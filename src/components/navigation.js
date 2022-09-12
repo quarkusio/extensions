@@ -13,10 +13,6 @@ const Navigation = () => {
     site: {},
   }
 
-  // Set these values by editing "siteMetadata" in gatsby-config.js
-  const author = data.site.siteMetadata?.author
-  const social = data.site.siteMetadata?.social
-
   return (
     <div className="navigation">
       <StaticImage
@@ -28,15 +24,8 @@ const Navigation = () => {
         height={144}
         alt="Static navigation bar"
       />
-      {author?.name && (
-        <p>
-          Written by <strong>{author.name}</strong> {author?.summary || null}
-          {` `}
-          <a href={`https://twitter.com/${social?.twitter || ``}`}>
-            You should follow them on Twitter
-          </a>
-        </p>
-      )}
+      {/* This will be invisible for the moment, which is fine */}
+      <p style={{ position: "absolute" }}>Quarkus</p>
     </div>
   )
 }

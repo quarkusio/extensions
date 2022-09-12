@@ -65,7 +65,7 @@
       <option name="presentableId" value="Default" />
       <updated>1663010206441</updated>
       <workItem from="1663010208804" duration="9000" />
-      <workItem from="1663010229699" duration="7053000" />
+      <workItem from="1663010229699" duration="7221000" />
     </task>
     <task id="LOCAL-00001" summary="IDE cruft">
       <created>1663012301406</created>
@@ -102,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663015931344</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="IDE cruft">
+      <created>1663018292371</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663018292371</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,12 +127,13 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="IDE cruft" />
     <MESSAGE value="More IDE cruft" />
     <MESSAGE value="Imitation content that looks like the designs" />
     <MESSAGE value="Update license." />
     <MESSAGE value="Pages publish workflow" />
-    <option name="LAST_COMMIT_MESSAGE" value="Pages publish workflow" />
+    <MESSAGE value="IDE cruft" />
+    <MESSAGE value="Skeleton testing infrastructure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Skeleton testing infrastructure" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
