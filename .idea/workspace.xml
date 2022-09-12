@@ -28,6 +28,7 @@
   <component name="ProjectId" id="2EgHFt2d9y6Odejni0lWOtLtSCE" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,7 +39,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -51,6 +52,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/src/components" />
     </key>
   </component>
@@ -63,7 +65,7 @@
       <option name="presentableId" value="Default" />
       <updated>1663010206441</updated>
       <workItem from="1663010208804" duration="9000" />
-      <workItem from="1663010229699" duration="4107000" />
+      <workItem from="1663010229699" duration="7053000" />
     </task>
     <task id="LOCAL-00001" summary="IDE cruft">
       <created>1663012301406</created>
@@ -72,7 +74,35 @@
       <option name="project" value="LOCAL" />
       <updated>1663012301406</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="More IDE cruft">
+      <created>1663015486982</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1663015486982</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Imitation content that looks like the designs">
+      <created>1663015531243</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663015531243</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Update license.">
+      <created>1663015749745</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1663015749745</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Pages publish workflow">
+      <created>1663015931344</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1663015931344</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -91,7 +121,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="IDE cruft" />
-    <option name="LAST_COMMIT_MESSAGE" value="IDE cruft" />
+    <MESSAGE value="More IDE cruft" />
+    <MESSAGE value="Imitation content that looks like the designs" />
+    <MESSAGE value="Update license." />
+    <MESSAGE value="Pages publish workflow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Pages publish workflow" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
