@@ -16,7 +16,7 @@ const ExtensionsList = () => {
         layout="fixed"
         formats={["auto", "webp", "avif"]}
         src="../images/extensions.png"
-        width={2330}
+        width={2320}
         height={776}
         alt="A list of dummy extensions"
       />

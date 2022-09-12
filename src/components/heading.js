@@ -17,7 +17,7 @@ const Heading = ({ title }) => {
         layout="fixed"
         formats={["auto", "webp", "avif"]}
         src="../images/heading.png"
-        width={2330}
+        width={2320}
         height={386}
         alt={title}
       />

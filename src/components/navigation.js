@@ -16,7 +16,7 @@ const Navigation = () => {
         layout="fixed"
         formats={["auto", "webp", "avif"]}
         src="../images/navigation-bar.png"
-        width={2330}
+        width={2320}
         height={144}
         alt="Static navigation bar"
       />
