@@ -9,10 +9,6 @@ import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
 
 const Navigation = () => {
-  const data = {
-    site: {},
-  }
-
   return (
     <div className="navigation">
       <StaticImage
