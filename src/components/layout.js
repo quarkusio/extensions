@@ -1,5 +1,8 @@
 import * as React from "react"
 import { Link } from "gatsby"
+import Navigation from "./navigation"
+import Heading from "./heading"
+import ExtensionsList from "./extensions-list"
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
@@ -8,9 +11,10 @@ const Layout = ({ location, title, children }) => {
 
   if (isRootPath) {
     header = (
-      <h1 className="main-heading">
-        <Link to="/">{title}</Link>
-      </h1>
+      <div>
+        <Navigation />
+        <Heading title={title} />
+      </div>
     )
   } else {
     header = (
@@ -23,7 +27,7 @@ const Layout = ({ location, title, children }) => {
   return (
     <div className="global-wrapper" data-is-root-path={isRootPath}>
       <header className="global-header">{header}</header>
-      <main>{children}</main>
+      <ExtensionsList content={{ children }} />
       <footer>
         © {new Date().getFullYear()}, Built with
         {` `}
