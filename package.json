@@ -8,6 +8,7 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   },
   "dependencies": {
+    "@fontsource/open-sans": "^4.5.11",
     "gatsby": "^4.22.1",
     "gatsby-plugin-feed": "^4.22.0",
     "gatsby-plugin-image": "^2.22.0",
@@ -25,6 +26,7 @@
     "prismjs": "^1.29.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "styled-components": "^5.3.5",
     "typeface-merriweather": "0.0.72",
     "typeface-montserrat": "0.0.75",
     "yaml-jest": "^1.2.0"
@@ -59,10 +61,10 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
-    "build": "gatsby build",
+    "build": "cp ./node_modules/gatsby-page-utils/dist/apply-trailing-slash-option.js ./node_modules/gatsby-page-utils && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
-    "start": "gatsby develop",
+    "start": "cp ./node_modules/gatsby-page-utils/dist/apply-trailing-slash-option.js ./node_modules/gatsby-page-utils && gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "ACTIVE_ENV=test SUPPRESS_ENV_OUTPUT=true jest --testPathIgnorePatterns test-integration/",
