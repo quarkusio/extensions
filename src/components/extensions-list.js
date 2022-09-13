@@ -3,28 +3,37 @@ import Filters from "./filters"
 import ExtensionCard from "./extension-card"
 
 const ExtensionsList = ({ extensions }) => {
+  // TODO why is this guard necessary?
   console.log("extensions is ", extensions)
-  return (
-    <div className="extensions-list" style={{ display: "flex" }}>
-      <Filters />
-      <ol
-        style={{
-          listStyle: `none`,
-          display: "flex",
-          flexDirection: "row",
-          width: "1262px",
-        }}
-      >
-        {extensions.map(extension => {
-          return (
-            <li key={extension.fields.slug}>
-              <ExtensionCard extension={extension} />
-            </li>
-          )
-        })}
-      </ol>
-    </div>
-  )
+  if (extensions) {
+    return (
+      <div className="extensions-list" style={{ display: "flex" }}>
+        <Filters />
+        <ol
+          style={{
+            listStyle: `none`,
+            display: "flex",
+            flexDirection: "row",
+            width: "1262px",
+          }}
+        >
+          {extensions.map(extension => {
+            return (
+              <li key={extension.fields.slug}>
+                <ExtensionCard extension={extension} />
+              </li>
+            )
+          })}
+        </ol>
+      </div>
+    )
+  } else {
+    return (
+      <div className="extensions-list" style={{ display: "flex" }}>
+        No extensions found.
+      </div>
+    )
+  }
 }
 
 export default ExtensionsList
