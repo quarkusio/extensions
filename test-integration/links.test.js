@@ -57,7 +57,7 @@ describe("site links", () => {
       linksToSkip,
       urlRewriteExpressions: [
         {
-          pattern: config.siteUrl,
+          pattern: config.siteUrl + "/" + config.pathPrefix,
           replacement: "http://localhost:9000",
         },
       ],
