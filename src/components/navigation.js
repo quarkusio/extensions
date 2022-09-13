@@ -11,6 +11,8 @@ import { StaticImage } from "gatsby-plugin-image"
 const Navigation = () => {
   return (
     <div className="navigation">
+      {/* This will be invisible for the moment, which is fine */}
+      <p style={{ position: "absolute" }}>Quarkus</p>
       <StaticImage
         className="fake-content"
         layout="constrained"
@@ -20,8 +22,6 @@ const Navigation = () => {
         height={144}
         alt="Static navigation bar"
       />
-      {/* This will be invisible for the moment, which is fine */}
-      <p style={{ position: "absolute" }}>Quarkus</p>
     </div>
   )
 }

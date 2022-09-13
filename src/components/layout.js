@@ -1,5 +1,4 @@
 import * as React from "react"
-import { Link } from "gatsby"
 import Navigation from "./navigation"
 import Heading from "./heading"
 
@@ -19,9 +18,6 @@ const Layout = ({ location, title, children }) => {
     header = (
       <div>
         <Navigation />
-        <Link className="header-link-home" to="/">
-          {title}
-        </Link>
       </div>
     )
   }
