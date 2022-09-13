@@ -1,25 +1,14 @@
-/**
- * Bio component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import * as React from "react"
-import { StaticImage } from "gatsby-plugin-image"
+import Filters from "./filters"
+import ExtensionCard from "./extension-card"
 
 const ExtensionsList = () => {
   return (
-    <div className="extensions-list">
-      <StaticImage
-        className="fake-content"
-        layout="fixed"
-        formats={["auto", "webp", "avif"]}
-        src="../images/extensions.png"
-        width={2320}
-        height={776}
-        alt="A list of dummy extensions"
-      />
+    <div className="extensions-list" style={{ display: "flex" }}>
+      <Filters />
+      <div>
+        <ExtensionCard />
+      </div>
     </div>
   )
 }
