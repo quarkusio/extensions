@@ -21,6 +21,20 @@ describe("main site", () => {
     ).resolves.toBeTruthy()
   })
 
+  describe("extensions list", () => {
+    it("should have a well-known extension", async () => {
+      await expect(
+        page.waitForXPath('//*[text()="Some extension"]')
+      ).resolves.toBeTruthy()
+    })
+
+    it("should have more than one well-known extension", async () => {
+      await expect(
+        page.waitForXPath('//*[text()="A third extension"]')
+      ).resolves.toBeTruthy()
+    })
+  })
+
   describe("header navigation bar", () => {
     xit("should have a Guides option", async () => {
       await expect(
