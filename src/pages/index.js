@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import ExtensionsList from "../components/extensions-list"
 
 const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -17,7 +18,9 @@ const Index = ({ data, location }) => {
   }
 
   return (
-    <Layout location={location} title={siteTitle} extensions={extensions} />
+    <Layout location={location} title={siteTitle}>
+      <ExtensionsList extensions={extensions} />
+    </Layout>
   )
 }
 

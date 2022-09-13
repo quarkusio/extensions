@@ -2,9 +2,8 @@ import * as React from "react"
 import { Link } from "gatsby"
 import Navigation from "./navigation"
 import Heading from "./heading"
-import ExtensionsList from "./extensions-list"
 
-const Layout = ({ location, title, extensions }) => {
+const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
   let header
@@ -18,9 +17,12 @@ const Layout = ({ location, title, extensions }) => {
     )
   } else {
     header = (
-      <Link className="header-link-home" to="/">
-        {title}
-      </Link>
+      <div>
+        <Navigation />
+        <Link className="header-link-home" to="/">
+          {title}
+        </Link>
+      </div>
     )
   }
 
@@ -31,7 +33,7 @@ const Layout = ({ location, title, extensions }) => {
       style={{ width: "1920px" }}
     >
       <header className="global-header">{header}</header>
-      <ExtensionsList extensions={extensions} />
+      {children}
     </div>
   )
 }
