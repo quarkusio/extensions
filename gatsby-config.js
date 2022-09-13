@@ -5,8 +5,9 @@ module.exports = {
       name: `The Quarkus Team`,
       summary: `who are nice.`,
     },
-    description: `A starter blog demonstrating what Gatsby can do.`,
+    description: `A prototype extensions cataloge.`,
     siteUrl: `https://http://hollycummins.com/extensions.io/`,
+    pathPrefix: "extensions.io",
     social: {
       twitter: `quarkusio`,
     },
