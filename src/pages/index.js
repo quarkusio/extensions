@@ -6,23 +6,19 @@ import Seo from "../components/seo"
 
 const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
-  const posts = data.allMarkdownRemark.nodes
+  const extensions = data.allExtension.nodes
 
-  console.log("posts is ", posts)
-
-  if (posts.length === 0) {
+  if (extensions.length === 0) {
     return (
       <Layout location={location} title={siteTitle}>
-        <p>
-          No extensions found. Add markdown posts to "content/blog" (or the
-          directory you specified for the "gatsby-source-filesystem" plugin in
-          gatsby-config.js).
-        </p>
+        <p>No extensions found. Is the Quarkus registry available?</p>
       </Layout>
     )
   }
 
-  return <Layout location={location} title={siteTitle} extensions={posts} />
+  return (
+    <Layout location={location} title={siteTitle} extensions={extensions} />
+  )
 }
 
 export default Index
@@ -41,17 +37,11 @@ export const pageQuery = graphql`
         title
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+    allExtension(sort: { fields: [name], order: DESC }) {
       nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          description
-        }
+        name
+        description
+        slug
       }
     }
   }

@@ -19,7 +19,7 @@ const ExtensionsList = ({ extensions }) => {
         >
           {extensions.map(extension => {
             return (
-              <li key={extension.fields.slug}>
+              <li key={extension.name}>
                 <ExtensionCard extension={extension} />
               </li>
             )

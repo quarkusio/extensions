@@ -1,0 +1,1137 @@
+{
+  "platforms": [
+    {
+      "platform-key": "io.quarkus.platform",
+      "name": "Quarkus Community Platform",
+      "streams": [
+        {
+          "id": "2.12",
+          "releases": [
+            {
+              "version": "2.12.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.12.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.12.1.Final"
+              ],
+              "quarkus-core-version": "2.12.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.12.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.12.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.12.0.Final"
+              ],
+              "quarkus-core-version": "2.12.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.12.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.12.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.12.0.CR1"
+              ],
+              "quarkus-core-version": "2.12.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.11",
+          "releases": [
+            {
+              "version": "2.11.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.11.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.11.3.Final"
+              ],
+              "quarkus-core-version": "2.11.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.11.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.11.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.11.2.Final"
+              ],
+              "quarkus-core-version": "2.11.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.11.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.11.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.11.1.Final"
+              ],
+              "quarkus-core-version": "2.11.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.11.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.11.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.11.0.CR1"
+              ],
+              "quarkus-core-version": "2.11.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.10",
+          "releases": [
+            {
+              "version": "2.10.4.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.10.4.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.10.4.Final"
+              ],
+              "quarkus-core-version": "2.10.4.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.10.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.10.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.10.3.Final"
+              ],
+              "quarkus-core-version": "2.10.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.10.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.10.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.10.2.Final"
+              ],
+              "quarkus-core-version": "2.10.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.10.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.10.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.10.1.Final"
+              ],
+              "quarkus-core-version": "2.10.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.10.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.10.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.10.0.Final"
+              ],
+              "quarkus-core-version": "2.10.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.10.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.10.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.10.0.CR1"
+              ],
+              "quarkus-core-version": "2.10.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.9",
+          "releases": [
+            {
+              "version": "2.9.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.9.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.9.2.Final"
+              ],
+              "quarkus-core-version": "2.9.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.9.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.9.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.9.1.Final"
+              ],
+              "quarkus-core-version": "2.9.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.9.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.9.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.9.0.Final"
+              ],
+              "quarkus-core-version": "2.9.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.9.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.9.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.9.0.CR1"
+              ],
+              "quarkus-core-version": "2.9.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.8",
+          "releases": [
+            {
+              "version": "2.8.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.8.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.8.3.Final"
+              ],
+              "quarkus-core-version": "2.8.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.8.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.8.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.8.2.Final"
+              ],
+              "quarkus-core-version": "2.8.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.8.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.8.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.8.1.Final"
+              ],
+              "quarkus-core-version": "2.8.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.8.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.8.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.8.0.Final"
+              ],
+              "quarkus-core-version": "2.8.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.8.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.8.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.8.0.CR1"
+              ],
+              "quarkus-core-version": "2.8.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.7",
+          "releases": [
+            {
+              "version": "2.7.6.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.6.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.6.Final"
+              ],
+              "quarkus-core-version": "2.7.6.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.7.5.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.5.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.5.Final"
+              ],
+              "quarkus-core-version": "2.7.5.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.7.4.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.4.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.4.Final"
+              ],
+              "quarkus-core-version": "2.7.4.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.7.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.3.Final"
+              ],
+              "quarkus-core-version": "2.7.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.7.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.2.Final"
+              ],
+              "quarkus-core-version": "2.7.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.7.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.1.Final"
+              ],
+              "quarkus-core-version": "2.7.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.7.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.0.Final"
+              ],
+              "quarkus-core-version": "2.7.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.7.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.7.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.7.0.CR1"
+              ],
+              "quarkus-core-version": "2.7.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.6",
+          "releases": [
+            {
+              "version": "2.6.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.6.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.6.3.Final"
+              ],
+              "quarkus-core-version": "2.6.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.6.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.6.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.6.2.Final"
+              ],
+              "quarkus-core-version": "2.6.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.6.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.6.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.6.1.Final"
+              ],
+              "quarkus-core-version": "2.6.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.6.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.6.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.6.0.Final"
+              ],
+              "quarkus-core-version": "2.6.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.6.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-amazon-services-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.6.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.6.0.CR1"
+              ],
+              "quarkus-core-version": "2.6.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.5",
+          "releases": [
+            {
+              "version": "2.5.4.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.5.4.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.5.4.Final"
+              ],
+              "quarkus-core-version": "2.5.4.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.5.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.5.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.5.3.Final"
+              ],
+              "quarkus-core-version": "2.5.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.5.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.5.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.5.2.Final"
+              ],
+              "quarkus-core-version": "2.5.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.5.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.5.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.5.1.Final"
+              ],
+              "quarkus-core-version": "2.5.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.5.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.5.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.5.0.Final"
+              ],
+              "quarkus-core-version": "2.5.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.5.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.5.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.5.0.CR1"
+              ],
+              "quarkus-core-version": "2.5.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.4",
+          "releases": [
+            {
+              "version": "2.4.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.4.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.4.2.Final"
+              ],
+              "quarkus-core-version": "2.4.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.4.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.4.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.4.1.Final"
+              ],
+              "quarkus-core-version": "2.4.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.4.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.4.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.4.0.Final"
+              ],
+              "quarkus-core-version": "2.4.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.4.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.4.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.4.0.CR1"
+              ],
+              "quarkus-core-version": "2.4.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.3",
+          "releases": [
+            {
+              "version": "2.3.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.3.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.3.1.Final"
+              ],
+              "quarkus-core-version": "2.3.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.3.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.3.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.3.0.Final"
+              ],
+              "quarkus-core-version": "2.3.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.3.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.3.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.3.0.CR1"
+              ],
+              "quarkus-core-version": "2.3.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.2",
+          "releases": [
+            {
+              "version": "2.2.5.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.2.5.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.2.5.Final"
+              ],
+              "quarkus-core-version": "2.2.5.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.2.4.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.2.4.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.2.4.Final"
+              ],
+              "quarkus-core-version": "2.2.4.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.2.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.2.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.2.3.Final"
+              ],
+              "quarkus-core-version": "2.2.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.2.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.2.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.2.2.Final"
+              ],
+              "quarkus-core-version": "2.2.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.2.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.2.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.2.1.Final"
+              ],
+              "quarkus-core-version": "2.2.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.2.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.2.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.2.0.CR1"
+              ],
+              "quarkus-core-version": "2.2.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        },
+        {
+          "id": "2.1",
+          "releases": [
+            {
+              "version": "2.1.4.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.1.4.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.1.4.Final"
+              ],
+              "quarkus-core-version": "2.1.4.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.1.3.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.1.3.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.1.3.Final"
+              ],
+              "quarkus-core-version": "2.1.3.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.1.2.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.1.2.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.1.2.Final"
+              ],
+              "quarkus-core-version": "2.1.2.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.1.1.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.1.1.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.1.1.Final"
+              ],
+              "quarkus-core-version": "2.1.1.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.1.0.Final",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.1.0.Final",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.1.0.Final"
+              ],
+              "quarkus-core-version": "2.1.0.Final",
+              "unlisted": false
+            },
+            {
+              "version": "2.1.0.CR1",
+              "member-boms": [
+                "io.quarkus.platform:quarkus-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-cassandra-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-hazelcast-client::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-google-cloud-services-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-optaplanner-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-qpid-jms-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-blaze-persistence-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-debezium-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-camel-bom::pom:2.1.0.CR1",
+                "io.quarkus.platform:quarkus-kogito-bom::pom:2.1.0.CR1"
+              ],
+              "quarkus-core-version": "2.1.0.CR1",
+              "unlisted": false
+            }
+          ],
+          "unlisted": false
+        }
+      ],
+      "current-stream-id": "2.12"
+    }
+  ]
+}

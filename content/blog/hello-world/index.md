@@ -1,7 +1,0 @@
----
-title: Some extension
-date: "2015-05-01T22:12:03.284Z"
-description: "Some extension"
----
-
-This is totally fake content.

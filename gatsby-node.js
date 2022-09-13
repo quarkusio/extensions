@@ -1,5 +1,31 @@
 const path = require(`path`)
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const axios = require("axios")
+const GithubSlugger = require("github-slugger")
+
+const slugger = new GithubSlugger()
+
+exports.sourceNodes = async ({
+  actions,
+  createNodeId,
+  createContentDigest,
+}) => {
+  const { data } = await axios.get(
+    `https://registry.quarkus.io/client/non-platform-extensions?v=2.0.7`
+  )
+
+  data.extensions.forEach(extension => {
+    actions.createNode({
+      ...extension,
+      id: createNodeId(extension.name),
+      // slug: slugger(extension.name),
+      slug: slugger.slug(extension.name, false),
+      internal: {
+        type: "extension",
+        contentDigest: createContentDigest(extension),
+      },
+    })
+  })
+}
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
@@ -7,19 +33,14 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Define a template for blog post
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
 
-  // Get all markdown blog posts sorted by date
+  // Get all extensions
   const result = await graphql(
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
-        ) {
+        allExtension(sort: { fields: [name], order: ASC }, limit: 1000) {
           nodes {
             id
-            fields {
-              slug
-            }
+            slug
           }
         }
       }
@@ -34,10 +55,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allMarkdownRemark.nodes
+  const posts = result.data.allExtension.nodes
 
   // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
   // `context` is available in the template as a prop and as a variable in GraphQL
 
   if (posts.length > 0) {
@@ -46,7 +66,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
 
       createPage({
-        path: post.fields.slug,
+        path: post.slug,
         component: blogPost,
         context: {
           id: post.id,
@@ -58,11 +78,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+exports.onCreateNode = ({ node, actions }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
-    const value = createFilePath({ node, getNode })
+  // TODO why doesn't this work, so we have to do it in the create call?
+  if (node.internal.type === `Extension`) {
+    const value = slugger.slug(node.name, false)
 
     createNodeField({
       name: `slug`,
@@ -78,10 +99,13 @@ exports.createSchemaCustomization = ({ actions }) => {
   // Explicitly define the siteMetadata {} object
   // This way those will always be defined even if removed from gatsby-config.js
 
-  // Also explicitly define the Markdown frontmatter
-  // This way the "MarkdownRemark" queries will return `null` even when no
-  // blog posts are stored inside "content/blog" instead of returning an error
   createTypes(`
+  
+    type Extension {
+      name: String
+      slug: String
+    }
+    
     type SiteSiteMetadata {
       author: Author
       siteUrl: String
@@ -95,11 +119,6 @@ exports.createSchemaCustomization = ({ actions }) => {
 
     type Social {
       twitter: String
-    }
-
-    type MarkdownRemark implements Node {
-      frontmatter: Frontmatter
-      fields: Fields
     }
 
     type Frontmatter {

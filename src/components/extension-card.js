@@ -3,7 +3,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import { Link } from "gatsby"
 
 const ExtensionCard = ({ extension }) => {
-  const title = extension.frontmatter.title || extension.fields.slug
+  const title = extension.name
 
   return (
     <div
@@ -24,20 +24,12 @@ const ExtensionCard = ({ extension }) => {
       >
         <header>
           <h2>
-            <Link to={extension.fields.slug} itemProp="url">
+            <Link to={extension.slug} itemProp="url">
               <span itemProp="headline">{title}</span>
             </Link>
           </h2>
-          <small>{extension.frontmatter.date}</small>
+          <small>{extension.description}</small>
         </header>
-        <section>
-          <p
-            dangerouslySetInnerHTML={{
-              __html: extension.frontmatter.description || extension.excerpt,
-            }}
-            itemProp="description"
-          />
-        </section>
       </article>
     </div>
   )

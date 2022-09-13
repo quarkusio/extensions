@@ -1,15 +1,20 @@
-const React = require("react");
-const gatsby = jest.requireActual("gatsby");
+const React = require("react")
+const gatsby = jest.requireActual("gatsby")
 module.exports = {
   ...gatsby,
   graphql: jest.fn().mockResolvedValue({
     data: {
-      allMarkdownRemark: {
+      allExtension: {
         edges: [
-          { node: { frontmatter: { category: "test-stuff" }, fields: { source: "some-source" } } }
-        ]
-      }
-    }
+          {
+            node: {
+              name: "test-extension",
+            },
+            description: "an extension with sample data",
+          },
+        ],
+      },
+    },
   }),
   Link: jest.fn().mockImplementation(
     // these props are invalid for an `a` tag
@@ -26,9 +31,9 @@ module.exports = {
     }) =>
       React.createElement("a", {
         ...rest,
-        href: to
+        href: to,
       })
   ),
   StaticQuery: jest.fn(),
-  useStaticQuery: jest.fn()
-};
+  useStaticQuery: jest.fn(),
+}

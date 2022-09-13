@@ -1,0 +1,992 @@
+{
+  "id": "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT",
+  "bom": "io.quarkus.platform:quarkus-bom::pom:2.0.7",
+  "quarkus-core-version": "2.0.7",
+  "extensions": [
+    {
+      "name": "Quarkus jOOQ - Runtime",
+      "description": "Enables you to develop type safe SQL queries using jOOQ",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "1.13.7.Final"
+      },
+      "artifact": "io.quarkiverse.jooq:quarkus-jooq::jar:0.2.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkus - Rsocket",
+      "description": "RSocket Support for native image",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "io.quarkus:quarkus-core:1.11.3.Final"
+      },
+      "artifact": "io.quarkiverse.rsocket:quarkus-rsocket::jar:0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "PrettyTime",
+      "description": "PrettyTime is an OpenSource time formatting library.",
+      "metadata": {
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN",
+        "status": "stable",
+        "built-with-quarkus-core": "2.0.1.Final",
+        "keywords": [
+          "prettytime"
+        ],
+        "categories": [
+          "miscellaneous"
+        ]
+      },
+      "artifact": "io.quarkiverse.prettytime:quarkus-prettytime::jar:0.1.1",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkus - Unleash - Runtime",
+      "description": "Unleash is a feature toggle system",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "io.quarkus:quarkus-core:1.11.1.Final"
+      },
+      "artifact": "io.quarkiverse.unleash:quarkus-unleash::jar:0.1.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkus - Hibernate Types - Runtime",
+      "description": "Hibernate Types",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "io.quarkus:quarkus-core:1.11.1.Final"
+      },
+      "artifact": "io.quarkiverse.hibernatetypes:quarkus-hibernate-types::jar:0.1.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Elasticsearch Reactive",
+      "description": "Elasticsearch Reactive client based on Vert.x and Mutiny",
+      "metadata": {
+        "extension-dependencies": [
+          "io.quarkus:quarkus-elasticsearch-rest-high-level-client::jar",
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-elasticsearch-rest-client-common::jar",
+          "io.quarkus:quarkus-apache-httpclient::jar",
+          "io.quarkus:quarkus-elasticsearch-rest-client::jar",
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-vertx::jar",
+          "io.quarkus:quarkus-netty::jar",
+          "io.quarkus:quarkus-jackson::jar",
+          "io.quarkus:quarkus-vertx-core::jar",
+          "io.quarkus:quarkus-mutiny::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN",
+        "status": "experimental",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "keywords": [
+          "elasticsearch",
+          "reactive"
+        ],
+        "categories": [
+          "data"
+        ]
+      },
+      "artifact": "io.quarkiverse.quarkus-elasticsearch-reactive:quarkus-elasticsearch-reactive::jar:0.1.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "MyFaces Core",
+      "description": "MyFaces Core is a JSF / Faces implementation which also provides a Quarkus integration.",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "guide": "https://github.com/apache/myfaces",
+        "status": "experimental",
+        "built-with-quarkus-core": "1.13.0.Final",
+        "keywords": [
+          "JSF",
+          "Faces",
+          "Java Server Faces"
+        ],
+        "categories": [
+          "web"
+        ]
+      },
+      "artifact": "org.apache.myfaces.core.extensions.quarkus:myfaces-quarkus::jar:2.3-next-M7",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "OpenCV",
+      "description": "Build computer vision and AI applications with OpenCV",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "keywords": [
+          "opencv",
+          "ai",
+          "computer vision"
+        ],
+        "categories": [
+          "business-automation"
+        ],
+        "built-with-quarkus-core": "2.0.0.Final",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar"
+        ]
+      },
+      "artifact": "io.quarkiverse.opencv:quarkus-opencv::jar:1.0.4",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkus JJWT Jackson",
+      "description": "Create JWT tokens",
+      "metadata": {
+        "unlisted": true,
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "keywords": [
+          "jwt",
+          "jjwt",
+          "token",
+          "jackson"
+        ],
+        "status": "stable",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-core::jar"
+        ],
+        "categories": [
+          "security"
+        ]
+      },
+      "artifact": "io.quarkiverse.jjwtjackson:quarkus-jjwt-jackson::jar:1.0.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Logging JSON Jackson",
+      "description": "Logging in JSON with support for custom fields",
+      "metadata": {
+        "extension-dependencies": [
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-jackson::jar",
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-jsonb::jar",
+          "io.quarkus:quarkus-jsonp::jar"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN",
+        "status": "preview",
+        "built-with-quarkus-core": "2.0.1.Final",
+        "keywords": [
+          "logging",
+          "json",
+          "formatter"
+        ],
+        "categories": [
+          "core"
+        ]
+      },
+      "artifact": "io.quarkiverse.loggingjson:quarkus-logging-json::jar:1.0.1",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Datadog Opentracing",
+      "description": "Support and activate the Datadog opentracing tracer",
+      "metadata": {
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN",
+        "status": "experimental",
+        "built-with-quarkus-core": "2.0.1.Final",
+        "keywords": [
+          "datadog-opentracing",
+          "monitoring",
+          "distributed-tracing"
+        ],
+        "categories": [
+          "observability"
+        ]
+      },
+      "artifact": "io.quarkiverse.opentracing.datadog:quarkus-datadog-opentracing::jar:1.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkiverse - Tekton Client - Runtime",
+      "description": "Parent POM for Quarkiverse projects that includes the default release and artifact publishing related\n    configuration",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "1.13.1.Final"
+      },
+      "artifact": "io.quarkiverse.tektonclient:quarkus-tekton-client::jar:0.4.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "GitHub App",
+      "description": "Automate GitHub tasks with a GitHub App",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.1.Final",
+        "guide": "https://quarkiverse.github.io/quarkiverse-docs/quarkus-github-app/dev/index.html",
+        "keywords": [
+          "github",
+          "github-app",
+          "github app",
+          "bot"
+        ],
+        "status": "stable",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-vertx-web::jar",
+          "io.quarkus:quarkus-vertx::jar",
+          "io.quarkus:quarkus-netty::jar",
+          "io.quarkus:quarkus-vertx-core::jar",
+          "io.quarkus:quarkus-mutiny::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar",
+          "io.quarkus:quarkus-vertx-http::jar",
+          "io.quarkus:quarkus-jackson::jar",
+          "io.quarkus:quarkus-caffeine::jar",
+          "io.quarkiverse.githubapi:quarkus-github-api::jar",
+          "io.quarkiverse.jjwtjackson:quarkus-jjwt-jackson::jar"
+        ],
+        "categories": [
+          "business-automation"
+        ]
+      },
+      "artifact": "io.quarkiverse.githubapp:quarkus-github-app::jar:1.1.3",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "QSON",
+      "description": "JSON object mapper",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "guide": "https://quarkus.io/guides/qson",
+        "status": "experimental",
+        "built-with-quarkus-core": "io.quarkus:quarkus-core:1.11.1.Final",
+        "keywords": [
+          "json"
+        ],
+        "categories": [
+          "serialization"
+        ]
+      },
+      "artifact": "io.quarkus.qson:quarkus-qson::jar:1.1.Final",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkus - Operator SDK",
+      "description": "Quarkus extension for the Java Operator SDK (https://javaoperatorsdk.io)",
+      "metadata": {
+        "built-with-quarkus-core": "2.0.1.Final",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-openshift-client::jar",
+          "io.quarkus:quarkus-kubernetes-client::jar",
+          "io.quarkus:quarkus-jackson::jar",
+          "io.quarkus:quarkus-kubernetes::jar",
+          "io.quarkus:quarkus-kubernetes-client-internal::jar",
+          "io.quarkus:quarkus-container-image::jar",
+          "io.quarkus:quarkus-container-image-jib::jar",
+          "io.quarkus:quarkus-smallrye-health::jar",
+          "io.quarkus:quarkus-vertx-http::jar",
+          "io.quarkus:quarkus-mutiny::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar",
+          "io.quarkus:quarkus-vertx-core::jar",
+          "io.quarkus:quarkus-netty::jar",
+          "io.quarkus:quarkus-jsonp::jar"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN"
+      },
+      "artifact": "io.quarkiverse.operatorsdk:quarkus-operator-sdk::jar:2.0.0.Beta2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkus Freemarker",
+      "description": "Freemarker support",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "guide": "https://quarkus.io/guides/freemarker",
+        "keywords": [
+          "freemarker",
+          "template"
+        ],
+        "status": "preview",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar"
+        ],
+        "categories": [
+          "miscellaneous"
+        ]
+      },
+      "artifact": "io.quarkiverse.freemarker:quarkus-freemarker::jar:0.3.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Minio Client extension",
+      "description": "Integrates MinIO Java SDK for Amazon S3 Compatible Cloud Storage",
+      "metadata": {
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar"
+        ],
+        "keywords": [
+          "minio",
+          "storage",
+          "kubernetes"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN",
+        "guide": "https://quarkus.io/guides/datasource",
+        "categories": [
+          "kubernetes",
+          "data"
+        ],
+        "description": "Integrates MinIO Java SDK for Amazon S3 Compatible Cloud Storage",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "status": "experimental"
+      },
+      "artifact": "io.quarkiverse.minio:quarkus-minio::jar:2.0.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Logging manager",
+      "description": "Provides you endpoints to visualize and manage the log level of your loggers",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "short-name": "logging manager",
+        "keywords": [
+          "logging manager",
+          "log",
+          "logging levels",
+          "log file"
+        ],
+        "status": "stable",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-vertx-http::jar",
+          "io.quarkus:quarkus-mutiny::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar",
+          "io.quarkus:quarkus-vertx-core::jar",
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-netty::jar"
+        ],
+        "categories": [
+          "logging"
+        ]
+      },
+      "artifact": "io.quarkiverse.loggingmanager:quarkus-logging-manager::jar:2.0.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Splunk logging extension - Runtime",
+      "description": "Send logs to a Splunk HTTP Event Collector (HEC)",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "1.13.2.Final"
+      },
+      "artifact": "io.quarkiverse.logging.splunk:quarkus-logging-splunk::jar:2.0.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Micrometer registry - SignalFX",
+      "description": "Send metrics to Splunk using SignalFX",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.2.Final",
+        "guide": "https://quarkus.io/guides/micrometer-metrics",
+        "keywords": [
+          "micrometer",
+          "metrics",
+          "metric",
+          "prometheus",
+          "monitoring"
+        ],
+        "status": "experimental",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-micrometer",
+          "io.quarkus:quarkus-core",
+          "io.quarkus:quarkus-arc",
+          "io.quarkus:quarkus-vertx-http",
+          "io.quarkus:quarkus-mutiny",
+          "io.quarkus:quarkus-smallrye-context-propagation",
+          "io.quarkus:quarkus-vertx-core",
+          "io.quarkus:quarkus-netty"
+        ],
+        "categories": [
+          "observability"
+        ]
+      },
+      "artifact": "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-signalfx::jar:2.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Micrometer registry - JMX",
+      "description": "View metrics data using JMX",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.2.Final",
+        "guide": "https://quarkus.io/guides/micrometer-metrics",
+        "keywords": [
+          "micrometer",
+          "metrics",
+          "metric",
+          "prometheus",
+          "monitoring"
+        ],
+        "status": "experimental",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-micrometer",
+          "io.quarkus:quarkus-core",
+          "io.quarkus:quarkus-arc",
+          "io.quarkus:quarkus-vertx-http",
+          "io.quarkus:quarkus-mutiny",
+          "io.quarkus:quarkus-smallrye-context-propagation",
+          "io.quarkus:quarkus-vertx-core",
+          "io.quarkus:quarkus-netty"
+        ],
+        "categories": [
+          "observability"
+        ]
+      },
+      "artifact": "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-jmx::jar:2.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Micrometer registry - Azure Monitor",
+      "description": "Send data gathered by Micrometer to Azure Monitor",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.2.Final",
+        "guide": "https://quarkus.io/guides/micrometer-metrics",
+        "keywords": [
+          "micrometer",
+          "metrics",
+          "metric",
+          "prometheus",
+          "monitoring"
+        ],
+        "status": "experimental",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-micrometer",
+          "io.quarkus:quarkus-core",
+          "io.quarkus:quarkus-arc",
+          "io.quarkus:quarkus-vertx-http",
+          "io.quarkus:quarkus-mutiny",
+          "io.quarkus:quarkus-smallrye-context-propagation",
+          "io.quarkus:quarkus-vertx-core",
+          "io.quarkus:quarkus-netty"
+        ],
+        "categories": [
+          "observability"
+        ]
+      },
+      "artifact": "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-azure-monitor::jar:2.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Micrometer registry - Datadog",
+      "description": "Send metrics to Datadog using the Datadog API",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.2.Final",
+        "guide": "https://quarkus.io/guides/micrometer-metrics",
+        "keywords": [
+          "micrometer",
+          "metrics",
+          "metric",
+          "prometheus",
+          "monitoring"
+        ],
+        "status": "experimental",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-micrometer",
+          "io.quarkus:quarkus-core",
+          "io.quarkus:quarkus-arc",
+          "io.quarkus:quarkus-vertx-http",
+          "io.quarkus:quarkus-mutiny",
+          "io.quarkus:quarkus-smallrye-context-propagation",
+          "io.quarkus:quarkus-vertx-core",
+          "io.quarkus:quarkus-netty"
+        ],
+        "categories": [
+          "observability"
+        ]
+      },
+      "artifact": "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Micrometer registry - Stackdriver",
+      "description": "Send metrics to Google Cloud Operations using Stackdriver",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.2.Final",
+        "guide": "https://quarkus.io/guides/micrometer-metrics",
+        "keywords": [
+          "micrometer",
+          "metrics",
+          "metric",
+          "prometheus",
+          "monitoring"
+        ],
+        "status": "experimental",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-micrometer",
+          "io.quarkus:quarkus-core",
+          "io.quarkus:quarkus-arc",
+          "io.quarkus:quarkus-vertx-http",
+          "io.quarkus:quarkus-mutiny",
+          "io.quarkus:quarkus-smallrye-context-propagation",
+          "io.quarkus:quarkus-vertx-core",
+          "io.quarkus:quarkus-netty"
+        ],
+        "categories": [
+          "observability"
+        ]
+      },
+      "artifact": "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-stackdriver::jar:2.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Micrometer registry - StatsD",
+      "description": "Send metrics to a StatsD sidecar agent",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.2.Final",
+        "guide": "https://quarkus.io/guides/micrometer-metrics",
+        "keywords": [
+          "micrometer",
+          "metrics",
+          "metric",
+          "prometheus",
+          "monitoring"
+        ],
+        "status": "experimental",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-micrometer",
+          "io.quarkus:quarkus-core",
+          "io.quarkus:quarkus-arc",
+          "io.quarkus:quarkus-vertx-http",
+          "io.quarkus:quarkus-mutiny",
+          "io.quarkus:quarkus-smallrye-context-propagation",
+          "io.quarkus:quarkus-vertx-core",
+          "io.quarkus:quarkus-netty"
+        ],
+        "categories": [
+          "observability"
+        ]
+      },
+      "artifact": "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-statsd::jar:2.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "JGraphT",
+      "description": "JGraphT - a Java library of graph theory data structures and algorithms",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "guide": "https://jgrapht.org/guide/UserOverview",
+        "status": "preview",
+        "built-with-quarkus-core": "1.13.4.Final",
+        "keywords": [
+          "jgrapht",
+          "graphs"
+        ],
+        "categories": [
+          "miscellaneous"
+        ]
+      },
+      "artifact": "io.quarkiverse.jgrapht:quarkus-jgrapht::jar:1.2.1",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "OpenTelemetry REST Client",
+      "description": "OpenTelemetry tracing of Rest Client",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN"
+      },
+      "artifact": "io.quarkus:quarkus-opentelemetry-rest-client::jar:2.0.3.Final",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "GitHub API",
+      "description": "Connect to the GitHub API",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "guide": "https://github-api.kohsuke.org/",
+        "keywords": [
+          "github",
+          "github-api",
+          "github api"
+        ],
+        "status": "stable",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-core::jar"
+        ],
+        "categories": [
+          "business-automation"
+        ]
+      },
+      "artifact": "io.quarkiverse.githubapi:quarkus-github-api::jar:1.131.1",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Camunda Platform Engine",
+      "description": "Quarkus Extension for the Camunda Platform Engine",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "keywords": [
+          "camunda",
+          "camunda-platform",
+          "processes",
+          "decisions",
+          "bpmn",
+          "dmn"
+        ],
+        "guide": "https://docs.camunda.org/manual/",
+        "categories": [
+          "business-automation"
+        ],
+        "status": "preview"
+      },
+      "artifact": "org.camunda.bpm.quarkus:camunda-bpm-quarkus-engine::jar:7.18.0-alpha3",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Logging Cloudwatch",
+      "description": "Parent POM for Quarkiverse projects that includes the default release and artifact publishing related\n    configuration",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "1.13.7.Final"
+      },
+      "artifact": "io.quarkiverse.logging.cloudwatch:quarkus-logging-cloudwatch::jar:3.0.0",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Doma - Database access framework",
+      "description": "Simplify your database accesses with compile-time code generation",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "guide": "https://github.com/quarkiverse/quarkus-doma",
+        "keywords": [
+          "doma",
+          "orm",
+          "sql"
+        ],
+        "status": "preview",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-agroal::jar",
+          "io.quarkus:quarkus-datasource::jar",
+          "io.quarkus:quarkus-narayana-jta::jar",
+          "io.quarkus:quarkus-mutiny::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar"
+        ],
+        "categories": [
+          "data"
+        ]
+      },
+      "artifact": "io.quarkiverse.doma:quarkus-doma::jar:0.0.5",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "JBeret - Batch Processing",
+      "description": "Write Batch Applications with JBeret a JSR-352 implementation",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "guide": "https://quarkus.io/guides/jberet",
+        "status": "experimental",
+        "built-with-quarkus-core": "1.13.0.Final",
+        "keywords": [
+          "batch",
+          "jberet",
+          "jsr352"
+        ],
+        "categories": [
+          "data"
+        ]
+      },
+      "artifact": "io.quarkiverse.jberet:quarkus-jberet::jar:0.0.5",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "JBeret - REST",
+      "description": "Manage JBeret Batch Applications with REST",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "keywords": [
+          "jberet-rest"
+        ],
+        "categories": [
+          "rest"
+        ],
+        "status": "experimental",
+        "built-with-quarkus-core": "1.13.0.Final"
+      },
+      "artifact": "io.quarkiverse.jberet:quarkus-jberet-rest::jar:0.0.5",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "MyBatis SQL Mapper",
+      "description": "MyBatis SQL mapper framework for Java",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "built-with-quarkus-core": "2.0.0.Final",
+        "guide": "https://quarkus.io/guides/mybatis",
+        "keywords": [
+          "mybatis"
+        ],
+        "status": "preview",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-agroal::jar",
+          "io.quarkus:quarkus-datasource::jar",
+          "io.quarkus:quarkus-narayana-jta::jar",
+          "io.quarkus:quarkus-mutiny::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar"
+        ],
+        "categories": [
+          "data"
+        ]
+      },
+      "artifact": "io.quarkiverse.mybatis:quarkus-mybatis::jar:0.0.9",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Maven Resolver",
+      "description": "An extension providing a Maven resolver implementation from the Quarkus core bootstrap project",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN"
+      },
+      "artifact": "io.quarkiverse.mavenresolver:quarkus-maven-resolver::jar:0.0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "RabbitMQ Client",
+      "description": "Parent POM for Quarkiverse projects that includes the default release and artifact publishing related\n    configuration",
+      "metadata": {
+        "extension-dependencies": [
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN",
+        "status": "experimental",
+        "built-with-quarkus-core": "2.0.0.CR3",
+        "keywords": [
+          "rabbitmq-client",
+          "rabbitmq"
+        ],
+        "categories": [
+          "messaging"
+        ]
+      },
+      "artifact": "io.quarkiverse.rabbitmqclient:quarkus-rabbitmq-client::jar:0.3.0.CR3",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Lucene",
+      "description": "Add full-text search capabilities to your application with Apache Lucene.",
+      "metadata": {
+        "quarkus-core-compatibility": "UNKNOWN",
+        "guide": "https://github.com/quarkiverse/quarkus-lucene",
+        "status": "preview",
+        "built-with-quarkus-core": "io.quarkus:quarkus-core:1.12.0.Final",
+        "keywords": [
+          "search",
+          "query",
+          "index",
+          "full-text"
+        ],
+        "categories": [
+          "search"
+        ]
+      },
+      "artifact": "io.quarkiverse.lucene:quarkus-lucene::jar:0.2",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    },
+    {
+      "name": "Quarkus CXF",
+      "description": "Consume and produce SOAP web services with Apache CXF",
+      "metadata": {
+        "built-with-quarkus-core": "2.0.0.Final",
+        "extension-dependencies": [
+          "io.quarkus:quarkus-arc::jar",
+          "io.quarkus:quarkus-core::jar",
+          "io.quarkus:quarkus-jaxb::jar",
+          "io.quarkus:quarkus-jaxp::jar",
+          "io.quarkus:quarkus-jackson::jar",
+          "io.quarkus:quarkus-vertx-http::jar",
+          "io.quarkus:quarkus-mutiny::jar",
+          "io.quarkus:quarkus-smallrye-context-propagation::jar",
+          "io.quarkus:quarkus-vertx-core::jar",
+          "io.quarkus:quarkus-netty::jar"
+        ],
+        "quarkus-core-compatibility": "UNKNOWN"
+      },
+      "artifact": "io.quarkiverse.cxf:quarkus-cxf::jar:0.9",
+      "origins": [
+        "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "core",
+      "name": "Core",
+      "description": "Essential Quarkus components. Provided automatically"
+    },
+    {
+      "id": "web",
+      "name": "Web",
+      "description": "Everything you need for REST endpoints, HTTP and web formats like JSON"
+    },
+    {
+      "id": "data",
+      "name": "Data",
+      "description": "Accessing and managing your data (RDBMS, NoSQL, caching, transaction management, etc)"
+    },
+    {
+      "id": "messaging",
+      "name": "Messaging",
+      "description": "Send and receives message to various messaging systems (AMQP, Kafka etc)"
+    },
+    {
+      "id": "reactive",
+      "name": "Reactive",
+      "description": "Non blocking stack and connectors"
+    },
+    {
+      "id": "cloud",
+      "name": "Cloud",
+      "description": "Useful for Cloud Native deployments platforms like Kubernetes and cloud providers"
+    },
+    {
+      "id": "observability",
+      "name": "Observability",
+      "description": "Metrics, tracing, etc"
+    },
+    {
+      "id": "security",
+      "name": "Security",
+      "description": "Everything you need to secure your application"
+    },
+    {
+      "id": "integration",
+      "name": "Integration",
+      "description": "Connectors to read to write from a skew of systems (file, S#, Twitter, etc)"
+    },
+    {
+      "id": "grpc",
+      "name": "gRPC",
+      "description": "gRPC integration"
+    },
+    {
+      "id": "business-automation",
+      "name": "Business Automation",
+      "description": "Rules engine, BPM, etc"
+    },
+    {
+      "id": "serialization",
+      "name": "Serialization",
+      "description": "Serializing and deserializing various formats"
+    },
+    {
+      "id": "miscellaneous",
+      "name": "Miscellaneous",
+      "description": "Mixed bag of good stuff"
+    },
+    {
+      "id": "compatibility",
+      "name": "Compatibility",
+      "description": "Support for alternative programming models on Quarkus"
+    },
+    {
+      "id": "alternative-languages",
+      "name": "Alternative languages",
+      "description": "Support for other JVM based languages"
+    }
+  ]
+}

@@ -22,15 +22,27 @@ describe("main site", () => {
   })
 
   describe("extensions list", () => {
-    it("should have a well-known extension", async () => {
+    it("should have a well-known non-platform extension", async () => {
       await expect(
-        page.waitForXPath('//*[text()="Some extension"]')
+        page.waitForXPath('//*[text()="RabbitMQ Client"]')
       ).resolves.toBeTruthy()
     })
 
-    it("should have more than one well-known extension", async () => {
+    it("should have more than one well-known non-platform extension", async () => {
       await expect(
-        page.waitForXPath('//*[text()="A third extension"]')
+        page.waitForXPath('//*[text()="GitHub App"]')
+      ).resolves.toBeTruthy()
+    })
+
+    xit("should have a well-known platform extension", async () => {
+      await expect(
+        page.waitForXPath('//*[text()="RESTEasy Reactive"]')
+      ).resolves.toBeTruthy()
+    })
+
+    xit("should have more than one well-known platform extension", async () => {
+      await expect(
+        page.waitForXPath('//*[text()="gRPC"]')
       ).resolves.toBeTruthy()
     })
   })
