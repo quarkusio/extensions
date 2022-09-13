@@ -13,7 +13,7 @@ const Navigation = () => {
     <div className="navigation">
       <StaticImage
         className="fake-content"
-        layout="fixed"
+        layout="constrained"
         formats={["auto", "webp", "avif"]}
         src="../images/navigation-bar.png"
         width={2320}

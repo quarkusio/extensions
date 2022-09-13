@@ -19,7 +19,7 @@ const Heading = ({ title }) => {
 
       <StaticImage
         className="fake-content"
-        layout="fixed"
+        layout="constrained"
         formats={["auto", "webp", "avif"]}
         src="../images/heading.png"
         width={2320}

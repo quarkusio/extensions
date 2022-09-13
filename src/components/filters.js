@@ -6,7 +6,7 @@ const Filters = () => {
     <div className="filters">
       <StaticImage
         className="fake-content"
-        layout="fixed"
+        layout="constrained"
         formats={["auto", "webp", "avif"]}
         src="../images/filters.png"
         width={282}

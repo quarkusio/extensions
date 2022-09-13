@@ -4,7 +4,7 @@ import Navigation from "./navigation"
 import Heading from "./heading"
 import ExtensionsList from "./extensions-list"
 
-const Layout = ({ location, title, children }) => {
+const Layout = ({ location, title, extensions }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
   let header
@@ -27,7 +27,7 @@ const Layout = ({ location, title, children }) => {
   return (
     <div className="global-wrapper" data-is-root-path={isRootPath}>
       <header className="global-header">{header}</header>
-      <ExtensionsList content={{ children }} />
+      <ExtensionsList extensions={extensions} />
     </div>
   )
 }
