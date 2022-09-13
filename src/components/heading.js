@@ -12,6 +12,11 @@ import { Link } from "gatsby"
 const Heading = ({ title }) => {
   return (
     <div className="heading">
+      {/* This will be invisible for the moment, which is fine */}
+      <h1 className="main-heading" style={{ position: "absolute" }}>
+        <Link to="/">{title}</Link>
+      </h1>
+
       <StaticImage
         className="fake-content"
         layout="fixed"
@@ -21,9 +26,6 @@ const Heading = ({ title }) => {
         height={386}
         alt={title}
       />
-      <h1 className="main-heading">
-        <Link to="/">{title}</Link>
-      </h1>
     </div>
   )
 }
