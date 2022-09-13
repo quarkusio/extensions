@@ -8,7 +8,7 @@ module.exports = {
       summary: `who are nice.`,
     },
     description: `A prototype extensions cataloge.`,
-    siteUrl: `https://http://hollycummins.com/extensions.io/`,
+    siteUrl: `http://hollycummins.com/extensions.io`,
     social: {
       twitter: `quarkusio`,
     },

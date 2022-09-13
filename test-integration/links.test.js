@@ -57,8 +57,12 @@ describe("site links", () => {
       linksToSkip,
       urlRewriteExpressions: [
         {
-          pattern: config.siteUrl + "/" + config.pathPrefix,
+          pattern: config.siteUrl,
           replacement: "http://localhost:9000",
+        },
+        {
+          pattern: config.pathPrefix,
+          replacement: "",
         },
       ],
       concurrency: 100, // The twitter URLs seem to work better with a high concurrency, counter-intuitively
