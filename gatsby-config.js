@@ -1,4 +1,6 @@
 module.exports = {
+  pathPrefix: "extensions.io",
+
   siteMetadata: {
     title: `Welcome to the Quarkiverse`,
     author: {
@@ -7,7 +9,6 @@ module.exports = {
     },
     description: `A prototype extensions cataloge.`,
     siteUrl: `https://http://hollycummins.com/extensions.io/`,
-    pathPrefix: "extensions.io",
     social: {
       twitter: `quarkusio`,
     },
