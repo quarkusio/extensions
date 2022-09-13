@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { StaticImage } from "gatsby-plugin-image"
 
 const BlogPostTemplate = ({
   data: { previous, next, site, extension },
@@ -12,6 +13,13 @@ const BlogPostTemplate = ({
 
   return (
     <Layout location={location} title={siteTitle}>
+      <StaticImage
+        className="fake-content"
+        layout="constrained"
+        formats={["auto", "webp", "avif"]}
+        src="../images/extension-detail-page.png"
+        alt="A dummy extension"
+      />
       <article
         className="blog-post"
         itemScope
