@@ -14,6 +14,7 @@ const ExtensionsList = ({ extensions }) => {
             listStyle: `none`,
             display: "flex",
             flexDirection: "row",
+            flexWrap: "wrap",
             width: "1262px",
           }}
         >
