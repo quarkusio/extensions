@@ -30,8 +30,8 @@ exports.sourceNodes = async ({
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
-  // Define a template for blog post
-  const blogPost = path.resolve(`./src/templates/blog-post.js`)
+  // Define a template for an extension
+  const extensionTemplate = path.resolve(`./src/templates/extension-detail.js`)
 
   // Get all extensions
   const result = await graphql(
@@ -49,7 +49,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (result.errors) {
     reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
+      `There was an error loading extensions`,
       result.errors
     )
     return
@@ -57,7 +57,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   const posts = result.data.allExtension.nodes
 
-  // Create blog posts pages
+  // Create extension pages
   // `context` is available in the template as a prop and as a variable in GraphQL
 
   if (posts.length > 0) {
@@ -67,7 +67,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
       createPage({
         path: post.slug,
-        component: blogPost,
+        component: extensionTemplate,
         context: {
           id: post.id,
           previousPostId,

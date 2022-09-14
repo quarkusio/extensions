@@ -38,6 +38,7 @@ html {
     --font-family-pt-mono: "PT Mono";
 
     --font-style-normal: normal;
+    --font-weight-bold: bold;
 
     font-family: var(--font-family-open-sans);
 
