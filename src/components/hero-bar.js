@@ -18,7 +18,7 @@ const HeroBart = styled.header`
 
 const Heroic = styled.h1`
   font-size: var(--font-size-72);
-  margin: 0px;
+  margin: 0;
   font-weight: var(--font-weight-normal);
   text-transform: uppercase;
   letter-spacing: 12.96px;
