@@ -50,17 +50,18 @@ html {
     --font-size-48: 48px;
     --font-size-56: 56px;
 
+    /** Spacing **/
+
+    --a-boatload-of-space: 200px;
+    --a-generous-space: 100px
+
 }
 
-link {
+:link {
     text-decoration: none;
 }
 
-a:link {
-    text-decoration: none;
-}
-
-a:visited {
+:visited {
     text-decoration: none;
 }
 

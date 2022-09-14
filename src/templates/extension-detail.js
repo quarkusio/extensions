@@ -5,9 +5,14 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
+import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 
 const ExtensionDetails = styled.main`
-  margin: 100px;
+  margin-left: var(--a-boatload-of-space);
+  margin-right: var(--a-boatload-of-space);
+  margin-top: var(--a-generous-space);
+  margin-bottom: var(--a-generous-space);
+
   display: flex;
   flex-direction: column;
 `
@@ -70,6 +75,18 @@ const DocumentationSection = styled.section`
   margin-bottom: 50px;
 `
 
+const VisibleLink = styled.a`
+  &:link {
+    color: var(--link);
+    text-decoration: underline;
+  }
+
+  &:visited {
+    color: var(--link-visited);
+    text-decoration: underline;
+  }
+`
+
 const DocumentationHeading = styled.h2`
   text-transform: uppercase;
   font-weight: var(--font-weight-normal);
@@ -84,6 +101,7 @@ const ExtensionDetailTemplate = ({
 }) => {
   return (
     <Layout location={location}>
+      <BreadcrumbBar name={extension.name} />
       <ExtensionDetails>
         <Headline>
           <Logo>
@@ -103,8 +121,10 @@ const ExtensionDetailTemplate = ({
               <DocumentationSection>
                 <DocumentationHeading>Documentation</DocumentationHeading>
                 Make sure to use the{" "}
-                <a href={extension.metadata.guide}>documentation</a> to get your
-                questions answered.
+                <VisibleLink href={extension.metadata.guide}>
+                  documentation
+                </VisibleLink>{" "}
+                to get your questions answered.
               </DocumentationSection>
             )}
           </Documentation>

@@ -25,7 +25,7 @@ describe("extension detail page", () => {
     })
 
     it("renders the extension name", () => {
-      expect(screen.getByText(extension.name)).toBeTruthy()
+      expect(screen.getAllByText(extension.name)).toHaveLength(2)
     })
 
     it("renders the category", () => {
@@ -60,7 +60,7 @@ describe("extension detail page", () => {
     })
 
     it("renders the extension name", () => {
-      expect(screen.getByText(extension.name)).toBeTruthy()
+      expect(screen.getAllByText(extension.name)).toHaveLength(2)
     })
 
     it("does not render anything about guides", async () => {
