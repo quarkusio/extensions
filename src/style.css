@@ -53,7 +53,8 @@ html {
     /** Spacing **/
 
     --a-boatload-of-space: 200px;
-    --a-generous-space: 100px
+    --a-generous-space: 100px;
+    --a-modest-space: 20px;
 
 }
 
