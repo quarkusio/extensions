@@ -47,6 +47,7 @@ export const pageQuery = graphql`
         slug
         metadata {
           categories
+          guide
         }
       }
     }

@@ -51,7 +51,7 @@ const ExtensionDescription = styled.div`
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   margin-top: 10px;
   font-weight: var(--font-weight-bold);
 `
@@ -63,6 +63,19 @@ const ExtensionCategory = styled.div`
   opacity: 1;
   margin-bottom: 10px;
   margin-top: 10px;
+`
+
+const DocumentationSection = styled.section`
+  margin-top: 20px;
+  margin-bottom: 50px;
+`
+
+const DocumentationHeading = styled.h2`
+  text-transform: uppercase;
+  font-weight: var(--font-weight-normal);
+  font-size: var(--font-size-24);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--grey-1);
 `
 
 const ExtensionDetailTemplate = ({
@@ -86,6 +99,14 @@ const ExtensionDetailTemplate = ({
         <Columns>
           <Documentation>
             <ExtensionDescription>{extension.description}</ExtensionDescription>
+            {extension.metadata.guide && (
+              <DocumentationSection>
+                <DocumentationHeading>Documentation</DocumentationHeading>
+                Make sure to use the{" "}
+                <a href={extension.metadata.guide}>documentation</a> to get your
+                questions answered.
+              </DocumentationSection>
+            )}
           </Documentation>
           <Metadata>
             {extension.metadata.categories &&
@@ -148,6 +169,7 @@ export const pageQuery = graphql`
       description
       metadata {
         categories
+        guide
       }
     }
     previous: extension(id: { eq: $previousPostId }) {
