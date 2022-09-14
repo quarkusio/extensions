@@ -3,7 +3,12 @@ import { render, screen } from "@testing-library/react"
 import ExtensionCard from "./extension-card"
 
 describe("extension card", () => {
-  const extension = { name: "JRuby", slug: "jruby-slug" }
+  const category = "jewellery"
+  const extension = {
+    name: "JRuby",
+    slug: "jruby-slug",
+    metadata: { categories: [category] },
+  }
 
   beforeEach(() => {
     render(<ExtensionCard extension={extension} />)
@@ -18,5 +23,9 @@ describe("extension card", () => {
     expect(link).toBeTruthy()
     // Hardcoding the host is a bit risky but this should always be true in  test environment
     expect(link.href).toBe("http://localhost/jruby-slug")
+  })
+
+  it("renders the category", () => {
+    expect(screen.getByText("Category: " + category)).toBeTruthy()
   })
 })

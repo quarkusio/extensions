@@ -102,8 +102,14 @@ exports.createSchemaCustomization = ({ actions }) => {
   createTypes(`
   
     type Extension {
-      name: String
-      slug: String
+      name: String!
+      description: String
+      slug: String!
+      metadata: ExtensionMetadata
+      }
+      
+    type ExtensionMetadata {
+      categories: [String]
     }
     
     type SiteSiteMetadata {
@@ -121,14 +127,5 @@ exports.createSchemaCustomization = ({ actions }) => {
       twitter: String
     }
 
-    type Frontmatter {
-      title: String
-      description: String
-      date: Date @dateformat
-    }
-
-    type Fields {
-      slug: String
-    }
   `)
 }
