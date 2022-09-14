@@ -10,3 +10,5 @@ import "./src/style.css"
 import "prismjs/themes/prism.css"
 
 import "@fontsource/open-sans"
+import "@fontsource/open-sans/300.css"
+import "@fontsource/open-sans/600.css"

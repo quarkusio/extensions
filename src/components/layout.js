@@ -1,6 +1,6 @@
 import * as React from "react"
 import Navigation from "./navigation"
-import Heading from "./heading"
+import HeroBar from "./hero-bar"
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
@@ -11,7 +11,7 @@ const Layout = ({ location, title, children }) => {
     header = (
       <div>
         <Navigation />
-        <Heading title={title} />
+        <HeroBar title={title} />
       </div>
     )
   } else {

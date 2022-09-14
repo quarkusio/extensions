@@ -28,6 +28,7 @@ const Logo = styled.div`
 const ExtensionName = styled.div`
   text-align: left;
   font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
   letter-spacing: 0;
   color: var(--grey-2);
   opacity: 1;

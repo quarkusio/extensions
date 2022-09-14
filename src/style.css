@@ -38,7 +38,11 @@ html {
     --font-family-pt-mono: "PT Mono";
 
     --font-style-normal: normal;
-    --font-weight-bold: bold;
+
+    --font-weight-normal: 300;
+    /* Cannot go lighter than this with open sans */
+    --font-weight-bold: 400;
+    --font-weight-boldest: 600;
 
     font-family: var(--font-family-open-sans);
 
@@ -46,15 +50,20 @@ html {
     --font-size-18: 18px;
     --font-size-20: 20px;
     --font-size-24: 24px;
+    --font-size-28: 28px;
     --font-size-32: 32px;
     --font-size-48: 48px;
     --font-size-56: 56px;
+    --font-size-72: 72px;
 
     /** Spacing **/
 
     --a-boatload-of-space: 200px;
     --a-generous-space: 100px;
     --a-modest-space: 20px;
+    --a-small-space: 12px;
+
+    font-weight: var(--font-weight-normal);
 
 }
 
