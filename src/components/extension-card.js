@@ -53,8 +53,6 @@ const ExtensionCategory = styled.div`
 `
 
 const ExtensionCard = ({ extension }) => {
-  const title = extension.name
-
   return (
     <Link to={extension.slug} itemProp="url">
       <Card className="extension-card">
@@ -66,9 +64,9 @@ const ExtensionCard = ({ extension }) => {
             alt="The extension logo"
           />
         </Logo>
-        <ExtensionName>{title}</ExtensionName>
+        <ExtensionName>{extension.name}</ExtensionName>
         <ExtensionDescription>{extension.description}</ExtensionDescription>
-        {/* Assume the category is sorted */}
+
         {extension.metadata.categories &&
           extension.metadata.categories.length > 0 && (
             <ExtensionCategory>
