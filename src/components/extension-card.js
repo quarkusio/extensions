@@ -1,10 +1,10 @@
 import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
+import Link from "gatsby-link"
 
 import styled from "styled-components"
-import { Link } from "gatsby"
 
-const Card = styled.div`
+const Card = styled(props => <Link {...props} />)`
   font-size: 3.5em;
   text-align: center;
   transform: var(--transform);
@@ -54,27 +54,25 @@ const ExtensionCategory = styled.div`
 
 const ExtensionCard = ({ extension }) => {
   return (
-    <Link to={extension.slug} itemProp="url">
-      <Card className="extension-card">
-        <Logo>
-          <StaticImage
-            layout="constrained"
-            formats={["auto", "webp", "avif"]}
-            src="../images/generic-extension-logo.png"
-            alt="The extension logo"
-          />
-        </Logo>
-        <ExtensionName>{extension.name}</ExtensionName>
-        <ExtensionDescription>{extension.description}</ExtensionDescription>
+    <Card to={extension.slug}>
+      <Logo>
+        <StaticImage
+          layout="constrained"
+          formats={["auto", "webp", "avif"]}
+          src="../images/generic-extension-logo.png"
+          alt="The extension logo"
+        />
+      </Logo>
+      <ExtensionName>{extension.name}</ExtensionName>
+      <ExtensionDescription>{extension.description}</ExtensionDescription>
 
-        {extension.metadata.categories &&
-          extension.metadata.categories.length > 0 && (
-            <ExtensionCategory>
-              Category: {extension.metadata.categories[0]}
-            </ExtensionCategory>
-          )}
-      </Card>
-    </Link>
+      {extension.metadata.categories &&
+        extension.metadata.categories.length > 0 && (
+          <ExtensionCategory>
+            Category: {extension.metadata.categories[0]}
+          </ExtensionCategory>
+        )}
+    </Card>
   )
 }
 
