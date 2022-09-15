@@ -6,6 +6,7 @@ import Seo from "../components/seo"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
+import ExtensionMetadata from "../components/extensions-display/extension-metadata"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--a-boatload-of-space);
@@ -39,7 +40,9 @@ const Metadata = styled.div`
   padding-left: 50px;
 `
 
-const Documentation = styled.div``
+const Documentation = styled.div`
+  width: 70%;
+`
 
 const ExtensionName = styled.div`
   text-align: left;
@@ -59,15 +62,6 @@ const ExtensionDescription = styled.div`
   margin-bottom: 40px;
   margin-top: 10px;
   font-weight: var(--font-weight-bold);
-`
-
-const ExtensionCategory = styled.div`
-  color: var(--grey-2);
-  text-align: left;
-  font-size: var(--font-size-16);
-  opacity: 1;
-  margin-bottom: 10px;
-  margin-top: 10px;
 `
 
 const DocumentationSection = styled.section`
@@ -129,13 +123,13 @@ const ExtensionDetailTemplate = ({
             )}
           </Documentation>
           <Metadata>
-            {extension.metadata.categories &&
-              extension.metadata.categories.length > 0 && (
-                <ExtensionCategory>
-                  <p>Category</p>
-                  <p>{extension.metadata.categories[0]}</p>
-                </ExtensionCategory>
-              )}
+            <ExtensionMetadata
+              data={{
+                name: "Category",
+                fieldName: "categories",
+                metadata: extension.metadata,
+              }}
+            />
           </Metadata>
         </Columns>
 
