@@ -2,7 +2,6 @@ import * as React from "react"
 
 import styled from "styled-components"
 import Link from "gatsby-link"
-import { faAngleRight } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const BreadcrumbBart = styled.header`
@@ -35,7 +34,7 @@ const BreadcrumbBar = ({ name }) => {
   return (
     <BreadcrumbBart>
       <StyledLink to="/">Extensions</StyledLink>
-      <PaddedIcon icon={faAngleRight} />
+      <PaddedIcon icon="angle-right" />
       {name}
     </BreadcrumbBart>
   )

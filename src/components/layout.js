@@ -2,6 +2,15 @@ import * as React from "react"
 import Navigation from "./navigation"
 import HeroBar from "./hero-bar"
 
+import { library } from "@fortawesome/fontawesome-svg-core"
+import {
+  faAngleRight,
+  faClipboard,
+  faClipboardCheck,
+} from "@fortawesome/free-solid-svg-icons"
+
+library.add(faAngleRight, faClipboard, faClipboardCheck)
+
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
