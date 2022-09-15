@@ -3,6 +3,8 @@ import * as React from "react"
 import styled from "styled-components"
 
 const MetadataBlock = styled.div`
+  width: 50%;
+  height: 60px;
   color: var(--grey-2);
   text-align: left;
   font-size: var(--font-size-16);

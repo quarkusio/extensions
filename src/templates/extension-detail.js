@@ -37,7 +37,11 @@ const Logo = styled.div`
 `
 
 const Metadata = styled.div`
+  flex-grow: 1;
   padding-left: 50px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 `
 
 const Documentation = styled.div`
@@ -90,12 +94,16 @@ const DocumentationHeading = styled.h2`
 `
 
 const ExtensionDetailTemplate = ({
-  data: { extension, previous, next },
+  data: {
+    extension: { name, description, metadata },
+    previous,
+    next,
+  },
   location,
 }) => {
   return (
     <Layout location={location}>
-      <BreadcrumbBar name={extension.name} />
+      <BreadcrumbBar name={name} />
       <ExtensionDetails>
         <Headline>
           <Logo>
@@ -106,16 +114,16 @@ const ExtensionDetailTemplate = ({
               alt="The extension logo"
             />
           </Logo>
-          <ExtensionName>{extension.name}</ExtensionName>
+          <ExtensionName>{name}</ExtensionName>
         </Headline>
         <Columns>
           <Documentation>
-            <ExtensionDescription>{extension.description}</ExtensionDescription>
-            {extension.metadata.guide && (
+            <ExtensionDescription>{description}</ExtensionDescription>
+            {metadata.guide && (
               <DocumentationSection>
                 <DocumentationHeading>Documentation</DocumentationHeading>
                 Make sure to use the{" "}
-                <VisibleLink href={extension.metadata.guide}>
+                <VisibleLink href={metadata.guide}>
                   documentation
                 </VisibleLink>{" "}
                 to get your questions answered.
@@ -125,9 +133,15 @@ const ExtensionDetailTemplate = ({
           <Metadata>
             <ExtensionMetadata
               data={{
+                name: "Status",
+                metadata,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Category",
                 fieldName: "categories",
-                metadata: extension.metadata,
+                metadata,
               }}
             />
           </Metadata>
@@ -182,6 +196,7 @@ export const pageQuery = graphql`
       name
       description
       metadata {
+        status
         categories
         guide
       }

@@ -9,10 +9,15 @@ describe("extension detail page", () => {
     const previous = {}
     const next = {}
 
+    const status = "primordial"
     const extension = {
       name: "JRuby",
       slug: "jruby-slug",
-      metadata: { categories: [category], guide: guideUrl },
+      metadata: {
+        categories: [category],
+        status: status,
+        guide: guideUrl,
+      },
     }
 
     beforeEach(() => {
@@ -30,6 +35,10 @@ describe("extension detail page", () => {
 
     it("renders the category", () => {
       expect(screen.getByText(category)).toBeTruthy()
+    })
+
+    it("renders the status", () => {
+      expect(screen.getByText(status)).toBeTruthy()
     })
 
     it("renders a link to the guide", () => {
