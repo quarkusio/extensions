@@ -7,6 +7,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
+import InstallationInstructions from "../components/extensions-display/installation-instructions"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--a-boatload-of-space);
@@ -95,7 +96,7 @@ const DocumentationHeading = styled.h2`
 
 const ExtensionDetailTemplate = ({
   data: {
-    extension: { name, description, metadata },
+    extension: { name, description, artifact, metadata },
     previous,
     next,
   },
@@ -129,6 +130,10 @@ const ExtensionDetailTemplate = ({
                 to get your questions answered.
               </DocumentationSection>
             )}
+            <DocumentationSection>
+              <DocumentationHeading>Installation</DocumentationHeading>
+              <InstallationInstructions artifact={artifact} />
+            </DocumentationSection>
           </Documentation>
           <Metadata>
             <ExtensionMetadata
@@ -195,6 +200,7 @@ export const pageQuery = graphql`
       id
       name
       description
+      artifact
       metadata {
         status
         categories
