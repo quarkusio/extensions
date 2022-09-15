@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import styled from "styled-components"
 
@@ -9,13 +9,16 @@ const CopyButton = styled.button`
 const CopyToClipboard = ({ children }) => {
   const doCopy = () => {
     navigator.clipboard.writeText(children)
+    setButtonText("clipboard-check")
   }
+
+  const [buttonText, setButtonText] = useState("clipboard")
 
   return (
     <React.Fragment>
       {children}
       <CopyButton onClick={doCopy}>
-        <FontAwesomeIcon icon="clipboard" />
+        <FontAwesomeIcon icon={buttonText} />
       </CopyButton>
     </React.Fragment>
   )
