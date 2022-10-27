@@ -4,7 +4,6 @@ import ExtensionCard from "./extension-card"
 
 const ExtensionsList = ({ extensions }) => {
   // TODO why is this guard necessary?
-  console.log("extensions is ", extensions)
   if (extensions) {
     return (
       <div className="extensions-list" style={{ display: "flex" }}>
