@@ -13,7 +13,6 @@ describe("hero bar", () => {
     expect(screen.getByText(arbitraryTitle)).toBeTruthy()
   })
 
-  // Test disabled since we have no user-facing docs on extensions!
   it("renders a link to more information", () => {
     const link = screen.getByText("What are Extensions?")
     expect(link).toBeTruthy()
