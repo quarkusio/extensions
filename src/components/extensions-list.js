@@ -1,5 +1,5 @@
 import * as React from "react"
-import Filters from "./filters"
+import Filters from "./filters/filters"
 import ExtensionCard from "./extension-card"
 import styled from "styled-components"
 

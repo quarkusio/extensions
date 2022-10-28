@@ -22,7 +22,8 @@ const Filters = () => {
         src="../images/filters.png"
         width={282}
         height={1160}
-        alt="A list of dummy extensions"
+        style={{ marginTop: "-9px" }}
+        alt="A list of filters"
       />
     </FilterBar>
   )
