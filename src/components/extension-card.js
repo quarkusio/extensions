@@ -10,7 +10,7 @@ const Card = styled(props => <Link {...props} />)`
   transform: var(--transform);
   margin: 15px;
   padding: 20px;
-  width: 263px;
+  width: 220px;
   height: 490px;
   background: var(--white) 0 0 no-repeat padding-box;
   border: 1px solid var(--grey-1);

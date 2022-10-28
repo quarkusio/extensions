@@ -1,9 +1,20 @@
 import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
+import styled from "styled-components"
+
+const FilterBar = styled.div`
+  width: 224px;
+  padding-top: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+`
 
 const Filters = () => {
   return (
-    <div className="filters">
+    <FilterBar className="filters">
+      <div style={{ width: "224px", height: "1px" }}></div>
       <StaticImage
         className="fake-content"
         layout="constrained"
@@ -13,7 +24,7 @@ const Filters = () => {
         height={1160}
         alt="A list of dummy extensions"
       />
-    </div>
+    </FilterBar>
   )
 }
 

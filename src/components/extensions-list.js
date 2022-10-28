@@ -1,22 +1,31 @@
 import * as React from "react"
 import Filters from "./filters"
 import ExtensionCard from "./extension-card"
+import styled from "styled-components"
+
+const FilterableList = styled.div`
+  margin-left: 208px;
+  margin-right: 208px;
+  margin-top: 85px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
+
+const Extensions = styled.ol`
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`
 
 const ExtensionsList = ({ extensions }) => {
   // TODO why is this guard necessary?
   if (extensions) {
     return (
-      <div className="extensions-list" style={{ display: "flex" }}>
+      <FilterableList className="extensions-list">
         <Filters />
-        <ol
-          style={{
-            listStyle: `none`,
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            width: "1262px",
-          }}
-        >
+        <Extensions>
           {extensions.map(extension => {
             return (
               <li key={extension.name}>
@@ -24,8 +33,8 @@ const ExtensionsList = ({ extensions }) => {
               </li>
             )
           })}
-        </ol>
-      </div>
+        </Extensions>
+      </FilterableList>
     )
   } else {
     return (
