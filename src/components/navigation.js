@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
-const NavBar = styled.div`
+const NavBar = styled.nav`
   height: 119px;
   background-color: var(--black);
   color: var(--white);
@@ -19,7 +19,16 @@ const NavBar = styled.div`
 `
 const Logo = styled.div`
   background-color: var(--black);
-  margin-right: 82px;
+  margin-right: 78px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 52px;
+  line-height: 46px;
+  width: 340px;
+  font-size: 50px;
+  letter-spacing: 5.5px;
+  font-weight: var(--font-weight-bold);
 `
 
 const NavEntry = styled(props => <a {...props} />)`
@@ -69,10 +78,11 @@ const Navigation = () => {
           backgroundColor="black"
           layout="constrained"
           formats={["auto", "webp", "avif"]}
-          src="../images/quarkus_logo_horizontal_rgb_600px_reverse.png"
-          height={52}
+          src="../images/logo.png"
+          height={50}
           alt="Quarkus logo"
         />
+        Quarkus
       </Logo>
       <NavEntry href="https://quarkus.io/get-started/">Get started</NavEntry>
       <NavEntry href="https://quarkus.io/guides/">Guides</NavEntry>
