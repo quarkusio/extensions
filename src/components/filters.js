@@ -2,7 +2,7 @@ import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
-const FilterBar = styled.div`
+const FilterBar = styled.aside`
   width: 224px;
   padding-top: 36px;
   display: flex;
