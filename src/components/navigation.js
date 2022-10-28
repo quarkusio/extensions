@@ -78,7 +78,7 @@ const Navigation = () => {
           backgroundColor="black"
           layout="constrained"
           formats={["auto", "webp", "avif"]}
-          src="../images/logo.png"
+          src="../images/quarkus-logo.png"
           height={50}
           alt="Quarkus logo"
         />
