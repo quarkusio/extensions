@@ -1,6 +1,11 @@
 import * as React from "react"
-import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
+import CategoryFilter from "./category-filter"
+import Search from "./search"
+import CompatibilityFilter from "./compatibility-filter"
+import RatingFilter from "./rating-filter"
+import PlatformFilter from "./platform-filter"
+import VersionFilter from "./version-filter"
 
 const FilterBar = styled.aside`
   width: 224px;
@@ -14,17 +19,12 @@ const FilterBar = styled.aside`
 const Filters = () => {
   return (
     <FilterBar className="filters">
-      <div style={{ width: "224px", height: "1px" }}></div>
-      <StaticImage
-        className="fake-content"
-        layout="constrained"
-        formats={["auto", "webp", "avif"]}
-        src="../images/filters.png"
-        width={282}
-        height={1160}
-        style={{ marginTop: "-9px" }}
-        alt="A list of filters"
-      />
+      <Search />
+      <VersionFilter />
+      <CategoryFilter />
+      <CompatibilityFilter />
+      <PlatformFilter />
+      <RatingFilter />
     </FilterBar>
   )
 }
