@@ -19,6 +19,7 @@ const RatingFilter = () => {
         layout="constrained"
         formats={["auto", "webp", "avif"]}
         src="../../images/ratingfilter.png"
+        style={{ width: "100%" }}
         alt="A filter"
       />
     </Element>

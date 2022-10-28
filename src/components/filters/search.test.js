@@ -1,12 +1,13 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
+import Search from "./search"
 
 describe("search", () => {
   beforeEach(() => {
     render(<Search />)
   })
 
-  xit("renders a search form", () => {
-    expect(screen.getByText("Categories")).toBeTruthy()
+  it("renders a search form", () => {
+    expect(screen.getByPlaceholderText("Find an extension")).toBeTruthy()
   })
 })

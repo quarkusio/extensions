@@ -19,7 +19,7 @@ const CategoryFilter = () => {
         layout="constrained"
         formats={["auto", "webp", "avif"]}
         src="../../images/categoryfilter.png"
-        width={282}
+        style={{ width: "100%" }}
         alt="A filter"
       />
     </Element>

@@ -46,6 +46,9 @@ html {
 
     font-family: var(--font-family-open-sans);
 
+    --font-size-10: 10px;
+    --font-size-12: 12px;
+    --font-size-14: 14px;
     --font-size-16: 16px;
     --font-size-18: 18px;
     --font-size-20: 20px;
@@ -62,6 +65,7 @@ html {
     --a-generous-space: 100px;
     --a-modest-space: 20px;
     --a-small-space: 12px;
+    --a-vsmall-space: 10px;
 
     font-weight: var(--font-weight-normal);
 

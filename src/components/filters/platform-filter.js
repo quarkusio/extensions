@@ -19,7 +19,7 @@ const PlatformFilter = () => {
         layout="constrained"
         formats={["auto", "webp", "avif"]}
         src="../../images/platformfilter.png"
-        width={282}
+        style={{ width: "100%" }}
         alt="A filter"
       />
     </Element>
