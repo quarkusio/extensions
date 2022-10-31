@@ -20,8 +20,8 @@ const SearchBox = styled.form`
 `
 
 const Input = styled.input`
-  padding: 0px;
-  border: 0px;
+  padding: 0;
+  border: 0;
   font-size: var(--font-size-14);
 `
 
@@ -32,7 +32,11 @@ const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
   margin-right: var(--a-vsmall-space);
 `
 
-const Search = () => {
+const Search = ({ searcher: listener }) => {
+  const onInputChange = e => {
+    listener(e.target.value)
+  }
+
   return (
     <Element>
       <SearchBox>
@@ -41,6 +45,7 @@ const Search = () => {
           id="search-regex"
           name="search-regex"
           placeholder="Find an extension"
+          onChange={onInputChange}
         />
       </SearchBox>
     </Element>

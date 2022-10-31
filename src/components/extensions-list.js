@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useState } from "react"
 import Filters from "./filters/filters"
 import ExtensionCard from "./extension-card"
 import styled from "styled-components"
@@ -20,19 +21,25 @@ const Extensions = styled.ol`
 `
 
 const ExtensionsList = ({ extensions }) => {
+  const [regex, setRegex] = useState(".*")
+
   // TODO why is this guard necessary?
   if (extensions) {
+    const filterActions = { searcher: setRegex }
+
     return (
       <FilterableList className="extensions-list">
-        <Filters />
+        <Filters filterActions={filterActions} />
         <Extensions>
-          {extensions.map(extension => {
-            return (
-              <li key={extension.name}>
-                <ExtensionCard extension={extension} />
-              </li>
-            )
-          })}
+          {extensions
+            .filter(extension => extension.name.match(regex))
+            .map(extension => {
+              return (
+                <li key={extension.name}>
+                  <ExtensionCard extension={extension} />
+                </li>
+              )
+            })}
         </Extensions>
       </FilterableList>
     )

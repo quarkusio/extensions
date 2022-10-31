@@ -16,10 +16,10 @@ const FilterBar = styled.aside`
   align-items: center;
 `
 
-const Filters = () => {
+const Filters = ({ filterActions: { searcher } }) => {
   return (
     <FilterBar className="filters">
-      <Search />
+      <Search searcher={searcher} />
       <VersionFilter />
       <CategoryFilter />
       <CompatibilityFilter />
