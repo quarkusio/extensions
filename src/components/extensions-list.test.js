@@ -42,4 +42,11 @@ describe("extension list", () => {
     await user.keyboard("Ruby")
     expect(screen.queryByText(extensions[0].name)).toBeTruthy()
   })
+
+  it("is case insensitive in its searching", async () => {
+    const searchInput = screen.getByRole("textbox")
+    await user.click(searchInput)
+    await user.keyboard("ruby")
+    expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+  })
 })

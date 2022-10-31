@@ -32,7 +32,9 @@ const ExtensionsList = ({ extensions }) => {
         <Filters filterActions={filterActions} />
         <Extensions>
           {extensions
-            .filter(extension => extension.name.match(regex))
+            .filter(extension =>
+              extension.name.toLowerCase().match(regex.toLowerCase())
+            )
             .map(extension => {
               return (
                 <li key={extension.name}>
