@@ -36,9 +36,10 @@ describe("extension list", () => {
     expect(screen.queryByText(extensions[0].name)).toBeFalsy()
   })
 
-  it("leaves in extensions which do not match the search filter", () => {
+  it("leaves in extensions which do not match the search filter", async () => {
     const searchInput = screen.getByRole("textbox")
-    user.type(searchInput, { target: { value: "Ruby" } })
-    expect(screen.getByText(extensions[0].name)).toBeTruthy()
+    await user.click(searchInput)
+    await user.keyboard("Ruby")
+    expect(screen.queryByText(extensions[0].name)).toBeTruthy()
   })
 })
