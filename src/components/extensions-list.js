@@ -18,6 +18,7 @@ const Extensions = styled.ol`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
 `
 
 const ExtensionsList = ({ extensions }) => {
