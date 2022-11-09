@@ -4,13 +4,10 @@ import CategoryFilter from "./category-filter"
 
 describe("category filter", () => {
   const filterer = jest.fn(() => {})
+  const categories = ["toad", "tadpole", "treefrog"]
+
   beforeEach(() => {
-    render(
-      <CategoryFilter
-        filterer={filterer}
-        categories={["toad", "tadpole", "treefrog"]}
-      />
-    )
+    render(<CategoryFilter filterer={filterer} categories={categories} />)
   })
 
   it("renders a categories title", () => {
@@ -23,16 +20,29 @@ describe("category filter", () => {
   })
 
   it("renders tickboxes", () => {
-    expect(screen.getByText("toad")).toBeTruthy()
-    expect(screen.getByText("tadpole")).toBeTruthy()
+    expect(screen.getAllByTitle("unticked")).toHaveLength(categories.length)
   })
 
-  xit("passes through the search expression to the listener", () => {
-    const categoryName = "treefrog"
-    const filterInput = screen.getByText(categoryName)
+  describe("when clicking a ticky box", () => {
+    it("passes through the search expression to the listener", () => {
+      const categoryName = "treefrog"
+      const filterInput = screen.getByText(categoryName)
 
-    fireEvent.click(filterInput)
+      fireEvent.click(filterInput)
 
-    expect(filterer).toHaveBeenCalledWith(categoryName)
+      expect(filterer).toHaveBeenCalledWith([categoryName])
+    })
+
+    it("updates the ticky box icons", () => {
+      const categoryName = "treefrog"
+      const filterInput = screen.getByText(categoryName)
+
+      fireEvent.click(filterInput)
+
+      expect(screen.getAllByTitle("unticked")).toHaveLength(
+        categories.length - 1
+      )
+      expect(screen.getByTitle("ticked")).toBeTruthy()
+    })
   })
 })

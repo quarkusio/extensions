@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -11,7 +11,7 @@ const Element = styled.div`
   align-items: flex-start;
 `
 
-const Title = styled.div`
+const Title = styled.title`
   font-size: var(--font-size-22);
   letter-spacing: 0;
   color: var(--grey-2);
@@ -36,7 +36,20 @@ const TickyBox = styled(props => <FontAwesomeIcon {...props} />)`
   font-size: 16px;
 `
 
-const CategoryFilter = ({ categories }) => {
+const toggleCategory = (
+  category,
+  tickedCategories,
+  setTickedCategories,
+  filterer
+) => {
+  tickedCategories = [...tickedCategories, category] // It's important to make a new array or nothing will be re-rendered
+  setTickedCategories(tickedCategories)
+  filterer && filterer(tickedCategories)
+}
+
+const CategoryFilter = ({ categories, filterer }) => {
+  const [tickedCategories, setTickedCategories] = useState([])
+
   return (
     <Element>
       <Title>Category</Title>
@@ -46,9 +59,23 @@ const CategoryFilter = ({ categories }) => {
             category =>
               category &&
               category.length > 0 && (
-                <Category key={category}>
+                <Category
+                  key={category}
+                  onClick={() =>
+                    toggleCategory(
+                      category,
+                      tickedCategories,
+                      setTickedCategories,
+                      filterer
+                    )
+                  }
+                >
                   <div>
-                    <TickyBox icon={["far", "square"]} />
+                    {tickedCategories.includes(category) ? (
+                      <TickyBox icon="square-check" title="ticked" />
+                    ) : (
+                      <TickyBox icon={["far", "square"]} title="unticked" />
+                    )}
                   </div>
                   <div>{category}</div>
                 </Category>

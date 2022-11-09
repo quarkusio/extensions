@@ -2,5 +2,5 @@ import React from "react"
 
 export function FontAwesomeIcon(props) {
   let className = `fa ${props.icon}`
-  return <i className={className} />
+  return <i className={className} title={props.title} />
 }
