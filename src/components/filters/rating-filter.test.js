@@ -7,7 +7,7 @@ describe("rating filter", () => {
     render(<RatingFilter />)
   })
 
-  xit("renders categories", () => {
-    expect(screen.getByText("Categories")).toBeTruthy()
+  xit("renders a title", () => {
+    expect(screen.getByText("Rating")).toBeTruthy()
   })
 })
