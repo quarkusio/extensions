@@ -4,12 +4,13 @@ import Filters from "./filters"
 
 describe("filters bar", () => {
   const searcher = jest.fn()
+  const filterer = jest.fn()
 
   beforeEach(() => {
     render(
       <Filters
         categories={["lynx", "skunks", "moose"]}
-        filterActions={{ searcher }}
+        filterActions={{ searcher, filterer }}
       />
     )
   })

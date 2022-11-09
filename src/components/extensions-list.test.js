@@ -1,5 +1,5 @@
 import React from "react"
-import { render, screen } from "@testing-library/react"
+import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import ExtensionsList from "./extensions-list"
 
@@ -71,16 +71,17 @@ describe("extension list", () => {
         expect(screen.queryAllByText(category)).toHaveLength(1) // One for the filter, and in the card the name is concatenated with something else
       })
 
-      xit("filters out extensions which do not match the ticked category", async () => {
-        const searchInput = screen.getByText(category)
-        await user.click(searchInput)
-        expect(screen.queryByText(extensions[0].name)).toBeFalsy()
+      it("leaves in extensions which match search filter", async () => {
+        fireEvent.click(screen.getByText(category))
+
+        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
       })
 
-      it("leaves in extensions which match search filter", async () => {
-        const searchInput = screen.getByText(category)
-        await user.click(searchInput)
-        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
+      it("filters out extensions which do not match the ticked category", async () => {
+        fireEvent.click(screen.getByText(category))
+
+        expect(screen.queryByText(extensions[2].name)).toBeFalsy()
       })
     })
   })

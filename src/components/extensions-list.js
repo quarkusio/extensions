@@ -23,10 +23,11 @@ const Extensions = styled.ol`
 
 const ExtensionsList = ({ extensions }) => {
   const [regex, setRegex] = useState(".*")
+  const [categoryFilter, setCategoryFilter] = useState([])
 
   // TODO why is this guard necessary?
   if (extensions) {
-    const filterActions = { searcher: setRegex }
+    const filterActions = { searcher: setRegex, filterer: setCategoryFilter }
 
     const categories = [
       ...new Set(
@@ -41,6 +42,14 @@ const ExtensionsList = ({ extensions }) => {
           {extensions
             .filter(extension =>
               extension.name.toLowerCase().match(regex.toLowerCase())
+            )
+            .filter(
+              extension =>
+                categoryFilter.length == 0 ||
+                (extension.metadata.categories &&
+                  extension.metadata.categories.find(category =>
+                    categoryFilter.includes(category.toLowerCase())
+                  ))
             )
             .map(extension => {
               return (
