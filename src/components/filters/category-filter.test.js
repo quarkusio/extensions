@@ -24,25 +24,38 @@ describe("category filter", () => {
   })
 
   describe("when clicking a ticky box", () => {
+    const categoryName = "treefrog"
+    beforeEach(() => {
+      fireEvent.click(screen.getByText(categoryName))
+    })
+
     it("passes through the search expression to the listener", () => {
-      const categoryName = "treefrog"
-      const filterInput = screen.getByText(categoryName)
-
-      fireEvent.click(filterInput)
-
       expect(filterer).toHaveBeenCalledWith([categoryName])
     })
 
     it("updates the ticky box icons", () => {
-      const categoryName = "treefrog"
-      const filterInput = screen.getByText(categoryName)
-
-      fireEvent.click(filterInput)
-
       expect(screen.getAllByTitle("unticked")).toHaveLength(
         categories.length - 1
       )
       expect(screen.getByTitle("ticked")).toBeTruthy()
+    })
+  })
+
+  describe("when un-clicking a ticky box", () => {
+    const categoryName = "treefrog"
+    beforeEach(() => {
+      fireEvent.click(screen.getByText(categoryName))
+      fireEvent.click(screen.getByText(categoryName))
+    })
+
+    it("passes through the search expression to the listener", () => {
+      expect(filterer).toHaveBeenCalledWith([categoryName])
+      expect(filterer).toHaveBeenCalledWith([])
+    })
+
+    it("updates the ticky box icons to go back to unticked", () => {
+      expect(screen.getAllByTitle("unticked")).toHaveLength(categories.length)
+      expect(screen.queryAllByTitle("ticked")).toHaveLength(0)
     })
   })
 })

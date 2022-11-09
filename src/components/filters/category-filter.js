@@ -42,7 +42,11 @@ const toggleCategory = (
   setTickedCategories,
   filterer
 ) => {
-  tickedCategories = [...tickedCategories, category] // It's important to make a new array or nothing will be re-rendered
+  if (tickedCategories.includes(category)) {
+    tickedCategories = tickedCategories.filter(item => item !== category)
+  } else {
+    tickedCategories = [...tickedCategories, category] // It's important to make a new array or nothing will be re-rendered
+  }
   setTickedCategories(tickedCategories)
   filterer && filterer(tickedCategories)
 }
