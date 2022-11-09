@@ -41,6 +41,26 @@ describe("category filter", () => {
     })
   })
 
+  describe("when clicking several ticky box", () => {
+    const categoryName = "treefrog"
+    const otherName = "toad"
+    beforeEach(() => {
+      fireEvent.click(screen.getByText(categoryName))
+      fireEvent.click(screen.getByText(otherName))
+    })
+
+    it("passes through the search expression to the listener", () => {
+      expect(filterer).toHaveBeenCalledWith([categoryName, otherName])
+    })
+
+    it("updates the ticky box icons", () => {
+      expect(screen.getAllByTitle("unticked")).toHaveLength(
+        categories.length - 2
+      )
+      expect(screen.getAllByTitle("ticked")).toHaveLength(2)
+    })
+  })
+
   describe("when un-clicking a ticky box", () => {
     const categoryName = "treefrog"
     beforeEach(() => {
