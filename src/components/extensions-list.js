@@ -45,7 +45,7 @@ const ExtensionsList = ({ extensions }) => {
             )
             .filter(
               extension =>
-                categoryFilter.length == 0 ||
+                categoryFilter.length === 0 ||
                 (extension.metadata.categories &&
                   extension.metadata.categories.find(category =>
                     categoryFilter.includes(category.toLowerCase())
