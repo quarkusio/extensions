@@ -3,13 +3,25 @@ import Navigation from "./navigation"
 import HeroBar from "./hero-bar"
 
 import { library } from "@fortawesome/fontawesome-svg-core"
+
 import {
   faAngleRight,
   faClipboard,
   faClipboardCheck,
+  faR,
+  faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons"
 
-library.add(faAngleRight, faClipboard, faClipboardCheck)
+import { faSquare } from "@fortawesome/free-regular-svg-icons"
+
+library.add(
+  faAngleRight,
+  faClipboard,
+  faClipboardCheck,
+  faSquare,
+  faSquareCheck,
+  faR
+)
 
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`

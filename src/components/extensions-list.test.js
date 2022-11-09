@@ -5,11 +5,24 @@ import ExtensionsList from "./extensions-list"
 
 describe("extension list", () => {
   const category = "jewellery"
+  const otherCategory = "snails"
+
   const extensions = [
     {
       name: "JRuby",
       slug: "jruby-slug",
       metadata: { categories: [category] },
+    },
+    {
+      name: "JDiamond",
+      slug: "jdiamond-slug",
+      metadata: { categories: [category] },
+    },
+
+    {
+      name: "Molluscs",
+      slug: "molluscs-slug",
+      metadata: { categories: [otherCategory] },
     },
   ]
   const user = userEvent.setup()
@@ -23,30 +36,52 @@ describe("extension list", () => {
   })
 
   it("renders the correct link", () => {
-    const link = screen.getByRole("link")
+    const link = screen.getAllByRole("link")[0] // Look at the first one
     expect(link).toBeTruthy()
     // Hardcoding the host is a bit risky but this should always be true in  test environment
     expect(link.href).toBe("http://localhost/jruby-slug")
   })
 
-  it("filters out extensions which do not match the search filter", async () => {
-    const searchInput = screen.getByRole("textbox")
-    await user.click(searchInput)
-    await user.keyboard("octopus")
-    expect(screen.queryByText(extensions[0].name)).toBeFalsy()
-  })
+  describe("searching and filtering", () => {
+    describe("searching", () => {
+      it("filters out extensions which do not match the search filter", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("octopus")
+        expect(screen.queryByText(extensions[0].name)).toBeFalsy()
+      })
 
-  it("leaves in extensions which do not match the search filter", async () => {
-    const searchInput = screen.getByRole("textbox")
-    await user.click(searchInput)
-    await user.keyboard("Ruby")
-    expect(screen.queryByText(extensions[0].name)).toBeTruthy()
-  })
+      it("leaves in extensions which do not match the search filter", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("Ruby")
+        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+      })
 
-  it("is case insensitive in its searching", async () => {
-    const searchInput = screen.getByRole("textbox")
-    await user.click(searchInput)
-    await user.keyboard("ruby")
-    expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+      it("is case insensitive in its searching", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("ruby")
+        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+      })
+    })
+
+    describe("category filter", () => {
+      it("has a list of categories", async () => {
+        expect(screen.queryAllByText(category)).toHaveLength(1) // One for the filter, and in the card the name is concatenated with something else
+      })
+
+      xit("filters out extensions which do not match the ticked category", async () => {
+        const searchInput = screen.getByText(category)
+        await user.click(searchInput)
+        expect(screen.queryByText(extensions[0].name)).toBeFalsy()
+      })
+
+      it("leaves in extensions which match search filter", async () => {
+        const searchInput = screen.getByText(category)
+        await user.click(searchInput)
+        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
+      })
+    })
   })
 })

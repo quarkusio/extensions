@@ -3,11 +3,22 @@ import { render, screen } from "@testing-library/react"
 import Filters from "./filters"
 
 describe("filters bar", () => {
+  const searcher = jest.fn()
+
   beforeEach(() => {
-    render(<Filters />)
+    render(
+      <Filters
+        categories={["lynx", "skunks", "moose"]}
+        filterActions={{ searcher }}
+      />
+    )
   })
 
-  xit("renders categories", () => {
-    expect(screen.getByText("Categories")).toBeTruthy()
+  it("renders categories", () => {
+    expect(screen.getByText("Category")).toBeTruthy()
+  })
+
+  it("renders individual categories", () => {
+    expect(screen.getByText("skunks")).toBeTruthy()
   })
 })

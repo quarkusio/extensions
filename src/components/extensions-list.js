@@ -28,9 +28,15 @@ const ExtensionsList = ({ extensions }) => {
   if (extensions) {
     const filterActions = { searcher: setRegex }
 
+    const categories = [
+      ...new Set(
+        extensions.map(extension => extension.metadata.categories).flat()
+      ),
+    ]
+
     return (
       <FilterableList className="extensions-list">
-        <Filters filterActions={filterActions} />
+        <Filters categories={categories} filterActions={filterActions} />
         <Extensions>
           {extensions
             .filter(extension =>
