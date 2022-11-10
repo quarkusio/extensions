@@ -41,7 +41,7 @@ const PlatformFilter = ({ options, filterer }) => {
       color: grey,
       borderColor: grey,
     }),
-    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    option: (styles, { isDisabled }) => {
       return {
         ...styles,
         cursor: isDisabled ? "not-allowed" : "default",
