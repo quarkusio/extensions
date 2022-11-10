@@ -68,6 +68,8 @@ html {
     --a-small-space: 12px;
     --a-vsmall-space: 10px;
 
+    --border-radius: 0;
+
     font-weight: var(--font-weight-normal);
 
 }

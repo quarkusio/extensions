@@ -1,26 +1,71 @@
 import * as React from "react"
-import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
+import Select from "react-select"
+import Title from "./title"
+import prettyCategory from "../util/pretty-category"
 
-const Element = styled.div`
-  width: 224px;
+const Element = styled.form`
   padding-top: 36px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  gap: 16px;
+`
+const IndicatorSeparator = styled.span`
+  align-self: stretch;
+  background-color: var(--grey-2);
+  width: 1px;
+  box-sizing: border-box;
 `
 
-const PlatformFilter = () => {
+const PlatformFilter = ({ options }) => {
+  const label = "platform"
+  const processedOptions = options
+    ? options.map(option => {
+        return { value: option, label: prettyCategory(option) }
+      })
+    : []
+
+  // Grab CSS variables in javascript
+  const grey = getComputedStyle(document.documentElement).getPropertyValue(
+    "--grey-2"
+  )
+
+  const borderRadius = getComputedStyle(
+    document.documentElement
+  ).getPropertyValue("--border-radius")
+
+  const colourStyles = {
+    control: styles => ({
+      ...styles,
+      borderRadius: borderRadius,
+      color: grey,
+      borderColor: grey,
+    }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        cursor: isDisabled ? "not-allowed" : "default",
+        borderRadius: borderRadius,
+      }
+    },
+    dropdownIndicator: styles => ({
+      ...styles,
+      color: grey, // Custom colour
+    }),
+  }
+
   return (
-    <Element>
-      <StaticImage
-        className="fake-content"
-        layout="constrained"
-        formats={["auto", "webp", "avif"]}
-        src="../../images/platformfilter.png"
-        style={{ width: "100%" }}
-        alt="A filter"
+    <Element data-testid="platform-form">
+      <Title htmlFor={label}>Platform</Title>
+      <Select
+        placeholder="All"
+        options={processedOptions}
+        name={label}
+        inputId={label}
+        styles={colourStyles}
+        components={{ IndicatorSeparator: IndicatorSeparator }}
       />
     </Element>
   )
