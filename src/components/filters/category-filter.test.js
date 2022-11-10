@@ -14,9 +14,9 @@ describe("category filter", () => {
     expect(screen.getByText("Category")).toBeTruthy()
   })
 
-  it("renders individual category names", () => {
-    expect(screen.getByText("toad")).toBeTruthy()
-    expect(screen.getByText("tadpole")).toBeTruthy()
+  it("renders prettified individual category names", () => {
+    expect(screen.getByText("Toad")).toBeTruthy()
+    expect(screen.getByText("Tadpole")).toBeTruthy()
   })
 
   it("renders tickboxes", () => {
@@ -24,13 +24,13 @@ describe("category filter", () => {
   })
 
   describe("when clicking a ticky box", () => {
-    const categoryName = "treefrog"
+    const categoryName = "Treefrog"
     beforeEach(() => {
       fireEvent.click(screen.getByText(categoryName))
     })
 
-    it("passes through the search expression to the listener", () => {
-      expect(filterer).toHaveBeenCalledWith([categoryName])
+    it("passes through the original category name to the listener", () => {
+      expect(filterer).toHaveBeenCalledWith([categoryName.toLowerCase()])
     })
 
     it("updates the ticky box icons", () => {
@@ -42,15 +42,18 @@ describe("category filter", () => {
   })
 
   describe("when clicking several ticky box", () => {
-    const categoryName = "treefrog"
-    const otherName = "toad"
+    const categoryName = "Treefrog"
+    const otherName = "Toad"
     beforeEach(() => {
       fireEvent.click(screen.getByText(categoryName))
       fireEvent.click(screen.getByText(otherName))
     })
 
-    it("passes through the search expression to the listener", () => {
-      expect(filterer).toHaveBeenCalledWith([categoryName, otherName])
+    it("passes through the category names to the listener", () => {
+      expect(filterer).toHaveBeenCalledWith([
+        categoryName.toLowerCase(),
+        otherName.toLowerCase(),
+      ])
     })
 
     it("updates the ticky box icons", () => {
@@ -62,14 +65,14 @@ describe("category filter", () => {
   })
 
   describe("when un-clicking a ticky box", () => {
-    const categoryName = "treefrog"
+    const categoryName = "Treefrog"
     beforeEach(() => {
       fireEvent.click(screen.getByText(categoryName))
       fireEvent.click(screen.getByText(categoryName))
     })
 
-    it("passes through the search expression to the listener", () => {
-      expect(filterer).toHaveBeenCalledWith([categoryName])
+    it("passes through the filter to the listener", () => {
+      expect(filterer).toHaveBeenCalledWith([categoryName.toLowerCase()])
       expect(filterer).toHaveBeenCalledWith([])
     })
 

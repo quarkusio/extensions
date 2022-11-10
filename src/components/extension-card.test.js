@@ -25,7 +25,7 @@ describe("extension card", () => {
     expect(link.href).toBe("http://localhost/jruby-slug")
   })
 
-  it("renders the category", () => {
-    expect(screen.getByText("Category: " + category)).toBeTruthy()
+  it("renders the formatted category", () => {
+    expect(screen.getByText("Category: Jewellery")).toBeTruthy()
   })
 })

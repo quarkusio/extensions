@@ -5,6 +5,7 @@ import ExtensionsList from "./extensions-list"
 
 describe("extension list", () => {
   const category = "jewellery"
+  const displayCategory = "Jewellery"
   const otherCategory = "snails"
 
   const extensions = [
@@ -68,18 +69,18 @@ describe("extension list", () => {
 
     describe("category filter", () => {
       it("has a list of categories", async () => {
-        expect(screen.queryAllByText(category)).toHaveLength(1) // One for the filter, and in the card the name is concatenated with something else
+        expect(screen.queryAllByText(displayCategory)).toHaveLength(1) // One for the filter, and in the card the name is concatenated with something else
       })
 
       it("leaves in extensions which match search filter", async () => {
-        fireEvent.click(screen.getByText(category))
+        fireEvent.click(screen.getByText(displayCategory))
 
         expect(screen.queryByText(extensions[0].name)).toBeTruthy()
         expect(screen.queryByText(extensions[1].name)).toBeTruthy()
       })
 
       it("filters out extensions which do not match the ticked category", async () => {
-        fireEvent.click(screen.getByText(category))
+        fireEvent.click(screen.getByText(displayCategory))
 
         expect(screen.queryByText(extensions[2].name)).toBeFalsy()
       })

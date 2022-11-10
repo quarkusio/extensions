@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Title from "./title"
+import prettyCategory from "../util/pretty-category"
 
 const Element = styled.div`
   padding-top: 36px;
@@ -76,7 +77,7 @@ const CategoryFilter = ({ categories, filterer }) => {
                       <TickyBox icon={["far", "square"]} title="unticked" />
                     )}
                   </div>
-                  <div>{category}</div>
+                  <div>{prettyCategory(category)}</div>
                 </Category>
               )
           )}

@@ -3,6 +3,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import Link from "gatsby-link"
 
 import styled from "styled-components"
+import prettyCategory from "./util/pretty-category"
 
 const Card = styled(props => <Link {...props} />)`
   font-size: 3.5em;
@@ -70,7 +71,7 @@ const ExtensionCard = ({ extension }) => {
       {extension.metadata.categories &&
         extension.metadata.categories.length > 0 && (
           <ExtensionCategory>
-            Category: {extension.metadata.categories[0]}
+            Category: {prettyCategory(extension.metadata.categories[0])}
           </ExtensionCategory>
         )}
     </Card>

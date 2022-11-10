@@ -20,6 +20,6 @@ describe("filters bar", () => {
   })
 
   it("renders individual categories", () => {
-    expect(screen.getByText("skunks")).toBeTruthy()
+    expect(screen.getByText("Skunks")).toBeTruthy()
   })
 })
