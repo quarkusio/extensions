@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 import Select from "react-select"
 import Title from "./title"
-import prettyCategory from "../util/pretty-category"
+import prettyPlatform from "../util/pretty-platform"
 
 const Element = styled.form`
   padding-top: 36px;
@@ -12,18 +12,16 @@ const Element = styled.form`
   align-items: flex-start;
   gap: 16px;
 `
-const IndicatorSeparator = styled.span`
-  align-self: stretch;
-  background-color: var(--grey-2);
-  width: 1px;
-  box-sizing: border-box;
-`
 
-const PlatformFilter = ({ options }) => {
+const onChange = (value, { action }, filterer) => {
+  if (action === "select-option" && filterer) filterer(value.value)
+}
+
+const PlatformFilter = ({ options, filterer }) => {
   const label = "platform"
   const processedOptions = options
     ? options.map(option => {
-        return { value: option, label: prettyCategory(option) }
+        return { value: option, label: prettyPlatform(option) }
       })
     : []
 
@@ -54,6 +52,11 @@ const PlatformFilter = ({ options }) => {
       ...styles,
       color: grey, // Custom colour
     }),
+    indicatorSeparator: styles => ({
+      ...styles,
+      margin: 0,
+      backgroundColor: grey,
+    }),
   }
 
   return (
@@ -62,10 +65,10 @@ const PlatformFilter = ({ options }) => {
       <Select
         placeholder="All"
         options={processedOptions}
+        onChange={(a, b) => onChange(a, b, filterer)}
         name={label}
         inputId={label}
         styles={colourStyles}
-        components={{ IndicatorSeparator: IndicatorSeparator }}
       />
     </Element>
   )

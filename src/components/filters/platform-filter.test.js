@@ -30,8 +30,19 @@ describe("platform filter", () => {
   })
 
   describe("when options are available", () => {
+    const platformCode =
+      "io.bananas.registry:quarkus-non-platform-extensions:2.6.2:json:1.0-SNAPSHOT"
+
+    const filterer = jest.fn()
     beforeEach(() => {
-      render(<PlatformFilter options={["chocolate", "mango", "strawberry"]} />)
+      filterer.mockReset()
+
+      render(
+        <PlatformFilter
+          filterer={filterer}
+          options={["chocolate", platformCode, "strawberry"]}
+        />
+      )
     })
 
     it("renders platform title", () => {
@@ -46,10 +57,24 @@ describe("platform filter", () => {
       expect(screen.getByTestId("platform-form")).toHaveFormValues({
         platform: "",
       })
-      await selectEvent.select(screen.getByLabelText(label), "Chocolate")
+      await selectEvent.select(
+        screen.getByLabelText(label),
+        "Non Platform Extensions"
+      )
       expect(screen.getByTestId("platform-form")).toHaveFormValues({
-        platform: "chocolate",
+        platform: platformCode,
       })
+    })
+
+    it("sends a message on click", async () => {
+      expect(screen.getByTestId("platform-form")).toHaveFormValues({
+        platform: "",
+      })
+      await selectEvent.select(
+        screen.getByLabelText(label),
+        "Non Platform Extensions"
+      )
+      expect(filterer).toHaveBeenCalledWith(platformCode)
     })
   })
 })
