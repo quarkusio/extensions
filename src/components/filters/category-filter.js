@@ -2,19 +2,14 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+import Title from "./title"
+
 const Element = styled.div`
-  width: 224px;
   padding-top: 36px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-`
-
-const Title = styled.section`
-  font-size: var(--font-size-22);
-  letter-spacing: 0;
-  color: var(--grey-2);
 `
 
 const Category = styled.li`
