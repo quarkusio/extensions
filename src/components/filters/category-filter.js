@@ -11,7 +11,7 @@ const Element = styled.div`
   align-items: flex-start;
 `
 
-const Title = styled.title`
+const Title = styled.section`
   font-size: var(--font-size-22);
   letter-spacing: 0;
   color: var(--grey-2);
