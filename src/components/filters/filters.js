@@ -19,15 +19,15 @@ const FilterBar = styled.aside`
 const Filters = ({
   categories,
   platforms,
-  filterActions: { searcher, filterer },
+  filterActions: { searcher, categoryFilterer, platformFilterer },
 }) => {
   return (
     <FilterBar className="filters">
       <Search searcher={searcher} />
       <VersionFilter />
-      <CategoryFilter categories={categories} filterer={filterer} />
+      <CategoryFilter categories={categories} filterer={categoryFilterer} />
       <CompatibilityFilter />
-      <PlatformFilter options={platforms} />
+      <PlatformFilter options={platforms} filterer={platformFilterer} />
       <RatingFilter />
     </FilterBar>
   )

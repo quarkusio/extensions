@@ -102,10 +102,10 @@ describe("extension list", () => {
         )
       })
 
-      xit("leaves in extensions which match search filter and filters out extensions which do not match", async () => {
+      it("leaves in extensions which match search filter and filters out extensions which do not match", async () => {
         expect(screen.queryByText(extensions[0].name)).toBeTruthy()
         expect(screen.queryByText(extensions[1].name)).toBeTruthy()
-        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
+        expect(screen.queryByText(extensions[2].name)).toBeTruthy()
 
         expect(screen.getByTestId("platform-form")).toHaveFormValues({
           platform: "",
@@ -114,7 +114,7 @@ describe("extension list", () => {
 
         expect(screen.queryByText(extensions[0].name)).toBeFalsy()
         expect(screen.queryByText(extensions[1].name)).toBeTruthy()
-        expect(screen.queryByText(extensions[1].name)).toBeFalsy()
+        expect(screen.queryByText(extensions[2].name)).toBeFalsy()
       })
     })
   })

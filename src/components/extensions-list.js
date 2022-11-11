@@ -21,7 +21,10 @@ const Extensions = styled.ol`
   width: 100%;
 `
 
-const filterExtensions = (extensions, { categoryFilter, regex }) => {
+const filterExtensions = (
+  extensions,
+  { regex, categoryFilter, platformFilter }
+) => {
   return extensions
     .filter(extension =>
       extension.name.toLowerCase().match(regex.toLowerCase())
@@ -29,20 +32,30 @@ const filterExtensions = (extensions, { categoryFilter, regex }) => {
     .filter(
       extension =>
         categoryFilter.length === 0 ||
-        (extension.metadata.categories &&
-          extension.metadata.categories.find(category =>
-            categoryFilter.includes(category.toLowerCase())
-          ))
+        extension.metadata.categories?.find(category =>
+          categoryFilter.includes(category.toLowerCase())
+        )
+    )
+    .filter(
+      extension =>
+        platformFilter.length === 0 ||
+        (extension.origins &&
+          extension.origins?.find(origin => platformFilter.includes(origin)))
     )
 }
 
 const ExtensionsList = ({ extensions }) => {
   const [regex, setRegex] = useState(".*")
   const [categoryFilter, setCategoryFilter] = useState([])
+  const [platformFilter, setPlatformFilter] = useState([])
 
   // TODO why is this guard necessary?
   if (extensions) {
-    const filterActions = { searcher: setRegex, filterer: setCategoryFilter }
+    const filterActions = {
+      searcher: setRegex,
+      categoryFilterer: setCategoryFilter,
+      platformFilterer: setPlatformFilter,
+    }
 
     const categories = [
       ...new Set(
@@ -54,7 +67,7 @@ const ExtensionsList = ({ extensions }) => {
       ...new Set(extensions.map(extension => extension.origins).flat()),
     ]
 
-    const filters = { regex, categoryFilter }
+    const filters = { regex, categoryFilter, platformFilter }
     const filteredExtensions = filterExtensions(extensions, filters)
 
     return (
