@@ -35,9 +35,17 @@ const ExtensionsList = ({ extensions }) => {
       ),
     ]
 
+    const platforms = [
+      ...new Set(extensions.map(extension => extension.origins).flat()),
+    ]
+
     return (
       <FilterableList className="extensions-list">
-        <Filters categories={categories} filterActions={filterActions} />
+        <Filters
+          categories={categories}
+          platforms={platforms}
+          filterActions={filterActions}
+        />
         <Extensions>
           {extensions
             .filter(extension =>

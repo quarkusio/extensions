@@ -40,6 +40,7 @@ const PlatformFilter = ({ options, filterer }) => {
       borderRadius: borderRadius,
       color: grey,
       borderColor: grey,
+      width: "220px",
     }),
     option: (styles, { isDisabled }) => {
       return {

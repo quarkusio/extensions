@@ -5,6 +5,10 @@ describe("platform name formatter", () => {
     expect(prettyPlatform("marshmallows")).toBe("Marshmallows")
   })
 
+  it("handles nulls", () => {
+    expect(prettyPlatform()).toBe()
+  })
+
   it("handles non-platform platforms", () => {
     expect(
       prettyPlatform(

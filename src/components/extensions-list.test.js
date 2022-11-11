@@ -2,6 +2,7 @@ import React from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import ExtensionsList from "./extensions-list"
+import selectEvent from "react-select-event"
 
 describe("extension list", () => {
   const category = "jewellery"
@@ -13,17 +14,20 @@ describe("extension list", () => {
       name: "JRuby",
       slug: "jruby-slug",
       metadata: { categories: [category] },
+      origins: ["bottom of the garden"],
     },
     {
       name: "JDiamond",
       slug: "jdiamond-slug",
       metadata: { categories: [category] },
+      origins: ["a mine"],
     },
 
     {
       name: "Molluscs",
       slug: "molluscs-slug",
       metadata: { categories: [otherCategory] },
+      origins: ["bottom of the garden"],
     },
   ]
   const user = userEvent.setup()
@@ -72,7 +76,7 @@ describe("extension list", () => {
         expect(screen.queryAllByText(displayCategory)).toHaveLength(1) // One for the filter, and in the card the name is concatenated with something else
       })
 
-      it("leaves in extensions which match search filter", async () => {
+      it("leaves in extensions which match category filter", async () => {
         fireEvent.click(screen.getByText(displayCategory))
 
         expect(screen.queryByText(extensions[0].name)).toBeTruthy()
@@ -83,6 +87,34 @@ describe("extension list", () => {
         fireEvent.click(screen.getByText(displayCategory))
 
         expect(screen.queryByText(extensions[2].name)).toBeFalsy()
+      })
+    })
+
+    describe("platform filter", () => {
+      const label = "Platform"
+
+      it("lists all the platforms in the menu", async () => {
+        // Don't look at what happens, just make sure the options are there
+        await selectEvent.select(screen.getByLabelText(label), "A Mine")
+        await selectEvent.select(
+          screen.getByLabelText(label),
+          "Bottom Of The Garden"
+        )
+      })
+
+      xit("leaves in extensions which match search filter and filters out extensions which do not match", async () => {
+        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
+        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
+
+        expect(screen.getByTestId("platform-form")).toHaveFormValues({
+          platform: "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "A Mine")
+
+        expect(screen.queryByText(extensions[0].name)).toBeFalsy()
+        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
+        expect(screen.queryByText(extensions[1].name)).toBeFalsy()
       })
     })
   })

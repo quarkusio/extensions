@@ -106,6 +106,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       description: String
       slug: String!
       metadata: ExtensionMetadata
+      origins: [String]
       }
       
     type ExtensionMetadata {

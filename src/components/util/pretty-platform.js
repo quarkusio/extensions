@@ -4,12 +4,12 @@ const mappings = {
 }
 
 export default origin => {
-  const elements = origin.split(":")
-  const element = elements.length > 1 ? elements[1] : origin
+  const elements = origin && origin.split(":")
+  const element = elements?.length > 1 ? elements[1] : origin
 
-  const words = element.split(/[ -]/)
+  const words = element?.split(/[ -]/)
   const pretty = words
-    .map(word => {
+    ?.map(word => {
       return word[0].toUpperCase() + word.substring(1)
     })
     .join(" ")
