@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useEffect, useState } from "react"
 import styled from "styled-components"
 import CategoryFilter from "./category-filter"
 import Search from "./search"
@@ -16,10 +17,36 @@ const FilterBar = styled.aside`
   align-items: center;
 `
 
-const Filters = ({
+const filterExtensions = (
   extensions,
-  filterActions: { searcher, categoryFilterer, platformFilterer },
-}) => {
+  { regex, categoryFilter, platformFilter }
+) => {
+  return extensions
+    .filter(extension =>
+      extension.name.toLowerCase().match(regex.toLowerCase())
+    )
+    .filter(
+      extension =>
+        categoryFilter.length === 0 ||
+        extension.metadata.categories?.find(category =>
+          categoryFilter.includes(category.toLowerCase())
+        )
+    )
+    .filter(
+      extension =>
+        platformFilter.length === 0 ||
+        (extension.origins &&
+          extension.origins?.find(origin => platformFilter.includes(origin)))
+    )
+}
+
+const Filters = ({ extensions, filterAction }) => {
+  const [regex, setRegex] = useState(".*")
+  const [categoryFilter, setCategoryFilter] = useState([])
+  const [platformFilter, setPlatformFilter] = useState([])
+
+  const filters = { regex, categoryFilter, platformFilter }
+
   const categories = [
     ...new Set(
       extensions.map(extension => extension.metadata.categories).flat()
@@ -29,13 +56,23 @@ const Filters = ({
   const platforms = [
     ...new Set(extensions.map(extension => extension.origins).flat()),
   ]
+
+  const filteredExtensions = filterExtensions(extensions, filters)
+
+  // Infinite loop avoidance! We only call the filteraction if any of these change
+  const dependencyList = [regex, categoryFilter, platformFilter]
+
+  useEffect(() => {
+    filterAction(filteredExtensions)
+  }, dependencyList)
+
   return (
     <FilterBar className="filters">
-      <Search searcher={searcher} />
+      <Search searcher={setRegex} />
       <VersionFilter />
-      <CategoryFilter categories={categories} filterer={categoryFilterer} />
+      <CategoryFilter categories={categories} filterer={setCategoryFilter} />
       <CompatibilityFilter />
-      <PlatformFilter options={platforms} filterer={platformFilterer} />
+      <PlatformFilter options={platforms} filterer={setPlatformFilter} />
       <RatingFilter />
     </FilterBar>
   )

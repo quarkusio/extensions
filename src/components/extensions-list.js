@@ -21,48 +21,15 @@ const Extensions = styled.ol`
   width: 100%;
 `
 
-const filterExtensions = (
-  extensions,
-  { regex, categoryFilter, platformFilter }
-) => {
-  return extensions
-    .filter(extension =>
-      extension.name.toLowerCase().match(regex.toLowerCase())
-    )
-    .filter(
-      extension =>
-        categoryFilter.length === 0 ||
-        extension.metadata.categories?.find(category =>
-          categoryFilter.includes(category.toLowerCase())
-        )
-    )
-    .filter(
-      extension =>
-        platformFilter.length === 0 ||
-        (extension.origins &&
-          extension.origins?.find(origin => platformFilter.includes(origin)))
-    )
-}
-
 const ExtensionsList = ({ extensions }) => {
-  const [regex, setRegex] = useState(".*")
-  const [categoryFilter, setCategoryFilter] = useState([])
-  const [platformFilter, setPlatformFilter] = useState([])
+  const allExtensions = extensions
+  const [filteredExtensions, setExtensions] = useState(allExtensions)
 
   // TODO why is this guard necessary?
-  if (extensions) {
-    const filterActions = {
-      searcher: setRegex,
-      categoryFilterer: setCategoryFilter,
-      platformFilterer: setPlatformFilter,
-    }
-
-    const filters = { regex, categoryFilter, platformFilter }
-    const filteredExtensions = filterExtensions(extensions, filters)
-
+  if (allExtensions) {
     return (
       <FilterableList className="extensions-list">
-        <Filters extensions={extensions} filterActions={filterActions} />
+        <Filters extensions={allExtensions} filterAction={setExtensions} />
         <Extensions>
           {filteredExtensions.map(extension => {
             return (
