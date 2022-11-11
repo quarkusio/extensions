@@ -56,7 +56,7 @@ describe("extension list", () => {
         expect(screen.queryByText(extensions[0].name)).toBeFalsy()
       })
 
-      it("leaves in extensions which do not match the search filter", async () => {
+      it("leaves in extensions which match the search filter", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
         await user.keyboard("Ruby")
