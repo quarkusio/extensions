@@ -33,7 +33,7 @@ const ExtensionName = styled.div`
   letter-spacing: 0;
   color: var(--grey-2);
   opacity: 1;
-  height: 66px;
+  min-height: 66px;
 `
 
 const ExtensionDescription = styled.div`
