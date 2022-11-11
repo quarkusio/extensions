@@ -57,26 +57,12 @@ const ExtensionsList = ({ extensions }) => {
       platformFilterer: setPlatformFilter,
     }
 
-    const categories = [
-      ...new Set(
-        extensions.map(extension => extension.metadata.categories).flat()
-      ),
-    ]
-
-    const platforms = [
-      ...new Set(extensions.map(extension => extension.origins).flat()),
-    ]
-
     const filters = { regex, categoryFilter, platformFilter }
     const filteredExtensions = filterExtensions(extensions, filters)
 
     return (
       <FilterableList className="extensions-list">
-        <Filters
-          categories={categories}
-          platforms={platforms}
-          filterActions={filterActions}
-        />
+        <Filters extensions={extensions} filterActions={filterActions} />
         <Extensions>
           {filteredExtensions.map(extension => {
             return (

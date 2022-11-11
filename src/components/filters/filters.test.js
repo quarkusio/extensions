@@ -9,7 +9,11 @@ describe("filters bar", () => {
   beforeEach(() => {
     render(
       <Filters
-        categories={["lynx", "skunks", "moose"]}
+        extensions={[
+          { metadata: { categories: ["lynx"] } },
+          { metadata: { categories: ["skunks"] } },
+          { metadata: { categories: ["moose"] } },
+        ]}
         filterActions={{ searcher, filterer }}
       />
     )

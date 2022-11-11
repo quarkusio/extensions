@@ -17,10 +17,18 @@ const FilterBar = styled.aside`
 `
 
 const Filters = ({
-  categories,
-  platforms,
+  extensions,
   filterActions: { searcher, categoryFilterer, platformFilterer },
 }) => {
+  const categories = [
+    ...new Set(
+      extensions.map(extension => extension.metadata.categories).flat()
+    ),
+  ]
+
+  const platforms = [
+    ...new Set(extensions.map(extension => extension.origins).flat()),
+  ]
   return (
     <FilterBar className="filters">
       <Search searcher={searcher} />
