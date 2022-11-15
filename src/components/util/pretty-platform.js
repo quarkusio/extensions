@@ -3,7 +3,7 @@ const mappings = {
   "Quarkus Bom Quarkus Platform Descriptor": "Quarkus Platform",
 }
 
-export default origin => {
+const prettify = origin => {
   const elements = origin && origin.split(":")
   const element = elements?.length > 1 ? elements[1] : origin
 
@@ -17,3 +17,5 @@ export default origin => {
   // Now do some final mappings
   return mappings[pretty] ? mappings[pretty] : pretty
 }
+
+export default prettify

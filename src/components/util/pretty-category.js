@@ -1,4 +1,4 @@
-export default category => {
+const prettify = category => {
   const words = category.split(/[ -]/)
   return words
     .map(word => {
@@ -6,3 +6,5 @@ export default category => {
     })
     .join(" ")
 }
+
+export default prettify
