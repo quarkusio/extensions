@@ -48,6 +48,7 @@ export const pageQuery = graphql`
         metadata {
           categories
           built_with_quarkus_core
+          quarkus_core_compatibility
           guide
         }
         origins

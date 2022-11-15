@@ -19,7 +19,7 @@ const FilterBar = styled.aside`
 
 const filterExtensions = (
   extensions,
-  { regex, categoryFilter, platformFilter, versionFilter }
+  { regex, categoryFilter, platformFilter, versionFilter, compatibilityFilter }
 ) => {
   return extensions
     .filter(extension =>
@@ -44,6 +44,14 @@ const filterExtensions = (
         (extension.metadata.built_with_quarkus_core &&
           versionFilter.includes(extension.metadata.built_with_quarkus_core))
     )
+    .filter(
+      extension =>
+        compatibilityFilter.length === 0 ||
+        (extension.metadata.quarkus_core_compatibility &&
+          compatibilityFilter.includes(
+            extension.metadata.quarkus_core_compatibility
+          ))
+    )
 }
 
 const Filters = ({ extensions, filterAction }) => {
@@ -51,8 +59,15 @@ const Filters = ({ extensions, filterAction }) => {
   const [categoryFilter, setCategoryFilter] = useState([])
   const [platformFilter, setPlatformFilter] = useState([])
   const [versionFilter, setVersionFilter] = useState([])
+  const [compatibilityFilter, setCompatibilityFilter] = useState([])
 
-  const filters = { regex, categoryFilter, platformFilter, versionFilter }
+  const filters = {
+    regex,
+    categoryFilter,
+    platformFilter,
+    versionFilter,
+    compatibilityFilter,
+  }
 
   const categories = [
     ...new Set(
@@ -68,7 +83,13 @@ const Filters = ({ extensions, filterAction }) => {
 
   // Infinite loop avoidance! We only call the filteraction if any of these change
   // It would be nice to make the filters a function, but that might make the comparison on these harder
-  const dependencyList = [regex, categoryFilter, platformFilter, versionFilter]
+  const dependencyList = [
+    regex,
+    categoryFilter,
+    platformFilter,
+    versionFilter,
+    compatibilityFilter,
+  ]
 
   useEffect(() => {
     filterAction(filteredExtensions)
@@ -79,7 +100,10 @@ const Filters = ({ extensions, filterAction }) => {
       <Search searcher={setRegex} />
       <VersionFilter extensions={extensions} filterer={setVersionFilter} />
       <CategoryFilter categories={categories} filterer={setCategoryFilter} />
-      <CompatibilityFilter />
+      <CompatibilityFilter
+        extensions={extensions}
+        filterer={setCompatibilityFilter}
+      />
       <PlatformFilter options={platforms} filterer={setPlatformFilter} />
       <RatingFilter />
     </FilterBar>

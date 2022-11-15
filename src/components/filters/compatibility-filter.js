@@ -1,28 +1,25 @@
 import * as React from "react"
-import { StaticImage } from "gatsby-plugin-image"
-import styled from "styled-components"
+import DropdownFilter from "./dropdown-filter"
+import prettyCategory from "../util/pretty-category"
 
-const Element = styled.div`
-  width: 224px;
-  padding-top: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`
+const CompatibilityFilter = ({ extensions, filterer }) => {
+  const options = extensions
+    ? [
+        ...new Set(
+          extensions
+            .map(extension => extension.metadata.quarkus_core_compatibility)
+            .flat()
+        ),
+      ]
+    : []
 
-const CompatibilityFilter = () => {
   return (
-    <Element>
-      <StaticImage
-        className="fake-content"
-        layout="constrained"
-        formats={["auto", "webp", "avif"]}
-        src="../../images/compatibilityfilter.png"
-        style={{ width: "100%" }}
-        alt="A filter"
-      />
-    </Element>
+    <DropdownFilter
+      displayLabel="Compatibility"
+      filterer={filterer}
+      options={options}
+      optionTransformer={prettyCategory}
+    />
   )
 }
 
