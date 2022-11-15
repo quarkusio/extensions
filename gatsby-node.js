@@ -111,6 +111,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       
     type ExtensionMetadata {
       categories: [String]
+      built_with_quarkus_core: String
+
     }
     
     type SiteSiteMetadata {

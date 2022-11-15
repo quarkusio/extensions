@@ -57,7 +57,9 @@ const DropdownFilter = ({
   displayLabel,
   optionTransformer,
 }) => {
-  const label = displayLabel ? displayLabel.toLowerCase() : "unknown"
+  const label = displayLabel
+    ? displayLabel.toLowerCase().replace(" ", "-")
+    : "unknown"
 
   const processedOptions = options
     ? options.map(option => {

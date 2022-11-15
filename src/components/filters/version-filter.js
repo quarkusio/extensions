@@ -1,29 +1,27 @@
 import * as React from "react"
-import { StaticImage } from "gatsby-plugin-image"
-import styled from "styled-components"
+import DropdownFilter from "./dropdown-filter"
 
-const Element = styled.div`
-  width: 224px;
-  padding-top: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-`
+const optionTransformer = string => string
 
-const CategoryFilter = () => {
+const VersionFilter = ({ extensions, filterer }) => {
+  const options = extensions
+    ? [
+        ...new Set(
+          extensions
+            .map(extension => extension.metadata.built_with_quarkus_core)
+            .flat()
+        ),
+      ]
+    : []
+
   return (
-    <Element>
-      <StaticImage
-        className="fake-content"
-        layout="constrained"
-        formats={["auto", "webp", "avif"]}
-        src="../../images/versionfilter.png"
-        style={{ width: "100%" }}
-        alt="A filter"
-      />
-    </Element>
+    <DropdownFilter
+      displayLabel="Quarkus Version"
+      filterer={filterer}
+      options={options}
+      optionTransformer={optionTransformer}
+    />
   )
 }
 
-export default CategoryFilter
+export default VersionFilter

@@ -19,7 +19,7 @@ const FilterBar = styled.aside`
 
 const filterExtensions = (
   extensions,
-  { regex, categoryFilter, platformFilter }
+  { regex, categoryFilter, platformFilter, versionFilter }
 ) => {
   return extensions
     .filter(extension =>
@@ -38,14 +38,21 @@ const filterExtensions = (
         (extension.origins &&
           extension.origins?.find(origin => platformFilter.includes(origin)))
     )
+    .filter(
+      extension =>
+        versionFilter.length === 0 ||
+        (extension.metadata.built_with_quarkus_core &&
+          versionFilter.includes(extension.metadata.built_with_quarkus_core))
+    )
 }
 
 const Filters = ({ extensions, filterAction }) => {
   const [regex, setRegex] = useState(".*")
   const [categoryFilter, setCategoryFilter] = useState([])
   const [platformFilter, setPlatformFilter] = useState([])
+  const [versionFilter, setVersionFilter] = useState([])
 
-  const filters = { regex, categoryFilter, platformFilter }
+  const filters = { regex, categoryFilter, platformFilter, versionFilter }
 
   const categories = [
     ...new Set(
@@ -60,7 +67,8 @@ const Filters = ({ extensions, filterAction }) => {
   const filteredExtensions = filterExtensions(extensions, filters)
 
   // Infinite loop avoidance! We only call the filteraction if any of these change
-  const dependencyList = [regex, categoryFilter, platformFilter]
+  // It would be nice to make the filters a function, but that might make the comparison on these harder
+  const dependencyList = [regex, categoryFilter, platformFilter, versionFilter]
 
   useEffect(() => {
     filterAction(filteredExtensions)
@@ -69,7 +77,7 @@ const Filters = ({ extensions, filterAction }) => {
   return (
     <FilterBar className="filters">
       <Search searcher={setRegex} />
-      <VersionFilter />
+      <VersionFilter extensions={extensions} filterer={setVersionFilter} />
       <CategoryFilter categories={categories} filterer={setCategoryFilter} />
       <CompatibilityFilter />
       <PlatformFilter options={platforms} filterer={setPlatformFilter} />

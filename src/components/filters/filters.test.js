@@ -10,17 +10,17 @@ describe("filters bar", () => {
 
   const alice = {
     name: "Alice",
-    metadata: { categories: ["lynx"] },
+    metadata: { categories: ["lynx"], built_with_quarkus_core: "4.2" },
     origins: ["Banff"],
   }
   const pascal = {
     name: "Pascal",
-    metadata: { categories: ["skunks"] },
+    metadata: { categories: ["skunks"], built_with_quarkus_core: "63.5" },
     origins: ["Toronto"],
   }
   const fluffy = {
     name: "Fluffy",
-    metadata: { categories: ["moose"] },
+    metadata: { categories: ["moose"], built_with_quarkus_core: "63.5" },
     origins: ["Banff"],
   }
 
@@ -111,6 +111,40 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(alice)
       expect(newExtensions).toContain(pascal)
       expect(newExtensions).not.toContain(fluffy)
+    })
+  })
+
+  describe("quarkus version filter", () => {
+    const label = "Quarkus Version"
+
+    it("lists all the versions in the menu", async () => {
+      // Don't look at what happens, just make sure the options are there
+      await selectEvent.select(screen.getByLabelText(label), "4.2")
+      await selectEvent.select(screen.getByLabelText(label), "63.5")
+    })
+
+    it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("quarkus-version-form")).toHaveFormValues({
+        "quarkus-version": "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "4.2")
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
+      expect(newExtensions).not.toContain(pascal)
+      expect(newExtensions).not.toContain(fluffy)
+    })
+
+    it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("quarkus-version-form")).toHaveFormValues({
+        "quarkus-version": "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "63.5")
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).not.toContain(alice)
+      expect(newExtensions).toContain(pascal)
+      expect(newExtensions).toContain(fluffy)
     })
   })
 })
