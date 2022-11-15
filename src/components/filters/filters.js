@@ -4,7 +4,6 @@ import styled from "styled-components"
 import CategoryFilter from "./category-filter"
 import Search from "./search"
 import CompatibilityFilter from "./compatibility-filter"
-import RatingFilter from "./rating-filter"
 import PlatformFilter from "./platform-filter"
 import VersionFilter from "./version-filter"
 
@@ -105,7 +104,6 @@ const Filters = ({ extensions, filterAction }) => {
         filterer={setCompatibilityFilter}
       />
       <PlatformFilter options={platforms} filterer={setPlatformFilter} />
-      <RatingFilter />
     </FilterBar>
   )
 }
