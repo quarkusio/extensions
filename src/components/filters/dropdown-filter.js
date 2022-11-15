@@ -2,6 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 import Select from "react-select"
 import Title from "./title"
+import styles from "../../style"
 
 const Element = styled.form`
   padding-top: 36px;
@@ -17,13 +18,9 @@ const onChange = (value, { action }, filterer) => {
 }
 
 // Grab CSS variables in javascript
-const grey = getComputedStyle(document.documentElement).getPropertyValue(
-  "--grey-2"
-)
+const grey = styles["grey-2"]
 
-const borderRadius = getComputedStyle(
-  document.documentElement
-).getPropertyValue("--border-radius")
+const borderRadius = styles["border-radius"]
 
 const colourStyles = {
   control: styles => ({
