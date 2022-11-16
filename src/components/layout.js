@@ -2,7 +2,7 @@ import * as React from "react"
 import Navigation from "./navigation"
 import HeroBar from "./hero-bar"
 
-import { library } from "@fortawesome/fontawesome-svg-core"
+import { library } from "@fontawesome/fontawesome-svg-core"
 
 import {
   faAngleRight,
@@ -10,9 +10,9 @@ import {
   faClipboardCheck,
   faR,
   faSquareCheck,
-} from "@fortawesome/free-solid-svg-icons"
+} from "@fontawesome/free-solid-svg-icons"
 
-import { faSquare } from "@fortawesome/free-regular-svg-icons"
+import { faSquare } from "@fontawesome/free-regular-svg-icons"
 
 library.add(
   faAngleRight,

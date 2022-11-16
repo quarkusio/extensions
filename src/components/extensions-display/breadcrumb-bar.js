@@ -2,7 +2,7 @@ import * as React from "react"
 
 import styled from "styled-components"
 import Link from "gatsby-link"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from "@fontawesome/react-fontawesome"
 
 const BreadcrumbBart = styled.header`
   height: 90px;

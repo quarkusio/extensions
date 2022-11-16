@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { FontAwesomeIcon } from "@fontawesome/react-fontawesome"
 import styled from "styled-components"
 
 const CopyButton = styled.button`
