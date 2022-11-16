@@ -1,9 +1,5 @@
 import * as React from "react"
-import Navigation from "./navigation"
-import HeroBar from "./hero-bar"
-
 import { library } from "@fortawesome/fontawesome-svg-core"
-
 import {
   faAngleRight,
   faClipboard,
@@ -11,8 +7,14 @@ import {
   faR,
   faSquareCheck,
 } from "@fortawesome/free-solid-svg-icons"
-
 import { faSquare } from "@fortawesome/free-regular-svg-icons"
+import {
+  faCreativeCommons,
+  faCreativeCommonsBy,
+} from "@fortawesome/free-brands-svg-icons"
+import Navigation from "./navigation"
+import HeroBar from "./hero-bar"
+import Footer from "./footer"
 
 library.add(
   faAngleRight,
@@ -20,6 +22,8 @@ library.add(
   faClipboardCheck,
   faSquare,
   faSquareCheck,
+  faCreativeCommons,
+  faCreativeCommonsBy,
   faR
 )
 
@@ -51,6 +55,7 @@ const Layout = ({ location, title, children }) => {
     >
       <header className="global-header">{header}</header>
       {children}
+      <Footer />
     </div>
   )
 }
