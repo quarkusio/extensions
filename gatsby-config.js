@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: "extensions.io",
+  pathPrefix: "extensions.quarkus.io",
 
   siteMetadata: {
     title: `Welcome to the Quarkiverse`,
@@ -7,8 +7,8 @@ module.exports = {
       name: `The Quarkus Team`,
       summary: `who are nice.`,
     },
-    description: `A prototype extensions cataloge.`,
-    siteUrl: `http://hollycummins.com/extensions.io`,
+    description: `A prototype extensions catalog.`,
+    siteUrl: `http://quarkus.io/extensions.quarkus.io`,
     social: {
       twitter: `quarkusio`,
     },
