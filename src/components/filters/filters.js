@@ -21,8 +21,10 @@ const filterExtensions = (
   { regex, categoryFilter, platformFilter, versionFilter, compatibilityFilter }
 ) => {
   return extensions
-    .filter(extension =>
-      extension.name.toLowerCase().match(regex.toLowerCase())
+    .filter(
+      extension =>
+        extension.name.toLowerCase().match(regex.toLowerCase()) ||
+        extension.description?.toLowerCase().match(regex.toLowerCase())
     )
     .filter(
       extension =>

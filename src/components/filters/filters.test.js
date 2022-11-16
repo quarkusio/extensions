@@ -10,6 +10,7 @@ describe("filters bar", () => {
 
   const alice = {
     name: "Alice",
+    description: "a nice person",
     metadata: {
       categories: ["lynx"],
       built_with_quarkus_core: "4.2",
@@ -65,12 +66,22 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(fluffy)
     })
 
-    it("leaves in extensions which match the search filter", async () => {
+    it("leaves in extensions whose name match the search filter", async () => {
       const searchInput = screen.getByRole("textbox")
       await user.click(searchInput)
       await user.keyboard("Alice")
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
+      expect(newExtensions).not.toContain(pascal)
+    })
+
+    it("leaves in extensions whose description match the search filter", async () => {
+      const searchInput = screen.getByRole("textbox")
+      await user.click(searchInput)
+      await user.keyboard("nice")
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
+      expect(newExtensions).not.toContain(pascal)
     })
 
     it("is case insensitive in its searching", async () => {
