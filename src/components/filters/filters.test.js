@@ -16,7 +16,7 @@ describe("filters bar", () => {
       built_with_quarkus_core: "4.2",
       quarkus_core_compatibility: "UNKNOWN",
     },
-    origins: ["Banff"],
+    platforms: ["Banff"],
   }
   const pascal = {
     name: "Pascal",
@@ -25,7 +25,7 @@ describe("filters bar", () => {
       built_with_quarkus_core: "63.5",
       quarkus_core_compatibility: "COMPATIBLE",
     },
-    origins: ["Toronto"],
+    platforms: ["Toronto"],
   }
   const fluffy = {
     name: "Fluffy",
@@ -34,7 +34,7 @@ describe("filters bar", () => {
       built_with_quarkus_core: "63.5",
       quarkus_core_compatibility: "COMPATIBLE",
     },
-    origins: ["Banff"],
+    platforms: ["Banff"],
   }
 
   const extensions = [alice, pascal, fluffy]
@@ -171,7 +171,7 @@ describe("filters bar", () => {
     })
   })
 
-  describe("compatibility filter", () => {
+  xdescribe("compatibility filter", () => {
     const label = "Compatibility"
 
     it("lists all the versions in the menu", async () => {

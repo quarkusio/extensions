@@ -1,27 +1,45 @@
-import prettyPlatform from "./pretty-platform"
+import { getPlatformId, prettyPlatformName } from "./pretty-platform"
 
 describe("platform name formatter", () => {
   it("handles arbitrary strings", () => {
-    expect(prettyPlatform("marshmallows")).toBe("Marshmallows")
+    expect(prettyPlatformName("marshmallows")).toBe("Marshmallows")
   })
 
   it("handles nulls", () => {
-    expect(prettyPlatform()).toBe()
+    expect(prettyPlatformName()).toBe()
+  })
+
+  it("handles non-platform platforms", () => {
+    expect(prettyPlatformName("quarkus-non-platform-extensions")).toBe(
+      "Non Platform Extensions"
+    )
+  })
+
+  it("handles quarkus core", () => {
+    expect(prettyPlatformName("quarkus-bom-quarkus-platform-descriptor")).toBe(
+      "Quarkus Platform"
+    )
+  })
+})
+
+describe("platform id extracter", () => {
+  it("handles arbitrary strings", () => {
+    expect(getPlatformId("marshmallows")).toBe("marshmallows")
+  })
+
+  it("handles nulls", () => {
+    expect(getPlatformId()).toBe()
   })
 
   it("handles non-platform platforms", () => {
     expect(
-      prettyPlatform(
+      getPlatformId(
         "io.quarkus.registry:quarkus-non-platform-extensions:2.0.7:json:1.0-SNAPSHOT"
       )
-    ).toBe("Non Platform Extensions")
+    ).toBe("quarkus-non-platform-extensions")
   })
 
-  it("handles quarkus core", () => {
-    expect(
-      prettyPlatform(
-        '"io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:2.1.0.Final:json:2.1.0.Final"'
-      )
-    ).toBe("Quarkus Platform")
+  it("handles arbitrary GAVs", () => {
+    expect(getPlatformId('"something:else:number:whatever:still"')).toBe("else")
   })
 })

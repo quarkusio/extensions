@@ -1,6 +1,8 @@
 const path = require(`path`)
 const axios = require("axios")
 const GithubSlugger = require("github-slugger")
+const { getPlatformId } = require("./src/components/util/pretty-platform")
+const { sortableName } = require("./src/components/util/sortable-name")
 
 const slugger = new GithubSlugger()
 
@@ -10,19 +12,21 @@ exports.sourceNodes = async ({
   createContentDigest,
 }) => {
   const { data } = await axios.get(
-    `https://registry.quarkus.io/client/non-platform-extensions?v=2.0.7`
+    `https://registry.quarkus.io/client/extensions/all`
   )
 
   data.extensions.forEach(extension => {
     actions.createNode({
+      metadata: {},
       ...extension,
       id: createNodeId(extension.name),
-      // slug: slugger(extension.name),
+      sortableName: sortableName(extension.name),
       slug: slugger.slug(extension.name, false),
       internal: {
         type: "extension",
         contentDigest: createContentDigest(extension),
       },
+      platforms: extension.origins.map(origin => getPlatformId(origin)),
     })
   })
 }
@@ -112,7 +116,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type ExtensionMetadata {
       categories: [String]
       built_with_quarkus_core: String
-
+      quarkus_core_compatibility: String
     }
     
     type SiteSiteMetadata {

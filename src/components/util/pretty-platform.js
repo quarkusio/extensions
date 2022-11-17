@@ -3,19 +3,22 @@ const mappings = {
   "Quarkus Bom Quarkus Platform Descriptor": "Quarkus Platform",
 }
 
-const prettify = origin => {
+const getPlatformId = origin => {
   const elements = origin && origin.split(":")
-  const element = elements?.length > 1 ? elements[1] : origin
+  const id = elements?.length > 1 ? elements[1] : origin
 
-  const words = element?.split(/[ -]/)
+  return id
+}
+
+const prettyPlatformName = platformId => {
+  const words = platformId?.split(/[ -]/)
   const pretty = words
     ?.map(word => {
       return word[0].toUpperCase() + word.substring(1)
     })
     .join(" ")
 
-  // Now do some final mappings
   return mappings[pretty] ? mappings[pretty] : pretty
 }
 
-export default prettify
+module.exports = { prettyPlatformName, getPlatformId }

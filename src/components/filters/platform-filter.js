@@ -1,6 +1,6 @@
 import * as React from "react"
 import DropdownFilter from "./dropdown-filter"
-import prettyPlatform from "../util/pretty-platform"
+import { prettyPlatformName } from "../util/pretty-platform"
 
 const PlatformFilter = ({ options, filterer }) => {
   return (
@@ -8,7 +8,7 @@ const PlatformFilter = ({ options, filterer }) => {
       displayLabel="Platform"
       filterer={filterer}
       options={options}
-      optionTransformer={prettyPlatform}
+      optionTransformer={prettyPlatformName}
     />
   )
 }

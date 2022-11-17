@@ -43,15 +43,15 @@ export const pageQuery = graphql`
     allExtension(sort: { fields: [name], order: DESC }) {
       nodes {
         name
+        sortableName
         description
         slug
         metadata {
           categories
-          built_with_quarkus_core
-          quarkus_core_compatibility
           guide
+          built_with_quarkus_core
         }
-        origins
+        platforms
       }
     }
   }
