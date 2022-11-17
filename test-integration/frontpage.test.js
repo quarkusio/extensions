@@ -62,6 +62,9 @@ describe("main site", () => {
           page.waitForXPath('//*[text()="RabbitMQ Client"]')
         ).resolves.toBeTruthy()
         // ... but others should be gone
+
+        await page.waitForXPath('//*[text()="GitHub App"]', { hidden: true })
+
         let visible = true
         const gitHubApp = await page
           .waitForXPath('//*[text()="GitHub App"]', { timeout: 2000 })
