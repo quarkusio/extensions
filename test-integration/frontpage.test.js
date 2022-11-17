@@ -34,13 +34,11 @@ describe("main site", () => {
       ).resolves.toBeTruthy()
     })
 
-    xit("should have a well-known platform extension", async () => {
-      await expect(
-        page.waitForXPath('//*[text()="RESTEasy Reactive"]')
-      ).resolves.toBeTruthy()
+    it("should have a well-known platform extension", async () => {
+      await expect(page.waitForXPath('//*[text()="ArC"]')).resolves.toBeTruthy()
     })
 
-    xit("should have more than one well-known platform extension", async () => {
+    it("should have more than one well-known platform extension", async () => {
       await expect(
         page.waitForXPath('//*[text()="gRPC"]')
       ).resolves.toBeTruthy()
@@ -65,12 +63,12 @@ describe("main site", () => {
         ).resolves.toBeTruthy()
         // ... but others should be gone
         let visible = true
-        await page
+        const gitHubApp = await page
           .waitForXPath('//*[text()="GitHub App"]', { timeout: 2000 })
           .catch(() => {
             visible = false
           })
-        expect(visible).toBeFalsy()
+        expect(gitHubApp).toBeFalsy()
       })
     })
 
