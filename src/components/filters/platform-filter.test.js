@@ -30,8 +30,7 @@ describe("platform filter", () => {
   })
 
   describe("when options are available", () => {
-    const platformCode =
-      "io.bananas.registry:quarkus-non-platform-extensions:2.6.2:json:1.0-SNAPSHOT"
+    const platformCode = "quarkus-non-platform-extensions"
 
     const filterer = jest.fn()
     beforeEach(() => {

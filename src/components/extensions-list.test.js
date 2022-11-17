@@ -9,27 +9,30 @@ describe("extension list", () => {
   const displayCategory = "Jewellery"
   const otherCategory = "snails"
 
-  const extensions = [
-    {
-      name: "JRuby",
-      slug: "jruby-slug",
-      metadata: { categories: [category] },
-      origins: ["bottom of the garden"],
-    },
-    {
-      name: "JDiamond",
-      slug: "jdiamond-slug",
-      metadata: { categories: [category] },
-      origins: ["a mine"],
-    },
+  const ruby = {
+    name: "JRuby",
+    sortableName: "ruby",
+    slug: "jruby-slug",
+    metadata: { categories: [category] },
+    platforms: ["bottom of the garden"],
+  }
+  const diamond = {
+    name: "JDiamond",
+    sortableName: "diamond",
+    slug: "jdiamond-slug",
+    metadata: { categories: [category] },
+    platforms: ["a mine"],
+  }
 
-    {
-      name: "Molluscs",
-      slug: "molluscs-slug",
-      metadata: { categories: [otherCategory] },
-      origins: ["bottom of the garden"],
-    },
-  ]
+  const molluscs = {
+    name: "Molluscs",
+    sortableName: "mollusc",
+    slug: "molluscs-slug",
+    metadata: { categories: [otherCategory] },
+    platforms: ["bottom of the garden"],
+  }
+
+  const extensions = [ruby, diamond, molluscs]
   const user = userEvent.setup()
 
   beforeEach(() => {
@@ -41,7 +44,7 @@ describe("extension list", () => {
   })
 
   it("renders the correct link", () => {
-    const link = screen.getAllByRole("link")[0] // Look at the first one
+    const link = screen.getAllByRole("link")[2] // Look at the third one - this is also testing the sorting
     expect(link).toBeTruthy()
     // Hardcoding the host is a bit risky but this should always be true in  test environment
     expect(link.href).toBe("http://localhost/jruby-slug")
@@ -53,21 +56,21 @@ describe("extension list", () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
         await user.keyboard("octopus")
-        expect(screen.queryByText(extensions[0].name)).toBeFalsy()
+        expect(screen.queryByText(ruby.name)).toBeFalsy()
       })
 
       it("leaves in extensions which match the search filter", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
         await user.keyboard("Ruby")
-        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+        expect(screen.queryByText(ruby.name)).toBeTruthy()
       })
 
       it("is case insensitive in its searching", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
         await user.keyboard("ruby")
-        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
+        expect(screen.queryByText(ruby.name)).toBeTruthy()
       })
     })
 
@@ -79,14 +82,14 @@ describe("extension list", () => {
       it("leaves in extensions which match category filter", async () => {
         fireEvent.click(screen.getByText(displayCategory))
 
-        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
-        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
+        expect(screen.queryByText(ruby.name)).toBeTruthy()
+        expect(screen.queryByText(diamond.name)).toBeTruthy()
       })
 
       it("filters out extensions which do not match the ticked category", async () => {
         fireEvent.click(screen.getByText(displayCategory))
 
-        expect(screen.queryByText(extensions[2].name)).toBeFalsy()
+        expect(screen.queryByText(molluscs.name)).toBeFalsy()
       })
     })
 
@@ -103,18 +106,18 @@ describe("extension list", () => {
       })
 
       it("leaves in extensions which match search filter and filters out extensions which do not match", async () => {
-        expect(screen.queryByText(extensions[0].name)).toBeTruthy()
-        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
-        expect(screen.queryByText(extensions[2].name)).toBeTruthy()
+        expect(screen.queryByText(ruby.name)).toBeTruthy()
+        expect(screen.queryByText(diamond.name)).toBeTruthy()
+        expect(screen.queryByText(molluscs.name)).toBeTruthy()
 
         expect(screen.getByTestId("platform-form")).toHaveFormValues({
           platform: "",
         })
         await selectEvent.select(screen.getByLabelText(label), "A Mine")
 
-        expect(screen.queryByText(extensions[0].name)).toBeFalsy()
-        expect(screen.queryByText(extensions[1].name)).toBeTruthy()
-        expect(screen.queryByText(extensions[2].name)).toBeFalsy()
+        expect(screen.queryByText(ruby.name)).toBeFalsy()
+        expect(screen.queryByText(diamond.name)).toBeTruthy()
+        expect(screen.queryByText(molluscs.name)).toBeFalsy()
       })
     })
   })

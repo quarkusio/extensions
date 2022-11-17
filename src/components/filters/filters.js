@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 import CategoryFilter from "./category-filter"
 import Search from "./search"
-import CompatibilityFilter from "./compatibility-filter"
 import PlatformFilter from "./platform-filter"
 import VersionFilter from "./version-filter"
 
@@ -36,8 +35,10 @@ const filterExtensions = (
     .filter(
       extension =>
         platformFilter.length === 0 ||
-        (extension.origins &&
-          extension.origins?.find(origin => platformFilter.includes(origin)))
+        (extension.platforms &&
+          extension.platforms?.find(platform =>
+            platformFilter.includes(platform)
+          ))
     )
     .filter(
       extension =>
@@ -77,7 +78,7 @@ const Filters = ({ extensions, filterAction }) => {
   ]
 
   const platforms = [
-    ...new Set(extensions.map(extension => extension.origins).flat()),
+    ...new Set(extensions.map(extension => extension.platforms).flat()),
   ]
 
   const filteredExtensions = filterExtensions(extensions, filters)
@@ -101,10 +102,6 @@ const Filters = ({ extensions, filterAction }) => {
       <Search searcher={setRegex} />
       <VersionFilter extensions={extensions} filterer={setVersionFilter} />
       <CategoryFilter categories={categories} filterer={setCategoryFilter} />
-      <CompatibilityFilter
-        extensions={extensions}
-        filterer={setCompatibilityFilter}
-      />
       <PlatformFilter options={platforms} filterer={setPlatformFilter} />
     </FilterBar>
   )

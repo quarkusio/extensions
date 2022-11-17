@@ -27,6 +27,11 @@ const ExtensionsList = ({ extensions }) => {
 
   // TODO why is this guard necessary?
   if (allExtensions) {
+    // Sort alphabetically, in the absence of a better idea (for now)
+    filteredExtensions.sort((a, b) =>
+      a.sortableName > b.sortableName ? 1 : -1
+    )
+
     return (
       <FilterableList className="extensions-list">
         <Filters extensions={allExtensions} filterAction={setExtensions} />
