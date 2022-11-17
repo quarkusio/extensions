@@ -4,6 +4,8 @@ on:
   push:
     branches:
       [ main ]
+  pull_request:
+    types: [ opened, synchronize, reopened, ready_for_review ]
 
 jobs:
   unit-test:
@@ -25,6 +27,25 @@ jobs:
         with:
           node-version: '14'
       - run: npm install
+      - run: npm run build
+        env:
+          NODE_ENV: production
+          GATSBY_ACTIVE_ENV: production
+      - run: npm run test:int
+        env:
+          CI: true
+
+  deploy:
+    # Only try and deploy on merged code
+    if: "(github.repository == 'quarkusio/extensions.quarkus.io' && endsWith(github.ref, '/main')) && github.event_name != 'pull_request'"
+    needs: [ unit-test, build ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - run: npm install
       - uses: enriikke/gatsby-gh-pages-action@v2
         with:
           access-token: ${{ secrets.ACCESS_TOKEN }}
@@ -33,6 +54,3 @@ jobs:
         env:
           NODE_ENV: production
           GATSBY_ACTIVE_ENV: production
-      - run: npm run test:int
-        env:
-          CI: true

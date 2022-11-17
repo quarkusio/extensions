@@ -48,7 +48,14 @@ describe("site links", () => {
       }
     })
 
-    const linksToSkip = ["https://twitter.com/quarkusio"]
+    const linksToSkip = [
+      "https://twitter.com/quarkusio",
+      // TODO remove these exemptions as soon as new releases with live guide links are made (the repos are correct, the releases are not)
+      "https://quarkus.io/guides/mybatis-plus",
+      "https://quarkus.io/guides/freemarker",
+      "https://quarkus.io/guides/jberet",
+      "https://quarkus.io/guides/qson",
+    ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
     return await checker.check({
