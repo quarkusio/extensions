@@ -1,10 +1,8 @@
 const path = require(`path`)
 const axios = require("axios")
-const GithubSlugger = require("github-slugger")
 const { getPlatformId } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
-
-const slugger = new GithubSlugger()
+const { extensionSlug } = require("./src/components/util/extension-slugger")
 
 exports.sourceNodes = async ({
   actions,
@@ -21,7 +19,7 @@ exports.sourceNodes = async ({
       ...extension,
       id: createNodeId(extension.name),
       sortableName: sortableName(extension.name),
-      slug: slugger.slug(extension.name, false),
+      slug: extensionSlug(extension.artifact),
       internal: {
         type: "extension",
         contentDigest: createContentDigest(extension),

@@ -1,13 +1,17 @@
+const parse = require("mvn-artifact-name-parser").default
+
 const mappings = {
   "Quarkus Non Platform Extensions": "Non Platform Extensions",
   "Quarkus Bom Quarkus Platform Descriptor": "Quarkus Platform",
 }
 
 const getPlatformId = origin => {
-  const elements = origin && origin.split(":")
-  const id = elements?.length > 1 ? elements[1] : origin
-
-  return id
+  if (origin && origin.includes(":")) {
+    const coordinates = parse(origin)
+    return coordinates.artifactId
+  } else {
+    return origin
+  }
 }
 
 const prettyPlatformName = platformId => {
