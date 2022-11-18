@@ -22,11 +22,7 @@ nvm install 14
 nvm use 14
 ```
 
-Finally, install the Gatsby cli
 
-```
-npm install -g gatsby-cli@4.14
-```
 # Local development
 
 In one terminal, run tests
@@ -37,7 +33,7 @@ npm run test:watch
 
 In another terminal, run the site
 ```
-gatsby develop
+npm run develop
 ```
 
 You can then see changes live on http://localhost:8000. 
@@ -47,17 +43,34 @@ You can then see changes live on http://localhost:8000.
 To do a production build locally, 
 
 ```
-gatsby build
+npm run build
 npm run test:int
 ```
 
 To view the build on http://localhost:9000, run 
 
 ```
-gatsby serve
+npm run serve
 ```
 
  
 # Deploying 
 
 Changes are deployed on merge, after a successful build. 
+
+# Optional: Gatsby CLI 
+
+Optional: If you will be doing a lot of development, you can install the Gatsby CLI
+
+```
+npm install -g gatsby-cli@4.14
+```
+
+With the CLI installed, you can run the following instead of the npm commands:
+
+```
+gatsby clean
+gatsby develop
+gatsby build
+gatsby serve
+```
