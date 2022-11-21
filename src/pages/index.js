@@ -50,6 +50,7 @@ export const pageQuery = graphql`
           categories
           guide
           built_with_quarkus_core
+          unlisted
         }
         platforms
       }
