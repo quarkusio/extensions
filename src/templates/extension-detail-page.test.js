@@ -47,6 +47,11 @@ describe("extension detail page", () => {
       const link = links.find(link => link.href === guideUrl)
       expect(link).toBeTruthy()
     })
+
+    it("does not render an unlisted banner", async () => {
+      const link = await screen.queryByText(/nlisted/)
+      expect(link).toBeNull()
+    })
   })
 
   describe("for an extension with very little information", () => {
@@ -75,6 +80,31 @@ describe("extension detail page", () => {
     it("does not render anything about guides", async () => {
       const link = await screen.queryByText(/Documentation/)
       expect(link).toBeNull()
+    })
+  })
+
+  describe("for an unlisted extension", () => {
+    const previous = {}
+    const next = {}
+
+    const category = "secret-jewellery"
+    const extension = {
+      name: "Secret JRuby",
+      slug: "jruby-slug",
+      metadata: { categories: [category], unlisted: true },
+    }
+
+    beforeEach(() => {
+      render(
+        <ExtensionDetailTemplate
+          data={{ extension, previous, next }}
+          location="/somewhere"
+        />
+      )
+    })
+
+    it("renders an unlisted banner", () => {
+      expect(screen.getByText("Unlisted")).toBeTruthy()
     })
   })
 })
