@@ -53,7 +53,6 @@ describe("site links", () => {
       // TODO remove these exemptions as soon as new releases with live guide links are made (the repos are correct, the releases are not)
       "https://quarkus.io/guides/mybatis-plus",
       "https://quarkus.io/guides/freemarker",
-      "https://quarkus.io/guides/jberet",
       "https://quarkus.io/guides/qson",
     ]
 
