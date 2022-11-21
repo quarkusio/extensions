@@ -16,7 +16,7 @@ exports.sourceNodes = async ({
   )
 
   data.extensions.forEach(extension => {
-    actions.createNode({
+    const node = {
       metadata: {},
       ...extension,
       id: createNodeId(extension.name),
@@ -26,8 +26,17 @@ exports.sourceNodes = async ({
         type: "extension",
         contentDigest: createContentDigest(extension),
       },
-      platforms: extension.origins.map(origin => getPlatformId(origin)),
-    })
+      platforms: extension.origins?.map(origin => getPlatformId(origin)),
+    }
+    if (typeof node.metadata.unlisted === "string") {
+      if (node.metadata.unlisted.toLowerCase() === "true") {
+        node.metadata.unlisted = true
+      } else {
+        node.metadata.unlisted = false
+      }
+    }
+
+    actions.createNode(node)
   })
 }
 
@@ -117,6 +126,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       categories: [String]
       built_with_quarkus_core: String
       quarkus_core_compatibility: String
+      unlisted: Boolean
     }
     
     type SiteSiteMetadata {
