@@ -14,7 +14,8 @@ const Card = styled(props => <Link {...props} />)`
   width: 220px;
   height: 490px;
   background: var(--white) 0 0 no-repeat padding-box;
-  border: 1px solid var(--grey-1);
+  border: ${props =>
+    props.$unlisted ? "1px solid var(--grey-0)" : "1px solid var(--grey-1)"};
   opacity: 1;
   display: flex;
   flex-direction: column;
@@ -31,7 +32,7 @@ const ExtensionName = styled.div`
   font-size: var(--font-size-24);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0;
-  color: var(--grey-2);
+  color: ${props => (props.$unlisted ? "var(--grey-1)" : "var(--grey-2)")};
   opacity: 1;
   min-height: 66px;
 `
@@ -56,7 +57,7 @@ const ExtensionCategory = styled.div`
 
 const ExtensionCard = ({ extension }) => {
   return (
-    <Card to={extension.slug}>
+    <Card to={extension.slug} $unlisted={extension.metadata.unlisted}>
       <Logo>
         <StaticImage
           layout="constrained"
@@ -65,7 +66,9 @@ const ExtensionCard = ({ extension }) => {
           alt="The extension logo"
         />
       </Logo>
-      <ExtensionName>{extension.name}</ExtensionName>
+      <ExtensionName $unlisted={extension.metadata.unlisted}>
+        {extension.name}
+      </ExtensionName>
       <ExtensionDescription>{extension.description}</ExtensionDescription>
 
       {extension.metadata.categories &&

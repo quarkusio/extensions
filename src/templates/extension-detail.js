@@ -24,6 +24,18 @@ const Headline = styled.header`
   display: flex;
   flex-direction: row;
   margin-bottom: 62px;
+  align-items: center;
+`
+
+const UnlistedWarning = styled.header`
+  padding-left: var(--a-boatload-of-space);
+  background-color: var(--grey-0);
+  text-align: left;
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  color: var(--grey-2);
+  padding-top: var(--a-modest-space);
+  padding-bottom: var(--a-modest-space);
 `
 
 const Columns = styled.div`
@@ -105,6 +117,7 @@ const ExtensionDetailTemplate = ({
   return (
     <Layout location={location}>
       <BreadcrumbBar name={name} />
+      {metadata.unlisted && <UnlistedWarning>Unlisted</UnlistedWarning>}
       <ExtensionDetails>
         <Headline>
           <Logo>
@@ -205,6 +218,7 @@ export const pageQuery = graphql`
         status
         categories
         guide
+        unlisted
       }
     }
     previous: extension(id: { eq: $previousPostId }) {
