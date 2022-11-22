@@ -35,7 +35,9 @@ describe("main site", () => {
     })
 
     it("should have a well-known platform extension", async () => {
-      await expect(page.waitForXPath('//*[text()="ArC"]')).resolves.toBeTruthy()
+      await expect(
+        page.waitForXPath('//*[text()="Cache"]')
+      ).resolves.toBeTruthy()
     })
 
     it("should have more than one well-known platform extension", async () => {
