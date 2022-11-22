@@ -54,6 +54,8 @@ describe("site links", () => {
       "https://quarkus.io/guides/mybatis-plus",
       "https://quarkus.io/guides/freemarker",
       "https://quarkus.io/guides/qson",
+      // This is correct in 2.14.2, but not in 3.0.0.Alpha
+      "https://quarkus.io/guides/security-jpa",
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
