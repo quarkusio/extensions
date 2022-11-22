@@ -7,6 +7,16 @@ const createNode = jest.fn()
 const createNodeId = jest.fn()
 const createContentDigest = jest.fn()
 
+const {
+  createMavenUrlFromCoordinates,
+} = require("./src/components/util/maven-url")
+jest.mock("./src/components/util/maven-url")
+
+const resolvedMavenUrl = "http://reallygoodurl.mvn"
+createMavenUrlFromCoordinates.mockImplementation(coordinates =>
+  coordinates ? resolvedMavenUrl : undefined
+)
+
 const actions = { createNode }
 
 describe("the main gatsby entrypoint", () => {
@@ -35,6 +45,41 @@ describe("the main gatsby entrypoint", () => {
 
     it("creates an id", () => {
       expect(createNodeId).toHaveBeenCalled()
+    })
+  })
+
+  describe("for a typical extension", () => {
+    const extension = {
+      artifact:
+        "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+    }
+
+    beforeAll(async () => {
+      axios.get = jest
+        .fn()
+        .mockReturnValue({ data: { extensions: [extension] } })
+
+      await sourceNodes({ actions, createNodeId, createContentDigest })
+    })
+
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
+    it("creates an id", () => {
+      expect(createNodeId).toHaveBeenCalled()
+    })
+
+    it("adds a maven url", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          metadata: {
+            maven: expect.objectContaining({
+              url: resolvedMavenUrl,
+            }),
+          },
+        })
+      )
     })
   })
 

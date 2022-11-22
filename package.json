@@ -36,6 +36,8 @@
     "styled-components": "^5.3.5",
     "typeface-merriweather": "0.0.72",
     "typeface-montserrat": "0.0.75",
+    "url-exist": "^2.0.0",
+    "url-exists": "^1.0.3",
     "yaml-jest": "^1.2.0"
   },
   "devDependencies": {

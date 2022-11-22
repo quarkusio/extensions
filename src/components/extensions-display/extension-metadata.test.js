@@ -42,6 +42,38 @@ describe("extension metadata block", () => {
     })
   })
 
+  describe("for link", () => {
+    const displayName = "Category"
+    const text = "some text"
+    const url = "http://thing"
+
+    describe("in the simple case", () => {
+      beforeEach(() => {
+        render(
+          <ExtensionMetadata
+            data={{
+              name: displayName,
+              text,
+              url,
+            }}
+          />
+        )
+      })
+
+      it("renders the field name", () => {
+        expect(screen.getByText(displayName)).toBeTruthy()
+      })
+
+      it("renders the link title", () => {
+        expect(screen.getByText(text)).toBeTruthy()
+      })
+
+      it("renders the link", () => {
+        expect(screen.getByRole("link")).toHaveAttribute("href", url)
+      })
+    })
+  })
+
   describe("for an array field", () => {
     const displayName = "Category"
     const fieldName = "categories"

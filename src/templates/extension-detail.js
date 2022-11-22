@@ -165,12 +165,20 @@ const ExtensionDetailTemplate = ({
                 name: "Platform",
                 plural: "Platforms",
                 fieldName: "platforms",
-                metadata: extension,
+                metadata: extension, // ugly, but we need to get it out of the top level, not the metadata
                 // Strip out
                 transformer: element =>
                   element !== "quarkus-non-platform-extensions"
                     ? prettyPlatformName(element)
                     : null,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Maven Central",
+                text: metadata.maven?.version,
+                url: metadata.maven?.url,
+                transformer: text => "Version " + text,
               }}
             />
           </Metadata>
@@ -230,6 +238,10 @@ export const pageQuery = graphql`
         categories
         guide
         unlisted
+        maven {
+          version
+          url
+        }
       }
       platforms
     }

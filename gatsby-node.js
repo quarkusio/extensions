@@ -1,8 +1,13 @@
 const path = require(`path`)
 const axios = require("axios")
+const parse = require("mvn-artifact-name-parser").default
+
 const { getPlatformId } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
 const { extensionSlug } = require("./src/components/util/extension-slugger")
+const {
+  createMavenUrlFromCoordinates,
+} = require("./src/components/util/maven-url")
 
 exports.sourceNodes = async ({
   actions,
@@ -13,7 +18,8 @@ exports.sourceNodes = async ({
     `https://registry.quarkus.io/client/extensions/all`
   )
 
-  data.extensions.forEach(extension => {
+  // Do a map so we can wait
+  const promises = data.extensions.map(async extension => {
     const node = {
       metadata: {},
       ...extension,
@@ -34,8 +40,18 @@ exports.sourceNodes = async ({
       }
     }
 
-    actions.createNode(node)
+    if (extension.artifact) {
+      const coordinates = parse(extension.artifact)
+      node.metadata.maven = coordinates
+      const mavenUrl = await createMavenUrlFromCoordinates(coordinates)
+      if (mavenUrl) {
+        node.metadata.maven.url = mavenUrl
+      }
+    }
+
+    return actions.createNode(node)
   })
+  return Promise.all(promises)
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
@@ -125,7 +141,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       built_with_quarkus_core: String
       quarkus_core_compatibility: String
       unlisted: Boolean
+      maven: MavenInfo
     }
+    
+    type MavenInfo {
+      url: String
+      version: String
+    }
+    
     
     type SiteSiteMetadata {
       author: Author
