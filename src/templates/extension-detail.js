@@ -8,6 +8,7 @@ import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
 import InstallationInstructions from "../components/extensions-display/installation-instructions"
+import { prettyPlatformName } from "../components/util/pretty-platform"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--a-boatload-of-space);
@@ -107,13 +108,10 @@ const DocumentationHeading = styled.h2`
 `
 
 const ExtensionDetailTemplate = ({
-  data: {
-    extension: { name, description, artifact, metadata },
-    previous,
-    next,
-  },
+  data: { extension, previous, next },
   location,
 }) => {
+  const { name, description, artifact, metadata } = extension
   return (
     <Layout location={location}>
       <BreadcrumbBar name={name} />
@@ -160,6 +158,19 @@ const ExtensionDetailTemplate = ({
                 name: "Category",
                 fieldName: "categories",
                 metadata,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Platform",
+                plural: "Platforms",
+                fieldName: "platforms",
+                metadata: extension,
+                // Strip out
+                transformer: element =>
+                  element !== "quarkus-non-platform-extensions"
+                    ? prettyPlatformName(element)
+                    : null,
               }}
             />
           </Metadata>
@@ -220,6 +231,7 @@ export const pageQuery = graphql`
         guide
         unlisted
       }
+      platforms
     }
     previous: extension(id: { eq: $previousPostId }) {
       slug
