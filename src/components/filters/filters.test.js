@@ -36,8 +36,18 @@ describe("filters bar", () => {
     },
     platforms: ["Banff"],
   }
+  const secret = {
+    name: "James Bond",
+    metadata: {
+      categories: ["moose"],
+      built_with_quarkus_core: "63.5",
+      quarkus_core_compatibility: "COMPATIBLE",
+      unlisted: true,
+    },
+    platforms: ["Banff"],
+  }
 
-  const extensions = [alice, pascal, fluffy]
+  const extensions = [alice, pascal, fluffy, secret]
 
   beforeEach(() => {
     render(
@@ -53,6 +63,10 @@ describe("filters bar", () => {
     expect(screen.getByText("Skunks")).toBeTruthy()
   })
 
+  it("excludes unlisted extensions", () => {
+    expect(newExtensions).not.toContain(secret)
+  })
+
   describe("searching", () => {
     const user = userEvent.setup()
 
@@ -64,6 +78,7 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(alice)
       expect(newExtensions).not.toContain(pascal)
       expect(newExtensions).not.toContain(fluffy)
+      expect(newExtensions).not.toContain(secret)
     })
 
     it("leaves in extensions whose name match the search filter", async () => {
@@ -73,6 +88,7 @@ describe("filters bar", () => {
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
       expect(newExtensions).not.toContain(pascal)
+      expect(newExtensions).not.toContain(secret)
     })
 
     it("leaves in extensions whose description match the search filter", async () => {
@@ -90,6 +106,42 @@ describe("filters bar", () => {
       await user.keyboard("alice")
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
+    })
+
+    describe("for an unlisted extension", () => {
+      const user = userEvent.setup()
+
+      it("filters out unlisted extensions if the search string is too short to be meaningful", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("j")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(newExtensions).not.toContain(alice)
+        expect(newExtensions).not.toContain(pascal)
+        expect(newExtensions).not.toContain(fluffy)
+        expect(newExtensions).not.toContain(secret)
+      })
+
+      it("shows unlisted extensions if the search string has a meaningful length", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("jame")
+        expect(extensionsListener).toHaveBeenCalled()
+
+        expect(newExtensions).toContain(secret)
+
+        expect(newExtensions).not.toContain(alice)
+        expect(newExtensions).not.toContain(pascal)
+        expect(newExtensions).not.toContain(fluffy)
+      })
+
+      it("is case insensitive in its searching", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("alice")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(newExtensions).toContain(alice)
+      })
     })
   })
 
@@ -113,6 +165,10 @@ describe("filters bar", () => {
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).not.toContain(alice)
     })
+
+    it("excludes unlisted extensions", () => {
+      expect(newExtensions).not.toContain(secret)
+    })
   })
 
   describe("platform filter", () => {
@@ -134,6 +190,10 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(alice)
       expect(newExtensions).toContain(pascal)
       expect(newExtensions).not.toContain(fluffy)
+    })
+
+    it("excludes unlisted extensions", () => {
+      expect(newExtensions).not.toContain(secret)
     })
   })
 
@@ -168,6 +228,10 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(alice)
       expect(newExtensions).toContain(pascal)
       expect(newExtensions).toContain(fluffy)
+    })
+
+    it("excludes unlisted extensions", () => {
+      expect(newExtensions).not.toContain(secret)
     })
   })
 
