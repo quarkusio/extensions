@@ -23,19 +23,32 @@ const MetadataValue = styled.div`
   font-weight: var(--font-weight-bold);
 `
 
-const ExtensionMetadata = ({ data: { name, fieldName, metadata } }) => {
+const ExtensionMetadata = ({
+  data: { name, plural, fieldName, metadata, transformer },
+}) => {
   const field = fieldName ? fieldName : name.toLowerCase()
   const content = metadata[field]
 
+  const transform = element => (transformer ? transformer(element) : element)
+
+  const prettyPrinted = Array.isArray(content)
+    ? content.map(element => transform(element))
+    : transform(content)
+
   return (
     <MetadataBlock>
-      <MetadataTitle>{name}</MetadataTitle>
-      {Array.isArray(content) ? (
-        content.map((element, i) => (
-          <MetadataValue key={i}>{element}</MetadataValue>
-        ))
+      {plural && Array.isArray(content) && content.length > 1 ? (
+        <MetadataTitle>{plural}</MetadataTitle>
       ) : (
-        <MetadataValue>{content}</MetadataValue>
+        <MetadataTitle>{name}</MetadataTitle>
+      )}
+      {Array.isArray(prettyPrinted) ? (
+        prettyPrinted.map(
+          (element, i) =>
+            element && <MetadataValue key={i}>{element}</MetadataValue>
+        )
+      ) : (
+        <MetadataValue>{prettyPrinted}</MetadataValue>
       )}
     </MetadataBlock>
   )
