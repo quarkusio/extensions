@@ -9,6 +9,8 @@ describe("extension detail page", () => {
     const platform1 = "A Box"
     const platform2 = "quarkus-bom-quarkus-platform-descriptor"
     const nonPlatform = "quarkus-non-platform-extensions"
+    const version = 0.42
+    const mvnUrl = "http://yup.its.maven/"
 
     const previous = {}
     const next = {}
@@ -21,6 +23,10 @@ describe("extension detail page", () => {
         categories: [category],
         status: status,
         guide: guideUrl,
+        maven: {
+          version,
+          url: mvnUrl,
+        },
       },
       platforms: [platform1, platform2, nonPlatform],
     }
@@ -65,6 +71,16 @@ describe("extension detail page", () => {
       const links = screen.getAllByRole("link")
       expect(links).toBeTruthy()
       const link = links.find(link => link.href === guideUrl)
+      expect(link).toBeTruthy()
+    })
+
+    it("renders a link to maven central", () => {
+      expect(screen.getByText("Maven Central")).toBeTruthy()
+      expect(screen.getByText("Version 0.42")).toBeTruthy()
+
+      const links = screen.getAllByRole("link")
+      expect(links).toBeTruthy()
+      const link = links.find(link => link.href === mvnUrl)
       expect(link).toBeTruthy()
     })
 

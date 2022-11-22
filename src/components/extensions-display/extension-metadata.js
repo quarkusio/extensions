@@ -24,16 +24,18 @@ const MetadataValue = styled.div`
 `
 
 const ExtensionMetadata = ({
-  data: { name, plural, fieldName, metadata, transformer },
+  data: { name, plural, fieldName, metadata, transformer, text, url },
 }) => {
   const field = fieldName ? fieldName : name.toLowerCase()
-  const content = metadata[field]
+  const content = text ? text : metadata ? metadata[field] : ""
 
   const transform = element => (transformer ? transformer(element) : element)
 
   const prettyPrinted = Array.isArray(content)
     ? content.map(element => transform(element))
     : transform(content)
+
+  const displayed = url ? <a href={url}>{prettyPrinted}</a> : prettyPrinted
 
   return (
     <MetadataBlock>
@@ -48,7 +50,7 @@ const ExtensionMetadata = ({
             element && <MetadataValue key={i}>{element}</MetadataValue>
         )
       ) : (
-        <MetadataValue>{prettyPrinted}</MetadataValue>
+        <MetadataValue>{displayed}</MetadataValue>
       )}
     </MetadataBlock>
   )
