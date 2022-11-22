@@ -19,41 +19,46 @@ const filterExtensions = (
   extensions,
   { regex, categoryFilter, platformFilter, versionFilter, compatibilityFilter }
 ) => {
-  return extensions
-    .filter(
-      extension =>
-        extension.name.toLowerCase().match(regex.toLowerCase()) ||
-        extension.description?.toLowerCase().match(regex.toLowerCase())
-    )
-    .filter(
-      extension =>
-        categoryFilter.length === 0 ||
-        extension.metadata.categories?.find(category =>
-          categoryFilter.includes(category.toLowerCase())
-        )
-    )
-    .filter(
-      extension =>
-        platformFilter.length === 0 ||
-        (extension.platforms &&
-          extension.platforms?.find(platform =>
-            platformFilter.includes(platform)
-          ))
-    )
-    .filter(
-      extension =>
-        versionFilter.length === 0 ||
-        (extension.metadata.built_with_quarkus_core &&
-          versionFilter.includes(extension.metadata.built_with_quarkus_core))
-    )
-    .filter(
-      extension =>
-        compatibilityFilter.length === 0 ||
-        (extension.metadata.quarkus_core_compatibility &&
-          compatibilityFilter.includes(
-            extension.metadata.quarkus_core_compatibility
-          ))
-    )
+  return (
+    extensions
+      // Exclude unlisted extensions, unless they happen to match a non-trivial search filter
+      // We don't need to check if the searches matches, because we do that below
+      .filter(extension => !extension.metadata.unlisted || regex.length > 2)
+      .filter(
+        extension =>
+          extension.name.toLowerCase().match(regex.toLowerCase()) ||
+          extension.description?.toLowerCase().match(regex.toLowerCase())
+      )
+      .filter(
+        extension =>
+          categoryFilter.length === 0 ||
+          extension.metadata.categories?.find(category =>
+            categoryFilter.includes(category.toLowerCase())
+          )
+      )
+      .filter(
+        extension =>
+          platformFilter.length === 0 ||
+          (extension.platforms &&
+            extension.platforms?.find(platform =>
+              platformFilter.includes(platform)
+            ))
+      )
+      .filter(
+        extension =>
+          versionFilter.length === 0 ||
+          (extension.metadata.built_with_quarkus_core &&
+            versionFilter.includes(extension.metadata.built_with_quarkus_core))
+      )
+      .filter(
+        extension =>
+          compatibilityFilter.length === 0 ||
+          (extension.metadata.quarkus_core_compatibility &&
+            compatibilityFilter.includes(
+              extension.metadata.quarkus_core_compatibility
+            ))
+      )
+  )
 }
 
 const Filters = ({ extensions, filterAction }) => {
