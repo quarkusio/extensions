@@ -149,6 +149,12 @@ const ExtensionDetailTemplate = ({
           <Metadata>
             <ExtensionMetadata
               data={{
+                name: "Version",
+                text: metadata.maven?.version,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Status",
                 metadata,
               }}

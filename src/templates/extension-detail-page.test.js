@@ -52,6 +52,10 @@ describe("extension detail page", () => {
       expect(screen.getByText(status)).toBeTruthy()
     })
 
+    it("renders the version", () => {
+      expect(screen.getByText(version)).toBeTruthy()
+    })
+
     it("renders the platform title as plural", () => {
       expect(screen.getByText("Platforms")).toBeTruthy()
     })
