@@ -5,10 +5,12 @@ import ExtensionCard from "./extension-card"
 describe("extension card", () => {
   describe("a normal extension", () => {
     const category = "jewellery"
+    const version = "1.2.3"
+
     const extension = {
       name: "JRuby",
       slug: "jruby-slug",
-      metadata: { categories: [category] },
+      metadata: { categories: [category], maven: { version } },
     }
 
     beforeEach(() => {
@@ -28,6 +30,10 @@ describe("extension card", () => {
 
     it("renders the formatted category", () => {
       expect(screen.getByText("Category: Jewellery")).toBeTruthy()
+    })
+
+    it("renders the version", () => {
+      expect(screen.getByText("Version: " + version)).toBeTruthy()
     })
   })
 
