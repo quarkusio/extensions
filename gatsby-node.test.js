@@ -7,10 +7,8 @@ const createNode = jest.fn()
 const createNodeId = jest.fn()
 const createContentDigest = jest.fn()
 
-const {
-  createMavenUrlFromCoordinates,
-} = require("./src/components/util/maven-url")
-jest.mock("./src/components/util/maven-url")
+const { createMavenUrlFromCoordinates } = require("./src/maven/maven-url")
+jest.mock("./src/maven/maven-url")
 
 const resolvedMavenUrl = "http://reallygoodurl.mvn"
 createMavenUrlFromCoordinates.mockImplementation(coordinates =>
