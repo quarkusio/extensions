@@ -19,6 +19,7 @@ const Card = styled(props => <Link {...props} />)`
   opacity: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 `
 
 const Logo = styled.div`
@@ -42,41 +43,60 @@ const ExtensionDescription = styled.div`
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   margin-top: 10px;
 `
 
-const ExtensionCategory = styled.div`
+const ExtensionInfo = styled.div`
   color: var(--grey-2);
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  margin-top: 6px;
+`
+const MainInformation = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
+`
+const FinerDetails = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 30px;
 `
 
 const ExtensionCard = ({ extension }) => {
   return (
     <Card to={extension.slug} $unlisted={extension.metadata.unlisted}>
-      <Logo>
-        <StaticImage
-          layout="constrained"
-          formats={["auto", "webp", "avif"]}
-          src="../images/generic-extension-logo.png"
-          alt="The extension logo"
-        />
-      </Logo>
-      <ExtensionName $unlisted={extension.metadata.unlisted}>
-        {extension.name}
-      </ExtensionName>
-      <ExtensionDescription>{extension.description}</ExtensionDescription>
+      <MainInformation>
+        <Logo>
+          <StaticImage
+            layout="constrained"
+            formats={["auto", "webp", "avif"]}
+            src="../images/generic-extension-logo.png"
+            alt="The extension logo"
+          />
+        </Logo>
+        <ExtensionName $unlisted={extension.metadata.unlisted}>
+          {extension.name}
+        </ExtensionName>
+        <ExtensionDescription>{extension.description}</ExtensionDescription>
+      </MainInformation>
+      <FinerDetails>
+        {extension.metadata.categories &&
+          extension.metadata.categories.length > 0 && (
+            <ExtensionInfo>
+              Category: {prettyCategory(extension.metadata.categories[0])}
+            </ExtensionInfo>
+          )}
 
-      {extension.metadata.categories &&
-        extension.metadata.categories.length > 0 && (
-          <ExtensionCategory>
-            Category: {prettyCategory(extension.metadata.categories[0])}
-          </ExtensionCategory>
-        )}
+        {extension.metadata.categories &&
+          extension.metadata.categories.length > 0 && (
+            <ExtensionInfo>
+              Version: {extension.metadata.maven?.version}
+            </ExtensionInfo>
+          )}
+      </FinerDetails>
     </Card>
   )
 }

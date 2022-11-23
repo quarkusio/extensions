@@ -51,6 +51,9 @@ export const pageQuery = graphql`
           guide
           built_with_quarkus_core
           unlisted
+          maven {
+            version
+          }
         }
         platforms
       }
