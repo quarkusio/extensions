@@ -1,13 +1,10 @@
 const path = require(`path`)
 const axios = require("axios")
-const parse = require("mvn-artifact-name-parser").default
 
 const { getPlatformId } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
 const { extensionSlug } = require("./src/components/util/extension-slugger")
-const {
-  createMavenUrlFromCoordinates,
-} = require("./src/components/util/maven-url")
+const { generateMavenInfo } = require("./src/maven/maven-info")
 
 exports.sourceNodes = async ({
   actions,
@@ -40,13 +37,8 @@ exports.sourceNodes = async ({
       }
     }
 
-    if (extension.artifact) {
-      const coordinates = parse(extension.artifact)
-      node.metadata.maven = coordinates
-      const mavenUrl = await createMavenUrlFromCoordinates(coordinates)
-      if (mavenUrl) {
-        node.metadata.maven.url = mavenUrl
-      }
+    if (node.artifact) {
+      node.metadata.maven = await generateMavenInfo(node.artifact)
     }
 
     return actions.createNode(node)
