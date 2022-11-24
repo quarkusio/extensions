@@ -1,5 +1,5 @@
 import React from "react"
-import { render, screen } from "@testing-library/react"
+import { render, screen, within } from "@testing-library/react"
 import ExtensionDetailTemplate from "./extension-detail"
 
 describe("extension detail page", () => {
@@ -26,6 +26,7 @@ describe("extension detail page", () => {
         maven: {
           version,
           url: mvnUrl,
+          timestamp: 1666716560000,
         },
       },
       platforms: [platform1, platform2, nonPlatform],
@@ -54,6 +55,14 @@ describe("extension detail page", () => {
 
     it("renders the version", () => {
       expect(screen.getByText(version)).toBeTruthy()
+    })
+
+    it("renders the release date", () => {
+      const publishDate = "Publish Date"
+      expect(screen.getByText(publishDate)).toBeTruthy()
+      const dateSection = screen.getByText(publishDate).closest("section")
+
+      expect(within(dateSection).getByText("Oct 25, 2022")).toBeTruthy()
     })
 
     it("renders the platform title as plural", () => {
