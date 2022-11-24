@@ -1,6 +1,6 @@
 import * as React from "react"
 import { graphql, Link } from "gatsby"
-
+import { format } from "date-fns"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { StaticImage } from "gatsby-plugin-image"
@@ -155,6 +155,16 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "Publish Date",
+                text: metadata.maven?.timestamp,
+                transformer: timestamp =>
+                  timestamp
+                    ? format(new Date(timestamp), "MMM dd, yyyy")
+                    : "unknown",
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Status",
                 metadata,
               }}
@@ -247,6 +257,7 @@ export const pageQuery = graphql`
         maven {
           version
           url
+          timestamp
         }
       }
       platforms

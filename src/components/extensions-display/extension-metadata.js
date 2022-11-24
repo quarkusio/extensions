@@ -2,7 +2,7 @@ import * as React from "react"
 
 import styled from "styled-components"
 
-const MetadataBlock = styled.div`
+const MetadataBlock = styled.section`
   width: 50%;
   height: 60px;
   color: var(--grey-2);
