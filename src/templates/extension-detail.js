@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 import { format } from "date-fns"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
@@ -44,7 +44,7 @@ const Columns = styled.div`
   flex-direction: row;
 `
 
-const Logo = styled.div`
+const LogoImage = styled.div`
   width: 220px;
   margin-right: 60px;
   margin-bottom: 25px;
@@ -107,6 +107,31 @@ const DocumentationHeading = styled.h2`
   border-bottom: 1px solid var(--grey-1);
 `
 
+const Logo = ({ extension }) => {
+  if (extension.localImage?.childImageSharp?.gatsbyImageData) {
+    return (
+      <LogoImage>
+        <GatsbyImage
+          layout="constrained"
+          image={extension.localImage?.childImageSharp.gatsbyImageData}
+          alt="The extension logo"
+        />
+      </LogoImage>
+    )
+  } else {
+    return (
+      <LogoImage>
+        <StaticImage
+          layout="constrained"
+          formats={["auto", "webp", "avif"]}
+          src="../images/generic-extension-logo.png"
+          alt="A generic image as a placeholder for the extension logo"
+        />
+      </LogoImage>
+    )
+  }
+}
+
 const ExtensionDetailTemplate = ({
   data: { extension, previous, next },
   location,
@@ -118,14 +143,7 @@ const ExtensionDetailTemplate = ({
       {metadata.unlisted && <UnlistedWarning>Unlisted</UnlistedWarning>}
       <ExtensionDetails>
         <Headline>
-          <Logo>
-            <StaticImage
-              layout="constrained"
-              formats={["auto", "webp", "avif"]}
-              src="../images/generic-extension-logo.png"
-              alt="The extension logo"
-            />
-          </Logo>
+          <Logo extension={extension} />
           <ExtensionName>{name}</ExtensionName>
         </Headline>
         <Columns>
@@ -272,6 +290,11 @@ export const pageQuery = graphql`
         sourceControlInfo {
           url
           project
+        }
+      }
+      localImage {
+        childImageSharp {
+          gatsbyImageData(width: 220)
         }
       }
       platforms

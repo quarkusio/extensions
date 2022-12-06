@@ -36,6 +36,11 @@ describe("extension detail page", () => {
           project: "jproject",
         },
       },
+      localImage: {
+        childImageSharp: {
+          gatsbyImageData: "specific-logo.png",
+        },
+      },
       platforms: [platform1, platform2, nonPlatform],
     }
 
@@ -114,6 +119,15 @@ describe("extension detail page", () => {
       expect(link).toBeTruthy()
     })
 
+    it("renders a logo with appropriate source ", async () => {
+      const image = screen.getByAltText("The extension logo")
+
+      // We can't just read the source, because this is a gatsby container, not a raw image
+      // The key names in the objects have UUIDs in them, so we cannot trivially inspect the object
+      // We could stringify and look for the image name, but that's a lot like hard work
+      expect(image).toBeTruthy()
+    })
+
     it("does not render an unlisted banner", async () => {
       const link = await screen.queryByText(/nlisted/)
       expect(link).toBeNull()
@@ -184,6 +198,14 @@ describe("extension detail page", () => {
     it("does not render anything about guides", async () => {
       const link = await screen.queryByText(/Documentation/)
       expect(link).toBeNull()
+    })
+
+    it("renders a placeholder image with appropriate source ", async () => {
+      const image = screen.getByAltText(
+        "A generic image as a placeholder for the extension logo"
+      )
+
+      expect(image.src).toContain("generic-extension-logo.png")
     })
   })
 
