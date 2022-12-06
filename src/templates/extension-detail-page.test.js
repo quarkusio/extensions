@@ -34,6 +34,7 @@ describe("extension detail page", () => {
         sourceControlInfo: {
           url: gitUrl,
           project: "jproject",
+          issues: 839,
         },
       },
       localImage: {
@@ -117,6 +118,11 @@ describe("extension detail page", () => {
       expect(links).toBeTruthy()
       const link = links.find(link => link.href === gitUrl)
       expect(link).toBeTruthy()
+    })
+
+    it("renders an issue count", () => {
+      expect(screen.getByText("Issues")).toBeTruthy()
+      expect(screen.getByText("839")).toBeTruthy()
     })
 
     it("renders a logo with appropriate source ", async () => {
