@@ -22,7 +22,7 @@ const Card = styled(props => <Link {...props} />)`
   justify-content: space-between;
 `
 
-const Logo = styled.div`
+const LogoImage = styled.div`
   width: 80px;
   height: 80px;
   margin-bottom: 25px;
@@ -68,27 +68,27 @@ const FinerDetails = styled.div`
   padding-bottom: 30px;
 `
 
-const logo = extension => {
+const Logo = ({ extension }) => {
   if (extension.localImage?.childImageSharp?.gatsbyImageData) {
     return (
-      <Logo>
+      <LogoImage>
         <GatsbyImage
           layout="constrained"
           image={extension.localImage?.childImageSharp.gatsbyImageData}
           alt="The extension logo"
         />
-      </Logo>
+      </LogoImage>
     )
   } else {
     return (
-      <Logo>
+      <LogoImage>
         <StaticImage
           layout="constrained"
           formats={["auto", "webp", "avif"]}
           src="../images/generic-extension-logo.png"
           alt="A generic image as a placeholder for the extension logo"
         />
-      </Logo>
+      </LogoImage>
     )
   }
 }
@@ -97,7 +97,7 @@ const ExtensionCard = ({ extension }) => {
   return (
     <Card to={extension.slug} $unlisted={extension.metadata.unlisted}>
       <MainInformation>
-        {logo(extension)}
+        <Logo extension={extension} />
         <ExtensionName $unlisted={extension.metadata.unlisted}>
           {extension.name}
         </ExtensionName>
