@@ -28,6 +28,12 @@ module.exports = {
       options: {
         nodeType: "extension",
         imagePath: "fields.sourceControlInfo.logoUrl",
+        // It's kind of wasteful to download images if we don't have an image to download, but there doesn't seem to be a way to get the plugin not to try to download empty URLs
+        // See https://github.com/graysonhicks/gatsby-plugin-remote-images/issues/120
+        prepareUrl: url =>
+          url
+            ? url
+            : "https://avatars.githubusercontent.com/u/69191779?s=200&v=4",
       },
     },
     {
