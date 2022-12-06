@@ -63,6 +63,10 @@ describe("the preprocessor", () => {
       expect(node.fields.sourceControlInfo.logoUrl).toEqual(imageUrl)
     })
 
+    it("fills in a project name", async () => {
+      expect(node.fields.sourceControlInfo.project).toEqual("somerepo")
+    })
+
     xit("adds a node for the remote image", async () => {})
   })
 })

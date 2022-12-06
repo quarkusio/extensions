@@ -22,8 +22,9 @@ exports.onCreateNode = async ({ node, getNode, actions }, pluginOptions) => {
     // See https://stackoverflow.com/questions/22932422/get-github-avatar-from-email-or-name
     // remove everything after the last backslash
     const orgUrl = scmUrl.substr(0, scmUrl.lastIndexOf("/"))
+    const project = scmUrl.substr(scmUrl.lastIndexOf("/") + 1)
     const logoUrl = orgUrl + ".png"
-    const scmInfo = { url: scmUrl, logoUrl }
+    const scmInfo = { url: scmUrl, logoUrl, project }
 
     createNodeField({
       node,
