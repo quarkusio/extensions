@@ -197,6 +197,14 @@ const ExtensionDetailTemplate = ({
                 transformer: text => "Version " + text,
               }}
             />
+            <ExtensionMetadata
+              data={{
+                name: "Extension Repository",
+                fieldName: "url",
+                text: extension.fields?.sourceControlInfo?.project,
+                url: extension.fields?.sourceControlInfo?.url,
+              }}
+            />
           </Metadata>
         </Columns>
 
@@ -258,6 +266,12 @@ export const pageQuery = graphql`
           version
           url
           timestamp
+        }
+      }
+      fields {
+        sourceControlInfo {
+          url
+          project
         }
       }
       platforms

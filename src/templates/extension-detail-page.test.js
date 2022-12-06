@@ -11,6 +11,7 @@ describe("extension detail page", () => {
     const nonPlatform = "quarkus-non-platform-extensions"
     const version = 0.42
     const mvnUrl = "http://yup.its.maven/"
+    const gitUrl = "https://github.com/someorg/someproject"
 
     const previous = {}
     const next = {}
@@ -27,6 +28,12 @@ describe("extension detail page", () => {
           version,
           url: mvnUrl,
           timestamp: 1666716560000,
+        },
+      },
+      fields: {
+        sourceControlInfo: {
+          url: gitUrl,
+          project: "jproject",
         },
       },
       platforms: [platform1, platform2, nonPlatform],
@@ -94,6 +101,16 @@ describe("extension detail page", () => {
       const links = screen.getAllByRole("link")
       expect(links).toBeTruthy()
       const link = links.find(link => link.href === mvnUrl)
+      expect(link).toBeTruthy()
+    })
+
+    it("renders a link to source control", () => {
+      expect(screen.getByText("Extension Repository")).toBeTruthy()
+      expect(screen.getByText("jproject")).toBeTruthy()
+
+      const links = screen.getAllByRole("link")
+      expect(links).toBeTruthy()
+      const link = links.find(link => link.href === gitUrl)
       expect(link).toBeTruthy()
     })
 
