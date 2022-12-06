@@ -223,6 +223,13 @@ const ExtensionDetailTemplate = ({
                 url: extension.fields?.sourceControlInfo?.url,
               }}
             />
+            <ExtensionMetadata
+              data={{
+                name: "Issues",
+                fieldName: "issues",
+                metadata: extension.fields?.sourceControlInfo,
+              }}
+            />
           </Metadata>
         </Columns>
 
@@ -290,6 +297,7 @@ export const pageQuery = graphql`
         sourceControlInfo {
           url
           project
+          issues
         }
       }
       localImage {
