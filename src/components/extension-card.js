@@ -1,9 +1,9 @@
 import * as React from "react"
-import { StaticImage } from "gatsby-plugin-image"
 import Link from "gatsby-link"
 
 import styled from "styled-components"
 import prettyCategory from "./util/pretty-category"
+import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
 
 const Card = styled(props => <Link {...props} />)`
   font-size: 3.5em;
@@ -24,8 +24,11 @@ const Card = styled(props => <Link {...props} />)`
 
 const Logo = styled.div`
   width: 80px;
-  height: 56px;
+  height: 80px;
   margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const ExtensionName = styled.div`
@@ -65,18 +68,36 @@ const FinerDetails = styled.div`
   padding-bottom: 30px;
 `
 
+const logo = extension => {
+  if (extension.localImage?.childImageSharp?.gatsbyImageData) {
+    return (
+      <Logo>
+        <GatsbyImage
+          layout="constrained"
+          image={extension.localImage?.childImageSharp.gatsbyImageData}
+          alt="The extension logo"
+        />
+      </Logo>
+    )
+  } else {
+    return (
+      <Logo>
+        <StaticImage
+          layout="constrained"
+          formats={["auto", "webp", "avif"]}
+          src="../images/generic-extension-logo.png"
+          alt="A generic image as a placeholder for the extension logo"
+        />
+      </Logo>
+    )
+  }
+}
+
 const ExtensionCard = ({ extension }) => {
   return (
     <Card to={extension.slug} $unlisted={extension.metadata.unlisted}>
       <MainInformation>
-        <Logo>
-          <StaticImage
-            layout="constrained"
-            formats={["auto", "webp", "avif"]}
-            src="../images/generic-extension-logo.png"
-            alt="The extension logo"
-          />
-        </Logo>
+        {logo(extension)}
         <ExtensionName $unlisted={extension.metadata.unlisted}>
           {extension.name}
         </ExtensionName>
