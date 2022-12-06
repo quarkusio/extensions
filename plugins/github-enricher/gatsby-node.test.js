@@ -1,7 +1,6 @@
 const { onCreateNode } = require("./gatsby-node")
 
-// This test relies on a mock in __mocks__. To validate things against
-// the real implementation, rename __mocks__/node-geocoder.js to something else temporarily.
+require("jest-fetch-mock").enableMocks()
 
 const createNodeField = jest.fn(({ node, name, value }) => {
   if (!node.fields) {
@@ -31,11 +30,28 @@ describe("the preprocessor", () => {
       expect(node.metadata).toEqual({})
       expect(node.sourceControlInfo).toBeUndefined()
     })
+
+    it("does no remote calls", async () => {
+      expect(fetch).not.toHaveBeenCalled()
+    })
   })
 
   describe("for an extension with a scm-url", () => {
-    const url = "http://gitsomething.com/someuser/somerepo"
+    const projectName = "somerepo"
+    const url = "http://gitsomething.com/someuser/" + projectName
     const imageUrl = "http://gitsomething.com/someuser.png"
+
+    const gitHubData = {
+      json: jest.fn().mockResolvedValue({
+        data: {
+          repository: {
+            issues: {
+              totalCount: 16,
+            },
+          },
+        },
+      }),
+    }
     const metadata = {
       "scm-url": url,
     }
@@ -46,10 +62,15 @@ describe("the preprocessor", () => {
     }
 
     beforeAll(async () => {
+      // Needed so that we do not short circuit the git path
+      process.env.GRAPHQL_ACCESS_TOKEN = "test_value"
+      fetch.mockResolvedValue(gitHubData)
       await onCreateNode({ node, actions })
     })
 
-    afterAll(() => {})
+    afterAll(() => {
+      delete process.env.GRAPHQL_ACCESS_TOKEN
+    })
 
     it("creates an scm object", async () => {
       expect(node.fields.sourceControlInfo).toBeTruthy()
@@ -64,9 +85,22 @@ describe("the preprocessor", () => {
     })
 
     it("fills in a project name", async () => {
-      expect(node.fields.sourceControlInfo.project).toEqual("somerepo")
+      expect(node.fields.sourceControlInfo.project).toEqual(projectName)
     })
 
-    xit("adds a node for the remote image", async () => {})
+    it("invokes the github graphql api", async () => {
+      expect(fetch).toHaveBeenCalled()
+      expect(fetch).toHaveBeenCalledWith(
+        "https://api.github.com/graphql",
+        expect.objectContaining({
+          // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
+          body: expect.stringMatching(/name:\\"somerepo\\"/),
+        })
+      )
+    })
+
+    it("fills in an issue count", async () => {
+      expect(node.fields.sourceControlInfo.issues).toEqual(16)
+    })
   })
 })
