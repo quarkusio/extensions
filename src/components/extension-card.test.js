@@ -35,6 +35,14 @@ describe("extension card", () => {
     it("renders the version", () => {
       expect(screen.getByText("Version: " + version)).toBeTruthy()
     })
+
+    it("renders a placeholder image with appropriate source ", async () => {
+      const image = screen.getByAltText(
+        "A generic image as a placeholder for the extension logo"
+      )
+
+      expect(image.src).toContain("generic-extension-logo.png")
+    })
   })
 
   describe("an unlisted extension", () => {

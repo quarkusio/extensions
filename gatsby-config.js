@@ -22,6 +22,14 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `github-enricher`,
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "extension",
+        imagePath: "fields.sourceControlInfo.logoUrl",
+      },
+    },
     {
       resolve: `gatsby-transformer-remark`,
       options: {

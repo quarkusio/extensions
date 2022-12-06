@@ -56,6 +56,11 @@ export const pageQuery = graphql`
           }
         }
         platforms
+        localImage {
+          childImageSharp {
+            gatsbyImageData(width: 80)
+          }
+        }
       }
     }
   }
