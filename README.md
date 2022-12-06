@@ -25,6 +25,11 @@ nvm use 14
 
 # Local development
 
+## Environment variables 
+
+Information is more complete if a GitHub access token is provided. It should only be granted read access. 
+Set it as an environment variable called `GRAPHQL_ACCESS_TOKEN`.
+
 In one terminal, run tests
 ```
 npm install
