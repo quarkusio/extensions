@@ -11,6 +11,7 @@ const generateMavenInfo = async artifact => {
   }
 
   // This will be slow because we need to need hit the endpoint too fast and we need to back off; we perhaps should batch, but that's hard to implement with our current model
+  // We should perhaps also consider a soft-cache locally for when we fail completely
   const timestamp = await promiseRetry(
     async () => {
       const response = await axios.get(
@@ -30,7 +31,7 @@ const generateMavenInfo = async artifact => {
       const { data } = response
       return data?.response?.docs[0]?.timestamp
     },
-    { retries: 4, minTimeout: 4 * 1000 }
+    { retries: 6, factor: 3, minTimeout: 4 * 1000 }
   ).catch(e => {
     // Don't even log 429 errors, they're kind of expected
     if (e.response?.status !== 429) {
@@ -38,7 +39,9 @@ const generateMavenInfo = async artifact => {
       console.warn("Could not fetch information from maven central", e)
     }
   })
-  if (timestamp) maven.timestamp = timestamp
+
+  // Error tolerance; make sure something get sets even if maven central is playing up
+  maven.timestamp = timestamp ? timestamp : 0
 
   return maven
 }
