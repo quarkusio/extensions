@@ -51,11 +51,11 @@ describe("site links", () => {
     const linksToSkip = [
       "https://twitter.com/quarkusio",
       // TODO remove these exemptions as soon as new releases with live guide links are made (the repos are correct, the releases are not)
-      "https://quarkus.io/guides/mybatis-plus",
       "https://quarkus.io/guides/freemarker",
       "https://quarkus.io/guides/qson",
       // This is correct in 2.14.2, but not in 3.0.0.Alpha
       "https://quarkus.io/guides/security-jpa",
+      "https://quarkiverse.github.io/quarkiverse-docs/jpastreamer/dev/", // https://github.com/quarkiverse/quarkus-jpastreamer/pull/21
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
