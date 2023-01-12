@@ -67,7 +67,7 @@ describe("the maven information generator", () => {
       "(this is a deliberate error to exercise the error path)"
     )
     const mavenInfo = await generateMavenInfo(artifact)
-    expect(mavenInfo.timestamp).toBeUndefined()
+    expect(mavenInfo.timestamp).toBe(0)
 
     // Other information should be present and correct
     expect(mavenInfo.version).toBe("3.0.0.Alpha1")
