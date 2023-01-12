@@ -133,7 +133,7 @@ describe("the main gatsby entrypoint", () => {
     })
   })
 
-  // in a handful of the extension yamls, the unlisted is a string, not a boolean. since this is a string, it drives graphQL made with type anxiety, unless we help.
+  // in a handful of the extension yamls, the unlisted is a string, not a boolean. since this is a string, it drives graphQL mad with type anxiety, unless we help.
   describe("for an extension with unlisted as a string", () => {
     const extension = { metadata: { unlisted: "true" } }
 
