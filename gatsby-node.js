@@ -139,6 +139,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     type MavenInfo {
       url: String
       version: String
+      timestamp: Int
     }
     
     

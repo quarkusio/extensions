@@ -14,6 +14,8 @@ const createMavenUrlFromCoordinates = async coordinates => {
   const exists = await urlExist(url)
   if (exists) {
     return url
+  } else {
+    console.warn("Could not work out url. Best guess was ", url)
   }
 }
 
