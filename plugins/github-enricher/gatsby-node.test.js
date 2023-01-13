@@ -39,7 +39,7 @@ describe("the preprocessor", () => {
   describe("for an extension with a scm-url", () => {
     const projectName = "somerepo"
     const url = "http://gitsomething.com/someuser/" + projectName
-    const imageUrl = "http://gitsomething.com/someuser.png"
+    const imageUrl = "http://something.com/someuser.png"
 
     const gitHubData = {
       json: jest.fn().mockResolvedValue({
@@ -49,6 +49,7 @@ describe("the preprocessor", () => {
               totalCount: 16,
             },
           },
+          repositoryOwner: { avatarUrl: imageUrl },
         },
       }),
     }
