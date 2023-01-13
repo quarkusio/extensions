@@ -1,20 +1,28 @@
 const parse = require("mvn-artifact-name-parser").default
 const slugify = require("slugify")
 
+const slugifyPart = string => {
+  return slugify(string, {
+    lower: true,
+  })
+}
+
 const extensionSlug = gav => {
   if (gav) {
     let string
     if (gav.includes(":")) {
       const coordinates = parse(gav)
-      string = coordinates.groupId + "_" + coordinates.artifactId
+      // slugs can have slashes in them, so use folders to group extensions in the same group
+      // slugify strips slashes, so slugify before adding the slashes
+      string =
+        slugifyPart(coordinates.groupId) +
+        "/" +
+        slugifyPart(coordinates.artifactId)
     } else {
-      string = gav
+      string = slugifyPart(gav)
     }
-    // We don't want dots in the url even though they are technically allowed
-    const deDotted = string.replace(/\./g, "-")
-    return slugify(deDotted, {
-      lower: true,
-    })
+
+    return string
   }
 }
 module.exports = { extensionSlug }
