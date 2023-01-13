@@ -34,17 +34,11 @@ exports.onCreateNode = async ({ node, getNode, actions }, pluginOptions) => {
 }
 
 const fetchScmInfo = async scmUrl => {
-  // We should do this properly with the API, but for now make an educated guess about the image URL
-  // See https://stackoverflow.com/questions/22932422/get-github-avatar-from-email-or-name
-  // remove everything after the last backslash
-
-  const orgUrl = scmUrl.substr(0, scmUrl.lastIndexOf("/"))
   const coords = gh(scmUrl)
 
   const project = coords.name
-  const logoUrl = orgUrl + ".png"
 
-  const scmInfo = { url: scmUrl, logoUrl, project }
+  const scmInfo = { url: scmUrl, project }
 
   const accessToken = process.env.GRAPHQL_ACCESS_TOKEN
   if (accessToken) {
@@ -54,6 +48,10 @@ const fetchScmInfo = async scmUrl => {
       issues(states:OPEN) {
         totalCount
       }
+    }
+    
+    repositoryOwner(login: "${coords.owner}") {
+        avatarUrl
     }
   }`
 
@@ -71,10 +69,12 @@ const fetchScmInfo = async scmUrl => {
         repository: {
           issues: { totalCount },
         },
+        repositoryOwner: { avatarUrl },
       },
     } = body
 
     scmInfo.issues = totalCount
+    scmInfo.logoUrl = avatarUrl
 
     return scmInfo
   } else {
