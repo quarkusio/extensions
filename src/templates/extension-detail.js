@@ -177,7 +177,7 @@ const ExtensionDetailTemplate = ({
                 text: metadata.maven?.timestamp,
                 transformer: timestamp =>
                   timestamp
-                    ? format(new Date(timestamp), "MMM dd, yyyy")
+                    ? format(new Date(+timestamp), "MMM dd, yyyy")
                     : "unknown",
               }}
             />
