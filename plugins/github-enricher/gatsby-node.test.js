@@ -9,7 +9,7 @@ const createNodeField = jest.fn(({ node, name, value }) => {
   node.fields[name] = value
 })
 const actions = { createNodeField }
-const internal = { type: "extension" }
+const internal = { type: "Extension" }
 
 describe("the preprocessor", () => {
   describe("for an extension with no scm information", () => {

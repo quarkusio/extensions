@@ -24,7 +24,7 @@ exports.sourceNodes = async ({
       sortableName: sortableName(extension.name),
       slug: extensionSlug(extension.artifact),
       internal: {
-        type: "extension",
+        type: "Extension",
         contentDigest: createContentDigest(extension),
       },
       platforms: extension.origins?.map(origin => getPlatformId(origin)),
@@ -97,30 +97,12 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   }
 }
 
-exports.onCreateNode = ({ node, actions }) => {
-  const { createNodeField } = actions
-
-  // TODO why doesn't this work, so we have to do it in the create call?
-  if (node.internal.type === `Extension`) {
-    const value = slugger.slug(node.name, false)
-
-    createNodeField({
-      name: `slug`,
-      node,
-      value,
-    })
-  }
-}
-
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
 
-  // Explicitly define the siteMetadata {} object
-  // This way those will always be defined even if removed from gatsby-config.js
-
   createTypes(`
   
-    type Extension {
+    type Extension implements Node {
       name: String!
       description: String
       slug: String!
@@ -141,22 +123,6 @@ exports.createSchemaCustomization = ({ actions }) => {
       version: String
       timestamp: Int
     }
-    
-    
-    type SiteSiteMetadata {
-      author: Author
-      siteUrl: String
-      social: Social
-    }
-
-    type Author {
-      name: String
-      summary: String
-    }
-
-    type Social {
-      twitter: String
-    }
-
+ 
   `)
 }
