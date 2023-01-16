@@ -1,7 +1,7 @@
 const gh = require("parse-github-url")
 
 const defaultOptions = {
-  nodeType: "extension",
+  nodeType: "Extension",
 }
 
 exports.onCreateNode = async ({ node, getNode, actions }, pluginOptions) => {
