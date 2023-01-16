@@ -121,8 +121,9 @@ exports.createSchemaCustomization = ({ actions }) => {
     type MavenInfo {
       url: String
       version: String
-      timestamp: Int
+      timestamp: String
     }
  
   `)
+  // We use string to represent the timestamp, because otherwise we risk bursting the 32-bit integer limit in graphql
 }
