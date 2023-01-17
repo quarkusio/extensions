@@ -29,17 +29,15 @@ describe("extension detail page", () => {
           url: mvnUrl,
           timestamp: 1666716560000,
         },
-      },
-      fields: {
-        sourceControlInfo: {
+        sourceControl: {
           url: gitUrl,
           project: "jproject",
           issues: 839,
-        },
-      },
-      localImage: {
-        childImageSharp: {
-          gatsbyImageData: "specific-logo.png",
+          ownerImage: {
+            childImageSharp: {
+              gatsbyImageData: "specific-logo.png",
+            },
+          },
         },
       },
       platforms: [platform1, platform2, nonPlatform],

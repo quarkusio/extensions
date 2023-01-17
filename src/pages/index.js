@@ -54,13 +54,20 @@ export const pageQuery = graphql`
           maven {
             version
           }
-        }
-        platforms
-        localImage {
-          childImageSharp {
-            gatsbyImageData(width: 80)
+          sourceControl {
+            projectImage {
+              childImageSharp {
+                gatsbyImageData(width: 80)
+              }
+            }
+            ownerImage {
+              childImageSharp {
+                gatsbyImageData(width: 80)
+              }
+            }
           }
         }
+        platforms
       }
     }
   }

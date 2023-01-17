@@ -3,7 +3,7 @@ import { graphql, Link } from "gatsby"
 import { format } from "date-fns"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { GatsbyImage, StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
@@ -108,12 +108,16 @@ const DocumentationHeading = styled.h2`
 `
 
 const Logo = ({ extension }) => {
-  if (extension.localImage?.childImageSharp?.gatsbyImageData) {
+  const imageData = getImage(extension.metadata.sourceControl?.projectImage)
+    ? getImage(extension.metadata.sourceControl?.projectImage)
+    : getImage(extension.metadata.sourceControl?.ownerImage)
+
+  if (imageData) {
     return (
       <LogoImage>
         <GatsbyImage
           layout="constrained"
-          image={extension.localImage?.childImageSharp.gatsbyImageData}
+          image={imageData}
           alt="The extension logo"
         />
       </LogoImage>
@@ -219,15 +223,15 @@ const ExtensionDetailTemplate = ({
               data={{
                 name: "Extension Repository",
                 fieldName: "url",
-                text: extension.fields?.sourceControlInfo?.project,
-                url: extension.fields?.sourceControlInfo?.url,
+                text: extension.metadata?.sourceControl?.project,
+                url: extension.metadata?.sourceControl?.url,
               }}
             />
             <ExtensionMetadata
               data={{
                 name: "Issues",
                 fieldName: "issues",
-                metadata: extension.fields?.sourceControlInfo,
+                metadata: extension.metadata?.sourceControl,
               }}
             />
           </Metadata>
@@ -292,19 +296,23 @@ export const pageQuery = graphql`
           url
           timestamp
         }
-      }
-      fields {
-        sourceControlInfo {
+        sourceControl {
           url
           project
           issues
+          projectImage {
+            childImageSharp {
+              gatsbyImageData(width: 220)
+            }
+          }
+          ownerImage {
+            childImageSharp {
+              gatsbyImageData(width: 220)
+            }
+          }
         }
       }
-      localImage {
-        childImageSharp {
-          gatsbyImageData(width: 220)
-        }
-      }
+
       platforms
     }
     previous: extension(id: { eq: $previousPostId }) {
