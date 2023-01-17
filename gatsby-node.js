@@ -37,7 +37,13 @@ exports.sourceNodes = async ({
       }
     }
 
+    // Use a better name and some structure for the source control information
+    node.metadata.sourceControl = node.metadata["scm-url"]
+    // Tidy up the old scm url
+    delete node.metadata["scm-url"]
+
     if (node.artifact) {
+      // This is very slow. Would doing it as a remote file help speed things up?
       node.metadata.maven = await generateMavenInfo(node.artifact)
     }
 
@@ -116,6 +122,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       quarkus_core_compatibility: String
       unlisted: Boolean
       maven: MavenInfo
+      sourceControl: SourceControlInfo @link(by: "url")
+
     }
     
     type MavenInfo {
@@ -126,4 +134,6 @@ exports.createSchemaCustomization = ({ actions }) => {
  
   `)
   // We use string to represent the timestamp, because otherwise we risk bursting the 32-bit integer limit in graphql
+
+  // What's going on with the @link? https://hashinteractive.com/blog/gatsby-data-relationships-with-foreign-key-fields/ explains
 }

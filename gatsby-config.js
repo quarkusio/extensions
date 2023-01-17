@@ -14,23 +14,25 @@ module.exports = {
     },
   },
   plugins: [
+    `github-enricher`,
+    `smart-cropper`,
+    {
+      resolve: `gatsby-plugin-remote-images`,
+      options: {
+        nodeType: "SourceControlInfo",
+        imagePath: "ownerImageUrl",
+        name: "ownerImage",
+        // See https://github.com/graysonhicks/gatsby-plugin-remote-images/issues/120
+        // The plugin complains about null ownerImageUrl fields
+        silent: true,
+      },
+    },
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
-      },
-    },
-    `github-enricher`,
-    {
-      resolve: `gatsby-plugin-remote-images`,
-      options: {
-        nodeType: "Extension",
-        imagePath: "fields.sourceControlInfo.logoUrl",
-        // See https://github.com/graysonhicks/gatsby-plugin-remote-images/issues/120
-        // The plugin complains about null logoUrl fields
-        silent: true,
       },
     },
     {
