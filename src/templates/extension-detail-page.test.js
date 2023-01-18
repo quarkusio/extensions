@@ -124,7 +124,7 @@ describe("extension detail page", () => {
     })
 
     it("renders a logo with appropriate source ", async () => {
-      const image = screen.getByAltText("The extension logo")
+      const image = screen.getByAltText("The logo of the organisation")
 
       // We can't just read the source, because this is a gatsby container, not a raw image
       // The key names in the objects have UUIDs in them, so we cannot trivially inspect the object

@@ -5,12 +5,15 @@ const { getPlatformId } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
 const { extensionSlug } = require("./src/components/util/extension-slugger")
 const { generateMavenInfo } = require("./src/maven/maven-info")
+const { createRemoteFileNode } = require("gatsby-source-filesystem")
 
 exports.sourceNodes = async ({
   actions,
+  getCache,
   createNodeId,
   createContentDigest,
 }) => {
+  const { createNode } = actions
   const { data } = await axios.get(
     `https://registry.quarkus.io/client/extensions/all`
   )
@@ -37,6 +40,17 @@ exports.sourceNodes = async ({
       }
     }
 
+    if (node.metadata["icon-url"]) {
+      await createRemoteFileNode({
+        url: node.metadata["icon-url"],
+        name: path.basename(node.metadata["icon-url"]),
+        parentNodeId: node.id,
+        getCache,
+        createNode,
+        createNodeId,
+      })
+    }
+
     // Use a better name and some structure for the source control information
     node.metadata.sourceControl = node.metadata["scm-url"]
     // Tidy up the old scm url
@@ -47,7 +61,7 @@ exports.sourceNodes = async ({
       node.metadata.maven = await generateMavenInfo(node.artifact)
     }
 
-    return actions.createNode(node)
+    return createNode(node)
   })
   return Promise.all(promises)
 }
@@ -123,7 +137,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       unlisted: Boolean
       maven: MavenInfo
       sourceControl: SourceControlInfo @link(by: "url")
-
+      logo: File @link(by: "url")
     }
     
     type MavenInfo {
