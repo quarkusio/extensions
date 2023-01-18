@@ -22,9 +22,6 @@ module.exports = {
         nodeType: "SourceControlInfo",
         imagePath: "ownerImageUrl",
         name: "ownerImage",
-        // See https://github.com/graysonhicks/gatsby-plugin-remote-images/issues/120
-        // The plugin complains about null ownerImageUrl fields
-        silent: true,
       },
     },
     `gatsby-plugin-image`,
