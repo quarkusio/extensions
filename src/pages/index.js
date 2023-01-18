@@ -54,6 +54,11 @@ export const pageQuery = graphql`
           maven {
             version
           }
+          logo {
+            childImageSharp {
+              gatsbyImageData(width: 220)
+            }
+          }
           sourceControl {
             projectImage {
               childImageSharp {

@@ -3,12 +3,12 @@ import { graphql, Link } from "gatsby"
 import { format } from "date-fns"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
 import InstallationInstructions from "../components/extensions-display/installation-instructions"
 import { prettyPlatformName } from "../components/util/pretty-platform"
+import ExtensionImage from "../components/extension-image"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--a-boatload-of-space);
@@ -108,32 +108,11 @@ const DocumentationHeading = styled.h2`
 `
 
 const Logo = ({ extension }) => {
-  const imageData = getImage(extension.metadata.sourceControl?.projectImage)
-    ? getImage(extension.metadata.sourceControl?.projectImage)
-    : getImage(extension.metadata.sourceControl?.ownerImage)
-
-  if (imageData) {
-    return (
-      <LogoImage>
-        <GatsbyImage
-          layout="constrained"
-          image={imageData}
-          alt="The extension logo"
-        />
-      </LogoImage>
-    )
-  } else {
-    return (
-      <LogoImage>
-        <StaticImage
-          layout="constrained"
-          formats={["auto", "webp", "avif"]}
-          src="../images/generic-extension-logo.png"
-          alt="A generic image as a placeholder for the extension logo"
-        />
-      </LogoImage>
-    )
-  }
+  return (
+    <LogoImage>
+      <ExtensionImage extension={extension} />
+    </LogoImage>
+  )
 }
 
 const ExtensionDetailTemplate = ({
@@ -291,6 +270,11 @@ export const pageQuery = graphql`
         categories
         guide
         unlisted
+        logo {
+          childImageSharp {
+            gatsbyImageData(width: 220)
+          }
+        }
         maven {
           version
           url

@@ -3,7 +3,7 @@ import Link from "gatsby-link"
 
 import styled from "styled-components"
 import prettyCategory from "./util/pretty-category"
-import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image"
+import ExtensionImage from "./extension-image"
 
 const Card = styled(props => <Link {...props} />)`
   font-size: 3.5em;
@@ -69,32 +69,11 @@ const FinerDetails = styled.div`
 `
 
 const Logo = ({ extension }) => {
-  const imageData = getImage(extension.metadata.sourceControl?.projectImage)
-    ? getImage(extension.metadata.sourceControl?.projectImage)
-    : getImage(extension.metadata.sourceControl?.ownerImage)
-
-  if (imageData) {
-    return (
-      <LogoImage>
-        <GatsbyImage
-          layout="constrained"
-          image={imageData}
-          alt="The extension logo"
-        />
-      </LogoImage>
-    )
-  } else {
-    return (
-      <LogoImage>
-        <StaticImage
-          layout="constrained"
-          formats={["auto", "webp", "avif"]}
-          src="../images/generic-extension-logo.png"
-          alt="A generic image as a placeholder for the extension logo"
-        />
-      </LogoImage>
-    )
-  }
+  return (
+    <LogoImage>
+      <ExtensionImage extension={extension} />
+    </LogoImage>
+  )
 }
 
 const ExtensionCard = ({ extension }) => {
