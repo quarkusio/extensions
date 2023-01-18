@@ -27,7 +27,7 @@ describe("extension detail page", () => {
         maven: {
           version,
           url: mvnUrl,
-          timestamp: 1666716560000,
+          timestamp: "1666716560000",
         },
         sourceControl: {
           url: gitUrl,
