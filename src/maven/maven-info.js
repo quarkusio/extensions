@@ -40,8 +40,7 @@ const generateMavenInfo = async artifact => {
     }
   })
 
-  // Error tolerance; make sure something get sets even if maven central is playing up
-  maven.timestamp = timestamp ? timestamp : 0
+  maven.timestamp = timestamp
 
   return maven
 }
