@@ -4,7 +4,7 @@ import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 
 const NavBar = styled.nav`
-  height: 119px;
+  flex-flow: wrap;
   background-color: var(--black);
   color: var(--white);
   display: flex;
@@ -17,6 +17,18 @@ const NavBar = styled.nav`
   font-weight: var(--font-weight-normal);
   text-transform: uppercase;
 `
+
+const Group = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: var(--black);
+  color: var(--white);
+  align-items: center;
+  padding-top: var(--a-modest-space);
+  padding-bottom: var(--a-modest-space);
+`
+
 const Logo = styled.div`
   background-color: var(--black);
   margin-right: 78px;
@@ -32,6 +44,8 @@ const Logo = styled.div`
 `
 
 const NavEntry = styled(props => <a {...props} />)`
+  padding: var(--a-small-space);
+
   &:visited {
     color: var(--white);
   }
@@ -71,26 +85,32 @@ const CallToAction = styled(props => <a {...props} />)`
 const Navigation = () => {
   return (
     <NavBar className="navigation">
-      <Logo>
-        <StaticImage
-          className="logo"
-          placeholder="none"
-          backgroundcolor="black"
-          layout="constrained"
-          formats={["auto", "webp", "avif"]}
-          src="../images/quarkus-logo.png"
-          height={50}
-          alt="Quarkus logo"
-        />
-        Quarkus
-      </Logo>
-      <NavEntry href="https://quarkus.io/get-started/">Get started</NavEntry>
-      <NavEntry href="https://quarkus.io/guides/">Guides</NavEntry>
-      <ActiveEntry to="/">Extensions</ActiveEntry>
-      <NavEntry href="https://quarkus.io/discussion/">Community</NavEntry>
-      <NavEntry href="https://quarkus.io/support/">Support</NavEntry>
-      <NavEntry href="https://quarkus.io/blog/">Blog</NavEntry>
-      <CallToAction href="https://code.quarkus.io/">Start Coding</CallToAction>
+      <Group>
+        <Logo>
+          <StaticImage
+            className="logo"
+            placeholder="none"
+            backgroundcolor="black"
+            layout="constrained"
+            formats={["auto", "webp", "avif"]}
+            src="../images/quarkus-logo.png"
+            height={50}
+            alt="Quarkus logo"
+          />
+          Quarkus
+        </Logo>
+      </Group>
+      <Group>
+        <NavEntry href="https://quarkus.io/get-started/">Get started</NavEntry>
+        <NavEntry href="https://quarkus.io/guides/">Guides</NavEntry>
+        <ActiveEntry to="/">Extensions</ActiveEntry>
+        <NavEntry href="https://quarkus.io/discussion/">Community</NavEntry>
+        <NavEntry href="https://quarkus.io/support/">Support</NavEntry>
+        <NavEntry href="https://quarkus.io/blog/">Blog</NavEntry>
+        <CallToAction href="https://code.quarkus.io/">
+          Start Coding
+        </CallToAction>
+      </Group>
     </NavBar>
   )
 }
