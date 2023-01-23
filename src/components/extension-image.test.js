@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react"
+import { cleanup, render, screen } from "@testing-library/react"
 import React from "react"
 import ExtensionImage from "./extension-image"
 
@@ -113,6 +113,40 @@ describe("the extension image", () => {
       const image = screen.getByRole("img", {})
 
       expect(image.src).toContain("yaml-logo.png")
+    })
+
+    describe("when the image is an svg", () => {
+      const extension = {
+        metadata: {
+          icon: {
+            childImageSharp: null,
+            publicURL: "some-svg.svg",
+          },
+          sourceControl: {
+            projectImage: {
+              childImageSharp: {
+                gatsbyImageData: "social-logo.png",
+              },
+            },
+            ownerImage: {
+              childImageSharp: {
+                gatsbyImageData: "owner-logo.png",
+              },
+            },
+          },
+        },
+      }
+
+      beforeEach(() => {
+        cleanup()
+        render(<ExtensionImage extension={extension} />)
+      })
+
+      it("renders the owner image", () => {
+        const image = screen.getByRole("img", {})
+
+        expect(image.src).toContain("some-svg.svg")
+      })
     })
   })
 })

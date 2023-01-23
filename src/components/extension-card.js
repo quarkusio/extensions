@@ -71,7 +71,7 @@ const FinerDetails = styled.div`
 const Logo = ({ extension }) => {
   return (
     <LogoImage>
-      <ExtensionImage extension={extension} />
+      <ExtensionImage extension={extension} size={80} />
     </LogoImage>
   )
 }

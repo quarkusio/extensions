@@ -1,14 +1,17 @@
 import * as React from "react"
 import { GatsbyImage, getImage, StaticImage } from "gatsby-plugin-image"
 
-const ExtensionImage = ({ extension }) => {
+const ExtensionImage = ({ extension, size }) => {
   const metadata = extension.metadata
   const sourceControl = metadata.sourceControl
 
-  let imageData
+  let imageData, svgData
   let altText
   if (metadata && metadata.icon) {
     imageData = getImage(metadata.icon)
+    if (!imageData) {
+      svgData = metadata.icon.publicURL
+    }
     altText = "The icon of the project"
   } else if (sourceControl?.projectImage) {
     imageData = getImage(sourceControl.projectImage)
@@ -17,8 +20,9 @@ const ExtensionImage = ({ extension }) => {
     imageData = getImage(sourceControl.ownerImage)
     altText = "The icon of the organisation"
   }
-
-  if (imageData) {
+  if (svgData) {
+    return <img src={svgData} alt={altText} height={size} width={size} />
+  } else if (imageData) {
     return <GatsbyImage layout="constrained" image={imageData} alt={altText} />
   } else {
     return (

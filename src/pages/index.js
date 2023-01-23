@@ -56,8 +56,9 @@ export const pageQuery = graphql`
           }
           icon {
             childImageSharp {
-              gatsbyImageData(width: 220)
+              gatsbyImageData(width: 80)
             }
+            publicURL
           }
           sourceControl {
             projectImage {
