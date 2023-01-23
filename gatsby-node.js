@@ -40,10 +40,14 @@ exports.sourceNodes = async ({
       }
     }
 
-    if (node.metadata["icon-url"]) {
+    // Avoid dashes in property names, since they get converted to underscores in some places and it's error-prone
+    node.metadata.icon = node.metadata["icon-url"]
+    delete node.metadata["icon-url"]
+
+    if (node.metadata.icon) {
       await createRemoteFileNode({
-        url: node.metadata["icon-url"],
-        name: path.basename(node.metadata["icon-url"]),
+        url: node.metadata.icon,
+        name: path.basename(node.metadata.icon),
         parentNodeId: node.id,
         getCache,
         createNode,
@@ -137,7 +141,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       unlisted: Boolean
       maven: MavenInfo
       sourceControl: SourceControlInfo @link(by: "url")
-      logo: File @link(by: "url")
+      icon: File @link(by: "url")
     }
     
     type MavenInfo {

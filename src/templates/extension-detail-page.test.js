@@ -123,8 +123,8 @@ describe("extension detail page", () => {
       expect(screen.getByText("839")).toBeTruthy()
     })
 
-    it("renders a logo with appropriate source ", async () => {
-      const image = screen.getByAltText("The logo of the organisation")
+    it("renders an icon with appropriate source ", async () => {
+      const image = screen.getByAltText("The icon of the organisation")
 
       // We can't just read the source, because this is a gatsby container, not a raw image
       // The key names in the objects have UUIDs in them, so we cannot trivially inspect the object
@@ -206,7 +206,7 @@ describe("extension detail page", () => {
 
     it("renders a placeholder image with appropriate source ", async () => {
       const image = screen.getByAltText(
-        "A generic image as a placeholder for the extension logo"
+        "A generic image as a placeholder for the extension icon"
       )
 
       expect(image.src).toContain("generic-extension-logo.png")

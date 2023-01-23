@@ -270,7 +270,7 @@ export const pageQuery = graphql`
         categories
         guide
         unlisted
-        logo {
+        icon {
           childImageSharp {
             gatsbyImageData(width: 220)
           }

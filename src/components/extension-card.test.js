@@ -38,7 +38,7 @@ describe("extension card", () => {
 
     it("renders a placeholder image with appropriate source ", async () => {
       const image = screen.getByAltText(
-        "A generic image as a placeholder for the extension logo"
+        "A generic image as a placeholder for the extension icon"
       )
 
       expect(image.src).toContain("generic-extension-logo.png")
