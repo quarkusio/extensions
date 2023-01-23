@@ -110,7 +110,7 @@ const DocumentationHeading = styled.h2`
 const Logo = ({ extension }) => {
   return (
     <LogoImage>
-      <ExtensionImage extension={extension} />
+      <ExtensionImage extension={extension} size={220} />
     </LogoImage>
   )
 }
@@ -274,6 +274,7 @@ export const pageQuery = graphql`
           childImageSharp {
             gatsbyImageData(width: 220)
           }
+          publicURL
         }
         maven {
           version
