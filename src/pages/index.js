@@ -54,7 +54,7 @@ export const pageQuery = graphql`
           maven {
             version
           }
-          logo {
+          icon {
             childImageSharp {
               gatsbyImageData(width: 220)
             }

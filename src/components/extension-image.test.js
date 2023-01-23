@@ -14,7 +14,7 @@ describe("the extension image", () => {
 
     it("renders a generic static image with suitable alt text", () => {
       const image = screen.getByAltText(
-        "A generic image as a placeholder for the extension logo"
+        "A generic image as a placeholder for the extension icon"
       )
       expect(image).toBeTruthy()
     })
@@ -71,7 +71,7 @@ describe("the extension image", () => {
     })
 
     it("renders the owner alt text", () => {
-      const image = screen.getByAltText("The logo of the project")
+      const image = screen.getByAltText("The icon of the project")
       expect(image).toBeTruthy()
     })
 
@@ -85,7 +85,7 @@ describe("the extension image", () => {
   describe("when the image is set in the metadata", () => {
     const extension = {
       metadata: {
-        "icon-url": {
+        icon: {
           childImageSharp: {
             gatsbyImageData: "yaml-logo.png",
           },

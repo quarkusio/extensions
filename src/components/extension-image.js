@@ -7,15 +7,15 @@ const ExtensionImage = ({ extension }) => {
 
   let imageData
   let altText
-  if (metadata && metadata["icon-url"]) {
-    imageData = getImage(metadata["icon-url"])
-    altText = "The logo of the project"
+  if (metadata && metadata.icon) {
+    imageData = getImage(metadata.icon)
+    altText = "The icon of the project"
   } else if (sourceControl?.projectImage) {
     imageData = getImage(sourceControl.projectImage)
-    altText = "The logo of the project"
+    altText = "The icon of the project"
   } else if (sourceControl?.ownerImage) {
     imageData = getImage(sourceControl.ownerImage)
-    altText = "The logo of the organisation"
+    altText = "The icon of the organisation"
   }
 
   if (imageData) {
@@ -26,7 +26,7 @@ const ExtensionImage = ({ extension }) => {
         layout="constrained"
         formats={["auto", "webp", "avif"]}
         src="../images/generic-extension-logo.png"
-        alt="A generic image as a placeholder for the extension logo"
+        alt="A generic image as a placeholder for the extension icon"
       />
     )
   }
