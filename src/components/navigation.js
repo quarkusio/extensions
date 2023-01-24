@@ -11,7 +11,6 @@ const NavToggle = styled.label`
 `
 
 const NavBar = styled.nav`
-  flex-flow: wrap;
   background-color: var(--black);
   color: var(--white);
   display: flex;
@@ -23,6 +22,14 @@ const NavBar = styled.nav`
   padding-right: 208px;
   font-weight: var(--font-weight-normal);
   text-transform: uppercase;
+
+  ${({ isMobile }) =>
+    isMobile
+      ? `
+flex-wrap: nowrap;
+`
+      : `  flex-flow: wrap;
+`}
 `
 
 const Wide = styled.ul`
@@ -174,7 +181,7 @@ const Navigation = () => {
   )
 
   return (
-    <NavBar className="navigation">
+    <NavBar isMobile={isMobile} className="navigation">
       <Group>
         <Logo>
           <StaticImage
