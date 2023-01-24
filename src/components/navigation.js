@@ -33,6 +33,7 @@ flex-wrap: nowrap;
 `
 
 const Wide = styled.ul`
+  padding-inline-start: 0;
   list-style: none;
   display: flex;
   flex-direction: row;
