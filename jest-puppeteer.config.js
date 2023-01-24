@@ -1,7 +1,7 @@
 // Load a token from `.env` when testing locally.
 // This is not used when running in CI.
 // See below for the ".env" contents.
-require("dotenv").config();
+require("dotenv").config()
 
 module.exports = {
   server: {
@@ -16,6 +16,12 @@ module.exports = {
     // specified time, the tests will fail. Increase this time (in ms) in case
     // your application requires more time to boot.
     launchTimeout: 45000,
-    debug: true
-  }
-};
+    debug: true,
+  },
+  launch: {
+    defaultViewport: {
+      width: 1920,
+      height: 1080,
+    },
+  },
+}
