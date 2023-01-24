@@ -20,12 +20,14 @@ exports.sourceNodes = async ({
 
   // Do a map so we can wait
   const promises = data.extensions.map(async extension => {
+    const slug = extensionSlug(extension.artifact)
+    const id = createNodeId(slug)
     const node = {
       metadata: {},
       ...extension,
-      id: createNodeId(extension.name),
+      id,
       sortableName: sortableName(extension.name),
-      slug: extensionSlug(extension.artifact),
+      slug,
       internal: {
         type: "Extension",
         contentDigest: createContentDigest(extension),

@@ -38,7 +38,7 @@ const ExtensionsList = ({ extensions }) => {
         <Extensions>
           {filteredExtensions.map(extension => {
             return (
-              <li key={extension.name}>
+              <li key={extension.id}>
                 <ExtensionCard extension={extension} />
               </li>
             )
