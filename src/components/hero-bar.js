@@ -4,8 +4,8 @@ import styled from "styled-components"
 
 const HeroBart = styled.header`
   height: 300px;
-  padding-left: var(--a-boatload-of-space);
-  padding-right: var(--a-boatload-of-space);
+  padding-left: var(--site-margins);
+  padding-right: var(--site-margins);
   color: var(--white);
   text-align: left;
   font-size: var(--font-size-28);

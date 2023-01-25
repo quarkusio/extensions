@@ -12,8 +12,8 @@ const FooterBar = styled.footer`
   justify-content: space-between;
   align-items: center;
   font-size: var(--font-size-16);
-  padding-left: 208px;
-  padding-right: 208px;
+  padding-left: var(--site-margins);
+  padding-right: var(--site-margins);
   font-weight: var(--font-weight-normal);
 `
 

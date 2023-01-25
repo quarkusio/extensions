@@ -11,7 +11,7 @@ const BreadcrumbBart = styled.header`
   font-size: var(--font-size-24);
   opacity: 1;
   margin: 0;
-  padding-left: var(--a-boatload-of-space);
+  padding-left: var(--site-margins);
   background-color: var(--quarkus-blue);
   display: flex;
   justify-content: flex-start;

@@ -62,7 +62,8 @@ html {
 
     /** Spacing **/
 
-    --a-boatload-of-space: 200px;
+    --site-margins: 13rem;
+
     --a-generous-space: 100px;
     --a-modest-space: 20px;
     --a-small-space: 12px;
@@ -71,7 +72,18 @@ html {
     --border-radius: 0;
 
     font-weight: var(--font-weight-normal);
+}
 
+@media screen and (max-width: 1170px) {
+    html {
+        --site-margins: 6rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    html {
+        --site-margins: 2rem;
+    }
 }
 
 :link {

@@ -18,8 +18,8 @@ const NavBar = styled.nav`
   justify-content: space-between;
   align-items: center;
   font-size: var(--font-size-24);
-  padding-left: 208px;
-  padding-right: 208px;
+  padding-left: var(--site-margins);
+  padding-right: var(--site-margins);
   font-weight: var(--font-weight-normal);
   text-transform: uppercase;
 
@@ -46,8 +46,8 @@ const Wide = styled.ul`
 const Narrow = styled.ul`
   background-color: #222;
   list-style: none;
-  margin-left: 208px;
-  margin-right: 208px;
+  margin-left: var(--site-margins);
+  margin-right: var(--site-margins);
   margin-top: 0;
   padding: 0;
   text-align: center;
