@@ -204,6 +204,20 @@ describe("extension detail page", () => {
       expect(link).toBeNull()
     })
 
+    it("does not render fields for which there is no information", async () => {
+      let link = await screen.queryByText("Platform")
+      expect(link).toBeNull()
+
+      link = await screen.queryByText("Category")
+      expect(link).toBeNull()
+
+      link = await screen.queryByText("Version")
+      expect(link).toBeNull()
+
+      link = await screen.queryByText("Issues")
+      expect(link).toBeNull()
+    })
+
     it("renders a placeholder image with appropriate source ", async () => {
       const image = screen.getByAltText(
         "A generic image as a placeholder for the extension icon"
