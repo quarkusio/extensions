@@ -27,33 +27,42 @@ const ExtensionMetadata = ({
   data: { name, plural, fieldName, metadata, transformer, text, url },
 }) => {
   const field = fieldName ? fieldName : name.toLowerCase()
-  const content = text ? text : metadata ? metadata[field] : ""
+  console.log("HOLLY field is ", field)
+  console.log("HOLLY meta is ", metadata)
 
-  const transform = element => (transformer ? transformer(element) : element)
+  const content = text ? text : metadata?.[field]
+  if (content) {
+    const transform = element => (transformer ? transformer(element) : element)
 
-  const prettyPrinted = Array.isArray(content)
-    ? content.map(element => transform(element))
-    : transform(content)
-
-  const displayed = url ? <a href={url}>{prettyPrinted}</a> : prettyPrinted
-
-  return (
-    <MetadataBlock>
-      {plural && Array.isArray(content) && content.length > 1 ? (
-        <MetadataTitle>{plural}</MetadataTitle>
-      ) : (
-        <MetadataTitle>{name}</MetadataTitle>
-      )}
-      {Array.isArray(prettyPrinted) ? (
-        prettyPrinted.map(
-          (element, i) =>
-            element && <MetadataValue key={i}>{element}</MetadataValue>
+    if (Array.isArray(content)) {
+      const prettyPrinted = content
+        .map(element => transform(element))
+        .filter(el => el != null)
+      // Do an extra check, in case transforming the array removed its content
+      if (prettyPrinted.length > 0) {
+        const title = plural && content.length > 1 ? plural : name
+        return (
+          <MetadataBlock>
+            <MetadataTitle>{title}</MetadataTitle>
+            {prettyPrinted.map(
+              (element, i) =>
+                element && <MetadataValue key={i}>{element}</MetadataValue>
+            )}
+          </MetadataBlock>
         )
-      ) : (
-        <MetadataValue>{displayed}</MetadataValue>
-      )}
-    </MetadataBlock>
-  )
+      }
+    } else {
+      const prettyPrinted = transform(content)
+      const displayed = url ? <a href={url}>{prettyPrinted}</a> : prettyPrinted
+
+      return (
+        <MetadataBlock>
+          <MetadataTitle>{name}</MetadataTitle>
+          <MetadataValue>{displayed}</MetadataValue>
+        </MetadataBlock>
+      )
+    }
+  }
 }
 
 export default ExtensionMetadata

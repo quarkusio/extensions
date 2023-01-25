@@ -12,6 +12,7 @@ describe("extension metadata block", () => {
   const metadata = {
     categories: [category, otherCategory],
     something: [thing],
+    empty: [],
     maturity,
     issues: issues,
   }
@@ -39,6 +40,28 @@ describe("extension metadata block", () => {
 
     it("does not renders other field names", () => {
       expect(screen.queryByText(issues)).toBeNull()
+    })
+  })
+
+  describe("for a field with missing data", () => {
+    const displayName = "Does not exist"
+    const pluralName = "Still does not exist"
+
+    beforeEach(() => {
+      render(
+        <ExtensionMetadata
+          data={{ name: displayName, plural: pluralName, metadata }}
+        />
+      )
+    })
+
+    it("does not render the field name", () => {
+      expect(screen.queryByText(displayName)).toBeNull()
+      expect(screen.queryByText(pluralName)).toBeNull()
+    })
+
+    it("does not render anything at all", () => {
+      expect(screen.debug()).toBeUndefined()
     })
   })
 
@@ -130,6 +153,51 @@ describe("extension metadata block", () => {
 
       it("renders the first element of the content", () => {
         expect(screen.getAllByText(frogs)).toHaveLength(2)
+      })
+    })
+
+    describe("with an empty array", () => {
+      const displayName = "Empty"
+
+      beforeEach(() => {
+        render(<ExtensionMetadata data={{ name: displayName, metadata }} />)
+      })
+
+      it("does not render the field name", () => {
+        expect(screen.queryByText(displayName)).toBeNull()
+      })
+
+      it("does not render anything at all", () => {
+        expect(screen.debug()).toBeUndefined()
+      })
+    })
+
+    describe("with a nulling transformer", () => {
+      const displayName = "Category"
+      const plural = "Categories"
+      const fieldName = "categories"
+
+      beforeEach(() => {
+        render(
+          <ExtensionMetadata
+            data={{
+              name: displayName,
+              fieldName,
+              plural,
+              transformer: () => null,
+              metadata,
+            }}
+          />
+        )
+      })
+
+      it("does not render the field name", () => {
+        expect(screen.queryByText(displayName)).toBeNull()
+        expect(screen.queryByText(plural)).toBeNull()
+      })
+
+      it("does not render anything at all", () => {
+        expect(screen.debug()).toBeUndefined()
       })
     })
   })
