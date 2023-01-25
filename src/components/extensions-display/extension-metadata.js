@@ -27,8 +27,6 @@ const ExtensionMetadata = ({
   data: { name, plural, fieldName, metadata, transformer, text, url },
 }) => {
   const field = fieldName ? fieldName : name.toLowerCase()
-  console.log("HOLLY field is ", field)
-  console.log("HOLLY meta is ", metadata)
 
   const content = text ? text : metadata?.[field]
   if (content) {
