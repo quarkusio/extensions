@@ -89,6 +89,7 @@ const Logo = styled.div`
 
 const NavEntry = styled(props => <a {...props} />)`
   padding: var(--a-small-space);
+  color: var(--white);
   white-space: nowrap;
 
   &:visited {
@@ -128,6 +129,7 @@ color: var(--white);
 
 const CallToAction = styled(props => <a {...props} />)`
   white-space: nowrap;
+  color: var(--white);
   padding-top: 6px;
   padding-bottom: 6px;
   padding-left: 12px;
