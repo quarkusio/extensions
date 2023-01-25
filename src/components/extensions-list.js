@@ -5,8 +5,8 @@ import ExtensionCard from "./extension-card"
 import styled from "styled-components"
 
 const FilterableList = styled.div`
-  margin-left: 208px;
-  margin-right: 208px;
+  margin-left: var(--site-margins);
+  margin-right: var(--site-margins);
   margin-top: 85px;
   display: flex;
   flex-direction: row;

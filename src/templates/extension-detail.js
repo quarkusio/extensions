@@ -11,8 +11,8 @@ import { prettyPlatformName } from "../components/util/pretty-platform"
 import ExtensionImage from "../components/extension-image"
 
 const ExtensionDetails = styled.main`
-  margin-left: var(--a-boatload-of-space);
-  margin-right: var(--a-boatload-of-space);
+  margin-left: var(--site-margins);
+  margin-right: var(--site-margins);
   margin-top: var(--a-generous-space);
   margin-bottom: var(--a-generous-space);
 
@@ -29,7 +29,7 @@ const Headline = styled.header`
 `
 
 const UnlistedWarning = styled.header`
-  padding-left: var(--a-boatload-of-space);
+  padding-left: var(--site-margins);
   background-color: var(--grey-0);
   text-align: left;
   font-size: var(--font-size-24);
