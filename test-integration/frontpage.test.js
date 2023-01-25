@@ -17,7 +17,7 @@ describe("main site", () => {
 
   it("should have Quarkiverse on it somewhere", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Welcome to the Quarkiverse"]`)
+      page.waitForXPath(`//*[text()="Extensions"]`)
     ).resolves.toBeTruthy()
   })
 
