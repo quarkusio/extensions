@@ -6,6 +6,8 @@ on:
       [ main ]
   pull_request:
     types: [ opened, synchronize, reopened ]
+  schedule: ## Do a run daily, to refresh website content
+    - cron: '0 3 * * *'
 
 jobs:
   unit-test:
