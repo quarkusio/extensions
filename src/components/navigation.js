@@ -62,29 +62,15 @@ const Narrow = styled.ul`
   justify-content: space-around;
 `
 
-const Group = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  background-color: var(--black);
-  color: var(--white);
-  align-items: center;
-  padding-top: var(--a-modest-space);
-  padding-bottom: var(--a-modest-space);
-`
-
 const Logo = styled.div`
   background-color: var(--black);
   margin-right: 78px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  height: 52px;
-  line-height: 46px;
-  width: 340px;
-  font-size: 50px;
-  letter-spacing: 5.5px;
-  font-weight: var(--font-weight-bold);
+  width: var(--logo-width);
+  padding-top: var(--a-modest-space);
+  padding-bottom: var(--a-modest-space);
 `
 
 const NavEntry = styled(props => <a {...props} />)`
@@ -185,21 +171,17 @@ const Navigation = () => {
 
   return (
     <NavBar isMobile={isMobile} className="navigation">
-      <Group>
-        <Logo>
-          <StaticImage
-            className="logo"
-            placeholder="none"
-            backgroundcolor="black"
-            layout="constrained"
-            formats={["auto", "webp", "avif"]}
-            src="../images/quarkus-logo.png"
-            height={50}
-            alt="Quarkus logo"
-          />
-          Quarkus
-        </Logo>
-      </Group>
+      <Logo>
+        <StaticImage
+          className="logo"
+          placeholder="none"
+          backgroundcolor="black"
+          layout="constrained"
+          formats={["auto", "webp", "avif"]}
+          src="../images/quarkus_logo_horizontal_rgb_600px_reverse.png"
+          alt="Quarkus logo"
+        />
+      </Logo>
 
       {isMobile && (
         <NavToggle onClick={handleOpen}>
