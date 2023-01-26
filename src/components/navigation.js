@@ -83,7 +83,7 @@ const NavEntry = styled(props => <a {...props} />)`
   }
 `
 
-const ActiveEntry = styled(props => <Link {...props} />)`
+const ActiveEntry = styled(({ isMobile, ...props }) => <Link {...props} />)`
   width: 100%;
   white-space: nowrap;
 
