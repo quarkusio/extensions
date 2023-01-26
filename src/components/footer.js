@@ -82,7 +82,7 @@ const Footer = () => {
           <StaticImage
             className="logo"
             placeholder="none"
-            backgroundcolor="black"
+            backgroundColor="black"
             layout="constrained"
             formats={["auto", "webp", "avif"]}
             src="../images/redhat_reversed.svg"

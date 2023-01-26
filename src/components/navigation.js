@@ -175,7 +175,7 @@ const Navigation = () => {
         <StaticImage
           className="logo"
           placeholder="none"
-          backgroundcolor="black"
+          backgroundColor="black"
           layout="constrained"
           formats={["auto", "webp", "avif"]}
           src="../images/quarkus_logo_horizontal_rgb_600px_reverse.png"
