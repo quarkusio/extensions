@@ -9,13 +9,13 @@ describe("main site", () => {
     await page.goto(siteRoot)
   })
 
-  it("should have Quarkus on it somewhere", async () => {
+  it("should have a Quarkus logo on it somewhere", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Quarkus"]`)
+      page.waitForXPath(`//img[contains(@alt,"Quarkus")]`)
     ).resolves.toBeTruthy()
   })
 
-  it("should have Quarkiverse on it somewhere", async () => {
+  it("should have an extensions heading on it somewhere", async () => {
     await expect(
       page.waitForXPath(`//*[text()="Extensions"]`)
     ).resolves.toBeTruthy()

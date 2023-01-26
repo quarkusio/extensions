@@ -63,6 +63,7 @@ html {
     /** Spacing **/
 
     --site-margins: 13rem;
+    --logo-width: 13rem;
 
     --a-generous-space: 100px;
     --a-modest-space: 20px;
@@ -74,6 +75,7 @@ html {
     font-weight: var(--font-weight-normal);
 }
 
+/** Adjustments for small screens  */
 @media screen and (max-width: 1170px) {
     html {
         --site-margins: 6rem;
@@ -83,6 +85,7 @@ html {
 @media screen and (max-width: 768px) {
     html {
         --site-margins: 2rem;
+        --logo-width: 8rem;
     }
 }
 
