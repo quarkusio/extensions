@@ -7,8 +7,15 @@ module.exports = {
       name: `The Quarkus Team`,
       summary: `who are nice.`,
     },
-    description: `A prototype extensions catalog.`,
+    description: `An extensions catalog.`,
     siteUrl: `http://quarkus.io/extensions.quarkus.io`,
+    translatedUrls: {
+      japanese: "http://ja.quarkus.io/",
+      chinese: "http://cn.quarkus.io/",
+      spanish: "http://es.quarkus.io/",
+    },
+
+    parentSiteUrl: `http://quarkus.io`,
     social: {
       twitter: `quarkusio`,
     },

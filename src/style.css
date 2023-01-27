@@ -63,6 +63,7 @@ html {
     /** Spacing **/
 
     --site-margins: 13rem;
+    --navbar-padding: 1rem;
     --logo-width: 13rem;
 
     --a-generous-space: 100px;
@@ -70,7 +71,7 @@ html {
     --a-small-space: 12px;
     --a-vsmall-space: 10px;
 
-    --border-radius: 0;
+    --border-radius: 10px;
 
     font-weight: var(--font-weight-normal);
 }
@@ -79,6 +80,8 @@ html {
 @media screen and (max-width: 1170px) {
     html {
         --site-margins: 6rem;
+        --navbar-padding: 1.5rem;
+
     }
 }
 
