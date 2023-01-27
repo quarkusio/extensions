@@ -61,7 +61,8 @@ describe("extension metadata block", () => {
     })
 
     it("does not render anything at all", () => {
-      expect(screen.debug()).toBeUndefined()
+      // Look for any text
+      expect(screen.queryAllByText(/./)).toHaveLength(0)
     })
   })
 
@@ -168,7 +169,8 @@ describe("extension metadata block", () => {
       })
 
       it("does not render anything at all", () => {
-        expect(screen.debug()).toBeUndefined()
+        // Look for any text
+        expect(screen.queryAllByText(/./)).toHaveLength(0)
       })
     })
 
@@ -197,7 +199,8 @@ describe("extension metadata block", () => {
       })
 
       it("does not render anything at all", () => {
-        expect(screen.debug()).toBeUndefined()
+        // Look for any text
+        expect(screen.queryAllByText(/./)).toHaveLength(0)
       })
     })
   })
