@@ -11,6 +11,7 @@ describe("extension list", () => {
 
   const ruby = {
     name: "JRuby",
+    id: "jruby",
     sortableName: "ruby",
     slug: "jruby-slug",
     metadata: { categories: [category] },
@@ -18,6 +19,7 @@ describe("extension list", () => {
   }
   const diamond = {
     name: "JDiamond",
+    id: "jdiamond",
     sortableName: "diamond",
     slug: "jdiamond-slug",
     metadata: { categories: [category] },
@@ -26,6 +28,7 @@ describe("extension list", () => {
 
   const molluscs = {
     name: "Molluscs",
+    id: "molluscs",
     sortableName: "mollusc",
     slug: "molluscs-slug",
     metadata: { categories: [otherCategory] },

@@ -43,6 +43,7 @@ export const pageQuery = graphql`
     allExtension(sort: { fields: [name], order: DESC }) {
       nodes {
         name
+        id
         sortableName
         description
         slug
