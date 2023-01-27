@@ -1,13 +1,13 @@
 const React = require("react")
 const plugin = jest.requireActual("gatsby-plugin-image")
 
-const mockStaticImage = ({ imgClassName, ...props }) =>
+const mockStaticImage = ({ imgClassName, backgroundColor, ...props }) =>
   React.createElement("img", {
     ...props,
     className: imgClassName,
   })
 
-const mockGatsbyImage = ({ imgClassName, ...props }) =>
+const mockGatsbyImage = ({ imgClassName, backgroundColor, ...props }) =>
   React.createElement("img", {
     ...props?.image?.props,
     alt: props?.alt,
