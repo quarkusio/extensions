@@ -5,8 +5,10 @@ import Navigation from "./navigation"
 import userEvent from "@testing-library/user-event"
 
 const barsIconTitle = "bars"
+const globeIconTitle = "globe"
+
 describe("navigation bar", () => {
-  const linkTitle = "Support"
+  const linkTitle = "Community"
 
   describe("at normal screen size", () => {
     beforeEach(() => {
@@ -20,6 +22,10 @@ describe("navigation bar", () => {
     it("renders links", () => {
       const link = screen.getAllByRole("link")
       expect(link).toBeTruthy()
+    })
+
+    it("renders a globe icon", () => {
+      expect(screen.getByTitle(globeIconTitle)).toBeInTheDocument()
     })
 
     it("does not render a hamburger menu", () => {
@@ -46,7 +52,7 @@ describe("navigation bar", () => {
       expect(screen.getByTitle(barsIconTitle)).toBeTruthy()
     })
 
-    it("clicking on the menu brings up a dropdwon", async () => {
+    it("clicking on the menu brings up a dropdown", async () => {
       await user.click(screen.getByTitle(barsIconTitle))
       expect(screen.getByText(linkTitle)).toBeTruthy()
     })

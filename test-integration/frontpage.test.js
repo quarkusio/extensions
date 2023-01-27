@@ -78,15 +78,15 @@ describe("main site", () => {
     })
 
     describe("header navigation bar", () => {
-      it("should have a Guides option", async () => {
+      it("should have a Start Coding button", async () => {
         await expect(
-          page.waitForXPath('//*[text()="Guides"]')
+          page.waitForXPath('//*[text()="Start Coding"]')
         ).resolves.toBeTruthy()
       })
 
-      it("should have a Support option", async () => {
+      it("should have a Learn option", async () => {
         await expect(
-          page.waitForXPath('//*[text()="Support"]')
+          page.waitForXPath('//*[text()="Learn"]')
         ).resolves.toBeTruthy()
       })
     })

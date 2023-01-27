@@ -12,12 +12,4 @@ describe("hero bar", () => {
   it("renders a welcome message", () => {
     expect(screen.getByText(arbitraryTitle)).toBeTruthy()
   })
-
-  it("renders a link to more information", () => {
-    const link = screen.getByText("What are Extensions?")
-    expect(link).toBeTruthy()
-    expect(link.href).toBe(
-      "https://quarkus.io/faq/#what-is-a-quarkus-extension"
-    )
-  })
 })

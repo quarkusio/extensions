@@ -12,8 +12,8 @@ import {
   faCreativeCommons,
   faCreativeCommonsBy,
 } from "@fortawesome/free-brands-svg-icons"
-import Navigation from "./navigation"
-import HeroBar from "./hero-bar"
+import Navigation from "./headers/navigation"
+import HeroBar from "./headers/hero-bar"
 import Footer from "./footer"
 
 library.add(
