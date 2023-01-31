@@ -56,13 +56,13 @@ const FlippyIcon = styled(({ isOpen, ...props }) => (
     `}
 `
 
-const MenuTitle = styled.title`
+const MenuTitle = styled.div`
   display: flex;
   flex-direction: row;
   gap: 5px;
   justify-content: flex-end;
   align-items: center;
-  padding: 0px 15px;
+  padding: 0 15px;
 `
 
 const Dropdown = styled.li`
