@@ -13,7 +13,7 @@ import {
   faCreativeCommonsBy,
 } from "@fortawesome/free-brands-svg-icons"
 import Navigation from "./headers/navigation"
-import HeroBar from "./headers/hero-bar"
+import TitleBand from "./headers/title-band"
 import Footer from "./footer"
 
 library.add(
@@ -36,7 +36,7 @@ const Layout = ({ location, title, children }) => {
     header = (
       <div>
         <Navigation />
-        <HeroBar title={title} />
+        <TitleBand title={title} />
       </div>
     )
   } else {

@@ -117,7 +117,7 @@ const NavEntry = styled(props => <li {...props} />)`
       current &&
       `   
         color: var(--red);
-        font-weight: var(--font-weight-boldest);
+        font-weight: var(--font-weight-awfully-bold);
           
         &:visited {
            color: var(--red);

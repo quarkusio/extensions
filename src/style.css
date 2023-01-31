@@ -42,7 +42,8 @@ html {
     --font-weight-normal: 300;
     /* Cannot go lighter than this with open sans */
     --font-weight-bold: 400;
-    --font-weight-boldest: 600;
+    --font-weight-awfully-bold: 600;
+    --font-weight-boldest: 700;
 
     font-family: var(--font-family-open-sans);
 

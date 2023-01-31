@@ -1,12 +1,12 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-import HeroBar from "./hero-bar"
+import TitleBand from "./title-band"
 
 describe("hero bar", () => {
   const arbitraryTitle = "Welcome to the Best Test in the West"
 
   beforeEach(() => {
-    render(<HeroBar title={arbitraryTitle} />)
+    render(<TitleBand title={arbitraryTitle} />)
   })
 
   it("renders a welcome message", () => {
