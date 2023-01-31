@@ -18,7 +18,7 @@ const BreadcrumbBart = styled.header`
   align-items: center;
 `
 const StyledLink = styled(props => <Link {...props} />)`
-  font-weight: var(--font-weight-boldest);
+  font-weight: var(--font-weight-awfully-bold);
   text-decoration: none;
   color: var(--white);
 `
