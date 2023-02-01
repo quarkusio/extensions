@@ -55,7 +55,6 @@ const DesktopNavigation = styled.ul`
   justify-content: space-between;
   padding-top: 0;
   padding-bottom: 0;
-  flex-wrap: wrap;
   align-content: center;
   align-items: center;
   background-color: var(--black);
@@ -201,7 +200,7 @@ const Navigation = () => {
   const extensions = (
     <Submenu title="Extensions">
       <NavEntry current={true}>
-        <Link to="/">Extension Catalog</Link>
+        <Link to="/">Browse Extensions</Link>
       </NavEntry>
       <NavEntry>
         <a
