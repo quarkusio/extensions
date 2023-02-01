@@ -59,10 +59,11 @@ const FlippyIcon = styled(({ isOpen, ...props }) => (
 const MenuTitle = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 5px;
+  gap: 3.8px;
   justify-content: flex-end;
   align-items: center;
-  padding: 0 15px;
+  padding: 0 14.4px; // Occult values to match the main site
+  line-height: 1.5rem; // This contributes to the spacing between items in the dropdown
 `
 
 const Dropdown = styled.li`
@@ -71,8 +72,7 @@ const Dropdown = styled.li`
   align-items: center;
   align-content: center;
   position: relative;
-  padding: 15px 0;
-  line-height: 1.8rem; // This affects the height of the elements
+  padding: 1rem 0;
 
   ${({ isMobile }) =>
     isMobile
