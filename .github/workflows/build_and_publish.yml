@@ -37,6 +37,8 @@ jobs:
       - run: npm run test:int
         env:
           CI: true
+      - name: Store PR id
+        run: echo ${{ github.event.number }} > ./public/pr-id.txt
       - name: Publishing directory for PR preview
         uses: actions/upload-artifact@v2
         with:
