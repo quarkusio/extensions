@@ -1,4 +1,4 @@
-import { getPlatformId, prettyPlatformName } from "./pretty-platform"
+import { getPlatformId, getStream, prettyPlatformName } from "./pretty-platform"
 
 describe("platform name formatter", () => {
   it("handles arbitrary strings", () => {
@@ -22,7 +22,7 @@ describe("platform name formatter", () => {
   })
 })
 
-describe("platform id extracter", () => {
+describe("platform id extractor", () => {
   it("handles arbitrary strings", () => {
     expect(getPlatformId("marshmallows")).toBe("marshmallows")
   })
@@ -41,5 +41,87 @@ describe("platform id extracter", () => {
 
   it("handles arbitrary GAVs", () => {
     expect(getPlatformId('"something:else:number:whatever:still"')).toBe("else")
+  })
+
+  describe("stream extractor", () => {
+    // A cut down version of what the registry returns us, with just the relevant bits
+    const currentPlatforms = [
+      {
+        "platform-key": "io.quarkus.platform",
+        name: "Quarkus Community Platform",
+        streams: [
+          {
+            id: "2.16",
+          },
+          {
+            id: "2.15",
+          },
+          {
+            id: "2.13",
+          },
+          {
+            id: "3.0",
+          },
+        ],
+        "current-stream-id": "2.16",
+      },
+    ]
+
+    it("handles arbitrary strings without exploding", () => {
+      expect(getStream("marshmallows")).toBeUndefined()
+    })
+
+    it("handles nulls", () => {
+      expect(getStream()).toBeUndefined()
+    })
+
+    it("extracts the stream for an origin", () => {
+      expect(
+        getStream(
+          "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:2.15.0:json:2.15.0",
+          currentPlatforms
+        )
+      ).toEqual(
+        expect.objectContaining({
+          platformKey: "io.quarkus.platform",
+          id: "2.15",
+        })
+      )
+    })
+
+    it("gets the correct is-current status for an origin", () => {
+      expect(
+        getStream(
+          "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:2.15.0:json:2.15.0",
+          currentPlatforms
+        ).isLatestThree
+      ).toBe(true)
+    })
+
+    it("extracts the stream for an origin with an alpha qualifier", () => {
+      expect(
+        getStream(
+          "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
+          currentPlatforms
+        )
+      ).toEqual({
+        platformKey: "io.quarkus.platform",
+        id: "3.0",
+        isLatestThree: true,
+      })
+    })
+
+    it("marks the stream as obsolete if it is not in the latest three platforms", () => {
+      expect(
+        getStream(
+          "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:1.2.3:json:1.2.3",
+          currentPlatforms
+        )
+      ).toEqual({
+        platformKey: "io.quarkus.platform",
+        id: "1.2",
+        isLatestThree: false,
+      })
+    })
   })
 })

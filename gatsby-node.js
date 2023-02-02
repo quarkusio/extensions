@@ -1,7 +1,10 @@
 const path = require(`path`)
 const axios = require("axios")
 
-const { getPlatformId } = require("./src/components/util/pretty-platform")
+const {
+  getPlatformId,
+  getStream,
+} = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
 const { extensionSlug } = require("./src/components/util/extension-slugger")
 const { generateMavenInfo } = require("./src/maven/maven-info")
@@ -14,12 +17,16 @@ exports.sourceNodes = async ({
   createContentDigest,
 }) => {
   const { createNode } = actions
-  const { data } = await axios.get(
-    `https://registry.quarkus.io/client/extensions/all`
-  )
+  const {
+    data: { extensions },
+  } = await axios.get(`https://registry.quarkus.io/client/extensions/all`)
+
+  const {
+    data: { platforms },
+  } = await axios.get(`https://registry.quarkus.io/client/platforms`)
 
   // Do a map so we can wait
-  const promises = data.extensions.map(async extension => {
+  const promises = extensions.map(async extension => {
     const slug = extensionSlug(extension.artifact)
     const id = createNodeId(slug)
     const node = {
@@ -33,6 +40,7 @@ exports.sourceNodes = async ({
         contentDigest: createContentDigest(extension),
       },
       platforms: extension.origins?.map(origin => getPlatformId(origin)),
+      streams: extension.origins?.map(origin => getStream(origin, platforms)),
     }
     if (typeof node.metadata.unlisted === "string") {
       if (node.metadata.unlisted.toLowerCase() === "true") {
