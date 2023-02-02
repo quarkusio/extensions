@@ -37,7 +37,12 @@ jobs:
       - run: npm run test:int
         env:
           CI: true
-
+      - name: Publishing directory for PR preview
+        uses: actions/upload-artifact@v2
+        with:
+          name: site
+          path: ./public
+          retention-days: 3
   deploy:
     # Only try and deploy on merged code
     if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
