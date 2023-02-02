@@ -14,6 +14,24 @@ const getPlatformId = origin => {
   }
 }
 
+const getStream = (origin, currentPlatforms) => {
+  if (origin && origin.includes(":")) {
+    const coordinates = parse(origin)
+    const versionParts = coordinates.version.split(".")
+    const id = `${versionParts[0]}.${versionParts[1]}`
+    const platform = currentPlatforms?.find(
+      platform => platform["platform-key"] === coordinates.groupId
+    )
+    const isLatestThree =
+      platform?.streams.find(stream => stream.id === id) != null
+    return {
+      platformKey: coordinates.groupId,
+      id: id,
+      isLatestThree,
+    }
+  }
+}
+
 const prettyPlatformName = platformId => {
   const words = platformId?.split(/[ -]/)
   const pretty = words
@@ -25,4 +43,4 @@ const prettyPlatformName = platformId => {
   return mappings[pretty] ? mappings[pretty] : pretty
 }
 
-module.exports = { prettyPlatformName, getPlatformId }
+module.exports = { prettyPlatformName, getPlatformId, getStream }

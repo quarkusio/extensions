@@ -3,6 +3,6 @@
 // that works in both `gatsby build` and in `gatsby develop`.
 // So WET it is.
 
-const styles = { "grey-2": "#555555", "border-radius": "0" }
+const styles = { "grey-2": "#555555", "border-radius": "10px" }
 
 export default styles

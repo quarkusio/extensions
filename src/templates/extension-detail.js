@@ -9,6 +9,7 @@ import ExtensionMetadata from "../components/extensions-display/extension-metada
 import InstallationInstructions from "../components/extensions-display/installation-instructions"
 import { prettyPlatformName } from "../components/util/pretty-platform"
 import ExtensionImage from "../components/extension-image"
+import CodeLink from "../components/extensions-display/code-link"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--site-margins);
@@ -61,6 +62,8 @@ const Metadata = styled.div`
 
 const Documentation = styled.div`
   width: 70%;
+  display: flex;
+  flex-direction: column;
 `
 
 const ExtensionName = styled.div`
@@ -120,7 +123,8 @@ const ExtensionDetailTemplate = ({
   data: { extension, previous, next },
   location,
 }) => {
-  const { name, description, artifact, metadata } = extension
+  const { name, description, artifact, metadata, platforms, streams } =
+    extension
   return (
     <Layout location={location}>
       <BreadcrumbBar name={name} />
@@ -133,6 +137,7 @@ const ExtensionDetailTemplate = ({
         <Columns>
           <Documentation>
             <ExtensionDescription>{description}</ExtensionDescription>
+
             {metadata.guide && (
               <DocumentationSection>
                 <DocumentationHeading>Documentation</DocumentationHeading>
@@ -149,6 +154,13 @@ const ExtensionDetailTemplate = ({
             </DocumentationSection>
           </Documentation>
           <Metadata>
+            <CodeLink
+              unlisted={metadata.unlisted}
+              artifact={artifact}
+              platforms={platforms}
+              streams={streams}
+            />
+
             <ExtensionMetadata
               data={{
                 name: "Version",
@@ -300,6 +312,11 @@ export const pageQuery = graphql`
       }
 
       platforms
+      streams {
+        id
+        isLatestThree
+        platformKey
+      }
     }
     previous: extension(id: { eq: $previousPostId }) {
       slug
