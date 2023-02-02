@@ -40,7 +40,7 @@ jobs:
 
   deploy:
     # Only try and deploy on merged code
-    if: "github.repository == 'quarkusio/extensions.quarkus.io' && github.ref_name == 'main' && github.event_name == 'push'"
+    if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
     needs: [ unit-test, build ]
     runs-on: ubuntu-latest
     steps:
