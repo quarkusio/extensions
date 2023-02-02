@@ -21,9 +21,11 @@ const DesktopSubmenu = styled.ul`
   min-width: 250px;
 
   padding: 0 0;
-  transform: translateX(-100%); // Right align by shifting left
+  transform: translateX(-100%) translateY(-30px);
+  // Right align by shifting left
+  // Add a buffer on top so we can move the mouse down onto the menu without falling into a 'blank' bit and closing the page
 
-  margin-top: 1.6em; // How far down below the heading the menu sits
+  margin-top: 58px; // How far down below the heading the menu sits - subtract the y translation from this to get the real value
 `
 
 // Used on mobile menus
