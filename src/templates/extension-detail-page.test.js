@@ -12,6 +12,7 @@ describe("extension detail page", () => {
     const version = 0.42
     const mvnUrl = "http://yup.its.maven/"
     const gitUrl = "https://github.com/someorg/someproject"
+    const olderUrl = "old-slug"
 
     const previous = {}
     const next = {}
@@ -41,6 +42,9 @@ describe("extension detail page", () => {
         },
       },
       platforms: [platform1, platform2, nonPlatform],
+      duplicates: [
+        { slug: olderUrl, relationship: "older", groupId: "old-group-id" },
+      ],
     }
 
     beforeEach(() => {
@@ -121,6 +125,16 @@ describe("extension detail page", () => {
     it("renders an issue count", () => {
       expect(screen.getByText("Issues")).toBeTruthy()
       expect(screen.getByText("839")).toBeTruthy()
+    })
+
+    it("renders a message about duplication extensions", () => {
+      expect(screen.getByText(/older version/)).toBeTruthy()
+      expect(screen.getByText(/old-group-id/)).toBeTruthy()
+
+      const links = screen.getAllByRole("link")
+      expect(links).toBeTruthy()
+      const link = links.find(link => link.href.includes(olderUrl))
+      expect(link).toBeTruthy()
     })
 
     it("renders an icon with appropriate source ", async () => {

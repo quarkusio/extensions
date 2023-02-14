@@ -40,6 +40,16 @@ const UnlistedWarning = styled.header`
   padding-bottom: var(--a-modest-space);
 `
 
+const SupersededWarning = styled.header`
+  padding-left: var(--site-margins);
+  background-color: var(--soft-yellow);
+  text-align: left;
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  padding-top: var(--a-modest-space);
+  padding-bottom: var(--a-modest-space);
+`
+
 const Columns = styled.div`
   display: flex;
   flex-direction: row;
@@ -91,6 +101,11 @@ const DocumentationSection = styled.section`
   margin-bottom: 50px;
 `
 
+const DuplicateReference = styled.div``
+const MavenCoordinate = styled.span`
+  font-weight: var(--font-weight-bold);
+`
+
 const VisibleLink = styled.a`
   &:link {
     color: var(--link);
@@ -123,12 +138,33 @@ const ExtensionDetailTemplate = ({
   data: { extension, previous, next },
   location,
 }) => {
-  const { name, description, artifact, metadata, platforms, streams } =
-    extension
+  const {
+    name,
+    description,
+    duplicates,
+    artifact,
+    metadata,
+    platforms,
+    streams,
+  } = extension
+
+  const isSuperseded =
+    duplicates && duplicates.find(dupe => dupe.relationship === "newer")
+
   return (
     <Layout location={location}>
       <BreadcrumbBar name={name} />
       {metadata.unlisted && <UnlistedWarning>Unlisted</UnlistedWarning>}
+      {isSuperseded &&
+        duplicates.map(duplicate => (
+          <SupersededWarning key={duplicate.groupId}>
+            {/^[aeiou]/i.test(duplicate.relationship) ? "An " : "A "}
+            {duplicate.relationship} version of this extension has been released
+            with the group id{" "}
+            <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>
+          </SupersededWarning>
+        ))}
+      }
       <ExtensionDetails>
         <Headline>
           <Logo extension={extension} />
@@ -151,6 +187,20 @@ const ExtensionDetailTemplate = ({
             <DocumentationSection>
               <DocumentationHeading>Installation</DocumentationHeading>
               <InstallationInstructions artifact={artifact} />
+            </DocumentationSection>
+
+            <DocumentationSection>
+              {duplicates &&
+                duplicates.map(duplicate => (
+                  <DuplicateReference key={duplicate.groupId}>
+                    {/^[aeiou]/i.test(duplicate.relationship) ? "An " : "A "}
+                    <Link to={"/" + duplicate.slug}>
+                      {duplicate.relationship} version
+                    </Link>{" "}
+                    of this extension was published with the group id{" "}
+                    <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>.
+                  </DuplicateReference>
+                ))}
             </DocumentationSection>
           </Documentation>
           <Metadata>
@@ -316,6 +366,11 @@ export const pageQuery = graphql`
         id
         isLatestThree
         platformKey
+      }
+      duplicates {
+        relationship
+        groupId
+        slug
       }
     }
     previous: extension(id: { eq: $previousPostId }) {

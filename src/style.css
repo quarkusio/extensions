@@ -20,6 +20,8 @@ html {
 
     --cta-hover: var(--link-hover);
 
+    --soft-yellow: #FDE9BF;
+    --orange: #E37B40;
     --light-blue: #e4edf7;
     --red: #FF004A;
     --dark-red: #cc0000;
