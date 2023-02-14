@@ -25,8 +25,19 @@ exports.sourceNodes = async ({
     data: { platforms },
   } = await axios.get(`https://registry.quarkus.io/client/platforms`)
 
-  // Do a map so we can wait
-  const promises = extensions.map(async extension => {
+  // Do a first pass of processing, to try and fill in release dates
+  const firstPromises = extensions.map(async extension => {
+    extension.metadata = extension.metadata || {}
+    if (extension.artifact) {
+      // This is very slow. Would doing it as a remote file help speed things up?
+      extension.metadata.maven = await generateMavenInfo(extension.artifact)
+    }
+  })
+
+  await Promise.all(firstPromises)
+
+  // Do a map so we can wait on the result
+  const secondPromises = extensions.map(async extension => {
     const slug = extensionSlug(extension.artifact)
     const id = createNodeId(slug)
     const node = {
@@ -70,14 +81,32 @@ exports.sourceNodes = async ({
     // Tidy up the old scm url
     delete node.metadata["scm-url"]
 
-    if (node.artifact) {
-      // This is very slow. Would doing it as a remote file help speed things up?
-      node.metadata.maven = await generateMavenInfo(node.artifact)
+    // Look for extensions which are not the same, but which have the same artifact id
+    // (artifactId is just the 'a' part of the gav, artifact is the whole gav string)
+    const duplicates = extensions.filter(
+      ext =>
+        ext.metadata.maven?.artifactId === node.metadata.maven?.artifactId &&
+        ext.artifact !== node.artifact
+    )
+    if (duplicates && duplicates.length > 0) {
+      const condensedDuplicates = duplicates.map(dupe => {
+        return {
+          artifact: dupe.artifact,
+          groupId: dupe.metadata.maven.groupId,
+          slug: extensionSlug(dupe.artifact),
+          timestamp: dupe.metadata.maven.timestamp,
+          relationship:
+            dupe.metadata.maven.timestamp > extension.metadata.maven.timestamp
+              ? "newer"
+              : "older",
+        }
+      })
+      node.duplicates = condensedDuplicates
     }
 
     return createNode(node)
   })
-  return Promise.all(promises)
+  return Promise.all(secondPromises)
 }
 
 exports.createPages = async ({ graphql, actions, reporter }) => {

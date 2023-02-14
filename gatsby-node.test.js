@@ -1,3 +1,5 @@
+const { default: parse } = require("mvn-artifact-name-parser")
+
 const axios = require("axios")
 jest.mock("axios")
 
@@ -7,13 +9,17 @@ const createNode = jest.fn()
 const createNodeId = jest.fn()
 const createContentDigest = jest.fn()
 
-const { createMavenUrlFromCoordinates } = require("./src/maven/maven-url")
-jest.mock("./src/maven/maven-url")
-
 const resolvedMavenUrl = "http://reallygoodurl.mvn"
-createMavenUrlFromCoordinates.mockImplementation(coordinates =>
-  coordinates ? resolvedMavenUrl : undefined
-)
+const { generateMavenInfo } = require("./src/maven/maven-info")
+jest.mock("./src/maven/maven-info")
+
+generateMavenInfo.mockImplementation(artifactId => {
+  const coordinates = parse(artifactId)
+  // This is totally unscientific and arbitrary, but it's reproducible
+  coordinates.timestamp = artifactId.length
+  coordinates.url = resolvedMavenUrl
+  return coordinates
+})
 
 const actions = { createNode }
 // A cut down version of what the registry returns us, with just the relevant bits
@@ -342,6 +348,101 @@ describe("the main gatsby entrypoint", () => {
 
     it("creates an id", () => {
       expect(createNodeId).toHaveBeenCalled()
+    })
+  })
+
+  describe("for an extension with an other extension sharing the artifact id", () => {
+    const extension = {
+      artifact:
+        "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+      origins: [
+        "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
+      ],
+    }
+    const olderExtension = {
+      artifact:
+        "io.quarkelsewhere:quarkus-micrometer-registry-datadog::jar:3.12.0",
+      origins: [
+        "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
+      ],
+    }
+
+    // A cut down version of what the registry returns us, with just the relevant bits
+    const currentPlatforms = {
+      platforms: [{}],
+    }
+    beforeAll(async () => {
+      axios.get = jest.fn().mockReturnValue({
+        data: {
+          extensions: [extension, olderExtension],
+          platforms: currentPlatforms.platforms,
+        },
+      })
+
+      await sourceNodes({ actions, createNodeId, createContentDigest })
+    })
+
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
+    it("creates ids", () => {
+      expect(createNodeId).toHaveBeenCalledTimes(2)
+    })
+
+    it("adds a link to the older extension from the new one", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: extension.artifact,
+          duplicates: [
+            expect.objectContaining({
+              groupId: "io.quarkelsewhere",
+              slug: "io.quarkelsewhere/quarkus-micrometer-registry-datadog",
+            }),
+          ],
+        })
+      )
+    })
+
+    it("adds a link to the newer extension from the old one", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: olderExtension.artifact,
+          duplicates: [
+            expect.objectContaining({
+              groupId: "io.quarkiverse.micrometer.registry",
+            }),
+          ],
+        })
+      )
+    })
+
+    it("marks the older duplicate as older", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: extension.artifact,
+          duplicates: [
+            expect.objectContaining({
+              relationship: "older",
+              timestamp: 65,
+            }),
+          ],
+        })
+      )
+    })
+
+    it("marks the newer duplicate as newer", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: olderExtension.artifact,
+          duplicates: [
+            expect.objectContaining({
+              relationship: "newer",
+              timestamp: 82,
+            }),
+          ],
+        })
+      )
     })
   })
 })
