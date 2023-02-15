@@ -142,14 +142,12 @@ const ExtensionDetailTemplate = ({
     name,
     description,
     duplicates,
+    isSuperseded,
     artifact,
     metadata,
     platforms,
     streams,
   } = extension
-
-  const isSuperseded =
-    duplicates && duplicates.find(dupe => dupe.relationship === "newer")
 
   return (
     <Layout location={location}>
@@ -164,7 +162,7 @@ const ExtensionDetailTemplate = ({
             <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>
           </SupersededWarning>
         ))}
-      }
+
       <ExtensionDetails>
         <Headline>
           <Logo extension={extension} />
@@ -372,6 +370,7 @@ export const pageQuery = graphql`
         groupId
         slug
       }
+      isSuperseded
     }
     previous: extension(id: { eq: $previousPostId }) {
       slug

@@ -445,6 +445,24 @@ describe("the main gatsby entrypoint", () => {
       )
     })
 
+    it("does not mark the newer extension as superseded", () => {
+      expect(createNode).not.toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: extension.artifact,
+          isSuperseded: true,
+        })
+      )
+    })
+
+    it("marks the older extension as superseded", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: olderExtension.artifact,
+          isSuperseded: true,
+        })
+      )
+    })
+
     describe("when maven conks out and does not give a timestamp", () => {
       beforeAll(async () => {
         // Clear any history from the parent beforeAll()
@@ -482,6 +500,15 @@ describe("the main gatsby entrypoint", () => {
         )
       })
 
+      it("does not mark the new extension as superseded", () => {
+        expect(createNode).not.toHaveBeenCalledWith(
+          expect.objectContaining({
+            artifact: extension.artifact,
+            isSuperseded: true,
+          })
+        )
+      })
+
       it("adds a link to the newer extension from the old one", () => {
         expect(createNode).toHaveBeenCalledWith(
           expect.objectContaining({
@@ -495,7 +522,16 @@ describe("the main gatsby entrypoint", () => {
         )
       })
 
-      it("marks the older duplicate as older", () => {
+      it("does not mark the older extension as superseded", () => {
+        expect(createNode).not.toHaveBeenCalledWith(
+          expect.objectContaining({
+            artifact: olderExtension.artifact,
+            isSuperseded: true,
+          })
+        )
+      })
+
+      it("marks the older duplicate as just different", () => {
         expect(createNode).toHaveBeenCalledWith(
           expect.objectContaining({
             artifact: extension.artifact,
@@ -508,7 +544,7 @@ describe("the main gatsby entrypoint", () => {
         )
       })
 
-      it("marks the newer duplicate as newer", () => {
+      it("marks the newer duplicate as just different", () => {
         expect(createNode).toHaveBeenCalledWith(
           expect.objectContaining({
             artifact: olderExtension.artifact,
