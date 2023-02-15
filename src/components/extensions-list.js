@@ -23,11 +23,7 @@ const Extensions = styled.ol`
 
 const ExtensionsList = ({ extensions }) => {
   // Do some pre-filtering for content we will never want, like superseded extensions
-  const allExtensions = extensions.filter(
-    extension =>
-      !extension.duplicates ||
-      !extension.duplicates.find(dupe => dupe.relationship === "newer")
-  )
+  const allExtensions = extensions.filter(extension => !extension.isSuperseded)
 
   const [filteredExtensions, setExtensions] = useState(allExtensions)
 

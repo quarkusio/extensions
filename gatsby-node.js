@@ -107,6 +107,13 @@ exports.sourceNodes = async ({
         }
       })
       node.duplicates = condensedDuplicates
+
+      if (
+        condensedDuplicates &&
+        condensedDuplicates.find(dupe => dupe.relationship === "newer")
+      ) {
+        node.isSuperseded = true
+      }
     }
 
     return createNode(node)

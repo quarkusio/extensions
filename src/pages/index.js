@@ -75,9 +75,7 @@ export const pageQuery = graphql`
           }
         }
         platforms
-        duplicates {
-          relationship
-        }
+        isSuperseded
       }
     }
   }

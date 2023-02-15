@@ -43,6 +43,7 @@ describe("extension list", () => {
     metadata: { categories: [otherCategory] },
     platforms: ["bottom of the garden"],
     duplicates: [{ relationship: "newer", groupId: "whatever" }],
+    isSuperseded: true,
   }
 
   const maybeObsolete = {
