@@ -35,7 +35,27 @@ describe("extension list", () => {
     platforms: ["bottom of the garden"],
   }
 
-  const extensions = [ruby, diamond, molluscs]
+  const obsolete = {
+    name: "Obsolete",
+    id: "really-old",
+    sortableName: "old",
+    slug: "old-slug",
+    metadata: { categories: [otherCategory] },
+    platforms: ["bottom of the garden"],
+    duplicates: [{ relationship: "newer", groupId: "whatever" }],
+  }
+
+  const maybeObsolete = {
+    name: "Maybebsolete",
+    id: "maybe-old",
+    sortableName: "maybe-old",
+    slug: "ambiguous-slug",
+    metadata: { categories: [otherCategory] },
+    platforms: ["bottom of the garden"],
+    duplicates: [{ relationship: "different", groupId: "whatever" }],
+  }
+
+  const extensions = [ruby, diamond, molluscs, obsolete, maybeObsolete]
   const user = userEvent.setup()
 
   beforeEach(() => {
@@ -47,10 +67,19 @@ describe("extension list", () => {
   })
 
   it("renders the correct link", () => {
-    const link = screen.getAllByRole("link")[2] // Look at the third one - this is also testing the sorting
+    const link = screen.getAllByRole("link")[3] // Look at the fourth one - this is also testing the sorting
     expect(link).toBeTruthy()
     // Hardcoding the host is a bit risky but this should always be true in  test environment
     expect(link.href).toBe("http://localhost/jruby-slug")
+  })
+
+  it("filters out extensions which have been superseded", async () => {
+    expect(screen.queryByText(obsolete.name)).toBeFalsy()
+  })
+
+  // If the relationship is 'different' we don't know which is newer or older, so we better leave it in
+  it("leaves in extensions which might have been superseded if we can't tell for sure", async () => {
+    expect(screen.queryByText(maybeObsolete.name)).toBeInTheDocument()
   })
 
   describe("searching and filtering", () => {
