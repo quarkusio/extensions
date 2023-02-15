@@ -4,6 +4,7 @@ jest.mock("url-exist")
 const {
   createMavenUrlFromCoordinates,
   createMavenUrlFromArtifactString,
+  createMavenArtifactsUrlFromCoordinates,
 } = require("./maven-url")
 
 describe("maven url generator", () => {
@@ -18,29 +19,55 @@ describe("maven url generator", () => {
     jest.clearAllMocks()
   })
 
-  it("turns coordinates into sensible urls", async () => {
-    expect(
-      await createMavenUrlFromCoordinates({
-        groupId: "fred",
-        artifactId: "george",
-        version: 0.1,
-      })
-    ).toBe("https://search.maven.org/artifact/fred/george/0.1/jar")
+  describe("human-readable url generator", () => {
+    it("turns coordinates into sensible urls", async () => {
+      expect(
+        await createMavenUrlFromCoordinates({
+          groupId: "fred",
+          artifactId: "george",
+          version: 0.1,
+        })
+      ).toBe("https://search.maven.org/artifact/fred/george/0.1/jar")
+    })
+
+    it("turns artifacts into sensible urls", async () => {
+      expect(await createMavenUrlFromArtifactString(gav)).toBe(
+        "https://search.maven.org/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-datadog/2.12.0/jar"
+      )
+    })
+
+    it("validates urls exist", async () => {
+      await createMavenUrlFromArtifactString(gav)
+      expect(urlExist).toHaveBeenCalled()
+    })
+
+    it("returns null if it cannot deduce a valid url", async () => {
+      await urlExist.mockReturnValue(false)
+      expect(await createMavenUrlFromArtifactString(gav)).toBeUndefined()
+    })
   })
 
-  it("turns artifacts into sensible urls", async () => {
-    expect(await createMavenUrlFromArtifactString(gav)).toBe(
-      "https://search.maven.org/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-datadog/2.12.0/jar"
-    )
-  })
+  describe("artifact-download url generator", () => {
+    it("turns coordinates into sensible urls", async () => {
+      expect(
+        await createMavenArtifactsUrlFromCoordinates({
+          groupId: "io.quarkiverse.amazonalexa",
+          artifactId: "quarkus-amazon-alexa",
+          version: "1.0.5",
+        })
+      ).toBe(
+        "https://repo1.maven.org/maven2/io/quarkiverse/amazonalexa/quarkus-amazon-alexa/1.0.5/"
+      )
+    })
 
-  it("validates urls exist", async () => {
-    await createMavenUrlFromArtifactString(gav)
-    expect(urlExist).toHaveBeenCalled()
-  })
+    it("validates urls exist", async () => {
+      await createMavenArtifactsUrlFromCoordinates(gav)
+      expect(urlExist).toHaveBeenCalled()
+    })
 
-  it("returns null if it cannot deduce a valid url", async () => {
-    await urlExist.mockReturnValue(false)
-    expect(await createMavenUrlFromArtifactString(gav)).toBeUndefined()
+    it("returns null if it cannot deduce a valid url", async () => {
+      await urlExist.mockReturnValue(false)
+      expect(await createMavenArtifactsUrlFromCoordinates(gav)).toBeUndefined()
+    })
   })
 })
