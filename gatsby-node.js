@@ -90,15 +90,20 @@ exports.sourceNodes = async ({
     )
     if (duplicates && duplicates.length > 0) {
       const condensedDuplicates = duplicates.map(dupe => {
+        // If we're missing a timestamp because we couldn't get it from maven, all we can do is describe the versions as 'different' from each other.
+        const relationship =
+          dupe.metadata.maven.timestamp && extension.metadata.maven.timestamp
+            ? dupe.metadata.maven.timestamp > extension.metadata.maven.timestamp
+              ? "newer"
+              : "older"
+            : "different"
+
         return {
           artifact: dupe.artifact,
           groupId: dupe.metadata.maven.groupId,
           slug: extensionSlug(dupe.artifact),
           timestamp: dupe.metadata.maven.timestamp,
-          relationship:
-            dupe.metadata.maven.timestamp > extension.metadata.maven.timestamp
-              ? "newer"
-              : "older",
+          relationship,
         }
       })
       node.duplicates = condensedDuplicates
