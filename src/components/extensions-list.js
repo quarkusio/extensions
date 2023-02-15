@@ -22,7 +22,13 @@ const Extensions = styled.ol`
 `
 
 const ExtensionsList = ({ extensions }) => {
-  const allExtensions = extensions
+  // Do some pre-filtering for content we will never want, like superseded extensions
+  const allExtensions = extensions.filter(
+    extension =>
+      !extension.duplicates ||
+      !extension.duplicates.find(dupe => dupe.relationship === "newer")
+  )
+
   const [filteredExtensions, setExtensions] = useState(allExtensions)
 
   // TODO why is this guard necessary?
