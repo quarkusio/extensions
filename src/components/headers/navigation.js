@@ -88,7 +88,7 @@ const LogoWrapper = styled.div`
   align-items: center;
 `
 
-const Logo = styled.div`
+const Logo = styled.a`
   background-color: var(--black);
   width: var(--logo-width);
   display: flex;
@@ -294,7 +294,7 @@ const Navigation = () => {
   return (
     <NavBar isMobile={isMobile}>
       <LogoWrapper>
-        <Logo>
+        <Logo href={config.siteMetadata.parentSiteUrl}>
           <StaticImage
             className="logo"
             placeholder="none"
