@@ -56,7 +56,7 @@ describe("maven url generator", () => {
           version: "1.0.5",
         })
       ).toBe(
-        "https://repo1.maven.org/maven2/io/quarkiverse/amazonalexa/quarkus-amazon-alexa/1.0.5/"
+        "https://repo1.maven.org/maven2/io/quarkiverse/amazonalexa/quarkus-amazon-alexa/1.0.5/quarkus-amazon-alexa-1.0.5.pom"
       )
     })
 

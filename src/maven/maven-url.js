@@ -22,7 +22,7 @@ const createMavenUrlFromCoordinates = async coordinates => {
 const createMavenArtifactsUrlFromCoordinates = async coordinates => {
   const pathifiedGroupId = coordinates.groupId?.replace(/\./g, "/")
 
-  const url = `https://repo1.maven.org/maven2/${pathifiedGroupId}/${coordinates.artifactId}/${coordinates.version}/`
+  const url = `https://repo1.maven.org/maven2/${pathifiedGroupId}/${coordinates.artifactId}/${coordinates.version}/${coordinates.artifactId}-${coordinates.version}.pom`
   const exists = await urlExist(url)
   if (exists) {
     return url
