@@ -127,7 +127,7 @@ describe("extension detail page", () => {
       expect(screen.getByText("839")).toBeTruthy()
     })
 
-    it("renders a message about duplication extensions", () => {
+    it("renders a message about duplicate extensions", () => {
       expect(screen.getByText(/older version/)).toBeTruthy()
       expect(screen.getByText(/old-group-id/)).toBeTruthy()
 
