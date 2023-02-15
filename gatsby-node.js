@@ -135,6 +135,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           nodes {
             id
             slug
+            isSuperseded
           }
         }
       }
@@ -156,8 +157,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   if (posts.length > 0) {
     posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+      const previousPostId = getPreviousPost(index, posts)
+      const nextPostId = getNextPost(index, posts)
 
       createPage({
         path: post.slug,
@@ -169,6 +170,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         },
       })
     })
+  }
+}
+
+const getPreviousPost = (index, posts) => {
+  let i = index
+  while (i > 0) {
+    i--
+    // Skip over superseded posts in the next and previous links
+    if (!posts[i].isSuperseded) {
+      return posts[i].id
+    }
+  }
+}
+
+const getNextPost = (index, posts) => {
+  let i = index
+  while (i < posts.length - 2) {
+    i++
+    // Skip over superseded posts in the next and previous links
+    if (!posts[i].isSuperseded) {
+      return posts[i].id
+    }
   }
 }
 
