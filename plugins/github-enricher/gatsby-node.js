@@ -65,7 +65,7 @@ const fetchScmInfo = async scmUrl => {
 
   const scmInfo = { url: scmUrl, project }
 
-  const accessToken = process.env.GRAPHQL_ACCESS_TOKEN
+  const accessToken = process.env.GITHUB_TOKEN
 
   if (accessToken) {
     const query = `
@@ -121,7 +121,7 @@ const fetchScmInfo = async scmUrl => {
     return scmInfo
   } else {
     console.warn(
-      "Cannot read GitHub information, because the environment variable `GRAPHQL_ACCESS_TOKEN` has not been set."
+      "Cannot read GitHub information, because the environment variable `GITHUB_TOKEN` has not been set."
     )
     return scmInfo
   }

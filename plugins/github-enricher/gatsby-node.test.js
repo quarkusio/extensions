@@ -82,7 +82,7 @@ describe("the github data handler", () => {
 
     beforeAll(async () => {
       // Needed so that we do not short circuit the git path
-      process.env.GRAPHQL_ACCESS_TOKEN = "test_value"
+      process.env.GITHUB_TOKEN = "test_value"
       fetch.mockResolvedValue(gitHubData)
       return onCreateNode({
         node,
@@ -93,7 +93,7 @@ describe("the github data handler", () => {
     })
 
     afterAll(() => {
-      delete process.env.GRAPHQL_ACCESS_TOKEN
+      delete process.env.GITHUB_TOKEN
       fetch.resetMocks()
     })
 
@@ -203,7 +203,7 @@ describe("the github data handler", () => {
 
     beforeAll(async () => {
       // Needed so that we do not short circuit the git path
-      process.env.GRAPHQL_ACCESS_TOKEN = "social-preview-test_value"
+      process.env.GITHUB_TOKEN = "social-preview-test_value"
       fetch.mockResolvedValue(gitHubData)
       return onCreateNode({
         node,
@@ -214,7 +214,7 @@ describe("the github data handler", () => {
     })
 
     afterAll(() => {
-      delete process.env.GRAPHQL_ACCESS_TOKEN
+      delete process.env.GITHUB_TOKEN
       fetch.resetMocks()
     })
 

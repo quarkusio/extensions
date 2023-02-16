@@ -28,7 +28,7 @@ nvm use 14
 ## Environment variables 
 
 Information is more complete if a GitHub access token is provided. It should only be granted read access. 
-Set it as an environment variable called `GRAPHQL_ACCESS_TOKEN`.
+Set it as an environment variable called `GITHUB_TOKEN`. (In the CI, this will be provided by the platform.)
 
 In one terminal, run tests
 ```
