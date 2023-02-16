@@ -185,6 +185,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   type SourceControlInfo implements Node @noinfer {
     url: String
     ownerImageUrl: String
+    extensionYamlUrl: String
     issues: String
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
