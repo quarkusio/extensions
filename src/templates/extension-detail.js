@@ -134,6 +134,14 @@ const Logo = ({ extension }) => {
   )
 }
 
+const AuthorGuidance = styled.div`
+  font-style: italic;
+`
+
+const Filename = styled.span`
+  font-family: monospace;
+`
+
 const ExtensionDetailTemplate = ({
   data: { extension, previous, next },
   location,
@@ -148,6 +156,12 @@ const ExtensionDetailTemplate = ({
     platforms,
     streams,
   } = extension
+
+  const extensionYaml = metadata.sourceControl?.extensionYamlUrl ? (
+    <a href={metadata.sourceControl.extensionYamlUrl}>quarkus-extension.yaml</a>
+  ) : (
+    "quarkus-extension.yaml"
+  )
 
   return (
     <Layout location={location}>
@@ -199,6 +213,22 @@ const ExtensionDetailTemplate = ({
                     <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>.
                   </DuplicateReference>
                 ))}
+            </DocumentationSection>
+
+            <DocumentationSection>
+              <AuthorGuidance>
+                This page was generated from the{" "}
+                <a href="https://quarkus.io/version/main/guides/extension-metadata#quarkus-extension-yaml">
+                  extension metadata
+                </a>{" "}
+                published to the{" "}
+                <a href="https://quarkus.io/guides/extension-registry-user">
+                  Quarkus registry
+                </a>
+                . Spot a problem? Submit a change to the {name} extension's{" "}
+                <Filename>{extensionYaml}</Filename> and this content will be
+                updated by the next extension release.
+              </AuthorGuidance>
             </DocumentationSection>
           </Documentation>
           <Metadata>
@@ -351,6 +381,7 @@ export const pageQuery = graphql`
               gatsbyImageData(width: 220)
             }
           }
+          extensionYamlUrl
           ownerImage {
             childImageSharp {
               gatsbyImageData(width: 220)
