@@ -27,7 +27,7 @@ exports.onCreateNode = async (
   const scmUrl = metadata?.sourceControl
 
   if (scmUrl) {
-    const scmInfo = await fetchScmInfo(scmUrl, createNode, createNodeId, node)
+    const scmInfo = await fetchScmInfo(scmUrl, node.metadata?.maven?.artifactId)
 
     scmInfo.id = createNodeId(`${scmInfo.owner}.${scmInfo.project}`)
 
@@ -58,15 +58,19 @@ exports.onCreateNode = async (
   }
 }
 
-const fetchScmInfo = async scmUrl => {
+const fetchScmInfo = async (scmUrl, artifactId) => {
   const coords = gh(scmUrl)
 
   const project = coords.name
+
+  // Some multi-extension projects use just the 'different' part of the name in the folder structure
+  const shortArtifactId = artifactId?.replace(coords.name + "-", "")
 
   const scmInfo = { url: scmUrl, project }
 
   const accessToken = process.env.GITHUB_TOKEN
 
+  // This query is long, because I can't find a way to do "or" or
   if (accessToken) {
     const query = `
   query {
@@ -74,6 +78,35 @@ const fetchScmInfo = async scmUrl => {
       issues(states:OPEN) {
         totalCount
       }
+    
+      defaultBranchRef {
+        name
+      }
+    
+      metaInfs: object(expression: "HEAD:runtime/src/main/resources/META-INF/") {
+        ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+    
+      subfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources/META-INF/") {
+        ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+      
+      shortenedSubfolderMetaInfs: object(expression: "HEAD:${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+        ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+      
       openGraphImageUrl
     }
     
@@ -95,16 +128,35 @@ const fetchScmInfo = async scmUrl => {
       data: {
         repository: {
           issues: { totalCount },
+          defaultBranchRef,
+          metaInfs,
+          subfolderMetaInfs,
+          shortenedSubfolderMetaInfs,
           openGraphImageUrl,
         },
         repositoryOwner: { avatarUrl },
       },
     } = body
 
+    const allMetaInfs = [
+      ...(metaInfs ? metaInfs.entries : []),
+      ...(subfolderMetaInfs ? subfolderMetaInfs.entries : []),
+      ...(shortenedSubfolderMetaInfs ? shortenedSubfolderMetaInfs.entries : []),
+    ]
+
+    const extensionYamls = allMetaInfs.filter(entry =>
+      entry.path.endsWith("/quarkus-extension.yaml")
+    )
+
     scmInfo.issues = totalCount
 
     scmInfo.owner = coords.owner
     scmInfo.ownerImageUrl = avatarUrl
+
+    // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
+    if (extensionYamls.length === 1) {
+      scmInfo.extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef?.name}/${extensionYamls[0].path}`
+    }
 
     // Only look at the social media preview if it's been set by the user; otherwise we know it will be the owner avatar with some text we don't want
     // This mechanism is a bit fragile, but should work for now

@@ -65,6 +65,18 @@ describe("the github data handler", () => {
             issues: {
               totalCount: 16,
             },
+            defaultBranchRef: { name: "unusual" },
+            metaInfs: null,
+            subfolderMetaInfs: null,
+            shortenedSubfolderMetaInfs: {
+              entries: [
+                { path: "runtime/src/main/resources/META-INF/beans.xml" },
+                {
+                  path: "some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+                },
+                { path: "runtime/src/main/resources/META-INF/services" },
+              ],
+            },
             openGraphImageUrl: socialMediaPreviewUrl,
           },
           repositoryOwner: { avatarUrl: avatarUrl },
@@ -72,6 +84,7 @@ describe("the github data handler", () => {
       }),
     }
     const metadata = {
+      maven: { artifactId: "something" },
       sourceControl: url,
     }
 
@@ -152,6 +165,15 @@ describe("the github data handler", () => {
     it("fills in an issue count", async () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({ issues: 16 })
+      )
+    })
+
+    it("fills in a url for the extension yaml", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          extensionYamlUrl:
+            "http://gitsomething.com/someuser/somerepo/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+        })
       )
     })
 
