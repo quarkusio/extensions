@@ -17,12 +17,18 @@ const SearchBox = styled.form`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  &:focus-within {
+    outline: var(--quarkus-blue) solid 2px;
+  }
 `
 
 const Input = styled.input`
   padding: 0;
   border: 0;
   font-size: var(--font-size-14);
+
+  outline: none; // change to the defaults, which otherwise give a blue ring inside the white area
 `
 
 const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
@@ -41,6 +47,7 @@ const Search = ({ searcher: listener }) => {
     <Element>
       <SearchBox>
         <PaddedIcon icon={faSearch} />
+
         <Input
           id="search-regex"
           name="search-regex"
