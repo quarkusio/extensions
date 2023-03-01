@@ -51,7 +51,8 @@ const ExtensionDescription = styled.div`
 `
 
 const ExtensionInfo = styled.div`
-  color: var(--grey-2);
+  color: ${props => (props.$unlisted ? "var(--dark-red)" : "var(--grey-2)")};
+  text-transform: ${props => (props.$unlisted ? "uppercase" : "none")};
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
@@ -77,16 +78,20 @@ const Logo = ({ extension }) => {
 }
 
 const ExtensionCard = ({ extension }) => {
+  const unlisted = extension.metadata.unlisted
+
   return (
-    <Card to={extension.slug} $unlisted={extension.metadata.unlisted}>
+    <Card to={extension.slug} $unlisted={unlisted}>
       <MainInformation>
         <Logo extension={extension} />
-        <ExtensionName $unlisted={extension.metadata.unlisted}>
-          {extension.name}
-        </ExtensionName>
+        <ExtensionName $unlisted={unlisted}>{extension.name}</ExtensionName>
         <ExtensionDescription>{extension.description}</ExtensionDescription>
       </MainInformation>
       <FinerDetails>
+        {unlisted && (
+          <ExtensionInfo $unlisted={unlisted}>Unlisted</ExtensionInfo>
+        )}
+
         {extension.metadata.categories &&
           extension.metadata.categories.length > 0 && (
             <ExtensionInfo>

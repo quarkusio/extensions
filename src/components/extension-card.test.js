@@ -62,5 +62,9 @@ describe("extension card", () => {
     it("renders the extension name", () => {
       expect(screen.getByText(extension.name)).toBeTruthy()
     })
+
+    it("adds an 'unlisted' label", () => {
+      expect(screen.getByText(/unlisted/i)).toBeTruthy()
+    })
   })
 })
