@@ -13,7 +13,7 @@ describe("filters bar", () => {
     description: "a nice person",
     metadata: {
       categories: ["lynx"],
-      built_with_quarkus_core: "4.2",
+      builtWithQuarkusCore: "4.2",
       quarkus_core_compatibility: "UNKNOWN",
     },
     platforms: ["Banff"],
@@ -22,7 +22,7 @@ describe("filters bar", () => {
     name: "Pascal",
     metadata: {
       categories: ["skunks"],
-      built_with_quarkus_core: "63.5",
+      builtWithQuarkusCore: "63.5",
       quarkus_core_compatibility: "COMPATIBLE",
     },
     platforms: ["Toronto"],
@@ -31,7 +31,7 @@ describe("filters bar", () => {
     name: "Fluffy",
     metadata: {
       categories: ["moose"],
-      built_with_quarkus_core: "63.5",
+      builtWithQuarkusCore: "63.5",
       quarkus_core_compatibility: "COMPATIBLE",
     },
     platforms: ["Banff"],
@@ -40,7 +40,7 @@ describe("filters bar", () => {
     name: "James Bond",
     metadata: {
       categories: ["moose"],
-      built_with_quarkus_core: "63.5",
+      builtWithQuarkusCore: "63.5",
       quarkus_core_compatibility: "COMPATIBLE",
       unlisted: true,
     },
@@ -198,7 +198,7 @@ describe("filters bar", () => {
   })
 
   describe("quarkus version filter", () => {
-    const label = "Quarkus Version"
+    const label = "Built With"
 
     it("lists all the versions in the menu", async () => {
       // Don't look at what happens, just make sure the options are there
@@ -207,8 +207,8 @@ describe("filters bar", () => {
     })
 
     it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("quarkus-version-form")).toHaveFormValues({
-        "quarkus-version": "",
+      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
+        "built-with": "",
       })
       await selectEvent.select(screen.getByLabelText(label), "4.2")
 
@@ -219,8 +219,8 @@ describe("filters bar", () => {
     })
 
     it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("quarkus-version-form")).toHaveFormValues({
-        "quarkus-version": "",
+      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
+        "built-with": "",
       })
       await selectEvent.select(screen.getByLabelText(label), "63.5")
 
@@ -245,8 +245,8 @@ describe("filters bar", () => {
     })
 
     it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("quarkus-version-form")).toHaveFormValues({
-        "quarkus-version": "",
+      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
+        "built-with": "",
       })
       await selectEvent.select(screen.getByLabelText(label), "Unknown")
 
@@ -257,8 +257,8 @@ describe("filters bar", () => {
     })
 
     it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("quarkus-version-form")).toHaveFormValues({
-        "quarkus-version": "",
+      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
+        "built-with": "",
       })
       await selectEvent.select(screen.getByLabelText(label), "Compatible")
 

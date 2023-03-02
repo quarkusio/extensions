@@ -28,6 +28,7 @@ describe("dropdown menu filter", () => {
     const label = "Frogs"
     const id = label.toLowerCase() + "-form"
     const code = "632T"
+    const duplicate = "duplicated"
 
     const transformerFunction = value => (value === code ? "Strawberry" : value)
 
@@ -39,7 +40,7 @@ describe("dropdown menu filter", () => {
         <DropdownFilter
           displayLabel={label}
           filterer={filterer}
-          options={["chocolate", "vanilla", code]}
+          options={[duplicate, "vanilla", "chocolate", duplicate, code]}
           optionTransformer={transformerFunction}
         />
       )
@@ -83,6 +84,82 @@ describe("dropdown menu filter", () => {
       })
       await selectEvent.select(screen.getByLabelText(label), "Strawberry")
       expect(filterer).toHaveBeenCalledWith(code)
+    })
+
+    it("renders menu entries", async () => {
+      await selectEvent.openMenu(screen.getByLabelText(label))
+      expect(screen.getByText("chocolate")).toBeTruthy()
+    })
+
+    it("strips out duplicate menu entries", async () => {
+      await selectEvent.openMenu(screen.getByLabelText(label))
+      expect(screen.getAllByText(duplicate)).toHaveLength(1)
+    })
+
+    it("sorts entries", async () => {
+      await selectEvent.openMenu(screen.getByLabelText(label))
+      const chocolateElement = screen.getByText("chocolate")
+      const vanillaElement = screen.getByText("vanilla")
+      // compareDocumentPosition returns a bitmask, so we do a bitwise AND on the results
+      expect(
+        chocolateElement.compareDocumentPosition(vanillaElement) &
+          Node.DOCUMENT_POSITION_FOLLOWING
+      ).toBeTruthy()
+    })
+  })
+
+  describe("and a sort function is specified", () => {
+    const label = "Frogs"
+    const code = "632T"
+    const duplicate = "duplicated"
+
+    const transformerFunction = value => (value === code ? "Strawberry" : value)
+
+    const compareFunction = (a, b) => {
+      {
+        if (a.toLowerCase() < b.toLowerCase()) {
+          return 1
+        }
+        if (a.toLowerCase() > b.toLowerCase()) {
+          return -1
+        }
+
+        return 0
+      }
+    }
+
+    const filterer = jest.fn()
+    beforeEach(() => {
+      filterer.mockReset()
+
+      render(
+        <DropdownFilter
+          displayLabel={label}
+          filterer={filterer}
+          options={[duplicate, "vanilla", "chocolate", duplicate, code]}
+          optionTransformer={transformerFunction}
+          compareFunction={compareFunction}
+        />
+      )
+    })
+
+    it("sorts entries according to the function", async () => {
+      await selectEvent.openMenu(screen.getByLabelText(label))
+
+      const chocolateElement = screen.getByText("chocolate")
+      const vanillaElement = screen.getByText("vanilla")
+      const strawberryElement = screen.getByText("Strawberry")
+
+      // compareDocumentPosition returns a bitmask, so we do a bitwise AND on the results
+      expect(
+        chocolateElement.compareDocumentPosition(vanillaElement) &
+          Node.DOCUMENT_POSITION_PRECEDING
+      ).toBeTruthy()
+
+      expect(
+        strawberryElement.compareDocumentPosition(vanillaElement) &
+          Node.DOCUMENT_POSITION_PRECEDING
+      ).toBeTruthy()
     })
   })
 })

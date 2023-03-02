@@ -47,8 +47,8 @@ const filterExtensions = (
       .filter(
         extension =>
           versionFilter.length === 0 ||
-          (extension.metadata.built_with_quarkus_core &&
-            versionFilter.includes(extension.metadata.built_with_quarkus_core))
+          (extension.metadata.builtWithQuarkusCore &&
+            versionFilter.includes(extension.metadata.builtWithQuarkusCore))
       )
       .filter(
         extension =>
@@ -82,9 +82,7 @@ const Filters = ({ extensions, filterAction }) => {
     ),
   ]
 
-  const platforms = [
-    ...new Set(extensions.map(extension => extension.platforms).flat()),
-  ]
+  const platforms = extensions.map(extension => extension.platforms).flat()
 
   const filteredExtensions = filterExtensions(extensions, filters)
 

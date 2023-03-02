@@ -20,12 +20,10 @@ const onChange = (value, { action }, filterer) => {
 // Grab CSS variables in javascript
 const grey = styles["grey-2"]
 
-const borderRadius = styles["border-radius"]
-
 const colourStyles = {
   control: styles => ({
     ...styles,
-    borderRadius: borderRadius,
+    borderRadius: 0,
     color: grey,
     borderColor: grey,
     width: "220px",
@@ -34,7 +32,7 @@ const colourStyles = {
     return {
       ...styles,
       cursor: isDisabled ? "not-allowed" : "default",
-      borderRadius: borderRadius,
+      borderRadius: 0,
     }
   },
   dropdownIndicator: styles => ({
@@ -48,21 +46,38 @@ const colourStyles = {
   }),
 }
 
+// We may get things that aren't strings, so we can't just use compareTo
+const defaultCompare = (a, b) => {
+  if (a < b) {
+    return -1
+  }
+  if (a > b) {
+    return 1
+  }
+
+  return 0
+}
+
 const DropdownFilter = ({
   options,
   filterer,
   displayLabel,
   optionTransformer,
+  compareFunction,
 }) => {
   const label = displayLabel
     ? displayLabel.toLowerCase().replace(" ", "-")
     : "unknown"
 
-  const processedOptions = options
-    ? options.map(option => {
-        return { value: option, label: optionTransformer(option) }
-      })
-    : []
+  const deduplicatedOptions = options ? [...new Set(options)] : []
+
+  const processedOptions = deduplicatedOptions.map(option => {
+    return { value: option, label: optionTransformer(option) }
+  })
+
+  // We need to sort by the label, so sort last
+  const compare = compareFunction ? compareFunction : defaultCompare
+  processedOptions.sort((a, b) => compare(a.label, b.label))
 
   return (
     <Element data-testid={label + "-form"}>
