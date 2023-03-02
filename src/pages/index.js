@@ -50,7 +50,7 @@ export const pageQuery = graphql`
         metadata {
           categories
           guide
-          built_with_quarkus_core
+          builtWithQuarkusCore
           unlisted
           maven {
             version

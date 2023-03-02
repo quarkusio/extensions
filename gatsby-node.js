@@ -81,6 +81,10 @@ exports.sourceNodes = async ({
     // Tidy up the old scm url
     delete node.metadata["scm-url"]
 
+    node.metadata.builtWithQuarkusCore = node.metadata[
+      "built-with-quarkus-core"
+    ]?.replace(/.*:/, "") // Some versions have a bit of maven GAV hanging around in the version string, strip it
+
     // Look for extensions which are not the same, but which have the same artifact id
     // (artifactId is just the 'a' part of the gav, artifact is the whole gav string)
     const duplicates = extensions.filter(
@@ -210,7 +214,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       
     type ExtensionMetadata {
       categories: [String]
-      built_with_quarkus_core: String
+      builtWithQuarkusCore: String
       quarkus_core_compatibility: String
       unlisted: Boolean
       maven: MavenInfo
