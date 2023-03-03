@@ -9,6 +9,7 @@ const { sortableName } = require("./src/components/util/sortable-name")
 const { extensionSlug } = require("./src/components/util/extension-slugger")
 const { generateMavenInfo } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const urlExist = require("url-exist")
 
 exports.sourceNodes = async ({
   actions,
@@ -89,6 +90,23 @@ exports.sourceNodes = async ({
     node.metadata.builtWithQuarkusCore = node.metadata[
       "built-with-quarkus-core"
     ]?.replace(/.*:/, "") // Some versions have a bit of maven GAV hanging around in the version string, strip it
+
+    // In general, links should be valid. However, relax that requirement for deprecated extensions because
+    // the guide may have been taken down well after the release, and an extension is not going to do a new release
+    // to remove a dead guide link, on an extension which is dead anyway.
+    if (
+      node.metadata?.status?.includes("deprecated") &&
+      node.metadata?.guide &&
+      !(await urlExist(node.metadata.guide))
+    ) {
+      console.warn(
+        "Stripping dead guide link from deprecated extension. Extension is:",
+        node.name,
+        "and guide link is",
+        node.metadata.guide
+      )
+      node.metadata.guide = undefined
+    }
 
     // Look for extensions which are not the same, but which have the same artifact id
     // (artifactId is just the 'a' part of the gav, artifact is the whole gav string)
