@@ -17,7 +17,7 @@ describe("extension detail page", () => {
     const previous = {}
     const next = {}
 
-    const status = "primordial"
+    const status = ["primordial"]
     const extension = {
       name: "JRuby",
       slug: "jruby-slug",
@@ -65,7 +65,7 @@ describe("extension detail page", () => {
     })
 
     it("renders the status", () => {
-      expect(screen.getByText(status)).toBeTruthy()
+      expect(screen.getByText(status[0])).toBeTruthy()
     })
 
     it("renders the version", () => {
@@ -160,7 +160,7 @@ describe("extension detail page", () => {
     const previous = {}
     const next = {}
 
-    const status = "primordial"
+    const status = ["primordial"]
     const extension = {
       name: "JRuby",
       slug: "jruby-slug",

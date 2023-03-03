@@ -84,6 +84,9 @@ describe("the main gatsby entrypoint", () => {
       origins: [
         "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
       ],
+      metadata: {
+        status: "shaky",
+      },
     }
     // A cut down version of what the registry returns us, with just the relevant bits
     const currentPlatforms = {
@@ -149,6 +152,16 @@ describe("the main gatsby entrypoint", () => {
       )
     })
 
+    it("sets a status by wrapping the value in an array", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          metadata: expect.objectContaining({
+            status: ["shaky"],
+          }),
+        })
+      )
+    })
+
     it("marks the as stream as current", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -160,11 +173,49 @@ describe("the main gatsby entrypoint", () => {
     it("adds a maven url", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
-          metadata: {
+          metadata: expect.objectContaining({
             maven: expect.objectContaining({
               url: resolvedMavenUrl,
             }),
-          },
+          }),
+        })
+      )
+    })
+  })
+
+  describe("for an extension with an array of statuses", () => {
+    const extension = {
+      artifact:
+        "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+      origins: [
+        "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
+      ],
+      metadata: {
+        status: ["questionable", "dodgy"],
+      },
+    }
+
+    beforeAll(async () => {
+      axios.get = jest.fn().mockReturnValue({
+        data: {
+          extensions: [extension],
+          platforms: [],
+        },
+      })
+
+      await sourceNodes({ actions, createNodeId, createContentDigest })
+    })
+
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
+    it("passes through the array status", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          metadata: expect.objectContaining({
+            status: ["questionable", "dodgy"],
+          }),
         })
       )
     })
