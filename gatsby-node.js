@@ -76,6 +76,11 @@ exports.sourceNodes = async ({
       })
     }
 
+    // The status could be an array *or* a string, so make it consistent by wrapping in an array
+    if (node.metadata.status && !Array.isArray(node.metadata.status)) {
+      node.metadata.status = [node.metadata.status]
+    }
+
     // Use a better name and some structure for the source control information
     node.metadata.sourceControl = node.metadata["scm-url"]
     // Tidy up the old scm url
@@ -214,6 +219,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       
     type ExtensionMetadata {
       categories: [String]
+      status: [String]
       builtWithQuarkusCore: String
       quarkus_core_compatibility: String
       unlisted: Boolean
