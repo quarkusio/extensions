@@ -1,8 +1,8 @@
 const parse = require("mvn-artifact-name-parser").default
 
 const mappings = {
-  "Quarkus Non Platform Extensions": "Non Platform Extensions",
   "Quarkus Bom Quarkus Platform Descriptor": "Quarkus Platform",
+  "Quarkus Qpid Jms Bom Quarkus Platform Descriptor": "Qpid JMS Platform",
 }
 
 const getPlatformId = origin => {
@@ -34,13 +34,22 @@ const getStream = (origin, currentPlatforms) => {
 
 const prettyPlatformName = platformId => {
   const words = platformId?.split(/[ -]/)
-  const pretty = words
+  let pretty = words
     ?.map(word => {
       return word[0].toUpperCase() + word.substring(1)
     })
     .join(" ")
 
-  return mappings[pretty] ? mappings[pretty] : pretty
+  // Check if we have a mapping for this; if not, strip the opening 'Quarkus' to increase signal-to-noise
+  pretty = mappings[pretty]
+    ? mappings[pretty]
+    : pretty?.replace(/^Quarkus /, "")
+
+  // Get rid of some word-flab that we will never want
+  pretty = pretty?.replace("Bom Quarkus Platform Descriptor", "Platform")
+  pretty = pretty?.replace("Quarkus Platform Descriptor", "Platform")
+
+  return pretty
 }
 
 module.exports = { prettyPlatformName, getPlatformId, getStream }

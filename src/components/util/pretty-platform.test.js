@@ -20,6 +20,24 @@ describe("platform name formatter", () => {
       "Quarkus Platform"
     )
   })
+
+  it("handles ecosystem platforms", () => {
+    expect(
+      prettyPlatformName("quarkus-camel-bom-quarkus-platform-descriptor")
+    ).toBe("Camel Platform")
+  })
+
+  it("handles ecosystem platforms which do not mention bom", () => {
+    expect(
+      prettyPlatformName("quarkus-hazelcast-client-quarkus-platform-descriptor")
+    ).toBe("Hazelcast Client Platform")
+  })
+
+  it("handles ecosystem platforms with unusual casing", () => {
+    expect(
+      prettyPlatformName("quarkus-qpid-jms-bom-quarkus-platform-descriptor")
+    ).toBe("Qpid JMS Platform")
+  })
 })
 
 describe("platform id extractor", () => {
