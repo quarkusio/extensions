@@ -77,6 +77,14 @@ exports.sourceNodes = async ({
       })
     }
 
+    // See https://github.com/quarkusio/quarkus/issues/31634; some descriptions should not be displayed because they are obvious inheritances from a parent pom
+    if (
+      node.description &&
+      /Parent POM for Quarkiverse projects /.test(node.description)
+    ) {
+      delete node.description
+    }
+
     // The status could be an array *or* a string, so make it consistent by wrapping in an array
     if (node.metadata.status && !Array.isArray(node.metadata.status)) {
       node.metadata.status = [node.metadata.status]

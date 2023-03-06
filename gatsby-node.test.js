@@ -78,9 +78,12 @@ describe("the main gatsby entrypoint", () => {
   })
 
   describe("for a typical extension", () => {
+    const description = "some interesting description"
+
     const extension = {
       artifact:
         "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+      description,
       origins: [
         "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
       ],
@@ -139,6 +142,14 @@ describe("the main gatsby entrypoint", () => {
       )
     })
 
+    it("passes through the description", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          description,
+        })
+      )
+    })
+
     it("sets a stream", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -178,6 +189,38 @@ describe("the main gatsby entrypoint", () => {
               url: resolvedMavenUrl,
             }),
           }),
+        })
+      )
+    })
+  })
+
+  describe("for an extension with an obviously boilerplated description inherited from the parent", () => {
+    const description =
+      "Parent POM for Quarkiverse projects that includes the default release and artifact publishing related and then some other content we will ignore"
+
+    const extension = {
+      description,
+    }
+
+    beforeAll(async () => {
+      axios.get = jest.fn().mockReturnValue({
+        data: {
+          extensions: [extension],
+          platforms: [],
+        },
+      })
+
+      await sourceNodes({ actions, createNodeId, createContentDigest })
+    })
+
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
+    it("strips out the silly-looking description", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.not.objectContaining({
+          description,
         })
       )
     })
