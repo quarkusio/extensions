@@ -36,6 +36,7 @@ const RowHog = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: var(--a-modest-space);
 `
 
 const CodeLink = ({ artifact, unlisted, platforms, streams }) => {
