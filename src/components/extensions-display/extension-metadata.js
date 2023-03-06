@@ -4,12 +4,9 @@ import styled from "styled-components"
 
 const MetadataBlock = styled.section`
   width: 50%;
-  height: 60px;
   color: var(--grey-2);
   text-align: left;
   font-size: var(--font-size-16);
-  margin-bottom: var(--a-small-space);
-  margin-top: var(--a-small-space);
   padding-bottom: var(--a-modest-space);
   padding-top: var(--a-modest-space);
   border-bottom: 1px solid var(--grey-1);
