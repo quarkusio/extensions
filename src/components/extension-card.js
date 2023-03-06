@@ -42,12 +42,21 @@ const ExtensionName = styled.div`
 `
 
 const ExtensionDescription = styled.div`
+  --num-lines: 7;
   color: var(--grey-2);
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
   margin-bottom: 20px;
   margin-top: 10px;
+  line-height: calc(var(--font-size-16) * var(--line-height-multiplier));
+  height: calc(
+    var(--num-lines) * var(--font-size-16) * var(--line-height-multiplier)
+  ); /* Set a cut-off point for the content; the number is the number of lines we are willing to show */
+  overflow: hidden; /* Cut off the content */
+  display: -webkit-box;
+  -webkit-line-clamp: var(--num-lines);
+  -webkit-box-orient: vertical;
 `
 
 const ExtensionInfo = styled.div`
