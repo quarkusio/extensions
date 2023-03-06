@@ -67,6 +67,8 @@ html {
 
     /** Spacing **/
 
+    --line-height-multiplier: 1.2; /* multiplier for making calculations easier */
+
     --site-margins: 13rem;
     --navbar-padding: 1rem;
     --logo-width: 13rem;
