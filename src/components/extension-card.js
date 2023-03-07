@@ -108,12 +108,11 @@ const ExtensionCard = ({ extension }) => {
             </ExtensionInfo>
           )}
 
-        {extension.metadata.categories &&
-          extension.metadata.categories.length > 0 && (
-            <ExtensionInfo>
-              Version: {extension.metadata.maven?.version}
-            </ExtensionInfo>
-          )}
+        {extension.metadata.maven?.version && (
+          <ExtensionInfo>
+            Version: {extension.metadata.maven?.version}
+          </ExtensionInfo>
+        )}
       </FinerDetails>
     </Card>
   )
