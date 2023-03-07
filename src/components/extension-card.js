@@ -11,8 +11,7 @@ const Card = styled(props => <Link {...props} />)`
   transform: var(--transform);
   margin: 15px;
   padding: 20px;
-  width: 220px;
-  height: 490px;
+  width: 240px;
   background: var(--white) 0 0 no-repeat padding-box;
   border: ${props =>
     props.$unlisted ? "1px solid var(--grey-0)" : "1px solid var(--grey-1)"};
@@ -25,33 +24,46 @@ const Card = styled(props => <Link {...props} />)`
 const LogoImage = styled.div`
   width: 80px;
   height: 80px;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   display: flex;
   justify-content: center;
   align-items: center;
 `
 
 const ExtensionName = styled.div`
+  --num-lines: 2;
+  --font-size: var(--font-size-24);
+  --line-height: calc(var(--font-size) * 1.1); // Squish long names a tiny bit
   text-align: left;
-  font-size: var(--font-size-24);
+  font-size: var(--font-size);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0;
   color: ${props => (props.$unlisted ? "var(--grey-1)" : "var(--grey-2)")};
   opacity: 1;
-  min-height: 66px;
+  margin-bottom: var(--a-small-space);
+  line-height: var(--line-height);
+  height: calc(
+    var(--num-lines) * var(--line-height)
+  ); /* Set a cut-off point for the content; the number is the number of lines we are willing to show */
+  overflow: hidden; /* Cut off the content */
+  display: -webkit-box;
+  -webkit-line-clamp: var(--num-lines);
+  -webkit-box-orient: vertical;
 `
 
 const ExtensionDescription = styled.div`
-  --num-lines: 7;
+  --num-lines: 6;
+  --font-size: var(--font-size-16);
+  --line-height: calc(var(--font-size) * var(--line-height-multiplier));
   color: var(--grey-2);
   text-align: left;
-  font-size: var(--font-size-16);
+  font-size: var(--font-size);
   opacity: 1;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 10px;
-  line-height: calc(var(--font-size-16) * var(--line-height-multiplier));
+  line-height: var(--line-height);
   height: calc(
-    var(--num-lines) * var(--font-size-16) * var(--line-height-multiplier)
+    var(--num-lines) * var(--line-height)
   ); /* Set a cut-off point for the content; the number is the number of lines we are willing to show */
   overflow: hidden; /* Cut off the content */
   display: -webkit-box;
@@ -70,12 +82,10 @@ const ExtensionInfo = styled.div`
 const MainInformation = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 30px;
 `
 const FinerDetails = styled.div`
   display: flex;
   flex-direction: column;
-  padding-bottom: 30px;
 `
 
 const Logo = ({ extension }) => {
@@ -85,6 +95,8 @@ const Logo = ({ extension }) => {
     </LogoImage>
   )
 }
+
+const spacer = "\u00A0"
 
 const ExtensionCard = ({ extension }) => {
   const unlisted = extension.metadata.unlisted
@@ -97,22 +109,19 @@ const ExtensionCard = ({ extension }) => {
         <ExtensionDescription>{extension.description}</ExtensionDescription>
       </MainInformation>
       <FinerDetails>
-        {unlisted && (
-          <ExtensionInfo $unlisted={unlisted}>Unlisted</ExtensionInfo>
-        )}
-
-        {extension.metadata.categories &&
-          extension.metadata.categories.length > 0 && (
-            <ExtensionInfo>
-              Category: {prettyCategory(extension.metadata.categories[0])}
-            </ExtensionInfo>
-          )}
-
-        {extension.metadata.maven?.version && (
-          <ExtensionInfo>
-            Version: {extension.metadata.maven?.version}
-          </ExtensionInfo>
-        )}
+        <ExtensionInfo $unlisted={unlisted}>
+          {unlisted ? "Unlisted" : spacer}
+        </ExtensionInfo>
+        <ExtensionInfo>
+          {extension.metadata?.categories?.length > 0
+            ? `Category: ${prettyCategory(extension.metadata.categories[0])}`
+            : spacer}
+        </ExtensionInfo>
+        <ExtensionInfo>
+          {extension.metadata.maven?.version
+            ? `Version: ${extension.metadata.maven?.version}`
+            : spacer}
+        </ExtensionInfo>
       </FinerDetails>
     </Card>
   )
