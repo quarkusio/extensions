@@ -52,7 +52,7 @@ const ExtensionName = styled.div`
 `
 
 const ExtensionDescription = styled.div`
-  --num-lines: 6;
+  --num-lines: 5;
   --font-size: var(--font-size-16);
   --line-height: calc(var(--font-size) * var(--line-height-multiplier));
   color: var(--grey-2);
