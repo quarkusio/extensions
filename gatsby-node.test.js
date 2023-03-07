@@ -86,6 +86,7 @@ describe("the main gatsby entrypoint", () => {
       ],
       metadata: {
         status: "shaky",
+        categories: ["round", "square"],
       },
     }
     // A cut down version of what the registry returns us, with just the relevant bits
@@ -129,6 +130,16 @@ describe("the main gatsby entrypoint", () => {
 
     it("creates an id", () => {
       expect(createNodeId).toHaveBeenCalled()
+    })
+
+    it("creates extension nodes", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          internal: expect.objectContaining({
+            type: "Extension",
+          }),
+        })
+      )
     })
 
     it("sets a platform", () => {
@@ -177,6 +188,26 @@ describe("the main gatsby entrypoint", () => {
             maven: expect.objectContaining({
               url: resolvedMavenUrl,
             }),
+          }),
+        })
+      )
+    })
+
+    it("creates a category node", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: "round",
+          internal: expect.objectContaining({
+            type: "Category",
+          }),
+        })
+      )
+
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: "square",
+          internal: expect.objectContaining({
+            type: "Category",
           }),
         })
       )
@@ -438,6 +469,7 @@ describe("the main gatsby entrypoint", () => {
     })
 
     it("creates ids", () => {
+      // It's not easy to do a 'greater than' here, so just hardcode
       expect(createNodeId).toHaveBeenCalledTimes(2)
     })
 

@@ -37,6 +37,34 @@ exports.sourceNodes = async ({
 
   await Promise.all(firstPromises)
 
+  const categoriesWithDuplicates = extensions
+    .map(extension => extension.metadata.categories)
+    .flat()
+
+  const categories = [...new Set(categoriesWithDuplicates)]
+
+  const categoryPromises = categories.map(async category => {
+    if (category) {
+      const slug = extensionSlug(category)
+      const id = createNodeId(slug)
+      const count = categoriesWithDuplicates.filter(c => c === category).length // Not as proper as a reduce, but much easier to read :)
+      const node = {
+        name: category,
+        count,
+        id,
+        sortableName: sortableName(category),
+        internal: {
+          type: "Category",
+          contentDigest: createContentDigest(category),
+        },
+      }
+
+      return createNode(node)
+    }
+  })
+
+  await Promise.all(categoryPromises)
+
   // Do a map so we can wait on the result
   const secondPromises = extensions.map(async extension => {
     const slug = extensionSlug(extension.artifact)

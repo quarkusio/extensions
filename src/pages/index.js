@@ -8,6 +8,7 @@ import ExtensionsList from "../components/extensions-list"
 const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const extensions = data.allExtension.nodes
+  const categories = data.allCategory.nodes.map(c => c.name)
 
   if (extensions.length === 0) {
     return (
@@ -19,7 +20,7 @@ const Index = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <ExtensionsList extensions={extensions} />
+      <ExtensionsList extensions={extensions} categories={categories} />
     </Layout>
   )
 }
@@ -40,6 +41,12 @@ export const pageQuery = graphql`
         title
       }
     }
+    allCategory(sort: { fields: [count, name], order: DESC }) {
+      nodes {
+        name
+      }
+    }
+
     allExtension(sort: { fields: [name], order: DESC }) {
       nodes {
         name

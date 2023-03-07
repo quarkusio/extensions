@@ -48,10 +48,15 @@ describe("filters bar", () => {
   }
 
   const extensions = [alice, pascal, fluffy, secret]
+  const categories = ["moose", "skunks", "lynx"]
 
   beforeEach(() => {
     render(
-      <Filters extensions={extensions} filterAction={extensionsListener} />
+      <Filters
+        extensions={extensions}
+        categories={categories}
+        filterAction={extensionsListener}
+      />
     )
   })
 

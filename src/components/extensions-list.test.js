@@ -57,10 +57,12 @@ describe("extension list", () => {
   }
 
   const extensions = [ruby, diamond, molluscs, obsolete, maybeObsolete]
+  const categories = [otherCategory, category]
+
   const user = userEvent.setup()
 
   beforeEach(() => {
-    render(<ExtensionsList extensions={extensions} />)
+    render(<ExtensionsList extensions={extensions} categories={categories} />)
   })
 
   it("renders the extension name", () => {
