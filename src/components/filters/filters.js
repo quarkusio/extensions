@@ -61,7 +61,7 @@ const filterExtensions = (
   )
 }
 
-const Filters = ({ extensions, filterAction }) => {
+const Filters = ({ extensions, categories, filterAction }) => {
   const [regex, setRegex] = useState(".*")
   const [categoryFilter, setCategoryFilter] = useState([])
   const [platformFilter, setPlatformFilter] = useState([])
@@ -75,12 +75,6 @@ const Filters = ({ extensions, filterAction }) => {
     versionFilter,
     compatibilityFilter,
   }
-
-  const categories = [
-    ...new Set(
-      extensions.map(extension => extension.metadata.categories).flat()
-    ),
-  ]
 
   const platforms = extensions.map(extension => extension.platforms).flat()
 

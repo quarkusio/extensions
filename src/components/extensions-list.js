@@ -21,7 +21,7 @@ const Extensions = styled.ol`
   width: 100%;
 `
 
-const ExtensionsList = ({ extensions }) => {
+const ExtensionsList = ({ extensions, categories }) => {
   // Do some pre-filtering for content we will never want, like superseded extensions
   const allExtensions = extensions.filter(extension => !extension.isSuperseded)
 
@@ -36,7 +36,11 @@ const ExtensionsList = ({ extensions }) => {
 
     return (
       <FilterableList className="extensions-list">
-        <Filters extensions={allExtensions} filterAction={setExtensions} />
+        <Filters
+          extensions={allExtensions}
+          categories={categories}
+          filterAction={setExtensions}
+        />
         <Extensions>
           {filteredExtensions.map(extension => {
             return (

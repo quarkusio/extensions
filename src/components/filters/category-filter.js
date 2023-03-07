@@ -55,32 +55,28 @@ const CategoryFilter = ({ categories, filterer }) => {
       <Title>Category</Title>
       <Categories>
         {categories &&
-          categories.map(
-            category =>
-              category &&
-              category.length > 0 && (
-                <Category
-                  key={category}
-                  onClick={() =>
-                    toggleCategory(
-                      category,
-                      tickedCategories,
-                      setTickedCategories,
-                      filterer
-                    )
-                  }
-                >
-                  <div>
-                    {tickedCategories.includes(category) ? (
-                      <TickyBox icon="square-check" title="ticked" />
-                    ) : (
-                      <TickyBox icon={["far", "square"]} title="unticked" />
-                    )}
-                  </div>
-                  <div>{prettyCategory(category)}</div>
-                </Category>
-              )
-          )}
+          categories.map(category => (
+            <Category
+              key={category}
+              onClick={() =>
+                toggleCategory(
+                  category,
+                  tickedCategories,
+                  setTickedCategories,
+                  filterer
+                )
+              }
+            >
+              <div>
+                {tickedCategories.includes(category) ? (
+                  <TickyBox icon="square-check" title="ticked" />
+                ) : (
+                  <TickyBox icon={["far", "square"]} title="unticked" />
+                )}
+              </div>
+              <div>{prettyCategory(category)}</div>
+            </Category>
+          ))}
       </Categories>
     </Element>
   )
