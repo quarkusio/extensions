@@ -257,6 +257,13 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "Built with",
+                fieldName: "builtWithQuarkusCore",
+                metadata,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Status",
                 metadata,
               }}
@@ -360,6 +367,7 @@ export const pageQuery = graphql`
         status
         categories
         guide
+        builtWithQuarkusCore
         unlisted
         icon {
           childImageSharp {

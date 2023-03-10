@@ -25,6 +25,7 @@ describe("extension detail page", () => {
         categories: [category],
         status: status,
         guide: guideUrl,
+        builtWithQuarkusCore: "2.23.0",
         maven: {
           version,
           url: mvnUrl,
@@ -82,6 +83,10 @@ describe("extension detail page", () => {
 
     it("renders the platform title as plural", () => {
       expect(screen.getByText("Platforms")).toBeTruthy()
+    })
+
+    it("renders the what version of quarkus the extension was built with", () => {
+      expect(screen.getByText("Built with")).toBeTruthy()
     })
 
     it("renders the platforms", () => {
