@@ -9,10 +9,18 @@ describe("extension installation instructions", () => {
     )
   })
 
-  it("renders the install command", () => {
+  it("renders the mvn install command", () => {
     expect(
       screen.getByText(
         './mvnw quarkus:add-extension -Dextensions="io.quarkiverse.rabbitmqclient:quarkus-rabbitmq-client"'
+      )
+    ).toBeTruthy()
+  })
+
+  it("renders the cli install command", () => {
+    expect(
+      screen.getByText(
+        'quarkus ext add io.quarkiverse.rabbitmqclient:quarkus-rabbitmq-client'
       )
     ).toBeTruthy()
   })
