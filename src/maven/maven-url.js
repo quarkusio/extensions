@@ -10,13 +10,8 @@ const createMavenUrlFromArtifactString = async artifact => {
 }
 
 const createMavenUrlFromCoordinates = async coordinates => {
-  const url = `https://search.maven.org/artifact/${coordinates.groupId}/${coordinates.artifactId}/${coordinates.version}/jar`
-  const exists = await urlExist(url)
-  if (exists) {
-    return url
-  } else {
-    console.warn("Could not work out url. Best guess was ", url)
-  }
+  // Validating these is so unreliable, don't do it at build-time, just let the links test complain
+  return `https://central.sonatype.com/artifact/${coordinates.groupId}/${coordinates.artifactId}/${coordinates.version}/jar`
 }
 
 const createMavenArtifactsUrlFromCoordinates = async coordinates => {
