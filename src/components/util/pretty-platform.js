@@ -1,8 +1,10 @@
 const parse = require("mvn-artifact-name-parser").default
 
+const nonPlatformExtensionName = "Other"
 const mappings = {
-  "Quarkus Bom Quarkus Platform Descriptor": "Quarkus Platform",
-  "Quarkus Qpid Jms Bom Quarkus Platform Descriptor": "Qpid JMS Platform",
+  "Quarkus Bom Quarkus Platform Descriptor": "Quarkus",
+  "Quarkus Qpid Jms Bom Quarkus Platform Descriptor": "Qpid JMS",
+  "Quarkus Non Platform Extensions": nonPlatformExtensionName,
 }
 
 const getPlatformId = origin => {
@@ -32,6 +34,20 @@ const getStream = (origin, currentPlatforms) => {
   }
 }
 
+const qualifiedPrettyPlatform = origin => {
+  if (origin && origin.includes(":")) {
+    const coordinates = parse(origin)
+
+    const prettyPlatform = prettyPlatformName(coordinates.artifactId)
+
+    if (prettyPlatform === nonPlatformExtensionName) {
+      return prettyPlatform
+    } else {
+      return `${coordinates.groupId}:${prettyPlatform}`
+    }
+  }
+}
+
 const prettyPlatformName = platformId => {
   const words = platformId?.split(/[ -]/)
   let pretty = words
@@ -46,10 +62,15 @@ const prettyPlatformName = platformId => {
     : pretty?.replace(/^Quarkus /, "")
 
   // Get rid of some word-flab that we will never want
-  pretty = pretty?.replace("Bom Quarkus Platform Descriptor", "Platform")
-  pretty = pretty?.replace("Quarkus Platform Descriptor", "Platform")
+  pretty = pretty?.replace(" Bom Quarkus Platform Descriptor", "")
+  pretty = pretty?.replace(" Quarkus Platform Descriptor", "")
 
   return pretty
 }
 
-module.exports = { prettyPlatformName, getPlatformId, getStream }
+module.exports = {
+  prettyPlatformName,
+  getPlatformId,
+  getStream,
+  qualifiedPrettyPlatform,
+}

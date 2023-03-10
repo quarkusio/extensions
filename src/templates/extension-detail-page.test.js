@@ -42,6 +42,11 @@ describe("extension detail page", () => {
         },
       },
       platforms: [platform1, platform2, nonPlatform],
+      origins: [
+        "org.quarkus.platform:" + platform1 + ":1",
+        "org.quarkus.platform:" + platform2 + ":1",
+        "org.quarkus.registry:" + nonPlatform + ":1",
+      ],
       duplicates: [
         { slug: olderUrl, relationship: "older", groupId: "old-group-id" },
       ],
@@ -85,14 +90,14 @@ describe("extension detail page", () => {
     })
 
     it("renders the platforms", () => {
-      expect(screen.getByText(platform1)).toBeTruthy()
-      // what gets shown should be the pretty-platform variant of the name
-      expect(screen.getByText("Quarkus Platform")).toBeTruthy()
+      // what gets shown should be the qualified-platform variant of the name
+      expect(screen.getByText("org.quarkus.platform:" + platform1)).toBeTruthy()
     })
 
     it("does not bother to list non-platform as a platform", () => {
       // Non-platform isn't a platform, so let's not include it in the list of platforms
       expect(screen.queryByText("Non Platform Extensions")).toBeFalsy()
+      expect(screen.queryByText("Other")).toBeFalsy()
     })
 
     it("renders a link to the guide", () => {
@@ -170,6 +175,7 @@ describe("extension detail page", () => {
         guide: guideUrl,
       },
       platforms: [platform1],
+      origins: ["org.quarkus.platform:" + platform1 + ":1"],
     }
 
     beforeEach(() => {
@@ -186,7 +192,7 @@ describe("extension detail page", () => {
     })
 
     it("renders the platform name", () => {
-      expect(screen.getByText(platform1)).toBeTruthy()
+      expect(screen.getByText("org.quarkus.platform:" + platform1)).toBeTruthy()
     })
   })
 

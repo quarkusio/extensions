@@ -129,7 +129,7 @@ describe("extension list", () => {
     })
 
     describe("platform filter", () => {
-      const label = "Platform"
+      const label = "Origin"
 
       it("lists all the platforms in the menu", async () => {
         // Don't look at what happens, just make sure the options are there
@@ -145,8 +145,8 @@ describe("extension list", () => {
         expect(screen.queryByText(diamond.name)).toBeTruthy()
         expect(screen.queryByText(molluscs.name)).toBeTruthy()
 
-        expect(screen.getByTestId("platform-form")).toHaveFormValues({
-          platform: "",
+        expect(screen.getByTestId("origin-form")).toHaveFormValues({
+          origin: "",
         })
         await selectEvent.select(screen.getByLabelText(label), "A Mine")
 

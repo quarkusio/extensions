@@ -3,7 +3,9 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import PlatformFilter from "./platform-filter"
 import selectEvent from "react-select-event"
 
-const label = "Platform"
+const label = "Origin"
+const nonPlatformLabel = "Other"
+
 describe("platform filter", () => {
   describe("when the list is empty", () => {
     beforeEach(() => {
@@ -11,7 +13,7 @@ describe("platform filter", () => {
     })
 
     it("renders platform title", () => {
-      expect(screen.getByText("Platform")).toBeTruthy()
+      expect(screen.getByText(label)).toBeTruthy()
     })
 
     it("has a dropdown menu", () => {
@@ -19,12 +21,12 @@ describe("platform filter", () => {
     })
 
     it("gracefully does nothing on click", async () => {
-      expect(screen.getByTestId("platform-form")).toHaveFormValues({
-        platform: "",
+      expect(screen.getByTestId("origin-form")).toHaveFormValues({
+        origin: "",
       })
       await fireEvent.click(screen.getByRole("combobox"))
-      expect(screen.getByTestId("platform-form")).toHaveFormValues({
-        platform: "",
+      expect(screen.getByTestId("origin-form")).toHaveFormValues({
+        origin: "",
       })
     })
   })
@@ -45,7 +47,7 @@ describe("platform filter", () => {
     })
 
     it("renders platform title", () => {
-      expect(screen.getByText("Platform")).toBeTruthy()
+      expect(screen.getByText(label)).toBeTruthy()
     })
 
     it("has a dropdown menu", () => {
@@ -53,26 +55,20 @@ describe("platform filter", () => {
     })
 
     it("changes the value on click", async () => {
-      expect(screen.getByTestId("platform-form")).toHaveFormValues({
-        platform: "",
+      expect(screen.getByTestId("origin-form")).toHaveFormValues({
+        origin: "",
       })
-      await selectEvent.select(
-        screen.getByLabelText(label),
-        "Non Platform Extensions"
-      )
-      expect(screen.getByTestId("platform-form")).toHaveFormValues({
-        platform: platformCode,
+      await selectEvent.select(screen.getByLabelText(label), nonPlatformLabel)
+      expect(screen.getByTestId("origin-form")).toHaveFormValues({
+        origin: platformCode,
       })
     })
 
     it("sends a message on click", async () => {
-      expect(screen.getByTestId("platform-form")).toHaveFormValues({
-        platform: "",
+      expect(screen.getByTestId("origin-form")).toHaveFormValues({
+        origin: "",
       })
-      await selectEvent.select(
-        screen.getByLabelText(label),
-        "Non Platform Extensions"
-      )
+      await selectEvent.select(screen.getByLabelText(label), nonPlatformLabel)
       expect(filterer).toHaveBeenCalledWith(platformCode)
     })
   })
