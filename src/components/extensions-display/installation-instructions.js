@@ -19,12 +19,25 @@ const InstallationInstructions = ({ artifact }) => {
   return (
     <React.Fragment>
       <p>
-        To add this extension to your project, enter the following command in
+        To add this extension to your project, use the relevant command in
         your Quarkus project directory:
       </p>
+      <h3>Quarkus CLI</h3>
+      <CodeBlock>
+        <CopyToClipboard>
+          {`quarkus ext add ${shortName}`}
+        </CopyToClipboard>
+      </CodeBlock>
+      <h3>Maven</h3>
       <CodeBlock>
         <CopyToClipboard>
           {`./mvnw quarkus:add-extension -Dextensions="${shortName}"`}
+        </CopyToClipboard>
+      </CodeBlock>
+      <h3>Gradle</h3>
+      <CodeBlock>
+        <CopyToClipboard>
+          {`./gradlew addExtension --extensions="${shortName}"`}
         </CopyToClipboard>
       </CodeBlock>
     </React.Fragment>
