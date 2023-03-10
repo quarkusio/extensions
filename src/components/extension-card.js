@@ -31,7 +31,7 @@ const LogoImage = styled.div`
 `
 
 const ExtensionName = styled.div`
-  --num-lines: 2;
+  --num-lines: 2.05; // Add a bit of padding so g and other hanging letters don't get cut off
   --font-size: var(--font-size-24);
   --line-height: calc(var(--font-size) * 1.1); // Squish long names a tiny bit
   text-align: left;
@@ -43,7 +43,7 @@ const ExtensionName = styled.div`
   margin-bottom: var(--a-small-space);
   line-height: var(--line-height);
   height: calc(
-    var(--num-lines) * var(--line-height)
+    (var(--num-lines) * var(--line-height) + 2px)
   ); /* Set a cut-off point for the content; the number is the number of lines we are willing to show */
   overflow: hidden; /* Cut off the content */
   display: -webkit-box;
@@ -52,7 +52,7 @@ const ExtensionName = styled.div`
 `
 
 const ExtensionDescription = styled.div`
-  --num-lines: 5;
+  --num-lines: 5.05; // Add a bit of padding so g and other hanging letters don't get cut off
   --font-size: var(--font-size-16);
   --line-height: calc(var(--font-size) * var(--line-height-multiplier));
   color: var(--grey-2);
