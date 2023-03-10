@@ -30,7 +30,7 @@
     "gatsby-remark-smartypants": "^5.25.0",
     "gatsby-source-filesystem": "^4.22.0",
     "gatsby-transformer-remark": "^5.22.0",
-    "gatsby-transformer-sharp": "^4.22.0",
+    "gatsby-transformer-sharp": "^4.25.0",
     "mvn-artifact-name-parser": "^6.0.0",
     "parse-github-url": "^1.0.2",
     "prismjs": "^1.29.0",
