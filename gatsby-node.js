@@ -118,6 +118,10 @@ exports.sourceNodes = async ({
     node.metadata.builtWithQuarkusCore = node.metadata[
       "built-with-quarkus-core"
     ]?.replace(/.*:/, "") // Some versions have a bit of maven GAV hanging around in the version string, strip it
+    delete node.metadata["built-with-quarkus-core"]
+
+    node.metadata.minimumJavaVersion = node.metadata["minimum-java-version"]
+    delete node.metadata["minimum-java-version"]
 
     // In general, links should be valid. However, relax that requirement for deprecated extensions because
     // the guide may have been taken down well after the release, and an extension is not going to do a new release

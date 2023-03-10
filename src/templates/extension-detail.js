@@ -290,6 +290,13 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "Minimum Java version",
+                fieldName: "minimumJavaVersion",
+                metadata,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Maven Central",
                 text: metadata.maven?.version,
                 url: metadata.maven?.url,
@@ -369,6 +376,7 @@ export const pageQuery = graphql`
         guide
         builtWithQuarkusCore
         unlisted
+        minimumJavaVersion
         icon {
           childImageSharp {
             gatsbyImageData(width: 220)
