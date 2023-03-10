@@ -71,8 +71,10 @@ describe("site links", () => {
           replacement: "http://localhost:9000",
         },
       ],
-      concurrency: 100, // The twitter URLs seem to work better with a high concurrency, counter-intuitively
+      concurrency: 10,
       timeout: 30 * 1000,
+      retryErrors: true,
+      retryErrorsCount: 6,
     })
   })
 
