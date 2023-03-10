@@ -21,7 +21,7 @@
     "gatsby-plugin-image": "^2.22.0",
     "gatsby-plugin-manifest": "^4.22.0",
     "gatsby-plugin-remote-images": "^3.6.0-alpha.1",
-    "gatsby-plugin-sharp": "^4.22.0",
+    "gatsby-plugin-sharp": "^4.25.0",
     "gatsby-plugin-styled-components": "^5.25.0",
     "gatsby-remark-copy-linked-files": "^5.22.0",
     "gatsby-remark-images": "^6.22.0",
