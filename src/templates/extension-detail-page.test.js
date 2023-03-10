@@ -26,6 +26,7 @@ describe("extension detail page", () => {
         status: status,
         guide: guideUrl,
         builtWithQuarkusCore: "2.23.0",
+        minimumJavaVersion: "5",
         maven: {
           version,
           url: mvnUrl,
@@ -85,8 +86,12 @@ describe("extension detail page", () => {
       expect(screen.getByText("Platforms")).toBeTruthy()
     })
 
-    it("renders the what version of quarkus the extension was built with", () => {
+    it("renders what version of quarkus the extension was built with", () => {
       expect(screen.getByText("Built with")).toBeTruthy()
+    })
+
+    it("renders the minimum java version", () => {
+      expect(screen.getByText("Minimum Java version")).toBeTruthy()
     })
 
     it("renders the platforms", () => {
