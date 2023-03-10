@@ -98,8 +98,8 @@ const Filters = ({ extensions, categories, filterAction }) => {
     <FilterBar className="filters">
       <Search searcher={setRegex} />
       <VersionFilter extensions={extensions} filterer={setVersionFilter} />
-      <CategoryFilter categories={categories} filterer={setCategoryFilter} />
       <PlatformFilter options={platforms} filterer={setPlatformFilter} />
+      <CategoryFilter categories={categories} filterer={setCategoryFilter} />
     </FilterBar>
   )
 }

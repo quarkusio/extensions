@@ -7,9 +7,9 @@ import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
 import InstallationInstructions from "../components/extensions-display/installation-instructions"
-import { prettyPlatformName } from "../components/util/pretty-platform"
 import ExtensionImage from "../components/extension-image"
 import CodeLink from "../components/extensions-display/code-link"
+import { qualifiedPrettyPlatform } from "../components/util/pretty-platform"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--site-margins);
@@ -279,13 +279,13 @@ const ExtensionDetailTemplate = ({
               data={{
                 name: "Platform",
                 plural: "Platforms",
-                fieldName: "platforms",
+                fieldName: "origins", // We label this 'platform' but include the platform and platform member both, so need to read origins
                 metadata: extension, // ugly, but we need to get it out of the top level, not the metadata
                 // Strip out
                 transformer: element =>
-                  element !== "quarkus-non-platform-extensions"
-                    ? prettyPlatformName(element)
-                    : null,
+                  /quarkus-non-platform-extensions/.test(element)
+                    ? null
+                    : qualifiedPrettyPlatform(element),
               }}
             />
             <ExtensionMetadata
@@ -407,6 +407,7 @@ export const pageQuery = graphql`
       }
 
       platforms
+      origins
       streams {
         id
         isLatestThree

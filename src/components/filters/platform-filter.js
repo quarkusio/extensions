@@ -5,7 +5,7 @@ import { prettyPlatformName } from "../util/pretty-platform"
 const PlatformFilter = ({ options, filterer }) => {
   return (
     <DropdownFilter
-      displayLabel="Platform"
+      displayLabel="Origin"
       filterer={filterer}
       options={options}
       optionTransformer={prettyPlatformName}
