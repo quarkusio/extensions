@@ -3,10 +3,12 @@ import * as React from "react"
 import styled from "styled-components"
 
 const MetadataBlock = styled.section`
-  width: 50%;
+  width: calc((50%) - var(--a-modest-space));
   color: var(--grey-2);
   text-align: left;
+  overflow-wrap: break-word;
   font-size: var(--font-size-16);
+  padding-left: var(--a-modest-space);
   padding-bottom: var(--a-modest-space);
   padding-top: var(--a-modest-space);
   border-bottom: 1px solid var(--grey-1);
