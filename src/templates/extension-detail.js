@@ -63,7 +63,7 @@ const LogoImage = styled.div`
 
 const Metadata = styled.div`
   flex-grow: 1;
-  padding-left: 50px;
+  padding-left: 30px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
