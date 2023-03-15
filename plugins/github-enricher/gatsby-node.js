@@ -115,62 +115,86 @@ const fetchScmInfo = async (scmUrl, artifactId) => {
     }
   }`
 
-    const res = await fetch("https://api.github.com/graphql", {
-      method: "POST",
-      body: JSON.stringify({ query }),
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-    const body = await res.json()
+    let body = undefined
+    let count = 0
 
-    const {
-      data: {
-        repository: {
-          issues: { totalCount },
-          defaultBranchRef,
-          metaInfs,
-          subfolderMetaInfs,
-          shortenedSubfolderMetaInfs,
-          openGraphImageUrl,
+    // We sometimes get bad results back from the git API where json() is null, so do a bit of retrying
+    while (!body?.data && count < 3) {
+      count++
+      const res = await fetch("https://api.github.com/graphql", {
+        method: "POST",
+        body: JSON.stringify({ query }),
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
         },
-        repositoryOwner: { avatarUrl },
-      },
-    } = body
-
-    const allMetaInfs = [
-      ...(metaInfs ? metaInfs.entries : []),
-      ...(subfolderMetaInfs ? subfolderMetaInfs.entries : []),
-      ...(shortenedSubfolderMetaInfs ? shortenedSubfolderMetaInfs.entries : []),
-    ]
-
-    const extensionYamls = allMetaInfs.filter(entry =>
-      entry.path.endsWith("/quarkus-extension.yaml")
-    )
-
-    scmInfo.issues = totalCount
-
-    scmInfo.owner = coords.owner
-    scmInfo.ownerImageUrl = avatarUrl
-
-    // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
-    if (extensionYamls.length === 1) {
-      scmInfo.extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef?.name}/${extensionYamls[0].path}`
+      })
+      body = await res.json()
+      if (!body?.data) {
+        console.warn(
+          "Retrying GitHub fetch for",
+          artifactId,
+          "- response is",
+          body
+        )
+      }
     }
 
-    // Only look at the social media preview if it's been set by the user; otherwise we know it will be the owner avatar with some text we don't want
-    // This mechanism is a bit fragile, but should work for now
-    // Default pattern https://opengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-openfga-client
-    // Customised pattern https://repository-images.githubusercontent.com/437045322/39ad4dec-e606-4b21-bb24-4c09a4790b58
+    if (body) {
+      const {
+        data: {
+          repository: {
+            issues: { totalCount },
+            defaultBranchRef,
+            metaInfs,
+            subfolderMetaInfs,
+            shortenedSubfolderMetaInfs,
+            openGraphImageUrl,
+          },
+          repositoryOwner: { avatarUrl },
+        },
+      } = body
 
-    const isCustomizedSocialMediaPreview =
-      openGraphImageUrl?.includes("githubusercontent")
+      const allMetaInfs = [
+        ...(metaInfs ? metaInfs.entries : []),
+        ...(subfolderMetaInfs ? subfolderMetaInfs.entries : []),
+        ...(shortenedSubfolderMetaInfs
+          ? shortenedSubfolderMetaInfs.entries
+          : []),
+      ]
 
-    if (isCustomizedSocialMediaPreview) {
-      scmInfo.socialImage = openGraphImageUrl
+      const extensionYamls = allMetaInfs.filter(entry =>
+        entry.path.endsWith("/quarkus-extension.yaml")
+      )
+
+      scmInfo.issues = totalCount
+
+      scmInfo.owner = coords.owner
+      scmInfo.ownerImageUrl = avatarUrl
+
+      // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
+      if (extensionYamls.length === 1) {
+        scmInfo.extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef?.name}/${extensionYamls[0].path}`
+      }
+
+      // Only look at the social media preview if it's been set by the user; otherwise we know it will be the owner avatar with some text we don't want
+      // This mechanism is a bit fragile, but should work for now
+      // Default pattern https://opengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-openfga-client
+      // Customised pattern https://repository-images.githubusercontent.com/437045322/39ad4dec-e606-4b21-bb24-4c09a4790b58
+
+      const isCustomizedSocialMediaPreview =
+        openGraphImageUrl?.includes("githubusercontent")
+
+      if (isCustomizedSocialMediaPreview) {
+        scmInfo.socialImage = openGraphImageUrl
+      }
+
+      return scmInfo
+    } else {
+      console.warn(
+        "Cannot read GitHub information, because the API did not return any data."
+      )
+      return scmInfo
     }
-
-    return scmInfo
   } else {
     console.warn(
       "Cannot read GitHub information, because the environment variable `GITHUB_TOKEN` has not been set."
