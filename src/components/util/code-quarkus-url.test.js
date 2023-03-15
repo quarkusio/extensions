@@ -12,7 +12,7 @@ describe("code quarkus url generator", () => {
   it("returns a minimal query string for platform extensions", () => {
     expect(
       codeQuarkusUrl({
-        artifact: "io.quarkus:quarkus-vertx:3.0.0.Alpha3",
+        artifact: "io.quarkus:quarkus-vertx:3.0.0.Final",
         platforms: ["quarkus-bom-quarkus-platform-descriptor"],
         streams: [
           {
@@ -41,6 +41,24 @@ describe("code quarkus url generator", () => {
     ).toBe(
       "https://code.quarkus.io/?e=io.quarkiverse.amazonalexa%3Aquarkus-amazon-alexa"
     )
+  })
+
+  // Make a (risky, but better than the alternative) assumption that the things in alphas were also in previous releases
+  it("returns a url, but with no stream, for alphas", () => {
+    expect(
+      codeQuarkusUrl({
+        artifact: "io.quarkus:quarkus-vertx:3.0.0.Alpha3",
+        platforms: ["quarkus-bom-quarkus-platform-descriptor"],
+        streams: [
+          {
+            platformKey: "io.quarkus.platform",
+            id: "3.0.0.Alpha4",
+            isLatestThree: true,
+            isAlpha: true,
+          },
+        ],
+      })
+    ).toBe("https://code.quarkus.io/?e=vertx")
   })
 
   it("does not attempt to build a url for unlisted extensions", () => {

@@ -146,6 +146,24 @@ describe("stream extractor", () => {
     ).toBe(true)
   })
 
+  it("correctly identifies not-alphas are not alphas", () => {
+    expect(
+      getStream(
+        "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:2.15.0:json:2.15.0",
+        currentPlatforms
+      ).isAlpha
+    ).toBe(false)
+  })
+
+  it("correctly identifies alphas are alphas", () => {
+    expect(
+      getStream(
+        "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:1.0.0.Alpha2:json:1.0.0.Alpha2",
+        currentPlatforms
+      ).isAlpha
+    ).toBe(true)
+  })
+
   it("extracts the stream for an origin with an alpha qualifier", () => {
     expect(
       getStream(
@@ -156,6 +174,7 @@ describe("stream extractor", () => {
       platformKey: "io.quarkus.platform",
       id: "3.0",
       isLatestThree: true,
+      isAlpha: true,
     })
   })
 
@@ -169,6 +188,7 @@ describe("stream extractor", () => {
       platformKey: "io.quarkus.platform",
       id: "1.2",
       isLatestThree: false,
+      isAlpha: false,
     })
   })
 })

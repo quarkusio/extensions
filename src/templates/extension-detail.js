@@ -411,6 +411,7 @@ export const pageQuery = graphql`
       streams {
         id
         isLatestThree
+        isAlpha
         platformKey
       }
       duplicates {

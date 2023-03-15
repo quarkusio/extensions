@@ -26,10 +26,12 @@ const getStream = (origin, currentPlatforms) => {
     )
     const isLatestThree =
       platform?.streams.find(stream => stream.id === id) != null
+    const isAlpha = /Alpha/.test(versionParts[3])
     return {
       platformKey: coordinates.groupId,
       id: id,
       isLatestThree,
+      isAlpha,
     }
   }
 }
