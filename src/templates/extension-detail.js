@@ -316,6 +316,7 @@ const ExtensionDetailTemplate = ({
                 name: "Issues",
                 fieldName: "issues",
                 metadata: extension.metadata?.sourceControl,
+                url: `${extension.metadata?.sourceControl?.url}/issues`,
               }}
             />
           </Metadata>

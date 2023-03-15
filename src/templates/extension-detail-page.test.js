@@ -137,9 +137,12 @@ describe("extension detail page", () => {
       expect(link).toBeTruthy()
     })
 
-    it("renders an issue count", () => {
+    it("renders a link to an issue count", () => {
       expect(screen.getByText("Issues")).toBeTruthy()
       expect(screen.getByText("839")).toBeTruthy()
+      expect(screen.getByText("839").href).toBe(
+        "https://github.com/someorg/someproject/issues"
+      )
     })
 
     it("renders a message about duplicate extensions", () => {
