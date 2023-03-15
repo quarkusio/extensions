@@ -11,6 +11,7 @@ import { faSquare } from "@fortawesome/free-regular-svg-icons"
 import {
   faCreativeCommons,
   faCreativeCommonsBy,
+  faGitAlt,
 } from "@fortawesome/free-brands-svg-icons"
 import Navigation from "./headers/navigation"
 import TitleBand from "./headers/title-band"
@@ -24,7 +25,8 @@ library.add(
   faSquareCheck,
   faCreativeCommons,
   faCreativeCommonsBy,
-  faR
+  faR,
+  faGitAlt
 )
 
 const Layout = ({ location, title, children }) => {
