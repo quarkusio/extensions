@@ -139,7 +139,7 @@ const fetchScmInfo = async (scmUrl, artifactId) => {
       }
     }
 
-    if (body) {
+    if (body?.data) {
       const {
         data: {
           repository: {
