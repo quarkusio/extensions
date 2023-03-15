@@ -155,6 +155,15 @@ describe("stream extractor", () => {
     ).toBe(false)
   })
 
+  it("correctly identifies candidate releases are alphas", () => {
+    expect(
+      getStream(
+        "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:1.0.0.Alpha2:json:1.0.0.CR2",
+        currentPlatforms
+      ).isAlpha
+    ).toBe(true)
+  })
+
   it("correctly identifies alphas are alphas", () => {
     expect(
       getStream(

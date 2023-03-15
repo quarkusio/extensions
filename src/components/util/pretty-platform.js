@@ -26,7 +26,8 @@ const getStream = (origin, currentPlatforms) => {
     )
     const isLatestThree =
       platform?.streams.find(stream => stream.id === id) != null
-    const isAlpha = /Alpha/.test(versionParts[3])
+    const qualifier = versionParts[3]
+    const isAlpha = /Alpha/.test(qualifier) || /CR/.test(qualifier)
     return {
       platformKey: coordinates.groupId,
       id: id,
