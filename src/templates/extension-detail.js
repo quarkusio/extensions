@@ -297,15 +297,14 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
-                name: "Maven Central",
-                text: metadata.maven?.version,
+                name: "Repository",
+                text: "Maven Central", // Hardcode for now, until we need to support other repos
                 url: metadata.maven?.url,
-                transformer: text => "Version " + text,
               }}
             />
             <ExtensionMetadata
               data={{
-                name: "Extension Repository",
+                name: "Source code",
                 fieldName: "url",
                 text: extension.metadata?.sourceControl?.project,
                 url: extension.metadata?.sourceControl?.url,
