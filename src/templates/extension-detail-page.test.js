@@ -118,17 +118,13 @@ describe("extension detail page", () => {
     })
 
     it("renders a link to maven central", () => {
+      expect(screen.getByText("Repository")).toBeTruthy()
       expect(screen.getByText("Maven Central")).toBeTruthy()
-      expect(screen.getByText("Version 0.42")).toBeTruthy()
-
-      const links = screen.getAllByRole("link")
-      expect(links).toBeTruthy()
-      const link = links.find(link => link.href === mvnUrl)
-      expect(link).toBeTruthy()
+      expect(screen.getByText("Maven Central").href).toBe(mvnUrl)
     })
 
     it("renders a link to source control", () => {
-      expect(screen.getByText("Extension Repository")).toBeTruthy()
+      expect(screen.getByText("Source code")).toBeTruthy()
       expect(screen.getByText("jproject")).toBeTruthy()
 
       const links = screen.getAllByRole("link")
