@@ -1,6 +1,7 @@
 import * as React from "react"
 
 import styled from "styled-components"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const MetadataBlock = styled.section`
   width: calc((50%) - var(--a-modest-space));
@@ -22,8 +23,13 @@ const MetadataValue = styled.div`
   font-weight: var(--font-weight-bold);
 `
 
+const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
+  margin-left: 0;
+  margin-right: 5px;
+`
+
 const ExtensionMetadata = ({
-  data: { name, plural, fieldName, metadata, transformer, text, url },
+  data: { name, plural, fieldName, metadata, transformer, text, url, icon },
 }) => {
   const field = fieldName ? fieldName : name.toLowerCase()
 
@@ -55,7 +61,11 @@ const ExtensionMetadata = ({
       return (
         <MetadataBlock>
           <MetadataTitle>{name}</MetadataTitle>
-          <MetadataValue>{displayed}</MetadataValue>
+          <MetadataValue>
+            {/*Anything added here also needs to be added to the FA library in layout.js */}
+            {icon && <PaddedIcon icon={["fab", icon]} />}
+            {displayed}
+          </MetadataValue>
         </MetadataBlock>
       )
     }

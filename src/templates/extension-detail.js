@@ -306,6 +306,11 @@ const ExtensionDetailTemplate = ({
               data={{
                 name: "Source code",
                 fieldName: "url",
+                icon:
+                  extension.metadata?.sourceControl?.url?.includes("github") ||
+                  extension.metadata?.sourceControl?.url?.includes("gitlab")
+                    ? "git-alt"
+                    : undefined,
                 text: extension.metadata?.sourceControl?.project,
                 url: extension.metadata?.sourceControl?.url,
               }}
