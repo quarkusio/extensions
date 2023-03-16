@@ -111,7 +111,11 @@ exports.sourceNodes = async ({
     }
 
     // Use a better name and some structure for the source control information
+    // This is the id of the other node, and it needs to be unique per extension, even extensions which share a repo
+    // The scm node generator parses this string to extract the url, so format matters
     node.metadata.sourceControl = node.metadata["scm-url"]
+      ? `${node.metadata["scm-url"]},${node.metadata?.maven?.groupId}.${node.metadata?.maven?.artifactId}`
+      : undefined
     // Tidy up the old scm url
     delete node.metadata["scm-url"]
 
@@ -274,7 +278,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       quarkus_core_compatibility: String
       unlisted: Boolean
       maven: MavenInfo
-      sourceControl: SourceControlInfo @link(by: "url")
+      sourceControl: SourceControlInfo @link(by: "key")
       icon: File @link(by: "url")
     }
     

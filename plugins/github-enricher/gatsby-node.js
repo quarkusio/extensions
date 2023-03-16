@@ -1,11 +1,32 @@
 const gh = require("parse-github-url")
 const path = require("path")
+const encodeUrl = require("encodeurl")
 
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const { labelExtractor } = require("./labelExtractor")
 
 const defaultOptions = {
   nodeType: "Extension",
+}
+
+let getLabels
+
+// TODO ideally we would cache between builds, too
+exports.onPreBootstrap = async ({}) => {
+  const res = await fetch(
+    "https://raw.githubusercontent.com/quarkusio/quarkus/main/.github/quarkus-github-bot.yml",
+    {
+      method: "GET",
+    }
+  )
+
+  const yaml = res && res.text ? await res.text() : ""
+
+  getLabels = labelExtractor(yaml).getLabels
+
+  // Return the promise so the execution waits for us
+  return yaml
 }
 
 exports.onCreateNode = async (
@@ -24,12 +45,22 @@ exports.onCreateNode = async (
   }
 
   const { metadata } = node
-  const scmUrl = metadata?.sourceControl
+  // A bit ugly, we need a unique identifier in string form, and we also need the url; use a comma-separated string
+  const id = metadata?.sourceControl
+  const scmUrl = id?.split(",")[0]
 
   if (scmUrl) {
-    const scmInfo = await fetchScmInfo(scmUrl, node.metadata?.maven?.artifactId)
+    const labels = await fetchScmLabel(scmUrl, node.metadata?.maven?.artifactId)
 
-    scmInfo.id = createNodeId(`${scmInfo.owner}.${scmInfo.project}`)
+    const scmInfo = await fetchScmInfo(
+      scmUrl,
+      node.metadata?.maven?.artifactId,
+      labels
+    )
+
+    scmInfo.id = createNodeId(id)
+    // We need a non-obfuscated version of the id to act as a foreign key
+    scmInfo.key = id
 
     scmInfo.internal = {
       type: "SourceControlInfo",
@@ -58,7 +89,20 @@ exports.onCreateNode = async (
   }
 }
 
-const fetchScmInfo = async (scmUrl, artifactId) => {
+async function fetchScmLabel(scmUrl, artifactId) {
+  // Special case extensions which live in the quarkus repo; in the future we could generalise,
+  // but at the moment we only know how to find a label for quarkus
+  if (scmUrl === "https://github.com/quarkusio/quarkus") {
+    return getLabels(artifactId)
+  }
+}
+
+const fetchScmInfo = async (scmUrl, artifactId, labels) => {
+  // TODO we can just treat label as an array, almost
+  const labelFilterString = labels
+    ? `, filterBy: { labels:  [${labels.map(label => `"${label}"`).join()}] }`
+    : ""
+
   const coords = gh(scmUrl)
 
   const project = coords.name
@@ -66,16 +110,26 @@ const fetchScmInfo = async (scmUrl, artifactId) => {
   // Some multi-extension projects use just the 'different' part of the name in the folder structure
   const shortArtifactId = artifactId?.replace(coords.name + "-", "")
 
-  const scmInfo = { url: scmUrl, project }
+  const issuesUrl = labels
+    ? encodeUrl(
+        scmUrl +
+          "/issues?q=is%3Aopen+is%3Aissue+label%3A" +
+          labels.map(label => label.replace("/", "%2F")).join(",")
+      )
+    : scmUrl + "/issues"
+
+  const scmInfo = { url: scmUrl, project, issuesUrl, labels }
 
   const accessToken = process.env.GITHUB_TOKEN
 
   // This query is long, because I can't find a way to do "or" or
+  // Batching this may not help that much because rate limits are done on query complexity and cost,
+  // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
   if (accessToken) {
     const query = `
   query {
     repository(owner:"${coords.owner}", name:"${coords.name}") {
-      issues(states:OPEN) {
+      issues(states:OPEN, ${labelFilterString}) {
         totalCount
       }
     
