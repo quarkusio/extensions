@@ -34,6 +34,7 @@ describe("extension detail page", () => {
         },
         sourceControl: {
           url: gitUrl,
+          issuesUrl: "https://github.com/someorg/someproject/issues",
           project: "jproject",
           issues: 839,
           ownerImage: {

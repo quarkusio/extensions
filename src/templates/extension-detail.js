@@ -320,7 +320,7 @@ const ExtensionDetailTemplate = ({
                 name: "Issues",
                 fieldName: "issues",
                 metadata: extension.metadata?.sourceControl,
-                url: `${extension.metadata?.sourceControl?.url}/issues`,
+                url: extension.metadata?.sourceControl?.issuesUrl,
               }}
             />
           </Metadata>
@@ -397,6 +397,7 @@ export const pageQuery = graphql`
           url
           project
           issues
+          issuesUrl
           projectImage {
             childImageSharp {
               gatsbyImageData(width: 220)
