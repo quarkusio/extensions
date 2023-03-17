@@ -1,9 +1,22 @@
 const yaml = require("js-yaml")
-const extensionsRegex = /extensions\/(.*)\/?/
+// If there is a folder between extensions and the folder holding the extension, just ignore it, by using a non-greedy non-capturing group
+// I mean, we all love regex, right?
+const extensionsRegex = /extensions(?:\/.*?)?\/(.+)\/?/
 const trailingSlash = /\/$/
 
-const labelExtractor = yamlString => {
+const foldersWhichAreNotExtensions = [
+  "api",
+  "spi",
+  "runtime",
+  "deployment",
+  "client",
+  "server",
+]
+// Eventually we may want to tack 'client' and 'server' on to the parent folder name, but for now ignore them
+
+const labelExtractor = (yamlString, repositoryListing) => {
   const json = yaml.load(yamlString)
+
   const rules = json?.triage?.rules
 
   // Turn the rules into a map
@@ -12,12 +25,17 @@ const labelExtractor = yamlString => {
 
   rules?.forEach(rule => {
     const directories = rule.directories
+
     directories?.forEach(dir => {
+      // Also add in anything from the repository listing
+
       const extensionMatch = dir.match(extensionsRegex)
 
       const extensionMaybeWithTrailingSlash = extensionMatch
         ? extensionMatch[1]
         : undefined
+
+      // Do a bit of further processing to strip off any directory nesting
       if (extensionMaybeWithTrailingSlash) {
         if (trailingSlash.test(extensionMaybeWithTrailingSlash)) {
           // Strip the trailing slash for ease of matching
@@ -25,8 +43,27 @@ const labelExtractor = yamlString => {
             trailingSlash,
             ""
           )
+          const subdirs = repositoryListing?.find(d => d.name === extension)
+            ?.object?.entries
+          if (subdirs) {
+            // We only want directories, and not the standard ones that we'd find in a top-level extension
+            const subExtensions = subdirs
+              .filter(
+                el =>
+                  el.type === "tree" &&
+                  !foldersWhichAreNotExtensions.includes(el.name)
+              )
+              .map(dir => dir.name)
+              .map(dir => dir.replace(/^quarkus-/, ""))
+
+            subExtensions.forEach(nestedExtension =>
+              addToMap(exactExtensionNamesMap, nestedExtension, rule)
+            )
+          }
+
           addToMap(exactExtensionNamesMap, extension, rule)
         } else {
+          // We don't handle nested directories in non-exact matched directories, for now
           addToMap(
             extensionNamePatternsMap,
             extensionMaybeWithTrailingSlash,

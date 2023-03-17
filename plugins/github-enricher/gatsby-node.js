@@ -23,7 +23,53 @@ exports.onPreBootstrap = async ({}) => {
 
   const yaml = res && res.text ? await res.text() : ""
 
-  getLabels = labelExtractor(yaml).getLabels
+  let repoListing
+
+  const repoCoords = { owner: "quarkusio", name: "quarkus" }
+
+  const accessToken = process.env.GITHUB_TOKEN
+
+  // This query is long, because I can't find a way to do "or" or
+  // Batching this may not help that much because rate limits are done on query complexity and cost,
+  // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
+  if (accessToken) {
+    const query = `
+  query {
+    repository(owner:"${repoCoords.owner}", name:"${repoCoords.name}") {
+     object(expression: "HEAD:extensions") {
+      # Top-level.
+      ... on Tree {
+        entries {
+          name
+          type
+          object {
+
+            # One level down.
+            ... on Tree {
+              entries {
+                name
+                type
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`
+
+    const pathsRes = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      body: JSON.stringify({ query }),
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    const body = await pathsRes.json()
+    repoListing = body?.data?.repository?.object?.entries
+  }
+
+  getLabels = labelExtractor(yaml, repoListing).getLabels
 
   // Return the promise so the execution waits for us
   return yaml
