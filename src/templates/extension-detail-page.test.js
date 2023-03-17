@@ -244,6 +244,9 @@ describe("extension detail page", () => {
       link = await screen.queryByText("Version")
       expect(link).toBeNull()
 
+      link = await screen.queryByText("Latest Version")
+      expect(link).toBeNull()
+
       link = await screen.queryByText("Issues")
       expect(link).toBeNull()
     })
