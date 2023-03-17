@@ -1,0 +1,4133 @@
+[
+  {
+    "name": "agroal",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 769
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "amazon-lambda-http",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "http-event-server",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "maven-archetype",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 851
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "amazon-lambda-rest",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "maven-archetype",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 866
+          }
+        },
+        {
+          "name": "rest-event-server",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "amazon-lambda-xray",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 768
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "amazon-lambda",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "common-deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "common-runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "event-server",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "maven-archetype",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 923
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "apache-httpclient",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 716
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "arc",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 735
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "avro",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 705
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "awt",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 694
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "azure-functions-http",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1385
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "azure-functions",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1375
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "cache",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 780
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "caffeine",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 746
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "config-yaml",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 744
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "container-image",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "container-image-buildpack",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "container-image-docker",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "container-image-jib",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "container-image-openshift",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "container-image-s2i",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1058
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "util",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "credentials",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 751
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "csrf-reactive",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 794
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "datasource",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 820
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "devservices",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "db2",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "derby",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "h2",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "mariadb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "mssql",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "mysql",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "oracle",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1171
+          }
+        },
+        {
+          "name": "postgresql",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elasticsearch-java-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 788
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elasticsearch-rest-client-common",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 787
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elasticsearch-rest-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 789
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elasticsearch-rest-high-level-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 810
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elytron-security-common",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 776
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elytron-security-jdbc",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 771
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elytron-security-ldap",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 770
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elytron-security-oauth2",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 769
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elytron-security-properties-file",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 792
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "elytron-security",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 760
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "flyway",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 741
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "funqy",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "funqy-amazon-lambda",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "funqy-google-cloud-functions",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "funqy-http",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "funqy-knative-events",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "funqy-server-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 895
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "google-cloud-functions-http",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 782
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "google-cloud-functions",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 772
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "grpc-common",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 750
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "grpc",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "api",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "codegen",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "inprocess",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 930
+          }
+        },
+        {
+          "name": "protoc",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "stubs",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "xds",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "hal",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 734
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "hibernate-envers",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 771
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "hibernate-orm",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "banned-signatures.txt",
+          "type": "blob",
+          "object": {
+            "byteSize": 0
+          }
+        },
+        {
+          "name": "deployment-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 6667
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "hibernate-reactive",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 765
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "hibernate-search-orm-coordination-outbox-polling",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 831
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "hibernate-search-orm-elasticsearch",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 800
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "hibernate-validator",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 795
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "infinispan-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "README.MD",
+          "type": "blob",
+          "object": {
+            "byteSize": 4370
+          }
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 764
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "jackson",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 772
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "jaeger",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 740
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "jaxb",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 737
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "jaxp",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 737
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "jaxrs-spi",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 724
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "jdbc",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "jdbc-db2",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "jdbc-derby",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "jdbc-h2",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "jdbc-mariadb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "jdbc-mssql",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "jdbc-mysql",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "jdbc-oracle",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "jdbc-postgresql",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 959
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "jms-spi",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 719
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "jsonb",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 768
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "jsonp",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 739
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "kafka-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 723
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "kafka-streams",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 755
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "keycloak-admin-client-common",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 794
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "keycloak-admin-client-reactive",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 789
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "keycloak-admin-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 770
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "keycloak-authorization",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 772
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "kotlin",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 741
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "kubernetes-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment-internal",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 878
+          }
+        },
+        {
+          "name": "runtime-internal",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "kubernetes-config",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 762
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "kubernetes-service-binding",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 811
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "kubernetes",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "kind",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "minikube",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "openshift",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 840
+          }
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "vanilla",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "liquibase-mongodb",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 762
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "liquibase",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 747
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "logging-gelf",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 755
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "logging-json",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 755
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "mailer",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 745
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "micrometer-registry-prometheus",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 955
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "micrometer",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1349
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "mongodb-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 725
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "mutiny",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 740
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "narayana-jta",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 752
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "narayana-lra",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 776
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "narayana-stm",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 752
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "netty-loom-adaptor",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 767
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "netty",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 740
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "oidc-client-filter",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 779
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "oidc-client-reactive-filter",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 797
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "oidc-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 760
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "oidc-common",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 760
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "oidc-token-propagation-reactive",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 800
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "oidc-token-propagation",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 782
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "oidc",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 754
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "openshift-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 760
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "opentelemetry",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 754
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "panache",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "hibernate-orm-panache-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "hibernate-orm-panache-kotlin",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "hibernate-orm-panache",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "hibernate-orm-rest-data-panache",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "hibernate-reactive-panache-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "hibernate-reactive-panache-kotlin",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "hibernate-reactive-panache",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "hibernate-reactive-rest-data-panache",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "mongodb-panache-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "mongodb-panache-kotlin",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "mongodb-panache",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "mongodb-rest-data-panache",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "panache-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "panache-hibernate-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "panache-mock",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "panacheql",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1531
+          }
+        },
+        {
+          "name": "rest-data-panache",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "picocli",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 742
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "pom.xml",
+    "type": "blob",
+    "object": {
+      "byteSize": 8660
+    }
+  },
+  {
+    "name": "quartz",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 687
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "qute",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 715
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-datasource",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 766
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-db2-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 771
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-mssql-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 775
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-mysql-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1415
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-oracle-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 776
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-pg-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 777
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-routes",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 758
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "reactive-streams-operators",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "mutiny-reactive-streams-operators",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 890
+          }
+        },
+        {
+          "name": "smallrye-reactive-streams-operators",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "smallrye-reactive-type-converters",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "redis-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 756
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "resteasy-classic",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1420
+          }
+        },
+        {
+          "name": "rest-client-config",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-jackson",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-jaxb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-jsonb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-mutiny",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-jackson",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-jaxb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-jsonb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-links",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-multipart",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-mutiny-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-mutiny",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-qute",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-server-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "resteasy-reactive",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "jaxrs-client-reactive",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 1836
+          }
+        },
+        {
+          "name": "quarkus-resteasy-reactive-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-jackson-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-jackson",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-jaxb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-jsonb-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-jsonb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-kotlin-serialization-common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-kotlin-serialization",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-kotlin",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-links",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-qute",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive-servlet",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "quarkus-resteasy-reactive",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-reactive-jackson",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-reactive-jaxb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-reactive-jsonb",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-reactive-kotlin-serialization",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "rest-client-reactive",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "scala",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 738
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "scheduler",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "api",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "common",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "kotlin",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 774
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "schema-registry",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "apicurio",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "confluent",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "devservice",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 803
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "security-jpa",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 753
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "security-webauthn",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 763
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "security",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 846
+          }
+        },
+        {
+          "name": "runtime-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "test-utils",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-context-propagation",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 814
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-fault-tolerance",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 778
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-graphql-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 726
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-graphql",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 770
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-health",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 788
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-jwt-build",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 771
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-jwt",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 753
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-metrics",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 789
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-openapi-common",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 744
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-openapi",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 745
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-opentracing",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 768
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-reactive-messaging-amqp",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 767
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-reactive-messaging-kafka",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 765
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-reactive-messaging-mqtt",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 763
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-reactive-messaging-rabbitmq",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 775
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-reactive-messaging",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "kotlin",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 781
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "smallrye-stork",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 768
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-boot-properties",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 774
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-cache",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 754
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-cloud-config-client",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 780
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-data-jpa",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 758
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-data-rest",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 762
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-di",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 748
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-scheduled",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 763
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-security",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 768
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "spring-web",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "core",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 827
+          }
+        },
+        {
+          "name": "resteasy-classic",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "resteasy-reactive",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "swagger-ui",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 750
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "transaction-annotations",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 738
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "undertow",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 770
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "spi",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "vertx-graphql",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 775
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "vertx-http",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "dev-console-runtime-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "dev-console-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "dev-ui-resources",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "dev-ui-spi",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 959
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "vertx",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "latebound-mdc-provider",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 787
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "webjars-locator",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "deployment",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 758
+          }
+        },
+        {
+          "name": "runtime",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  },
+  {
+    "name": "websockets",
+    "type": "tree",
+    "object": {
+      "entries": [
+        {
+          "name": "client",
+          "type": "tree",
+          "object": {}
+        },
+        {
+          "name": "pom.xml",
+          "type": "blob",
+          "object": {
+            "byteSize": 759
+          }
+        },
+        {
+          "name": "server",
+          "type": "tree",
+          "object": {}
+        }
+      ]
+    }
+  }
+]
