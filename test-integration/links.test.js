@@ -71,7 +71,7 @@ describe("site links", () => {
           replacement: "http://localhost:9000",
         },
       ],
-      concurrency: 10,
+      concurrency: 5,
       timeout: 30 * 1000,
       retryErrors: true,
       retryErrorsCount: 6,
