@@ -10,7 +10,13 @@ describe("extension card", () => {
     const extension = {
       name: "JRuby",
       slug: "jruby-slug",
-      metadata: { categories: [category], maven: { version } },
+      metadata: {
+        categories: [category],
+        maven: {
+          version,
+          timestamp: "1666716560000",
+        },
+      },
     }
 
     beforeEach(() => {
@@ -33,7 +39,11 @@ describe("extension card", () => {
     })
 
     it("renders the version", () => {
-      expect(screen.getByText("Version: " + version)).toBeTruthy()
+      expect(screen.getByText("Latest Version: " + version)).toBeTruthy()
+    })
+
+    it("renders the publish date ", () => {
+      expect(screen.getByText("Publish Date: Oct 25, 2022")).toBeTruthy()
     })
 
     it("renders a placeholder image with appropriate source ", async () => {

@@ -1,5 +1,6 @@
 import * as React from "react"
 import Link from "gatsby-link"
+import { format, isValid } from "date-fns"
 
 import styled from "styled-components"
 import prettyCategory from "./util/pretty-category"
@@ -119,7 +120,16 @@ const ExtensionCard = ({ extension }) => {
         </ExtensionInfo>
         <ExtensionInfo>
           {extension.metadata.maven?.version
-            ? `Version: ${extension.metadata.maven?.version}`
+            ? `Latest Version: ${extension.metadata.maven.version}`
+            : spacer}
+        </ExtensionInfo>
+        <ExtensionInfo>
+          {extension.metadata.maven?.timestamp &&
+          isValid(+extension.metadata.maven?.timestamp)
+            ? `Publish Date: ${format(
+                new Date(+extension.metadata.maven.timestamp),
+                "MMM dd, yyyy"
+              )}`
             : spacer}
         </ExtensionInfo>
       </FinerDetails>
