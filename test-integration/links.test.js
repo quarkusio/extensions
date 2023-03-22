@@ -54,9 +54,6 @@ describe("site links", () => {
       "https://quarkus.io/guides/freemarker",
       "https://quarkus.io/guides/qson",
       "https://quarkus.io/guides/azure-functions", // https://github.com/quarkusio/quarkus/issues/31148
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/tagsoup.html", // https://github.com/apache/camel-quarkus/issues/4620
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/ipfs.html", // https://github.com/apache/camel-quarkus/issues/4621
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/weka.html", //https://github.com/apache/camel-quarkus/issues/4622
       "https://quarkus.io/guides/amazon-cognitouserpools", //https://github.com/quarkiverse/quarkus-amazon-services/issues/577
     ]
 
