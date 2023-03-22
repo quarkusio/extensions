@@ -1,4 +1,4 @@
-jest.setTimeout(15 * 60 * 1000)
+jest.setTimeout(10 * 60 * 1000)
 
 const link = require("linkinator")
 const status = require("http-status")
@@ -68,9 +68,10 @@ describe("site links", () => {
           replacement: "http://localhost:9000",
         },
       ],
-      concurrency: 5,
+      concurrency: 50,
       timeout: 30 * 1000,
-      retryErrors: true,
+      retry: true, // Retry on 429
+      retryErrors: true, // Retry on 5xx
       retryErrorsCount: 6,
     })
   })
