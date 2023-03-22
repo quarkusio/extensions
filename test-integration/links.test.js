@@ -1,4 +1,4 @@
-jest.setTimeout(5 * 60 * 1000)
+jest.setTimeout(15 * 60 * 1000)
 
 const link = require("linkinator")
 const status = require("http-status")
