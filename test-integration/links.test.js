@@ -53,7 +53,6 @@ describe("site links", () => {
       // TODO remove these exemptions as soon as new releases with live guide links are made (the repos are correct, the releases are not)
       "https://quarkus.io/guides/freemarker",
       "https://quarkus.io/guides/qson",
-      "https://quarkus.io/guides/azure-functions", // https://github.com/quarkusio/quarkus/issues/31148
       "https://quarkus.io/guides/amazon-cognitouserpools", //https://github.com/quarkiverse/quarkus-amazon-services/issues/577
     ]
 
