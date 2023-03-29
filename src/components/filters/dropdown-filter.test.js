@@ -13,6 +13,11 @@ describe("dropdown menu filter", () => {
       expect(screen.getByRole("combobox")).toBeTruthy()
     })
 
+    it("has an option to reset", async () => {
+      await selectEvent.openMenu(screen.getByTestId("unknown-form"))
+      expect(screen.getByText("All")).toBeTruthy()
+    })
+
     it("gracefully does nothing on click", async () => {
       expect(screen.getByTestId("unknown-form")).toHaveFormValues({
         unknown: "",
@@ -84,6 +89,20 @@ describe("dropdown menu filter", () => {
       })
       await selectEvent.select(screen.getByLabelText(label), "Strawberry")
       expect(filterer).toHaveBeenCalledWith(code)
+    })
+
+    it("has an option to reset", async () => {
+      await selectEvent.openMenu(screen.getByLabelText(label))
+      // In the dom, there are two Alls, one placeholder and one real one
+      expect(screen.getAllByText("All")).toHaveLength(2)
+    })
+
+    it("sends a reset message when All is clicked", async () => {
+      expect(screen.getByTestId(id)).toHaveFormValues({
+        frogs: "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "All")
+      expect(filterer).toHaveBeenCalledWith("")
     })
 
     it("renders menu entries", async () => {

@@ -165,10 +165,23 @@ describe("filters bar", () => {
     })
 
     it("filters out extensions which do not match the ticked category", async () => {
+      expect(newExtensions).toContain(alice)
       fireEvent.click(screen.getByText(displayCategory))
 
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).not.toContain(alice)
+    })
+
+    it("reinstates extensions when a category is unticked", async () => {
+      expect(newExtensions).toContain(alice)
+
+      fireEvent.click(screen.getByText(displayCategory))
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).not.toContain(alice)
+
+      fireEvent.click(screen.getByText(displayCategory))
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
     })
 
     it("excludes unlisted extensions", () => {
@@ -195,6 +208,21 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(alice)
       expect(newExtensions).toContain(pascal)
       expect(newExtensions).not.toContain(fluffy)
+    })
+
+    it("leaves in every extensions when 'All' is selected", async () => {
+      expect(screen.getByTestId("origin-form")).toHaveFormValues({
+        origin: "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "Toronto")
+      expect(newExtensions).not.toContain(alice)
+
+      await selectEvent.select(screen.getByLabelText(label), "All")
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
+      expect(newExtensions).toContain(pascal)
+      expect(newExtensions).toContain(fluffy)
     })
 
     it("excludes unlisted extensions", () => {
@@ -231,6 +259,21 @@ describe("filters bar", () => {
 
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).not.toContain(alice)
+      expect(newExtensions).toContain(pascal)
+      expect(newExtensions).toContain(fluffy)
+    })
+
+    it("leaves in all extensions when 'All' is selected", async () => {
+      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
+        "built-with": "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "63.5")
+      expect(newExtensions).not.toContain(alice)
+
+      await selectEvent.select(screen.getByLabelText(label), "All")
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
       expect(newExtensions).toContain(pascal)
       expect(newExtensions).toContain(fluffy)
     })
