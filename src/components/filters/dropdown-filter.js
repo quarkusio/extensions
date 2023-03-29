@@ -79,6 +79,10 @@ const DropdownFilter = ({
   const compare = compareFunction ? compareFunction : defaultCompare
   processedOptions.sort((a, b) => compare(a.label, b.label))
 
+  // Now add 'All' to the beginning
+  // A filter string of zero length is interpreted as 'everything'
+  processedOptions.unshift({ value: "", label: "All" })
+
   return (
     <Element data-testid={label + "-form"}>
       <Title htmlFor={label}>{displayLabel}</Title>
