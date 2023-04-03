@@ -260,15 +260,15 @@ describe("filters bar", () => {
 
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).not.toContain(alice)
-      expect(newExtensions).toContain(pascal)
+      expect(newExtensions).not.toContain(pascal)
       expect(newExtensions).toContain(fluffy)
     })
 
     it("leaves in all extensions when 'All' is selected", async () => {
-      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
-        "built-with": "",
+      expect(screen.getByTestId("status-form")).toHaveFormValues({
+        status: "",
       })
-      await selectEvent.select(screen.getByLabelText(label), "63.5")
+      await selectEvent.select(screen.getByLabelText(label), "sparkling")
       expect(newExtensions).not.toContain(alice)
 
       await selectEvent.select(screen.getByLabelText(label), "All")
@@ -276,6 +276,45 @@ describe("filters bar", () => {
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
       expect(newExtensions).toContain(pascal)
+      expect(newExtensions).toContain(fluffy)
+    })
+
+    it("excludes unlisted extensions", () => {
+      expect(newExtensions).not.toContain(secret)
+    })
+  })
+
+  describe("quarkus status filter", () => {
+    const label = "Status"
+
+    it("lists all the statuses in the menu", async () => {
+      // Don't look at what happens, just make sure the options are there
+      await selectEvent.select(screen.getByLabelText(label), "wonky")
+      await selectEvent.select(screen.getByLabelText(label), "shonky")
+      await selectEvent.select(screen.getByLabelText(label), "sparkling")
+    })
+
+    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("status-form")).toHaveFormValues({
+        status: "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "wonky")
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
+      expect(newExtensions).not.toContain(pascal)
+      expect(newExtensions).not.toContain(fluffy)
+    })
+
+    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("status-form")).toHaveFormValues({
+        status: "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "sparkling")
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).not.toContain(alice)
+      expect(newExtensions).not.toContain(pascal)
       expect(newExtensions).toContain(fluffy)
     })
 
