@@ -13,7 +13,7 @@ describe("filters bar", () => {
     description: "a nice person",
     metadata: {
       categories: ["lynx"],
-      builtWithQuarkusCore: "4.2",
+      status: "wonky",
       quarkus_core_compatibility: "UNKNOWN",
     },
     platforms: ["Banff"],
@@ -22,7 +22,7 @@ describe("filters bar", () => {
     name: "Pascal",
     metadata: {
       categories: ["skunks"],
-      builtWithQuarkusCore: "63.5",
+      status: "shonky",
       quarkus_core_compatibility: "COMPATIBLE",
     },
     platforms: ["Toronto"],
@@ -31,7 +31,7 @@ describe("filters bar", () => {
     name: "Fluffy",
     metadata: {
       categories: ["moose"],
-      builtWithQuarkusCore: "63.5",
+      status: "sparkling",
       quarkus_core_compatibility: "COMPATIBLE",
     },
     platforms: ["Banff"],
@@ -40,7 +40,7 @@ describe("filters bar", () => {
     name: "James Bond",
     metadata: {
       categories: ["moose"],
-      builtWithQuarkusCore: "63.5",
+      status: "wonky",
       quarkus_core_compatibility: "COMPATIBLE",
       unlisted: true,
     },
@@ -230,20 +230,21 @@ describe("filters bar", () => {
     })
   })
 
-  describe("quarkus version filter", () => {
-    const label = "Built With"
+  describe("status filter", () => {
+    const label = "Status"
 
-    it("lists all the versions in the menu", async () => {
+    it("lists all the statuses in the menu", async () => {
       // Don't look at what happens, just make sure the options are there
-      await selectEvent.select(screen.getByLabelText(label), "4.2")
-      await selectEvent.select(screen.getByLabelText(label), "63.5")
+      await selectEvent.select(screen.getByLabelText(label), "wonky")
+      await selectEvent.select(screen.getByLabelText(label), "shonky")
+      await selectEvent.select(screen.getByLabelText(label), "sparkling")
     })
 
-    it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
-        "built-with": "",
+    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("status-form")).toHaveFormValues({
+        status: "",
       })
-      await selectEvent.select(screen.getByLabelText(label), "4.2")
+      await selectEvent.select(screen.getByLabelText(label), "wonky")
 
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
@@ -251,11 +252,11 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(fluffy)
     })
 
-    it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
-        "built-with": "",
+    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("status-form")).toHaveFormValues({
+        status: "",
       })
-      await selectEvent.select(screen.getByLabelText(label), "63.5")
+      await selectEvent.select(screen.getByLabelText(label), "sparkling")
 
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).not.toContain(alice)
@@ -286,14 +287,14 @@ describe("filters bar", () => {
   xdescribe("compatibility filter", () => {
     const label = "Compatibility"
 
-    it("lists all the versions in the menu", async () => {
+    it("lists all the compatibilities in the menu", async () => {
       // Don't look at what happens, just make sure the options are there
       await selectEvent.select(screen.getByLabelText(label), "Unknown")
       await selectEvent.select(screen.getByLabelText(label), "Compatible")
     })
 
-    it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
+    it("leaves in extensions which match compatibility filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
         "built-with": "",
       })
       await selectEvent.select(screen.getByLabelText(label), "Unknown")
@@ -304,8 +305,8 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(fluffy)
     })
 
-    it("leaves in extensions which match version filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("built-with-form")).toHaveFormValues({
+    it("leaves in extensions which match compatibility filter and filters out extensions which do not match", async () => {
+      expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
         "built-with": "",
       })
       await selectEvent.select(screen.getByLabelText(label), "Compatible")
