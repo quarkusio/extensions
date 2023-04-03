@@ -4,7 +4,6 @@ import styled from "styled-components"
 import CategoryFilter from "./category-filter"
 import Search from "./search"
 import PlatformFilter from "./platform-filter"
-import VersionFilter from "./version-filter"
 
 const FilterBar = styled.aside`
   width: 224px;
@@ -17,7 +16,7 @@ const FilterBar = styled.aside`
 
 const filterExtensions = (
   extensions,
-  { regex, categoryFilter, platformFilter, versionFilter, compatibilityFilter }
+  { regex, categoryFilter, platformFilter, compatibilityFilter }
 ) => {
   return (
     extensions
@@ -46,12 +45,6 @@ const filterExtensions = (
       )
       .filter(
         extension =>
-          versionFilter.length === 0 ||
-          (extension.metadata.builtWithQuarkusCore &&
-            versionFilter.includes(extension.metadata.builtWithQuarkusCore))
-      )
-      .filter(
-        extension =>
           compatibilityFilter.length === 0 ||
           (extension.metadata.quarkus_core_compatibility &&
             compatibilityFilter.includes(
@@ -65,14 +58,12 @@ const Filters = ({ extensions, categories, filterAction }) => {
   const [regex, setRegex] = useState(".*")
   const [categoryFilter, setCategoryFilter] = useState([])
   const [platformFilter, setPlatformFilter] = useState([])
-  const [versionFilter, setVersionFilter] = useState([])
   const [compatibilityFilter, setCompatibilityFilter] = useState([])
 
   const filters = {
     regex,
     categoryFilter,
     platformFilter,
-    versionFilter,
     compatibilityFilter,
   }
 
@@ -86,7 +77,6 @@ const Filters = ({ extensions, categories, filterAction }) => {
     regex,
     categoryFilter,
     platformFilter,
-    versionFilter,
     compatibilityFilter,
   ]
 
@@ -97,7 +87,6 @@ const Filters = ({ extensions, categories, filterAction }) => {
   return (
     <FilterBar className="filters">
       <Search searcher={setRegex} />
-      <VersionFilter extensions={extensions} filterer={setVersionFilter} />
       <PlatformFilter options={platforms} filterer={setPlatformFilter} />
       <CategoryFilter categories={categories} filterer={setCategoryFilter} />
     </FilterBar>
