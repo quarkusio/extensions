@@ -8,6 +8,7 @@ on:
     types: [ opened, synchronize, reopened ]
   schedule: ## Do a run daily, to refresh website content
     - cron: '0 3 * * *'
+  workflow_dispatch:
 
 jobs:
   unit-test:
