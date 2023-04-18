@@ -11,15 +11,22 @@ const Card = styled(props => <Link {...props} />)`
   text-align: center;
   transform: var(--transform);
   margin: 15px;
-  padding: 20px;
+  padding: 1rem;
   width: 240px;
   background: var(--white) 0 0 no-repeat padding-box;
   border: ${props =>
     props.$unlisted ? "1px solid var(--grey-0)" : "1px solid var(--grey-1)"};
+  border-radius: 10px;
   opacity: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  &:hover,
+  :focus {
+    background-color: var(--light-blue);
+    border: 1px solid var(--light-blue);
+  }
 `
 
 const LogoImage = styled.div`
@@ -33,11 +40,11 @@ const LogoImage = styled.div`
 
 const ExtensionName = styled.div`
   --num-lines: 2.05; // Add a bit of padding so g and other hanging letters don't get cut off
-  --font-size: var(--font-size-24);
+  --font-size: 1.25rem;
   --line-height: calc(var(--font-size) * 1.1); // Squish long names a tiny bit
   text-align: left;
   font-size: var(--font-size);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-awfully-bold);
   letter-spacing: 0;
   color: ${props => (props.$unlisted ? "var(--grey-1)" : "var(--grey-2)")};
   opacity: 1;
@@ -76,7 +83,7 @@ const ExtensionInfo = styled.div`
   color: ${props => (props.$unlisted ? "var(--dark-red)" : "var(--grey-2)")};
   text-transform: ${props => (props.$unlisted ? "uppercase" : "none")};
   text-align: left;
-  font-size: var(--font-size-16);
+  font-size: 0.7rem;
   opacity: 1;
   margin-top: 6px;
 `
