@@ -36,6 +36,8 @@ const LogoImage = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 6px;
+  overflow: hidden;
 `
 
 const ExtensionName = styled.div`

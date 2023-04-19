@@ -59,6 +59,8 @@ const LogoImage = styled.div`
   width: 220px;
   margin-right: 60px;
   margin-bottom: 25px;
+  border-radius: 10px;
+  overflow: hidden;
 `
 
 const Metadata = styled.div`
