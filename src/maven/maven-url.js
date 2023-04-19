@@ -10,8 +10,16 @@ const createMavenUrlFromArtifactString = async artifact => {
 }
 
 const createMavenUrlFromCoordinates = async coordinates => {
-  // Validating these is so unreliable, don't do it at build-time, just let the links test complain
-  return `https://central.sonatype.com/artifact/${coordinates.groupId}/${coordinates.artifactId}/${coordinates.version}/jar`
+  // We prefer the newer, central.sonatype links, but publishing glitches mean some extensions don't show in sonatype central
+  const url = `https://central.sonatype.com/artifact/${coordinates.groupId}/${coordinates.artifactId}/${coordinates.version}/jar`
+  const exists = await urlExist(url)
+  if (exists) {
+    return url
+  } else {
+    // Validating these is so unreliable, don't do it at build-time, just let the links test complain
+    // ?eh= avoids the redirect to the page that doesn't exist
+    return `https://search.maven.org/artifact/${coordinates.groupId}/${coordinates.artifactId}/${coordinates.version}/jar?eh=`
+  }
 }
 
 const createMavenArtifactsUrlFromCoordinates = async coordinates => {
