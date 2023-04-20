@@ -28,10 +28,13 @@ const RightColumn = styled.div`
   width: 100%;
 `
 
-const ExtensionCount = styled.div`
+const ExtensionCount = styled.h2`
   margin-top: 1.25rem;
   margin-left: 3.25rem;
+  margin-bottom: 0.5rem;
   width: 100%;
+  font-size: 1.25rem;
+  font-weight: 400;
 `
 
 const ExtensionsList = ({ extensions, categories }) => {
@@ -54,8 +57,8 @@ const ExtensionsList = ({ extensions, categories }) => {
 
     const countMessage =
       extensionCount === filteredExtensions.length
-        ? `Showing ${extensionCount} extensions.`
-        : `Showing ${filteredExtensions.length} of ${extensionCount} extensions.`
+        ? `Showing ${extensionCount} extensions`
+        : `Showing ${filteredExtensions.length} matching of ${extensionCount} extensions`
 
     return (
       <FilterableList className="extensions-list">
