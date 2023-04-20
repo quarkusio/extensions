@@ -8,7 +8,7 @@ import StatusFilter from "./status-filter"
 
 const FilterBar = styled.aside`
   width: 224px;
-  padding-top: 31px; // TODO can we do better than this rather specific hardcoding to align with the cards?
+  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
