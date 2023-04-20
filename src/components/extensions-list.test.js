@@ -88,7 +88,7 @@ describe("extension list", () => {
   it("displays a brief message about how many extensions there are", async () => {
     // The superceded extension should not be counted
     const num = extensions.length - 1
-    expect(screen.getByText(`Showing ${num} extensions.`)).toBeTruthy()
+    expect(screen.getByText(`Showing ${num} extensions`)).toBeTruthy()
   })
 
   describe("searching and filtering", () => {
@@ -138,7 +138,7 @@ describe("extension list", () => {
 
         const total = extensions.length - 1
         expect(
-          screen.getByText(`Showing 2 of ${total} extensions.`)
+          screen.getByText(`Showing 2 matching of ${total} extensions`)
         ).toBeTruthy()
       })
     })
