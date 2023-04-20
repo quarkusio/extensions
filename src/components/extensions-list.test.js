@@ -85,6 +85,12 @@ describe("extension list", () => {
     expect(screen.queryByText(maybeObsolete.name)).toBeInTheDocument()
   })
 
+  it("displays a brief message about how many extensions there are", async () => {
+    // The superceded extension should not be counted
+    const num = extensions.length - 1
+    expect(screen.getByText(`Showing ${num} extensions.`)).toBeTruthy()
+  })
+
   describe("searching and filtering", () => {
     describe("searching", () => {
       it("filters out extensions which do not match the search filter", async () => {
@@ -125,6 +131,15 @@ describe("extension list", () => {
         fireEvent.click(screen.getByText(displayCategory))
 
         expect(screen.queryByText(molluscs.name)).toBeFalsy()
+      })
+
+      it("displays a longer message about how many extensions are still shown", async () => {
+        fireEvent.click(screen.getByText(displayCategory))
+
+        const total = extensions.length - 1
+        expect(
+          screen.getByText(`Showing 2 of ${total} extensions.`)
+        ).toBeTruthy()
       })
     })
 

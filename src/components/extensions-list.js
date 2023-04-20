@@ -21,6 +21,19 @@ const Extensions = styled.ol`
   width: 100%;
 `
 
+const RightColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+`
+
+const ExtensionCount = styled.div`
+  margin-top: 1.25rem;
+  margin-left: 3.25rem;
+  width: 100%;
+`
+
 const ExtensionsList = ({ extensions, categories }) => {
   // Do some pre-filtering for content we will never want, like superseded extensions
   const allExtensions = extensions.filter(extension => !extension.isSuperseded)
@@ -29,10 +42,20 @@ const ExtensionsList = ({ extensions, categories }) => {
 
   // TODO why is this guard necessary?
   if (allExtensions) {
+    // Exclude unlisted extensions from the count, even though we sometimes show them if there's a direct search for it
+    const extensionCount = allExtensions.filter(
+      extension => !extension.metadata.unlisted
+    ).length
+
     // Sort alphabetically, in the absence of a better idea (for now)
     filteredExtensions.sort((a, b) =>
       a.sortableName > b.sortableName ? 1 : -1
     )
+
+    const countMessage =
+      extensionCount === filteredExtensions.length
+        ? `Showing ${extensionCount} extensions.`
+        : `Showing ${filteredExtensions.length} of ${extensionCount} extensions.`
 
     return (
       <FilterableList className="extensions-list">
@@ -41,15 +64,19 @@ const ExtensionsList = ({ extensions, categories }) => {
           categories={categories}
           filterAction={setExtensions}
         />
-        <Extensions>
-          {filteredExtensions.map(extension => {
-            return (
-              <li key={extension.id}>
-                <ExtensionCard extension={extension} />
-              </li>
-            )
-          })}
-        </Extensions>
+        <RightColumn>
+          {" "}
+          <ExtensionCount>{countMessage}</ExtensionCount>
+          <Extensions>
+            {filteredExtensions.map(extension => {
+              return (
+                <li key={extension.id}>
+                  <ExtensionCard extension={extension} />
+                </li>
+              )
+            })}
+          </Extensions>{" "}
+        </RightColumn>
       </FilterableList>
     )
   } else {
