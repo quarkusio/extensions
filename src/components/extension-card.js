@@ -9,10 +9,9 @@ import ExtensionImage from "./extension-image"
 const Card = styled(props => <Link {...props} />)`
   font-size: 3.5em;
   text-align: center;
-  transform: var(--transform);
   margin: 15px;
   padding: 1rem;
-  width: 240px;
+  width: 100%;
   background: var(--white) 0 0 no-repeat padding-box;
   border: ${props =>
     props.$unlisted ? "1px solid var(--grey-0)" : "1px solid var(--grey-1)"};
@@ -50,11 +49,16 @@ const ExtensionName = styled.div`
   letter-spacing: 0;
   color: ${props => (props.$unlisted ? "var(--grey-1)" : "var(--grey-2)")};
   opacity: 1;
-  margin-bottom: var(--a-small-space);
+  width: 100%;
+  padding-bottom: 2px;
+  margin-bottom: 8px;
   line-height: var(--line-height);
-  height: calc(
-    (var(--num-lines) * var(--line-height) + 2px)
-  ); /* Set a cut-off point for the content; the number is the number of lines we are willing to show */
+  min-height: calc(1.05 * var(--line-height));
+  max-height: calc((var(--num-lines)) * var(--line-height));
+  /* Set a cut-off point for the content; the number is the number of lines we are willing to show. 
+  Allow it to drop below if it wants. 
+  Because the description butts to the bottom of the name, this does cause a bit of raggediness internally, but it means 
+  we can shrink cards if all the titles are short. */
   overflow: hidden; /* Cut off the content */
   display: -webkit-box;
   -webkit-line-clamp: var(--num-lines);
@@ -62,19 +66,20 @@ const ExtensionName = styled.div`
 `
 
 const ExtensionDescription = styled.div`
-  --num-lines: 5.05; // Add a bit of padding so g and other hanging letters don't get cut off
+  --num-lines: 3.05; // Add a bit of padding so g and other hanging letters don't get cut off
   --font-size: var(--font-size-16);
   --line-height: calc(var(--font-size) * var(--line-height-multiplier));
   color: var(--grey-2);
   text-align: left;
   font-size: var(--font-size);
   opacity: 1;
-  margin-bottom: 10px;
+  padding-bottom: 2px; /* Give a little more space to dangling gs, without showing the next line of text */
+  margin-bottom: 8px;
   margin-top: 10px;
   line-height: var(--line-height);
-  height: calc(
-    var(--num-lines) * var(--line-height)
-  ); /* Set a cut-off point for the content; the number is the number of lines we are willing to show */
+  min-height: calc((var(--num-lines) - 2) * var(--line-height));
+  max-height: calc((var(--num-lines) + 2) * var(--line-height));
+  /* Set a cut-off point for the content; the number is the number of lines we are willing to show */
   overflow: hidden; /* Cut off the content */
   display: -webkit-box;
   -webkit-line-clamp: var(--num-lines);
