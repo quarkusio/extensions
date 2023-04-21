@@ -15,10 +15,16 @@ const FilterableList = styled.div`
 
 const Extensions = styled.ol`
   list-style: none;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, auto));
+  grid-template-rows: repeat(auto-fill, 1fr);
   width: 100%;
+`
+
+const CardItem = styled.li`
+  height: 100%;
+  width: 100%;
+  display: flex;
 `
 
 const RightColumn = styled.div`
@@ -73,9 +79,9 @@ const ExtensionsList = ({ extensions, categories }) => {
           <Extensions>
             {filteredExtensions.map(extension => {
               return (
-                <li key={extension.id}>
+                <CardItem key={extension.id}>
                   <ExtensionCard extension={extension} />
-                </li>
+                </CardItem>
               )
             })}
           </Extensions>{" "}
