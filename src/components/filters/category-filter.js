@@ -14,7 +14,7 @@ const Element = styled.div`
 `
 
 const Category = styled.li`
-  font-size: var(--font-size-18);
+  font-size: var(--font-size-16);
   color: var(--black);
   display: flex;
   padding: 0;

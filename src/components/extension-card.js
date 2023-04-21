@@ -67,7 +67,7 @@ const ExtensionName = styled.div`
 
 const ExtensionDescription = styled.div`
   --num-lines: 3.05; // Add a bit of padding so g and other hanging letters don't get cut off
-  --font-size: var(--font-size-16);
+  --font-size: var(--font-size-14);
   --line-height: calc(var(--font-size) * var(--line-height-multiplier));
   color: var(--grey-2);
   text-align: left;
