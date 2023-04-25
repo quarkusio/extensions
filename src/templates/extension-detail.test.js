@@ -10,6 +10,9 @@ describe("extension detail page", () => {
     const platform2 = "quarkus-bom-quarkus-platform-descriptor"
     const nonPlatform = "quarkus-non-platform-extensions"
     const version = 0.42
+    const groupId = "gr.something"
+    const artifactId = "art.somethingelse"
+
     const mvnUrl = "http://yup.its.maven/"
     const gitUrl = "https://github.com/someorg/someproject"
     const olderUrl = "old-slug"
@@ -18,6 +21,7 @@ describe("extension detail page", () => {
     const next = {}
 
     const status = ["primordial"]
+
     const extension = {
       name: "JRuby",
       slug: "jruby-slug",
@@ -29,6 +33,8 @@ describe("extension detail page", () => {
         minimumJavaVersion: "5",
         maven: {
           version,
+          groupId,
+          artifactId,
           url: mvnUrl,
           timestamp: "1666716560000",
         },
@@ -70,6 +76,14 @@ describe("extension detail page", () => {
 
     it("renders the category", () => {
       expect(screen.getByText(category)).toBeTruthy()
+    })
+
+    it("renders the artifact id", () => {
+      expect(screen.getByText(artifactId)).toBeInTheDocument()
+    })
+
+    it("renders the group id", () => {
+      expect(screen.getByText(groupId)).toBeInTheDocument()
     })
 
     it("renders the status", () => {

@@ -259,6 +259,18 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "Group ID",
+                text: metadata.maven?.groupId,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Artifact ID",
+                text: metadata.maven?.artifactId,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Built with",
                 fieldName: "builtWithQuarkusCore",
                 metadata,
@@ -392,6 +404,8 @@ export const pageQuery = graphql`
         }
         maven {
           version
+          groupId
+          artifactId
           url
           timestamp
         }
