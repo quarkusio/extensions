@@ -84,6 +84,35 @@ describe("the guide url rewriter", () => {
   })
 
   describe("and a valid link exists for an older version", () => {
+    describe("in quarkus guides format", () => {
+      const existingVersion =
+        "https://quarkus.io/version/2.13/guides/kogito-dmn"
+      const badVersion = "https://quarkus.io/guides/kogito-dmn"
+
+      beforeEach(() => {
+        urlExist.mockImplementation(url => url === existingVersion)
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("maps dead links to live links at the older version", async () => {
+        expect(
+          await rewriteGuideUrl({
+            name: "kind-of-dropped-extension",
+
+            metadata: {
+              guide: badVersion,
+              maven: { version: "2.16.0" },
+            },
+          })
+        ).toBe(existingVersion)
+      })
+    })
+  })
+
+  describe("in camel format", () => {
     const existingVersion =
       "https://camel.apache.org/camel-quarkus/2.16.x/reference/extensions/sortof-lapsed.html"
     const badVersion =
