@@ -14,7 +14,7 @@
     "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^1.4.0",
     "compare-version": "^0.1.2",
-    "date-fns": "^2.29.3",
+    "date-fns": "^2.30.0",
     "encodeurl": "^1.0.2",
     "gatsby": "^4.25.5",
     "gatsby-plugin-feed": "^4.25.0",
