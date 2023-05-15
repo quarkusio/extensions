@@ -16,7 +16,7 @@
     "compare-version": "^0.1.2",
     "date-fns": "^2.30.0",
     "encodeurl": "^1.0.2",
-    "gatsby": "^4.25.5",
+    "gatsby": "^4.25.7",
     "gatsby-plugin-feed": "^4.25.0",
     "gatsby-plugin-fontawesome-css": "^1.2.0",
     "gatsby-plugin-image": "^2.22.0",
