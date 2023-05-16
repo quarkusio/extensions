@@ -33,7 +33,7 @@
     "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^4.25.0",
     "js-yaml": "^4.1.0",
-    "mvn-artifact-name-parser": "^6.0.0",
+    "mvn-artifact-name-parser": "^6.1.0",
     "parse-github-url": "^1.0.2",
     "prismjs": "^1.29.0",
     "react": "^18.1.0",
