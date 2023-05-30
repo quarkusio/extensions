@@ -52,8 +52,6 @@ describe("site links", () => {
       "https://twitter.com/quarkusio",
       // TODO remove this exemption as soon as new releases with live guide links are made (the repos are correct, the releases are not)
       "https://quarkus.io/guides/qson",
-      // PR https://github.com/quarkiverse/quarkus-asyncapi/pull/71
-      "https://quarkiverse.github.io/quarkiverse-docs/quarkus-asyncapi-annotation-scanner/dev/",
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
