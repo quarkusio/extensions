@@ -239,7 +239,11 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
       }
     }
 
-    if (body?.data) {
+    if (!body?.data && !body?.data?.repository) {
+      console.warn("Strange artifact for ", artifactId, "- response is", body)
+    }
+
+    if (body?.data && body?.data?.repository) {
       const {
         data: {
           repository: {
