@@ -1,6 +1,7 @@
 const gh = require("parse-github-url")
 const path = require("path")
 const encodeUrl = require("encodeurl")
+const promiseRetry = require("promise-retry")
 
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
@@ -215,31 +216,32 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
     }
   }`
 
-    let body = undefined
-    let count = 0
-
     // We sometimes get bad results back from the git API where json() is null, so do a bit of retrying
-    while (!body?.data && count < 3) {
-      count++
-      const res = await fetch("https://api.github.com/graphql", {
-        method: "POST",
-        body: JSON.stringify({ query }),
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      body = await res.json()
-      if (!body?.data) {
-        console.warn(
-          "Retrying GitHub fetch for",
-          artifactId,
-          "- response is",
-          body
-        )
-      }
-    }
+    const body = await promiseRetry(
+      async () => {
+        const res = await fetch("https://api.github.com/graphql", {
+          method: "POST",
+          body: JSON.stringify({ query }),
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        })
+        const ghBody = await res.json()
+        if (!ghBody?.data) {
+          throw Error(
+            `Unsuccessful GitHub fetch for ${artifactId} - response is ${ghBody}`
+          )
+        }
+        return ghBody
+      },
+      { retries: 4, minTimeout: 4 * 1000 }
+    ).catch(e => {
+      // Do not break the build for this, warn and carry on
+      console.warn(e)
+      return undefined
+    })
 
-    if (!body?.data && !body?.data?.repository) {
+    if (body?.data && !body?.data?.repository) {
       console.warn("Strange artifact for ", artifactId, "- response is", body)
     }
 
