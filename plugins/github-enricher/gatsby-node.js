@@ -229,7 +229,9 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
         const ghBody = await res.json()
         if (!ghBody?.data) {
           throw Error(
-            `Unsuccessful GitHub fetch for ${artifactId} - response is ${ghBody}`
+            `Unsuccessful GitHub fetch for ${artifactId} - response is ${JSON.stringify(
+              ghBody
+            )}`
           )
         }
         return ghBody
@@ -241,8 +243,12 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
       return undefined
     })
 
-    if (body?.data && !body?.data?.repository) {
-      console.warn("Strange artifact for ", artifactId, "- response is", body)
+    if (body?.errors) {
+      console.warn(
+        `Could not get GitHub information for ${artifactId} - response is ${JSON.stringify(
+          body
+        )}`
+      )
     }
 
     if (body?.data && body?.data?.repository) {
@@ -297,7 +303,7 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
       return scmInfo
     } else {
       console.warn(
-        "Cannot read GitHub information, because the API did not return any data."
+        `Cannot read GitHub information ofr ${artifactId}, because the API did not return any data.`
       )
       return scmInfo
     }
