@@ -218,7 +218,7 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
 
     // We sometimes get bad results back from the git API where json() is null, so do a bit of retrying
     const body = await promiseRetry(
-      async () => {
+      async retry => {
         const res = await fetch("https://api.github.com/graphql", {
           method: "POST",
           body: JSON.stringify({ query }),
@@ -228,7 +228,7 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
         })
         const ghBody = await res.json()
         if (!ghBody?.data) {
-          throw Error(
+          retry(
             `Unsuccessful GitHub fetch for ${artifactId} - response is ${JSON.stringify(
               ghBody
             )}`
@@ -236,7 +236,7 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
         }
         return ghBody
       },
-      { retries: 4, minTimeout: 4 * 1000 }
+      { retries: 4, minTimeout: 10 * 1000, factor: 5 }
     ).catch(e => {
       // Do not break the build for this, warn and carry on
       console.warn(e)
