@@ -54,15 +54,6 @@ describe("site links", () => {
       "https://quarkus.io/guides/qson",
       // PR https://github.com/quarkiverse/quarkus-asyncapi/pull/71
       "https://quarkiverse.github.io/quarkiverse-docs/quarkus-asyncapi-annotation-scanner/dev/",
-      // See issue https://github.com/apache/camel-quarkus/issues/4964
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/cli-connector.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/datasonnet.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/elasticsearch.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/mapstruct.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/optaplanner.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/smallrye-reactive-messaging.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/xmlsecurity.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/tika.html",
       // See https://github.com/quarkiverse/quarkus-itext/pull/19
       "https://quarkiverse.github.io/quarkiverse-docs/itext/dev/",
     ]
