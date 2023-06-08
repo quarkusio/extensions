@@ -62,7 +62,7 @@ describe("the guide url rewriter", () => {
       const badLink = "https://quarkus.io/guides/rest-really-new"
 
       beforeEach(() => {
-        urlExist.mockImplementation(url => url === validLink)
+        urlExist.mockImplementation(url => Promise.resolve(url === validLink))
       })
 
       afterEach(() => {
@@ -88,7 +88,7 @@ describe("the guide url rewriter", () => {
       const badLink = "https://quarkus.io/guides/kogito-dmn"
 
       beforeEach(() => {
-        urlExist.mockImplementation(url => url === validLink)
+        urlExist.mockImplementation(url => Promise.resolve(url === validLink))
       })
 
       afterEach(() => {
@@ -118,7 +118,7 @@ describe("the guide url rewriter", () => {
         "https://camel.apache.org/camel-quarkus/latest/reference/extensions/sortof-lapsed.html"
 
       beforeEach(() => {
-        urlExist.mockImplementation(url => url === validLink)
+        urlExist.mockImplementation(url => Promise.resolve(url === validLink))
       })
 
       afterEach(() => {
@@ -146,7 +146,7 @@ describe("the guide url rewriter", () => {
         "https://camel.apache.org/camel-quarkus/latest/reference/extensions/hot-off-the-press.html"
 
       beforeEach(() => {
-        urlExist.mockImplementation(url => url === validLink)
+        urlExist.mockImplementation(url => Promise.resolve(url === validLink))
       })
 
       afterEach(() => {
