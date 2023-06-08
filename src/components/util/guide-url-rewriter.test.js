@@ -58,12 +58,11 @@ describe("the guide url rewriter", () => {
     })
 
     describe("and a valid link exists for a snapshot version", () => {
-      const existingVersion =
-        "https://quarkus.io/version/main/guides/rest-really-new"
-      const badVersion = "https://quarkus.io/guides/rest-really-new"
+      const validLink = "https://quarkus.io/version/main/guides/rest-really-new"
+      const badLink = "https://quarkus.io/guides/rest-really-new"
 
       beforeEach(() => {
-        urlExist.mockImplementation(url => url === existingVersion)
+        urlExist.mockImplementation(url => url === validLink)
       })
 
       afterEach(() => {
@@ -75,22 +74,21 @@ describe("the guide url rewriter", () => {
           await rewriteGuideUrl({
             name: "hot-off-the-press-extension",
             metadata: {
-              guide: badVersion,
+              guide: badLink,
             },
           })
-        ).toBe(existingVersion)
+        ).toBe(validLink)
       })
     })
   })
 
   describe("and a valid link exists for an older version", () => {
     describe("in quarkus guides format", () => {
-      const existingVersion =
-        "https://quarkus.io/version/2.13/guides/kogito-dmn"
-      const badVersion = "https://quarkus.io/guides/kogito-dmn"
+      const validLink = "https://quarkus.io/version/2.13/guides/kogito-dmn"
+      const badLink = "https://quarkus.io/guides/kogito-dmn"
 
       beforeEach(() => {
-        urlExist.mockImplementation(url => url === existingVersion)
+        urlExist.mockImplementation(url => url === validLink)
       })
 
       afterEach(() => {
@@ -103,40 +101,68 @@ describe("the guide url rewriter", () => {
             name: "kind-of-dropped-extension",
 
             metadata: {
-              guide: badVersion,
+              guide: badLink,
               maven: { version: "2.16.0" },
             },
           })
-        ).toBe(existingVersion)
+        ).toBe(validLink)
       })
     })
   })
 
   describe("in camel format", () => {
-    const existingVersion =
-      "https://camel.apache.org/camel-quarkus/2.16.x/reference/extensions/sortof-lapsed.html"
-    const badVersion =
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/sortof-lapsed.html"
+    describe("and a valid link exists for an older version", () => {
+      const validLink =
+        "https://camel.apache.org/camel-quarkus/2.16.x/reference/extensions/sortof-lapsed.html"
+      const badLink =
+        "https://camel.apache.org/camel-quarkus/latest/reference/extensions/sortof-lapsed.html"
 
-    beforeEach(() => {
-      urlExist.mockImplementation(url => url === existingVersion)
+      beforeEach(() => {
+        urlExist.mockImplementation(url => url === validLink)
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("maps dead links to live links at the older version", async () => {
+        expect(
+          await rewriteGuideUrl({
+            name: "kind-of-dropped-extension",
+
+            metadata: {
+              guide: badLink,
+              maven: { version: "2.16.0" },
+            },
+          })
+        ).toBe(validLink)
+      })
     })
 
-    afterEach(() => {
-      jest.clearAllMocks()
-    })
+    describe("and a valid link exists for a snapshot version", () => {
+      const validLink =
+        "https://camel.apache.org/camel-quarkus/next/reference/extensions/hot-off-the-press.html"
+      const badLink =
+        "https://camel.apache.org/camel-quarkus/latest/reference/extensions/hot-off-the-press.html"
 
-    it("maps dead links to live links at the older version", async () => {
-      expect(
-        await rewriteGuideUrl({
-          name: "kind-of-dropped-extension",
+      beforeEach(() => {
+        urlExist.mockImplementation(url => url === validLink)
+      })
 
-          metadata: {
-            guide: badVersion,
-            maven: { version: "2.16.0" },
-          },
-        })
-      ).toBe(existingVersion)
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("maps dead links to live snapshot links", async () => {
+        expect(
+          await rewriteGuideUrl({
+            name: "hot-off-the-press-extension",
+            metadata: {
+              guide: badLink,
+            },
+          })
+        ).toBe(validLink)
+      })
     })
   })
 })
