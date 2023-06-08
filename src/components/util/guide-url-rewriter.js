@@ -16,63 +16,37 @@ const rewriteGuideUrl = async ({ name, metadata }) => {
       )
       return undefined
     } else if (metadata?.guide) {
-      let newLink = metadata.guide.replace("guides", "version/main/guides")
-      if (await urlExist(newLink)) {
-        // Don't generate chatter if a link works on retry
-        if (originalLink !== newLink) {
-          console.warn(
-            `Mapping dead guide link ${originalLink} to snapshot version, ${newLink}`
-          )
-        }
-        return newLink
-      } else {
-        // Camel use 'next' for their snapshot links
-        let newLink = metadata.guide.replace("latest", "next")
-        if (await urlExist(newLink)) {
-          // Don't generate chatter if a link works on retry
-          if (originalLink !== newLink) {
-            console.warn(
-              `Mapping dead guide link ${originalLink} to snapshot version, ${newLink}`
-            )
-          }
-          return newLink
-        } else {
+      const transforms = [
+        metadata => metadata.guide.replace("guides", "version/main/guides"),
+        metadata => metadata.guide.replace("latest", "next"),
+        metadata => {
           const approxVersion = metadata.maven?.version.replace(
             /([0-9]+\.[0-9]+\.).+/,
             "$1x"
           )
-          newLink = metadata.guide.replace("latest", approxVersion)
-          if (await urlExist(newLink)) {
-            // Don't generate chatter if a link works on retry
-            // Many of the hits here are cases where the original link redirects and urlExist reports that as not existing
-            // I think it's ok for us to pre-code the redirect, but it's a shame about the chatter
-            if (originalLink !== newLink) {
-              console.log(
-                `Mapping dead (or redirected) guide link ${originalLink} to ${newLink} (specified version)`
-              )
-            }
-            return newLink
-          } else {
-            // Last ditch attempt; check the most n - 1 docs version
-            // This corrects the case where an extension has not yet been included in the
-            // Tactical hardcoding; we should make this less hacky
-            const secondMostRecentVersion = "2.13"
-            newLink = metadata.guide.replace(
-              "/guides/",
-              `/version/${secondMostRecentVersion}/guides/`
-            )
-            if (await urlExist(newLink)) {
-              // Don't generate chatter if a link works on retry
-              // Many of the hits here are cases where the original link redirects and urlExist reports that as not existing
-              // I think it's ok for us to pre-code the redirect, but it's a shame about the chatter
-              if (originalLink !== newLink) {
-                console.log(
-                  `Mapping dead (or redirected) guide link ${originalLink} to ${newLink} (specified version)`
-                )
-              }
-              return newLink
-            }
-          }
+          return metadata.guide.replace("latest", approxVersion)
+        },
+        metadata => {
+          // Last ditch attempt; check the most n - 1 docs version
+          // This corrects the case where an extension has not yet been included in the snapshot
+          // Tactical hardcoding; we should make this less hacky
+          const secondMostRecentVersion = "2.13"
+          return metadata.guide.replace(
+            "/guides/",
+            `/version/${secondMostRecentVersion}/guides/`
+          )
+        },
+      ]
+      for (let i = 0; i < transforms.length; i++) {
+        const transform = transforms[i]
+
+        const newLink = transform(metadata)
+        const newLinkExists = await urlExist(newLink)
+        if (newLinkExists && originalLink !== newLink) {
+          console.warn(
+            `Mapping dead guide link ${originalLink} to a live version, ${newLink}`
+          )
+          return newLink
         }
       }
     }
