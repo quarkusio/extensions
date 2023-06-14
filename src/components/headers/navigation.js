@@ -245,12 +245,9 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/pubNavEntrycations`}>
-          Publications
+        <a href="https://github.com/orgs/quarkusio/projects/13/views/1">
+          Roadmap
         </a>
-      </NavEntry>
-      <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/awards`}>Awards</a>
       </NavEntry>
     </Submenu>
   )
