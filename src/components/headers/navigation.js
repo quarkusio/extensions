@@ -219,7 +219,7 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
-        <a href="https://hub.quarkiverse.io/">Publish Extensions</a>
+        <a href="https://hub.quarkiverse.io/">Share Extensions</a>
       </NavEntry>
     </Submenu>
   )
