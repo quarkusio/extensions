@@ -218,6 +218,9 @@ const Navigation = () => {
           Create Extensions
         </a>
       </NavEntry>
+      <NavEntry>
+        <a href="https://hub.quarkiverse.io/">Publish Extensions</a>
+      </NavEntry>
     </Submenu>
   )
   const community = (
