@@ -65,7 +65,7 @@
     "node-libcurl": "^3.0.0",
     "prettier": "^2.8.8",
     "promise-retry": "^2.0.1",
-    "puppeteer": "^20.2.1",
+    "puppeteer": "^20.8.3",
     "puppeteer-core": "^20.5.0",
     "react-select-event": "^5.5.1",
     "react-test-renderer": "^18.2.0"
