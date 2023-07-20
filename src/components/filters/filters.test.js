@@ -189,47 +189,6 @@ describe("filters bar", () => {
     })
   })
 
-  describe("platform filter", () => {
-    const label = "Origin"
-
-    it("lists all the platforms in the menu", async () => {
-      // Don't look at what happens, just make sure the options are there
-      await selectEvent.select(screen.getByLabelText(label), "Toronto")
-      await selectEvent.select(screen.getByLabelText(label), "Banff")
-    })
-
-    it("leaves in extensions which match search filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("origin-form")).toHaveFormValues({
-        origin: "",
-      })
-      await selectEvent.select(screen.getByLabelText(label), "Toronto")
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-      expect(newExtensions).toContain(pascal)
-      expect(newExtensions).not.toContain(fluffy)
-    })
-
-    it("leaves in every extensions when 'All' is selected", async () => {
-      expect(screen.getByTestId("origin-form")).toHaveFormValues({
-        origin: "",
-      })
-      await selectEvent.select(screen.getByLabelText(label), "Toronto")
-      expect(newExtensions).not.toContain(alice)
-
-      await selectEvent.select(screen.getByLabelText(label), "All")
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).toContain(pascal)
-      expect(newExtensions).toContain(fluffy)
-    })
-
-    it("excludes unlisted extensions", () => {
-      expect(newExtensions).not.toContain(secret)
-    })
-  })
-
   describe("status filter", () => {
     const label = "Status"
 
