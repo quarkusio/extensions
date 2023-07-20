@@ -2,7 +2,6 @@ import React from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import ExtensionsList from "./extensions-list"
-import selectEvent from "react-select-event"
 
 describe("extension list", () => {
   const category = "jewellery"
@@ -140,34 +139,6 @@ describe("extension list", () => {
         expect(
           screen.getByText(`Showing 2 matching of ${total} extensions`)
         ).toBeTruthy()
-      })
-    })
-
-    describe("platform filter", () => {
-      const label = "Origin"
-
-      it("lists all the platforms in the menu", async () => {
-        // Don't look at what happens, just make sure the options are there
-        await selectEvent.select(screen.getByLabelText(label), "A Mine")
-        await selectEvent.select(
-          screen.getByLabelText(label),
-          "Bottom Of The Garden"
-        )
-      })
-
-      it("leaves in extensions which match search filter and filters out extensions which do not match", async () => {
-        expect(screen.queryByText(ruby.name)).toBeTruthy()
-        expect(screen.queryByText(diamond.name)).toBeTruthy()
-        expect(screen.queryByText(molluscs.name)).toBeTruthy()
-
-        expect(screen.getByTestId("origin-form")).toHaveFormValues({
-          origin: "",
-        })
-        await selectEvent.select(screen.getByLabelText(label), "A Mine")
-
-        expect(screen.queryByText(ruby.name)).toBeFalsy()
-        expect(screen.queryByText(diamond.name)).toBeTruthy()
-        expect(screen.queryByText(molluscs.name)).toBeFalsy()
       })
     })
   })

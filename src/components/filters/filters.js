@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import styled from "styled-components"
 import CategoryFilter from "./category-filter"
 import Search from "./search"
-import PlatformFilter from "./platform-filter"
 import StatusFilter from "./status-filter"
 
 const FilterBar = styled.aside`
@@ -17,7 +16,7 @@ const FilterBar = styled.aside`
 
 const filterExtensions = (
   extensions,
-  { regex, categoryFilter, platformFilter, statusFilter, compatibilityFilter }
+  { regex, categoryFilter, statusFilter, compatibilityFilter }
 ) => {
   return (
     extensions
@@ -35,14 +34,6 @@ const filterExtensions = (
           extension.metadata.categories?.find(category =>
             categoryFilter.includes(category.toLowerCase())
           )
-      )
-      .filter(
-        extension =>
-          platformFilter.length === 0 ||
-          (extension.platforms &&
-            extension.platforms?.find(platform =>
-              platformFilter.includes(platform)
-            ))
       )
       .filter(
         extension =>
@@ -64,19 +55,15 @@ const filterExtensions = (
 const Filters = ({ extensions, categories, filterAction }) => {
   const [regex, setRegex] = useState(".*")
   const [categoryFilter, setCategoryFilter] = useState([])
-  const [platformFilter, setPlatformFilter] = useState([])
   const [statusFilter, setStatusFilter] = useState([])
   const [compatibilityFilter, setCompatibilityFilter] = useState([])
 
   const filters = {
     regex,
     categoryFilter,
-    platformFilter,
     statusFilter,
     compatibilityFilter,
   }
-
-  const platforms = extensions.map(extension => extension.platforms).flat()
 
   const filteredExtensions = filterExtensions(extensions, filters)
 
@@ -85,7 +72,6 @@ const Filters = ({ extensions, categories, filterAction }) => {
   const dependencyList = [
     regex,
     categoryFilter,
-    platformFilter,
     statusFilter,
     compatibilityFilter,
   ]
@@ -98,7 +84,6 @@ const Filters = ({ extensions, categories, filterAction }) => {
     <FilterBar className="filters">
       <Search searcher={setRegex} />
       <StatusFilter extensions={extensions} filterer={setStatusFilter} />
-      <PlatformFilter options={platforms} filterer={setPlatformFilter} />
       <CategoryFilter categories={categories} filterer={setCategoryFilter} />
     </FilterBar>
   )
