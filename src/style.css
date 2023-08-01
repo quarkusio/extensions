@@ -16,7 +16,7 @@ html {
     --link-dark-bg: #9BCAFA;
     --link-light-bg: #1259A5;
     --link-hover: --red;
-    --link-visited: #AA4494;
+    --link-visited: #1259A5;
 
     --cta-hover: var(--link-hover);
 
@@ -100,10 +100,12 @@ html {
 }
 
 :link {
+    color: var(--link);
     text-decoration: none;
 }
 
 :visited {
+    color: var(--link-visited);
     text-decoration: none;
 }
 
