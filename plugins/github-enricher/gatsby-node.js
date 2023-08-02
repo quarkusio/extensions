@@ -145,6 +145,14 @@ async function fetchScmLabel(scmUrl, artifactId) {
 }
 
 const fetchScmInfo = async (scmUrl, artifactId, labels) => {
+  if (scmUrl && scmUrl.includes("github.com")) {
+    return fetchGitHubInfo(scmUrl, artifactId, labels)
+  } else {
+    return { url: scmUrl }
+  }
+}
+
+const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
   // TODO we can just treat label as an array, almost
   const labelFilterString = labels
     ? `, filterBy: { labels:  [${labels.map(label => `"${label}"`).join()}] }`

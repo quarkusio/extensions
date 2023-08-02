@@ -325,7 +325,9 @@ const ExtensionDetailTemplate = ({
                   extension.metadata?.sourceControl?.url?.includes("gitlab")
                     ? "git-alt"
                     : undefined,
-                text: extension.metadata?.sourceControl?.project,
+                text: extension.metadata?.sourceControl?.project
+                  ? extension.metadata?.sourceControl?.project
+                  : "source",
                 url: extension.metadata?.sourceControl?.url,
               }}
             />
