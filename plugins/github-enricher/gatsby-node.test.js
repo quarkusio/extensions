@@ -56,7 +56,7 @@ describe("the github data handler", () => {
   describe("for an extension with a scm-url", () => {
     const projectName = "somerepo"
     const ownerName = "someuser"
-    const url = "http://gitsomething.com/someuser/" + projectName
+    const url = "http://fake.github.com/someuser/" + projectName
     const issuesUrl = url + "/issues"
     const avatarUrl = "http://something.com/someuser.png"
     const socialMediaPreviewUrl =
@@ -192,7 +192,7 @@ describe("the github data handler", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
           extensionYamlUrl:
-            "http://gitsomething.com/someuser/somerepo/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+            "http://fake.github.com/someuser/somerepo/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
         })
       )
     })
@@ -361,7 +361,7 @@ describe("the github data handler", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
           extensionYamlUrl:
-            "http://gitsomething.com/someuser/somerepo/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+            "http://fake.github.com/someuser/somerepo/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
         })
       )
     })
@@ -379,7 +379,7 @@ describe("the github data handler", () => {
   })
 
   describe("where the social media preview has been set by the user", () => {
-    const url = "http://gitsomething.com/someuser/aproject"
+    const url = "http://fake.github.com/someuser/aproject"
 
     const avatarUrl = "http://something.com/someuser.png"
     const socialMediaPreviewUrl =
