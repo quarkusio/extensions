@@ -11,6 +11,9 @@ const defaultOptions = {
   nodeType: "Extension",
 }
 
+// To avoid hitting the git rate limiter retrieving information we already know, cache what we can
+let repoCache = {}
+
 let getLabels
 
 // TODO ideally we would cache between builds, too
@@ -74,6 +77,11 @@ exports.onPreBootstrap = async ({}) => {
 
   // Return the promise so the execution waits for us
   return yaml
+}
+
+exports.onPluginInit = () => {
+  // Clear the cache
+  repoCache = {}
 }
 
 exports.onCreateNode = async (
@@ -153,6 +161,8 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
 }
 
 const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
+  const cachedScmInfo = repoCache[scmUrl]
+
   // TODO we can just treat label as an array, almost
   const labelFilterString = labels
     ? `, filterBy: { labels:  [${labels.map(label => `"${label}"`).join()}] }`
@@ -173,7 +183,12 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
       )
     : scmUrl + "/issues"
 
-  const scmInfo = { url: scmUrl, project, issuesUrl, labels }
+  // Take what we have cached as a base, if we have it
+  const scmInfo = cachedScmInfo ? cachedScmInfo : { url: scmUrl, project }
+
+  // Always set the issuesUrl and labels since the cached one might be invalid
+  scmInfo.issuesUrl = issuesUrl
+  scmInfo.labels = labels
 
   const accessToken = process.env.GITHUB_TOKEN
 
@@ -181,26 +196,11 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
   // Batching this may not help that much because rate limits are done on query complexity and cost,
   // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
   if (accessToken) {
-    const query = `
-  query {
-    repository(owner:"${coords.owner}", name:"${coords.name}") {
-      issues(states:OPEN, ${labelFilterString}) {
+    const issuesQuery = `issues(states:OPEN, ${labelFilterString}) {
         totalCount
-      }
-    
-      defaultBranchRef {
-        name
-      }
-    
-      metaInfs: object(expression: "HEAD:runtime/src/main/resources/META-INF/") {
-        ... on Tree {
-          entries {
-            path
-          }
-        }
-      }
-    
-      subfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources/META-INF/") {
+      }`
+
+    const subfoldersQuery = `subfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources/META-INF/") {
         ... on Tree {
           entries {
             path
@@ -214,8 +214,42 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
             path
           }
         }
+      }`
+
+    let query
+    if (cachedScmInfo) {
+      if (labels) {
+        query = `query {
+        repository(owner:"${coords.owner}", name:"${coords.name}") {
+          ${issuesQuery}
+          
+          ${subfoldersQuery}
+    }`
+      } else {
+        query = `query {
+        repository(owner:"${coords.owner}", name:"${coords.name}") {          
+          ${subfoldersQuery}
+    }`
+      }
+    } else {
+      query = `query {
+    repository(owner:"${coords.owner}", name:"${coords.name}") {
+      ${issuesQuery}
+    
+      defaultBranchRef {
+        name
+      }
+    
+      metaInfs: object(expression: "HEAD:runtime/src/main/resources/META-INF/") {
+        ... on Tree {
+          entries {
+            path
+          }
+        }
       }
       
+      ${subfoldersQuery}
+         
       openGraphImageUrl
     }
     
@@ -223,6 +257,7 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         avatarUrl
     }
   }`
+    }
 
     // We sometimes get bad results back from the git API where json() is null, so do a bit of retrying
     const body = await promiseRetry(
@@ -308,10 +343,13 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         scmInfo.socialImage = openGraphImageUrl
       }
 
+      // Save this information for the next time
+      repoCache[scmUrl] = scmInfo
+
       return scmInfo
     } else {
       console.warn(
-        `Cannot read GitHub information ofr ${artifactId}, because the API did not return any data.`
+        `Cannot read GitHub information for ${artifactId}, because the API did not return any data.`
       )
       return scmInfo
     }
