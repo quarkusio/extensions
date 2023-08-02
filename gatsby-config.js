@@ -29,6 +29,7 @@ module.exports = {
         nodeType: "SourceControlInfo",
         imagePath: "ownerImageUrl",
         name: "ownerImage",
+        skipUndefinedUrls: true,
       },
     },
     `gatsby-plugin-image`,
