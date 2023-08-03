@@ -6,6 +6,7 @@ const promiseRetry = require("promise-retry")
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { labelExtractor } = require("./labelExtractor")
+const { findSponsor, clearCaches, dumpCache } = require("./sponsorFinder")
 const PersistableCache = require("./persistable-cache")
 
 const defaultOptions = {
@@ -95,6 +96,7 @@ exports.onPluginInit = () => {
   // Clear the cache; we read from the cache later on, so this shouldn't affect the persistence between builds
   // This is mostly needed for tests, since we can't add new methods beyond what the API defines to this file
   repoCache.flushAll()
+  clearCaches()
 }
 
 exports.onCreateNode = async (
@@ -216,6 +218,9 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
 
   const scmInfo = { url: scmUrl, project }
 
+  scmInfo.companies = await findSponsor(coords.owner, project)
+
+  // Always set the issuesUrl and labels since the cached one might be invalid
   scmInfo.issuesUrl = issuesUrl
   scmInfo.labels = labels
 
@@ -312,7 +317,7 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         }
         return ghBody
       },
-      { retries: 3 }
+      { retries: 3, minTimeout: 10 * 1000 }
     ).catch(e => {
       // Do not break the build for this, warn and carry on
       console.warn(e)
@@ -406,6 +411,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   type SourceControlInfo implements Node @noinfer {
     url: String
     ownerImageUrl: String
+    companies: [String]
     extensionYamlUrl: String
     issues: String
     socialImage: File @link(by: "url")
