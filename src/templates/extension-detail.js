@@ -311,6 +311,14 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "Lead Sponsor",
+                plural: "Lead Sponsors",
+                fieldName: "companies",
+                metadata: metadata?.sourceControl, // we need to get it out of the top level, not the metadata
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Repository",
                 text: "Maven Central", // Hardcode for now, until we need to support other repos
                 url: metadata.maven?.url,
@@ -416,6 +424,7 @@ export const pageQuery = graphql`
           project
           issues
           issuesUrl
+          companies
           projectImage {
             childImageSharp {
               gatsbyImageData(width: 220)

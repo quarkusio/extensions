@@ -30,6 +30,8 @@ describe("the github data handler", () => {
     }
 
     beforeAll(async () => {
+      fetch.mockResolvedValue({ json: jest.fn().mockResolvedValue({}) })
+
       await onPreBootstrap({ cache, actions: {} })
       // Don't count what the pre bootstrap does in our checking
       fetch.resetMocks()
