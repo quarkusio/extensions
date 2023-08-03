@@ -1,6 +1,7 @@
-const PuppeteerEnvironment = require("jest-environment-puppeteer")
+const JestPuppeteerEnvironment =
+  require("jest-environment-puppeteer").TestEnvironment
 
-class DebugEnv extends PuppeteerEnvironment {
+class DebugEnv extends JestPuppeteerEnvironment {
   async handleTestEvent(event) {
     const ignoredEvents = [
       "setup",
@@ -11,6 +12,7 @@ class DebugEnv extends PuppeteerEnvironment {
       "run_start",
       "run_describe_start",
       "test_start",
+      "test_started",
       "hook_start",
       "hook_success",
       "test_fn_start",

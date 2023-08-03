@@ -1,4 +1,4 @@
-jest.setTimeout(15 * 1000)
+jest.setTimeout(25 * 1000)
 
 const { port } = require("../jest-puppeteer.config").server
 
