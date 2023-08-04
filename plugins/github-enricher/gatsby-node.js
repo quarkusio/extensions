@@ -160,8 +160,24 @@ const fetchScmInfo = async (scmUrl, artifactId, labels) => {
   }
 }
 
+function cache(ghJson, scmUrl, hasLabelInfo) {
+  // This is a shallow copy but that's ok since the scm info object is pretty flat
+  // This copy *should* be unneeded, but better safe than sorry
+  const jsonCopy = { ...ghJson }
+
+  // We do *not* want to cache artifact-specific extension paths or the issue count (if there are labels)
+  delete jsonCopy["subfolderMetaInfs"]
+  delete jsonCopy["shortenedSubfolderMetaInfs"]
+
+  if (hasLabelInfo) {
+    delete jsonCopy["issues"]
+    delete jsonCopy["issuesUrl"]
+  }
+  repoCache[scmUrl] = jsonCopy // Save this information for the next time
+}
+
 const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
-  const cachedScmInfo = repoCache[scmUrl]
+  const hasCache = scmUrl in repoCache
 
   // TODO we can just treat label as an array, almost
   const labelFilterString = labels
@@ -183,10 +199,10 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
       )
     : scmUrl + "/issues"
 
-  // Take what we have cached as a base, if we have it
-  const scmInfo = cachedScmInfo ? cachedScmInfo : { url: scmUrl, project }
+  const shouldUpdateIssueCount = !hasCache || labels
 
-  // Always set the issuesUrl and labels since the cached one might be invalid
+  const scmInfo = { url: scmUrl, project }
+
   scmInfo.issuesUrl = issuesUrl
   scmInfo.labels = labels
 
@@ -217,18 +233,22 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
       }`
 
     let query
-    if (cachedScmInfo) {
+    if (hasCache) {
       if (labels) {
         query = `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {
           ${issuesQuery}
           
           ${subfoldersQuery}
+          }
     }`
       } else {
+        // TODO we could probably drop this in the case where we already had a yaml file at the top level, but we also want to know if there are others at sub-levels,
+        // so that we can handle the ambiguity
         query = `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {          
           ${subfoldersQuery}
+          }
     }`
       }
     } else {
@@ -279,7 +299,7 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         }
         return ghBody
       },
-      { retries: 4, minTimeout: 10 * 1000, factor: 5 }
+      { retries: 3 }
     ).catch(e => {
       // Do not break the build for this, warn and carry on
       console.warn(e)
@@ -295,19 +315,28 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
     }
 
     if (body?.data && body?.data?.repository) {
+      const returnedData = body.data
+      const cachedData = repoCache[scmUrl]
+      const returnedRepository = returnedData?.repository
+      const cachedRepository = cachedData?.repository
+
+      // Merge the cache and what we got passed back this time
+      const data = { ...cachedData, ...returnedData }
+      // We also need to do a deep merge of the repository object
+      data.repository = { ...cachedRepository, ...returnedRepository }
+      cache(data, scmUrl, labels)
+
       const {
-        data: {
-          repository: {
-            issues: { totalCount },
-            defaultBranchRef,
-            metaInfs,
-            subfolderMetaInfs,
-            shortenedSubfolderMetaInfs,
-            openGraphImageUrl,
-          },
-          repositoryOwner: { avatarUrl },
+        repository: {
+          issues: { totalCount },
+          defaultBranchRef,
+          metaInfs,
+          subfolderMetaInfs,
+          shortenedSubfolderMetaInfs,
+          openGraphImageUrl,
         },
-      } = body
+        repositoryOwner: { avatarUrl },
+      } = data
 
       const allMetaInfs = [
         ...(metaInfs ? metaInfs.entries : []),
@@ -342,9 +371,6 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
       if (isCustomizedSocialMediaPreview) {
         scmInfo.socialImage = openGraphImageUrl
       }
-
-      // Save this information for the next time
-      repoCache[scmUrl] = scmInfo
 
       return scmInfo
     } else {
