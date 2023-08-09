@@ -311,8 +311,8 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
-                name: "Lead Sponsor",
-                plural: "Lead Sponsors",
+                name: "Sponsor",
+                plural: "Sponsors",
                 fieldName: "companies",
                 metadata: metadata?.sourceControl, // we need to get it out of the top level, not the metadata
               }}
