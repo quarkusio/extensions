@@ -1,0 +1,27 @@
+name: 'Install node and dependencies'
+description: 'This action runs setup-node to install node and then runs npm ci or reads the dependencies from a cache.'
+inputs:
+  node-version:
+    required: true
+    description: 'The node version to install.'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.node-version }}
+        cache: "npm" # this only caches global dependencies
+
+    - uses: actions/cache@v3
+      id: npm-cache
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
+
+    - name: Install Dependencies
+      run: npm ci --prefer-offline
+      shell: bash
