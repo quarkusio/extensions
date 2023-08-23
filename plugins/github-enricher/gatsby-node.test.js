@@ -18,6 +18,8 @@ createRemoteFileNode.mockReturnValue({ absolutePath: "/hi/there/path.ext" })
 const actions = { createNode }
 const internal = { type: "Extension" }
 
+const cache = { get: jest.fn() }
+
 describe("the github data handler", () => {
   describe("for an extension with no scm information", () => {
     const metadata = {}
@@ -28,7 +30,7 @@ describe("the github data handler", () => {
     }
 
     beforeAll(async () => {
-      await onPreBootstrap({ actions: {} })
+      await onPreBootstrap({ cache, actions: {} })
       // Don't count what the pre bootstrap does in our checking
       fetch.resetMocks()
       return onCreateNode({
@@ -114,7 +116,7 @@ describe("the github data handler", () => {
       // Needed so that we do not short circuit the git path
       process.env.GITHUB_TOKEN = "test_value"
       fetch.mockResolvedValue(gitHubApi)
-      await onPreBootstrap({ actions: {} })
+      await onPreBootstrap({ cache, actions: {} })
     })
 
     beforeEach(async () => {
@@ -462,7 +464,7 @@ describe("the github data handler", () => {
       // Needed so that we do not short circuit the git path
       process.env.GITHUB_TOKEN = "test_value"
       fetch.mockResolvedValue(gitHubApi)
-      await onPreBootstrap({ actions: {} })
+      await onPreBootstrap({ cache, actions: {} })
     })
 
     beforeEach(async () => {
@@ -788,7 +790,7 @@ describe("the github data handler", () => {
       // Needed so that we do not short circuit the git path
       process.env.GITHUB_TOKEN = "social-preview-test_value"
       fetch.mockResolvedValue(gitHubApi)
-      await onPreBootstrap({ actions: {} })
+      await onPreBootstrap({ cache, actions: {} })
       return onCreateNode({
         node,
         createContentDigest,

@@ -14,13 +14,18 @@ const defaultOptions = {
 
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 60 * 60 * 24
+// TODO we need some jitter on this or we will still have 'mass cache extinctions'
 const cacheOptions = { stdTTL: 2 * DAY_IN_SECONDS }
+const CACHE_KEY = "github-api-for-repos"
 const repoCache = new PersistableCache(cacheOptions)
 
 let getLabels
 
-// TODO ideally we would cache between builds, too
-exports.onPreBootstrap = async ({}) => {
+
+exports.onPreBootstrap = async ({ cache }) => {
+  const cacheContents = await cache.get(CACHE_KEY)
+  repoCache.ingestDump(cacheContents)
+
   const res = await fetch(
     "https://raw.githubusercontent.com/quarkusio/quarkus/main/.github/quarkus-github-bot.yml",
     {
@@ -82,8 +87,13 @@ exports.onPreBootstrap = async ({}) => {
   return yaml
 }
 
+exports.onPostBootstrap = async ({ cache }) => {
+  cache.set(CACHE_KEY, repoCache.dump())
+}
+
 exports.onPluginInit = () => {
-  // Clear the cache
+  // Clear the cache; we read from the cache later on, so this shouldn't affect the persistence between builds
+  // This is mostly needed for tests, since we can't add new methods beyond what the API defines to this file
   repoCache.flushAll()
 }
 
