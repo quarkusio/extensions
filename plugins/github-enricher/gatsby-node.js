@@ -2,6 +2,7 @@ const gh = require("parse-github-url")
 const path = require("path")
 const encodeUrl = require("encodeurl")
 const promiseRetry = require("promise-retry")
+const NodeCache = require("node-cache")
 
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
@@ -12,7 +13,9 @@ const defaultOptions = {
 }
 
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
-let repoCache = {}
+const DAY_IN_SECONDS = 60 * 60 * 24
+const cacheOptions = { stdTTL: 2 * DAY_IN_SECONDS }
+const repoCache = new NodeCache(cacheOptions)
 
 let getLabels
 
@@ -81,7 +84,7 @@ exports.onPreBootstrap = async ({}) => {
 
 exports.onPluginInit = () => {
   // Clear the cache
-  repoCache = {}
+  repoCache.flushAll()
 }
 
 exports.onCreateNode = async (
@@ -173,11 +176,11 @@ function cache(ghJson, scmUrl, hasLabelInfo) {
     delete jsonCopy["issues"]
     delete jsonCopy["issuesUrl"]
   }
-  repoCache[scmUrl] = jsonCopy // Save this information for the next time
+  repoCache.set(scmUrl, jsonCopy) // Save this information for the next time
 }
 
 const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
-  const hasCache = scmUrl in repoCache
+  const hasCache = repoCache.has(scmUrl)
 
   // TODO we can just treat label as an array, almost
   const labelFilterString = labels
@@ -193,10 +196,10 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
 
   const issuesUrl = labels
     ? encodeUrl(
-        scmUrl +
-          "/issues?q=is%3Aopen+is%3Aissue+label%3A" +
-          labels.map(label => label.replace("/", "%2F")).join(",")
-      )
+      scmUrl +
+      "/issues?q=is%3Aopen+is%3Aissue+label%3A" +
+      labels.map(label => label.replace("/", "%2F")).join(",")
+    )
     : scmUrl + "/issues"
 
   const shouldUpdateIssueCount = !hasCache || labels
@@ -293,8 +296,8 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         if (!ghBody?.data) {
           retry(
             `Unsuccessful GitHub fetch for ${artifactId} - response is ${JSON.stringify(
-              ghBody
-            )}`
+              ghBody,
+            )}`,
           )
         }
         return ghBody
@@ -316,7 +319,7 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
 
     if (body?.data && body?.data?.repository) {
       const returnedData = body.data
-      const cachedData = repoCache[scmUrl]
+      const cachedData = repoCache.get(scmUrl)
       const returnedRepository = returnedData?.repository
       const cachedRepository = cachedData?.repository
 
