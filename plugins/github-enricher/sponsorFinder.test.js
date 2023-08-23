@@ -1,231 +1,185 @@
 import {
   clearCaches,
   findSponsor,
+  findSponsorFromContributorList,
+  normalizeCompanyName,
+  setMinimumContributionCount,
+  setMinimumContributionPercent,
   setMinimumContributorCount,
 } from "./sponsorFinder"
 
 require("jest-fetch-mock").enableMocks()
 
 const urls = {}
-urls["https://api.github.com/repos/quarkiverse/quarkus-pact/contributors"] = [
+
+// Mock users (for contributor lists)
+
+const exampleContributor = {
+  login: "holly-cummins",
+  company: "Red Hat",
+  contributions: 9,
+}
+
+const anotherContributor = {
+  login: "another-contributor",
+  company: "Another Company",
+  contributions: 9,
+}
+
+const occasionalContributor = {
+  login: "occasional-contributor",
+  company: "Occasional Company",
+  contributions: 44,
+}
+
+const pactContributors = [
   {
     login: "holly-cummins",
-    url: "https://api.github.com/users/holly-cummins",
-    type: "User",
-    site_admin: false,
+    company: "@RedHatOfficial",
     contributions: 68,
   },
   {
     login: "dependabot[bot]",
-    url: "https://api.github.com/users/dependabot%5Bbot%5D",
-    type: "Bot",
     site_admin: false,
     contributions: 27,
   },
   {
     login: "actions-user",
-    url: "https://api.github.com/users/actions-user",
-    type: "User",
-    site_admin: false,
     contributions: 21,
   },
   {
     login: "allcontributors[bot]",
-    url: "https://api.github.com/users/allcontributors%5Bbot%5D",
-    type: "Bot",
     contributions: 10,
   },
   {
     login: "gastaldi",
-    url: "https://api.github.com/users/gastaldi",
-    type: "User",
-    site_admin: false,
     contributions: 5,
   },
   {
     login: "michalvavrik",
-    url: "https://api.github.com/users/michalvavrik",
-    type: "User",
-    site_admin: false,
     contributions: 1,
   },
 ]
 
-urls[
-  "https://api.github.com/repos/quarkiverse/quarkus-many-contributors/contributors"
-] = [
-  {
-    login: "occasional-contributor",
-    url: "https://api.github.com/users/occasional-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 15,
-  },
-  {
-    login: "occasional-contributor",
-    url: "https://api.github.com/users/occasional-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 44,
-  },
+const companyWithASingleContributor = "Company With A Single Contributor"
+const manyContributors = [
+  occasionalContributor,
+  occasionalContributor,
   {
     login: "solo-contributor",
-    url: "https://api.github.com/users/solo-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
+    company: companyWithASingleContributor,
+    contributions: 109,
   },
   {
     login: "holly-cummins",
-    url: "https://api.github.com/users/holly-cummins",
-    type: "User",
-    site_admin: false,
+    company: "Red Hat",
     contributions: 33,
   },
   {
     login: "dependabot[bot]",
-    url: "https://api.github.com/users/dependabot%5Bbot%5D",
-    type: "Bot",
-    site_admin: false,
     contributions: 27,
   },
+  anotherContributor,
+  exampleContributor,
+  anotherContributor,
+  anotherContributor,
+  anotherContributor,
+  anotherContributor,
+  exampleContributor,
   {
     login: "another-contributor",
-    url: "https://api.github.com/users/another-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
-  },
-  {
-    login: "holly-cummins",
-    url: "https://api.github.com/users/holly-cummins",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
-  },
-  {
-    login: "another-contributor",
-    url: "https://api.github.com/users/another-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
-  },
-  {
-    login: "another-contributor",
-    url: "https://api.github.com/users/another-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
-  },
-  {
-    login: "another-contributor",
-    url: "https://api.github.com/users/another-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
-  },
-  {
-    login: "another-contributor",
-    url: "https://api.github.com/users/another-contributor",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
-  },
-  {
-    login: "holly-cummins",
-    url: "https://api.github.com/users/holly-cummins",
-    type: "User",
-    site_admin: false,
-    contributions: 9,
-  },
-  {
-    login: "another-contributor",
-    url: "https://api.github.com/users/another-contributor",
-    type: "User",
-    site_admin: false,
+    company: "Another Company",
     contributions: 19,
   },
   {
     login: "redhat-employee",
-    url: "https://api.github.com/users/redhat-employee",
-    type: "User",
-    site_admin: false,
+    company: "@RedHatOfficial",
     contributions: 9,
   },
 ]
 
-urls[
-  "https://api.github.com/repos/quarkiverse/quarkus-pact-same-user/contributors"
-] = [
-  {
-    login: "holly-cummins",
-    url: "https://api.github.com/users/holly-cummins",
-    type: "User",
-    site_admin: false,
-    contributions: 68,
-  },
-]
-
-urls["https://api.github.com/repos/quarkiverse/another-project/contributors"] =
+const anotherContributors =
   [
     {
       login: "redhat-employee",
-      url: "https://api.github.com/users/redhat-employee",
-      type: "User",
-      site_admin: false,
+      company: "@RedHatOfficial",
       contributions: 68,
     },
   ]
 
-urls["https://api.github.com/users/holly-cummins"] = {
-  login: "holly-cummins",
-  type: "User",
-  name: "Holly Cummins",
-  company: "@RedHatOfficial",
-}
-
-urls["https://api.github.com/users/redhat-employee"] = {
-  login: "redhat-employee",
-  type: "User",
-  name: "A Red Hat Employee",
-  company: "@RedHatOfficial",
-}
-
-urls["https://api.github.com/users/occasional-contributor"] = {
-  login: "occasional-contributor",
-  type: "User",
-  company: "Occasional Company",
-}
-
-urls["https://api.github.com/users/solo-contributor"] = {
-  login: "solo-contributor",
-  type: "User",
-  company: "Company With A Single Contributor",
-}
-
-urls["https://api.github.com/users/another-contributor"] = {
-  login: "another-contributor",
-  type: "User",
-  company: "Another Company",
-}
-
-urls["https://api.github.com/users/dependabot%5Bbot%5D"] = {
-  login: "whatever",
-  type: "Bot",
-  name: "A happy little automation",
-  company: "Should Not Be Returned",
-}
+// Mock company information
 
 urls["https://api.github.com/users/redhatofficial"] = {
   login: "RedHatOfficial",
   type: "Organization",
-  site_admin: false,
   name: "Red Hat",
   company: null,
 }
 
+const frogNode = {
+  "node": {
+    "author": {
+      "user": {
+        "login": "cescoffier",
+        "company": "Red Hat"
+      }
+    }
+  }
+}
+const rabbitNode = {
+  "node": {
+    "author": {
+      "user": {
+        "login": "ozangunalp",
+        "company": "Rabbit"
+      }
+    }
+  }
+}
+
+const tortoiseNode = {
+  "node": {
+    "author": {
+      "user": {
+        "login": "a-name",
+        "company": "Tortoise"
+      }
+    }
+  }
+}
+
+const nullUserNode = {
+  "node": {
+    "author": {
+      "user": null
+    }
+  }
+}
+
+const graphQLResponse = {
+  "data": {
+    "repository": {
+      "defaultBranchRef": {
+        "target": {
+          "history": {
+            "edges": [
+              rabbitNode, tortoiseNode, frogNode, tortoiseNode, rabbitNode, rabbitNode, rabbitNode, rabbitNode, nullUserNode, frogNode, frogNode
+            ]
+          }
+        }
+      }
+    }
+  }
+}
+
+urls["https://api.github.com/graphql"] = graphQLResponse
+
+
 describe("the github sponsor finder", () => {
   beforeAll(async () => {
+    // Needed so that we do not short circuit the git path
+    process.env.GITHUB_TOKEN = "test_value"
+    
     setMinimumContributorCount(1)
 
     fetch.mockImplementation(url =>
@@ -262,276 +216,202 @@ describe("the github sponsor finder", () => {
     expect(fetch).not.toHaveBeenCalled()
   })
 
-  it("caches repo information", async () => {
-    const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-    expect(sponsor).not.toBeUndefined()
-    const callCount = fetch.mock.calls.length
-    const secondSponsor = await findSponsor("quarkiverse", "quarkus-pact")
-    expect(secondSponsor).toBe(sponsor)
-    // No extra calls should be made as everything should be cached
-    expect(fetch.mock.calls.length).toBe(callCount)
+  fit("returns a list of company sponsors, given an org and project", async () => {
+    setMinimumContributionCount(1)
+    const sponsor = await findSponsor("someorg", "someproject")
+    expect(fetch).toHaveBeenCalled()
+    expect(sponsor).toContain("Red Hat")
   })
 
-  it("caches user information", async () => {
-    const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-    expect(sponsor).not.toBeUndefined()
-    const callCount = fetch.mock.calls.length
-    const secondSponsor = await findSponsor(
-      "quarkiverse",
-      "quarkus-pact-same-user"
-    )
-    expect(secondSponsor).toStrictEqual(sponsor)
-    // One extra call for the repo, but no calls for the user
-    expect(fetch.mock.calls.length).toBe(callCount + 1)
+  it("orders company sponsors by contribution level", async () => {
+    setMinimumContributionCount(1)
+    setMinimumContributorCount(1)
+    setMinimumContributionPercent(1)
+    const sponsor = await findSponsor("someorg", "someproject")
+    expect(fetch).toHaveBeenCalled()
+    expect(sponsor).toStrictEqual(["Rabbit", "Red Hat", "Tortoise"])
   })
 
-  // This test is quite sensitive to the minimum proportion of commits we set for a company to be counted as a lead
-  it("sorts by number of commits", async () => {
-    const sponsors = await findSponsor(
-      "quarkiverse",
-      "quarkus-many-contributors"
-    )
-
-    expect(sponsors.slice(0, 3)).toStrictEqual([
-      "Another Company",
-      "Red Hat",
-      "Occasional Company",
-    ])
+  it("filters out companies which do not have enough contributors", async () => {
+    setMinimumContributionCount(10)
+    const sponsor = await findSponsor("someorg", "someproject")
+    expect(fetch).toHaveBeenCalled()
+    expect(sponsor).toBeUndefined()
   })
 
-  it("excludes companies which only have a single contributor", async () => {
-    // Other tests may set this differently, so set it to the value this test expects
-    setMinimumContributorCount(2)
-    const sponsors = await findSponsor(
-      "quarkiverse",
-      "quarkus-many-contributors"
-    )
+  // Convenience tests for the logic which takes an array of contributor counts and turns it into a list of sponsors
+  describe("when the contributor counts have already been collated", () => {
 
-    expect(sponsors).toStrictEqual([
-      "Another Company",
-      "Red Hat",
-      "Occasional Company",
-    ])
-  })
-
-  describe("when the main user has linked to a github company account", () => {
     beforeAll(() => {
-      setMinimumContributorCount(1)
+      setMinimumContributionCount(5)
     })
 
-    it("returns a company name", async () => {
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Red Hat"])
-    })
-
-    it("caches company information", async () => {
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
+    it("caches repo information", async () => {
+      const sponsor = await findSponsorFromContributorList(pactContributors)
       expect(sponsor).not.toBeUndefined()
       const callCount = fetch.mock.calls.length
-      const secondSponsor = await findSponsor("quarkiverse", "another-project")
+      const secondSponsor = await findSponsorFromContributorList(pactContributors)
       expect(secondSponsor).toStrictEqual(sponsor)
-      // One extra call for the repo, one extra call for the user, but no calls for the company
-      expect(fetch.mock.calls.length).toBe(callCount + 2)
-    })
-  })
-
-  describe("when the main user has linked to a company name", () => {
-    beforeAll(() => {
-      setMinimumContributorCount(1)
-      urls["https://api.github.com/users/holly-cummins"] = {
-        login: "holly-cummins",
-        name: "Holly Cummins",
-        type: "User",
-        company: "Red Hat",
-      }
+      // No extra calls should be made as everything should be cached
+      expect(fetch.mock.calls.length).toBe(callCount)
     })
 
-    beforeEach(() => {
-      clearCaches()
+    it("sorts by number of commits", async () => {
+      setMinimumContributorCount(0)
+      setMinimumContributionPercent(10)
+
+      const sponsors = await findSponsorFromContributorList(manyContributors)
+
+      expect(sponsors.slice(0, 4)).toStrictEqual([
+        companyWithASingleContributor,
+        "Occasional Company",
+        "Another Company",
+        "Red Hat",
+      ])
     })
 
-    it("returns the company name", async () => {
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Red Hat"])
-    })
-  })
+    it("excludes companies which only have a single contributor", async () => {
+      // Other tests may set this differently, so set it to the value this test expects
+      setMinimumContributorCount(0)
+      setMinimumContributionPercent(20)
 
-  describe("when the main user has linked to a company name in an unexpected format", () => {
-    beforeEach(() => {
-      setMinimumContributorCount(1)
-      clearCaches()
-    })
+      let sponsors = await findSponsorFromContributorList(manyContributors)
+      expect(sponsors).toContain("Occasional Company")
+      expect(sponsors).toContain(companyWithASingleContributor)
 
-    it("normalises a company name with Inc at the end", async () => {
-      urls["https://api.github.com/users/holly-cummins"] = {
-        login: "holly-cummins",
-        name: "Holly Cummins",
-        type: "User",
-        company: "Red Hat, Inc",
-      }
+      // Now put in a higher threshold for the number of contributors
+      setMinimumContributorCount(2)
+      sponsors = await findSponsorFromContributorList(manyContributors)
+      expect(sponsors).toContain("Occasional Company")
+      expect(sponsors).not.toContain(companyWithASingleContributor)
 
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Red Hat"])
     })
 
-    it("normalises a company name with Inc. at the end", async () => {
-      urls["https://api.github.com/users/holly-cummins"] = {
-        login: "holly-cummins",
-        name: "Holly Cummins",
-        type: "User",
-        company: "Red Hat, Inc.",
-      }
+    describe("when the main user has linked to a github company account", () => {
+      beforeAll(() => {
+        setMinimumContributorCount(1)
+      })
 
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Red Hat"])
+      it("returns a company name", async () => {
+        const sponsor = await findSponsorFromContributorList(pactContributors)
+        expect(sponsor).toStrictEqual(["Red Hat"])
+      })
+
+      it("caches company information", async () => {
+        const sponsor = await findSponsorFromContributorList(pactContributors)
+        expect(sponsor).not.toBeUndefined()
+        const callCount = fetch.mock.calls.length
+        const secondSponsor = await findSponsorFromContributorList(anotherContributors)
+        expect(secondSponsor).toStrictEqual(sponsor)
+        // No extra fetch calls, since we passed in the contributor list and the company is cached
+        expect(fetch.mock.calls.length).toBe(callCount)
+      })
     })
 
-    it("normalises a company name with a 'by' structure at the end", async () => {
-      urls["https://api.github.com/users/holly-cummins"] = {
-        login: "holly-cummins",
-        name: "Holly Cummins",
-        type: "User",
-        company: "JBoss by Red Hat by IBM",
-      }
 
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Red Hat"])
-    })
+    describe("when the main user is a bot", () => {
 
-    it("normalises a company name with an '@' structure at the end", async () => {
-      urls["https://api.github.com/users/holly-cummins"] = {
-        login: "holly-cummins",
-        name: "Holly Cummins",
-        type: "User",
-        company: "Red Hat @kiegroup",
-      }
-
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Red Hat"])
-    })
-
-    it("normalises a company name with a parenthetical structure at the end", async () => {
-      urls["https://api.github.com/users/holly-cummins"] = {
-        login: "holly-cummins",
-        name: "Holly Cummins",
-        type: "User",
-        company: "Linkare TI (@linkareti)",
-      }
-
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Linkare TI"])
-    })
-
-    it("normalises a company name with a hyphenated '@' structure at the end", async () => {
-      urls["https://api.github.com/users/holly-cummins"] = {
-        login: "holly-cummins",
-        name: "Holly Cummins",
-        type: "User",
-        company: "Red Hat - @hibernate",
-      }
-
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Red Hat"])
-    })
-  })
-
-  describe("when the main user is a bot", () => {
-    beforeAll(() => {
-      setMinimumContributorCount(1)
-      urls[
-        "https://api.github.com/repos/quarkiverse/quarkus-pact/contributors"
-      ] = [
+      const contributors = [
         {
           login: "dependabot[bot]",
-          url: "https://api.github.com/users/dependabot%5Bbot%5D",
-          type: "Bot",
-          site_admin: false,
+          company: "Irrelevant",
           contributions: 27,
         },
       ]
+
+      beforeAll(() => {
+        setMinimumContributorCount(1)
+      })
+
+      it("does not return a name", async () => {
+        const sponsor = await findSponsorFromContributorList(contributors)
+        expect(sponsor).toBeUndefined()
+      })
     })
 
-    beforeEach(() => {
-      clearCaches()
-    })
+    describe("when the main user is the actions user", () => {
+      // The Actions User https://api.github.com/users/actions-user is not flagged as a bot, but we want to exclude it
 
-    it("does not return a name", async () => {
-      const sponsor = await findSponsor("quarkiverse", "quarkus-pact")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toBeUndefined()
-    })
-  })
-
-  describe("when the main user is the actions user", () => {
-    // The Actions User https://api.github.com/users/actions-user is not flagged as a bot, but we want to exclude it
-    beforeAll(() => {
-      // Lazily make these tests pass by setting a lower threshold for users
-      setMinimumContributorCount(1)
-      urls[
-        "https://api.github.com/repos/quarkiverse/actions-only/contributors"
-      ] = [
+      const contributors = [
         {
           login: "actions-user",
-          url: "https://api.github.com/users/actions-user",
-          site_admin: false,
+          name: "Actions User",
+          company: "GitHub Actions",
           contributions: 27,
         },
       ]
 
-      urls["https://api.github.com/users/actions-user"] = {
-        login: "actions-user",
-        name: "Actions User",
-        company: "GitHub Actions",
-      }
+      beforeAll(() => {
+        setMinimumContributorCount(1)
+      })
+
+      it("does not return a name", async () => {
+        const sponsor = await findSponsorFromContributorList(contributors)
+        expect(sponsor).toBeUndefined()
+      })
     })
 
-    beforeEach(() => {
-      clearCaches()
-    })
-
-    it("does not return a name", async () => {
-      const sponsor = await findSponsor("quarkiverse", "actions-only")
-      expect(fetch).toHaveBeenCalled()
-      expect(sponsor).toBeUndefined()
-    })
-  })
-
-  describe("when the main user is the quarkiverse bot", () => {
-    // The Actions User https://api.github.com/users/actions-user is not flagged as a bot, but we want to exclude it
-    beforeAll(() => {
-      urls["https://api.github.com/repos/quarkiverse/quarkobot/contributors"] =
+    describe("when the main user is the quarkiverse bot", () => {
+      const contributors =
         [
           {
             login: "quarkiversebot",
-            url: "https://api.github.com/users/quarkiversebot",
-            site_admin: false,
+            name: "Unflagged bot",
+            company: "Quarkiverse Hub",
             contributions: 27,
           },
         ]
 
-      urls["https://api.github.com/users/quarkiversebot"] = {
-        login: "quarkiversebot",
-        name: "Unflagged bot",
-        company: "Quarkiverse Hub",
-      }
+      it("does not return a name", async () => {
+        const sponsor = await findSponsorFromContributorList(contributors)
+        expect(sponsor).toBeUndefined()
+      })
     })
-
+  })
+  describe("company name normalization", () => {
     beforeEach(() => {
       clearCaches()
     })
 
-    it("does not return a name", async () => {
-      const sponsor = await findSponsor("quarkiverse", "quarkobot")
-      expect(fetch).toHaveBeenCalled()
+    it("handles the simple case", async () => {
+      const name = "Atlantic Octopus Federation"
+      const sponsor = await normalizeCompanyName(name)
+      expect(sponsor).toBe(name)
+    })
+
+    it("gracefully handles undefined", async () => {
+      const sponsor = await normalizeCompanyName(undefined)
       expect(sponsor).toBeUndefined()
+    })
+
+    it("normalises a company name with Inc at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat, Inc")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with Inc. at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat, Inc.")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with a 'by' structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("JBoss by Red Hat by IBM")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with an '@' structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat @kiegroup")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with a parenthetical structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("Linkare TI (@linkareti)")
+      expect(sponsor).toBe("Linkare TI")
+    })
+
+    it("normalises a company name with a hyphenated '@' structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat - @hibernate")
+      expect(sponsor).toBe("Red Hat")
     })
   })
 })

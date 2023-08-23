@@ -6,8 +6,8 @@ const promiseRetry = require("promise-retry")
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { labelExtractor } = require("./labelExtractor")
-const { findSponsor, clearCaches, dumpCache } = require("./sponsorFinder")
 const PersistableCache = require("./persistable-cache")
+const { findSponsor, clearCaches, saveSponsorCache, initSponsorCache } = require("./sponsorFinder")
 
 const defaultOptions = {
   nodeType: "Extension",
@@ -15,7 +15,6 @@ const defaultOptions = {
 
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 60 * 60 * 24
-// TODO we need some jitter on this or we will still have 'mass cache extinctions'
 const cacheOptions = { stdTTL: 2 * DAY_IN_SECONDS }
 const CACHE_KEY = "github-api-for-repos"
 const repoCache = new PersistableCache(cacheOptions)
@@ -26,6 +25,7 @@ let getLabels
 exports.onPreBootstrap = async ({ cache }) => {
   const cacheContents = await cache.get(CACHE_KEY)
   repoCache.ingestDump(cacheContents)
+  initSponsorCache(cache)
 
   const res = await fetch(
     "https://raw.githubusercontent.com/quarkusio/quarkus/main/.github/quarkus-github-bot.yml",
@@ -90,6 +90,7 @@ exports.onPreBootstrap = async ({ cache }) => {
 
 exports.onPostBootstrap = async ({ cache }) => {
   cache.set(CACHE_KEY, repoCache.dump())
+  saveSponsorCache(cache)
 }
 
 exports.onPluginInit = () => {
@@ -213,8 +214,6 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
       labels.map(label => label.replace("/", "%2F")).join(",")
     )
     : scmUrl + "/issues"
-
-  const shouldUpdateIssueCount = !hasCache || labels
 
   const scmInfo = { url: scmUrl, project }
 
