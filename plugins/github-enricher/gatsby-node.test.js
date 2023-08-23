@@ -257,7 +257,6 @@ describe("the github data handler", () => {
         {}
       )
 
-      // It should call the GitHub API again ...
       expect(fetch).toHaveBeenCalledTimes(callCount + 1)
 
       // But it should not ask for the issues
