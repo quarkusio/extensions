@@ -2,11 +2,11 @@ const gh = require("parse-github-url")
 const path = require("path")
 const encodeUrl = require("encodeurl")
 const promiseRetry = require("promise-retry")
-const NodeCache = require("node-cache")
 
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { labelExtractor } = require("./labelExtractor")
+const PersistableCache = require("./persistable-cache")
 
 const defaultOptions = {
   nodeType: "Extension",
@@ -15,7 +15,7 @@ const defaultOptions = {
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 60 * 60 * 24
 const cacheOptions = { stdTTL: 2 * DAY_IN_SECONDS }
-const repoCache = new NodeCache(cacheOptions)
+const repoCache = new PersistableCache(cacheOptions)
 
 let getLabels
 
