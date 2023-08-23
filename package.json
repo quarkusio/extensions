@@ -35,6 +35,7 @@
     "jest-environment-puppeteer": "^9.0.0",
     "js-yaml": "^4.1.0",
     "mvn-artifact-name-parser": "^6.1.0",
+    "node-cache": "^5.1.2",
     "parse-github-url": "^1.0.2",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
