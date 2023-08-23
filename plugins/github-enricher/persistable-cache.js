@@ -1,13 +1,18 @@
 const NodeCache = require("node-cache")
 
+// Vary the time to live by up to 20% to avoid mass extinctions
+const jitterRatio = 0.2
+
 class PersistableCache {
 
   constructor(options) {
+    this.options = options
     this.cache = new NodeCache(options)
   }
 
   set(key, value) {
-    return this.cache.set(key, value)
+    const jitteredTtl = this.options?.stdTTL ? this.options.stdTTL + (this.options.stdTTL) * jitterRatio * (Math.random() - 0.5) : 0
+    return this.cache.set(key, value, jitteredTtl)
 
   }
 
