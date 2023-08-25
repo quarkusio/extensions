@@ -43,6 +43,7 @@ describe("extension detail page", () => {
           issuesUrl: "https://github.com/someorg/someproject/issues",
           project: "jproject",
           issues: 839,
+          sponsors: ["Automatically Calculated Sponsor"],
           ownerImage: {
             childImageSharp: {
               gatsbyImageData: "specific-logo.png",
@@ -156,6 +157,11 @@ describe("extension detail page", () => {
       )
     })
 
+    it("renders a sponsor field", () => {
+      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.getByText("Automatically Calculated Sponsor")).toBeTruthy()
+    })
+
     it("renders a message about duplicate extensions", () => {
       expect(screen.getByText(/older version/)).toBeTruthy()
       expect(screen.getByText(/old-group-id/)).toBeTruthy()
@@ -178,6 +184,134 @@ describe("extension detail page", () => {
     it("does not render an unlisted banner", async () => {
       const link = await screen.queryByText(/nlisted/)
       expect(link).toBeNull()
+    })
+  })
+
+  describe("for an extension with a manual sponsor override", () => {
+    const gitUrl = "https://github.com/someorg/someproject"
+
+    const previous = {}
+    const next = {}
+
+    const extension = {
+      name: "JRuby",
+      slug: "jruby-slug",
+      metadata: {
+        sponsors: ["Manual Sponsor Override"],
+        sourceControl: {
+          url: gitUrl,
+          issuesUrl: "https://github.com/someorg/someproject/issues",
+          project: "jproject",
+          issues: 839,
+          sponsors: ["Automatically Calculated Sponsor"],
+          ownerImage: {
+            childImageSharp: {
+              gatsbyImageData: "specific-logo.png",
+            },
+          },
+        },
+      }
+    }
+
+    beforeEach(() => {
+      render(
+        <ExtensionDetailTemplate
+          data={{ extension, previous, next }}
+          location="/somewhere"
+        />
+      )
+    })
+
+    it("renders a sponsor field, using the information manually set", () => {
+      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.getByText("Manual Sponsor Override")).toBeTruthy()
+      expect(screen.queryByText("Automatically Calculated Sponsor")).toBeFalsy()
+    })
+  })
+
+  // People are likely to get the type of the Sponsors field wrong, so we should be tolerant
+  describe("for an extension with a manual sponsor override which is not an array", () => {
+    const gitUrl = "https://github.com/someorg/someproject"
+
+    const previous = {}
+    const next = {}
+
+    const extension = {
+      name: "JRuby",
+      slug: "jruby-slug",
+      metadata: {
+        sponsors: "Manual Sponsor Override",
+        sourceControl: {
+          url: gitUrl,
+          issuesUrl: "https://github.com/someorg/someproject/issues",
+          project: "jproject",
+          issues: 839,
+          sponsors: ["Automatically Calculated Sponsor"],
+          ownerImage: {
+            childImageSharp: {
+              gatsbyImageData: "specific-logo.png",
+            },
+          },
+        },
+      }
+    }
+
+    beforeEach(() => {
+      render(
+        <ExtensionDetailTemplate
+          data={{ extension, previous, next }}
+          location="/somewhere"
+        />
+      )
+    })
+
+    it("renders a sponsor field, using the information manually set", () => {
+      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.queryByText("Automatically Calculated Sponsor")).toBeFalsy()
+      expect(screen.getByText("Manual Sponsor Override")).toBeTruthy()
+    })
+  })
+
+  // People are likely to get the name of the Sponsors field wrong, so we should be tolerant
+  describe("for an extension with a manual sponsor override which uses the non-plural name", () => {
+    const gitUrl = "https://github.com/someorg/someproject"
+
+    const previous = {}
+    const next = {}
+
+    const extension = {
+      name: "JRuby",
+      slug: "jruby-slug",
+      metadata: {
+        sponsor: "Manual Sponsor Override",
+        sourceControl: {
+          url: gitUrl,
+          issuesUrl: "https://github.com/someorg/someproject/issues",
+          project: "jproject",
+          issues: 839,
+          sponsors: ["Automatically Calculated Sponsor"],
+          ownerImage: {
+            childImageSharp: {
+              gatsbyImageData: "specific-logo.png",
+            },
+          },
+        },
+      }
+    }
+
+    beforeEach(() => {
+      render(
+        <ExtensionDetailTemplate
+          data={{ extension, previous, next }}
+          location="/somewhere"
+        />
+      )
+    })
+
+    it("renders a sponsor field, using the information manually set", () => {
+      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.getByText("Manual Sponsor Override")).toBeTruthy()
+      expect(screen.queryByText("Automatically Calculated Sponsor")).toBeFalsy()
     })
   })
 
@@ -262,6 +396,9 @@ describe("extension detail page", () => {
       expect(link).toBeNull()
 
       link = await screen.queryByText("Issues")
+      expect(link).toBeNull()
+
+      link = await screen.queryByText("Sponsor")
       expect(link).toBeNull()
     })
 

@@ -145,9 +145,9 @@ const Filename = styled.span`
 `
 
 const ExtensionDetailTemplate = ({
-  data: { extension, previous, next },
-  location,
-}) => {
+                                   data: { extension, previous, next },
+                                   location,
+                                 }) => {
   const {
     name,
     description,
@@ -164,6 +164,9 @@ const ExtensionDetailTemplate = ({
   ) : (
     "quarkus-extension.yaml"
   )
+
+  // Honour manual overrides of the sponsor
+  const sponsors = metadata?.sponsors || metadata?.sponsor || metadata.sourceControl?.sponsors
 
   return (
     <Layout location={location}>
@@ -313,8 +316,7 @@ const ExtensionDetailTemplate = ({
               data={{
                 name: "Sponsor",
                 plural: "Sponsors",
-                fieldName: "companies",
-                metadata: metadata?.sourceControl, // we need to get it out of the top level, not the metadata
+                text: sponsors,
               }}
             />
             <ExtensionMetadata
@@ -406,6 +408,8 @@ export const pageQuery = graphql`
         builtWithQuarkusCore
         unlisted
         minimumJavaVersion
+        sponsor
+        sponsors
         icon {
           childImageSharp {
             gatsbyImageData(width: 220)
@@ -424,7 +428,7 @@ export const pageQuery = graphql`
           project
           issues
           issuesUrl
-          companies
+          sponsors
           projectImage {
             childImageSharp {
               gatsbyImageData(width: 220)
