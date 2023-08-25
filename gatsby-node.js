@@ -12,11 +12,11 @@ const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 
 exports.sourceNodes = async ({
-  actions,
-  getCache,
-  createNodeId,
-  createContentDigest,
-}) => {
+                               actions,
+                               getCache,
+                               createNodeId,
+                               createContentDigest,
+                             }) => {
   const { createNode } = actions
   const {
     data: { extensions },
@@ -121,7 +121,7 @@ exports.sourceNodes = async ({
 
     node.metadata.builtWithQuarkusCore = node.metadata[
       "built-with-quarkus-core"
-    ]?.replace(/.*:/, "") // Some versions have a bit of maven GAV hanging around in the version string, strip it
+      ]?.replace(/.*:/, "") // Some versions have a bit of maven GAV hanging around in the version string, strip it
     delete node.metadata["built-with-quarkus-core"]
 
     node.metadata.minimumJavaVersion = node.metadata["minimum-java-version"]
@@ -265,6 +265,8 @@ exports.createSchemaCustomization = ({ actions }) => {
       maven: MavenInfo
       sourceControl: SourceControlInfo @link(by: "key")
       icon: File @link(by: "url")
+      sponsors: [String]
+      sponsor: String
     }
     
     type MavenInfo {

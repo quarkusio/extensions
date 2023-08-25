@@ -217,7 +217,7 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
 
   const scmInfo = { url: scmUrl, project }
 
-  scmInfo.companies = await findSponsor(coords.owner, project)
+  scmInfo.sponsors = await findSponsor(coords.owner, project)
 
   // Always set the issuesUrl and labels since the cached one might be invalid
   scmInfo.issuesUrl = issuesUrl
