@@ -15,7 +15,7 @@ const urls = {}
 // Mock users (for contributor lists)
 
 const exampleContributor = {
-  login: "holly-cummins",
+  login: "a-person",
   company: "Red Hat",
   contributions: 9,
 }
@@ -34,7 +34,7 @@ const occasionalContributor = {
 
 const pactContributors = [
   {
-    login: "holly-cummins",
+    login: "a-person",
     company: "@RedHatOfficial",
     contributions: 68,
   },
@@ -71,7 +71,7 @@ const manyContributors = [
     contributions: 109,
   },
   {
-    login: "holly-cummins",
+    login: "a-person",
     company: "Red Hat",
     contributions: 33,
   },
@@ -120,7 +120,7 @@ const frogNode = {
   "node": {
     "author": {
       "user": {
-        "login": "cescoffier",
+        "login": "someonewhoribbits",
         "company": "Red Hat"
       }
     }
@@ -130,7 +130,7 @@ const rabbitNode = {
   "node": {
     "author": {
       "user": {
-        "login": "ozangunalp",
+        "login": "someonebouncy",
         "company": "Rabbit"
       }
     }
@@ -171,20 +171,34 @@ const graphQLResponse = {
     }
   }
 }
-
 urls["https://api.github.com/graphql"] = graphQLResponse
 
+// Every company in our tests should be in this file or we will filter them out
+const namedSponsorsOptIn = "named-sponsors:\n" +
+  "  - Red Hat\n" +
+  "  - Another Company\n" +
+  "  - Occasional Company\n" +
+  `  - ${companyWithASingleContributor}\n` +
+  "  - Tortoise\n" +
+  "  - Rabbit\n" +
+  "  - Frog\n"
+
+urls["https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"] = namedSponsorsOptIn
 
 describe("the github sponsor finder", () => {
   beforeAll(async () => {
     // Needed so that we do not short circuit the git path
     process.env.GITHUB_TOKEN = "test_value"
-    
+
     setMinimumContributorCount(1)
+
 
     fetch.mockImplementation(url =>
       Promise.resolve({
         json: jest
+          .fn()
+          .mockResolvedValue(urls[url] || urls[url.toLowerCase()] || {}),
+        text: jest
           .fn()
           .mockResolvedValue(urls[url] || urls[url.toLowerCase()] || {}),
       })
@@ -216,7 +230,7 @@ describe("the github sponsor finder", () => {
     expect(fetch).not.toHaveBeenCalled()
   })
 
-  fit("returns a list of company sponsors, given an org and project", async () => {
+  it("returns a list of company sponsors, given an org and project", async () => {
     setMinimumContributionCount(1)
     const sponsor = await findSponsor("someorg", "someproject")
     expect(fetch).toHaveBeenCalled()
@@ -286,6 +300,26 @@ describe("the github sponsor finder", () => {
       expect(sponsors).not.toContain(companyWithASingleContributor)
 
     })
+
+    describe("when there is a narrow opt-in list", () => {
+      beforeEach(() => {
+        setMinimumContributorCount(0)
+        setMinimumContributionPercent(5)
+
+        urls["https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"] = "named-sponsors:\n" +
+          "  - Red Hat"
+      })
+
+      afterAll(() => {
+        urls["https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"] = namedSponsorsOptIn
+      })
+
+      it("filters out companies that are not in the opt-in list", async () => {
+        let sponsors = await findSponsorFromContributorList(manyContributors)
+        expect(sponsors).toStrictEqual(["Red Hat"])
+      })
+    })
+
 
     describe("when the main user has linked to a github company account", () => {
       beforeAll(() => {
