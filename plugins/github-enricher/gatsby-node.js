@@ -413,6 +413,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     companies: [String]
     extensionYamlUrl: String
     issues: String
+    sponsors: [String]
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
   }

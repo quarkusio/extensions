@@ -1,6 +1,7 @@
 //const fetch = require("node-fetch")  // TODO is this needed when test mocks it?
 const promiseRetry = require("promise-retry")
 const PersistableCache = require("./persistable-cache")
+const yaml = require("js-yaml")
 
 // We store the raw(ish) data in the cache, to avoid repeating the same request multiple times and upsetting the github rate limiter
 const DAY_IN_SECONDS = 60 * 60 * 24
@@ -15,10 +16,12 @@ const repoContributorCache = new PersistableCache(cacheOptions)
 const companyCache = new PersistableCache(cacheOptions)
 
 let minimumContributorCount = 2
-let minimumContributionPercent = 25
+let minimumContributionPercent = 20
 
-// Only consider users who have a minimum number of contributions
-let minContributionCount = 3
+// Only consider users who have a significant number of contributions
+let minContributionCount = 5
+
+let optedInSponsors
 
 const setMinimumContributionPercent = n => {
   minimumContributionPercent = n
@@ -41,6 +44,31 @@ const initSponsorCache = (cache) => {
 const clearCaches = () => {
   repoContributorCache.flushAll()
   companyCache.flushAll()
+  optedInSponsors = undefined
+}
+
+const getSponsorData = async () => {
+  if (!optedInSponsors) {
+    const url = "https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"
+    const res = await fetch(
+      url,
+      {
+        method: "GET",
+      }
+    )
+
+    if (res && res.text) {
+      const yamlString = await res.text()
+
+      const json = yaml.load(yamlString)
+
+      optedInSponsors = await json
+    } else {
+      console.warn("Could not fetch sponsor opt in information from", url, ". Does the file exist?")
+      optedInSponsors = {}
+    }
+  }
+  return optedInSponsors
 }
 
 const getOrSetFromCache = async (cache, key, functionThatReturnsAPromise) => {
@@ -266,7 +294,12 @@ const findSponsorFromContributorList = async (userContributions) => {
       minimumContributionPercent
   )
 
-  const sorted = majorProportions.sort((c, d) => d.commits - c.commits)
+  const sponsorData = await getSponsorData()
+  const namedSponsors = sponsorData["named-sponsors"]
+
+  const onlyOptIns = majorProportions.filter(company => namedSponsors && namedSponsors.includes(company.company))
+
+  const sorted = onlyOptIns.sort((c, d) => d.commits - c.commits)
 
   const answer = sorted.map(val => val.company)
 
@@ -346,8 +379,8 @@ const getCompanyFromGitHubLogin = async company => {
 }
 
 const saveSponsorCache = (cache) => {
-  companyCache.set(COMPANY_CACHE_KEY, companyCache.dump())
-  repoContributorCache.set(REPO_CACHE_KEY, repoContributorCache.dump())
+  cache.set(COMPANY_CACHE_KEY, companyCache.dump())
+  cache.set(REPO_CACHE_KEY, repoContributorCache.dump())
 }
 
 module.exports = {
