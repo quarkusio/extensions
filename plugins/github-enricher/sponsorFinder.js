@@ -49,7 +49,7 @@ const clearCaches = () => {
 
 const getSponsorData = async () => {
   if (!optedInSponsors) {
-    const url = "https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"
+    const url = "https://raw.githubusercontent.com/quarkusio/quarkus-extension-catalog/main/named-contributing-orgs-opt-in.yml"
     const res = await fetch(
       url,
       {

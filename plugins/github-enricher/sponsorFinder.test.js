@@ -10,6 +10,7 @@ import {
 
 require("jest-fetch-mock").enableMocks()
 
+const optInUrl = "https://raw.githubusercontent.com/quarkusio/quarkus-extension-catalog/main/named-contributing-orgs-opt-in.yml"
 const urls = {}
 
 // Mock users (for contributor lists)
@@ -183,7 +184,7 @@ const namedSponsorsOptIn = "named-sponsors:\n" +
   "  - Rabbit\n" +
   "  - Frog\n"
 
-urls["https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"] = namedSponsorsOptIn
+urls[optInUrl] = namedSponsorsOptIn
 
 describe("the github sponsor finder", () => {
   beforeAll(async () => {
@@ -306,12 +307,12 @@ describe("the github sponsor finder", () => {
         setMinimumContributorCount(0)
         setMinimumContributionPercent(5)
 
-        urls["https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"] = "named-sponsors:\n" +
+        urls[optInUrl] = "named-sponsors:\n" +
           "  - Red Hat"
       })
 
       afterAll(() => {
-        urls["https://raw.githubusercontent.com/quarkiverse/quarkiverse/main/named-contributor-opt-in.yml"] = namedSponsorsOptIn
+        urls[optInUrl] = namedSponsorsOptIn
       })
 
       it("filters out companies that are not in the opt-in list", async () => {
