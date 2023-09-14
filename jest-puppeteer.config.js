@@ -5,7 +5,7 @@ require("dotenv").config()
 
 module.exports = {
   server: {
-    command: "./node_modules/.bin/gatsby serve",
+    command: `./node_modules/.bin/gatsby serve ${process.env.PATH_PREFIX_FLAG}`,
     // The protocol, host and port are used to check when your application
     // is ready to accept requests. Your tests will start running as soon as
     // the port on that host and protocol are available.
