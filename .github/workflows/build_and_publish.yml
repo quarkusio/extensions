@@ -50,7 +50,7 @@ jobs:
           node-version: '14'
           cache: "npm" # this only caches global dependencies
       - run: npm ci --prefer-offline
-      - run: npm run build
+      - run: npm run build --prefix-paths
         env:
           NODE_ENV: production
           GATSBY_ACTIVE_ENV: production
@@ -72,20 +72,17 @@ jobs:
     # Only try and deploy on merged code
     if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
     needs: [ unit-test, build ]
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v3 # not needed for the code, but needed for the git config
+      - name: Download Built site
+        uses: dawidd6/action-download-artifact@v2
         with:
-          node-version: '14'
-          cache: "npm" # this only caches global dependencies
-      - run: npm ci --prefer-offline
-      - uses: enriikke/gatsby-gh-pages-action@v2
+          name: site
+          path: site
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
-          access-token: ${{ secrets.ACCESS_TOKEN }}
-          deploy-branch: pages
-          gatsby-args: --prefix-paths
-        env:
-          NODE_ENV: production
-          GATSBY_ACTIVE_ENV: production
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          folder: site # The folder the action should deploy.
