@@ -1,3 +1,5 @@
+const { segmentSnippet } = require("./src/analytics/segment-snippet.js")
+
 module.exports = {
   pathPrefix: "extensions",
 
@@ -133,6 +135,19 @@ module.exports = {
       },
     },
     `gatsby-plugin-fontawesome-css`,
-    "gatsby-plugin-styled-components",
+    "gatsby-plugin-styled-components", {
+      resolve: `gatsby-plugin-segment-js`,
+      options: {
+        // segment write key for your production environment
+        // when process.env.NODE_ENV === 'production'
+        // required; non-empty string
+        prodKey: process.env.SEGMENT_KEY,
+
+        // when process.env.NODE_ENV === 'development'
+        // optional; non-empty string
+        devKey: process.env.SEGMENT_KEY,
+        customSnippet: segmentSnippet
+      }
+    }
   ],
 }
