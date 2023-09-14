@@ -22,6 +22,7 @@
     "gatsby-plugin-image": "^2.22.0",
     "gatsby-plugin-manifest": "^4.25.0",
     "gatsby-plugin-remote-images": "https://github.com/holly-cummins/gatsby-plugin-remote-images/releases/download/3.6.6-amended/gatsby-plugin-remote-images-3.6.6.tgz",
+    "gatsby-plugin-segment-js": "^5.0.0",
     "gatsby-plugin-sharp": "^4.25.1",
     "gatsby-plugin-styled-components": "^5.25.0",
     "gatsby-remark-copy-linked-files": "^5.25.0",
