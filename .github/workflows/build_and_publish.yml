@@ -61,12 +61,6 @@ jobs:
           CI: true
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
-      - name: Deploy
-        if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: public # The folder the action should deploy.
-          branch: pages
       - name: Store PR id
         if: "github.event_name == 'pull_request'"
         run: echo ${{ github.event.number }} > ./public/pr-id.txt
@@ -79,7 +73,7 @@ jobs:
           retention-days: 4
   deploy:
     # Only try and deploy on merged code
-    if: "'false' == 'no'" # github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
+    if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
     needs: [ unit-test, build ]
     permissions:
       contents: write
@@ -87,7 +81,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3 # not needed for the code, but needed for the git config
       - name: Download Built site
-        uses: dawidd6/action-download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: site
           path: site
