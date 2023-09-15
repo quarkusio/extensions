@@ -50,6 +50,7 @@ jobs:
           node-version: '14'
           cache: "npm" # this only caches global dependencies
       - run: npm ci --prefer-offline
+      - run: npm run clean
       - run: npm run build -- ${{ github.ref_name == 'main' && '--prefix-paths' || '' }}
         env:
           NODE_ENV: production
