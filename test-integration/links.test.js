@@ -56,6 +56,11 @@ describe("site links", () => {
       "https://quarkiverse.github.io/quarkiverse-docs/quarkus-asyncapi-annotation-scanner/dev/",
       // See https://github.com/quarkiverse/quarkus-itext/pull/19
       "https://quarkiverse.github.io/quarkiverse-docs/itext/dev/",
+      // Pending investigation
+      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/atlasmap.html",
+      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/corda.html",
+      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/solr.html",
+      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/vm.html",
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
