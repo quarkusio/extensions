@@ -1,17 +1,13 @@
 import * as React from "react"
 import { library } from "@fortawesome/fontawesome-svg-core"
-import {
-  faAngleRight,
-  faClipboard,
-  faClipboardCheck,
-  faR,
-  faSquareCheck,
-} from "@fortawesome/free-solid-svg-icons"
+import { faAngleRight, faClipboard, faClipboardCheck, faR, faSquareCheck, } from "@fortawesome/free-solid-svg-icons"
 import { faSquare } from "@fortawesome/free-regular-svg-icons"
 import {
   faCreativeCommons,
   faCreativeCommonsBy,
   faGitAlt,
+  faGithub,
+  faGitlab
 } from "@fortawesome/free-brands-svg-icons"
 import Navigation from "./headers/navigation"
 import TitleBand from "./headers/title-band"
@@ -26,7 +22,9 @@ library.add(
   faCreativeCommons,
   faCreativeCommonsBy,
   faR,
-  faGitAlt
+  faGitAlt,
+  faGithub,
+  faGitlab
 )
 
 const Layout = ({ location, title, children }) => {
