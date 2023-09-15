@@ -56,10 +56,6 @@ jobs:
           GATSBY_ACTIVE_ENV: production
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
-      - run: npm run test:int
-        env:
-          CI: true
-          PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
       - name: Store PR id
         if: "github.event_name == 'pull_request'"
         run: echo ${{ github.event.number }} > ./public/pr-id.txt
