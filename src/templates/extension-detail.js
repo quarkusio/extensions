@@ -332,10 +332,10 @@ const ExtensionDetailTemplate = ({
                 name: "Source code",
                 fieldName: "url",
                 icon:
-                  extension.metadata?.sourceControl?.url?.includes("github") ||
-                  extension.metadata?.sourceControl?.url?.includes("gitlab")
-                    ? "git-alt"
-                    : undefined,
+                  extension.metadata?.sourceControl?.url?.includes("github") ? "github" : extension.metadata?.sourceControl?.url?.includes("gitlab") ?
+                    "gitlab" : extension.metadata?.sourceControl?.url?.includes("git")
+                      ? "git-alt"
+                      : undefined,
                 text: extension.metadata?.sourceControl?.project
                   ? extension.metadata?.sourceControl?.project
                   : "source",
