@@ -62,15 +62,15 @@ jobs:
           CI: true
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
       - name: Store PR id
-          if: "github.event_name == 'pull_request'"
-          run: echo ${{ github.event.number }} > ./public/pr-id.txt
-          - name: Publishing directory for PR preview
-            if: "github.event_name == 'pull_request'"
-            uses: actions/upload-artifact@v3
-            with:
-              name: site
-              path: ./public
-              retention-days: 3
+        if: "github.event_name == 'pull_request'"
+        run: echo ${{ github.event.number }} > ./public/pr-id.txt
+      - name: Publishing directory for PR preview
+        if: "github.event_name == 'pull_request'"
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: ./public
+          retention-days: 4
   deploy:
     # Only try and deploy on merged code
     if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
