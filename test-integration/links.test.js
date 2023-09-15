@@ -6,13 +6,14 @@ const { curly } = require("node-libcurl")
 const promiseRetry = require("promise-retry")
 
 const config = require("../gatsby-config.js")
+const { port } = require("../jest-puppeteer.config").server
 
 describe("site links", () => {
   const deadExternalLinks = []
   const deadInternalLinks = []
 
   beforeAll(async () => {
-    const path = "http://localhost:9000"
+    const path = `http://localhost:${port}/${process.env.PATH_PREFIX}`
 
     // create a new `LinkChecker` that we'll use to run the scan.
     const checker = new link.LinkChecker()

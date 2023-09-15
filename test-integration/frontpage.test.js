@@ -2,7 +2,7 @@ jest.setTimeout(25 * 1000)
 
 const { port } = require("../jest-puppeteer.config").server
 
-const siteRoot = `http://localhost:${port}`
+const siteRoot = `http://localhost:${port}/${process.env.PATH_PREFIX}`
 
 describe("main site", () => {
   beforeAll(async () => {
