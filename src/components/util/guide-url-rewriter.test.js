@@ -164,6 +164,36 @@ describe("the guide url rewriter", () => {
           })
         })
 
+        describe("and a valid link exists for a much older version", () => {
+          const validLink =
+            "https://camel.apache.org/camel-quarkus/2.13.x/reference/extensions/sortof-lapsed.html"
+          const badLink =
+            "https://camel.apache.org/camel-quarkus/latest/reference/extensions/sortof-lapsed.html"
+
+          beforeEach(() => {
+            urlExist.mockImplementation(url =>
+              Promise.resolve(url === validLink)
+            )
+          })
+
+          afterEach(() => {
+            jest.clearAllMocks()
+          })
+
+          it("maps dead links to live links at the older version", async () => {
+            expect(
+              await rewriteGuideUrl({
+                name: "kind-of-dropped-extension",
+
+                metadata: {
+                  guide: badLink,
+                  maven: { version: "2.16.0" },
+                },
+              })
+            ).toBe(validLink)
+          })
+        })
+
         describe("and a valid link exists for a snapshot version", () => {
           const validLink =
             "https://camel.apache.org/camel-quarkus/next/reference/extensions/hot-off-the-press.html"

@@ -36,6 +36,20 @@ const rewriteGuideUrl = async ({ name, metadata }) => {
             `/version/${secondMostRecentVersion}/guides/`
           )
         },
+        metadata => {
+          // Camel format, hardcoded LTS
+          return metadata.guide.replace(
+            "/latest/",
+            "/2.16.x/"
+          )
+        },
+        metadata => {
+          // Camel format, hardcoded LTS
+          return metadata.guide.replace(
+            "/latest/",
+            "/2.13.x/"
+          )
+        }
       ]
       for (let i = 0; i < transforms.length; i++) {
         const transform = transforms[i]
