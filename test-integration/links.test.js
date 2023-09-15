@@ -13,8 +13,8 @@ describe("site links", () => {
   const deadInternalLinks = []
 
   beforeAll(async () => {
-    const path = `http://localhost:${port}/${process.env.PATH_PREFIX}`
-
+    const path = `http://localhost:${port}/${process.env.PATH_PREFIX || ""}`
+    
     // create a new `LinkChecker` that we'll use to run the scan.
     const checker = new link.LinkChecker()
 
@@ -74,7 +74,7 @@ describe("site links", () => {
       urlRewriteExpressions: [
         {
           pattern: config.siteUrl,
-          replacement: "http://localhost:9000",
+          replacement: path,
         },
       ],
       concurrency: 50,
