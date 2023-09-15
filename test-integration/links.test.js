@@ -13,7 +13,7 @@ describe("site links", () => {
   const deadInternalLinks = []
 
   beforeAll(async () => {
-    const path = `http://localhost:${port}/${process.env.PATH_PREFIX || ""}`
+    const path = `http://localhost:${port}/${process.env.PATH_PREFIX}`
 
     // create a new `LinkChecker` that we'll use to run the scan.
     const checker = new link.LinkChecker()
@@ -57,14 +57,8 @@ describe("site links", () => {
       "https://quarkiverse.github.io/quarkiverse-docs/quarkus-asyncapi-annotation-scanner/dev/",
       // See https://github.com/quarkiverse/quarkus-itext/pull/19
       "https://quarkiverse.github.io/quarkiverse-docs/itext/dev/",
-      // Pending investigation
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/atlasmap.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/corda.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/solr.html",
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/vm.html",
+      // Known incorrect link in auto-generated yaml, hopefully will be corrected in the next release
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/camel-k.html",
-      // This one sometimes causes issues, but I think we know it's ok :)
-      "https://www.redhat.com/"
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
@@ -75,7 +69,7 @@ describe("site links", () => {
       urlRewriteExpressions: [
         {
           pattern: config.siteUrl,
-          replacement: path,
+          replacement: "http://localhost:9000",
         },
       ],
       concurrency: 50,
