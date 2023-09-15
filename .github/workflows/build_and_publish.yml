@@ -50,12 +50,15 @@ jobs:
           node-version: '14'
           cache: "npm" # this only caches global dependencies
       - run: npm ci --prefer-offline
-      - run: npm run build -- ${PATH_PREFIX_FLAG}
+      - run: npm run build -- ${{ github.ref_name == 'main' && '--prefix-paths' || '' }}
         env:
           NODE_ENV: production
           GATSBY_ACTIVE_ENV: production
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
+      - run: npm run test:int
+        env:
+          CI: true
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
       - name: Store PR id
         if: "github.event_name == 'pull_request'"
