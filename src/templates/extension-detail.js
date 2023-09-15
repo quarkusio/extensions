@@ -336,9 +336,10 @@ const ExtensionDetailTemplate = ({
                     "gitlab" : extension.metadata?.sourceControl?.url?.includes("git")
                       ? "git-alt"
                       : undefined,
+                // If we don't have a project name, still show a url label, but if we don't have a url, don't show a label
                 text: extension.metadata?.sourceControl?.project
                   ? extension.metadata?.sourceControl?.project
-                  : "source",
+                  : extension.metadata?.sourceControl?.url ? "source" : undefined,
                 url: extension.metadata?.sourceControl?.url,
               }}
             />
