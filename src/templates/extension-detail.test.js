@@ -354,6 +354,39 @@ describe("extension detail page", () => {
     })
   })
 
+  // When we return a source control block with nulls, we should not display a source control section
+  describe("for an extension with missing source control information", () => {
+    const previous = {}
+    const next = {}
+
+    const extension = {
+      name: "JRuby",
+      slug: "jruby-slug",
+      metadata: { "sourceControl": null },
+    }
+
+    beforeEach(() => {
+      render(
+        <ExtensionDetailTemplate
+          data={{ extension, previous, next }}
+          location="/somewhere"
+        />
+      )
+    })
+
+    it("renders the extension name", () => {
+      expect(screen.getAllByText(extension.name)).toHaveLength(2)
+    })
+
+    it("does not render anything about source control", async () => {
+      expect(screen.queryByText(/Source code/)).toBeFalsy()
+    })
+
+    it("does not render anything about source", async () => {
+      expect(screen.queryByText(/source/)).toBeFalsy()
+    })
+  })
+
   describe("for an extension with very little information", () => {
     const previous = {}
     const next = {}
