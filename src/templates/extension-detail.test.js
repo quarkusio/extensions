@@ -435,4 +435,33 @@ describe("extension detail page", () => {
       expect(screen.getByText("Unlisted")).toBeTruthy()
     })
   })
+
+  // A date of '0' is invalid and should not be displayed
+  describe("for an extension whose date is zero", () => {
+    const previous = {}
+    const next = {}
+
+    const category = "old-jewellery"
+    const extension = {
+      name: "Ancient JRuby",
+      slug: "jruby-slug",
+      metadata: {
+        categories: [category], maven: { timestamp: "0" },
+      },
+    }
+
+    beforeEach(() => {
+      render(
+        <ExtensionDetailTemplate
+          data={{ extension, previous, next }}
+          location="/somewhere"
+        />
+      )
+    })
+
+    it("does not render a release date", () => {
+      const publishDate = "Publish Date"
+      expect(screen.queryByText(publishDate)).toBeFalsy()
+    })
+  })
 })

@@ -253,7 +253,8 @@ const ExtensionDetailTemplate = ({
             <ExtensionMetadata
               data={{
                 name: "Publish Date",
-                text: metadata.maven?.timestamp,
+                // Count dates of 0 as undefined, so we don't render them
+                text: metadata.maven?.timestamp > 0 ? metadata.maven?.timestamp : undefined,
                 transformer: timestamp =>
                   timestamp
                     ? format(new Date(+timestamp), "MMM dd, yyyy")
