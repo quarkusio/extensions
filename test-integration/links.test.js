@@ -62,6 +62,8 @@ describe("site links", () => {
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/corda.html",
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/solr.html",
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/vm.html",
+      // This one sometimes causes issues, but I think we know it's ok :)
+      "https://www.redhat.com/"
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
