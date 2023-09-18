@@ -35,6 +35,18 @@ describe("the persistable cache", () => {
     expect(has).toBeFalsy()
   })
 
+  it("should report the size correctly", () => {
+    const cache = new PersistableCache()
+
+    expect(cache.size()).toBe(0)
+    // Populate data
+    cache.set("frog", frog)
+    expect(cache.size()).toBe(1)
+    cache.set("rabbit", rabbit)
+    expect(cache.size()).toBe(2)
+
+  })
+
   it("should produce a dump that can be ingested for round-tripping", () => {
     const cache = new PersistableCache()
 

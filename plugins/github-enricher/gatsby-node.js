@@ -1,13 +1,13 @@
 const gh = require("parse-github-url")
 const path = require("path")
 const encodeUrl = require("encodeurl")
-const promiseRetry = require("promise-retry")
 
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { labelExtractor } = require("./labelExtractor")
 const PersistableCache = require("./persistable-cache")
 const { findSponsor, clearCaches, saveSponsorCache, initSponsorCache } = require("./sponsorFinder")
+const { getRawFileContents, queryGraphQl } = require("./github-helper")
 
 const defaultOptions = {
   nodeType: "Extension",
@@ -27,26 +27,16 @@ exports.onPreBootstrap = async ({ cache }) => {
   repoCache.ingestDump(cacheContents)
   initSponsorCache(cache)
 
-  const res = await fetch(
-    "https://raw.githubusercontent.com/quarkusio/quarkus/main/.github/quarkus-github-bot.yml",
-    {
-      method: "GET",
-    }
-  )
-
-  const yaml = res && res.text ? await res.text() : ""
-
-  let repoListing
-
   const repoCoords = { owner: "quarkusio", name: "quarkus" }
 
-  const accessToken = process.env.GITHUB_TOKEN
+  const text = await getRawFileContents(repoCoords.owner, repoCoords.name, ".github/quarkus-github-bot.yml")
+
+  const yaml = text ? text : ""
 
   // This query is long, because I can't find a way to do "or" or
   // Batching this may not help that much because rate limits are done on query complexity and cost,
   // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
-  if (accessToken) {
-    const query = `
+  const query = `
   query {
     repository(owner:"${repoCoords.owner}", name:"${repoCoords.name}") {
      object(expression: "HEAD:extensions") {
@@ -71,16 +61,8 @@ exports.onPreBootstrap = async ({ cache }) => {
   }
 }`
 
-    const pathsRes = await fetch("https://api.github.com/graphql", {
-      method: "POST",
-      body: JSON.stringify({ query }),
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    })
-    const body = await pathsRes.json()
-    repoListing = body?.data?.repository?.object?.entries
-  }
+  const pathsRes = await queryGraphQl(query)
+  const repoListing = pathsRes?.repository?.object?.entries
 
   getLabels = labelExtractor(yaml, repoListing).getLabels
 
@@ -90,6 +72,7 @@ exports.onPreBootstrap = async ({ cache }) => {
 
 exports.onPostBootstrap = async ({ cache }) => {
   cache.set(CACHE_KEY, repoCache.dump())
+  console.log("Persisted", repoCache.size(), "cached repositories.")
   saveSponsorCache(cache)
 }
 
@@ -223,17 +206,14 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
   scmInfo.issuesUrl = issuesUrl
   scmInfo.labels = labels
 
-  const accessToken = process.env.GITHUB_TOKEN
-
   // This query is long, because I can't find a way to do "or" or
   // Batching this may not help that much because rate limits are done on query complexity and cost,
   // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
-  if (accessToken) {
-    const issuesQuery = `issues(states:OPEN, ${labelFilterString}) {
+  const issuesQuery = `issues(states:OPEN, ${labelFilterString}) {
         totalCount
       }`
 
-    const subfoldersQuery = `subfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources/META-INF/") {
+  const subfoldersQuery = `subfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources/META-INF/") {
         ... on Tree {
           entries {
             path
@@ -249,27 +229,27 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         }
       }`
 
-    let query
-    if (hasCache) {
-      if (labels) {
-        query = `query {
+  let query
+  if (hasCache) {
+    if (labels) {
+      query = `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {
           ${issuesQuery}
           
           ${subfoldersQuery}
           }
     }`
-      } else {
-        // TODO we could probably drop this in the case where we already had a yaml file at the top level, but we also want to know if there are others at sub-levels,
-        // so that we can handle the ambiguity
-        query = `query {
+    } else {
+      // TODO we could probably drop this in the case where we already had a yaml file at the top level, but we also want to know if there are others at sub-levels,
+      // so that we can handle the ambiguity
+      query = `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {          
           ${subfoldersQuery}
           }
     }`
-      }
-    } else {
-      query = `query {
+    }
+  } else {
+    query = `query {
     repository(owner:"${coords.owner}", name:"${coords.name}") {
       ${issuesQuery}
     
@@ -294,111 +274,72 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         avatarUrl
     }
   }`
-    }
+  }
 
-    // We sometimes get bad results back from the git API where json() is null, so do a bit of retrying
-    const body = await promiseRetry(
-      async retry => {
-        const res = await fetch("https://api.github.com/graphql", {
-          method: "POST",
-          body: JSON.stringify({ query }),
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        const ghBody = await res.json()
-        if (!ghBody?.data) {
-          retry(
-            `Unsuccessful GitHub fetch for ${artifactId} - response is ${JSON.stringify(
-              ghBody,
-            )}`,
-          )
-        }
-        return ghBody
+  const body = await queryGraphQl(query)
+
+  if (body?.data && body?.data?.repository) {
+    const returnedData = body.data
+    const cachedData = repoCache.get(scmUrl)
+    const returnedRepository = returnedData?.repository
+    const cachedRepository = cachedData?.repository
+
+    // Merge the cache and what we got passed back this time
+    const data = { ...cachedData, ...returnedData }
+    // We also need to do a deep merge of the repository object
+    data.repository = { ...cachedRepository, ...returnedRepository }
+    cache(data, scmUrl, labels)
+
+    const {
+      repository: {
+        issues: { totalCount },
+        defaultBranchRef,
+        metaInfs,
+        subfolderMetaInfs,
+        shortenedSubfolderMetaInfs,
+        openGraphImageUrl,
       },
-      { retries: 3, minTimeout: 30 * 1000, factor: 5 }
-    ).catch(e => {
-      // Do not break the build for this, warn and carry on
-      console.warn(e)
-      return undefined
-    })
+      repositoryOwner: { avatarUrl },
+    } = data
 
-    if (body?.errors) {
-      console.warn(
-        `Could not get GitHub information for ${artifactId} - response is ${JSON.stringify(
-          body
-        )}`
-      )
+    const allMetaInfs = [
+      ...(metaInfs ? metaInfs.entries : []),
+      ...(subfolderMetaInfs ? subfolderMetaInfs.entries : []),
+      ...(shortenedSubfolderMetaInfs
+        ? shortenedSubfolderMetaInfs.entries
+        : []),
+    ]
+
+    const extensionYamls = allMetaInfs.filter(entry =>
+      entry.path.endsWith("/quarkus-extension.yaml")
+    )
+
+    scmInfo.issues = totalCount
+
+    scmInfo.owner = coords.owner
+    scmInfo.ownerImageUrl = avatarUrl
+
+    // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
+    if (extensionYamls.length === 1) {
+      scmInfo.extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef?.name}/${extensionYamls[0].path}`
     }
 
-    if (body?.data && body?.data?.repository) {
-      const returnedData = body.data
-      const cachedData = repoCache.get(scmUrl)
-      const returnedRepository = returnedData?.repository
-      const cachedRepository = cachedData?.repository
+    // Only look at the social media preview if it's been set by the user; otherwise we know it will be the owner avatar with some text we don't want
+    // This mechanism is a bit fragile, but should work for now
+    // Default pattern https://opengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-openfga-client
+    // Customised pattern https://repository-images.githubusercontent.com/437045322/39ad4dec-e606-4b21-bb24-4c09a4790b58
 
-      // Merge the cache and what we got passed back this time
-      const data = { ...cachedData, ...returnedData }
-      // We also need to do a deep merge of the repository object
-      data.repository = { ...cachedRepository, ...returnedRepository }
-      cache(data, scmUrl, labels)
+    const isCustomizedSocialMediaPreview =
+      openGraphImageUrl?.includes("githubusercontent")
 
-      const {
-        repository: {
-          issues: { totalCount },
-          defaultBranchRef,
-          metaInfs,
-          subfolderMetaInfs,
-          shortenedSubfolderMetaInfs,
-          openGraphImageUrl,
-        },
-        repositoryOwner: { avatarUrl },
-      } = data
-
-      const allMetaInfs = [
-        ...(metaInfs ? metaInfs.entries : []),
-        ...(subfolderMetaInfs ? subfolderMetaInfs.entries : []),
-        ...(shortenedSubfolderMetaInfs
-          ? shortenedSubfolderMetaInfs.entries
-          : []),
-      ]
-
-      const extensionYamls = allMetaInfs.filter(entry =>
-        entry.path.endsWith("/quarkus-extension.yaml")
-      )
-
-      scmInfo.issues = totalCount
-
-      scmInfo.owner = coords.owner
-      scmInfo.ownerImageUrl = avatarUrl
-
-      // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
-      if (extensionYamls.length === 1) {
-        scmInfo.extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef?.name}/${extensionYamls[0].path}`
-      }
-
-      // Only look at the social media preview if it's been set by the user; otherwise we know it will be the owner avatar with some text we don't want
-      // This mechanism is a bit fragile, but should work for now
-      // Default pattern https://opengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-openfga-client
-      // Customised pattern https://repository-images.githubusercontent.com/437045322/39ad4dec-e606-4b21-bb24-4c09a4790b58
-
-      const isCustomizedSocialMediaPreview =
-        openGraphImageUrl?.includes("githubusercontent")
-
-      if (isCustomizedSocialMediaPreview) {
-        scmInfo.socialImage = openGraphImageUrl
-      }
-
-      return scmInfo
-    } else {
-      console.warn(
-        `Cannot read GitHub information for ${artifactId}, because the API did not return any data.`
-      )
-      return scmInfo
+    if (isCustomizedSocialMediaPreview) {
+      scmInfo.socialImage = openGraphImageUrl
     }
+
+    return scmInfo
   } else {
     console.warn(
-      "Cannot read GitHub information, because the environment variable `GITHUB_TOKEN` has not been set."
+      `Cannot read GitHub information for ${artifactId}, because the API did not return any data.`
     )
     return scmInfo
   }

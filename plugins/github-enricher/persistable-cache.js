@@ -54,7 +54,10 @@ class PersistableCache {
     if (dump) {
       this.cache.mset(dump)
     }
+  }
 
+  size() {
+    return this.cache.keys().length
   }
 }
 
