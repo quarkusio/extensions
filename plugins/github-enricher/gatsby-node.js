@@ -14,8 +14,8 @@ const defaultOptions = {
 }
 
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
-const DAY_IN_SECONDS = 60 * 60 * 24
-const cacheOptions = { stdTTL: 2 * DAY_IN_SECONDS }
+const DAY_IN_SECONDS = 24 * 60 * 60
+const cacheOptions = { stdTTL: 3 * DAY_IN_SECONDS }
 const CACHE_KEY = "github-api-for-repos"
 const repoCache = new PersistableCache(cacheOptions)
 
@@ -316,7 +316,7 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         }
         return ghBody
       },
-      { retries: 3, minTimeout: 10 * 1000 }
+      { retries: 3, minTimeout: 30 * 1000, factor: 5 }
     ).catch(e => {
       // Do not break the build for this, warn and carry on
       console.warn(e)

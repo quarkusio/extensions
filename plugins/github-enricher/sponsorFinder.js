@@ -106,7 +106,7 @@ async function tolerantFetch(url) {
       }
       return ghBody
     },
-    { retries: 3, minTimeout: 10 * 1000, factor: 5 }
+    { retries: 3, minTimeout: 30 * 1000, factor: 5 }
   ).catch(e => {
     // Do not break the build for this, warn and carry on
     console.warn(e)
@@ -286,7 +286,6 @@ const findSponsorFromContributorList = async (userContributions) => {
   const noSolos = Object.values(commits).filter(
     company => company.contributors >= minimumContributorCount
   )
-
 
   const majorProportions = Object.values(noSolos).filter(
     company =>
