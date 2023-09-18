@@ -1,7 +1,6 @@
-//const fetch = require("node-fetch")  // TODO is this needed when test mocks it?
-const promiseRetry = require("promise-retry")
 const PersistableCache = require("./persistable-cache")
 const yaml = require("js-yaml")
+const { getRawFileContents, queryGraphQl, queryRest } = require("./github-helper")
 
 // We store the raw(ish) data in the cache, to avoid repeating the same request multiple times and upsetting the github rate limiter
 const DAY_IN_SECONDS = 60 * 60 * 24
@@ -37,7 +36,9 @@ const setMinimumContributionCount = n => {
 
 const initSponsorCache = (cache) => {
   companyCache.ingestDump(cache.get(COMPANY_CACHE_KEY))
+  console.log("Ingested", companyCache.size(), "cached companies.")
   repoContributorCache.ingestDump(cache.get(REPO_CACHE_KEY))
+  console.log("Ingested contributor information for", repoContributorCache.size(), "cached repositories.")
 
 }
 
@@ -49,17 +50,15 @@ const clearCaches = () => {
 
 const getSponsorData = async () => {
   if (!optedInSponsors) {
-    const url = "https://raw.githubusercontent.com/quarkusio/quarkus-extension-catalog/main/named-contributing-orgs-opt-in.yml"
-    const res = await fetch(
-      url,
-      {
-        method: "GET",
-      }
-    )
 
-    if (res && res.text) {
-      const yamlString = await res.text()
+    const org = "quarkusio"
+    const repo = "quarkus-extension-catalog"
+    const path = "named-contributing-orgs-opt-in.yml"
 
+
+    const yamlString = await getRawFileContents(org, repo, path)
+
+    if (yamlString) {
       const json = yaml.load(yamlString)
 
       optedInSponsors = await json
@@ -81,49 +80,6 @@ const getOrSetFromCache = async (cache, key, functionThatReturnsAPromise) => {
   }
 }
 
-async function tolerantFetch(url) {
-  const accessToken = process.env.GITHUB_TOKEN
-
-  const headers = accessToken
-    ? {
-      Authorization: `Bearer ${accessToken}`,
-    }
-    : {}
-  const body = await promiseRetry(
-    async retry => {
-      // TODO still ask, but without auth if token is missing
-      const res = await fetch(url, {
-        method: "GET",
-        headers,
-      })
-      const ghBody = await res.json()
-      if (!ghBody) {
-        retry(
-          `Unsuccessful GitHub fetch for ${url} - response is ${JSON.stringify(
-            ghBody
-          )}`
-        )
-      }
-      return ghBody
-    },
-    { retries: 3, minTimeout: 30 * 1000, factor: 5 }
-  ).catch(e => {
-    // Do not break the build for this, warn and carry on
-    console.warn(e)
-    return undefined
-  })
-
-  if (body?.errors || body?.message) {
-    console.warn(
-      `Could not get GitHub information for ${url} - response is ${JSON.stringify(
-        body
-      )}`
-    )
-    return undefined
-  }
-
-  return body
-}
 
 const getUserContributions = async (org, project) => {
   if (org && project) {
@@ -137,13 +93,10 @@ const getUserContributions = async (org, project) => {
 }
 
 const getUserContributionsNoCache = async (org, project) => {
-  const accessToken = process.env.GITHUB_TOKEN
-
-  if (accessToken) {
-    // We're only doing one, easy, date manipulation, so don't bother with a library
-    const timePeriodInDays = 180
-    const someMonthsAgo = new Date(Date.now() - timePeriodInDays * DAY_IN_MILLISECONDS).toISOString()
-    const query = `query { 
+  // We're only doing one, easy, date manipulation, so don't bother with a library
+  const timePeriodInDays = 180
+  const someMonthsAgo = new Date(Date.now() - timePeriodInDays * DAY_IN_MILLISECONDS).toISOString()
+  const query = `query { 
   repository(owner: "${org}", name: "${project}") {
     defaultBranchRef{
         target{
@@ -168,71 +121,31 @@ const getUserContributionsNoCache = async (org, project) => {
 }
 }`
 
-    const body = await promiseRetry(
-      async retry => {
-        const res = await fetch("https://api.github.com/graphql", {
-          method: "POST",
-          body: JSON.stringify({ query }),
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        })
-        const ghBody = await res.json()
-        if (!ghBody?.data) {
-          retry(
-            `Unsuccessful GitHub fetch for ${org}:${project} - response is ${JSON.stringify(
-              ghBody,
-            )}`,
-          )
+  const body = await queryGraphQl(query)
+
+  if (body?.data && body?.data?.repository) {
+    const history = body?.data?.repository?.defaultBranchRef?.target?.history?.edges
+
+    if (history && Array.isArray(history)) {
+      let users = history.map(o => o?.node?.author?.user)
+
+      // Some commits have an author who doesn't have a github mapping, so filter those out
+      users = users.filter(user => user !== null && user !== undefined)
+
+
+      const collatedHistory = Object.values(users.reduce((acc, user) => {
+        if (acc[user.login]) {
+          acc[user.login].contributions = acc[user.login].contributions + 1
+        } else {
+          acc[user.login] = { ...user, contributions: 1 }
         }
-        return ghBody
-      },
-      { retries: 3, minTimeout: 10 * 1000 }
-    ).catch(e => {
-      // Do not break the build for this, warn and carry on
-      console.warn(e)
-      return undefined
-    })
+        return acc
+      }, []))
 
-    if (body?.errors) {
-      console.warn(
-        `Could not get GitHub information for ${artifactId} - response is ${JSON.stringify(
-          body
-        )}`
-      )
+      return collatedHistory
     }
-
-
-    if (body?.data && body?.data?.repository) {
-      const returnedData = body?.data?.repository
-      const ghBody = returnedData
-
-      const history = ghBody?.defaultBranchRef?.target?.history?.edges
-
-      if (history && Array.isArray(history)) {
-        let users = history.map(o => o?.node?.author?.user)
-
-        // Some commits have an author who doesn't have a github mapping, so filter those out
-        users = users.filter(user => user !== null && user !== undefined)
-
-
-        const collatedHistory = Object.values(users.reduce((acc, user) => {
-          if (acc[user.login]) {
-            acc[user.login].contributions = acc[user.login].contributions + 1
-          } else {
-            acc[user.login] = { ...user, contributions: 1 }
-          }
-          return acc
-        }, []))
-
-        return collatedHistory
-      }
-    }
-  } else {
-    console.warn(
-      "Cannot read contributor information, because the environment variable `GITHUB_TOKEN` has not been set."
-    )
   }
+
 }
 
 const findSponsor = async (org, project) => {
@@ -364,8 +277,7 @@ const normalizeCompanyNameNoCache = async (company) => {
 
 const getCompanyFromGitHubLogin = async company => {
 
-  const url = `https://api.github.com/users/${company}`
-  const ghBody = await tolerantFetch(url)
+  const ghBody = queryRest(`users/${company}`)
 
   let name = ghBody?.name
 
@@ -379,7 +291,10 @@ const getCompanyFromGitHubLogin = async company => {
 
 const saveSponsorCache = (cache) => {
   cache.set(COMPANY_CACHE_KEY, companyCache.dump())
+  console.log("Persisted", companyCache.size(), "cached companies.")
   cache.set(REPO_CACHE_KEY, repoContributorCache.dump())
+  console.log("Persisted contributor information for", repoContributorCache.size(), "cached repositories.")
+
 }
 
 module.exports = {
