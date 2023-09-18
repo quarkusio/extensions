@@ -3,6 +3,7 @@ import { useState } from "react"
 import Filters from "./filters/filters"
 import ExtensionCard from "./extension-card"
 import styled from "styled-components"
+import { extensionComparator } from "./util/extension-comparator"
 
 const FilterableList = styled.div`
   margin-left: var(--site-margins);
@@ -56,10 +57,7 @@ const ExtensionsList = ({ extensions, categories }) => {
       extension => !extension.metadata.unlisted
     ).length
 
-    // Sort alphabetically, in the absence of a better idea (for now)
-    filteredExtensions.sort((a, b) =>
-      a.sortableName > b.sortableName ? 1 : -1
-    )
+    filteredExtensions.sort(extensionComparator)
 
     const countMessage =
       extensionCount === filteredExtensions.length
