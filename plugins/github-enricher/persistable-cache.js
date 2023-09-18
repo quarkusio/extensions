@@ -1,7 +1,7 @@
 const NodeCache = require("node-cache")
 
-// Vary the time to live by up to 20% to avoid mass extinctions
-const jitterRatio = 0.2
+// Vary the time to live to avoid mass extinctions
+const jitterRatio = 0.35
 
 class PersistableCache {
 
