@@ -25,6 +25,8 @@ let getLabels
 exports.onPreBootstrap = async ({ cache }) => {
   const cacheContents = await cache.get(CACHE_KEY)
   repoCache.ingestDump(cacheContents)
+  console.log("Ingested", repoCache.size(), "cached repositories.")
+
   initSponsorCache(cache)
 
   const repoCoords = { owner: "quarkusio", name: "quarkus" }
@@ -231,6 +233,8 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
 
   let query
   if (hasCache) {
+    // If a repo has labels, we can't just use the issue count for the repo, we need to get the issue count for the specific label
+    // We could also cache that, but it's more complicated
     if (labels) {
       query = `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {
