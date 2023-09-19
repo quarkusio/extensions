@@ -151,7 +151,6 @@ describe("the github data handler", () => {
     })
 
     it("creates a content digest", async () => {
-      // internal.contentDigest
       expect(createContentDigest).toHaveBeenCalled()
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -239,7 +238,8 @@ describe("the github data handler", () => {
     it("caches the issue count", async () => {
       expect(queryGraphQl).toHaveBeenLastCalledWith(expect.stringMatching(/issues\(states:OPEN/))
 
-      const callCount = queryGraphQl.mock.calls.length
+      // Reset call counts and histories, since the code may not even do a query
+      jest.clearAllMocks()
 
       // Now re-trigger the invocation
       await onCreateNode(
@@ -251,8 +251,6 @@ describe("the github data handler", () => {
         },
         {}
       )
-
-      expect(queryGraphQl).toHaveBeenCalledTimes(callCount + 1)
 
       // But it should not ask for the issues
       expect(queryGraphQl).not.toHaveBeenLastCalledWith(expect.stringMatching(/issues\(states:OPEN/))
@@ -268,6 +266,9 @@ describe("the github data handler", () => {
           /HEAD:runtime\/src\/main\/resources\/META-INF/
         )
       )
+
+      // Reset call counts and histories, since the code may not even do a query
+      jest.clearAllMocks()
 
       // Now re-trigger the invocation
       await onCreateNode(
@@ -302,14 +303,16 @@ describe("the github data handler", () => {
       )
     })
 
-    it("does not cache the quarkus-extension.yaml in subfolders", async () => {
-      // Sense check
+    it("caches the quarkus-extension.yaml in subfolders", async () => {
+      // Sense check of what happened in beforeEach
       expect(queryGraphQl).toHaveBeenLastCalledWith(
         expect.stringMatching(
           /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
         ),
       )
 
+      // Reset call counts and histories, since the code may not even do a query
+      jest.clearAllMocks()
       // Now re-trigger the invocation
       await onCreateNode(
         {
@@ -321,8 +324,9 @@ describe("the github data handler", () => {
         {}
       )
 
-      // And it should still ask for the subfolder meta-inf listing
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      // And it should not ask for the subfolder meta-inf listing
+      // It possibly won't ask for anything at all
+      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
         expect.stringMatching(
           /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
         ),
@@ -627,7 +631,7 @@ describe("the github data handler", () => {
       )
     })
 
-    it("does not cache the quarkus-extension.yaml in subfolders", async () => {
+    it("caches the quarkus-extension.yaml in subfolders", async () => {
       // Now re-trigger the invocation
       await onCreateNode(
         {
@@ -639,8 +643,8 @@ describe("the github data handler", () => {
         {}
       )
 
-      // And it should still ask for the subfolder meta-inf listing
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      // And it should not ask for the subfolder meta-inf listing
+      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
         expect.stringMatching(
           /HEAD:second\/runtime\/src\/main\/resources\/META-INF/
         ),

@@ -18,8 +18,8 @@ export NVM_DIR="$HOME/.nvm"
 Check the last two lines against the suggested commands in the output of the `nvm` install. 
 
 ```
-nvm install 14
-nvm use 14
+nvm install 18
+nvm use 18
 ```
 
 
