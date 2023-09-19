@@ -1,7 +1,7 @@
 const promiseRetry = require("promise-retry")
-const RETRY_OPTIONS = { retries: 3, minTimeout: 60 * 1000, factor: 3 }
+const RETRY_OPTIONS = { retries: 3, minTimeout: 40 * 1000, factor: 3 }
 
-async function tolerantFetch(url, params) {
+async function tolerantFetch(url, params, isSuccessful) {
   const accessToken = process.env.GITHUB_TOKEN
 
   if (accessToken) {
@@ -12,7 +12,8 @@ async function tolerantFetch(url, params) {
       async retry => {
         const res = await fetch(url, { ...params, headers })
         const ghBody = await res.json()
-        if (!ghBody) {
+
+        if (!isSuccessful(ghBody)) {
           retry(
             `Unsuccessful GitHub fetch for ${url} - response is ${JSON.stringify(
               ghBody
@@ -49,16 +50,20 @@ async function tolerantFetch(url, params) {
 const queryGraphQl = async (query) => {
 
   return tolerantFetch("https://api.github.com/graphql", {
-    method: "POST",
-    body: JSON.stringify({ query }),
-  })
+      method: "POST",
+      body: JSON.stringify({ query })
+    },
+    (ghBody) => ghBody?.data
+  )
 
 }
 
 const queryRest = async (path) => {
   return await tolerantFetch(`https://api.github.com/${path}`, {
-    method: "GET",
-  })
+      method: "GET",
+    },
+    (ghBody) => ghBody
+  )
 
 }
 

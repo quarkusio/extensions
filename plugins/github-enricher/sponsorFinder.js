@@ -289,12 +289,11 @@ const getCompanyFromGitHubLogin = async company => {
   return name
 }
 
-const saveSponsorCache = (cache) => {
-  cache.set(COMPANY_CACHE_KEY, companyCache.dump())
+const saveSponsorCache = async (cache) => {
+  await cache.set(COMPANY_CACHE_KEY, companyCache.dump())
   console.log("Persisted", companyCache.size(), "cached companies.")
-  cache.set(REPO_CACHE_KEY, repoContributorCache.dump())
+  await cache.set(REPO_CACHE_KEY, repoContributorCache.dump())
   console.log("Persisted contributor information for", repoContributorCache.size(), "cached repositories.")
-
 }
 
 module.exports = {
