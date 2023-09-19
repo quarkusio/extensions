@@ -8,7 +8,7 @@ describe("the github helper", () => {
   })
 
   describe("the graphql api helper", () => {
-    const response = { toads: "swamps" }
+    const response = { data: { toads: "swamps" } }
     const gitHubApi = {
       json: jest.fn().mockResolvedValue(response),
     }
@@ -38,7 +38,7 @@ describe("the github helper", () => {
     it("returns the api json", async () => {
       const query = "query bla bla bla"
       const answer = await queryGraphQl(query)
-      expect(answer).toStrictEqual({ toads: "swamps" })
+      expect(answer).toStrictEqual({ data: { toads: "swamps" } })
     })
   })
 

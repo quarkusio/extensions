@@ -80,13 +80,13 @@ exports.onPreBootstrap = async ({ cache }) => {
 }
 
 exports.onPostBootstrap = async ({ cache }) => {
-  cache.set(CACHE_KEY, repoCache.dump())
+  await cache.set(CACHE_KEY, repoCache.dump())
   console.log("Persisted", repoCache.size(), "cached repositories.")
 
-  cache.set(YAML_CACHE_KEY, extensionYamlCache.dump())
+  await cache.set(YAML_CACHE_KEY, extensionYamlCache.dump())
   console.log("Persisted", extensionYamlCache.size(), "cached metadata file locations.")
 
-  saveSponsorCache(cache)
+  await saveSponsorCache(cache)
 }
 
 exports.onPluginInit = () => {
@@ -318,7 +318,6 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   const returnedData = body?.data
   const returnedRepository = body?.data?.repository
 
-
   const cachedData = repoCache.get(scmUrl)
   const cachedRepository = cachedData?.repository
 
@@ -367,10 +366,11 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
     // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
     if (extensionYamls.length === 1) {
       const extensionYamlPath = extensionYamls[0].path
-      // It should be safe to guess 'main' for the branch ref, in the unlikely event that we didn't get it from the cache or from github
-      const branch = defaultBranchRef ? defaultBranchRef.name : "main"
-      extensionYamlUrl = `${scmUrl}/blob/${branch}/${extensionYamlPath}`
-      extensionYamlCache.set(artifactKey, extensionYamlUrl)
+      // If we didn't get a branch ref from the cache or from github we're a bit stuck and will have to try again next time
+      if (defaultBranchRef) {
+        extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`
+        extensionYamlCache.set(artifactKey, extensionYamlUrl)
+      }
     }
   }
   scmInfo.extensionYamlUrl = extensionYamlUrl
