@@ -13,7 +13,6 @@ const contentDigest = "some content digest"
 const createNode = jest.fn()
 const createNodeId = jest.fn().mockImplementation(id => id)
 const createContentDigest = jest.fn().mockReturnValue(contentDigest)
-createRemoteFileNode.mockReturnValue({ absolutePath: "/hi/there/path.ext" })
 
 const actions = { createNode }
 const internal = { type: "Extension" }
@@ -21,6 +20,14 @@ const internal = { type: "Extension" }
 const cache = { get: jest.fn() }
 
 describe("the github data handler", () => {
+  beforeAll(() => {
+    createRemoteFileNode.mockReturnValue({ absolutePath: "/hi/there/path.ext" })
+  })
+
+  afterAll(() => {
+    jest.resetAllMocks()
+  })
+
   describe("for an extension with no scm information", () => {
     const metadata = {}
 
@@ -34,7 +41,7 @@ describe("the github data handler", () => {
 
       await onPreBootstrap({ cache, actions: {} })
       // Don't count what the pre bootstrap does in our checking
-      jest.resetAllMocks()
+      jest.clearAllMocks()
       return onCreateNode({
         node,
         createContentDigest,
@@ -44,7 +51,7 @@ describe("the github data handler", () => {
     })
 
     afterAll(() => {
-      jest.resetAllMocks()
+      jest.clearAllMocks()
     })
 
     it("changes nothing", async () => {
@@ -132,7 +139,7 @@ describe("the github data handler", () => {
     })
 
     afterAll(() => {
-      jest.resetAllMocks()
+      jest.clearAllMocks()
     })
 
     afterEach(() => {
@@ -224,19 +231,13 @@ describe("the github data handler", () => {
     it("invokes the github graphql api", async () => {
       expect(queryGraphQl).toHaveBeenCalled()
       expect(queryGraphQl).toHaveBeenCalledWith(
-        expect.objectContaining({
-          // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
-          body: expect.stringMatching(/name:\\"somerepo\\"/),
-        })
+        // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
+        expect.stringMatching(/name: ?\"somerepo\"/),
       )
     })
 
     it("caches the issue count", async () => {
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(/issues\(states:OPEN/),
-        })
-      )
+      expect(queryGraphQl).toHaveBeenLastCalledWith(expect.stringMatching(/issues\(states:OPEN/))
 
       const callCount = queryGraphQl.mock.calls.length
 
@@ -254,11 +255,7 @@ describe("the github data handler", () => {
       expect(queryGraphQl).toHaveBeenCalledTimes(callCount + 1)
 
       // But it should not ask for the issues
-      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(/issues\(states:OPEN/),
-        })
-      )
+      expect(queryGraphQl).not.toHaveBeenLastCalledWith(expect.stringMatching(/issues\(states:OPEN/))
 
       // It should set an issue count, even though it didn't ask for one
       expect(createNode).toHaveBeenLastCalledWith(
@@ -267,12 +264,9 @@ describe("the github data handler", () => {
     })
 
     it("caches the top-level quarkus-extension.yaml", async () => {
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(
-            /HEAD:runtime\/src\/main\/resources\/META-INF/
-          ),
-        })
+      expect(queryGraphQl).toHaveBeenLastCalledWith(expect.stringMatching(
+          /HEAD:runtime\/src\/main\/resources\/META-INF/
+        )
       )
 
       // Now re-trigger the invocation
@@ -288,11 +282,7 @@ describe("the github data handler", () => {
 
       // But it should not ask for the top-level meta-inf listing
       expect(queryGraphQl).not.toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(
-            /HEAD:runtime\/src\/main\/resources\/META-INF/
-          ),
-        })
+        expect.stringMatching(/HEAD:runtime\/src\/main\/resources\/META-INF/),
       )
 
       // It should set an extension descriptor path, even though it didn't ask for one
@@ -315,11 +305,9 @@ describe("the github data handler", () => {
     it("does not cache the quarkus-extension.yaml in subfolders", async () => {
       // Sense check
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(
-            /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
-          ),
-        })
+        expect.stringMatching(
+          /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
+        ),
       )
 
       // Now re-trigger the invocation
@@ -335,11 +323,9 @@ describe("the github data handler", () => {
 
       // And it should still ask for the subfolder meta-inf listing
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(
-            /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
-          ),
-        })
+        expect.stringMatching(
+          /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
+        ),
       )
 
       // It should set an extension descriptor path
@@ -368,10 +354,7 @@ describe("the github data handler", () => {
       )
 
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        "https://api.github.com/graphql",
-        expect.objectContaining({
-          body: expect.stringMatching(/issues\(states:OPEN/),
-        })
+        expect.stringMatching(/issues\(states:OPEN/),
       )
 
       expect(createNode).toHaveBeenLastCalledWith(
@@ -465,10 +448,6 @@ describe("the github data handler", () => {
       })
     })
 
-    afterAll(() => {
-      jest.resetAllMocks()
-    })
-
     afterEach(() => {
       jest.clearAllMocks()
     })
@@ -477,8 +456,7 @@ describe("the github data handler", () => {
       expect(createNode).toHaveBeenCalled()
     })
 
-    fit("creates a content digest", async () => {
-      // internal.contentDigest
+    it("creates a content digest", async () => {
       expect(createContentDigest).toHaveBeenCalled()
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -556,19 +534,14 @@ describe("the github data handler", () => {
     it("invokes the github graphql api", async () => {
       expect(queryGraphQl).toHaveBeenCalled()
       expect(queryGraphQl).toHaveBeenCalledWith(
-        expect.objectContaining({
-          // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
-          body: expect.stringMatching(/name:\\"quarkus\\"/),
-        })
+        expect.stringMatching(/name: ?\"quarkus\"/),
       )
     })
 
     it("does not cache the issue count", async () => {
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
-          body: expect.stringMatching(/issues\(states:OPEN/),
-        })
+        // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
+        expect.stringMatching(/issues\(states:OPEN/),
       )
 
       // Now re-trigger the invocation
@@ -586,9 +559,7 @@ describe("the github data handler", () => {
       )
 
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(/issues\(states:OPEN/),
-        })
+        expect.stringMatching(/issues\(states:OPEN/),
       )
 
       expect(createNode).toHaveBeenLastCalledWith(
@@ -598,10 +569,8 @@ describe("the github data handler", () => {
 
     it("does not cache the labels and issue url", async () => {
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
-          body: expect.stringMatching(/issues\(states:OPEN/),
-        })
+        // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
+        expect.stringMatching(/issues\(states:OPEN/),
       )
 
       // Now re-trigger the invocation
@@ -643,11 +612,9 @@ describe("the github data handler", () => {
 
       // But it should not ask for the top-level meta-inf listing
       expect(queryGraphQl).not.toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(
-            /HEAD:runtime\/src\/main\/resources\/META-INF/
-          ),
-        })
+        expect.stringMatching(
+          /HEAD:runtime\/src\/main\/resources\/META-INF/
+        ),
       )
 
       // It should set an extension descriptor path, even though it didn't ask for one
@@ -674,11 +641,9 @@ describe("the github data handler", () => {
 
       // And it should still ask for the subfolder meta-inf listing
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(
-            /HEAD:second\/runtime\/src\/main\/resources\/META-INF/
-          ),
-        })
+        expect.stringMatching(
+          /HEAD:second\/runtime\/src\/main\/resources\/META-INF/
+        ),
       )
 
       // It should set an extension descriptor path
@@ -693,10 +658,7 @@ describe("the github data handler", () => {
 
     it("caches the image location", async () => {
       expect(queryGraphQl).toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
-          body: expect.stringMatching(/issues\(states:OPEN/),
-        })
+        expect.stringMatching(/issues\(states:OPEN/),
       )
 
       response.data.repository.issues.totalCount = 7
@@ -718,9 +680,7 @@ describe("the github data handler", () => {
 
       // We shouldn't be asking for image urls or file paths, since those are totally cacheable
       expect(queryGraphQl).not.toHaveBeenLastCalledWith(
-        expect.objectContaining({
-          body: expect.stringMatching(/openGraphImageUrl/),
-        })
+        expect.stringMatching(/openGraphImageUrl/),
       )
 
       // It should fill in the cached information for everything but the issue count and issue url
@@ -739,18 +699,16 @@ describe("the github data handler", () => {
     const socialMediaPreviewUrl =
       "https://repository-images.githubusercontent.com/437045322/39ad4dec-e606-4b21-bb24-4c09a4790b58"
 
-    const gitHubApi = {
-      json: jest.fn().mockResolvedValue({
-        data: {
-          repository: {
-            issues: {
-              totalCount: 10,
-            },
-            openGraphImageUrl: socialMediaPreviewUrl,
+    const response = {
+      data: {
+        repository: {
+          issues: {
+            totalCount: 10,
           },
-          repositoryOwner: { avatarUrl: avatarUrl },
+          openGraphImageUrl: socialMediaPreviewUrl,
         },
-      }),
+        repositoryOwner: { avatarUrl: avatarUrl },
+      },
     }
 
     const metadata = {
@@ -763,7 +721,7 @@ describe("the github data handler", () => {
     }
 
     beforeAll(async () => {
-      queryGraphQl.mockResolvedValue(gitHubApi)
+      queryGraphQl.mockResolvedValue(response)
       await onPreBootstrap({ cache, actions: {} })
       return onCreateNode({
         node,
@@ -771,10 +729,6 @@ describe("the github data handler", () => {
         createNodeId,
         actions,
       })
-    })
-
-    afterAll(() => {
-      jest.resetAllMocks()
     })
 
     it("creates a new file node with the cropped image", async () => {
