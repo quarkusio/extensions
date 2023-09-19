@@ -1,5 +1,5 @@
 const promiseRetry = require("promise-retry")
-const RETRY_OPTIONS = { retries: 3, minTimeout: 40 * 1000, factor: 3 }
+const RETRY_OPTIONS = { retries: 3, minTimeout: 60 * 1000, factor: 3 }
 
 async function tolerantFetch(url, params) {
   const accessToken = process.env.GITHUB_TOKEN

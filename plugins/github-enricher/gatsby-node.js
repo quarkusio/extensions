@@ -15,17 +15,24 @@ const defaultOptions = {
 
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 24 * 60 * 60
-const cacheOptions = { stdTTL: 3 * DAY_IN_SECONDS }
+
 const CACHE_KEY = "github-api-for-repos"
-const repoCache = new PersistableCache(cacheOptions)
+const repoCache = new PersistableCache({ stdTTL: 3 * DAY_IN_SECONDS })
+
+// The location of extension metadata files is unlikely to change often, and if it does, the link checker will flag the issue
+const extensionYamlCache = new PersistableCache({ stdTTL: 10 * DAY_IN_SECONDS })
+const YAML_CACHE_KEY = "github-api-for-extension-metadata"
 
 let getLabels
-
 
 exports.onPreBootstrap = async ({ cache }) => {
   const cacheContents = await cache.get(CACHE_KEY)
   repoCache.ingestDump(cacheContents)
   console.log("Ingested", repoCache.size(), "cached repositories.")
+
+  const metadataCacheContents = await cache.get(YAML_CACHE_KEY)
+  extensionYamlCache.ingestDump(metadataCacheContents)
+  console.log("Ingested", extensionYamlCache.size(), "cached metadata file locations.")
 
   initSponsorCache(cache)
 
@@ -75,13 +82,18 @@ exports.onPreBootstrap = async ({ cache }) => {
 exports.onPostBootstrap = async ({ cache }) => {
   cache.set(CACHE_KEY, repoCache.dump())
   console.log("Persisted", repoCache.size(), "cached repositories.")
+
+  cache.set(YAML_CACHE_KEY, extensionYamlCache.dump())
+  console.log("Persisted", extensionYamlCache.size(), "cached metadata file locations.")
+
   saveSponsorCache(cache)
 }
 
 exports.onPluginInit = () => {
-  // Clear the cache; we read from the cache later on, so this shouldn't affect the persistence between builds
+  // Clear the in-memory cache; we read from the gatsby cache later on, so this shouldn't affect the persistence between builds
   // This is mostly needed for tests, since we can't add new methods beyond what the API defines to this file
   repoCache.flushAll()
+  extensionYamlCache.flushAll()
   clearCaches()
 }
 
@@ -110,6 +122,7 @@ exports.onCreateNode = async (
 
     const scmInfo = await fetchScmInfo(
       scmUrl,
+      node.metadata?.maven?.groupId,
       node.metadata?.maven?.artifactId,
       labels
     )
@@ -153,31 +166,34 @@ async function fetchScmLabel(scmUrl, artifactId) {
   }
 }
 
-const fetchScmInfo = async (scmUrl, artifactId, labels) => {
+const fetchScmInfo = async (scmUrl, groupId, artifactId, labels) => {
   if (scmUrl && scmUrl.includes("github.com")) {
-    return fetchGitHubInfo(scmUrl, artifactId, labels)
+    return fetchGitHubInfo(scmUrl, groupId, artifactId, labels)
   } else {
     return { url: scmUrl }
   }
 }
 
 function cache(ghJson, scmUrl, hasLabelInfo) {
-  // This is a shallow copy but that's ok since the scm info object is pretty flat
   // This copy *should* be unneeded, but better safe than sorry
-  const jsonCopy = { ...ghJson }
+  const jsonCopy = structuredClone(ghJson)
 
-  // We do *not* want to cache artifact-specific extension paths or the issue count (if there are labels)
-  delete jsonCopy["subfolderMetaInfs"]
-  delete jsonCopy["shortenedSubfolderMetaInfs"]
+  if (jsonCopy.repository) {
 
-  if (hasLabelInfo) {
-    delete jsonCopy["issues"]
-    delete jsonCopy["issuesUrl"]
+    // We do *not* want to cache artifact-specific extension paths or the issue count (if there are labels)
+    delete jsonCopy.repository["subfolderMetaInfs"]
+    delete jsonCopy.repository["shortenedSubfolderMetaInfs"]
+    delete jsonCopy.repository["quarkusSubfolderMetaInfs"]
+
+    if (hasLabelInfo) {
+      delete jsonCopy.repository["issues"]
+      delete jsonCopy.repository["issuesUrl"]
+    }
   }
   repoCache.set(scmUrl, jsonCopy) // Save this information for the next time
 }
 
-const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
+const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   const hasCache = repoCache.has(scmUrl)
 
   // TODO we can just treat label as an array, almost
@@ -215,7 +231,16 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
         totalCount
       }`
 
-  const subfoldersQuery = `subfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources/META-INF/") {
+  const fullSubfoldersQuery = `
+      metaInfs: object(expression: "HEAD:runtime/src/main/resources/META-INF/") {
+        ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+      
+      subfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources/META-INF/") {
         ... on Tree {
           entries {
             path
@@ -229,9 +254,24 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
             path
           }
         }
+      }
+      
+       quarkusSubfolderMetaInfs: object(expression: "HEAD:extensions/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+        ... on Tree {
+          entries {
+            path
+          }
+        }
       }`
 
   let query
+  const artifactKey = groupId + ":" + artifactId
+
+  const hasMetadataFileLocationCache = extensionYamlCache.get(artifactKey)
+
+  const subfoldersQuery = hasMetadataFileLocationCache ? "" : fullSubfoldersQuery
+
+  // TODO once we also cache issues, we can drop the query entirely in some cases
   if (hasCache) {
     // If a repo has labels, we can't just use the issue count for the repo, we need to get the issue count for the specific label
     // We could also cache that, but it's more complicated
@@ -244,13 +284,15 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
           }
     }`
     } else {
-      // TODO we could probably drop this in the case where we already had a yaml file at the top level, but we also want to know if there are others at sub-levels,
-      // so that we can handle the ambiguity
-      query = `query {
+      if (subfoldersQuery.length > 0) {
+        query = `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {          
           ${subfoldersQuery}
           }
     }`
+      } else {
+        query = undefined
+      }
     }
   } else {
     query = `query {
@@ -259,14 +301,6 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
     
       defaultBranchRef {
         name
-      }
-    
-      metaInfs: object(expression: "HEAD:runtime/src/main/resources/META-INF/") {
-        ... on Tree {
-          entries {
-            path
-          }
-        }
       }
       
       ${subfoldersQuery}
@@ -280,73 +314,82 @@ const fetchGitHubInfo = async (scmUrl, artifactId, labels) => {
   }`
   }
 
-  const body = await queryGraphQl(query)
+  const body = query ? await queryGraphQl(query) : undefined
+  const returnedData = body?.data
+  const returnedRepository = body?.data?.repository
 
-  if (body?.data && body?.data?.repository) {
-    const returnedData = body.data
-    const cachedData = repoCache.get(scmUrl)
-    const returnedRepository = returnedData?.repository
-    const cachedRepository = cachedData?.repository
 
-    // Merge the cache and what we got passed back this time
-    const data = { ...cachedData, ...returnedData }
-    // We also need to do a deep merge of the repository object
-    data.repository = { ...cachedRepository, ...returnedRepository }
-    cache(data, scmUrl, labels)
+  const cachedData = repoCache.get(scmUrl)
+  const cachedRepository = cachedData?.repository
 
-    const {
-      repository: {
-        issues: { totalCount },
-        defaultBranchRef,
-        metaInfs,
-        subfolderMetaInfs,
-        shortenedSubfolderMetaInfs,
-        openGraphImageUrl,
-      },
-      repositoryOwner: { avatarUrl },
-    } = data
 
+  // Merge the cache and what we got passed back this time
+  const data = { ...cachedData, ...returnedData }
+  // We also need to do a deep merge of the repository object
+  data.repository = { ...cachedRepository, ...returnedRepository }
+  cache(data, scmUrl, labels)
+
+  const {
+    repository: {
+      defaultBranchRef,
+      metaInfs,
+      subfolderMetaInfs,
+      shortenedSubfolderMetaInfs,
+      quarkusSubfolderMetaInfs,
+      openGraphImageUrl,
+    },
+  } = data
+
+  // Handle these separately since the parent objects may be undefined and destructuring nested undefineds is not good
+  scmInfo.issues = data?.repository?.issues?.totalCount
+  scmInfo.ownerImageUrl = data?.repositoryOwner?.avatarUrl
+
+
+  let extensionYamlUrl
+
+  if (hasMetadataFileLocationCache) {
+    extensionYamlUrl = extensionYamlCache.get(artifactKey)
+  } else {
     const allMetaInfs = [
       ...(metaInfs ? metaInfs.entries : []),
       ...(subfolderMetaInfs ? subfolderMetaInfs.entries : []),
       ...(shortenedSubfolderMetaInfs
         ? shortenedSubfolderMetaInfs.entries
         : []),
+      ...(quarkusSubfolderMetaInfs
+        ? quarkusSubfolderMetaInfs.entries
+        : [])
     ]
 
     const extensionYamls = allMetaInfs.filter(entry =>
       entry.path.endsWith("/quarkus-extension.yaml")
     )
-
-    scmInfo.issues = totalCount
-
-    scmInfo.owner = coords.owner
-    scmInfo.ownerImageUrl = avatarUrl
-
     // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
     if (extensionYamls.length === 1) {
-      scmInfo.extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef?.name}/${extensionYamls[0].path}`
+      const extensionYamlPath = extensionYamls[0].path
+      // It should be safe to guess 'main' for the branch ref, in the unlikely event that we didn't get it from the cache or from github
+      const branch = defaultBranchRef ? defaultBranchRef.name : "main"
+      extensionYamlUrl = `${scmUrl}/blob/${branch}/${extensionYamlPath}`
+      extensionYamlCache.set(artifactKey, extensionYamlUrl)
     }
-
-    // Only look at the social media preview if it's been set by the user; otherwise we know it will be the owner avatar with some text we don't want
-    // This mechanism is a bit fragile, but should work for now
-    // Default pattern https://opengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-openfga-client
-    // Customised pattern https://repository-images.githubusercontent.com/437045322/39ad4dec-e606-4b21-bb24-4c09a4790b58
-
-    const isCustomizedSocialMediaPreview =
-      openGraphImageUrl?.includes("githubusercontent")
-
-    if (isCustomizedSocialMediaPreview) {
-      scmInfo.socialImage = openGraphImageUrl
-    }
-
-    return scmInfo
-  } else {
-    console.warn(
-      `Cannot read GitHub information for ${artifactId}, because the API did not return any data.`
-    )
-    return scmInfo
   }
+  scmInfo.extensionYamlUrl = extensionYamlUrl
+
+  scmInfo.owner = coords.owner
+
+  // Only look at the social media preview if it's been set by the user; otherwise we know it will be the owner avatar with some text we don't want
+  // This mechanism is a bit fragile, but should work for now
+  // Default pattern https://opengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-openfga-client
+  // Customised pattern https://repository-images.githubusercontent.com/437045322/39ad4dec-e606-4b21-bb24-4c09a4790b58
+
+  const isCustomizedSocialMediaPreview =
+    openGraphImageUrl?.includes("githubusercontent")
+
+  if (isCustomizedSocialMediaPreview) {
+    scmInfo.socialImage = openGraphImageUrl
+  }
+
+  return scmInfo
 }
 
 exports.createSchemaCustomization = ({ actions }) => {
