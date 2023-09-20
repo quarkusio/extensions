@@ -34,13 +34,13 @@ const NavBar = styled.nav`
   padding: var(--navbar-padding) var(--site-margins);
 
   ${({ isMobile }) =>
-    isMobile
-      ? `
+          isMobile
+                  ? `
       flex-wrap: nowrap;
       column-gap: 1rem;
 
 `
-      : `  
+                  : `  
       flex-flow: wrap;
       column-gap: 10rem;
 
@@ -102,11 +102,11 @@ const CallToActionWrapper = styled.li`
   display: flex;
 
   ${({ isMobile }) =>
-    isMobile
-      ? `
+          isMobile
+                  ? `
         padding: 15px 0;
 `
-      : `  
+                  : `  
 `}
 `
 
@@ -267,6 +267,9 @@ const Navigation = () => {
     <Submenu title={langIcon}>
       <NavEntry>
         <a href={`${config.siteMetadata.siteUrl}`}>Official (English)</a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.translatedUrls.portuguese}`}>Português</a>
       </NavEntry>
       <NavEntry>
         <a href={`${config.siteMetadata.translatedUrls.spanish}`}>Español</a>

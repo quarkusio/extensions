@@ -12,9 +12,10 @@ module.exports = {
     description: `An extensions catalog.`,
     siteUrl: `http://quarkus.io/extensions`,
     translatedUrls: {
-      japanese: "http://ja.quarkus.io/",
-      chinese: "http://cn.quarkus.io/",
-      spanish: "http://es.quarkus.io/",
+      japanese: "https://ja.quarkus.io/",
+      chinese: "https://cn.quarkus.io/",
+      portuguese: "https://pt.quarkus.io/",
+      spanish: "https://es.quarkus.io/",
     },
 
     parentSiteUrl: `http://quarkus.io`,
