@@ -56,7 +56,6 @@ describe("an extension details page", () => {
     ).resolves.toBeTruthy()
   })
 
-  // Temporarily disabled since the GitHub data is not coming in reliably
   xit("should show the issue count", async () => {
     await expect(
       page.waitForXPath(`//*[text()="Issues"]`)

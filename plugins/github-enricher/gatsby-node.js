@@ -16,25 +16,27 @@ const defaultOptions = {
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 24 * 60 * 60
 
-const CACHE_KEY = "github-api-for-repos"
-const repoCache = new PersistableCache({ stdTTL: 3 * DAY_IN_SECONDS })
-
-// The location of extension metadata files is unlikely to change often, and if it does, the link checker will flag the issue
-const extensionYamlCache = new PersistableCache({ stdTTL: 10 * DAY_IN_SECONDS })
-const YAML_CACHE_KEY = "github-api-for-extension-metadata"
+// Defer initialization of these so we're playing at the right points in the plugin lifecycle
+let repoCache, extensionYamlCache
 
 let getLabels
 
-exports.onPreBootstrap = async ({ cache }) => {
-  const cacheContents = await cache.get(CACHE_KEY)
-  repoCache.ingestDump(cacheContents)
+exports.onPreBootstrap = async ({}) => {
+  repoCache = new PersistableCache({ key: "github-api-for-repos", stdTTL: 3 * DAY_IN_SECONDS })
+
+// The location of extension metadata files is unlikely to change often, and if it does, the link checker will flag the issue
+  extensionYamlCache = new PersistableCache({
+    key: "github-api-for-extension-metadata",
+    stdTTL: 10 * DAY_IN_SECONDS
+  })
+
+  await repoCache.ready()
   console.log("Ingested", repoCache.size(), "cached repositories.")
 
-  const metadataCacheContents = await cache.get(YAML_CACHE_KEY)
-  extensionYamlCache.ingestDump(metadataCacheContents)
+  await extensionYamlCache.ready()
   console.log("Ingested", extensionYamlCache.size(), "cached metadata file locations.")
 
-  initSponsorCache(cache)
+  await initSponsorCache()
 
   const repoCoords = { owner: "quarkusio", name: "quarkus" }
 
@@ -79,21 +81,21 @@ exports.onPreBootstrap = async ({ cache }) => {
   return yaml
 }
 
-exports.onPostBootstrap = async ({ cache }) => {
-  await cache.set(CACHE_KEY, repoCache.dump())
+exports.onPostBootstrap = async ({}) => {
+  await repoCache.persist()
   console.log("Persisted", repoCache.size(), "cached repositories.")
 
-  await cache.set(YAML_CACHE_KEY, extensionYamlCache.dump())
+  await extensionYamlCache.persist()
   console.log("Persisted", extensionYamlCache.size(), "cached metadata file locations.")
 
-  await saveSponsorCache(cache)
+  await saveSponsorCache()
 }
 
 exports.onPluginInit = () => {
   // Clear the in-memory cache; we read from the gatsby cache later on, so this shouldn't affect the persistence between builds
   // This is mostly needed for tests, since we can't add new methods beyond what the API defines to this file
-  repoCache.flushAll()
-  extensionYamlCache.flushAll()
+  repoCache?.flushAll()
+  extensionYamlCache?.flushAll()
   clearCaches()
 }
 

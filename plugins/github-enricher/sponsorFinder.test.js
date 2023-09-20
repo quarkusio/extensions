@@ -2,6 +2,7 @@ import {
   clearCaches,
   findSponsor,
   findSponsorFromContributorList,
+  initSponsorCache,
   normalizeCompanyName,
   setMinimumContributionCount,
   setMinimumContributionPercent,
@@ -187,9 +188,6 @@ const namedSponsorsOptIn = "named-sponsors:\n" +
 
 describe("the github sponsor finder", () => {
   beforeAll(async () => {
-    // Needed so that we do not short circuit the git path
-    process.env.GITHUB_TOKEN = "test_value"
-
     setMinimumContributorCount(1)
 
     getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
@@ -201,12 +199,12 @@ describe("the github sponsor finder", () => {
     )
   })
 
-  beforeEach(() => {
+  beforeEach(async () => {
     clearCaches()
+    await initSponsorCache()
   })
 
   afterAll(() => {
-    delete process.env.GITHUB_TOKEN
     jest.resetAllMocks()
   })
 
@@ -256,6 +254,11 @@ describe("the github sponsor finder", () => {
 
     beforeAll(() => {
       setMinimumContributionCount(5)
+    })
+
+    beforeEach(async () => {
+      clearCaches()
+      await initSponsorCache()
     })
 
     it("caches repo information", async () => {
@@ -324,6 +327,11 @@ describe("the github sponsor finder", () => {
   describe("when the main user has linked to a github company account", () => {
     beforeAll(() => {
       setMinimumContributorCount(1)
+    })
+
+    beforeEach(async () => {
+      clearCaches()
+      await initSponsorCache()
     })
 
     it("returns a company name", async () => {
@@ -403,8 +411,9 @@ describe("the github sponsor finder", () => {
   })
 })
 describe("company name normalization", () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     clearCaches()
+    await initSponsorCache()
   })
 
   it("handles the simple case", async () => {
