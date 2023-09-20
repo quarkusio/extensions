@@ -38,23 +38,23 @@ jobs:
       - uses: actions/checkout@v3
       - name: Get current date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "name=date::$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
       - name: Get current month
         id: month
-        run: echo "::set-output name=date::$(date +'%Y-%m')"
+        run: echo "name=month::$(date +'%Y-%m')" >> "$GITHUB_OUTPUT"
       - name: Caching Gatsby
         uses: actions/cache@v3
         with:
           path: |
             public
             .cache
-          key: ${{ runner.os }}-gatsby-build-${{ steps.date.outputs.month }}-${{ steps.date.outputs.date }}-${{ github.run_id }}
+          key: ${{ runner.os }}-gatsby-build-${{ steps.month.outputs.month }}-${{ steps.date.outputs.date }}-${{ github.run_id }}
           restore-keys: | # We don't know if restore keys matches in reverse chronological order, which is what we want, so add some extra date qualifiers
-            ${{ runner.os }}-gatsby-build-${{ steps.date.outputs.month }}-${{ steps.date.outputs.date }}
+            ${{ runner.os }}-gatsby-build-${{ steps.month.outputs.month }}-${{ steps.date.outputs.date }}
             ${{ runner.os }}-gatsby-build-${{ steps.date.outputs.month }}
             ${{ runner.os }}-gatsby-build-
       - run: ls -lh .cache/caches
-      - run: ls -lh .cache/caches/github-enricher
+      - run: ls -lh .cache/data/datastore/data.mdb
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
