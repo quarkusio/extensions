@@ -1,10 +1,19 @@
 const PersistableCache = require("./persistable-cache")
+const { dir } = require("tmp-promise")
+require("tmp-promise").setGracefulCleanup()
 
 const time = jest.useFakeTimers()
 
 describe("the persistable cache", () => {
+  let cachePath
+
   const frog = { frog: "bounce" }
   const rabbit = { rabbit: "bounce" }
+
+  beforeEach(async () => {
+    const { path } = await dir({ unsafeCleanup: true })
+    cachePath = path
+  })
 
 
   it("should set and get objects", () => {
@@ -48,7 +57,7 @@ describe("the persistable cache", () => {
   })
 
   it("should produce a dump that can be ingested for round-tripping", () => {
-    const cache = new PersistableCache()
+    const cache = new PersistableCache(cachePath)
 
     // Populate data
     cache.set("frog", frog)
@@ -111,6 +120,47 @@ describe("the persistable cache", () => {
     const cache = new PersistableCache()
     cache.ingestDump([])
     expect(cache.has("whatever")).toBeFalsy()
+  })
+
+  it("should not persist to disk if there is no key set", async () => {
+    const cache = new PersistableCache({ cachePath })
+
+    // Populate data
+    cache.set("frog", frog)
+
+    await expect(cache.persist()).rejects.toThrowError(/key/)
+  })
+
+
+  it("should persist and ingest from disk", async () => {
+    const cache = new PersistableCache({ cachePath, key: "something" })
+
+    // Populate data
+    cache.set("apples", frog)
+    cache.set("bananas", rabbit)
+
+    await cache.persist()
+
+    const cache2 = new PersistableCache({ cachePath, key: "something" })
+    await cache2.ready()
+    expect(cache2.has("apples")).toBeTruthy()
+    expect(cache2.get("apples")).toStrictEqual(frog)
+    expect(cache2.get("bananas")).toStrictEqual(rabbit)
+    expect(cache2.size()).toBe(2)
+  })
+
+  it("should not ingest from disk if the keys are different", async () => {
+    const cache = new PersistableCache({ cachePath, key: "something" })
+
+    // Populate data
+    cache.set("bowls", frog)
+    cache.set("plates", rabbit)
+
+    await cache.persist()
+
+    const cache2 = new PersistableCache({ cachePath, key: "different" })
+    expect(cache2.has("bowls")).toBeFalsy()
+    expect(cache2.has("plates")).toBeFalsy()
   })
 
 })

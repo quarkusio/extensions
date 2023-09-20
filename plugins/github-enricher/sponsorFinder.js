@@ -6,13 +6,7 @@ const { getRawFileContents, queryGraphQl, queryRest } = require("./github-helper
 const DAY_IN_SECONDS = 60 * 60 * 24
 const DAY_IN_MILLISECONDS = 1000 * DAY_IN_SECONDS
 
-const cacheOptions = { stdTTL: 4 * DAY_IN_SECONDS }
-const CACHE_KEY = "github-api-for-contributions"
-const COMPANY_CACHE_KEY = CACHE_KEY + "-company"
-const REPO_CACHE_KEY = CACHE_KEY + "-repo"
-
-const repoContributorCache = new PersistableCache(cacheOptions)
-const companyCache = new PersistableCache(cacheOptions)
+let repoContributorCache, companyCache
 
 let minimumContributorCount = 2
 let minimumContributionPercent = 20
@@ -34,17 +28,22 @@ const setMinimumContributionCount = n => {
   minContributionCount = n
 }
 
-const initSponsorCache = (cache) => {
-  companyCache.ingestDump(cache.get(COMPANY_CACHE_KEY))
-  console.log("Ingested", companyCache.size(), "cached companies.")
-  repoContributorCache.ingestDump(cache.get(REPO_CACHE_KEY))
-  console.log("Ingested contributor information for", repoContributorCache.size(), "cached repositories.")
+const initSponsorCache = async () => {
+  repoContributorCache = new PersistableCache({
+    key: "github-api-for-contribution-repo",
+    stdTTL: 4 * DAY_IN_SECONDS
+  })
+  companyCache = new PersistableCache({ key: "github-api-for-contribution-company", stdTTL: 4 * DAY_IN_SECONDS })
 
+  await companyCache.ready()
+  console.log("Ingested", companyCache.size(), "cached companies.")
+  await repoContributorCache.ready()
+  console.log("Ingested contributor information for", repoContributorCache.size(), "cached repositories.")
 }
 
 const clearCaches = () => {
-  repoContributorCache.flushAll()
-  companyCache.flushAll()
+  repoContributorCache?.flushAll()
+  companyCache?.flushAll()
   optedInSponsors = undefined
 }
 
@@ -289,10 +288,10 @@ const getCompanyFromGitHubLogin = async company => {
   return name
 }
 
-const saveSponsorCache = async (cache) => {
-  await cache.set(COMPANY_CACHE_KEY, companyCache.dump())
+const saveSponsorCache = async () => {
+  await companyCache.persist()
   console.log("Persisted", companyCache.size(), "cached companies.")
-  await cache.set(REPO_CACHE_KEY, repoContributorCache.dump())
+  await repoContributorCache.persist()
   console.log("Persisted contributor information for", repoContributorCache.size(), "cached repositories.")
 }
 

@@ -57,6 +57,7 @@ typings/
 # dotenv environment variable files
 .env*
 
+.cache*
 # gatsby files
 .cache/
 public
