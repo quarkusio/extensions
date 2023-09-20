@@ -10,7 +10,7 @@ async function tolerantFetch(url, params, isSuccessful) {
     }
     const body = await promiseRetry(
       async retry => {
-        const res = await fetch(url, { ...params, headers })
+        const res = await fetch(url, { ...params, headers }).catch(e => retry(e))
         const ghBody = await res.json()
 
         if (!isSuccessful(ghBody)) {
