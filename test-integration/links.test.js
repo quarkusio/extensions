@@ -14,7 +14,7 @@ describe("site links", () => {
 
   beforeAll(async () => {
     const path = `http://localhost:${port}/${process.env.PATH_PREFIX || ""}`
-    
+
     // create a new `LinkChecker` that we'll use to run the scan.
     const checker = new link.LinkChecker()
 
@@ -62,6 +62,7 @@ describe("site links", () => {
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/corda.html",
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/solr.html",
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/vm.html",
+      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/camel-k.html",
       // This one sometimes causes issues, but I think we know it's ok :)
       "https://www.redhat.com/"
     ]
