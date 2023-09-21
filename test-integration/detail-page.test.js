@@ -56,7 +56,7 @@ describe("an extension details page", () => {
     ).resolves.toBeTruthy()
   })
 
-  xit("should show the issue count", async () => {
+  it("should show the issue count", async () => {
     await expect(
       page.waitForXPath(`//*[text()="Issues"]`)
     ).resolves.toBeTruthy()
