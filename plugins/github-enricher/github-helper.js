@@ -1,7 +1,7 @@
 const promiseRetry = require("promise-retry")
 const RETRY_OPTIONS = { retries: 3, minTimeout: 40 * 1000, factor: 3 }
 
-async function tolerantFetch(url, params, isSuccessful) {
+async function tolerantFetch(url, params, isSuccessful, getContents) {
   const accessToken = process.env.GITHUB_TOKEN
 
   if (accessToken) {
@@ -11,7 +11,7 @@ async function tolerantFetch(url, params, isSuccessful) {
     const body = await promiseRetry(
       async retry => {
         const res = await fetch(url, { ...params, headers }).catch(e => retry(e))
-        const ghBody = await res.json()
+        const ghBody = await getContents(res)
 
         if (!isSuccessful(ghBody)) {
           retry(
@@ -54,6 +54,7 @@ const queryGraphQl = async (query) => {
       body: JSON.stringify({ query })
     },
     (ghBody) => ghBody?.data
+    , res => res && res.json()
   )
 
 }
@@ -62,7 +63,8 @@ const queryRest = async (path) => {
   return await tolerantFetch(`https://api.github.com/${path}`, {
       method: "GET",
     },
-    (ghBody) => ghBody
+    (ghBody) => ghBody,
+    res => res && res.json()
   )
 
 }
@@ -73,10 +75,10 @@ const getRawFileContents = async (org, repo, path) => {
   const fullPath = `raw.githubusercontent.com/${org}/${repo}/main/${path}`.replace("//", "/")
   const url = "https://" + fullPath
 
-  const res = await fetch(url)
-  if (res && res.text) {
-    return res.text()
-  }
+  return await tolerantFetch(url, {
+    method: "GET",
+  }, ghBody => ghBody, res => res && res.text())
+
 }
 
 module.exports = { queryGraphQl, queryRest, getRawFileContents }
