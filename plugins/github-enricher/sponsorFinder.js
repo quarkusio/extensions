@@ -31,9 +31,9 @@ const setMinimumContributionCount = n => {
 const initSponsorCache = async () => {
   repoContributorCache = new PersistableCache({
     key: "github-api-for-contribution-repo",
-    stdTTL: 4 * DAY_IN_SECONDS
+    stdTTL: 2 * DAY_IN_SECONDS
   })
-  companyCache = new PersistableCache({ key: "github-api-for-contribution-company", stdTTL: 4 * DAY_IN_SECONDS })
+  companyCache = new PersistableCache({ key: "github-api-for-contribution-company", stdTTL: 1.5 * DAY_IN_SECONDS })
 
   await companyCache.ready()
   console.log("Ingested", companyCache.size(), "cached companies.")
