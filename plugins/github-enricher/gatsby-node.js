@@ -196,7 +196,9 @@ function cache(ghJson, scmUrl, hasLabelInfo) {
 }
 
 const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
-  const hasCache = repoCache.has(scmUrl)
+
+  // Check both that we have a cache and that it's been populated with the data we expect
+  const hasCache = repoCache.has(scmUrl) && repoCache.get(scmUrl).repositoryOwner?.avatarUrl
 
   // TODO we can just treat label as an array, almost
   const labelFilterString = labels
@@ -234,6 +236,10 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
       }`
 
   const fullSubfoldersQuery = `
+      defaultBranchRef {
+        name
+      }
+      
       metaInfs: object(expression: "HEAD:runtime/src/main/resources/META-INF/") {
         ... on Tree {
           entries {
@@ -300,10 +306,6 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
     query = `query {
     repository(owner:"${coords.owner}", name:"${coords.name}") {
       ${issuesQuery}
-    
-      defaultBranchRef {
-        name
-      }
       
       ${subfoldersQuery}
          
