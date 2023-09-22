@@ -110,6 +110,7 @@ const getUserContributionsNoCache = async (org, project) => {
                                 author {
                                   user {
                                     login
+                                    name
                                     company
                                   }
                                 }
@@ -159,13 +160,23 @@ const findSponsor = async (org, project) => {
   }
 }
 
+const notBot = (user) => {
+  return user.login && !user.login.includes("[bot]") && user.login !== "actions-user" && user.login !== "quarkiversebot"
+}
+
+const getContributors = async (org, project) => {
+  const collatedHistory = await getUserContributions(org, project)
+  return collatedHistory?.map(user => {
+    const { name, login, contributions } = user
+    return { name: name || login, login, contributions }
+  }).filter(notBot)
+}
+
 const findSponsorFromContributorList = async (userContributions) => {
 
   // The GraphQL API, unlike the REST API, does not list a type for users, so we can only detect bots from name inspection
   const notBots = userContributions
-    .filter(user => user.login && !user.login.includes("[bot]"))
-    .filter(user => user.login !== "actions-user")
-    .filter(user => user.login !== "quarkiversebot")
+    .filter(notBot)
 
   const totalContributions = notBots.reduce(
     (acc, user) => acc + user.contributions,
@@ -301,6 +312,7 @@ const saveSponsorCache = async () => {
 
 module.exports = {
   findSponsor,
+  getContributors,
   clearCaches,
   initSponsorCache,
   saveSponsorCache,

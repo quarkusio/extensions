@@ -6,7 +6,7 @@ const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { labelExtractor } = require("./labelExtractor")
 const PersistableCache = require("./persistable-cache")
-const { findSponsor, clearCaches, saveSponsorCache, initSponsorCache } = require("./sponsorFinder")
+const { findSponsor, clearCaches, saveSponsorCache, initSponsorCache, getContributors } = require("./sponsorFinder")
 const { getRawFileContents, queryGraphQl } = require("./github-helper")
 
 const defaultOptions = {
@@ -223,6 +223,7 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   const scmInfo = { url: scmUrl, project }
 
   scmInfo.sponsors = await findSponsor(coords.owner, project)
+  scmInfo.contributors = await getContributors(coords.owner, project)
 
   // Always set the issuesUrl and labels since the cached one might be invalid
   scmInfo.issuesUrl = issuesUrl

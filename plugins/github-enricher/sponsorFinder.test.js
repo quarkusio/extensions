@@ -2,6 +2,7 @@ import {
   clearCaches,
   findSponsor,
   findSponsorFromContributorList,
+  getContributors,
   initSponsorCache,
   normalizeCompanyName,
   setMinimumContributionCount,
@@ -66,6 +67,7 @@ const pactContributors = [
 ]
 
 const companyWithASingleContributor = "Company With A Single Contributor"
+
 const manyContributors = [
   occasionalContributor,
   occasionalContributor,
@@ -135,6 +137,7 @@ const rabbitNode = {
     "author": {
       "user": {
         "login": "someonebouncy",
+        "name": "Doctor Fluffy",
         "company": "Rabbit"
       }
     }
@@ -212,248 +215,269 @@ describe("the github sponsor finder", () => {
     jest.clearAllMocks()
   })
 
-  it("does not make remote calls if the org is undefined", async () => {
-    const sponsor = await findSponsor(undefined, "quarkus-pact")
-    expect(sponsor).toBeUndefined()
-    expect(queryRest).not.toHaveBeenCalled()
-    expect(queryGraphQl).not.toHaveBeenCalled()
-  })
+  describe("identifying a sponsor", () => {
 
-  it("does not make remote calls if the project is undefined", async () => {
-    const sponsor = await findSponsor("someorg", undefined)
-    expect(sponsor).toBeUndefined()
-    expect(queryRest).not.toHaveBeenCalled()
-    expect(queryGraphQl).not.toHaveBeenCalled()
-  })
-
-  it("returns a list of company sponsors, given an org and project", async () => {
-    setMinimumContributionCount(1)
-    const sponsor = await findSponsor("someorg", "someproject")
-    expect(queryGraphQl).toHaveBeenCalled()
-    expect(sponsor).toContain("Red Hat")
-  })
-
-  it("orders company sponsors by contribution level", async () => {
-    setMinimumContributionCount(1)
-    setMinimumContributorCount(1)
-    setMinimumContributionPercent(1)
-    const sponsor = await findSponsor("someorg", "someproject")
-    expect(queryGraphQl).toHaveBeenCalled()
-    expect(sponsor).toStrictEqual(["Rabbit", "Red Hat", "Tortoise"])
-  })
-
-  it("filters out companies which do not have enough contributors", async () => {
-    setMinimumContributionCount(10)
-    const sponsor = await findSponsor("someorg", "someproject")
-    expect(queryGraphQl).toHaveBeenCalled()
-    expect(sponsor).toBeUndefined()
-  })
-
-  // Convenience tests for the logic which takes an array of contributor counts and turns it into a list of sponsors
-  describe("when the contributor counts have already been collated", () => {
-
-    beforeAll(() => {
-      setMinimumContributionCount(5)
+    it("does not make remote calls if the org is undefined", async () => {
+      const sponsor = await findSponsor(undefined, "quarkus-pact")
+      expect(sponsor).toBeUndefined()
+      expect(queryRest).not.toHaveBeenCalled()
+      expect(queryGraphQl).not.toHaveBeenCalled()
     })
 
-    beforeEach(async () => {
-      clearCaches()
-      await initSponsorCache()
+    it("does not make remote calls if the project is undefined", async () => {
+      const sponsor = await findSponsor("someorg", undefined)
+      expect(sponsor).toBeUndefined()
+      expect(queryRest).not.toHaveBeenCalled()
+      expect(queryGraphQl).not.toHaveBeenCalled()
     })
 
-    it("caches repo information", async () => {
-      const sponsor = await findSponsorFromContributorList(pactContributors)
-      expect(sponsor).not.toBeUndefined()
-      const callCount = queryGraphQl.mock.calls.length + queryRest.mock.calls.length
-      const secondSponsor = await findSponsorFromContributorList(pactContributors)
-      expect(secondSponsor).toStrictEqual(sponsor)
-      // No extra calls should be made as everything should be cached
-      expect(queryGraphQl.mock.calls.length + queryRest.mock.calls.length).toBe(callCount)
+    it("returns a list of company sponsors, given an org and project", async () => {
+      setMinimumContributionCount(1)
+      const sponsor = await findSponsor("someorg", "someproject")
+      expect(queryGraphQl).toHaveBeenCalled()
+      expect(sponsor).toContain("Red Hat")
     })
 
-    it("sorts by number of commits", async () => {
-      setMinimumContributorCount(0)
-      setMinimumContributionPercent(10)
-
-      const sponsors = await findSponsorFromContributorList(manyContributors)
-
-      expect(sponsors.slice(0, 4)).toStrictEqual([
-        companyWithASingleContributor,
-        "Occasional Company",
-        "Another Company",
-        "Red Hat",
-      ])
-    })
-
-    it("excludes companies which only have a single contributor", async () => {
-      // Other tests may set this differently, so set it to the value this test expects
-      setMinimumContributorCount(0)
-      setMinimumContributionPercent(20)
-
-      let sponsors = await findSponsorFromContributorList(manyContributors)
-      expect(sponsors).toContain("Occasional Company")
-      expect(sponsors).toContain(companyWithASingleContributor)
-
-      // Now put in a higher threshold for the number of contributors
-      setMinimumContributorCount(2)
-      sponsors = await findSponsorFromContributorList(manyContributors)
-      expect(sponsors).toContain("Occasional Company")
-      expect(sponsors).not.toContain(companyWithASingleContributor)
-
-    })
-  })
-
-  describe("when there is a narrow opt-in list", () => {
-    beforeEach(() => {
-      setMinimumContributorCount(0)
-      setMinimumContributionPercent(5)
-
-      getRawFileContents.mockResolvedValue("named-sponsors:\n" +
-        "  - Red Hat"
-      )
-    })
-
-    afterAll(() => {
-      getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
-    })
-
-    it("filters out companies that are not in the opt-in list", async () => {
-      let sponsors = await findSponsorFromContributorList(manyContributors)
-      expect(sponsors).toStrictEqual(["Red Hat"])
-    })
-  })
-
-
-  describe("when the main user has linked to a github company account", () => {
-    beforeAll(() => {
+    it("orders company sponsors by contribution level", async () => {
+      setMinimumContributionCount(1)
       setMinimumContributorCount(1)
+      setMinimumContributionPercent(1)
+      const sponsor = await findSponsor("someorg", "someproject")
+      expect(queryGraphQl).toHaveBeenCalled()
+      expect(sponsor).toStrictEqual(["Rabbit", "Red Hat", "Tortoise"])
     })
 
-    beforeEach(async () => {
-      clearCaches()
-      await initSponsorCache()
-    })
-
-    it("returns a company name", async () => {
-      const sponsor = await findSponsorFromContributorList(pactContributors)
-      expect(sponsor).toStrictEqual(["Red Hat"])
-    })
-
-    it("caches company information", async () => {
-      const sponsor = await findSponsorFromContributorList(pactContributors)
-      expect(sponsor).not.toBeUndefined()
-      const callCount = queryGraphQl.mock.calls.length + queryRest.mock.calls.length
-      const secondSponsor = await findSponsorFromContributorList(anotherContributors)
-      expect(secondSponsor).toStrictEqual(sponsor)
-      // No extra remote calls, since we passed in the contributor list and the company is cached
-      expect(queryGraphQl.mock.calls.length + queryRest.mock.calls.length).toBe(callCount)
-    })
-  })
-
-
-  describe("when the main user is a bot", () => {
-
-    const contributors = [
-      {
-        login: "dependabot[bot]",
-        company: "Irrelevant",
-        contributions: 27,
-      },
-    ]
-
-    beforeAll(() => {
-      setMinimumContributorCount(1)
-    })
-
-    it("does not return a name", async () => {
-      const sponsor = await findSponsorFromContributorList(contributors)
+    it("filters out companies which do not have enough contributors", async () => {
+      setMinimumContributionCount(10)
+      const sponsor = await findSponsor("someorg", "someproject")
+      expect(queryGraphQl).toHaveBeenCalled()
       expect(sponsor).toBeUndefined()
     })
-  })
 
-  describe("when the main user is the actions user", () => {
-    // The Actions User users/actions-user is not flagged as a bot, but we want to exclude it
+    // Convenience tests for the logic which takes an array of contributor counts and turns it into a list of sponsors
+    describe("when the contributor counts have already been collated", () => {
 
-    const contributors = [
-      {
-        login: "actions-user",
-        name: "Actions User",
-        company: "GitHub Actions",
-        contributions: 27,
-      },
-    ]
+      beforeAll(() => {
+        setMinimumContributionCount(5)
+      })
 
-    beforeAll(() => {
-      setMinimumContributorCount(1)
+      beforeEach(async () => {
+        clearCaches()
+        await initSponsorCache()
+      })
+
+      it("caches repo information", async () => {
+        const sponsor = await findSponsorFromContributorList(pactContributors)
+        expect(sponsor).not.toBeUndefined()
+        const callCount = queryGraphQl.mock.calls.length + queryRest.mock.calls.length
+        const secondSponsor = await findSponsorFromContributorList(pactContributors)
+        expect(secondSponsor).toStrictEqual(sponsor)
+        // No extra calls should be made as everything should be cached
+        expect(queryGraphQl.mock.calls.length + queryRest.mock.calls.length).toBe(callCount)
+      })
+
+      it("sorts by number of commits", async () => {
+        setMinimumContributorCount(0)
+        setMinimumContributionPercent(10)
+
+        const sponsors = await findSponsorFromContributorList(manyContributors)
+
+        expect(sponsors.slice(0, 4)).toStrictEqual([
+          companyWithASingleContributor,
+          "Occasional Company",
+          "Another Company",
+          "Red Hat",
+        ])
+      })
+
+      it("excludes companies which only have a single contributor", async () => {
+        // Other tests may set this differently, so set it to the value this test expects
+        setMinimumContributorCount(0)
+        setMinimumContributionPercent(20)
+
+        let sponsors = await findSponsorFromContributorList(manyContributors)
+        expect(sponsors).toContain("Occasional Company")
+        expect(sponsors).toContain(companyWithASingleContributor)
+
+        // Now put in a higher threshold for the number of contributors
+        setMinimumContributorCount(2)
+        sponsors = await findSponsorFromContributorList(manyContributors)
+        expect(sponsors).toContain("Occasional Company")
+        expect(sponsors).not.toContain(companyWithASingleContributor)
+
+      })
     })
 
-    it("does not return a name", async () => {
-      const sponsor = await findSponsorFromContributorList(contributors)
-      expect(sponsor).toBeUndefined()
-    })
-  })
+    describe("when there is a narrow opt-in list", () => {
+      beforeEach(() => {
+        setMinimumContributorCount(0)
+        setMinimumContributionPercent(5)
 
-  describe("when the main user is the quarkiverse bot", () => {
-    const contributors =
-      [
+        getRawFileContents.mockResolvedValue("named-sponsors:\n" +
+          "  - Red Hat"
+        )
+      })
+
+      afterAll(() => {
+        getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
+      })
+
+      it("filters out companies that are not in the opt-in list", async () => {
+        let sponsors = await findSponsorFromContributorList(manyContributors)
+        expect(sponsors).toStrictEqual(["Red Hat"])
+      })
+    })
+
+
+    describe("when the main user has linked to a github company account", () => {
+      beforeAll(() => {
+        setMinimumContributorCount(1)
+      })
+
+      beforeEach(async () => {
+        clearCaches()
+        await initSponsorCache()
+      })
+
+      it("returns a company name", async () => {
+        const sponsor = await findSponsorFromContributorList(pactContributors)
+        expect(sponsor).toStrictEqual(["Red Hat"])
+      })
+
+      it("caches company information", async () => {
+        const sponsor = await findSponsorFromContributorList(pactContributors)
+        expect(sponsor).not.toBeUndefined()
+        const callCount = queryGraphQl.mock.calls.length + queryRest.mock.calls.length
+        const secondSponsor = await findSponsorFromContributorList(anotherContributors)
+        expect(secondSponsor).toStrictEqual(sponsor)
+        // No extra remote calls, since we passed in the contributor list and the company is cached
+        expect(queryGraphQl.mock.calls.length + queryRest.mock.calls.length).toBe(callCount)
+      })
+    })
+
+
+    describe("when the main user is a bot", () => {
+
+      const contributors = [
         {
-          login: "quarkiversebot",
-          name: "Unflagged bot",
-          company: "Quarkiverse Hub",
+          login: "dependabot[bot]",
+          company: "Irrelevant",
           contributions: 27,
         },
       ]
 
-    it("does not return a name", async () => {
-      const sponsor = await findSponsorFromContributorList(contributors)
-      expect(sponsor).toBeUndefined()
+      beforeAll(() => {
+        setMinimumContributorCount(1)
+      })
+
+      it("does not return a name", async () => {
+        const sponsor = await findSponsorFromContributorList(contributors)
+        expect(sponsor).toBeUndefined()
+      })
+    })
+
+    describe("when the main user is the actions user", () => {
+      // The Actions User users/actions-user is not flagged as a bot, but we want to exclude it
+
+      const contributors = [
+        {
+          login: "actions-user",
+          name: "Actions User",
+          company: "GitHub Actions",
+          contributions: 27,
+        },
+      ]
+
+      beforeAll(() => {
+        setMinimumContributorCount(1)
+      })
+
+      it("does not return a name", async () => {
+        const sponsor = await findSponsorFromContributorList(contributors)
+        expect(sponsor).toBeUndefined()
+      })
+    })
+
+    describe("when the main user is the quarkiverse bot", () => {
+      const contributors =
+        [
+          {
+            login: "quarkiversebot",
+            name: "Unflagged bot",
+            company: "Quarkiverse Hub",
+            contributions: 27,
+          },
+        ]
+
+      it("does not return a name", async () => {
+        const sponsor = await findSponsorFromContributorList(contributors)
+        expect(sponsor).toBeUndefined()
+      })
     })
   })
-})
-describe("company name normalization", () => {
-  beforeEach(async () => {
-    clearCaches()
-    await initSponsorCache()
+  describe("company name normalization", () => {
+    beforeEach(async () => {
+      clearCaches()
+      await initSponsorCache()
+    })
+
+    it("handles the simple case", async () => {
+      const name = "Atlantic Octopus Federation"
+      const sponsor = await normalizeCompanyName(name)
+      expect(sponsor).toBe(name)
+    })
+
+    it("gracefully handles undefined", async () => {
+      const sponsor = await normalizeCompanyName(undefined)
+      expect(sponsor).toBeUndefined()
+    })
+
+    it("normalises a company name with Inc at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat, Inc")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with Inc. at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat, Inc.")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with a 'by' structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("JBoss by Red Hat by IBM")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with an '@' structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat @kiegroup")
+      expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with a parenthetical structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("Linkare TI (@linkareti)")
+      expect(sponsor).toBe("Linkare TI")
+    })
+
+    it("normalises a company name with a hyphenated '@' structure at the end", async () => {
+      const sponsor = await normalizeCompanyName("Red Hat - @hibernate")
+      expect(sponsor).toBe("Red Hat")
+    })
   })
 
-  it("handles the simple case", async () => {
-    const name = "Atlantic Octopus Federation"
-    const sponsor = await normalizeCompanyName(name)
-    expect(sponsor).toBe(name)
-  })
+  describe("listing all contributors", () => {
 
-  it("gracefully handles undefined", async () => {
-    const sponsor = await normalizeCompanyName(undefined)
-    expect(sponsor).toBeUndefined()
-  })
+    it("does not make remote calls if the org is undefined", async () => {
+      const sponsor = await findSponsor(undefined, "quarkus-pact")
+      expect(sponsor).toBeUndefined()
+      expect(queryRest).not.toHaveBeenCalled()
+      expect(queryGraphQl).not.toHaveBeenCalled()
+    })
 
-  it("normalises a company name with Inc at the end", async () => {
-    const sponsor = await normalizeCompanyName("Red Hat, Inc")
-    expect(sponsor).toBe("Red Hat")
-  })
-
-  it("normalises a company name with Inc. at the end", async () => {
-    const sponsor = await normalizeCompanyName("Red Hat, Inc.")
-    expect(sponsor).toBe("Red Hat")
-  })
-
-  it("normalises a company name with a 'by' structure at the end", async () => {
-    const sponsor = await normalizeCompanyName("JBoss by Red Hat by IBM")
-    expect(sponsor).toBe("Red Hat")
-  })
-
-  it("normalises a company name with an '@' structure at the end", async () => {
-    const sponsor = await normalizeCompanyName("Red Hat @kiegroup")
-    expect(sponsor).toBe("Red Hat")
-  })
-
-  it("normalises a company name with a parenthetical structure at the end", async () => {
-    const sponsor = await normalizeCompanyName("Linkare TI (@linkareti)")
-    expect(sponsor).toBe("Linkare TI")
-  })
-
-  it("normalises a company name with a hyphenated '@' structure at the end", async () => {
-    const sponsor = await normalizeCompanyName("Red Hat - @hibernate")
-    expect(sponsor).toBe("Red Hat")
+    it("returns a list of individuals, given an org and project", async () => {
+      setMinimumContributionCount(1)
+      const contributors = await getContributors("someorg", "someproject")
+      expect(queryGraphQl).toHaveBeenCalled()
+      expect(contributors).toHaveLength(3)
+      expect(contributors[0]).toStrictEqual({ "name": "Doctor Fluffy", login: "someonebouncy", contributions: 5 })
+    })
   })
 })
