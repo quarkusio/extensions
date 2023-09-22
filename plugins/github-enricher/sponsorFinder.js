@@ -266,9 +266,8 @@ const normalizeCompanyNameNoCache = async (company) => {
       // Special case for some URLs
       companyName = companyName.replace("https://www.redhat.com/", "Red Hat")
       companyName = companyName.replace("http://www.redhat.com/", "Red Hat")
-
-      companyName = companyName.trim()
     }
+    companyName = companyName?.trim()
 
     return companyName
   }
