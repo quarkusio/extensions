@@ -79,6 +79,8 @@ describe("the github helper", () => {
   describe("the raw file helper", () => {
     const contents = "a file contents"
     beforeEach(async () => {
+      // Needed so that we do not short circuit the git path
+      process.env.GITHUB_TOKEN = "test_value"
       const gitHubApi = {
         text: jest.fn().mockResolvedValue(contents)
       }
@@ -90,26 +92,26 @@ describe("the github helper", () => {
       jest.clearAllMocks()
     })
 
-    it("calls github with the correct url", () => {
+    it("calls github with the correct url", async () => {
       const org = "quacky"
       const repo = "duck"
       const path = "an-arbitrary-path"
       const expectedUrl = "https://raw.githubusercontent.com/quacky/duck/main/an-arbitrary-path"
 
-      getRawFileContents(org, repo, path)
+      await getRawFileContents(org, repo, path)
       expect(fetch).toHaveBeenLastCalledWith(
-        expectedUrl)
+        expectedUrl, { "headers": { "Authorization": "Bearer test_value" }, "method": "GET" })
     })
 
-    it("handles double slashes", () => {
+    it("handles double slashes", async () => {
       const org = "quacky"
       const repo = "duck"
       const path = "/bad-path"
       const expectedUrl = "https://raw.githubusercontent.com/quacky/duck/main/bad-path"
 
-      getRawFileContents(org, repo, path)
+      await getRawFileContents(org, repo, path)
       expect(fetch).toHaveBeenLastCalledWith(
-        expectedUrl)
+        expectedUrl, { "headers": { "Authorization": "Bearer test_value" }, "method": "GET" })
     })
 
 
