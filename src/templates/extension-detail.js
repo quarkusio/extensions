@@ -10,6 +10,7 @@ import InstallationInstructions from "../components/extensions-display/installat
 import ExtensionImage from "../components/extension-image"
 import CodeLink from "../components/extensions-display/code-link"
 import { qualifiedPrettyPlatform } from "../components/util/pretty-platform"
+import ContributionsChart from "../components/charts/contributions-chart"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--site-margins);
@@ -206,19 +207,26 @@ const ExtensionDetailTemplate = ({
               <InstallationInstructions artifact={artifact} />
             </DocumentationSection>
 
-            <DocumentationSection>
-              {duplicates &&
-                duplicates.map(duplicate => (
-                  <DuplicateReference key={duplicate.groupId}>
-                    {/^[aeiou]/i.test(duplicate.relationship) ? "An " : "A "}
-                    <Link to={"/" + duplicate.slug}>
-                      {duplicate.relationship} version
-                    </Link>{" "}
-                    of this extension was published with the group id{" "}
-                    <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>.
-                  </DuplicateReference>
-                ))}
-            </DocumentationSection>
+            {duplicates && duplicates.length > 0 && (<DocumentationSection>
+              {duplicates.map(duplicate => (
+                <DuplicateReference key={duplicate.groupId}>
+                  {/^[aeiou]/i.test(duplicate.relationship) ? "An " : "A "}
+                  <Link to={"/" + duplicate.slug}>
+                    {duplicate.relationship} version
+                  </Link>{" "}
+                  of this extension was published with the group id{" "}
+                  <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>.
+                </DuplicateReference>
+              ))}
+            </DocumentationSection>)}
+
+            {metadata?.sourceControl?.contributors && metadata?.sourceControl?.contributors.length > 0 && (
+              <DocumentationSection>
+                <DocumentationHeading>Contributors</DocumentationHeading>
+                <p>Commits to this extension's repository in the past six months.</p>
+                <ContributionsChart contributors={metadata.sourceControl.contributors} />
+
+              </DocumentationSection>)}
 
             <DocumentationSection>
               <AuthorGuidance>
@@ -431,6 +439,11 @@ export const pageQuery = graphql`
           issues
           issuesUrl
           sponsors
+          contributors {
+            name
+            contributions
+            login
+          }
           projectImage {
             childImageSharp {
               gatsbyImageData(width: 220)

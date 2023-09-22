@@ -2,6 +2,7 @@ import React from "react"
 import { render, screen, within } from "@testing-library/react"
 import ExtensionDetailTemplate from "./extension-detail"
 
+
 describe("extension detail page", () => {
   describe("for an extension with lots of information", () => {
     const category = "jewellery"
@@ -44,6 +45,7 @@ describe("extension detail page", () => {
           project: "jproject",
           issues: 839,
           sponsors: ["Automatically Calculated Sponsor"],
+          contributors: [{ name: "Alice", contributions: 6 }, { name: "Bob", contributions: 2 }],
           ownerImage: {
             childImageSharp: {
               gatsbyImageData: "specific-logo.png",
@@ -172,13 +174,27 @@ describe("extension detail page", () => {
       expect(link).toBeTruthy()
     })
 
-    it("renders an icon with appropriate source ", async () => {
+    it("renders an icon with appropriate source", async () => {
       const image = screen.getByAltText("The icon of the organisation")
 
       // We can't just read the source, because this is a gatsby container, not a raw image
       // The key names in the objects have UUIDs in them, so we cannot trivially inspect the object
       // We could stringify and look for the image name, but that's a lot like hard work
       expect(image).toBeTruthy()
+    })
+
+    it("renders a contributors section", async () => {
+      expect(screen.getByText("Contributors")).toBeTruthy()
+    })
+
+    // With the resizable container, we can't see inside the chart at all, sadly
+    xit("renders a committers chart", async () => {
+      // The committers chart is an svg, not an image, but we can find it by title
+      const chartTitle = screen.getByTitle("Committers")
+
+      // ... but there's not much we can meaningfully test
+      const chart = chartTitle.closest("svg")
+      expect(chart).toBeTruthy()
     })
 
     it("does not render an unlisted banner", async () => {
@@ -384,6 +400,10 @@ describe("extension detail page", () => {
 
     it("does not render anything about source", async () => {
       expect(screen.queryByText(/source/)).toBeFalsy()
+    })
+
+    it("does not render a contributors section", async () => {
+      expect(screen.queryByText("Contributors")).toBeFalsy()
     })
   })
 

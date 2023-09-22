@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 import Select from "react-select"
 import Title from "./title"
-import styles from "../../style"
+import { styles } from "../util/styles/style"
 
 const Element = styled.form`
   padding-top: 36px;
@@ -59,12 +59,12 @@ const defaultCompare = (a, b) => {
 }
 
 const DropdownFilter = ({
-  options,
-  filterer,
-  displayLabel,
-  optionTransformer,
-  compareFunction,
-}) => {
+                          options,
+                          filterer,
+                          displayLabel,
+                          optionTransformer,
+                          compareFunction,
+                        }) => {
   const label = displayLabel
     ? displayLabel.toLowerCase().replace(" ", "-")
     : "unknown"
