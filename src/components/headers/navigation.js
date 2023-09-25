@@ -145,7 +145,7 @@ const Navigation = () => {
   }
 
   const about = (
-    <Submenu title="About">
+    <Submenu title="Why">
       <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/about`}>
           What Is Quarkus?
