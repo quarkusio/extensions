@@ -36,6 +36,8 @@ const initSponsorCache = async () => {
   companyCache = new PersistableCache({ key: "github-api-for-contribution-company", stdTTL: 1.5 * DAY_IN_SECONDS })
 
   await companyCache.ready()
+  // TODO flushing the cache for debug
+  companyCache.flushAll()
   console.log("Ingested", companyCache.size(), "cached companies.")
   await repoContributorCache.ready()
   console.log("Ingested contributor information for", repoContributorCache.size(), "cached repositories.")
