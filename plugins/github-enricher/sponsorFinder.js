@@ -29,6 +29,9 @@ const setMinimumContributionCount = n => {
 }
 
 const initSponsorCache = async () => {
+  // If there are problems with the cache, it works well to add something like companyCache.flushAll() on a main-branch build
+  // (and then remove it next build)
+
   repoContributorCache = new PersistableCache({
     key: "github-api-for-contribution-repo",
     stdTTL: 2 * DAY_IN_SECONDS
@@ -36,8 +39,6 @@ const initSponsorCache = async () => {
   companyCache = new PersistableCache({ key: "github-api-for-contribution-company", stdTTL: 1.5 * DAY_IN_SECONDS })
 
   await companyCache.ready()
-  // TODO flushing the cache for debug
-  companyCache.flushAll()
   console.log("Ingested", companyCache.size(), "cached companies.")
   await repoContributorCache.ready()
   console.log("Ingested contributor information for", repoContributorCache.size(), "cached repositories.")
@@ -292,10 +293,6 @@ const getCompanyFromGitHubLogin = async company => {
 }
 
 const saveSponsorCache = async () => {
-  const dump = companyCache.dump().map(entry => {
-    return { ...entry, expires: new Date(entry.ts) }
-  })
-  console.debug("Persisting the following company cache", dump)
   await companyCache.persist()
   console.log("Persisted", companyCache.size(), "cached companies.")
   await repoContributorCache.persist()
