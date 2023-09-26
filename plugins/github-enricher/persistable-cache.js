@@ -10,6 +10,9 @@ const DEFAULT_CACHE_PATH = process.env.NODE_ENV === "test" ? "./.cache-github-ap
 
 /* This is an in-memory cache, with the option to persist itself to disk, when persist() is called.
 If a key and path are given, it will read from disk on initialisation.
+There are two layers of cache; node-cache does the in-memory part, and cacache persists the serialized node cache into a larger on-disk cache.
+
+The time to live option is in SECONDS.
  */
 class PersistableCache {
 
@@ -40,7 +43,7 @@ class PersistableCache {
   }
 
   set(key, value) {
-    const jitteredTtl = this.options?.stdTTL ? this.options.stdTTL + (this.options.stdTTL) * jitterRatio * (Math.random() - 0.5) : 0
+    const jitteredTtl = this.options?.stdTTL ? this.options.stdTTL + (this.options.stdTTL) * jitterRatio * (Math.random() - 1) : 0
     return this.cache.set(key, value, jitteredTtl)
 
   }
