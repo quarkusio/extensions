@@ -194,8 +194,8 @@ describe("the github sponsor finder", () => {
 
     queryGraphQl.mockResolvedValue(graphQLResponse)
 
-    queryRest.mockImplementation(url =>
-      urls[url] || urls[url.toLowerCase()] || {}
+    queryRest.mockImplementation(url => Promise.resolve(
+      urls[url] || urls[url.toLowerCase()] || {})
     )
   })
 

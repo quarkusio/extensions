@@ -206,9 +206,11 @@ const findSponsorFromContributorList = async (userContributions) => {
   )
 
   const sponsorData = await getSponsorData()
-  const namedSponsors = sponsorData["named-sponsors"]
 
-  const onlyOptIns = majorProportions.filter(company => namedSponsors && namedSponsors.includes(company.company))
+  // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be sade
+
+  const namedSponsors = sponsorData["named-sponsors"].map(name => name.toLowerCase())
+  const onlyOptIns = majorProportions.filter(company => namedSponsors && namedSponsors.includes(company.company.toLowerCase()))
 
   const sorted = onlyOptIns.sort((c, d) => d.commits - c.commits)
 
@@ -275,7 +277,7 @@ const normalizeCompanyNameNoCache = async (company) => {
 
 const getCompanyFromGitHubLogin = async company => {
 
-  const ghBody = queryRest(`users/${company}`)
+  const ghBody = await queryRest(`users/${company}`)
 
   let name = ghBody?.name
 
@@ -288,6 +290,10 @@ const getCompanyFromGitHubLogin = async company => {
 }
 
 const saveSponsorCache = async () => {
+  const dump = companyCache.dump().map(entry => {
+    return { ...entry, expires: new Date(entry.ts) }
+  })
+  console.debug("Persisting the following company cache", dump)
   await companyCache.persist()
   console.log("Persisted", companyCache.size(), "cached companies.")
   await repoContributorCache.persist()
