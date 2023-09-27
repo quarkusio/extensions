@@ -57,7 +57,7 @@ describe("site links", () => {
       "https://quarkiverse.github.io/quarkiverse-docs/quarkus-asyncapi-annotation-scanner/dev/",
       // See https://github.com/quarkiverse/quarkus-itext/pull/19
       "https://quarkiverse.github.io/quarkiverse-docs/itext/dev/",
-      // Known incorrect link in auto-generated yaml, hopefully will be corrected in the next release
+      // Known incorrect link in auto-generated yaml, corrected by https://github.com/apache/camel-quarkus/pull/5365
       "https://camel.apache.org/camel-quarkus/latest/reference/extensions/camel-k.html",
     ]
 
