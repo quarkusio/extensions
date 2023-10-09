@@ -269,7 +269,7 @@ const Navigation = () => {
         <a href={`${config.siteMetadata.siteUrl}`}>Official (English)</a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.translatedUrls.portuguese}`}>Português (Brasileiro)</a>
+        <a href={`${config.siteMetadata.translatedUrls.portuguese}`}>Português (BR)</a>
       </NavEntry>
       <NavEntry>
         <a href={`${config.siteMetadata.translatedUrls.spanish}`}>Español</a>
