@@ -139,11 +139,19 @@ const Logo = ({ extension }) => {
 
 const AuthorGuidance = styled.div`
   font-style: italic;
+  padding-top: 2rem;
 `
 
 const Filename = styled.span`
   font-family: monospace;
 `
+
+const ClosingRule = styled.div`
+  width: 100%;
+  position: relative;
+  top: -1px;
+  padding-left: var(--a-modest-space);
+  border-bottom: 1px solid var(--grey-1);`
 
 const ExtensionDetailTemplate = ({
                                    data: { extension, previous, next },
@@ -228,21 +236,6 @@ const ExtensionDetailTemplate = ({
 
               </DocumentationSection>)}
 
-            <DocumentationSection>
-              <AuthorGuidance>
-                This page was generated from the{" "}
-                <a href="https://quarkus.io/version/main/guides/extension-metadata#quarkus-extension-yaml">
-                  extension metadata
-                </a>{" "}
-                published to the{" "}
-                <a href="https://quarkus.io/guides/extension-registry-user">
-                  Quarkus registry
-                </a>
-                . Spot a problem? Submit a change to the {name} extension's{" "}
-                <Filename>{extensionYaml}</Filename> and this content will be
-                updated by the next extension release.
-              </AuthorGuidance>
-            </DocumentationSection>
           </Documentation>
           <Metadata>
             <CodeLink
@@ -359,6 +352,22 @@ const ExtensionDetailTemplate = ({
                 url: extension.metadata?.sourceControl?.issuesUrl,
               }}
             />
+
+            <ClosingRule />
+
+            <AuthorGuidance>
+              This page was generated from the{" "}
+              <a href="https://quarkus.io/version/main/guides/extension-metadata#quarkus-extension-yaml">
+                extension metadata
+              </a>{" "}
+              published to the{" "}
+              <a href="https://quarkus.io/guides/extension-registry-user">
+                Quarkus registry
+              </a>
+              . Spot a problem? Submit a change to the {name} extension's{" "}
+              <Filename>{extensionYaml}</Filename> and this content will be
+              updated by the next extension release.
+            </AuthorGuidance>
           </Metadata>
         </Columns>
 
