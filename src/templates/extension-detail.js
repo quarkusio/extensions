@@ -11,6 +11,8 @@ import ExtensionImage from "../components/extension-image"
 import CodeLink from "../components/extensions-display/code-link"
 import { qualifiedPrettyPlatform } from "../components/util/pretty-platform"
 import ContributionsChart from "../components/charts/contributions-chart"
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import "react-tabs/style/react-tabs.css"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--site-margins);
@@ -73,7 +75,7 @@ const Metadata = styled.div`
   align-content: flex-start;
 `
 
-const Documentation = styled.div`
+const MainContent = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
@@ -95,7 +97,7 @@ const ExtensionDescription = styled.div`
   font-size: var(--font-size-16);
   opacity: 1;
   margin-bottom: 40px;
-  margin-top: 10px;
+  margin-top: 20px;
   font-weight: var(--font-weight-bold);
 `
 
@@ -127,6 +129,11 @@ const DocumentationHeading = styled.h2`
   font-size: var(--font-size-24);
   padding-bottom: 10px;
   border-bottom: 1px solid var(--grey-1);
+`
+
+//  I wish this wasn't here, but we need to set an explicit height for the charts, or the contents don't render at all
+const ChartHolder = styled.div`
+  height: 600px; // For now, an arbitrary height, but we should tune
 `
 
 const Logo = ({ extension }) => {
@@ -197,46 +204,63 @@ const ExtensionDetailTemplate = ({
           <ExtensionName>{name}</ExtensionName>
         </Headline>
         <Columns>
-          <Documentation>
+          <MainContent>
             <ExtensionDescription>{description}</ExtensionDescription>
 
-            {metadata.guide && (
-              <DocumentationSection>
-                <DocumentationHeading>Documentation</DocumentationHeading>
-                Make sure to use the{" "}
-                <VisibleLink href={metadata.guide}>
-                  documentation
-                </VisibleLink>{" "}
-                to get your questions answered.
-              </DocumentationSection>
-            )}
-            <DocumentationSection>
-              <DocumentationHeading>Installation</DocumentationHeading>
-              <InstallationInstructions artifact={artifact} />
-            </DocumentationSection>
+            <Tabs>
+              <TabList>
+                <Tab>Documentation</Tab>
+                {metadata?.sourceControl?.contributors && metadata?.sourceControl?.contributors.length > 0 && (
+                  <Tab>Community</Tab>)}
+              </TabList>
 
-            {duplicates && duplicates.length > 0 && (<DocumentationSection>
-              {duplicates.map(duplicate => (
-                <DuplicateReference key={duplicate.groupId}>
-                  {/^[aeiou]/i.test(duplicate.relationship) ? "An " : "A "}
-                  <Link to={"/" + duplicate.slug}>
-                    {duplicate.relationship} version
-                  </Link>{" "}
-                  of this extension was published with the group id{" "}
-                  <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>.
-                </DuplicateReference>
-              ))}
-            </DocumentationSection>)}
+              <TabPanel>
 
-            {metadata?.sourceControl?.contributors && metadata?.sourceControl?.contributors.length > 0 && (
-              <DocumentationSection>
-                <DocumentationHeading>Contributors</DocumentationHeading>
-                <p>Commits to this extension's repository in the past six months.</p>
-                <ContributionsChart contributors={metadata.sourceControl.contributors} />
+                {metadata.guide && (
+                  <DocumentationSection>
+                    <DocumentationHeading>Guides</DocumentationHeading>
+                    Make sure to use the extension's{" "}
+                    <VisibleLink href={metadata.guide}>
+                      documentation
+                    </VisibleLink>{" "}
+                    to get your questions answered.
+                  </DocumentationSection>
+                )}
+                <DocumentationSection>
+                  <DocumentationHeading>Installation</DocumentationHeading>
+                  <InstallationInstructions artifact={artifact} />
+                </DocumentationSection>
 
-              </DocumentationSection>)}
+                {duplicates && duplicates.length > 0 && (<DocumentationSection>
+                  {duplicates.map(duplicate => (
+                    <DuplicateReference key={duplicate.groupId}>
+                      {/^[aeiou]/i.test(duplicate.relationship) ? "An " : "A "}
+                      <Link to={"/" + duplicate.slug}>
+                        {duplicate.relationship} version
+                      </Link>{" "}
+                      of this extension was published with the group id{" "}
+                      <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>.
+                    </DuplicateReference>
+                  ))}
+                </DocumentationSection>)}
+              </TabPanel>
 
-          </Documentation>
+              {metadata?.sourceControl?.contributors && metadata?.sourceControl?.contributors.length > 0 && (
+                <TabPanel>
+                  <DocumentationSection>
+                    <DocumentationHeading>Recent Contributors</DocumentationHeading>
+                    <p>Commits to this extension's repository in the past six
+                      months.</p>
+
+                    <ChartHolder>
+                      <ContributionsChart contributors={metadata.sourceControl.contributors} />
+                    </ChartHolder>
+                  </DocumentationSection>
+                </TabPanel>)
+              }
+            </Tabs>
+          </MainContent>
+
           <Metadata>
             <CodeLink
               unlisted={metadata.unlisted}

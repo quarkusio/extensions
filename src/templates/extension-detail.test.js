@@ -1,6 +1,7 @@
 import React from "react"
 import { render, screen, within } from "@testing-library/react"
 import ExtensionDetailTemplate from "./extension-detail"
+import userEvent from "@testing-library/user-event"
 
 
 describe("extension detail page", () => {
@@ -22,6 +23,8 @@ describe("extension detail page", () => {
     const next = {}
 
     const status = ["primordial"]
+
+    const user = userEvent.setup()
 
     const extension = {
       name: "JRuby",
@@ -183,8 +186,15 @@ describe("extension detail page", () => {
       expect(image).toBeTruthy()
     })
 
-    it("renders a contributors section", async () => {
-      expect(screen.getByText("Contributors")).toBeTruthy()
+    it("renders a contributors tab", async () => {
+      expect(screen.getAllByText("Community")).toHaveLength(2)
+      // One for the menu, one for the tab
+    })
+
+    it("has contributors information on the community tab", async () => {
+      const tab = screen.getAllByText("Community")[1] // get the last element, which should be second
+      await user.click(tab)
+      expect(screen.getByText("Recent Contributors")).toBeTruthy()
     })
 
     // With the resizable container, we can't see inside the chart at all, sadly
@@ -402,8 +412,9 @@ describe("extension detail page", () => {
       expect(screen.queryByText(/source/)).toBeFalsy()
     })
 
-    it("does not render a contributors section", async () => {
-      expect(screen.queryByText("Contributors")).toBeFalsy()
+    it("does not render a contributors tab", async () => {
+      expect(screen.getAllByText("Community")).toHaveLength(1)
+      // One for the menu, none for the tab
     })
   })
 
@@ -431,7 +442,7 @@ describe("extension detail page", () => {
     })
 
     it("does not render anything about guides", async () => {
-      const link = await screen.queryByText(/Documentation/)
+      const link = await screen.queryByText(/Guides/)
       expect(link).toBeNull()
     })
 
