@@ -43,6 +43,7 @@
     "react-dom": "^18.2.0",
     "react-responsive": "^9.0.2",
     "react-select": "^5.7.4",
+    "react-tabs": "^6.0.2",
     "recharts": "^2.8.0",
     "slugify": "^1.6.6",
     "smartcrop-sharp": "^2.0.7",
