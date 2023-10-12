@@ -96,13 +96,13 @@ const ExtensionDescription = styled.div`
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
-  margin-bottom: 40px;
-  margin-top: 20px;
+  margin-bottom: 3rem;
+  margin-top: 2.5rem;
   font-weight: var(--font-weight-bold);
 `
 
 const DocumentationSection = styled.section`
-  margin-top: 20px;
+  margin-top: 2.5rem;
   margin-bottom: 50px;
 `
 
@@ -128,7 +128,6 @@ const DocumentationHeading = styled.h2`
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-24);
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--grey-1);
 `
 
 //  I wish this wasn't here, but we need to set an explicit height for the charts, or the contents don't render at all
