@@ -26,6 +26,7 @@ const ContributorInformation = styled.li`
   flex-direction: row;
   justify-content: space-between;
   color: black;
+  column-gap: 0.75rem;
 `
 
 const Contributor = styled.div`
