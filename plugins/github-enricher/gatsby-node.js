@@ -406,9 +406,17 @@ exports.createSchemaCustomization = ({ actions }) => {
     companies: [String]
     extensionYamlUrl: String
     issues: String
+    contributors: [ContributorInfo]
     sponsors: [String]
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
+  }
+  
+  type ContributorInfo implements Node @noinfer {
+    name: String
+    login: String
+    contributions: Int
+    url: String
   }
   `
   createTypes(typeDefs)

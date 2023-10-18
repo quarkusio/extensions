@@ -138,7 +138,8 @@ const rabbitNode = {
       "user": {
         "login": "someonebouncy",
         "name": "Doctor Fluffy",
-        "company": "Rabbit"
+        "company": "Rabbit",
+        "url": "http://profile"
       }
     }
   }
@@ -477,7 +478,12 @@ describe("the github sponsor finder", () => {
       const contributors = await getContributors("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
       expect(contributors).toHaveLength(3)
-      expect(contributors[0]).toStrictEqual({ "name": "Doctor Fluffy", login: "someonebouncy", contributions: 5 })
+      expect(contributors[0]).toStrictEqual({
+        "name": "Doctor Fluffy",
+        login: "someonebouncy",
+        contributions: 5,
+        url: "http://profile"
+      })
     })
   })
 })
