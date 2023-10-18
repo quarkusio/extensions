@@ -248,8 +248,7 @@ const ExtensionDetailTemplate = ({
                 <TabPanel>
                   <DocumentationSection>
                     <DocumentationHeading>Recent Contributors</DocumentationHeading>
-                    <p>Commits to this extension's repository in the past six
-                      months.</p>
+                    <p>Commits to this extension's repository in the past six months (including merge commits).</p>
 
                     <ChartHolder>
                       <ContributionsChart contributors={metadata.sourceControl.contributors} />
@@ -475,6 +474,7 @@ export const pageQuery = graphql`
             name
             contributions
             login
+            url
           }
           projectImage {
             childImageSharp {

@@ -112,6 +112,7 @@ const getUserContributionsNoCache = async (org, project) => {
                                     login
                                     name
                                     company
+                                    url
                                   }
                                 }
                             }
@@ -167,8 +168,8 @@ const notBot = (user) => {
 const getContributors = async (org, project) => {
   const collatedHistory = await getUserContributions(org, project)
   return collatedHistory?.map(user => {
-    const { name, login, contributions } = user
-    return { name: name || login, login, contributions }
+    const { name, login, contributions, url } = user
+    return { name: name || login, login, contributions, url }
   }).filter(notBot)
 }
 
