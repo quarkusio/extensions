@@ -104,10 +104,78 @@ describe("the persistable cache", () => {
 
     // Now run the time forward to past the original ttl
     time.setSystemTime(new Date(timeNow + 1.5 * ttlInMs))
-    // expect(cache2.has("frog")).toBeFalsy()
+    expect(cache2.has("frog")).toBeFalsy()
     const thirdDump = cache2.dump()
     expect(thirdDump).toStrictEqual([])
 
+  })
+
+  it("should should not even ingest expired content", () => {
+    const ttl = 2 * 60 * 60
+    const timeNow = Date.now()
+
+    const cache = new PersistableCache({ stdTTL: ttl })
+
+    // Populate data
+    cache.set("frog", frog)
+    cache.set("rabbit", rabbit)
+
+    const dump = cache.dump()
+    expect(dump).not.toBeUndefined()
+
+    // Now run the clock forward a LOT, so that everything should be expired
+    const ttlInMs = ttl * 1000
+    time.setSystemTime(new Date(timeNow + 1000 * ttlInMs))
+    const cache2 = new PersistableCache({ stdTTL: ttl })
+    cache2.ingestDump(dump)
+
+    // The cache should have kicked everything out
+    expect(cache2.has("frog")).toBeFalsy()
+    const thirdDump = cache2.dump()
+    expect(thirdDump).toStrictEqual([])
+
+  })
+
+  it("should should not reset the expiry time on ingestion", () => {
+    const ttl = 2 * 60 * 60
+    const timeNow = Date.now()
+
+    const cache = new PersistableCache({ stdTTL: ttl })
+
+    // Populate data
+    cache.set("frog", frog)
+    cache.set("rabbit", rabbit)
+
+    const dump = cache.dump()
+    expect(dump).not.toBeUndefined()
+    const frogIndex = 0
+    const frogExpiry = dump[frogIndex].ts
+    // Make sure that was the frog
+    expect(dump[frogIndex].key).toBe("frog")
+
+    // Now run the clock forward a little, so that nothing should be expired (even with jitter)
+    const ttlInMs = ttl * 1000
+    time.setSystemTime(new Date(timeNow + ttlInMs / 3))
+    const cache2 = new PersistableCache({ stdTTL: ttl })
+    cache2.ingestDump(dump)
+
+    // Nothing should be kicked out
+    expect(cache2.has("frog")).toBeTruthy()
+    expect(cache2.get("frog")).toStrictEqual(frog)
+
+    // Run the clock forward a touch more so that anything we set should live
+    time.setSystemTime(new Date(timeNow + 2 * ttlInMs / 3))
+    cache2.set("youngfrog", "whatever")
+
+    // Now run the clock forward a little more, so that the original entries should be expired,
+    // but new ones would not be
+    time.setSystemTime(new Date(frogExpiry + 1))
+
+    // The cache should have kicked the original frog out
+    expect(cache2.has("frog")).toBeFalsy()
+
+    // ... but the new one should still be there
+    expect(cache2.has("youngfrog")).toBeTruthy()
   })
 
   it("gracefully handles ingesting undefined dumps", () => {
