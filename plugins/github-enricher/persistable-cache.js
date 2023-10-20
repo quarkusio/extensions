@@ -85,8 +85,12 @@ class PersistableCache {
 
   // Mostly used for testing
   ingestDump(dump) {
+    const now = Date.now()
     if (dump) {
-      this.cache.mset(dump)
+      // We need to do some processing to convert the ts values into ttls, because mset does not read the ts values
+      // the ttl is in seconds, timestamps are in ms
+      const dumpWithCorrectedTtls = dump.map(entry => ({ ...entry, ttl: (entry.ts - now) / 1000 }))
+      this.cache.mset(dumpWithCorrectedTtls)
     }
   }
 
