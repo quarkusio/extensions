@@ -72,7 +72,7 @@
     "prettier": "^3.0.2",
     "promise-retry": "^2.0.1",
     "puppeteer": "^21.3.8",
-    "puppeteer-core": "^21.3.8",
+    "puppeteer-core": "^21.4.0",
     "react-select-event": "^5.5.1",
     "react-test-renderer": "^18.2.0",
     "resize-observer-polyfill": "^1.5.1"
