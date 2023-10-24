@@ -1,5 +1,5 @@
 const promiseRetry = require("promise-retry")
-const RETRY_OPTIONS = { retries: 3, minTimeout: 40 * 1000, factor: 3 }
+const RETRY_OPTIONS = { retries: 3, minTimeout: 75 * 1000, factor: 3 }
 const PAGE_INFO_SUBQUERY = "pageInfo {\n" +
   "      hasNextPage\n" +
   "      endCursor\n" +
