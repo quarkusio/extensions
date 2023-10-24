@@ -180,6 +180,8 @@ const ExtensionDetailTemplate = ({
     "quarkus-extension.yaml"
   )
 
+  const extensionRootUrl = metadata?.sourceControl?.extensionRootUrl
+
   // Honour manual overrides of the sponsor
   const sponsors = metadata?.sponsors || metadata?.sponsor || metadata.sourceControl?.sponsors
 
@@ -248,7 +250,12 @@ const ExtensionDetailTemplate = ({
                 <TabPanel>
                   <DocumentationSection>
                     <DocumentationHeading>Recent Contributors</DocumentationHeading>
-                    <p>Commits to this extension's repository in the past six months (including merge commits).</p>
+
+                    {!extensionRootUrl && (
+                      <p>Commits to this extension's repository in the past six months (including merge commits).</p>)}
+                    {extensionRootUrl && (
+                      <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
+                        (including merge commits).</p>)}
 
                     <ChartHolder>
                       <ContributionsChart contributors={metadata.sourceControl.contributors} />
@@ -482,6 +489,7 @@ export const pageQuery = graphql`
             }
           }
           extensionYamlUrl
+          extensionRootUrl
           ownerImage {
             childImageSharp {
               gatsbyImageData(width: 220)

@@ -83,18 +83,19 @@ const getOrSetFromCache = async (cache, key, functionThatReturnsAPromise) => {
 }
 
 
-const getUserContributions = async (org, project) => {
+const getUserContributions = async (org, project, inPath) => {
   if (org && project) {
-    const key = org + ":" + project
+    const key = org + ":" + project + inPath
     return await getOrSetFromCache(
       repoContributorCache,
       key,
-      getUserContributionsNoCache.bind(this, org, project)
+      getUserContributionsNoCache.bind(this, org, project, inPath)
     )
   }
 }
 
-const getUserContributionsNoCache = async (org, project) => {
+const getUserContributionsNoCache = async (org, project, inPath) => {
+  const path = inPath || ""
   // We're only doing one, easy, date manipulation, so don't bother with a library
   const timePeriodInDays = 180
   const someMonthsAgo = new Date(Date.now() - timePeriodInDays * DAY_IN_MILLISECONDS).toISOString()
@@ -102,27 +103,27 @@ const getUserContributionsNoCache = async (org, project) => {
   repository(owner: "${org}", name: "${project}") {
     defaultBranchRef{
         target{
-            ... on Commit{
-                history(since: "${someMonthsAgo}"){
-                    edges{
-                        node{
-                            ... on Commit{
-                                author {
-                                  user {
-                                    login
-                                    name
-                                    company
-                                    url
+              ... on Commit{
+                  history(path: "${path}", since: "${someMonthsAgo}"){
+                      edges{
+                          node{
+                              ... on Commit{
+                                  author {
+                                    user {
+                                      login
+                                      name
+                                      company
+                                      url
+                                    }
                                   }
-                                }
-                            }
-                        }
-                    }
-                }
+                              }
+                          }
+                      }
+                  }
+               }
             }
         }
     }
-}
 }`
 
   const body = await queryGraphQl(query)
@@ -152,9 +153,9 @@ const getUserContributionsNoCache = async (org, project) => {
 
 }
 
-const findSponsor = async (org, project) => {
+const findSponsor = async (org, project, path) => {
   // Cache the github response and aggregation, but not the calculation of sponsors, since we may change the algorithm for it
-  const collatedHistory = await getUserContributions(org, project)
+  const collatedHistory = await getUserContributions(org, project, path)
   if (collatedHistory) {
     // We don't want to persist the sponsor calculations across builds; we could cache it locally but it's probably not worth it
     return findSponsorFromContributorList(collatedHistory)
@@ -165,8 +166,8 @@ const notBot = (user) => {
   return user.login && !user.login.includes("[bot]") && user.login !== "actions-user" && user.login !== "quarkiversebot"
 }
 
-const getContributors = async (org, project) => {
-  const collatedHistory = await getUserContributions(org, project)
+const getContributors = async (org, project, path) => {
+  const collatedHistory = await getUserContributions(org, project, path)
   return collatedHistory?.map(user => {
     const { name, login, contributions, url } = user
     return { name: name || login, login, contributions, url }
