@@ -24,9 +24,9 @@ let getLabels
 exports.onPreBootstrap = async ({}) => {
   repoCache = new PersistableCache({ key: "github-api-for-repos", stdTTL: 3 * DAY_IN_SECONDS })
 
-// The location of extension metadata files is unlikely to change often, and if it does, the link checker will flag the issue
+// The location of extension files is unlikely to change often, and if it does, the link checker will flag the issue
   extensionYamlCache = new PersistableCache({
-    key: "github-api-for-extension-metadata",
+    key: "github-api-for-extension-paths",
     stdTTL: 10 * DAY_IN_SECONDS
   })
 
@@ -222,9 +222,6 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
 
   const scmInfo = { url: scmUrl, project }
 
-  scmInfo.sponsors = await findSponsor(coords.owner, project)
-  scmInfo.contributors = await getContributors(coords.owner, project)
-
   // Always set the issuesUrl and labels since the cached one might be invalid
   scmInfo.issuesUrl = issuesUrl
   scmInfo.labels = labels
@@ -349,10 +346,14 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   scmInfo.ownerImageUrl = data?.repositoryOwner?.avatarUrl
 
 
-  let extensionYamlUrl
-
+  let extensionPathInRepo
   if (hasMetadataFileLocationCache) {
-    extensionYamlUrl = extensionYamlCache.get(artifactKey)
+    const paths = extensionYamlCache.get(artifactKey)
+    const { extensionYamlUrl, extensionRootUrl } = paths
+    extensionPathInRepo = paths.extensionPathInRepo
+    scmInfo.extensionYamlUrl = extensionYamlUrl
+    scmInfo.extensionPathInRepo = extensionPathInRepo
+    scmInfo.extensionRootUrl = extensionRootUrl
   } else {
     const allMetaInfs = [
       ...(metaInfs ? metaInfs.entries : []),
@@ -370,15 +371,24 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
     )
     // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
     if (extensionYamls.length === 1) {
-      const extensionYamlPath = extensionYamls[0].path
+
       // If we didn't get a branch ref from the cache or from github we're a bit stuck and will have to try again next time
       if (defaultBranchRef) {
-        extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`
-        extensionYamlCache.set(artifactKey, extensionYamlUrl)
+        const extensionYamlPath = extensionYamls[0].path
+        extensionPathInRepo = extensionYamlPath.replace("runtime/src/main/resources/META-INF/quarkus-extension.yaml", "")
+        const extensionRootUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionPathInRepo}`
+        const extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`
+        extensionYamlCache.set(artifactKey, { extensionYamlUrl, extensionPathInRepo, extensionRootUrl })
+
+        scmInfo.extensionYamlUrl = extensionYamlUrl
+        scmInfo.extensionPathInRepo = extensionPathInRepo
+        scmInfo.extensionRootUrl = extensionRootUrl
       }
     }
   }
-  scmInfo.extensionYamlUrl = extensionYamlUrl
+
+  scmInfo.sponsors = await findSponsor(coords.owner, project, extensionPathInRepo)
+  scmInfo.contributors = await getContributors(coords.owner, project, extensionPathInRepo)
 
   scmInfo.owner = coords.owner
 

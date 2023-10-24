@@ -227,6 +227,24 @@ describe("the github data handler", () => {
       )
     })
 
+    it("fills in a path for the extension", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          extensionPathInRepo:
+            "some-folder-name/",
+        })
+      )
+    })
+
+    it("fills in a url for the extension", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          extensionRootUrl:
+            "http://fake.github.com/someuser/somerepo/blob/unusual/some-folder-name/",
+        })
+      )
+    })
+
     it("invokes the github graphql api", async () => {
       expect(queryGraphQl).toHaveBeenCalled()
       expect(queryGraphQl).toHaveBeenCalledWith(
@@ -236,7 +254,7 @@ describe("the github data handler", () => {
     })
 
     it("caches the issue count", async () => {
-      expect(queryGraphQl).toHaveBeenLastCalledWith(expect.stringMatching(/issues\(states:OPEN/))
+      expect(queryGraphQl).toHaveBeenCalledWith(expect.stringMatching(/issues\(states:OPEN/))
 
       // Reset call counts and histories, since the code may not even do a query
       jest.clearAllMocks()
@@ -253,7 +271,7 @@ describe("the github data handler", () => {
       )
 
       // But it should not ask for the issues
-      expect(queryGraphQl).not.toHaveBeenLastCalledWith(expect.stringMatching(/issues\(states:OPEN/))
+      expect(queryGraphQl).not.toHaveBeenCalledWith(expect.stringMatching(/issues\(states:OPEN/))
 
       // It should set an issue count, even though it didn't ask for one
       expect(createNode).toHaveBeenLastCalledWith(
@@ -262,7 +280,7 @@ describe("the github data handler", () => {
     })
 
     it("caches the top-level quarkus-extension.yaml", async () => {
-      expect(queryGraphQl).toHaveBeenLastCalledWith(expect.stringMatching(
+      expect(queryGraphQl).toHaveBeenCalledWith(expect.stringMatching(
           /HEAD:runtime\/src\/main\/resources\/META-INF/
         )
       )
@@ -282,7 +300,7 @@ describe("the github data handler", () => {
       )
 
       // But it should not ask for the top-level meta-inf listing
-      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
         expect.stringMatching(/HEAD:runtime\/src\/main\/resources\/META-INF/),
       )
 
@@ -292,6 +310,8 @@ describe("the github data handler", () => {
           extensionYamlUrl:
             url +
             "/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+          extensionPathInRepo:
+            "some-folder-name/",
         })
       )
 
@@ -305,7 +325,7 @@ describe("the github data handler", () => {
 
     it("caches the quarkus-extension.yaml in subfolders", async () => {
       // Sense check of what happened in beforeEach
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      expect(queryGraphQl).toHaveBeenCalledWith(
         expect.stringMatching(
           /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
         ),
@@ -326,13 +346,13 @@ describe("the github data handler", () => {
 
       // And it should not ask for the subfolder meta-inf listing
       // It possibly won't ask for anything at all
-      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
         expect.stringMatching(
           /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
         ),
       )
 
-      // It should set an extension descriptor path
+      // It should set an extension descriptor path and extension path
       expect(createNode).toHaveBeenLastCalledWith(
         expect.objectContaining({
           extensionYamlUrl:
@@ -357,7 +377,7 @@ describe("the github data handler", () => {
         {}
       )
 
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      expect(queryGraphQl).toHaveBeenCalledWith(
         expect.stringMatching(/issues\(states:OPEN/),
       )
 
@@ -543,7 +563,7 @@ describe("the github data handler", () => {
     })
 
     it("does not cache the issue count", async () => {
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      expect(queryGraphQl).toHaveBeenCalledWith(
         // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
         expect.stringMatching(/issues\(states:OPEN/),
       )
@@ -562,17 +582,17 @@ describe("the github data handler", () => {
         {}
       )
 
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      expect(queryGraphQl).toHaveBeenCalledWith(
         expect.stringMatching(/issues\(states:OPEN/),
       )
 
-      expect(createNode).toHaveBeenLastCalledWith(
+      expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({ issues: newIssueCount })
       )
     })
 
     it("does not cache the labels and issue url", async () => {
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      expect(queryGraphQl).toHaveBeenCalledWith(
         // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
         expect.stringMatching(/issues\(states:OPEN/),
       )
@@ -592,17 +612,19 @@ describe("the github data handler", () => {
         {}
       )
 
-      expect(createNode).toHaveBeenLastCalledWith(
+      expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({ issuesUrl: secondIssuesUrl })
       )
 
       // It should return the labels for this extension
-      expect(createNode).toHaveBeenLastCalledWith(
+      expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({ labels: secondLabels })
       )
     })
 
     it("caches the top-level quarkus-extension.yaml", async () => {
+      // Reset call counts
+      jest.clearAllMocks()
       // Now re-trigger the invocation
       await onCreateNode(
         {
@@ -615,14 +637,14 @@ describe("the github data handler", () => {
       )
 
       // But it should not ask for the top-level meta-inf listing
-      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
         expect.stringMatching(
           /HEAD:runtime\/src\/main\/resources\/META-INF/
         ),
       )
 
       // It should set an extension descriptor path, even though it didn't ask for one
-      expect(createNode).toHaveBeenLastCalledWith(
+      expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
           extensionYamlUrl:
             url +
@@ -632,6 +654,9 @@ describe("the github data handler", () => {
     })
 
     it("caches the quarkus-extension.yaml in subfolders", async () => {
+      // Reset call counts
+      jest.clearAllMocks()
+
       // Now re-trigger the invocation
       await onCreateNode(
         {
@@ -644,14 +669,14 @@ describe("the github data handler", () => {
       )
 
       // And it should not ask for the subfolder meta-inf listing
-      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
         expect.stringMatching(
           /HEAD:second\/runtime\/src\/main\/resources\/META-INF/
         ),
       )
 
       // It should set an extension descriptor path
-      expect(createNode).toHaveBeenLastCalledWith(
+      expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
           extensionYamlUrl:
             url +
@@ -661,13 +686,14 @@ describe("the github data handler", () => {
     })
 
     it("caches the image location", async () => {
-      expect(queryGraphQl).toHaveBeenLastCalledWith(
+      expect(queryGraphQl).toHaveBeenCalledWith(
         expect.stringMatching(/issues\(states:OPEN/),
       )
 
       response.data.repository.issues.totalCount = 7
 
-      const callCount = queryGraphQl.mock.calls.length
+      // Reset call counts
+      jest.clearAllMocks()
 
       // Now re-trigger the invocation
       await onCreateNode(
@@ -680,10 +706,10 @@ describe("the github data handler", () => {
         {}
       )
 
-      expect(queryGraphQl).toHaveBeenCalledTimes(callCount + 1)
+      expect(queryGraphQl).toHaveBeenCalledTimes(1)
 
       // We shouldn't be asking for image urls or file paths, since those are totally cacheable
-      expect(queryGraphQl).not.toHaveBeenLastCalledWith(
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
         expect.stringMatching(/openGraphImageUrl/),
       )
 
