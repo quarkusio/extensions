@@ -84,9 +84,9 @@ html {
 }
 
 /** Adjustments for small screens  */
-@media screen and (max-width: 1170px) {
+@media screen and (max-width: 1366px) {
     html {
-        --site-margins: 6rem;
+        --site-margins: 4rem;
         --navbar-padding: 1.5rem;
 
     }
