@@ -105,6 +105,16 @@ class PersistableCache {
     return cacache.put(this.cachePath, this.options.key, JSON.stringify(this.dump()))
   }
 
+  async getOrSet(key, functionThatReturnsAPromise) {
+    if (this.has(key)) {
+      return this.get(key)
+    } else {
+      const answer = await functionThatReturnsAPromise()
+      this.set(key, answer)
+      return answer
+    }
+  }
+
 }
 
 module.exports = PersistableCache

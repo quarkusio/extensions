@@ -72,30 +72,19 @@ const getSponsorData = async () => {
   return optedInSponsors
 }
 
-const getOrSetFromCache = async (cache, key, functionThatReturnsAPromise) => {
-  if (cache.has(key)) {
-    return cache.get(key)
-  } else {
-    const answer = await functionThatReturnsAPromise()
-    cache.set(key, answer)
-    return answer
-  }
-}
-
-
 const getUserContributions = async (org, project, inPath) => {
   if (org && project) {
+    // If inPath is undefined, that's fine, we'll use it in the key without ill effect
     const key = org + ":" + project + inPath
-    return await getOrSetFromCache(
-      repoContributorCache,
+    return await repoContributorCache.getOrSet(
       key,
-      getUserContributionsNoCache.bind(this, org, project, inPath)
+      () => getUserContributionsNoCache(org, project, inPath)
     )
   }
 }
 
 const getUserContributionsNoCache = async (org, project, inPath) => {
-  const path = inPath || ""
+  const pathParam = inPath ? `path: "${inPath}", ` : ""
   // We're only doing one, easy, date manipulation, so don't bother with a library
   const timePeriodInDays = 180
   const someMonthsAgo = new Date(Date.now() - timePeriodInDays * DAY_IN_MILLISECONDS).toISOString()
@@ -104,7 +93,7 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
     defaultBranchRef{
         target{
               ... on Commit{
-                  history(path: "${path}", since: "${someMonthsAgo}"){
+                  history(${pathParam} since: "${someMonthsAgo}"){
                       edges{
                           node{
                               ... on Commit{
@@ -238,10 +227,9 @@ const findSponsorFromContributorList = async (userContributions) => {
 
 const normalizeCompanyName = async (company) => {
   if (company) {
-    return await getOrSetFromCache(
-      companyCache,
+    return await companyCache.getOrSet(
       company,
-      normalizeCompanyNameNoCache.bind(this, company)
+      () => normalizeCompanyNameNoCache(company)
     )
   }
 }
