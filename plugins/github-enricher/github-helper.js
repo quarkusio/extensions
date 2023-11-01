@@ -8,10 +8,14 @@ const PAGE_INFO_SUBQUERY = "pageInfo {\n" +
 
 // We can add more errors we know are non-recoverable here, which should help build times
 const isRecoverableError = (ghBody, params) => {
-  if (JSON.stringify(ghBody).includes("Parse error")) {
-    console.log("Parse error on ", params)
-    console.log("Error is", ghBody)
+  const contents = JSON.stringify(ghBody)
+  if (contents.includes("Parse error")) {
+    console.warn("Parse error on ", params)
+    console.warn("Error is", ghBody)
     return false
+  } else if (contents.includes("Something went wrong while executing your query")) {
+    console.warn("Mystery error for ", params)
+    console.warn("Error is", ghBody)
   }
   return true
 }
@@ -111,7 +115,7 @@ const queryGraphQl = async (query) => {
 
   // If we didn't get to the end of the pages, do not return any data
   if (paginatedElements && paginatedElements.contents?.hasNextPage && !recursedData) {
-    console.warn("Could not read all pages.")
+    console.warn("Could not read all pages for GitHub query.")
     return undefined
   }
 

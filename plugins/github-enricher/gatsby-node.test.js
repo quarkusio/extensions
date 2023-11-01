@@ -562,15 +562,14 @@ describe("the github data handler", () => {
       )
     })
 
-    it("does not cache the issue count", async () => {
+    it("caches the issue count", async () => {
       expect(queryGraphQl).toHaveBeenCalledWith(
         // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
         expect.stringMatching(/issues\(states:OPEN/),
       )
 
       // Now re-trigger the invocation
-      const newIssueCount = 4
-      response.data.repository.issues.totalCount = newIssueCount
+      jest.clearAllMocks()
 
       await onCreateNode(
         {
@@ -582,12 +581,12 @@ describe("the github data handler", () => {
         {}
       )
 
-      expect(queryGraphQl).toHaveBeenCalledWith(
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
         expect.stringMatching(/issues\(states:OPEN/),
       )
 
       expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ issues: newIssueCount })
+        expect.objectContaining({ issues: 16 })
       )
     })
 
@@ -706,14 +705,10 @@ describe("the github data handler", () => {
         {}
       )
 
-      expect(queryGraphQl).toHaveBeenCalledTimes(1)
+      expect(queryGraphQl).not.toHaveBeenCalled()
 
-      // We shouldn't be asking for image urls or file paths, since those are totally cacheable
-      expect(queryGraphQl).not.toHaveBeenCalledWith(
-        expect.stringMatching(/openGraphImageUrl/),
-      )
 
-      // It should fill in the cached information for everything but the issue count and issue url
+      // It should fill in the cached information for images
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
           ownerImageUrl: "http://something.com/someuser.png",
