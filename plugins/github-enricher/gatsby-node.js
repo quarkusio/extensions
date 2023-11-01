@@ -334,7 +334,31 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
                 }
               }
             }
+            
+            camelQuarkusCoreSubfolderMetaInfs: object(expression: "HEAD:extensions-core/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+            
+            camelQuarkusJvmSubfolderMetaInfs: object(expression: "HEAD:extensions-jvm/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+            
+            camelQuarkusSupportSubfolderMetaInfs: object(expression: "HEAD:extensions-support/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
           }
+        }
     }`
 
   const body = await queryGraphQl(query)
@@ -342,29 +366,12 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
 
   // If we got rate limited, there may not be a repository field
   if (data?.repository) {
-    const {
-      repository: {
-        defaultBranchRef,
-        metaInfs,
-        subfolderMetaInfs,
-        shortenedSubfolderMetaInfs,
-        quarkusSubfolderMetaInfs,
-      },
-    } = data
+    const defaultBranchRef = data.repository.defaultBranchRef
 
-    const allMetaInfs = [
-      ...(metaInfs ? metaInfs.entries : []),
-      ...(subfolderMetaInfs ? subfolderMetaInfs.entries : []),
-      ...(shortenedSubfolderMetaInfs
-        ? shortenedSubfolderMetaInfs.entries
-        : []),
-      ...(quarkusSubfolderMetaInfs
-        ? quarkusSubfolderMetaInfs.entries
-        : [])
-    ]
+    const allMetaInfs = Object.values(data.repository).map(e => e?.entries).flat()
 
     const extensionYamls = allMetaInfs.filter(entry =>
-      entry.path.endsWith("/quarkus-extension.yaml")
+      entry?.path.endsWith("/quarkus-extension.yaml")
     )
     // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
     if (extensionYamls.length === 1) {
