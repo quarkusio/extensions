@@ -67,6 +67,13 @@ describe("the github helper", () => {
 
       const response1 = {
         data: {
+          rateLimit: {
+            limit: 5000,
+            cost: 1,
+            remaining: 727,
+            resetAt: "2023-11-02T21:53:43Z"
+          },
+
           holder: {
             information: {
               pageInfo: {
