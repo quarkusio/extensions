@@ -6,8 +6,8 @@ on:
       [ main ]
   pull_request:
     types: [ opened, synchronize, reopened ]
-  schedule: ## Do a run twice daily, to refresh website content
-    - cron: '0 22,04 * * *'
+  schedule: ## Do a run three times daily, to refresh website content
+    - cron: '0 22,04,12 25 * *'
   workflow_dispatch:
 
 defaults:

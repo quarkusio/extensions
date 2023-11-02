@@ -38,7 +38,7 @@ describe("the github helper", () => {
 
     it("adds pagination requests", async () => {
       const query = "query { information(){ edges { bla bla bla}}"
-      const queryWithPagination = /query\s*{\s*information\(\){\spageInfo {\s*hasNextPage\s*endCursor\s*}\s*edges {\s*bla bla bla}/
+      const queryWithPagination = /query\s*{.*\s*information\(\){\spageInfo {\s*hasNextPage\s*endCursor\s*}\s*edges {\s*bla bla bla}/
 
       await queryGraphQl(query)
       expect(fetch).toBeCalledTimes(1)
@@ -128,10 +128,10 @@ describe("the github helper", () => {
 
       it("makes follow-up calls with a good page reference", async () => {
         const query = "query {      holder {          information{edges { whatever }}"
-        const queryWithPagination = /query\s*{\s*holder\s*{\s*information\s*{\s*pageInfo {\s*hasNextPage\s*endCursor\s*}\s*edges\s*{\s*whatever }/
+        const queryWithPagination = /query\s*{.*\s*holder\s*{\s*information\s*{\s*pageInfo {\s*hasNextPage\s*endCursor\s*}\s*edges\s*{\s*whatever }/
 
-        const queryWithPageReference = /query {\s*holder\s*{\s*information\(after: "Y3Vyc29yOjEwMA=="\)/
-        const queryWithSecondPageReference = /query {\s*holder\s*{\s*information\(after: "YHGMADEUP=="\)/
+        const queryWithPageReference = /query {.*\s*holder\s*{\s*information\(after: "Y3Vyc29yOjEwMA=="\)/
+        const queryWithSecondPageReference = /query {.*\s*holder\s*{\s*information\(after: "YHGMADEUP=="\)/
 
         await queryGraphQl(query)
         expect(fetch).toBeCalledTimes(3)
@@ -145,10 +145,10 @@ describe("the github helper", () => {
 
       it("correctly handles existing parentheses in the query", async () => {
         const query = "query {  holder{  information(since: something) {edges { whatever }}"
-        const queryWithPagination = /query\s*{\s*holder\s*{\s*information\(since: something\)\s*{\s*pageInfo {\s*hasNextPage\s*endCursor\s*}\s*edges\s*{\s*whatever }/
+        const queryWithPagination = /query\s*{.*\s*holder\s*{\s*information\(since: something\)\s*{\s*pageInfo {\s*hasNextPage\s*endCursor\s*}\s*edges\s*{\s*whatever }/
 
-        const queryWithPageReference = /query {\s*holder\s*{\s*information\(after: "Y3Vyc29yOjEwMA==", since: something\)/
-        const queryWithSecondPageReference = /query {\s*holder\s*{\s*information\(after: "YHGMADEUP==", since: something\)/
+        const queryWithPageReference = /query {.*\s*holder\s*{\s*information\(after: "Y3Vyc29yOjEwMA==", since: something\)/
+        const queryWithSecondPageReference = /query {.*\s*holder\s*{\s*information\(after: "YHGMADEUP==", since: something\)/
 
         await queryGraphQl(query)
         expect(fetch).toBeCalledTimes(3)

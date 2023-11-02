@@ -6,6 +6,15 @@ const PAGE_INFO_SUBQUERY = "pageInfo {\n" +
   "    }\n" +
   "    edges {"
 
+const RATE_LIMIT_PREQUERY = `rateLimit {
+    limit
+    cost
+    remaining
+    resetAt
+  }`
+
+let resetTime
+
 // We can add more errors we know are non-recoverable here, which should help build times
 const isRecoverableError = (ghBody, params) => {
   const contents = JSON.stringify(ghBody)
@@ -32,12 +41,17 @@ async function tolerantFetch(url, params, isSuccessful, getContents) {
       async retry => {
         const res = await fetch(url, { ...params, headers }).catch(e => retry(e))
         const ghBody = await getContents(res)
+        resetTime = ghBody?.data?.rateLimit?.resetAt || resetTime
 
         if (!isSuccessful(ghBody) && isRecoverableError(ghBody, params)) {
+          const responseString = JSON.stringify(ghBody)
+
+          if (responseString?.includes("RATE_LIMITED") && resetTime) {
+            console.warn("Hit the rate limit. Waiting until", resetTime)
+            await waitUntil(resetTime)
+          }
           retry(
-            `Unsuccessful GitHub fetch for ${url} - response is ${JSON.stringify(
-              ghBody
-            )}`
+            `Unsuccessful GitHub fetch for ${url} - response is ${responseString}`
           )
         }
         return ghBody
@@ -89,7 +103,9 @@ function findPaginatedElements(data, name, inPath) {
 * If there's more than one edges element, I think it would paginate the first, but I haven't tested.
  */
 const queryGraphQl = async (query) => {
-  const amendedQuery = query.replace(/edges\s*{/, PAGE_INFO_SUBQUERY)
+
+  const amendedQuery = query.replace(/edges\s*{/, PAGE_INFO_SUBQUERY).replace("query {", "query {" + RATE_LIMIT_PREQUERY)
+
 
   const answer = await tolerantFetch("https://api.github.com/graphql", {
       method: "POST",
@@ -169,6 +185,13 @@ const queryRest = async (path) => {
 
 }
 
+const waitUntil = async (timeString) => {
+  const targetTime = new Date(timeString)
+  const delta = targetTime - Date.now()
+  return new Promise(resolve => {
+    setTimeout(resolve, delta)
+  })
+}
 
 const getRawFileContents = async (org, repo, path) => {
   // Don't consolidate these two lines or we risk replacing the double slash in http://
