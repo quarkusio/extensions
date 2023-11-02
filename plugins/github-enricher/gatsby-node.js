@@ -26,7 +26,7 @@ exports.onPreBootstrap = async ({}) => {
 
 // The location of extension files is unlikely to change often, and if it does, the link checker will flag the issue
   extensionYamlCache = new PersistableCache({
-    key: "github-api-for-extension-paths",
+    key: "github-api-for-extension-metadata-paths",
     stdTTL: 10 * DAY_IN_SECONDS
   })
 
@@ -289,10 +289,28 @@ const getImageInformationNoCache = async (coords) => {
 
 const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
   const artifactKey = groupId + ":" + artifactId
-  return await extensionYamlCache.getOrSet(artifactKey, () => getMetadataPathNoCache(coords, groupId, artifactId, scmUrl))
+  const {
+    defaultBranchRef,
+    extensionYamls
+  } = await extensionYamlCache.getOrSet(artifactKey, () => getMetadataPathNoCache(coords, groupId, artifactId)) ?? {}
+
+  // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
+  if (extensionYamls?.length === 1) {
+
+    const extensionYamlPath = extensionYamls[0].path
+    const extensionPathInRepo = extensionYamlPath.replace("runtime/src/main/resources/META-INF/quarkus-extension.yaml", "")
+    const extensionRootUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionPathInRepo}`
+    const extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`
+
+    return { extensionYamlUrl, extensionPathInRepo, extensionRootUrl }
+
+  } else {
+    console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId}; found `, extensionYamls)
+  }
+
 }
 
-const getMetadataPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
+const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
 
   // Some multi-extension projects use just the 'different' part of the name in the folder structure
   const shortArtifactId = artifactId?.replace(coords.name + "-", "")
@@ -370,21 +388,10 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
 
     const allMetaInfs = Object.values(data.repository).map(e => e?.entries).flat()
 
-    const extensionYamls = allMetaInfs.filter(entry =>
-      entry?.path.endsWith("/quarkus-extension.yaml")
-    )
-    // We should only have one extension yaml - if we have more, don't guess, and if we have less, don't set anything
-    if (extensionYamls.length === 1) {
-
-      const extensionYamlPath = extensionYamls[0].path
-      const extensionPathInRepo = extensionYamlPath.replace("runtime/src/main/resources/META-INF/quarkus-extension.yaml", "")
-      const extensionRootUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionPathInRepo}`
-      const extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`
-
-      return { extensionYamlUrl, extensionPathInRepo, extensionRootUrl }
-
-    } else {
-      console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId}; found `, extensionYamls)
+    return {
+      defaultBranchRef, extensionYamls: allMetaInfs.filter(entry =>
+        entry?.path.endsWith("/quarkus-extension.yaml")
+      )
     }
   }
 
