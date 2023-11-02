@@ -295,7 +295,7 @@ const Navigation = () => {
   )
 
   return (
-    <NavBar isMobile={isMobile}>
+    <NavBar $isMobile={isMobile}>
       <LogoWrapper>
         <Logo href={config.siteMetadata.parentSiteUrl}>
           <StaticImage
