@@ -248,19 +248,29 @@ const ExtensionDetailTemplate = ({
 
               {metadata?.sourceControl?.contributors && metadata?.sourceControl?.contributors.length > 0 && (
                 <TabPanel>
-                  <DocumentationSection>
-                    <DocumentationHeading>Recent Contributors</DocumentationHeading>
+                  <DocumentationHeading>Recent Contributors</DocumentationHeading>
 
-                    {!extensionRootUrl && (
-                      <p>Commits to this extension's repository in the past six months (including merge commits).</p>)}
-                    {extensionRootUrl && (
-                      <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
-                        (including merge commits).</p>)}
+                  {!extensionRootUrl && (
+                    <p>Commits to this extension's repository in the past six months (including merge commits).</p>)}
+                  {extensionRootUrl && (
+                    <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
+                      (including merge commits).</p>)}
 
-                    <ChartHolder>
-                      <ContributionsChart contributors={metadata.sourceControl.contributors} />
-                    </ChartHolder>
-                  </DocumentationSection>
+                  <ChartHolder>
+                    <ContributionsChart contributors={metadata.sourceControl.contributors} />
+                  </ChartHolder>
+
+                  {metadata?.sourceControl?.lastUpdated && (
+                    <p><i>Commit statistics last
+                      updated {new Date(+metadata?.sourceControl?.lastUpdated).toLocaleDateString("en-us", {
+                        weekday: "long",
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "numeric"
+                      })}.</i></p>
+                  )}
                 </TabPanel>)
               }
             </Tabs>
@@ -477,6 +487,7 @@ export const pageQuery = graphql`
           issues
           issuesUrl
           sponsors
+          lastUpdated
           contributors {
             name
             contributions

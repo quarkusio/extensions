@@ -61,4 +61,11 @@ describe("an extension details page", () => {
       page.waitForXPath(`//*[text()="Issues"]`)
     ).resolves.toBeTruthy()
   })
+
+  it("should show a community tab", async () => {
+    await expect(
+      page.waitForXPath(`//*[text()="Community"]`)
+    ).resolves.toBeTruthy()
+  })
+  
 })

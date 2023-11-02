@@ -477,13 +477,23 @@ describe("the github sponsor finder", () => {
       setMinimumContributionCount(1)
       const contributors = await getContributors("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
-      expect(contributors).toHaveLength(3)
-      expect(contributors[0]).toStrictEqual({
+      expect(contributors.contributors).toHaveLength(3)
+      expect(contributors.contributors[0]).toStrictEqual({
         "name": "Doctor Fluffy",
         login: "someonebouncy",
         contributions: 5,
         url: "http://profile"
       })
     })
+  })
+
+  it("returns last updated information", async () => {
+    const contributors = await getContributors("someorg", "someproject")
+
+    expect(contributors).toHaveProperty("lastUpdated")
+    
+    const now = Date.now()
+    expect(contributors.lastUpdated / now).toBeCloseTo(1)
+
   })
 })

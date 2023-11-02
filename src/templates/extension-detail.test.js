@@ -48,6 +48,7 @@ describe("extension detail page", () => {
           project: "jproject",
           issues: 839,
           sponsors: ["Automatically Calculated Sponsor"],
+          lastUpdated: "1698924315702",
           contributors: [{ name: "Alice", contributions: 6 }, { name: "Bob", contributions: 2 }],
           ownerImage: {
             childImageSharp: {
@@ -195,6 +196,17 @@ describe("extension detail page", () => {
       const tab = screen.getAllByText("Community")[1] // get the last element, which should be second
       await user.click(tab)
       expect(screen.getByText("Recent Contributors")).toBeTruthy()
+    })
+
+    it("has last updated information on the community tab", async () => {
+      const tab = screen.getAllByText("Community")[1] // get the last element, which should be second
+      await user.click(tab)
+      const year = new Date().getFullYear()
+      const lastUpdated = screen.getByText(/last updated/i)
+      expect(lastUpdated).toBeTruthy()
+
+      expect(lastUpdated.innerHTML).toMatch(" " + year)
+
     })
 
     // With the resizable container, we can't see inside the chart at all, sadly
