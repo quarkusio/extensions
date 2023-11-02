@@ -51,8 +51,8 @@ const FlippyIcon = styled(({ isOpen, ...props }) => (
   <FontAwesomeIcon {...props} />
 ))`
   ${({ isOpen }) =>
-    isOpen &&
-    ` 
+          isOpen &&
+          ` 
     transition: 0.2s;
     transform: rotateX(180deg);
     `}
@@ -77,11 +77,11 @@ const Dropdown = styled.li`
   padding: 1rem 0;
 
   ${({ isMobile }) =>
-    isMobile
-      ? `
+          isMobile
+                  ? `
         flex-wrap: nowrap;
       `
-      : `  
+                  : `  
       flex-flow: wrap;
       `}
 `
@@ -116,8 +116,8 @@ const NavEntry = styled(props => <li {...props} />)`
     }
 
     ${({ current }) =>
-      current &&
-      `   
+            current &&
+            `   
         color: var(--red);
         font-weight: var(--font-weight-awfully-bold);
           
@@ -155,7 +155,7 @@ const Submenu = ({ title, children }) => {
 
   return (
     <Dropdown
-      isMobile={isMobile}
+      $isMobile={isMobile}
       onMouseOver={handleOpen}
       onMouseOut={handleClose}
     >
