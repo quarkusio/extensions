@@ -84,17 +84,27 @@ function findPaginatedElements(data, name, inPath) {
   let currentPath = inPath || []
   let contents
 
+  let answer
+
   for (let key in data) {
     if (key === name) {
       contents = data[key]
       break
     } else if (typeof data[key] == "object") {
       currentPath.push(key)
-      return findPaginatedElements(data[key], name, currentPath)
+      answer = findPaginatedElements(data[key], name, currentPath)
+      if (answer) {
+        contents = answer.contents
+        break
+      } else {
+        currentPath.pop(key)
+      }
     }
   }
 
-  return { keys: currentPath, contents }
+  if (contents) {
+    return { keys: currentPath, contents }
+  }
 }
 
 /*
@@ -105,7 +115,6 @@ function findPaginatedElements(data, name, inPath) {
 const queryGraphQl = async (query) => {
 
   const amendedQuery = query.replace(/edges\s*{/, PAGE_INFO_SUBQUERY).replace("query {", "query {" + RATE_LIMIT_PREQUERY)
-
 
   const answer = await tolerantFetch("https://api.github.com/graphql", {
       method: "POST",
