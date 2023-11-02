@@ -230,7 +230,9 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
 
   // scmInfo.extensionPathInRepo may be undefined, but these methods will cope with that
   scmInfo.sponsors = await findSponsor(coords.owner, project, scmInfo.extensionPathInRepo)
-  scmInfo.contributors = await getContributors(coords.owner, project, scmInfo.extensionPathInRepo)
+  const { contributors, lastUpdated } = await getContributors(coords.owner, project, scmInfo.extensionPathInRepo) ?? {}
+  scmInfo.contributors = contributors
+  scmInfo.lastUpdated = lastUpdated
 
   scmInfo.owner = coords.owner
 
@@ -447,6 +449,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     companies: [String]
     extensionYamlUrl: String
     issues: String
+    lastUpdated: String
     contributors: [ContributorInfo]
     sponsors: [String]
     socialImage: File @link(by: "url")

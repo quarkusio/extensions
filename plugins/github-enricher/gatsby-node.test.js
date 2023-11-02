@@ -5,9 +5,11 @@
 const { onCreateNode, onPreBootstrap, onPluginInit } = require("./gatsby-node")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { queryGraphQl, getRawFileContents, queryRest } = require("./github-helper")
+const { getContributors } = require("./sponsorFinder")
 
 jest.mock("gatsby-source-filesystem")
 jest.mock("./github-helper")
+jest.mock("./sponsorFinder")
 
 const contentDigest = "some content digest"
 const createNode = jest.fn()
@@ -122,6 +124,7 @@ describe("the github data handler", () => {
 
     beforeAll(async () => {
       queryGraphQl.mockResolvedValue(response)
+      getContributors.mockResolvedValue({ contributors: [{ name: "someone" }], lastUpdated: Date.now() })
       await onPreBootstrap({ cache, actions: {} })
     })
 
@@ -206,6 +209,18 @@ describe("the github data handler", () => {
     it("fills in an issue count", async () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({ issues: 16 })
+      )
+    })
+
+    it("fills in last updated information", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ lastUpdated: expect.anything() })
+      )
+    })
+
+    it("fills in contributor information", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ contributors: expect.arrayContaining([expect.anything()]) })
       )
     })
 

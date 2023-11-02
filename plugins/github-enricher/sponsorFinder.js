@@ -103,17 +103,17 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
                                       name
                                       company
                                       url
+                                      }
                                     }
-                                  }
-                              }
-                          }
-                      }
-                  }
-               }
-            }
-        }
-    }
-}`
+                                }
+                            }
+                        }
+                    }
+                 }
+              }
+          }
+      }
+  }`
 
   const body = await queryGraphQl(query)
 
@@ -136,7 +136,7 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
         return acc
       }, []))
 
-      return collatedHistory
+      return { collatedHistory, lastUpdated: Date.now() }
     }
   }
 
@@ -144,9 +144,9 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
 
 const findSponsor = async (org, project, path) => {
   // Cache the github response and aggregation, but not the calculation of sponsors, since we may change the algorithm for it
-  const collatedHistory = await getUserContributions(org, project, path)
+  const { collatedHistory } = await getUserContributions(org, project, path) ?? {}
+  // We don't want to persist the sponsor calculations across builds; we could cache it locally but it's probably not worth it
   if (collatedHistory) {
-    // We don't want to persist the sponsor calculations across builds; we could cache it locally but it's probably not worth it
     return findSponsorFromContributorList(collatedHistory)
   }
 }
@@ -156,11 +156,12 @@ const notBot = (user) => {
 }
 
 const getContributors = async (org, project, path) => {
-  const collatedHistory = await getUserContributions(org, project, path)
-  return collatedHistory?.map(user => {
+  const { collatedHistory, lastUpdated } = await getUserContributions(org, project, path) ?? {}
+  const contributors = collatedHistory?.map(user => {
     const { name, login, contributions, url } = user
     return { name: name || login, login, contributions, url }
   }).filter(notBot)
+  return { contributors, lastUpdated }
 }
 
 const findSponsorFromContributorList = async (userContributions) => {
@@ -297,7 +298,7 @@ const saveSponsorCache = async () => {
   await companyCache.persist()
   console.log("Persisted", companyCache.size(), "cached companies.")
   await repoContributorCache.persist()
-  console.log("Persisted contributor information for", repoContributorCache.size(), "cached repositories.")
+  console.log("Persisted contributor information for", repoContributorCache.size(), "cached repositories and paths within those repositories.")
 }
 
 module.exports = {
