@@ -5,7 +5,6 @@ import {
   getContributors,
   initSponsorCache,
   normalizeCompanyName,
-  setMinimumContributionCount,
   setMinimumContributionPercent,
   setMinimumContributorCount,
 } from "./sponsorFinder"
@@ -17,101 +16,49 @@ jest.mock("./github-helper")
 
 const urls = {}
 
-// Mock users (for contributor lists)
-
-const exampleContributor = {
-  login: "a-person",
-  company: "Red Hat",
-  contributions: 9,
-}
-
-const anotherContributor = {
-  login: "another-contributor",
-  company: "Another Company",
-  contributions: 9,
-}
-
-const occasionalContributor = {
-  login: "occasional-contributor",
-  company: "Occasional Company",
-  contributions: 44,
-}
-
 const pactContributors = [
   {
-    login: "a-person",
-    company: "@RedHatOfficial",
+    name: "Red Hat",
     contributions: 68,
+    contributors: 10
   },
   {
-    login: "dependabot[bot]",
-    site_admin: false,
-    contributions: 27,
-  },
-  {
-    login: "actions-user",
-    contributions: 21,
-  },
-  {
-    login: "allcontributors[bot]",
-    contributions: 10,
-  },
-  {
-    login: "gastaldi",
+    name: "gastaldi",
     contributions: 5,
+    contributors: 1
+
   },
   {
-    login: "michalvavrik",
+    name: "michalvavrik",
     contributions: 1,
+    contributors: 1
   },
 ]
 
 const companyWithASingleContributor = "Company With A Single Contributor"
 
 const manyContributors = [
-  occasionalContributor,
-  occasionalContributor,
   {
-    login: "solo-contributor",
-    company: companyWithASingleContributor,
+    name: companyWithASingleContributor,
     contributions: 109,
+    contributors: 1
   },
   {
-    login: "a-person",
-    company: "Red Hat",
+    name: "Occasional Company",
+    contributions: 59,
+    contributors: 2
+  },
+  {
+    name: "Another Company",
+    contributions: 49,
+    contributors: 3
+  },
+  {
+    name: "Red Hat",
     contributions: 33,
-  },
-  {
-    login: "dependabot[bot]",
-    contributions: 27,
-  },
-  anotherContributor,
-  exampleContributor,
-  anotherContributor,
-  anotherContributor,
-  anotherContributor,
-  anotherContributor,
-  exampleContributor,
-  {
-    login: "another-contributor",
-    company: "Another Company",
-    contributions: 19,
-  },
-  {
-    login: "redhat-employee",
-    company: "@RedHatOfficial",
-    contributions: 9,
+    contributors: 5
   },
 ]
-
-const anotherContributors =
-  [
-    {
-      login: "redhat-employee",
-      company: "@RedHatOfficial",
-      contributions: 68,
-    },
-  ]
 
 // Mock company information
 
@@ -167,6 +114,34 @@ const tortoiseNode = {
   }
 }
 
+const frogNodeDifferentCompany = {
+  "node": {
+    parents: {
+      totalCount: 1
+    },
+    "author": {
+      "user": {
+        "login": "some-name",
+        "company": "Red Hat @somewhere"
+      }
+    }
+  }
+}
+
+const linkNodeGitHubIdCompany = {
+  "node": {
+    parents: {
+      totalCount: 1
+    },
+    "author": {
+      "user": {
+        "login": "link-name",
+        "company": "@RedHatOfficial"
+      }
+    }
+  }
+}
+
 const mergeNode = {
   "node": {
     parents: {
@@ -196,7 +171,7 @@ const graphQLResponse = {
         "target": {
           "history": {
             "edges": [
-              rabbitNode, tortoiseNode, frogNode, tortoiseNode, mergeNode, rabbitNode, rabbitNode, rabbitNode, mergeNode, rabbitNode, nullUserNode, frogNode, frogNode
+              rabbitNode, tortoiseNode, tortoiseNode, mergeNode, linkNodeGitHubIdCompany, frogNodeDifferentCompany, rabbitNode, rabbitNode, rabbitNode, mergeNode, rabbitNode, nullUserNode, frogNode, frogNode
             ]
           }
         }
@@ -258,14 +233,12 @@ describe("the github sponsor finder", () => {
     })
 
     it("returns a list of company sponsors, given an org and project", async () => {
-      setMinimumContributionCount(1)
       const sponsor = await findSponsor("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
       expect(sponsor).toContain("Red Hat")
     })
 
     it("orders company sponsors by contribution level", async () => {
-      setMinimumContributionCount(1)
       setMinimumContributorCount(1)
       setMinimumContributionPercent(1)
       const sponsor = await findSponsor("someorg", "someproject")
@@ -274,7 +247,7 @@ describe("the github sponsor finder", () => {
     })
 
     it("filters out companies which do not have enough contributors", async () => {
-      setMinimumContributionCount(10)
+      setMinimumContributorCount(10)
       const sponsor = await findSponsor("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
       expect(sponsor).toBeUndefined()
@@ -282,10 +255,6 @@ describe("the github sponsor finder", () => {
 
     // Convenience tests for the logic which takes an array of contributor counts and turns it into a list of sponsors
     describe("when the contributor counts have already been collated", () => {
-
-      beforeAll(() => {
-        setMinimumContributionCount(5)
-      })
 
       beforeEach(async () => {
         clearCaches()
@@ -304,7 +273,7 @@ describe("the github sponsor finder", () => {
 
       it("sorts by number of commits", async () => {
         setMinimumContributorCount(0)
-        setMinimumContributionPercent(10)
+        setMinimumContributionPercent(1)
 
         const sponsors = await findSponsorFromContributorList(manyContributors)
 
@@ -352,33 +321,7 @@ describe("the github sponsor finder", () => {
         let sponsors = await findSponsorFromContributorList(manyContributors)
         expect(sponsors).toStrictEqual(["Red Hat"])
       })
-    })
 
-
-    describe("when the main user has linked to a github company account", () => {
-      beforeAll(() => {
-        setMinimumContributorCount(1)
-      })
-
-      beforeEach(async () => {
-        clearCaches()
-        await initSponsorCache()
-      })
-
-      it("returns a company name", async () => {
-        const sponsor = await findSponsorFromContributorList(pactContributors)
-        expect(sponsor).toStrictEqual(["Red Hat"])
-      })
-
-      it("caches company information", async () => {
-        const sponsor = await findSponsorFromContributorList(pactContributors)
-        expect(sponsor).not.toBeUndefined()
-        const callCount = queryGraphQl.mock.calls.length + queryRest.mock.calls.length
-        const secondSponsor = await findSponsorFromContributorList(anotherContributors)
-        expect(secondSponsor).toStrictEqual(sponsor)
-        // No extra remote calls, since we passed in the contributor list and the company is cached
-        expect(queryGraphQl.mock.calls.length + queryRest.mock.calls.length).toBe(callCount)
-      })
     })
 
 
@@ -499,25 +442,148 @@ describe("the github sponsor finder", () => {
     })
 
     it("returns a list of individuals, given an org and project", async () => {
-      setMinimumContributionCount(1)
       const contributors = await getContributors("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
-      expect(contributors.contributors).toHaveLength(3)
+      expect(contributors.contributors).toHaveLength(5)
       expect(contributors.contributors[0]).toStrictEqual({
         "name": "Doctor Fluffy",
         login: "someonebouncy",
         contributions: 5,
-        url: "http://profile"
+        url: "http://profile",
+        company: "Rabbit"
       })
     })
 
     it("filters out merge commits", async () => {
-      setMinimumContributionCount(1)
       const contributors = await getContributors("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
       expect(contributors.contributors).not.toContainEqual(expect.objectContaining({ login: merger }))
     })
+
+    describe("when the main user has linked to a github company account", () => {
+      beforeAll(() => {
+        setMinimumContributorCount(1)
+      })
+
+      beforeEach(async () => {
+        clearCaches()
+        await initSponsorCache()
+      })
+
+      it("returns a company name", async () => {
+        const contributors = await getContributors("someorg", "someproject")
+        expect(contributors.contributors).toContainEqual(expect.objectContaining({
+          login: "link-name",
+          company: "Red Hat"
+        }))
+      })
+    })
   })
+
+  describe("listing all contributing companies", () => {
+
+    it("returns a list of companies, given an org and project", async () => {
+      const contributors = await getContributors("someorg", "someproject")
+      expect(queryGraphQl).toHaveBeenCalled()
+      expect(contributors.companies).toHaveLength(3)
+      expect(contributors.companies).toContainEqual({
+        "name": "Rabbit",
+        contributions: 5,
+        contributors: 1
+      })
+    })
+
+    it("sorts companies by contribution count", async () => {
+      const contributors = await getContributors("someorg", "someproject")
+      expect(queryGraphQl).toHaveBeenCalled()
+      expect(contributors.companies).toHaveLength(3)
+      expect(contributors.companies[1]).toStrictEqual({
+        "name": "Red Hat",
+        contributions: 4,
+        contributors: 3
+      })
+      expect(contributors.companies[2]).toStrictEqual({
+        "name": "Tortoise",
+        contributions: 2,
+        contributors: 1
+      })
+    })
+
+    // TODO also need to do it based on the sponsors field :o
+    describe("when there is a narrow opt-in list", () => {
+      beforeEach(() => {
+        setMinimumContributorCount(0)
+        setMinimumContributionPercent(5)
+
+        getRawFileContents.mockResolvedValue(
+          `named-sponsors:
+ - Red Hat`
+        )
+      })
+
+      afterAll(() => {
+        getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
+      })
+
+      it("excludes companies which have not opted in", async () => {
+        const contributors = await getContributors("someorg", "someproject")
+        expect(queryGraphQl).toHaveBeenCalled()
+        expect(contributors.companies).toHaveLength(2)
+        expect(contributors.companies[0]).toStrictEqual({
+          "name": "Other",
+          contributions: 7,
+          contributors: 2
+        })
+        expect(contributors.companies[1]).toStrictEqual({
+          "name": "Red Hat",
+          contributions: 4,
+          contributors: 3
+        })
+      })
+    })
+
+    describe("when there are companies on both the sponsor and companies list", () => {
+      beforeEach(() => {
+        setMinimumContributorCount(0)
+        setMinimumContributionPercent(5)
+
+        getRawFileContents.mockResolvedValue(
+          `named-sponsors:
+ - Red Hat
+named-contributing-orgs:
+ - Tortoise
+            `
+        )
+      })
+
+      afterAll(() => {
+        getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
+      })
+
+      it("excludes companies which have not opted in", async () => {
+        const contributors = await getContributors("someorg", "someproject")
+        expect(queryGraphQl).toHaveBeenCalled()
+        expect(contributors.companies).toHaveLength(3)
+        expect(contributors.companies[0]).toStrictEqual({
+          "name": "Other",
+          contributions: 5,
+          contributors: 1
+        })
+        expect(contributors.companies[1]).toStrictEqual({
+          "name": "Red Hat",
+          contributions: 4,
+          contributors: 3
+        })
+        expect(contributors.companies[2]).toStrictEqual({
+          "name": "Tortoise",
+          contributions: 2,
+          contributors: 1
+        })
+      })
+    })
+
+  })
+
 
   it("returns last updated information", async () => {
     const contributors = await getContributors("someorg", "someproject")
