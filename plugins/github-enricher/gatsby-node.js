@@ -230,8 +230,13 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
 
   // scmInfo.extensionPathInRepo may be undefined, but these methods will cope with that
   scmInfo.sponsors = await findSponsor(coords.owner, project, scmInfo.extensionPathInRepo)
-  const { contributors, lastUpdated } = await getContributors(coords.owner, project, scmInfo.extensionPathInRepo) ?? {}
+  const {
+    contributors,
+    lastUpdated,
+    companies
+  } = await getContributors(coords.owner, project, scmInfo.extensionPathInRepo) ?? {}
   scmInfo.contributors = contributors
+  scmInfo.companies = companies
   scmInfo.lastUpdated = lastUpdated
 
   scmInfo.owner = coords.owner
@@ -309,7 +314,6 @@ const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
   } else {
     console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId}; found `, extensionYamls)
   }
-
 }
 
 const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
@@ -446,11 +450,11 @@ exports.createSchemaCustomization = ({ actions }) => {
   type SourceControlInfo implements Node @noinfer {
     url: String
     ownerImageUrl: String
-    companies: [String]
     extensionYamlUrl: String
     issues: String
     lastUpdated: String
     contributors: [ContributorInfo]
+    companies: [CompanyContributorInfo]
     sponsors: [String]
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
@@ -461,6 +465,11 @@ exports.createSchemaCustomization = ({ actions }) => {
     login: String
     contributions: Int
     url: String
+  }
+  
+  type CompanyContributorInfo implements Node @noinfer {
+    name: String
+    contributions: Int
   }
   `
   createTypes(typeDefs)

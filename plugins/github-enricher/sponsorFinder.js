@@ -11,9 +11,6 @@ let repoContributorCache, companyCache
 let minimumContributorCount = 2
 let minimumContributionPercent = 20
 
-// Only consider users who have a significant number of contributions
-let minContributionCount = 5
-
 let optedInSponsors
 
 const setMinimumContributionPercent = n => {
@@ -24,9 +21,6 @@ const setMinimumContributorCount = n => {
   minimumContributorCount = n
 }
 
-const setMinimumContributionCount = n => {
-  minContributionCount = n
-}
 
 const initSponsorCache = async () => {
   // If there are problems with the cache, it works well to add something like companyCache.flushAll() on a main-branch build
@@ -72,18 +66,55 @@ const getSponsorData = async () => {
   return optedInSponsors
 }
 
-const getUserContributions = async (org, project, inPath) => {
+const getContributors = async (org, project, inPath) => {
   if (org && project) {
     // If inPath is undefined, that's fine, we'll use it in the key without ill effect
     const key = org + ":" + project + inPath
-    return await repoContributorCache.getOrSet(
+    const { collatedHistory, lastUpdated } = await repoContributorCache.getOrSet(
       key,
-      () => getUserContributionsNoCache(org, project, inPath)
-    )
+      () => getContributorsNoCache(org, project, inPath)
+    ) ?? {}
+
+    if (collatedHistory) {
+      // Don't cache our company calculations
+      const contributors = collatedHistory?.map(user => {
+        const { name, login, contributions, url, company } = user
+        return { name: name || login, login, contributions, url, company }
+      }).filter(notBot)
+
+      const sponsorData = await getSponsorData()
+
+      // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be sade
+
+      const nameableCompanies = [sponsorData["named-sponsors"]?.map(name => name.toLowerCase()), sponsorData["named-contributing-orgs"]?.map(name => name.toLowerCase())].flat()
+      const onlyOptIns = contributors.map(user => {
+        const sanitisedName = nameableCompanies.includes(user?.company?.toLowerCase()) ? user.company : "Other"
+        return { ...user, company: sanitisedName }
+      })
+
+
+      const companies = Object.values(onlyOptIns.reduce((acc, user) => {
+        const company = user.company
+        if (company) {
+          if (acc[company]) {
+            acc[company].contributions = acc[company].contributions + user.contributions
+            acc[company].contributors = acc[company].contributors + 1
+          } else {
+            acc[company] = { name: company, contributions: user.contributions, contributors: 1 }
+          }
+        }
+        return acc
+      }, {}))
+
+      const sortedCompanies = companies.sort((c, d) => d.contributions - c.contributions)
+
+      return { contributors, companies: sortedCompanies, lastUpdated }
+    }
   }
+
 }
 
-const getUserContributionsNoCache = async (org, project, inPath) => {
+const getContributorsNoCache = async (org, project, inPath) => {
   const pathParam = inPath ? `path: "${inPath}", ` : ""
   // We're only doing one, easy, date manipulation, so don't bother with a library
   const timePeriodInDays = 180
@@ -134,6 +165,11 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
       // Some commits have an author who doesn't have a github mapping, so filter those out
       users = users.filter(user => user !== null && user !== undefined)
 
+      // Normalise company names
+      users = await Promise.all(users.map(async user => {
+        const normalisedCompany = await normalizeCompanyName(user.company)
+        return { ...user, company: normalisedCompany }
+      }))
 
       const collatedHistory = Object.values(users.reduce((acc, user) => {
         if (acc[user.login]) {
@@ -152,98 +188,50 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
 
 const findSponsor = async (org, project, path) => {
   // Cache the github response and aggregation, but not the calculation of sponsors, since we may change the algorithm for it
-  const { collatedHistory } = await getUserContributions(org, project, path) ?? {}
+  const { companies } = await getContributors(org, project, path) ?? {}
   // We don't want to persist the sponsor calculations across builds; we could cache it locally but it's probably not worth it
-  if (collatedHistory) {
-    return findSponsorFromContributorList(collatedHistory)
+  if (companies) {
+    return findSponsorFromContributorList(companies)
   }
 }
 
 const notBot = (user) => {
+  // The GraphQL API, unlike the REST API, does not list a type for users, so we can only detect bots from name inspection
   return user.login && !user.login.includes("[bot]") && user.login !== "actions-user" && user.login !== "quarkiversebot"
 }
 
-const getContributors = async (org, project, path) => {
-  const { collatedHistory, lastUpdated } = await getUserContributions(org, project, path) ?? {}
-  const contributors = collatedHistory?.map(user => {
-    const { name, login, contributions, url } = user
-    return { name: name || login, login, contributions, url }
-  }).filter(notBot)
-  return { contributors, lastUpdated }
-}
+const findSponsorFromContributorList = async (companies) => {
 
-const findSponsorFromContributorList = async (userContributions) => {
 
-  // The GraphQL API, unlike the REST API, does not list a type for users, so we can only detect bots from name inspection
-  const notBots = userContributions
-    .filter(notBot)
-
-  const totalContributions = notBots.reduce(
-    (acc, user) => acc + user.contributions,
+  const totalContributions = companies.reduce(
+    (acc, comp) => acc + comp.contributions,
     0
   )
 
-  const significantContributors = notBots.filter(
-    user => user.contributions >= minContributionCount
-  )
-
-  const companies = significantContributors.map(async user => {
-    return {
-      company: await normalizeCompanyName(user.company),
-      commits: user.contributions,
-      login: user.login,
-    }
-  })
-  const allCompanies = await Promise.all(companies)
-  const filtered = allCompanies.filter(user => user !== undefined)
-  const commits = filtered.reduce((acc, user) => {
-    const company = user.company
-    if (company) {
-      if (acc[company]) {
-        acc[company].commits = acc[company].commits + user.commits
-        acc[company].contributors = acc[company].contributors + 1
-      } else {
-        acc[company] = { company, commits: user.commits, contributors: 1 }
-      }
-    }
-    return acc
-  }, {})
-
-  const noSolos = Object.values(commits).filter(
+  const noSolos = Object.values(companies).filter(
     company => company.contributors >= minimumContributorCount
   )
 
   const majorProportions = Object.values(noSolos).filter(
-    company =>
-      (company.commits * 100) / totalContributions >=
+    company => (company.contributions * 100) / totalContributions >=
       minimumContributionPercent
   )
+
 
   const sponsorData = await getSponsorData()
 
   // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be sade
 
   const namedSponsors = sponsorData["named-sponsors"].map(name => name.toLowerCase())
-  const onlyOptIns = majorProportions.filter(company => namedSponsors && namedSponsors.includes(company.company.toLowerCase()))
+  const onlyOptIns = majorProportions.filter(company => namedSponsors && namedSponsors.includes(company.name.toLowerCase()))
 
-  const sorted = onlyOptIns.sort((c, d) => d.commits - c.commits)
-
-  const answer = sorted.map(val => val.company)
+  const answer = onlyOptIns.map(val => val.name)
 
   // Return undefined instead of an empty array
   return answer.length > 0 ? answer : undefined
 }
 
 const normalizeCompanyName = async (company) => {
-  if (company) {
-    return await companyCache.getOrSet(
-      company,
-      () => normalizeCompanyNameNoCache(company)
-    )
-  }
-}
-
-const normalizeCompanyNameNoCache = async (company) => {
   // Even though we have a company, we need to do postprocessing
 
   if (company) {
@@ -288,7 +276,16 @@ const normalizeCompanyNameNoCache = async (company) => {
   }
 }
 
-const getCompanyFromGitHubLogin = async company => {
+const getCompanyFromGitHubLogin = async (company) => {
+  if (company) {
+    return await companyCache.getOrSet(
+      company,
+      () => getCompanyFromGitHubLoginNoCache(company)
+    )
+  }
+}
+
+const getCompanyFromGitHubLoginNoCache = async company => {
 
   const ghBody = await queryRest(`users/${company}`)
 
@@ -316,7 +313,7 @@ module.exports = {
   initSponsorCache,
   saveSponsorCache,
   setMinimumContributorCount,
-  setMinimumContributionPercent, setMinimumContributionCount,
+  setMinimumContributionPercent,
   normalizeCompanyName,
   findSponsorFromContributorList
 }
