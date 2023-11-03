@@ -248,13 +248,14 @@ const ExtensionDetailTemplate = ({
 
               {metadata?.sourceControl?.contributors && metadata?.sourceControl?.contributors.length > 0 && (
                 <TabPanel>
-                  <DocumentationHeading>Recent Contributors</DocumentationHeading>
+                  <DocumentationSection>
+                    <DocumentationHeading>Recent Contributors</DocumentationHeading>
 
                   {!extensionRootUrl && (
-                    <p>Commits to this extension's repository in the past six months (including merge commits).</p>)}
+                    <p>Commits to this extension's repository in the past six months (excluding merge commits).</p>)}
                   {extensionRootUrl && (
                     <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
-                      (including merge commits).</p>)}
+                      (excluding merge commits).</p>)}
 
                   <ChartHolder>
                     <ContributionsChart contributors={metadata.sourceControl.contributors} />
@@ -271,6 +272,7 @@ const ExtensionDetailTemplate = ({
                         minute: "numeric"
                       })}.</i></p>
                   )}
+                  </DocumentationSection>
                 </TabPanel>)
               }
             </Tabs>

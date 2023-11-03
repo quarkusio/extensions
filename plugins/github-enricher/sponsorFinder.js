@@ -97,6 +97,10 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
                       edges{
                           node{
                               ... on Commit{
+                                parents(first: 1) {
+                                  totalCount
+                                }
+                                 
                                   author {
                                     user {
                                       login
@@ -121,7 +125,11 @@ const getUserContributionsNoCache = async (org, project, inPath) => {
     const history = body?.data?.repository?.defaultBranchRef?.target?.history?.edges
 
     if (history && Array.isArray(history)) {
-      let users = history.map(o => o?.node?.author?.user)
+
+      // Filter out merge commits
+      const historyWithoutMerges = history.filter(o => o?.node?.parents?.totalCount === 1)
+
+      let users = historyWithoutMerges.map(o => o?.node?.author?.user)
 
       // Some commits have an author who doesn't have a github mapping, so filter those out
       users = users.filter(user => user !== null && user !== undefined)
