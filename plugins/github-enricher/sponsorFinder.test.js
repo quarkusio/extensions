@@ -122,8 +122,13 @@ urls["users/redhatofficial"] = {
   company: null,
 }
 
+const merger = "a person who did merges"
+
 const frogNode = {
   "node": {
+    parents: {
+      totalCount: 1
+    },
     "author": {
       "user": {
         "login": "someonewhoribbits",
@@ -134,6 +139,9 @@ const frogNode = {
 }
 const rabbitNode = {
   "node": {
+    parents: {
+      totalCount: 1
+    },
     "author": {
       "user": {
         "login": "someonebouncy",
@@ -147,9 +155,26 @@ const rabbitNode = {
 
 const tortoiseNode = {
   "node": {
+    parents: {
+      totalCount: 1
+    },
     "author": {
       "user": {
         "login": "a-name",
+        "company": "Tortoise"
+      }
+    }
+  }
+}
+
+const mergeNode = {
+  "node": {
+    parents: {
+      totalCount: 2
+    },
+    "author": {
+      "user": {
+        "login": merger,
         "company": "Tortoise"
       }
     }
@@ -171,7 +196,7 @@ const graphQLResponse = {
         "target": {
           "history": {
             "edges": [
-              rabbitNode, tortoiseNode, frogNode, tortoiseNode, rabbitNode, rabbitNode, rabbitNode, rabbitNode, nullUserNode, frogNode, frogNode
+              rabbitNode, tortoiseNode, frogNode, tortoiseNode, mergeNode, rabbitNode, rabbitNode, rabbitNode, mergeNode, rabbitNode, nullUserNode, frogNode, frogNode
             ]
           }
         }
@@ -485,13 +510,20 @@ describe("the github sponsor finder", () => {
         url: "http://profile"
       })
     })
+
+    it("filters out merge commits", async () => {
+      setMinimumContributionCount(1)
+      const contributors = await getContributors("someorg", "someproject")
+      expect(queryGraphQl).toHaveBeenCalled()
+      expect(contributors.contributors).not.toContainEqual(expect.objectContaining({ login: merger }))
+    })
   })
 
   it("returns last updated information", async () => {
     const contributors = await getContributors("someorg", "someproject")
 
     expect(contributors).toHaveProperty("lastUpdated")
-    
+
     const now = Date.now()
     expect(contributors.lastUpdated / now).toBeCloseTo(1)
 
