@@ -10,7 +10,7 @@ import {
 } from "./sponsorFinder"
 import { queryRest } from "./github-helper"
 
-const { queryGraphQl, getRawFileContents } = require("./github-helper")
+const { queryGraphQl } = require("./github-helper")
 
 jest.mock("./github-helper")
 
@@ -180,21 +180,10 @@ const graphQLResponse = {
   }
 }
 
-// Every company in our tests should be in this file or we will filter them out
-const namedSponsorsOptIn = "named-sponsors:\n" +
-  "  - Red Hat\n" +
-  "  - Another Company\n" +
-  "  - Occasional Company\n" +
-  `  - ${companyWithASingleContributor}\n` +
-  "  - Tortoise\n" +
-  "  - Rabbit\n" +
-  "  - Frog\n"
 
 describe("the github sponsor finder", () => {
   beforeAll(async () => {
     setMinimumContributorCount(1)
-
-    getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
 
     queryGraphQl.mockResolvedValue(graphQLResponse)
 
@@ -302,28 +291,6 @@ describe("the github sponsor finder", () => {
 
       })
     })
-
-    describe("when there is a narrow opt-in list", () => {
-      beforeEach(() => {
-        setMinimumContributorCount(0)
-        setMinimumContributionPercent(5)
-
-        getRawFileContents.mockResolvedValue("named-sponsors:\n" +
-          "  - Red Hat"
-        )
-      })
-
-      afterAll(() => {
-        getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
-      })
-
-      it("filters out companies that are not in the opt-in list", async () => {
-        let sponsors = await findSponsorFromContributorList(manyContributors)
-        expect(sponsors).toStrictEqual(["Red Hat"])
-      })
-
-    })
-
 
     describe("when the main user is a bot", () => {
 
@@ -508,82 +475,7 @@ describe("the github sponsor finder", () => {
         contributors: 1
       })
     })
-
-    // TODO also need to do it based on the sponsors field :o
-    describe("when there is a narrow opt-in list", () => {
-      beforeEach(() => {
-        setMinimumContributorCount(0)
-        setMinimumContributionPercent(5)
-
-        getRawFileContents.mockResolvedValue(
-          `named-sponsors:
- - Red Hat`
-        )
-      })
-
-      afterAll(() => {
-        getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
-      })
-
-      it("excludes companies which have not opted in", async () => {
-        const contributors = await getContributors("someorg", "someproject")
-        expect(queryGraphQl).toHaveBeenCalled()
-        expect(contributors.companies).toHaveLength(2)
-        expect(contributors.companies[0]).toStrictEqual({
-          "name": "Other",
-          contributions: 7,
-          contributors: 2
-        })
-        expect(contributors.companies[1]).toStrictEqual({
-          "name": "Red Hat",
-          contributions: 4,
-          contributors: 3
-        })
-      })
-    })
-
-    describe("when there are companies on both the sponsor and companies list", () => {
-      beforeEach(() => {
-        setMinimumContributorCount(0)
-        setMinimumContributionPercent(5)
-
-        getRawFileContents.mockResolvedValue(
-          `named-sponsors:
- - Red Hat
-named-contributing-orgs:
- - Tortoise
-            `
-        )
-      })
-
-      afterAll(() => {
-        getRawFileContents.mockResolvedValue(namedSponsorsOptIn)
-      })
-
-      it("excludes companies which have not opted in", async () => {
-        const contributors = await getContributors("someorg", "someproject")
-        expect(queryGraphQl).toHaveBeenCalled()
-        expect(contributors.companies).toHaveLength(3)
-        expect(contributors.companies[0]).toStrictEqual({
-          "name": "Other",
-          contributions: 5,
-          contributors: 1
-        })
-        expect(contributors.companies[1]).toStrictEqual({
-          "name": "Red Hat",
-          contributions: 4,
-          contributors: 3
-        })
-        expect(contributors.companies[2]).toStrictEqual({
-          "name": "Tortoise",
-          contributions: 2,
-          contributors: 1
-        })
-      })
-    })
-
   })
-
 
   it("returns last updated information", async () => {
     const contributors = await getContributors("someorg", "someproject")

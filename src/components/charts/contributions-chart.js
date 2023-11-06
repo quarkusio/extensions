@@ -6,7 +6,7 @@ import styled from "styled-components"
 
 const RADIAN = Math.PI / 180
 
-const LegendBlop = styled.div`
+const LegendSwatch = styled.div`
   height: 12px;
   width: 12px;
   border-radius: 3px;
@@ -50,8 +50,8 @@ const Contributor = styled.div`
 const ContributionsChart = (props) => {
   const uncolouredContributors = props.contributors
 
-  if (uncolouredContributors) {
-    const palette = getPalette(uncolouredContributors.length)
+  if (uncolouredContributors && uncolouredContributors.length > 0) {
+    const palette = getPalette(uncolouredContributors.length, props.baseColour)
 
     const contributors = uncolouredContributors.sort((a, b) => b.contributions - a.contributions).map((contributor, i) => {
       return { ...contributor, fill: palette[i] }
@@ -62,7 +62,7 @@ const ContributionsChart = (props) => {
     //  we set a blank label if there are a small number of contributors, so we get the line, but we define our own
     // text so we can make it black. the offset in the label list is hand-tuned to put the text near the end of the line
     return (
-      <ResponsiveContainer width={700} height="80%">
+      <ResponsiveContainer width={700} height="100%">
         <PieChart title={"Committers"}
                   desc={`A pie chart showing that ${contributors[0].name} has made the most commits in the past six months.`}>
           <Pie data={contributors} dataKey="contributions" nameKey="name" innerRadius={80}
@@ -127,7 +127,7 @@ const renderLegend = (props) => {
             return (
               <ContributorInformation key={`item-${index}`}>
                 <Contributor>
-                  <LegendBlop color={color} />
+                  <LegendSwatch color={color} />
                   <a href={entry?.payload.url}>{name}</a>
                 </Contributor>
                 <span

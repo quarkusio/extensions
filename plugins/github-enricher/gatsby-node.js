@@ -8,6 +8,7 @@ const { labelExtractor } = require("./labelExtractor")
 const PersistableCache = require("./persistable-cache")
 const { findSponsor, clearCaches, saveSponsorCache, initSponsorCache, getContributors } = require("./sponsorFinder")
 const { getRawFileContents, queryGraphQl } = require("./github-helper")
+const yaml = require("js-yaml")
 
 const defaultOptions = {
   nodeType: "Extension",
@@ -21,7 +22,7 @@ let imageCache, extensionYamlCache, issueCountCache
 
 let getLabels
 
-exports.onPreBootstrap = async ({}) => {
+exports.onPreBootstrap = async () => {
   imageCache = new PersistableCache({ key: "github-api-for-images", stdTTL: 3 * DAY_IN_SECONDS })
 
 // The location of extension files is unlikely to change often, and if it does, the link checker will flag the issue
@@ -127,6 +128,9 @@ exports.onCreateNode = async (
   }
 
   const { metadata } = node
+
+  createSponsor({ actions, createNodeId, createContentDigest }, metadata)
+
   // A bit ugly, we need a unique identifier in string form, and we also need the url; use a comma-separated string
   const id = metadata?.sourceControl
   const scmUrl = id?.split(",")[0]
@@ -169,6 +173,53 @@ exports.onCreateNode = async (
 
     // Return a promise to make sure we wait
     return scmInfo
+  }
+}
+
+exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+  await createContributingCompanies({ actions, createNodeId, createContentDigest })
+}
+
+
+const extensionCatalogContributingCompany = "extension-catalog-contributing-company"
+const createContributingCompanies = async ({ actions, createNodeId, createContentDigest }) => {
+
+  const org = "quarkusio"
+  const repo = "quarkus-extension-catalog"
+  const path = "named-contributing-orgs-opt-in.yml"
+
+  const yamlString = await getRawFileContents(org, repo, path)
+
+  if (yamlString) {
+    const json = await yaml.load(yamlString)
+
+    json["named-sponsors"]?.forEach(company => createSponsor({
+      actions,
+      createNodeId,
+      createContentDigest
+    }, { sponsor: company, source: "extension-catalog-sponsor" }))
+
+    json["named-contributing-orgs"]?.forEach(company => createSponsor({
+      actions,
+      createNodeId,
+      createContentDigest
+    }, { sponsor: company, source: extensionCatalogContributingCompany }))
+
+  } else {
+    console.warn("Could not fetch sponsor opt in information from", url, ". Does the file exist?")
+  }
+}
+
+
+const createSponsor = ({ actions: { createNode }, createNodeId, createContentDigest }, { sponsor, source }) => {
+  if (sponsor) {
+    const derivedSource = source || "metadata-sponsor"
+    createNode({
+      id: sponsor,
+      name: sponsor,
+      source: derivedSource,
+      internal: { type: "ContributingCompany", contentDigest: createContentDigest(sponsor + "sponsor") }
+    })
   }
 }
 
@@ -229,14 +280,14 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   }
 
   // scmInfo.extensionPathInRepo may be undefined, but these methods will cope with that
-  scmInfo.sponsors = await findSponsor(coords.owner, project, scmInfo.extensionPathInRepo)
+  scmInfo.allSponsors = await findSponsor(coords.owner, project, scmInfo.extensionPathInRepo)
   const {
     contributors,
     lastUpdated,
     companies
   } = await getContributors(coords.owner, project, scmInfo.extensionPathInRepo) ?? {}
   scmInfo.contributors = contributors
-  scmInfo.companies = companies
+  scmInfo.allCompanies = companies
   scmInfo.lastUpdated = lastUpdated
 
   scmInfo.owner = coords.owner
@@ -444,6 +495,70 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
   return { issues, issuesUrl }
 }
 
+// This combines the sponsor opt-in information (which we only fully have after processing all nodes) with the companies and sponsor information for individual nodes,
+// to get a sanitised list
+exports.createResolvers = ({ createResolvers }) => {
+  const resolvers = {
+    SourceControlInfo: {
+      companies: {
+        type: "[CompanyContributorInfo]",
+        resolve: async (source, args, context) => {
+
+          const answer = await context.nodeModel.findAll({
+              type: `ContributingCompany`
+            },
+          )
+
+          // No need to filter on opt-in source, any named company counts
+          const nameableCompanies = Array.from(answer?.entries.map(company => company.name?.toLowerCase()))
+          const other = "Other"
+
+          // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
+          const onlyOptIns = source.allCompanies?.map(company => {
+            const sanitisedName = nameableCompanies.includes(company.name?.toLowerCase()) ? company.name : other
+            return { ...company, name: sanitisedName }
+          })
+
+          // We're almost there, but we may have multiple 'other' entries, so aggregate
+          const aggregated = onlyOptIns?.reduce((acc, stats) => {
+            if (stats.name === other) {
+              const existingOther = acc.find(s => s.name === other)
+              if (existingOther) {
+                existingOther.contributors = existingOther.contributors + stats.contributors
+                existingOther.contributions = existingOther.contributions + stats.contributions
+              } else {
+                acc.push(stats)
+              }
+            } else {
+              acc.push(stats)
+            }
+            return acc
+          }, [])
+
+          return aggregated?.length > 0 ? aggregated : undefined
+        }
+      },
+
+      sponsors: {
+        type: "[String]",
+        resolve: async (source, args, context) => {
+
+          const answer = await context.nodeModel.findAll({
+              type: `ContributingCompany`
+            },
+          )
+          const namedSponsors = Array.from(answer?.entries.filter(company => company.source !== extensionCatalogContributingCompany).map(company => company.name?.toLowerCase()))
+
+          // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
+          const filtered = source.allSponsors?.filter(company => namedSponsors && namedSponsors.includes(company.toLowerCase()))
+          return filtered?.length > 0 ? filtered : undefined
+        }
+      }
+    }
+  }
+  createResolvers(resolvers)
+}
+
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
@@ -455,7 +570,9 @@ exports.createSchemaCustomization = ({ actions }) => {
     lastUpdated: String
     contributors: [ContributorInfo]
     companies: [CompanyContributorInfo]
+    allCompanies: [CompanyContributorInfo]
     sponsors: [String]
+    allSponsors: [String]
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
   }

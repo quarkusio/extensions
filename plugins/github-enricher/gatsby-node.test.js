@@ -2,7 +2,7 @@
  * @jest-environment node
  */
 
-const { onCreateNode, onPreBootstrap, onPluginInit } = require("./gatsby-node")
+const { onCreateNode, onPreBootstrap, onPluginInit, sourceNodes, createResolvers } = require("./gatsby-node")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { queryGraphQl, getRawFileContents, queryRest } = require("./github-helper")
 const { getContributors } = require("./sponsorFinder")
@@ -65,6 +65,68 @@ describe("the github data handler", () => {
       expect(queryGraphQl).not.toHaveBeenCalled()
       expect(queryRest).not.toHaveBeenCalled()
       expect(getRawFileContents).not.toHaveBeenCalled()
+    })
+  })
+
+  describe("for an extension with an explicit sponsor listed", () => {
+    const sponsor = "Big Company Inc"
+    const metadata = { sponsor }
+
+    const node = {
+      metadata,
+      internal,
+    }
+
+    beforeAll(async () => {
+      queryGraphQl.mockResolvedValue({})
+
+      await onPreBootstrap({ cache, actions: {} })
+      // Don't count what the pre bootstrap does in our checking
+      jest.clearAllMocks()
+      return onCreateNode({
+        node,
+        createContentDigest,
+        createNodeId,
+        actions,
+      })
+    })
+
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
+    it("creates a contributing company node", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: sponsor,
+          source: "metadata-sponsor"
+        })
+      )
+    })
+
+    it("creates a contributing company node with a suitable type", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          internal: expect.objectContaining({ type: "ContributingCompany" }),
+        })
+      )
+    })
+
+    it("creates a contributing company node with a meaningful id", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: sponsor,
+        })
+      )
+    })
+
+    it("creates a contributing company node with a proper content digest", async () => {
+      expect(createContentDigest).toHaveBeenCalled()
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          internal: expect.objectContaining({ contentDigest }),
+        })
+      )
     })
   })
 
@@ -771,10 +833,343 @@ describe("the github data handler", () => {
       })
     })
 
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
     it("creates a new file node with the cropped image", async () => {
       expect(createRemoteFileNode).toHaveBeenCalledWith(
         expect.objectContaining({ url: socialMediaPreviewUrl })
       )
     })
   })
+
+  describe("reading sponsor information from the extension catalog", () => {
+    const sponsor1 = "Big Company Inc"
+    const sponsor2 = "Small Company Inc"
+    const contributingcompany1 = "Modest Company"
+    const contributingcompany2 = "Maybe, Inc"
+
+    const yaml = `
+named-sponsors:
+  - ${sponsor1}
+  - ${sponsor2}
+named-contributing-orgs:
+  - ${contributingcompany1}
+  - ${contributingcompany2}
+    `
+
+    beforeAll(async () => {
+      getRawFileContents.mockResolvedValue(yaml)
+
+      await sourceNodes({
+          createContentDigest,
+          createNodeId,
+          actions,
+        }
+      )
+
+    })
+
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
+    it("creates a contributing company node for each entry in the remote file", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: sponsor1,
+        })
+      )
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: sponsor2,
+        })
+      )
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: contributingcompany1,
+        })
+      )
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: contributingcompany2,
+        })
+      )
+    })
+
+    it("sets a suitable source for sponsors", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: sponsor1,
+          source: "extension-catalog-sponsor"
+        })
+      )
+
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          name: contributingcompany1,
+          source: "extension-catalog-contributing-company"
+        })
+      )
+
+    })
+
+    it("creates a contributing company node with a suitable type", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          internal: expect.objectContaining({ type: "ContributingCompany" }),
+        })
+      )
+    })
+
+    it("creates a contributing company node with a meaningful id", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: sponsor1,
+        })
+      )
+    })
+
+    it("creates a contributing company node with a proper content digest", async () => {
+      expect(createContentDigest).toHaveBeenCalled()
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          internal: expect.objectContaining({ contentDigest }),
+        })
+      )
+    })
+  })
+
+  describe("sanitising the list of contributing companies and sponsors to those who have opted in", () => {
+    // These tests are a bit lazy with the mocking, because findAll's function returns an iterable, not an array, but as the tests are mocking-heavy, I don't think going further is that helpful
+    const createResolversFn = jest.fn()
+    const args = ""
+
+    describe("getting sponsors", () => {
+
+      beforeEach(() => {
+        createResolvers({ createResolvers: createResolversFn })
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("returns undefined when there are no sponsors", async () => {
+        const optedIn = []
+        const param = createResolversFn.mock.calls[0][0]
+        // Try and exercise the resolver by drilling down
+        const source = {
+          allSponsors: ["Rather secretive", "Very Public", "A bit forgetful"]
+        }
+        const resolve = param.SourceControlInfo.sponsors.resolve
+
+        const context = {
+          nodeModel: {
+            findAll: jest.fn().mockResolvedValue({ entries: optedIn })
+          }
+        }
+
+        const answer = await resolve(source, args, context)
+        expect(answer).toBeUndefined()
+      })
+
+      it("filters out companies that are not in the opt-in list", async () => {
+        const optedIn = [{ name: "Very Public" }]
+        expect(createResolversFn).toHaveBeenCalled()
+        const param = createResolversFn.mock.calls[0][0]
+        // Try and exercise the resolver by drilling down
+        const source = {
+          allSponsors: ["Rather secretive", "Very Public", "A bit forgetful"]
+        }
+        const resolve = param.SourceControlInfo.sponsors.resolve
+
+        const context = {
+          nodeModel: {
+            findAll: jest.fn().mockResolvedValue({ entries: optedIn })
+          }
+        }
+
+        const answer = await resolve(source, args, context)
+        expect(answer).toStrictEqual(["Very Public"])
+      })
+
+
+      it("returns more than one sponsor if more than one applies", async () => {
+        const optedIn = [{ name: "Very Public" }, { name: "Mostly out there" }]
+        expect(createResolversFn).toHaveBeenCalled()
+        const param = createResolversFn.mock.calls[0][0]
+        // Try and exercise the resolver by drilling down
+        const source = {
+          allSponsors: ["Rather secretive", "Very Public", "A bit forgetful", "Mostly out there"]
+        }
+        const resolve = param.SourceControlInfo.sponsors.resolve
+        const context = {
+          nodeModel: {
+            findAll: jest.fn().mockResolvedValue({ entries: optedIn })
+          }
+        }
+
+        const answer = await resolve(source, args, context)
+        expect(answer).toStrictEqual(["Very Public", "Mostly out there"])
+      })
+
+      it("excludes companies who have only opted in as non-sponsors", async () => {
+        const optedIn = [{ name: "Very Public" }, {
+          name: "Mostly out there",
+          source: "extension-catalog-contributing-company"
+        }]
+        const param = createResolversFn.mock.calls[0][0]
+        // Try and exercise the resolver by drilling down
+        const source = {
+          allSponsors: ["Rather secretive", "Very Public", "A bit forgetful", "Mostly out there"]
+        }
+        const resolve = param.SourceControlInfo.sponsors.resolve
+
+        const context = {
+          nodeModel: {
+            findAll: jest.fn().mockResolvedValue({ entries: optedIn })
+          }
+        }
+
+        const answer = await resolve(source, args, context)
+        expect(answer).toStrictEqual(["Very Public"])
+      })
+    })
+
+    describe("getting contributing companies", () => {
+
+      const createResolversFn = jest.fn()
+      const source = {
+        allCompanies: [{
+          "name": "Nice Hat",
+          contributions: 4,
+          contributors: 3
+        },
+          {
+            "name": "Another Hat",
+            contributions: 4,
+            contributors: 1
+          }
+          ,
+          {
+            "name": "Timid Hat",
+            contributions: 3,
+            contributors: 1
+          }
+        ]
+      }
+
+
+      beforeEach(() => {
+        createResolvers({ createResolvers: createResolversFn })
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+
+      fit("includes companies which have opted in", async () => {
+        const optedIn = [{ name: "Nice Hat" }]
+        const param = createResolversFn.mock.calls[0][0]
+        // Try and exercise the resolver by drilling down
+
+        const resolve = param.SourceControlInfo.companies.resolve
+
+        const context = {
+          nodeModel: {
+            findAll: jest.fn().mockResolvedValue({ entries: optedIn })
+          }
+        }
+
+        const contributors = await resolve(source, args, context)
+
+        expect(contributors).toContainEqual(
+          {
+            "name": "Nice Hat",
+            contributions: 4,
+            contributors: 3
+          })
+      })
+
+      fit("excludes companies which have not opted in", async () => {
+        const optedIn = [{ name: "Another Hat" }]
+        const param = createResolversFn.mock.calls[0][0]
+        // Try and exercise the resolver by drilling down
+
+        const resolve = param.SourceControlInfo.companies.resolve
+
+        const context = {
+          nodeModel: {
+            findAll: jest.fn().mockResolvedValue({ entries: optedIn })
+          }
+        }
+
+        const contributors = await resolve(source, args, context)
+
+        expect(contributors).not.toContainEqual(
+          expect.objectContaining({
+            "name": "Nice Hat"
+          }))
+      })
+
+      fit("aggregates contributions from excluded companies", async () => {
+        const optedIn = [{ name: "Nice Hat" }]
+        const param = createResolversFn.mock.calls[0][0]
+
+        const resolve = param.SourceControlInfo.companies.resolve
+
+        const context = {
+          nodeModel: {
+            findAll: jest.fn().mockResolvedValue({ entries: optedIn })
+          }
+        }
+
+        const contributors = await resolve(source, args, context)
+        console.log("HPLLY ansert ", contributors)
+
+        expect(contributors).toHaveLength(2)
+        expect(contributors).toContainEqual({
+          "name": "Other",
+          contributions: 7,
+          contributors: 2
+        })
+      })
+    })
+
+
+    // TODO test for re-sorting with other? Or do we care?
+
+    describe("when there is a narrow opt-in list", () => {
+
+      describe("when there are companies on both the sponsor and companies list", () => {
+
+
+        it("excludes companies which have not opted in", async () => {
+          const contributors = await getContributors("someorg", "someproject")
+          expect(queryGraphQl).toHaveBeenCalled()
+          expect(contributors.companies).toHaveLength(3)
+          expect(contributors.companies[0]).toStrictEqual({
+            "name": "Other",
+            contributions: 5,
+            contributors: 1
+          })
+          expect(contributors.companies[1]).toStrictEqual({
+            "name": "Red Hat",
+            contributions: 4,
+            contributors: 3
+          })
+          expect(contributors.companies[2]).toStrictEqual({
+            "name": "Tortoise",
+            contributions: 2,
+            contributors: 1
+          })
+        })
+      })
+
+    })
+  })
 })
+
