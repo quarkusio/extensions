@@ -133,7 +133,7 @@ const DocumentationHeading = styled.h2`
 
 //  I wish this wasn't here, but we need to set an explicit height for the charts, or the contents don't render at all
 const ChartHolder = styled.div`
-  height: 600px; // For now, an arbitrary height, but we should tune
+  height: 480px; // For now, an arbitrary height, but we should tune
 `
 
 const Logo = ({ extension }) => {
@@ -276,8 +276,19 @@ const ExtensionDetailTemplate = ({
                         (excluding merge commits).</p>)}
 
                     <ChartHolder>
-                      <ContributionsChart contributors={metadata.sourceControl.contributors} />
+                      <ContributionsChart contributors={metadata.sourceControl.contributors} baseColour={"#4695EB"} />
                     </ChartHolder>
+
+                    <ChartHolder>
+                      <ContributionsChart contributors={metadata.sourceControl.companies} baseColour={"#666"} />
+                    </ChartHolder>
+
+                    {metadata?.sourceControl?.companies && (
+                      <p><i>Company affiliations are derived from GitHub user profiles. Want your company's name to be
+                        shown in this chart? <a
+                          href={"https://hub.quarkiverse.io/checklist/#allow-your-company-to-be-named-as-a-sponsor-or-contributor-optional"}>Opt-in
+                          to have it included.</a></i></p>
+                    )}
 
                     {metadata?.sourceControl?.lastUpdated && (
                       <p><i>Commit statistics last
@@ -513,6 +524,10 @@ export const pageQuery = graphql`
             contributions
             login
             url
+          }
+          companies {
+            name
+            contributions
           }
           projectImage {
             childImageSharp {

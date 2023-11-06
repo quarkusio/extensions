@@ -7,7 +7,7 @@ describe("the styles helper", () => {
 
 
     it("returns quarkus blue if the length is 1", () => {
-      const palette = getPalette(1)
+      const palette = getPalette(1, QUARKUS_BLUE)
       expect(palette).toHaveLength(1)
       expect(palette[0]).toBe(QUARKUS_BLUE)
     })
@@ -21,7 +21,7 @@ describe("the styles helper", () => {
     })
 
     it("returns variations of Quarkus blue for limited numbers of entries", () => {
-      const palette = getPalette(10)
+      const palette = getPalette(10, QUARKUS_BLUE)
 
       // We start with Quarkus blue and then go down
       expect(palette[0]).toBe(QUARKUS_BLUE)

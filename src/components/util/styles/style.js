@@ -7,24 +7,24 @@ import Values from "values.js"
 
 const styles = { "grey-2": "#555555", "border-radius": "10px" }
 
-const quarkusBlue = new Values("#4695EB")
 const white = new Values("#ffffff")
 
-const getPalette = (n) => {
+const getPalette = (n, baseCode) => {
+  const baseColour = new Values(baseCode)
 
-  // Simple case, just do a blue spectrum
+  // Simple case, just do a coloured spectrum
   if (n <= 10) {
     const increment = 100 / n
-    return [...Array(n).keys()].map(i => quarkusBlue.tint(i * increment).hexString())
+    return [...Array(n).keys()].map(i => baseColour.tint(i * increment).hexString())
   } else {
-    // Do a cyclical range of colours, from blue down to white, then through shades of grey, then black from black to blue
-    const blueElements = Math.min(Math.round(n / 3) + 1, 6)
-    const greyElements = n - 2 * blueElements
-    const blueIncrement = 100 / (2 * blueElements)
+    // Do a cyclical range of colours, from coloured down to white, then through shades of grey, then black from black to coloured
+    const colouredElements = Math.min(Math.round(n / 3) + 1, 6)
+    const greyElements = n - 2 * colouredElements
+    const colouredIncrement = 100 / (2 * colouredElements)
     const greyIncrement = 100 / greyElements
 
-    const tints = [...Array(blueElements).keys()].map(i => quarkusBlue.tint(i * blueIncrement).hexString())
-    const shades = [...Array(blueElements).keys()].map(i => quarkusBlue.shade((2 * blueElements - i) * blueIncrement).hexString())
+    const tints = [...Array(colouredElements).keys()].map(i => baseColour.tint(i * colouredIncrement).hexString())
+    const shades = [...Array(colouredElements).keys()].map(i => baseColour.shade((2 * colouredElements - i) * colouredIncrement).hexString())
     const greys = [...Array(greyElements).keys()].map(i => white.shade(i * greyIncrement).hexString())
 
     return [...tints, ...greys, ...shades]

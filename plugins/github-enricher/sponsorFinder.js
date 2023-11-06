@@ -1,6 +1,5 @@
 const PersistableCache = require("./persistable-cache")
-const yaml = require("js-yaml")
-const { getRawFileContents, queryGraphQl, queryRest } = require("./github-helper")
+const { queryGraphQl, queryRest } = require("./github-helper")
 
 // We store the raw(ish) data in the cache, to avoid repeating the same request multiple times and upsetting the github rate limiter
 const DAY_IN_SECONDS = 60 * 60 * 24
@@ -10,8 +9,6 @@ let repoContributorCache, companyCache
 
 let minimumContributorCount = 2
 let minimumContributionPercent = 20
-
-let optedInSponsors
 
 const setMinimumContributionPercent = n => {
   minimumContributionPercent = n
@@ -41,29 +38,6 @@ const initSponsorCache = async () => {
 const clearCaches = () => {
   repoContributorCache?.flushAll()
   companyCache?.flushAll()
-  optedInSponsors = undefined
-}
-
-const getSponsorData = async () => {
-  if (!optedInSponsors) {
-
-    const org = "quarkusio"
-    const repo = "quarkus-extension-catalog"
-    const path = "named-contributing-orgs-opt-in.yml"
-
-
-    const yamlString = await getRawFileContents(org, repo, path)
-
-    if (yamlString) {
-      const json = yaml.load(yamlString)
-
-      optedInSponsors = await json
-    } else {
-      console.warn("Could not fetch sponsor opt in information from", url, ". Does the file exist?")
-      optedInSponsors = {}
-    }
-  }
-  return optedInSponsors
 }
 
 const getContributors = async (org, project, inPath) => {
@@ -82,18 +56,7 @@ const getContributors = async (org, project, inPath) => {
         return { name: name || login, login, contributions, url, company }
       }).filter(notBot)
 
-      const sponsorData = await getSponsorData()
-
-      // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be sade
-
-      const nameableCompanies = [sponsorData["named-sponsors"]?.map(name => name.toLowerCase()), sponsorData["named-contributing-orgs"]?.map(name => name.toLowerCase())].flat()
-      const onlyOptIns = contributors.map(user => {
-        const sanitisedName = nameableCompanies.includes(user?.company?.toLowerCase()) ? user.company : "Other"
-        return { ...user, company: sanitisedName }
-      })
-
-
-      const companies = Object.values(onlyOptIns.reduce((acc, user) => {
+      const companies = Object.values(contributors.reduce((acc, user) => {
         const company = user.company
         if (company) {
           if (acc[company]) {
@@ -217,15 +180,7 @@ const findSponsorFromContributorList = async (companies) => {
       minimumContributionPercent
   )
 
-
-  const sponsorData = await getSponsorData()
-
-  // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be sade
-
-  const namedSponsors = sponsorData["named-sponsors"].map(name => name.toLowerCase())
-  const onlyOptIns = majorProportions.filter(company => namedSponsors && namedSponsors.includes(company.name.toLowerCase()))
-
-  const answer = onlyOptIns.map(val => val.name)
+  const answer = majorProportions.map(val => val.name)
 
   // Return undefined instead of an empty array
   return answer.length > 0 ? answer : undefined
