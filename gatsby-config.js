@@ -2,7 +2,7 @@ const { segmentSnippet } = require("./src/analytics/segment-snippet.js")
 
 module.exports = {
   pathPrefix: "/extensions",
-
+  trailingSlash: "always",
   siteMetadata: {
     title: `Extensions`,
     author: {
