@@ -2,7 +2,17 @@ import React from "react"
 import { render, screen, within } from "@testing-library/react"
 import ExtensionDetailTemplate from "./extension-detail"
 import userEvent from "@testing-library/user-event"
+import { useQueryParamString, getQueryParams } from "react-use-query-param-string"
 
+
+jest.mock("react-use-query-param-string", () => {
+  const original = jest.requireActual("react-use-query-param-string") // Step 2.
+  return {
+    ...original,
+    useQueryParamString: jest.fn(),
+    getQueryParams: jest.fn()
+  }
+})
 
 describe("extension detail page", () => {
   describe("for an extension with lots of information", () => {
@@ -68,13 +78,21 @@ describe("extension detail page", () => {
       ],
     }
 
+    const setSearchString = jest.fn()
     beforeEach(() => {
+
+      useQueryParamString.mockReturnValue([undefined, setSearchString])
+
       render(
         <ExtensionDetailTemplate
           data={{ extension, previous, next }}
           location="/somewhere"
         />
       )
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
     })
 
     it("renders the extension name", () => {
@@ -193,6 +211,7 @@ describe("extension detail page", () => {
     })
 
     it("has contributors information on the community tab", async () => {
+      expect(screen.queryByText("Recent Contributors")).toBeFalsy()
       const tab = screen.getAllByText("Community")[1] // get the last element, which should be second
       await user.click(tab)
       expect(screen.getByText("Recent Contributors")).toBeTruthy()
@@ -219,9 +238,62 @@ describe("extension detail page", () => {
       expect(chart).toBeTruthy()
     })
 
+    it("sets a url parameter on the Community tab", async () => {
+      const tab = screen.getAllByText("Community")[1] // get the last element, which should be second
+      await user.click(tab)
+      expect(setSearchString).toHaveBeenCalled()
+      expect(setSearchString).toHaveBeenCalledWith("community")
+
+    })
+
+    it("sets a url parameter when clicking back to the first tab", async () => {
+      const tab = screen.getAllByText("Community")[1] // get the last element, which should be second
+      await user.click(tab)
+
+      const tab2 = screen.getAllByText("Documentation")[0] // This should be the first element with this name
+      await user.click(tab2)
+      expect(setSearchString).toHaveBeenCalled()
+      expect(setSearchString).toHaveBeenLastCalledWith("docs")
+    })
+
+
     it("does not render an unlisted banner", async () => {
       const link = await screen.queryByText(/nlisted/)
       expect(link).toBeNull()
+    })
+
+    describe("when url parameters are set on initial load", () => {
+      beforeEach(() => {
+
+        // we do *not* mock useQueryParamString to return a useful value, because in the actual app it does not return a value on initial load
+        getQueryParams.mockReturnValue({ tab: "community" })
+
+        render(
+          <ExtensionDetailTemplate
+            data={{ extension, previous, next }}
+            location="/somewhere"
+          />
+        )
+      })
+
+      it("honours the url parameter", async () => {
+        expect(screen.getByText("Recent Contributors")).toBeTruthy()
+      })
+
+      it("adjusts a url parameter when clicking back to the first tab", async () => {
+        const tab = screen.getAllByText("Documentation")[0]
+        await user.click(tab)
+        expect(setSearchString).toHaveBeenCalled()
+        expect(setSearchString).toHaveBeenLastCalledWith("docs")
+        // The original tab will still be in the dom, but the docs tab should now be rendered
+        expect(screen.queryByText(/Installation/)).toBeTruthy()
+
+        const tab2 = screen.getAllByText("Community")[1]
+        await user.click(tab2)
+        expect(setSearchString).toHaveBeenCalled()
+        expect(setSearchString).toHaveBeenLastCalledWith("community")
+        expect(screen.getAllByText("Recent Contributors")).toBeTruthy()
+      })
     })
   })
 

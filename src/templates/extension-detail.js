@@ -13,6 +13,7 @@ import { qualifiedPrettyPlatform } from "../components/util/pretty-platform"
 import ContributionsChart from "../components/charts/contributions-chart"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import "react-tabs/style/react-tabs.css"
+import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
 
 const ExtensionDetails = styled.main`
   margin-left: var(--site-margins);
@@ -159,6 +160,9 @@ const ClosingRule = styled.div`
   padding-left: var(--a-modest-space);
   border-bottom: 1px solid var(--grey-1);`
 
+// Semi-duplicate the tab headings so we get prettier search strings :)
+const tabs = ["docs", "community"]
+
 const ExtensionDetailTemplate = ({
                                    data: { extension, previous, next },
                                    location,
@@ -173,6 +177,20 @@ const ExtensionDetailTemplate = ({
     platforms,
     streams,
   } = extension
+
+
+  const key = "tab"
+  const [searchText, setSearchText, initialized] = useQueryParamString(key, "")
+
+  const onSelect = (index) => {
+    setSearchText(tabs[index])
+    return true
+  }
+
+  // It's a bit odd that this is needed, but the state we read may not reflect what is in the url on first load
+  const realSearchText = initialized ? searchText : getQueryParams() ? getQueryParams()[key] : undefined
+
+  const selected = Math.max(tabs.indexOf(realSearchText), 0)
 
   const extensionYaml = metadata.sourceControl?.extensionYamlUrl ? (
     <a href={metadata.sourceControl.extensionYamlUrl}>quarkus-extension.yaml</a>
@@ -208,7 +226,7 @@ const ExtensionDetailTemplate = ({
           <MainContent>
             <ExtensionDescription>{description}</ExtensionDescription>
 
-            <Tabs>
+            <Tabs onSelect={onSelect} defaultIndex={selected}>
               <TabList>
                 <Tab>Documentation</Tab>
                 {metadata?.sourceControl?.contributors && metadata?.sourceControl?.contributors.length > 0 && (
@@ -251,27 +269,27 @@ const ExtensionDetailTemplate = ({
                   <DocumentationSection>
                     <DocumentationHeading>Recent Contributors</DocumentationHeading>
 
-                  {!extensionRootUrl && (
-                    <p>Commits to this extension's repository in the past six months (excluding merge commits).</p>)}
-                  {extensionRootUrl && (
-                    <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
-                      (excluding merge commits).</p>)}
+                    {!extensionRootUrl && (
+                      <p>Commits to this extension's repository in the past six months (excluding merge commits).</p>)}
+                    {extensionRootUrl && (
+                      <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
+                        (excluding merge commits).</p>)}
 
-                  <ChartHolder>
-                    <ContributionsChart contributors={metadata.sourceControl.contributors} />
-                  </ChartHolder>
+                    <ChartHolder>
+                      <ContributionsChart contributors={metadata.sourceControl.contributors} />
+                    </ChartHolder>
 
-                  {metadata?.sourceControl?.lastUpdated && (
-                    <p><i>Commit statistics last
-                      updated {new Date(+metadata?.sourceControl?.lastUpdated).toLocaleDateString("en-us", {
-                        weekday: "long",
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                        hour: "numeric",
-                        minute: "numeric"
-                      })}.</i></p>
-                  )}
+                    {metadata?.sourceControl?.lastUpdated && (
+                      <p><i>Commit statistics last
+                        updated {new Date(+metadata?.sourceControl?.lastUpdated).toLocaleDateString("en-us", {
+                          weekday: "long",
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          hour: "numeric",
+                          minute: "numeric"
+                        })}.</i></p>
+                    )}
                   </DocumentationSection>
                 </TabPanel>)
               }
