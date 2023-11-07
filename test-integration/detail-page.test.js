@@ -67,5 +67,11 @@ describe("an extension details page", () => {
       page.waitForXPath(`//*[text()="Community"]`)
     ).resolves.toBeTruthy()
   })
-  
+
+  it("should show a sponsor", async () => {
+    await expect(
+      page.waitForXPath(`//*[text()="Sponsor"]`)
+    ).resolves.toBeTruthy()
+  })
+
 })
