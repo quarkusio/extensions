@@ -57,14 +57,12 @@ const getContributors = async (org, project, inPath) => {
       }).filter(notBot)
 
       const companies = Object.values(contributors.reduce((acc, user) => {
-        const company = user.company
-        if (company) {
-          if (acc[company]) {
-            acc[company].contributions = acc[company].contributions + user.contributions
-            acc[company].contributors = acc[company].contributors + 1
-          } else {
-            acc[company] = { name: company, contributions: user.contributions, contributors: 1 }
-          }
+        const company = user.company || "Unknown"
+        if (acc[company]) {
+          acc[company].contributions = acc[company].contributions + user.contributions
+          acc[company].contributors = acc[company].contributors + 1
+        } else {
+          acc[company] = { name: company, contributions: user.contributions, contributors: 1 }
         }
         return acc
       }, {}))
