@@ -243,6 +243,20 @@ const getNextPost = (index, posts) => {
   }
 }
 
+exports.onCreateWebpackConfig = ({ actions }) => {
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          use: ["file-loader"],
+        },
+      ],
+    },
+  })
+}
+
+
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
 
@@ -279,4 +293,6 @@ exports.createSchemaCustomization = ({ actions }) => {
   // We use string to represent the timestamp, because otherwise we risk bursting the 32-bit integer limit in graphql
 
   // What's going on with the @link? https://hashinteractive.com/blog/gatsby-data-relationships-with-foreign-key-fields/ explains
+
+
 }

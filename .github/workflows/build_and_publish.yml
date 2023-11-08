@@ -16,8 +16,7 @@ defaults:
 
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: ${{ github.workflow }} # do not allow any concurrency or the different builds will fight for the github rate limit and all take far longer
 
 jobs:
   unit-test:
