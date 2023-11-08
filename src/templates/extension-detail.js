@@ -3,162 +3,37 @@ import { graphql, Link } from "gatsby"
 import { format } from "date-fns"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
-import styled from "styled-components"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
 import InstallationInstructions from "../components/extensions-display/installation-instructions"
-import ExtensionImage from "../components/extension-image"
 import CodeLink from "../components/extensions-display/code-link"
 import { qualifiedPrettyPlatform } from "../components/util/pretty-platform"
 import ContributionsChart from "../components/charts/contributions-chart"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import "react-tabs/style/react-tabs.css"
 import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
+import {
+  AuthorGuidance,
+  ChartHolder,
+  ClosingRule,
+  Columns,
+  DocumentationHeading,
+  DocumentationSection,
+  DuplicateReference,
+  ExtensionDescription,
+  ExtensionDetails,
+  ExtensionName,
+  Filename,
+  Headline,
+  Logo,
+  MainContent,
+  MavenCoordinate,
+  Metadata,
+  SupersededWarning,
+  UnlistedWarning,
+  VisibleLink
+} from "../components/extensions-display/extension-detail-styles"
 
-const ExtensionDetails = styled.main`
-  margin-left: var(--site-margins);
-  margin-right: var(--site-margins);
-  margin-top: var(--a-generous-space);
-  margin-bottom: var(--a-generous-space);
-
-  display: flex;
-  flex-direction: column;
-`
-
-const Headline = styled.header`
-  height: 160px;
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 62px;
-  align-items: center;
-`
-
-const UnlistedWarning = styled.header`
-  padding-left: var(--site-margins);
-  background-color: var(--grey-0);
-  text-align: left;
-  font-size: var(--font-size-24);
-  font-weight: var(--font-weight-bold);
-  color: var(--grey-2);
-  padding-top: var(--a-modest-space);
-  padding-bottom: var(--a-modest-space);
-`
-
-const SupersededWarning = styled.header`
-  padding-left: var(--site-margins);
-  background-color: var(--soft-yellow);
-  text-align: left;
-  font-size: var(--font-size-24);
-  font-weight: var(--font-weight-bold);
-  padding-top: var(--a-modest-space);
-  padding-bottom: var(--a-modest-space);
-`
-
-const Columns = styled.div`
-  display: flex;
-  flex-direction: row;
-`
-
-const LogoImage = styled.div`
-  width: 220px;
-  margin-right: 60px;
-  margin-bottom: 25px;
-  border-radius: 10px;
-  overflow: hidden;
-`
-
-const Metadata = styled.div`
-  flex-grow: 1;
-  padding-left: 30px;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-content: flex-start;
-`
-
-const MainContent = styled.div`
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-`
-
-const ExtensionName = styled.div`
-  text-align: left;
-  font-size: var(--font-size-48);
-  font-weight: var(--font-weight-bold);
-  letter-spacing: 0;
-  color: var(--grey-2);
-  text-transform: uppercase;
-  opacity: 1;
-`
-
-const ExtensionDescription = styled.div`
-  color: var(--grey-2);
-  text-align: left;
-  font-size: var(--font-size-16);
-  opacity: 1;
-  margin-bottom: 3rem;
-  margin-top: 2.5rem;
-  font-weight: var(--font-weight-bold);
-`
-
-const DocumentationSection = styled.section`
-  margin-top: 2.5rem;
-  margin-bottom: 50px;
-`
-
-const DuplicateReference = styled.div``
-const MavenCoordinate = styled.span`
-  font-weight: var(--font-weight-bold);
-`
-
-const VisibleLink = styled.a`
-  &:link {
-    color: var(--link);
-    text-decoration: underline;
-  }
-
-  &:visited {
-    color: var(--link-visited);
-    text-decoration: underline;
-  }
-`
-
-const DocumentationHeading = styled.h2`
-  text-transform: uppercase;
-  font-weight: var(--font-weight-normal);
-  font-size: var(--font-size-24);
-  padding-bottom: 10px;
-`
-
-//  I wish this wasn't here, but we need to set an explicit height for the charts, or the contents don't render at all
-const ChartHolder = styled.div`
-  height: 480px; // For now, an arbitrary height, but we should tune
-`
-
-const Logo = ({ extension }) => {
-  return (
-    <LogoImage>
-      <ExtensionImage extension={extension} size={220} />
-    </LogoImage>
-  )
-}
-
-const AuthorGuidance = styled.div`
-  font-style: italic;
-  padding-top: 2rem;
-`
-
-const Filename = styled.span`
-  font-family: monospace;
-`
-
-const ClosingRule = styled.div`
-  width: 100%;
-  position: relative;
-  top: -1px;
-  padding-left: var(--a-modest-space);
-  border-bottom: 1px solid var(--grey-1);`
 
 // Semi-duplicate the tab headings so we get prettier search strings :)
 const tabs = ["docs", "community"]

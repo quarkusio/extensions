@@ -135,7 +135,8 @@ module.exports = {
         icon: `src/images/quarkus-logo-black-background.png`, // This path is relative to the root of the site.
       },
     },
-    "gatsby-plugin-styled-components", {
+    "gatsby-plugin-styled-components",
+    {
       resolve: `gatsby-plugin-segment-js`,
       options: {
         // segment write key for your production environment
