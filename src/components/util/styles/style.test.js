@@ -30,7 +30,7 @@ describe("the styles helper", () => {
 
     it("fills in very long palettes with shades of grey", () => {
       const palette = getPalette(100)
-      expect(palette[50]).toBe("#7f7f7f")
+      expect(palette[50]).toBe("#808080")
       expect(palette).toContain("#ffffff")
       expect(palette).toContain("#000000")
     })

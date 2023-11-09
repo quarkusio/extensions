@@ -286,7 +286,7 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
     lastUpdated,
     companies
   } = await getContributors(coords.owner, project, scmInfo.extensionPathInRepo) ?? {}
-  scmInfo.contributors = contributors
+  scmInfo.contributorsWithFullCompanyInfo = contributors
   scmInfo.allCompanies = companies
   scmInfo.lastUpdated = lastUpdated
 
@@ -498,6 +498,8 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
 // This combines the sponsor opt-in information (which we only fully have after processing all nodes) with the companies and sponsor information for individual nodes,
 // to get a sanitised list
 exports.createResolvers = ({ createResolvers }) => {
+  const other = "Other"
+
   const resolvers = {
     SourceControlInfo: {
       companies: {
@@ -511,7 +513,6 @@ exports.createResolvers = ({ createResolvers }) => {
 
           // No need to filter on opt-in source, any named company counts
           const nameableCompanies = Array.from(answer?.entries.map(company => company.name?.toLowerCase()))
-          const other = "Other"
 
           // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
           const onlyOptIns = source.allCompanies?.map(company => {
@@ -536,6 +537,28 @@ exports.createResolvers = ({ createResolvers }) => {
           }, [])
 
           return aggregated?.length > 0 ? aggregated : undefined
+        }
+      },
+
+      contributors: {
+        type: "[ContributorInfo]",
+        resolve: async (source, args, context) => {
+
+          const optedInCompanies = await context.nodeModel.findAll({
+              type: `ContributingCompany`
+            },
+          )
+
+          // No need to filter on opt-in source, any named company counts
+          const nameableCompanies = Array.from(optedInCompanies?.entries.map(company => company.name?.toLowerCase()))
+
+          // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
+          return source.contributorsWithFullCompanyInfo?.map(contributor => {
+            const sanitisedName = nameableCompanies.includes(contributor.company?.toLowerCase()) ? contributor.company : other
+            return { ...contributor, company: sanitisedName }
+          })
+
+
         }
       },
 
@@ -580,6 +603,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   type ContributorInfo implements Node @noinfer {
     name: String
     login: String
+    company: String
     contributions: Int
     url: String
   }

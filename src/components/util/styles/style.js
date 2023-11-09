@@ -18,7 +18,8 @@ const getPalette = (n, baseCode) => {
     return [...Array(n).keys()].map(i => baseColour.tint(i * increment).hexString())
   } else {
     // Do a cyclical range of colours, from coloured down to white, then through shades of grey, then black from black to coloured
-    const colouredElements = Math.min(Math.round(n / 3) + 1, 6)
+    // In pie charts, thin widges tend to look white because of the border, no matter what colour we set
+    const colouredElements = Math.max(Math.round(n / 3) + 1, 6)
     const greyElements = n - 2 * colouredElements
     const colouredIncrement = 100 / (2 * colouredElements)
     const greyIncrement = 100 / greyElements

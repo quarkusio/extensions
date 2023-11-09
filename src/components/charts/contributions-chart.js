@@ -7,8 +7,8 @@ import styled from "styled-components"
 const RADIAN = Math.PI / 180
 
 const LegendSwatch = styled.div`
-  height: 12px;
-  width: 12px;
+  height: var(--font-size-10);
+  width: var(--font-size-10);
   border-radius: 3px;
   background-color: ${(props) => props.color};
 `
@@ -27,6 +27,9 @@ const ContributorInformation = styled.li`
   justify-content: space-between;
   color: black;
   column-gap: 0.75rem;
+  font-size: var(--font-size-10);
+  padding: 2px;
+
 `
 
 const Contributor = styled.div`
@@ -47,17 +50,39 @@ const Contributor = styled.div`
   }
 `
 
+// For an easy life, sort companies alphabetically
+const companyComparator = (a, b) => {
+  return a?.localeCompare(b)
+}
+
 const ContributionsChart = (props) => {
   const uncolouredContributors = props.contributors
+  const uncolouredCompanies = props.companies
 
-  if (uncolouredContributors && uncolouredContributors.length > 0) {
+  if (uncolouredContributors?.length > 0) {
     const palette = getPalette(uncolouredContributors.length, props.baseColour)
 
-    const contributors = uncolouredContributors.sort((a, b) => b.contributions - a.contributions).map((contributor, i) => {
+    let companies
+
+    if (uncolouredCompanies?.length > 0) {
+      const companyPalette = getPalette(uncolouredCompanies.length, props.companyColour)
+      companies = uncolouredCompanies.sort((a, b) => b.contributions - a.contributions).map((contributor, i) => {
+        return { ...contributor, fill: companyPalette[i] }
+      })
+      // Now that we have a palette based on contributions, sort again to be alphabetical
+      companies = companies.sort((a, b) => companyComparator(a.name, b.name))
+    }
+
+    const ungroupedContributors = uncolouredContributors.sort((a, b) => b.contributions - a.contributions).map((contributor, i) => {
       return { ...contributor, fill: palette[i] }
     })
 
+    const contributors = ungroupedContributors.sort((a, b) => a.company === b.company ? (b.contributions - a.contributions) : companyComparator(a.company, b.company))
+
     const lotsOfContributors = contributors.length > 8
+
+    const innerRadius = 70
+    const companyRingWidth = 25
 
     //  we set a blank label if there are a small number of contributors, so we get the line, but we define our own
     // text so we can make it black. the offset in the label list is hand-tuned to put the text near the end of the line
@@ -65,15 +90,23 @@ const ContributionsChart = (props) => {
       <ResponsiveContainer width={700} height="100%">
         <PieChart title={"Committers"}
                   desc={`A pie chart showing that ${contributors[0].name} has made the most commits in the past six months.`}>
-          <Pie data={contributors} dataKey="contributions" nameKey="name" innerRadius={80}
+          <Pie data={companies} dataKey="contributions" nameKey="name" innerRadius={innerRadius}
+               outerRadius={innerRadius + companyRingWidth}
+          >
+          </Pie>
+
+          <Pie data={contributors} dataKey="contributions" nameKey="name"
+               innerRadius={innerRadius + companyRingWidth + 5}
                label={lotsOfContributors ? false : () => ""}
           >
+
             {lotsOfContributors ||
               <LabelList position="outside" offset={21} stroke="none"
                          fill="black"
                          content={renderCustomizedLabel} valueAccessor={(p) => p} />}
             }
           </Pie>
+
           {lotsOfContributors && <Legend layout="vertical" align="right" verticalAlign="top"
                                          content={renderLegend} />}
 
@@ -121,7 +154,10 @@ const renderLegend = (props) => {
       <h5>Commits</h5>
       <ContributorList>
         {
-          payload.map((entry, index) => {
+          payload.filter(entry => entry.payload.login) // Filter out companies from the list, by assuming they won't have a login field
+            .sort((a, b) =>
+              b.payload.contributions - a.payload.contributions
+            ).map((entry, index) => {
             const { payload: { name, value }, color } = entry
 
             return (
