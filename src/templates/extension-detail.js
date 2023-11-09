@@ -276,11 +276,9 @@ const ExtensionDetailTemplate = ({
                         (excluding merge commits).</p>)}
 
                     <ChartHolder>
-                      <ContributionsChart contributors={metadata.sourceControl.contributors} baseColour={"#4695EB"} />
-                    </ChartHolder>
-
-                    <ChartHolder>
-                      <ContributionsChart contributors={metadata.sourceControl.companies} baseColour={"#666"} />
+                      <ContributionsChart contributors={metadata.sourceControl.contributors}
+                                          companies={metadata.sourceControl.companies} baseColour={"#4695EB"}
+                                          companyColour={"#666"} />
                     </ChartHolder>
 
                     {metadata?.sourceControl?.companies && (
@@ -523,6 +521,7 @@ export const pageQuery = graphql`
             name
             contributions
             login
+            company
             url
           }
           companies {
