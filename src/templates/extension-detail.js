@@ -424,7 +424,9 @@ const ExtensionDetailTemplate = ({
             <ClosingRule />
 
             <AuthorGuidance>
-              This page was generated from the{" "}
+              Spot a problem? Submit a change to the {name} extension's{" "}
+              <Filename>{extensionYaml}</Filename> and this content will be
+              updated by the next extension release. This page was generated from the{" "}
               <a href="https://quarkus.io/version/main/guides/extension-metadata#quarkus-extension-yaml">
                 extension metadata
               </a>{" "}
@@ -432,9 +434,7 @@ const ExtensionDetailTemplate = ({
               <a href="https://quarkus.io/guides/extension-registry-user">
                 Quarkus registry
               </a>
-              . Spot a problem? Submit a change to the {name} extension's{" "}
-              <Filename>{extensionYaml}</Filename> and this content will be
-              updated by the next extension release.
+              .
             </AuthorGuidance>
           </Metadata>
         </Columns>
