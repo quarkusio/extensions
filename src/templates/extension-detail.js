@@ -270,7 +270,10 @@ const ExtensionDetailTemplate = ({
                     <DocumentationHeading>Recent Contributors</DocumentationHeading>
 
                     {!extensionRootUrl && (
-                      <p>Commits to this extension's repository in the past six months (excluding merge commits).</p>)}
+                      <p>Commits to the <a
+                        href={metadata.sourceControl.url}><code>{metadata.sourceControl.owner}/{metadata.sourceControl.project}</code> repository</a>,
+                        which hosts this extension, in
+                        the past six months (excluding merge commits).</p>)}
                     {extensionRootUrl && (
                       <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
                         (excluding merge commits).</p>)}
@@ -278,7 +281,7 @@ const ExtensionDetailTemplate = ({
                     <ChartHolder>
                       <ContributionsChart contributors={metadata.sourceControl.contributors}
                                           companies={metadata.sourceControl.companies} baseColour={"#4695EB"}
-                                          companyColour={"#666"} />
+                                          companyColour={"#555"} />
                     </ChartHolder>
 
                     {metadata?.sourceControl?.companies && (
@@ -512,6 +515,7 @@ export const pageQuery = graphql`
         }
         sourceControl {
           url
+          owner
           project
           issues
           issuesUrl
