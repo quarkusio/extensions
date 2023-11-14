@@ -1,0 +1,62 @@
+name: Check external links
+
+on:
+  push:
+    branches:
+      [ main ]
+  schedule: ## Do a run once times daily, to catch new regressions
+    - cron: '45 10 * * *'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+
+concurrency:
+  group: ${{ github.workflow }} # do not allow any concurrency or the different builds will risk creating multiple issues
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Get current date
+        id: date
+        run: |
+          echo "month=$(date +'%Y-%m')" >> "$GITHUB_OUTPUT"
+          echo "day=$(date +'%d')" >> "$GITHUB_OUTPUT"
+      - name: Restoring cached GitHub API results
+        uses: actions/cache@v3
+        with:
+          path: |
+            .cache-github-api
+          key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: | # If there are multiple partial matches for a restore key, the action returns the most recently created cache.
+            gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}
+            gatsby-build-github-queries-
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: "npm" # this only caches global dependencies
+      - run: npm ci --prefer-offline
+      - run: npm run build -- ${{ github.ref_name == 'main' && '--prefix-paths' || '' }}
+        env:
+          NODE_ENV: production
+          GATSBY_ACTIVE_ENV: production
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
+      - name: Caching GitHub API results
+        uses: actions/cache/save@v3  # save the cache even if the integration tests fail
+        with:
+          path: |
+            .cache-github-api
+          key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
+      - run: npm run test:links
+        env:
+          CI: true
+          PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
+          PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
+      - name: Store PR id
+        if: "github.event_name == 'pull_request'"
+        run: echo ${{ github.event.number }} > ./public/pr-id.txt

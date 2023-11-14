@@ -95,8 +95,9 @@
     "start": "cp ./node_modules/gatsby-page-utils/dist/apply-trailing-slash-option.js ./node_modules/gatsby-page-utils && gatsby develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "ACTIVE_ENV=test SUPPRESS_ENV_OUTPUT=true jest --testPathIgnorePatterns test-integration/",
-    "test:watch": "ACTIVE_ENV=test SUPPRESS_ENV_OUTPUT=true jest --watch --testPathIgnorePatterns test-integration/",
-    "test:int": "echo '--- Do not forget to run \u001b[1mgatsby build\u001b[0m before running integration tests! ---' && jest --config=jest.integration.config.js test-integration/"
+    "test": "ACTIVE_ENV=test SUPPRESS_ENV_OUTPUT=true jest --testPathIgnorePatterns test-integration/ --testPathIgnorePatterns util/",
+    "test:watch": "ACTIVE_ENV=test SUPPRESS_ENV_OUTPUT=true jest --watch --testPathIgnorePatterns test-integration/ --testPathIgnorePatterns util/",
+    "test:int": "echo '--- Do not forget to run \u001b[1mgatsby build\u001b[0m before running integration tests! ---' && jest --config=jest.integration.config.js test-integration/",
+    "test:links": "echo '--- Do not forget to run \u001b[1mgatsby build\u001b[0m before running integration tests! ---' && jest --config=jest.integration.config.js util/external-links.test.js"
   }
 }
