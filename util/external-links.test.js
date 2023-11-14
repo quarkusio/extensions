@@ -8,12 +8,14 @@ const promiseRetry = require("promise-retry")
 const config = require("../gatsby-config.js")
 const { port } = require("../jest-puppeteer.config").server
 
-describe("site links", () => {
+const pathPrefix = process.env.PATH_PREFIX || ""
+
+describe("site external links", () => {
   const deadExternalLinks = []
   const deadInternalLinks = []
 
   beforeAll(async () => {
-    const path = `http://localhost:${port}/${process.env.PATH_PREFIX}`
+    const path = `http://localhost:${port}/${pathPrefix}`
 
     // create a new `LinkChecker` that we'll use to run the scan.
     const checker = new link.LinkChecker()
@@ -80,9 +82,6 @@ describe("site links", () => {
     })
   })
 
-  it("internal links should all resolve", async () => {
-    expect(deadInternalLinks).toEqual([])
-  })
 
   it("external links should all resolve", async () => {
     expect(deadExternalLinks).toEqual([])
