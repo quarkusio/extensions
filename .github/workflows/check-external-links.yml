@@ -57,6 +57,10 @@ jobs:
           CI: true
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
-      - name: Store PR id
-        if: "github.event_name == 'pull_request'"
-        run: echo ${{ github.event.number }} > ./public/pr-id.txt
+      - name: jbang
+        uses: jbangdev/jbang-action@v0.111.0
+        if: always() # we *especially* want to run this if the link checker failed
+        with:
+          script: util/dead-link-issue.java
+          scriptargs: token="${GITHUB_TOKEN}" issueRepo="${GITHUB_REPOSITORY}"  runId="${GITHUB_RUN_ID}" siteUrl="https://quarkus.io/extensions"
+

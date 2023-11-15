@@ -4,7 +4,7 @@ const link = require("linkinator")
 const status = require("http-status")
 const { curly } = require("node-libcurl")
 const promiseRetry = require("promise-retry")
-
+const fs = require("fs/promises")
 const config = require("../gatsby-config.js")
 const { port } = require("../jest-puppeteer.config").server
 
@@ -14,7 +14,11 @@ describe("site external links", () => {
   const deadExternalLinks = []
   const deadInternalLinks = []
 
+  const resultsFile = "dead-link-check-results.json"
+
   beforeAll(async () => {
+    await fs.rm(resultsFile, { force: true })
+
     const path = `http://localhost:${port}/${pathPrefix}`
 
     // create a new `LinkChecker` that we'll use to run the scan.
@@ -45,6 +49,12 @@ describe("site external links", () => {
           } else {
             if (!deadExternalLinks.includes(description)) {
               deadExternalLinks.push(description)
+
+              // Also write out to a file - the a+ flag will create it if it doesn't exist
+              const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
+              await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
+                console.warn("Error writing results:", err)
+              })
             }
           }
         }
