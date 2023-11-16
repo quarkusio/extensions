@@ -62,4 +62,4 @@ jobs:
         if: always() # we *especially* want to run this if the link checker failed
         with:
           script: util/dead-link-issue.java
-          scriptargs: token="${{ secrets.GITHUB_TOKEN }}" issueRepo="${{ vars.GITHUB_REPOSITORY }}"  runId="${{ vars.GITHUB_RUN_ID }}" siteUrl="https://quarkus.io/extensions"
+          scriptargs: token="${{ secrets.GITHUB_TOKEN }}" issueRepo="${{ github.repository }}"  runId="${{ github.run_id }}" siteUrl="https://quarkus.io/extensions"
