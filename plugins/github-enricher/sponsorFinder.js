@@ -128,7 +128,7 @@ const getContributorsNoCache = async (org, project, inPath) => {
 
       // Normalise company names
       users = await Promise.all(users.map(async user => {
-        const normalisedCompany = await normalizeCompanyName(user.company)
+        const normalisedCompany = await resolveAndNormalizeCompanyName(user.company)
         return { ...user, company: normalisedCompany }
       }))
 
@@ -184,52 +184,59 @@ const findSponsorFromContributorList = async (companies) => {
   return answer.length > 0 ? answer : undefined
 }
 
-const normalizeCompanyName = async (company) => {
+const resolveAndNormalizeCompanyName = async (company) => {
   // Even though we have a company, we need to do postprocessing
 
   if (company) {
-    let companyName
     if (company.startsWith("@")) {
-      companyName = await getCompanyFromGitHubLogin(company.replace("@", ""))
+      return normalizeCompanyName(await getCompanyFromGitHubLogin(company.replace("@", "")))
     } else {
-      // Do some normalisation
-      // This is a bit fragile, and we just have to handle patterns as we discover them
-      companyName = company
-        .replace(", Inc.", "")
-        .replace(", Inc", "")
-        .replace(" Inc", "")
-        .replace("  GmbH", "")
-
-      // The ? makes the match non-greedy
-      const parenthesisMatch = companyName.match(/(.*?) \(.*\)/)
-      if (parenthesisMatch) {
-        companyName = parenthesisMatch[1]
-      }
-
-      const atMatch = companyName.match(/(.*?)( - )?@.*/)
-      if (atMatch) {
-        companyName = atMatch[1]
-      }
-
-      const byMatch = companyName.match(/(.*?) by .*/)
-      if (byMatch) {
-        companyName = byMatch[1]
-      }
-
-      // Special case for some acquisitions
-      companyName = companyName.replace("JBoss", "Red Hat")
-
-      // Special case for some URLs
-      companyName = companyName.replace("https://www.redhat.com/", "Red Hat")
-      companyName = companyName.replace("http://www.redhat.com/", "Red Hat")
+      return normalizeCompanyName(company)
     }
-    // Strip out commas and whitespace
-    companyName = companyName.replace(",", "")
-    companyName = companyName?.trim()
-
-    return companyName
   }
 }
+
+const normalizeCompanyName = (company) => {
+
+  if (!company) return
+
+  // Do some normalisation
+  // This is a bit fragile, and we just have to handle patterns as we discover them
+  let companyName = company
+    .replace(", Inc.", "")
+    .replace(", Inc", "")
+    .replace("  GmbH", "")
+
+  // The ? makes the match non-greedy
+  const parenthesisMatch = companyName.match(/(.*?) \(.*\)/)
+  if (parenthesisMatch) {
+    companyName = parenthesisMatch[1]
+  }
+
+  const atMatch = companyName.match(/(.*?)( - )?@.*/)
+  if (atMatch) {
+    companyName = atMatch[1]
+  }
+
+  const byMatch = companyName.match(/(.*?) by .*/)
+  if (byMatch) {
+    companyName = byMatch[1]
+  }
+
+  // Special case for some acquisitions
+  companyName = companyName.replace("JBoss", "Red Hat")
+
+  // Special case for some URLs
+  companyName = companyName.replace("https://www.redhat.com/", "Red Hat")
+  companyName = companyName.replace("http://www.redhat.com/", "Red Hat")
+
+  // Strip out commas and whitespace
+  companyName = companyName.replace(",", "")
+  companyName = companyName?.trim()
+
+  return companyName
+}
+
 
 const getCompanyFromGitHubLogin = async (company) => {
   if (company) {
@@ -269,6 +276,7 @@ module.exports = {
   saveSponsorCache,
   setMinimumContributorCount,
   setMinimumContributionPercent,
+  resolveAndNormalizeCompanyName,
   normalizeCompanyName,
   findSponsorFromContributorList
 }

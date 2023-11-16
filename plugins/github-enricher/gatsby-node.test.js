@@ -9,7 +9,10 @@ const { getContributors } = require("./sponsorFinder")
 
 jest.mock("gatsby-source-filesystem")
 jest.mock("./github-helper")
-jest.mock("./sponsorFinder")
+jest.mock("./sponsorFinder", () => ({
+  ...jest.requireActual("./sponsorFinder"),
+  getContributors: jest.fn(),
+}))
 
 const contentDigest = "some content digest"
 const createNode = jest.fn()

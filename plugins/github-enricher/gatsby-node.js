@@ -6,7 +6,14 @@ const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { labelExtractor } = require("./labelExtractor")
 const PersistableCache = require("./persistable-cache")
-const { findSponsor, clearCaches, saveSponsorCache, initSponsorCache, getContributors } = require("./sponsorFinder")
+const {
+  findSponsor,
+  clearCaches,
+  saveSponsorCache,
+  initSponsorCache,
+  getContributors,
+  normalizeCompanyName
+} = require("./sponsorFinder")
 const { getRawFileContents, queryGraphQl } = require("./github-helper")
 const yaml = require("js-yaml")
 
@@ -550,7 +557,8 @@ exports.createResolvers = ({ createResolvers }) => {
           )
 
           // No need to filter on opt-in source, any named company counts
-          const nameableCompanies = Array.from(optedInCompanies?.entries.map(company => company.name?.toLowerCase()))
+          // Normalise the company name, since the names in the user record will be normalized
+          const nameableCompanies = Array.from(optedInCompanies?.entries.map(company => normalizeCompanyName(company.name)).map(companyName => companyName.toLowerCase()))
 
           // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
           return source.contributorsWithFullCompanyInfo?.map(contributor => {
@@ -570,10 +578,11 @@ exports.createResolvers = ({ createResolvers }) => {
               type: `ContributingCompany`
             },
           )
-          const namedSponsors = Array.from(answer?.entries.filter(company => company.source !== extensionCatalogContributingCompany).map(company => company.name?.toLowerCase()))
+          const namedSponsors = Array.from(answer?.entries.filter(company => company.source !== extensionCatalogContributingCompany).map(company => normalizeCompanyName(company.name)).map(companyName => companyName?.toLowerCase()))
 
-          // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
-          const filtered = source.allSponsors?.filter(company => namedSponsors && namedSponsors.includes(company.toLowerCase()))
+          // The case should be the same on the opt in list and GitHub info, but do a normalized case-insensitive comparison to be safe
+          // Since this is a filter, we need to use a sync function, but that's ok as we don't need to resolve user ids
+          const filtered = source.allSponsors?.filter(company => namedSponsors && namedSponsors.includes(normalizeCompanyName(company).toLowerCase()))
           return filtered?.length > 0 ? filtered : undefined
         }
       }
