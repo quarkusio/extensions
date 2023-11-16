@@ -74,7 +74,7 @@ class Report implements Runnable {
 
 
         try {
-            final GitHub github = new GitHubBuilder().withOAuthToken(token)
+            final GitHub github = new GitHubBuilder()..withAppInstallationToken(token)
                     .build();
 
             List<DeadLink> links = readTestOutputFile();
