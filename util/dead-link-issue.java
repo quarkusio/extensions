@@ -16,6 +16,8 @@
 
 //usr/bin/env jbang "$0" "$@" ; exit $?
 
+//JAVA 17+
+
 //DEPS org.kohsuke:github-api:1.308
 //DEPS info.picocli:picocli:4.2.0
 
@@ -39,7 +41,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 @Command(name = "report", mixinStandardHelpOptions = true,
-        description = "Takes care of updating an issue depending on the status of the build")
+        description = "Raises and closes issues depending on the results of dead link checking")
 class Report implements Runnable {
 
     // We need a marker to search for, but double quotes are not honoured, and hyphenated terms
@@ -51,8 +53,8 @@ class Report implements Runnable {
     @Option(names = "token", description = "Github token to use when calling the Github API")
     private String token;
 
-    @Option(names = "status", description = "The status of the CI run")
-    private String status;
+    @Option(names = "siteUrl", description = "Base url of the external site ")
+    private String siteUrl;
 
     @Option(names = "issueRepo", description = "The repository where issues should be raised if " +
             "we cannot identify an owning repository (i.e. quarkusio/quarkus)")
@@ -62,20 +64,12 @@ class Report implements Runnable {
             "live repo")
     private boolean dryRun;
 
-    @Option(names = "runId", description = "The ID of the Github Action run for  which we are " +
-            "reporting the CI status")
+    @Option(names = "runId", description = "The ID of the Github Action run")
     private String runId;
 
     @Override
     public void run() {
         try {
-            if ("cancelled".equalsIgnoreCase(status)) {
-                System.out.println("Job status is `cancelled` - exiting");
-                System.exit(0);
-            }
-
-            System.out.println(String.format("The CI build had status %s.", status));
-
             final GitHub github = new GitHubBuilder().withOAuthToken(token)
                     .build();
 
@@ -165,7 +159,7 @@ class Report implements Runnable {
                         This issue was auto-created by the dead link helper. 
                                         
                          --- %s --- Do not remove this line or the dead link helper will not be able to manage this issue
-                         """, link.url, link.owningPage, EYECATCHER);
+                         """, link.url, getOwningPage(link), EYECATCHER);
 
                 if (!dryRun) {
                     repository.createIssue(title)
@@ -189,7 +183,11 @@ class Report implements Runnable {
             throw new UncheckedIOException(e);
         }
     }
-    
+
+    private String getOwningPage(DeadLink link) {
+        return link.owningPage.replace("http://localhost:9000", siteUrl);
+    }
+
     private List<DeadLink> readTestOutputFile() throws IOException {
         Path filePath = FileSystems.getDefault()
                 .getPath(OUTPUT_PATH);
