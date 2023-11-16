@@ -12,14 +12,16 @@ defaults:
   run:
     shell: bash
 
-permissions: write-all # since narrower scopes don't work ...
-
 concurrency:
   group: ${{ github.workflow }} # do not allow any concurrency or the different builds will risk creating multiple issues
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      repository-projects: read
+      statuses: read
     steps:
       - uses: actions/checkout@v3
       - name: Restoring cached GitHub API results
