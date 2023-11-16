@@ -19,6 +19,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      repository-projects: read
+      statuses: read
     steps:
       - uses: actions/checkout@v3
       - name: Get current date
