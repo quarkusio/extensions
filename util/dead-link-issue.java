@@ -69,10 +69,6 @@ class Report implements Runnable {
 
     @Override
     public void run() {
-        System.out.println("Option dump!" + token + " repo " + issueRepo + " url" + siteUrl + "run id " + runId + "sneaky token" + token.toUpperCase());
-        System.out.println("Option dump!" + token.substring(1, 5));
-
-
         try {
             final GitHub github = new GitHubBuilder().withAppInstallationToken(token)
                     .build();
