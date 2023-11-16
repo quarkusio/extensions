@@ -4,7 +4,7 @@ import {
   findSponsorFromContributorList,
   getContributors,
   initSponsorCache,
-  normalizeCompanyName,
+  resolveAndNormalizeCompanyName,
   setMinimumContributionPercent,
   setMinimumContributorCount,
 } from "./sponsorFinder"
@@ -359,48 +359,48 @@ describe("the github sponsor finder", () => {
 
     it("handles the simple case", async () => {
       const name = "Atlantic Octopus Federation"
-      const sponsor = await normalizeCompanyName(name)
+      const sponsor = await resolveAndNormalizeCompanyName(name)
       expect(sponsor).toBe(name)
     })
 
     it("gracefully handles undefined", async () => {
-      const sponsor = await normalizeCompanyName(undefined)
+      const sponsor = await resolveAndNormalizeCompanyName(undefined)
       expect(sponsor).toBeUndefined()
     })
 
     it("normalises a company name with Inc at the end", async () => {
-      const sponsor = await normalizeCompanyName("Red Hat, Inc")
+      const sponsor = await resolveAndNormalizeCompanyName("Red Hat, Inc")
       expect(sponsor).toBe("Red Hat")
     })
 
     it("normalises a company name with Inc. at the end", async () => {
-      const sponsor = await normalizeCompanyName("Red Hat, Inc.")
+      const sponsor = await resolveAndNormalizeCompanyName("Red Hat, Inc.")
       expect(sponsor).toBe("Red Hat")
     })
 
     it("normalises a company name with a 'by' structure at the end", async () => {
-      const sponsor = await normalizeCompanyName("JBoss by Red Hat by IBM")
+      const sponsor = await resolveAndNormalizeCompanyName("JBoss by Red Hat by IBM")
       expect(sponsor).toBe("Red Hat")
     })
 
     it("normalises a company name with an '@' structure at the end", async () => {
-      const sponsor = await normalizeCompanyName("Red Hat @kiegroup")
+      const sponsor = await resolveAndNormalizeCompanyName("Red Hat @kiegroup")
       expect(sponsor).toBe("Red Hat")
     })
 
     it("normalises a company name with a parenthetical structure at the end", async () => {
-      const sponsor = await normalizeCompanyName("Linkare TI (@linkareti)")
+      const sponsor = await resolveAndNormalizeCompanyName("Linkare TI (@linkareti)")
       expect(sponsor).toBe("Linkare TI")
     })
 
     it("normalises a company name with a hyphenated '@' structure at the end", async () => {
-      const sponsor = await normalizeCompanyName("Red Hat - @hibernate")
+      const sponsor = await resolveAndNormalizeCompanyName("Red Hat - @hibernate")
       expect(sponsor).toBe("Red Hat")
     })
 
     it("normalises a company name with several comma-separated clauses", async () => {
       // This case is tricky, because we could tokenise on commas, but we only let people have one company, because otherwise the graph could be chaos.
-      const sponsor = await normalizeCompanyName("Red Hat, @xlate")
+      const sponsor = await resolveAndNormalizeCompanyName("Red Hat, @xlate")
       expect(sponsor).toBe("Red Hat")
     })
   })
