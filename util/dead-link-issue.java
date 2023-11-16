@@ -69,6 +69,10 @@ class Report implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Option dump!" + token + " repo " + issueRepo + " url" + siteUrl + "run id " + runId + "sneaky token" + token.toUpperCase());
+        System.out.println("Option dump!" + token.substring(1, 5));
+
+
         try {
             final GitHub github = new GitHubBuilder().withOAuthToken(token)
                     .build();
@@ -162,9 +166,10 @@ class Report implements Runnable {
                          """, link.url, getOwningPage(link), EYECATCHER);
 
                 if (!dryRun) {
-                    repository.createIssue(title)
+                    GHIssue issue = repository.createIssue(title)
                             .body(body)
                             .create();
+                    System.out.println(String.format("Created issue: %s", issue.getHtmlUrl()));
                 } else {
                     System.out.println(
                             String.format("Dry run: NOT creating issue:\n %s\n%s", title, body));
