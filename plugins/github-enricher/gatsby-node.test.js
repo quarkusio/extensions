@@ -282,7 +282,7 @@ describe("the github data handler", () => {
 
     it("fills in contributor information", async () => {
       expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ contributors: expect.arrayContaining([expect.anything()]) })
+        expect.objectContaining({ contributorsWithFullCompanyInfo: expect.arrayContaining([expect.anything()]) })
       )
     })
 
@@ -1071,7 +1071,7 @@ named-contributing-orgs:
       })
 
 
-      fit("includes companies which have opted in", async () => {
+      it("includes companies which have opted in", async () => {
         const optedIn = [{ name: "Nice Hat" }]
         const param = createResolversFn.mock.calls[0][0]
         // Try and exercise the resolver by drilling down
@@ -1094,7 +1094,7 @@ named-contributing-orgs:
           })
       })
 
-      fit("excludes companies which have not opted in", async () => {
+      it("excludes companies which have not opted in", async () => {
         const optedIn = [{ name: "Another Hat" }]
         const param = createResolversFn.mock.calls[0][0]
         // Try and exercise the resolver by drilling down
@@ -1115,7 +1115,7 @@ named-contributing-orgs:
           }))
       })
 
-      fit("aggregates contributions from excluded companies", async () => {
+      it("aggregates contributions from excluded companies", async () => {
         const optedIn = [{ name: "Nice Hat" }]
         const param = createResolversFn.mock.calls[0][0]
 
@@ -1128,7 +1128,6 @@ named-contributing-orgs:
         }
 
         const contributors = await resolve(source, args, context)
-        console.log("HPLLY ansert ", contributors)
 
         expect(contributors).toHaveLength(2)
         expect(contributors).toContainEqual({
@@ -1139,37 +1138,8 @@ named-contributing-orgs:
       })
     })
 
-
     // TODO test for re-sorting with other? Or do we care?
 
-    describe("when there is a narrow opt-in list", () => {
-
-      describe("when there are companies on both the sponsor and companies list", () => {
-
-
-        it("excludes companies which have not opted in", async () => {
-          const contributors = await getContributors("someorg", "someproject")
-          expect(queryGraphQl).toHaveBeenCalled()
-          expect(contributors.companies).toHaveLength(3)
-          expect(contributors.companies[0]).toStrictEqual({
-            "name": "Other",
-            contributions: 5,
-            contributors: 1
-          })
-          expect(contributors.companies[1]).toStrictEqual({
-            "name": "Red Hat",
-            contributions: 4,
-            contributors: 3
-          })
-          expect(contributors.companies[2]).toStrictEqual({
-            "name": "Tortoise",
-            contributions: 2,
-            contributors: 1
-          })
-        })
-      })
-
-    })
   })
 })
 
