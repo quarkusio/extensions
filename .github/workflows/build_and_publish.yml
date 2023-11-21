@@ -54,6 +54,19 @@ jobs:
           node-version: '18'
           cache: "npm" # this only caches global dependencies
       - run: npm ci --prefer-offline
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            eslintrc:
+              - '.eslint*'
+
+      # run eslint on all files if eslintrc changes
+      - name: Run eslint on changed files
+        if: steps.filter.outputs.eslintrc == 'false'
+        uses: sibiraj-s/action-eslint@v2
+        with:
+          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
       - run: npm run build -- ${{ github.ref_name == 'main' && '--prefix-paths' || '' }}
         env:
           NODE_ENV: production

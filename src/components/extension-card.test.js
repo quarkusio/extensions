@@ -42,11 +42,11 @@ describe("extension card", () => {
       expect(screen.getByText("Latest Version: " + version)).toBeTruthy()
     })
 
-    it("renders the publish date ", () => {
+    it("renders the publish date", () => {
       expect(screen.getByText("Publish Date: Oct 25, 2022")).toBeTruthy()
     })
 
-    it("renders a placeholder image with appropriate source ", async () => {
+    it("renders a placeholder image with appropriate source", async () => {
       const image = screen.getByAltText(
         "A generic image as a placeholder for the extension icon"
       )

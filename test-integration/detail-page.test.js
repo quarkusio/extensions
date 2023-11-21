@@ -24,7 +24,7 @@ describe("an extension details page", () => {
     const greyImage = await page
       .waitForXPath("//img[contains(@alt,\"placeholder\") or contains(@alt,\"generic\")]", { timeout: 2000 })
       .catch(() => {
-        visible = false
+        return false
       })
     expect(greyImage).toBeFalsy()
   })

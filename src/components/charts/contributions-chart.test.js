@@ -16,7 +16,7 @@ describe("the contribution pie chart", () => {
       // With the resizable container, we can't see inside the chart at all, sadly
     })
 
-    xit("renders a committers chart", async () => {
+    it.skip("renders a committers chart", async () => {
       // The committers chart is an svg, not an image, but we can find it by title
       const chartTitle = screen.getByTitle("Committers")
 

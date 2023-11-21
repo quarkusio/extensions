@@ -67,11 +67,10 @@ describe("main site", () => {
 
         await page.waitForXPath("//*[text()=\"GitHub App\"]", { hidden: true })
 
-        let visible = true
         const gitHubApp = await page
           .waitForXPath("//*[text()=\"GitHub App\"]", { timeout: 2000 })
           .catch(() => {
-            visible = false
+            return false
           })
         expect(gitHubApp).toBeFalsy()
       })
