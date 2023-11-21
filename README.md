@@ -30,6 +30,15 @@ nvm use 18
 Information is more complete if a GitHub access token is provided. It should only be granted read access. 
 Set it as an environment variable called `GITHUB_TOKEN`. (In the CI, this will be provided by the platform.)
 
+## Caching 
+
+The site pulls down a lot of content through the GitHub API. 
+A full build of the site will trigger the rate limiter several times. Each time the rate limiter is hit, the build needs to wait an hour for it to roll over.
+Because of this, a fresh build could take two or three hours – be prepared! To build more quickly (but with incomplete information), use the `npm run develop:quickly` command.
+
+The build caches GitHub content in a cache in the `.cache-github-api/` directory, so once a build has been done, subsequent builds should be quicker. 
+Most cache contents have a lifespan of a few days (with some jitter so everything doesn't expire at once).
+
 In one terminal, run tests
 ```
 npm install
@@ -40,6 +49,8 @@ In another terminal, run the site
 ```
 npm run develop
 ```
+
+(or `npm run develop:quickly` if you're in a hurry and don't need all the source control data)
 
 You can then see changes live on http://localhost:8000. 
 
