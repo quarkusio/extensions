@@ -2,7 +2,7 @@ import React from "react"
 import { render, screen, within } from "@testing-library/react"
 import ExtensionDetailTemplate from "./extension-detail"
 import userEvent from "@testing-library/user-event"
-import { useQueryParamString, getQueryParams } from "react-use-query-param-string"
+import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
 
 
 jest.mock("react-use-query-param-string", () => {
@@ -229,7 +229,7 @@ describe("extension detail page", () => {
     })
 
     // With the resizable container, we can't see inside the chart at all, sadly
-    xit("renders a committers chart", async () => {
+    it.skip("renders a committers chart", async () => {
       // The committers chart is an svg, not an image, but we can find it by title
       const chartTitle = screen.getByTitle("Committers")
 
@@ -550,7 +550,7 @@ describe("extension detail page", () => {
       expect(link).toBeNull()
     })
 
-    it("renders a placeholder image with appropriate source ", async () => {
+    it("renders a placeholder image with appropriate source", async () => {
       const image = screen.getByAltText(
         "A generic image as a placeholder for the extension icon"
       )

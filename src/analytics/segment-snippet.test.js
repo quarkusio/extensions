@@ -1,11 +1,10 @@
-import React from "react"
 import { segmentSnippet } from "./segment-snippet"
 
 describe("the segment analytics segment", () => {
-  const { segmentSnippet } = require("./segment-snippet.js")
 
   describe("as a raw string", () => {
     it("includes the correct placeholders", () => {
+      // eslint-disable-next-line no-template-curly-in-string
       expect(segmentSnippet).toContain("${writeKey}")
     })
   })
@@ -15,7 +14,7 @@ describe("the segment analytics segment", () => {
       // stub out other functions in the plugin that get called
       const gatsbySegmentLoad = jest.fn()
       window.gatsbyPluginSegmentPageviewCaller = jest.fn()
-      expect(eval(segmentSnippet))
+      eval(segmentSnippet)
       expect(gatsbySegmentLoad).toHaveBeenCalled()
 
     })
@@ -25,7 +24,7 @@ describe("the segment analytics segment", () => {
       // stub out other functions in the plugin that get called
       const gatsbySegmentLoad = jest.fn()
       window.gatsbyPluginSegmentPageviewCaller = jest.fn()
-      expect(eval(segmentSnippet))
+      eval(segmentSnippet)
       expect(gatsbySegmentLoad).not.toHaveBeenCalled()
     })
   })

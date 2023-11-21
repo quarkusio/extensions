@@ -211,7 +211,7 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(fluffy)
     })
 
-    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+    it("leaves in extensions which match another status filter and filters out extensions which do not match", async () => {
       expect(screen.getByTestId("status-form")).toHaveFormValues({
         status: "",
       })
@@ -265,7 +265,7 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(fluffy)
     })
 
-    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+    it("leaves in extensions which match another status filter and filters out extensions which do not match", async () => {
       expect(screen.getByTestId("status-form")).toHaveFormValues({
         status: "",
       })
@@ -282,7 +282,7 @@ describe("filters bar", () => {
     })
   })
 
-  xdescribe("compatibility filter", () => {
+  describe.skip("compatibility filter", () => {
     const label = "Compatibility"
 
     it("lists all the compatibilities in the menu", async () => {
@@ -303,7 +303,7 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(fluffy)
     })
 
-    it("leaves in extensions which match compatibility filter and filters out extensions which do not match", async () => {
+    it("leaves in extensions which match another compatibility filter and filters out extensions which do not match", async () => {
       expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
         "built-with": "",
       })

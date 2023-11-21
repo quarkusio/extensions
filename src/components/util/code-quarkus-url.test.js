@@ -62,7 +62,7 @@ describe("code quarkus url generator", () => {
   })
 
   it("does not attempt to build a url for unlisted extensions", () => {
-    expect(
+    const url =
       codeQuarkusUrl({
         artifact:
           "io.quarkus:quarkus-elytron-security-common::jar:3.0.0.Alpha3",
@@ -76,7 +76,7 @@ describe("code quarkus url generator", () => {
         ],
         unlisted: true,
       })
-    ).toBeUndefined
+    expect(url).toBeUndefined()
   })
 
   it("does not attempt to build a url for very old streams", () => {

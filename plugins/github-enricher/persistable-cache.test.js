@@ -196,7 +196,7 @@ describe("the persistable cache", () => {
     // Populate data
     cache.set("frog", frog)
 
-    await expect(cache.persist()).rejects.toThrowError(/key/)
+    await expect(cache.persist()).rejects.toThrow(/key/)
   })
 
 

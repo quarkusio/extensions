@@ -5,12 +5,13 @@
  * and adjust the slider to 180 days ago.
  *
  */
-jest.setTimeout(15 * 1000)
-
 import { getContributors } from "./sponsorFinder"
 
+jest.setTimeout(15 * 1000)
+
+
 // Disabled, since this should only be run on special occasions
-xdescribe("real data contributor information", () => {
+describe.skip("real data contributor information", () => {
   beforeEach(() => {
     process.env.GITHUB_TOKEN = "YO, THIS HAS TO BE YOUR TOKEN"
   })

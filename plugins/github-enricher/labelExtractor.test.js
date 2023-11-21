@@ -2,6 +2,7 @@ import { labelExtractor } from "./labelExtractor"
 import { readFile } from "fs/promises"
 
 const testDataYaml = readFile("__mocks__/test-data/quarkus-github-bot.yml")
+// eslint-disable-next-line jest/no-mocks-import
 const repoListing = require("../../__mocks__/test-data/quarkus-repo-listing-from-graphql.json")
 
 describe("the github label extractor", () => {

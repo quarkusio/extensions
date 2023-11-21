@@ -299,7 +299,7 @@ describe("the main gatsby entrypoint", () => {
     })
   })
 
-  describe("for an extension with unlisted set to false", () => {
+  describe("with unlisted set to false", () => {
     const extension = { metadata: { unlisted: false } }
 
     beforeAll(async () => {

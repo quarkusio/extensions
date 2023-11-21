@@ -1,3 +1,5 @@
+/* eslint no-template-curly-in-string: 0 */
+
 // This is the segment snippet, with a few modifications
 // The write key is parameterised for the gatsby plugin
 // We check do not track and do not load anything if do not track is true

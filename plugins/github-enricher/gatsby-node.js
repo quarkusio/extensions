@@ -90,7 +90,7 @@ exports.onPreBootstrap = async () => {
   return yaml
 }
 
-exports.onPostBootstrap = async ({}) => {
+exports.onPostBootstrap = async () => {
   await imageCache.persist()
   console.log("Persisted", imageCache.size(), "cached repository images.")
 
@@ -580,6 +580,22 @@ exports.createResolvers = ({ createResolvers }) => {
     }
   }
   createResolvers(resolvers)
+}
+
+const ESLintPlugin = require("eslint-webpack-plugin")
+
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  if (stage === "develop") {
+    actions.setWebpackConfig({
+      plugins: [
+        new ESLintPlugin({
+          extensions: ["js", "jsx", "ts", "tsx"], // | [, "md", "mdx"] or any other files
+          emitWarning: true,
+          failOnError: false,
+        }),
+      ],
+    })
+  }
 }
 
 exports.createSchemaCustomization = ({ actions }) => {

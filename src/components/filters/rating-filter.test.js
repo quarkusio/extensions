@@ -7,7 +7,7 @@ describe("rating filter", () => {
     render(<RatingFilter />)
   })
 
-  xit("renders a title", () => {
+  it.skip("renders a title", () => {
     expect(screen.getByText("Rating")).toBeTruthy()
   })
 })

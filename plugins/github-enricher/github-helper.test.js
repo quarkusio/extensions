@@ -33,7 +33,7 @@ describe("the github helper", () => {
           body: expect.stringMatching(query),
         })
       )
-      expect(fetch).toBeCalledTimes(1)
+      expect(fetch).toHaveBeenCalledTimes(1)
     })
 
     it("adds pagination requests", async () => {
@@ -41,7 +41,7 @@ describe("the github helper", () => {
       const queryWithPagination = /query\s*{.*\s*information\(\){\spageInfo {\s*hasNextPage\s*endCursor\s*}\s*edges {\s*bla bla bla}/
 
       await queryGraphQl(query)
-      expect(fetch).toBeCalledTimes(1)
+      expect(fetch).toHaveBeenCalledTimes(1)
       expect(sortOutEscapinginQueryString(fetch.mock.calls[0][1].body)).toMatch(queryWithPagination)
     })
 
@@ -141,7 +141,7 @@ describe("the github helper", () => {
         const queryWithSecondPageReference = /query {.*\s*holder\s*{\s*information\(after: "YHGMADEUP=="\)/
 
         await queryGraphQl(query)
-        expect(fetch).toBeCalledTimes(3)
+        expect(fetch).toHaveBeenCalledTimes(3)
         expect(sortOutEscapinginQueryString(fetch.mock.calls[0][1].body)).toMatch(queryWithPagination)
         expect(sortOutEscapinginQueryString(fetch.mock.calls[1][1].body)).toMatch(queryWithPageReference)
 
@@ -158,7 +158,7 @@ describe("the github helper", () => {
         const queryWithSecondPageReference = /query {.*\s*holder\s*{\s*information\(after: "YHGMADEUP==", since: something\)/
 
         await queryGraphQl(query)
-        expect(fetch).toBeCalledTimes(3)
+        expect(fetch).toHaveBeenCalledTimes(3)
         expect(sortOutEscapinginQueryString(fetch.mock.calls[0][1].body)).toMatch(queryWithPagination)
         expect(sortOutEscapinginQueryString(fetch.mock.calls[1][1].body)).toMatch(queryWithPageReference)
         // On the third call, it needs to strip out the earlier after and add the new one
