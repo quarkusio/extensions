@@ -14,6 +14,7 @@ const RATE_LIMIT_PREQUERY = `rateLimit {
   }`
 
 let resetTime
+const allowSlowBuild = !process.env.DONT_WAIT
 
 // We can add more errors we know are non-recoverable here, which should help build times
 const isRecoverableError = (ghBody, params) => {
@@ -46,13 +47,15 @@ async function tolerantFetch(url, params, isSuccessful, getContents) {
         if (!isSuccessful(ghBody) && isRecoverableError(ghBody, params)) {
           const responseString = JSON.stringify(ghBody)
 
-          if (responseString?.includes("RATE_LIMITED") && resetTime) {
+          if (allowSlowBuild && responseString?.includes("RATE_LIMITED") && resetTime) {
             console.warn("Hit the rate limit. Waiting until", resetTime)
             await waitUntil(resetTime)
           }
-          retry(
-            `Unsuccessful GitHub fetch for ${url} - response is ${responseString}`
-          )
+          if (allowSlowBuild) {
+            retry(
+              `Unsuccessful GitHub fetch for ${url} - response is ${responseString}`
+            )
+          }
         }
         return ghBody
       },
