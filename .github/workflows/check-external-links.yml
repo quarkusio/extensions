@@ -1,10 +1,7 @@
 name: Check external links
 
 on:
-  push:
-    branches:
-      [ main ]
-  schedule: ## Do a run once times daily, to catch new regressions
+  schedule: ## Do a run once daily, to catch new regressions
     - cron: '45 10 * * *'
   workflow_dispatch:
 
@@ -13,7 +10,7 @@ defaults:
     shell: bash
 
 concurrency:
-  group: ${{ github.workflow }} # do not allow any concurrency or the different builds will risk creating multiple issues
+  group: uses-github-api # do not allow any concurrency or the different builds will risk creating multiple issues
 
 jobs:
   build:
