@@ -206,7 +206,7 @@ const createContributingCompanies = async ({ actions, createNodeId, createConten
     }, { sponsor: company, source: extensionCatalogContributingCompany }))
 
   } else {
-    console.warn("Could not fetch sponsor opt in information from", url, ". Does the file exist?")
+    console.warn("Could not fetch sponsor opt in information from", org, repo, path, ". Does the file exist?")
   }
 }
 
@@ -589,6 +589,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     url: String
     ownerImageUrl: String
     extensionYamlUrl: String
+    extensionRootUrl: String
     issues: String
     lastUpdated: String
     contributors: [ContributorInfo]
