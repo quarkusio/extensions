@@ -49,11 +49,14 @@ jobs:
           restore-keys: | # If there are multiple partial matches for a restore key, the action returns the most recently created cache.
             gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}
             gatsby-build-github-queries-
+
       - uses: actions/setup-node@v3
         with:
           node-version: '18'
           cache: "npm" # this only caches global dependencies
+
       - run: npm ci --prefer-offline
+
       - uses: dorny/paths-filter@v2
         id: filter
         with:
@@ -63,16 +66,17 @@ jobs:
 
       # run eslint on all files if eslintrc changes
       - name: Run eslint on changed files
-        if: steps.filter.outputs.eslintrc == 'false'
         uses: sibiraj-s/action-eslint@v2
         with:
           all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
+
       - run: npm run build -- ${{ github.ref_name == 'main' && '--prefix-paths' || '' }}
         env:
           NODE_ENV: production
           GATSBY_ACTIVE_ENV: production
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
+
       - name: Caching GitHub API results
         uses: actions/cache/save@v3  # save the cache even if the integration tests fail
         with:
