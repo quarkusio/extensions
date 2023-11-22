@@ -58,7 +58,7 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.1.4",
-    "@testing-library/react": "^14.1.0",
+    "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.4.3",
     "babel-jest": "^29.6.2",
     "babel-plugin-styled-components": "^2.1.4",
