@@ -193,7 +193,7 @@ class Report implements Runnable {
     private List<DeadLink> readTestOutputFile() throws IOException {
         Path filePath = FileSystems.getDefault()
                 .getPath(OUTPUT_PATH);
-        if File.exists(filePath) {
+        if (File.exists(filePath)) {
             return Files.lines(filePath)
                     .map(line -> {
                         try {
