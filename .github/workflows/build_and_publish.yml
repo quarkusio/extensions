@@ -57,19 +57,6 @@ jobs:
 
       - run: npm ci --prefer-offline
 
-      - uses: dorny/paths-filter@v2
-        id: filter
-        with:
-          filters: |
-            eslintrc:
-              - '.eslint*'
-
-      # run eslint on all files if eslintrc changes
-      - name: Run eslint on changed files
-        uses: sibiraj-s/action-eslint@v3
-        with:
-          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
-
       - run: npm run build -- ${{ github.ref_name == 'main' && '--prefix-paths' || '' }}
         env:
           NODE_ENV: production
@@ -83,20 +70,37 @@ jobs:
           path: |
             .cache-github-api
           key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
+          
       - run: npm run test:int
         env:
           CI: true
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            eslintrc:
+              - '.eslint*'
+
+      # run eslint on all files if eslintrc changes
+      - name: Run eslint on changed files
+        uses: sibiraj-s/action-eslint@v3
+        with:
+          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}    
+          
       - name: Store PR id
         if: "github.event_name == 'pull_request'"
         run: echo ${{ github.event.number }} > ./public/pr-id.txt
+        
       - name: Publishing directory for site deployment
         uses: actions/upload-artifact@v3
         with:
           name: site
           path: ./public
           retention-days: 3
+          
   deploy:
     # Only try and deploy on merged code
     if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
