@@ -223,6 +223,8 @@ const normalizeCompanyName = async (company) => {
       companyName = companyName.replace("https://www.redhat.com/", "Red Hat")
       companyName = companyName.replace("http://www.redhat.com/", "Red Hat")
     }
+    // Strip out commas and whitespace
+    companyName = companyName.replace(",", "")
     companyName = companyName?.trim()
 
     return companyName
