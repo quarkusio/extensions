@@ -397,6 +397,12 @@ describe("the github sponsor finder", () => {
       const sponsor = await normalizeCompanyName("Red Hat - @hibernate")
       expect(sponsor).toBe("Red Hat")
     })
+
+    it("normalises a company name with several comma-separated clauses", async () => {
+      // This case is tricky, because we could tokenise on commas, but we only let people have one company, because otherwise the graph could be chaos.
+      const sponsor = await normalizeCompanyName("Red Hat, @xlate")
+      expect(sponsor).toBe("Red Hat")
+    })
   })
 
   describe("listing all contributors", () => {
