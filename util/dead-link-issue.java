@@ -39,6 +39,7 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.Collections;
 
 @Command(name = "report", mixinStandardHelpOptions = true,
         description = "Raises and closes issues depending on the results of dead link checking")
@@ -192,15 +193,19 @@ class Report implements Runnable {
     private List<DeadLink> readTestOutputFile() throws IOException {
         Path filePath = FileSystems.getDefault()
                 .getPath(OUTPUT_PATH);
-        return Files.lines(filePath)
-                .map(line -> {
-                    try {
-                        return new ObjectMapper().readValue(line, DeadLink.class);
-                    } catch (JsonProcessingException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .toList();
+        if File.exists(filePath) {
+            return Files.lines(filePath)
+                    .map(line -> {
+                        try {
+                            return new ObjectMapper().readValue(line, DeadLink.class);
+                        } catch (JsonProcessingException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .toList();
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     public static void main(String... args) {
