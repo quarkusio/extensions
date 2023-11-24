@@ -203,6 +203,10 @@ const ExtensionDetailTemplate = ({
   // Honour manual overrides of the sponsor
   const sponsors = metadata?.sponsors || metadata?.sponsor || metadata.sourceControl?.sponsors
 
+  const extensionCount = metadata?.sourceControl?.repository?.extensionCount
+
+  const alongWith = extensionCount > 1 ? `, along with ${extensionCount} other extensions,` : ""
+
   return (
     <Layout location={location}>
       <BreadcrumbBar name={name} />
@@ -271,8 +275,8 @@ const ExtensionDetailTemplate = ({
 
                     {!extensionRootUrl && (
                       <p>Commits to the <a
-                        href={metadata.sourceControl.url}><code>{metadata.sourceControl.owner}/{metadata.sourceControl.project}</code> repository</a>,
-                        which hosts this extension, in
+                        href={metadata.sourceControl.url}><code>{metadata.sourceControl.repository.owner}/{metadata.sourceControl.repository.project}</code> repository</a>,
+                        which hosts this extension{alongWith} in
                         the past six months (excluding merge commits).</p>)}
                     {extensionRootUrl && (
                       <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
@@ -409,10 +413,10 @@ const ExtensionDetailTemplate = ({
                       ? "git-alt"
                       : undefined,
                 // If we don't have a project name, still show a url label, but if we don't have a url, don't show a label
-                text: extension.metadata?.sourceControl?.project
-                  ? extension.metadata?.sourceControl?.project
-                  : extension.metadata?.sourceControl?.url ? "source" : undefined,
-                url: extension.metadata?.sourceControl?.url,
+                text: extension.metadata?.sourceControl?.repository?.project
+                  ? extension.metadata?.sourceControl?.repository?.project
+                  : extension.metadata?.sourceControl?.repository?.url ? "source" : undefined,
+                url: extension.metadata?.sourceControl?.repository?.url,
               }}
             />
             <ExtensionMetadata
@@ -514,9 +518,12 @@ export const pageQuery = graphql`
           timestamp
         }
         sourceControl {
-          url
-          owner
-          project
+          repository {
+            url
+            owner
+            project
+            extensionCount
+          }
           issues
           issuesUrl
           sponsors

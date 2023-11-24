@@ -1,6 +1,7 @@
 const gh = require("parse-github-url")
 const path = require("path")
 const encodeUrl = require("encodeurl")
+const { createRepository, getResolvers } = require("./repository-creator")
 
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
@@ -143,6 +144,12 @@ exports.onCreateNode = async (
   const scmUrl = id?.split(",")[0]
 
   if (scmUrl) {
+
+    const coords = gh(scmUrl)
+
+    const project = coords.name
+    const owner = coords.owner
+
     const labels = await fetchScmLabel(scmUrl, node.metadata?.maven?.artifactId)
 
     const scmInfo = await fetchScmInfo(
@@ -151,6 +158,9 @@ exports.onCreateNode = async (
       node.metadata?.maven?.artifactId,
       labels
     )
+
+    createRepository({ actions, createNodeId, createContentDigest }, { url: scmUrl, project, owner })
+    scmInfo.repository = scmUrl
 
     scmInfo.id = createNodeId(id)
     // We need a non-obfuscated version of the id to act as a foreign key
@@ -242,23 +252,18 @@ const fetchScmInfo = async (scmUrl, groupId, artifactId, labels) => {
   if (scmUrl && scmUrl.includes("github.com")) {
     return fetchGitHubInfo(scmUrl, groupId, artifactId, labels)
   } else {
-    return { url: scmUrl }
+    return {}
   }
 }
 
 
 const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
-
   const coords = gh(scmUrl)
-
   const project = coords.name
-
-  const scmInfo = { url: scmUrl, project }
 
   const { issuesUrl, issues } = await getIssueInformation(coords, labels, scmUrl)
 
-  scmInfo.issuesUrl = issuesUrl
-  scmInfo.issues = issues
+  const scmInfo = { issuesUrl, issues }
 
   scmInfo.labels = labels
 
@@ -296,8 +301,6 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   scmInfo.contributorsWithFullCompanyInfo = contributors
   scmInfo.allCompanies = companies
   scmInfo.lastUpdated = lastUpdated
-
-  scmInfo.owner = coords.owner
 
   return scmInfo
 }
@@ -508,6 +511,7 @@ exports.createResolvers = ({ createResolvers }) => {
   const other = "Other"
 
   const resolvers = {
+    ...getResolvers(),
     SourceControlInfo: {
       companies: {
         type: "[CompanyContributorInfo]",
@@ -591,27 +595,11 @@ exports.createResolvers = ({ createResolvers }) => {
   createResolvers(resolvers)
 }
 
-const ESLintPlugin = require("eslint-webpack-plugin")
-
-exports.onCreateWebpackConfig = ({ stage, actions }) => {
-  if (stage === "develop") {
-    actions.setWebpackConfig({
-      plugins: [
-        new ESLintPlugin({
-          extensions: ["js", "jsx", "ts", "tsx"], // | [, "md", "mdx"] or any other files
-          emitWarning: true,
-          failOnError: false,
-        }),
-      ],
-    })
-  }
-}
-
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
   const typeDefs = `
   type SourceControlInfo implements Node @noinfer {
-    url: String
+    repository: Repository @link(by: "url")
     ownerImageUrl: String
     extensionYamlUrl: String
     extensionRootUrl: String
@@ -624,6 +612,12 @@ exports.createSchemaCustomization = ({ actions }) => {
     allSponsors: [String]
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
+  }
+  
+  type Repository implements Node {
+    url: String
+    owner: String
+    project: String
   }
   
   type ContributorInfo implements Node @noinfer {
