@@ -10,6 +10,7 @@ const { extensionSlug } = require("./src/components/util/extension-slugger")
 const { generateMavenInfo } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
+const ESLintPlugin = require("eslint-webpack-plugin")
 
 exports.sourceNodes = async ({
                                actions,
@@ -243,8 +244,20 @@ const getNextPost = (index, posts) => {
   }
 }
 
-exports.onCreateWebpackConfig = ({ actions }) => {
+exports.onCreateWebpackConfig = ({ stage, actions }) => {
+  let plugins
+  if (stage === "develop") {
+    plugins = [
+      new ESLintPlugin({
+        extensions: ["js", "jsx", "ts", "tsx"], // | [, "md", "mdx"] or any other files
+        emitWarning: true,
+        failOnError: false,
+      }),
+    ]
+  }
+
   actions.setWebpackConfig({
+    plugins,
     module: {
       rules: [
         {

@@ -53,9 +53,11 @@ describe("extension detail page", () => {
           timestamp: "1666716560000",
         },
         sourceControl: {
-          url: gitUrl,
+          repository: {
+            url: gitUrl,
+            project: "jproject",
+          },
           issuesUrl: "https://github.com/someorg/someproject/issues",
-          project: "jproject",
           issues: 839,
           sponsors: ["Automatically Calculated Sponsor"],
           lastUpdated: "1698924315702",
@@ -309,9 +311,11 @@ describe("extension detail page", () => {
       metadata: {
         sponsors: ["Manual Sponsor Override"],
         sourceControl: {
-          url: gitUrl,
+          repository: {
+            url: gitUrl,
+            project: "jproject",
+          },
           issuesUrl: "https://github.com/someorg/someproject/issues",
-          project: "jproject",
           issues: 839,
           sponsors: ["Automatically Calculated Sponsor"],
           ownerImage: {
@@ -352,9 +356,10 @@ describe("extension detail page", () => {
       metadata: {
         sponsors: "Manual Sponsor Override",
         sourceControl: {
-          url: gitUrl,
+          repository: {
+            url: gitUrl, project: "jproject",
+          },
           issuesUrl: "https://github.com/someorg/someproject/issues",
-          project: "jproject",
           issues: 839,
           sponsors: ["Automatically Calculated Sponsor"],
           ownerImage: {
@@ -395,9 +400,11 @@ describe("extension detail page", () => {
       metadata: {
         sponsor: "Manual Sponsor Override",
         sourceControl: {
-          url: gitUrl,
+          repository: {
+            url: gitUrl,
+            project: "jproject",
+          },
           issuesUrl: "https://github.com/someorg/someproject/issues",
-          project: "jproject",
           issues: 839,
           sponsors: ["Automatically Calculated Sponsor"],
           ownerImage: {

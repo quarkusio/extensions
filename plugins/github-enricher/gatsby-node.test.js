@@ -6,9 +6,11 @@ const { onCreateNode, onPreBootstrap, onPluginInit, sourceNodes, createResolvers
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { queryGraphQl, getRawFileContents, queryRest } = require("./github-helper")
 const { getContributors } = require("./sponsorFinder")
+const { createRepository } = require("./repository-creator")
 
 jest.mock("gatsby-source-filesystem")
 jest.mock("./github-helper")
+jest.mock("./repository-creator")
 jest.mock("./sponsorFinder", () => ({
   ...jest.requireActual("./sponsorFinder"),
   getContributors: jest.fn(),
@@ -27,6 +29,10 @@ const cache = { get: jest.fn() }
 describe("the github data handler", () => {
   beforeAll(() => {
     createRemoteFileNode.mockReturnValue({ absolutePath: "/hi/there/path.ext" })
+
+    // Suppress the chatter about caching
+    jest.spyOn(console, "log").mockImplementation(() => {
+    })
   })
 
   afterAll(() => {
@@ -69,6 +75,12 @@ describe("the github data handler", () => {
       expect(queryRest).not.toHaveBeenCalled()
       expect(getRawFileContents).not.toHaveBeenCalled()
     })
+
+
+    it("does not creates a repository node", async () => {
+      expect(createRepository).not.toHaveBeenCalled()
+    })
+
   })
 
   describe("for an extension with an explicit sponsor listed", () => {
@@ -227,6 +239,17 @@ describe("the github data handler", () => {
       )
     })
 
+
+    it("creates a repository node", async () => {
+      expect(createRepository).toHaveBeenCalledWith(expect.anything(),
+        expect.objectContaining({
+          url: url,
+          project: projectName,
+          owner: ownerName
+        })
+      )
+    })
+
     it("sets the type", async () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -244,7 +267,7 @@ describe("the github data handler", () => {
     })
 
     it("copies across the url", async () => {
-      expect(createNode).toHaveBeenCalledWith(expect.objectContaining({ url }))
+      expect(createNode).toHaveBeenCalledWith(expect.objectContaining({ repository: url }))
     })
 
     it("fills in an issues url", async () => {
@@ -259,17 +282,6 @@ describe("the github data handler", () => {
       )
     })
 
-    it("fills in a project name", async () => {
-      expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ project: projectName })
-      )
-    })
-
-    it("fills in the owner name", async () => {
-      expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ owner: ownerName })
-      )
-    })
 
     it("fills in an issue count", async () => {
       expect(createNode).toHaveBeenCalledWith(
@@ -472,8 +484,6 @@ describe("the github data handler", () => {
   })
 
   describe("where a label should be used", () => {
-    const projectName = "quarkus"
-    const ownerName = "quarkusio"
     const url = "https://github.com/quarkusio/quarkus"
     const issuesUrl =
       url +
@@ -586,7 +596,7 @@ describe("the github data handler", () => {
     })
 
     it("copies across the url", async () => {
-      expect(createNode).toHaveBeenCalledWith(expect.objectContaining({ url }))
+      expect(createNode).toHaveBeenCalledWith(expect.objectContaining({ repository: url }))
     })
 
     it("fills in an issues url", async () => {
@@ -598,18 +608,6 @@ describe("the github data handler", () => {
     it("fills in an image with the owner avatar", async () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({ ownerImageUrl: avatarUrl })
-      )
-    })
-
-    it("fills in a project name", async () => {
-      expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ project: projectName })
-      )
-    })
-
-    it("fills in the owner name", async () => {
-      expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ owner: ownerName })
       )
     })
 
