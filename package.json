@@ -57,7 +57,7 @@
     "yaml-jest": "^1.2.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/jest-dom": "^6.1.5",
     "@testing-library/react": "^14.1.2",
     "@testing-library/user-event": "^14.4.3",
     "babel-jest": "^29.6.2",
