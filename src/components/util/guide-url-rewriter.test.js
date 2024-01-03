@@ -1,7 +1,8 @@
 import { rewriteGuideUrl } from "./guide-url-rewriter"
 
 const urlExist = require("url-exist")
-jest.mock("url-exist")
+
+jest.mock("url-exist", () => jest.fn())
 
 describe("the guide url rewriter", () => {
   beforeEach(() => {
