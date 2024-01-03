@@ -222,7 +222,7 @@ describe("extension detail page", () => {
     it("has last updated information on the community tab", async () => {
       const tab = screen.getAllByText("Community")[1] // get the last element, which should be second
       await user.click(tab)
-      const year = new Date().getFullYear()
+      const year = "2023"
       const lastUpdated = screen.getByText(/last updated/i)
       expect(lastUpdated).toBeTruthy()
 
