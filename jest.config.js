@@ -16,6 +16,7 @@ module.exports = {
     ], // Workaround for https://github.com/facebook/jest/issues/9771
   },
   testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
+  // Add ESM dependencies into the group in this pattern
   transformIgnorePatterns: [
     `<rootDir>/node_modules/(?!(rehype-react|gatsby)/)`,
   ],
