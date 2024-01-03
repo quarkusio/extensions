@@ -65,7 +65,13 @@ module.exports = {
         ],
       },
     },
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-transformer-sharp`,
+      options: {
+        // Suppress warnings about childImageSharp being null for svgs
+        checkSupportedExtensions: false,
+      },
+    },
     {
       resolve: `gatsby-plugin-sharp`,
       options: {
