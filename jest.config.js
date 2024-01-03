@@ -18,7 +18,7 @@ module.exports = {
   testPathIgnorePatterns: [`node_modules`, `\\.cache`, `<rootDir>.*/public`],
   // Add ESM dependencies into the group in this pattern
   transformIgnorePatterns: [
-    `<rootDir>/node_modules/(?!(rehype-react|gatsby)/)`,
+    `<rootDir>/node_modules/(?!(rehype-react|url-exist|is-url-superb|ky-universal|ky|gatsby)/)`,
   ],
   globals: {
     __PATH_PREFIX__: ``,

@@ -1,6 +1,11 @@
-const urlExist = require("url-exist")
-
 const rewriteGuideUrl = async ({ name, metadata }) => {
+  // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
+  // A simple property read won't work
+  const {
+    default: urlExist,
+  } = await import("url-exist")
+
+
   const exists = metadata?.guide && (await urlExist(metadata.guide))
   const originalLink = metadata?.guide
   // In general, links should be valid. However, relax that requirement for deprecated extensions because

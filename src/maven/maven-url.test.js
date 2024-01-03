@@ -1,5 +1,6 @@
 const urlExist = require("url-exist")
-jest.mock("url-exist")
+
+jest.mock("url-exist", () => jest.fn().mockReturnValue(true))
 
 const {
   createMavenUrlFromCoordinates,

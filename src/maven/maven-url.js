@@ -1,4 +1,3 @@
-const urlExist = require("url-exist")
 const parse = require("mvn-artifact-name-parser").default
 
 const createMavenUrlFromArtifactString = async artifact => {
@@ -10,6 +9,13 @@ const createMavenUrlFromArtifactString = async artifact => {
 }
 
 const createMavenUrlFromCoordinates = async coordinates => {
+
+  // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
+  // A simple property read won't work
+  const {
+    default: urlExist,
+  } = await import("url-exist")
+
   // We prefer the newer, central.sonatype links, but publishing glitches mean some extensions don't show in sonatype central
   const url = `https://central.sonatype.com/artifact/${coordinates.groupId}/${coordinates.artifactId}/${coordinates.version}/jar`
   const exists = await urlExist(url)
@@ -24,7 +30,12 @@ const createMavenUrlFromCoordinates = async coordinates => {
 
 const createMavenArtifactsUrlFromCoordinates = async coordinates => {
   const pathifiedGroupId = coordinates.groupId?.replace(/\./g, "/")
-
+  // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
+  // A simple property read won't work
+  const {
+    default: urlExist,
+  } = await import("url-exist")
+  
   const url = `https://repo1.maven.org/maven2/${pathifiedGroupId}/${coordinates.artifactId}/${coordinates.version}/${coordinates.artifactId}-${coordinates.version}.pom`
   const exists = await urlExist(url)
   if (exists) {
