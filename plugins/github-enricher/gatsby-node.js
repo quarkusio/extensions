@@ -33,10 +33,10 @@ let getLabels
 exports.onPreBootstrap = async () => {
   imageCache = new PersistableCache({ key: "github-api-for-images", stdTTL: 3 * DAY_IN_SECONDS })
 
-// The location of extension files is unlikely to change often, and if it does, the link checker will flag the issue
+// The location of extension files changes relatively often as extensions get moved or deprecated; to avoid publishing dead links, check often
   extensionYamlCache = new PersistableCache({
     key: "github-api-for-extension-metadata-paths",
-    stdTTL: 10 * DAY_IN_SECONDS
+    stdTTL: 0.8 * DAY_IN_SECONDS
   })
 
   issueCountCache = new PersistableCache({
