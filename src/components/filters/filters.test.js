@@ -4,6 +4,19 @@ import Filters from "./filters"
 import selectEvent from "react-select-event"
 import userEvent from "@testing-library/user-event"
 
+let mockQueryParamSearchString = undefined
+
+jest.mock("react-use-query-param-string", () => {
+
+  const original = jest.requireActual("react-use-query-param-string")
+  return {
+    ...original,
+    useQueryParamString: jest.fn().mockImplementation(() => [mockQueryParamSearchString, jest.fn().mockImplementation((val) => mockQueryParamSearchString = val), true]),
+    getQueryParams: jest.fn().mockReturnValue({ "search-regex": mockQueryParamSearchString })
+
+  }
+})
+
 describe("filters bar", () => {
   let newExtensions
   const extensionsListener = jest.fn(extensions => (newExtensions = extensions))
@@ -51,6 +64,7 @@ describe("filters bar", () => {
   const categories = ["moose", "skunks", "lynx"]
 
   beforeEach(() => {
+    mockQueryParamSearchString = undefined
     render(
       <Filters
         extensions={extensions}

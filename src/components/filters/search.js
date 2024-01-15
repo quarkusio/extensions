@@ -1,7 +1,9 @@
 import * as React from "react"
+import { useEffect } from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
+import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
 
 const Element = styled.div`
   display: flex;
@@ -10,7 +12,7 @@ const Element = styled.div`
   align-items: center;
 `
 
-const SearchBox = styled.form`
+const SearchBox = styled.div`
   border: 1px solid var(--grey-1);
   height: 36px;
   width: 224px;
@@ -38,10 +40,26 @@ const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
   margin-right: var(--a-vsmall-space);
 `
 
+const key = "search-regex"
+
 const Search = ({ searcher: listener }) => {
   const onInputChange = e => {
+    if (e.target.value !== realSearchText) {
+      setSearchText(e.target.value)
+    }
+    //  Make sure the listener knows about the right values, even before any re-render
     listener(e.target.value)
   }
+
+  const [searchText, setSearchText, initialized] = useQueryParamString(key, undefined, true)
+  const realSearchText = initialized ? searchText : getQueryParams() ? getQueryParams()[key] : undefined
+
+  useEffect(() => {  // Make sure that even if the url is pasted in a browser, the list updates with the right value
+    if (realSearchText && realSearchText.length > 0) {
+      listener(realSearchText)
+    }
+  })
+
 
   return (
     <Element>
@@ -49,10 +67,11 @@ const Search = ({ searcher: listener }) => {
         <PaddedIcon icon={faSearch} />
 
         <Input
-          id="search-regex"
-          name="search-regex"
+          id={key}
+          name={key}
           placeholder="Find an extension"
           onChange={onInputChange}
+          defaultValue={realSearchText}
         />
       </SearchBox>
     </Element>
