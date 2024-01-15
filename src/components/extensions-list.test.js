@@ -60,8 +60,13 @@ describe("extension list", () => {
 
   const user = userEvent.setup()
 
-  beforeEach(() => {
+  beforeEach(async () => {
     render(<ExtensionsList extensions={extensions} categories={categories} />)
+
+    // Clear any search text (it might be simpler to just clear the query string
+    const searchInput = screen.getByRole("textbox")
+    await user.click(searchInput)
+    await user.clear(searchInput)
   })
 
   it("renders the extension name", () => {
@@ -95,6 +100,7 @@ describe("extension list", () => {
       it("filters out extensions which do not match the search filter", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
+        await user.clear(searchInput)
         await user.keyboard("octopus")
         expect(screen.queryByText(ruby.name)).toBeFalsy()
       })
@@ -102,6 +108,7 @@ describe("extension list", () => {
       it("leaves in extensions which match the search filter", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
+        await user.clear(searchInput)
         await user.keyboard("Ruby")
         expect(screen.queryByText(ruby.name)).toBeTruthy()
       })
@@ -109,6 +116,7 @@ describe("extension list", () => {
       it("is case insensitive in its searching", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
+        await user.clear(searchInput)
         await user.keyboard("ruby")
         expect(screen.queryByText(ruby.name)).toBeTruthy()
       })
