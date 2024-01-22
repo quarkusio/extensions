@@ -96,14 +96,19 @@ exports.sourceNodes = async ({
     delete node.metadata["icon-url"]
 
     if (node.metadata.icon) {
-      await createRemoteFileNode({
-        url: node.metadata.icon,
-        name: path.basename(node.metadata.icon),
-        parentNodeId: node.id,
-        getCache,
-        createNode,
-        createNodeId,
-      })
+      try {
+        await createRemoteFileNode({
+          url: node.metadata.icon,
+          name: path.basename(node.metadata.icon),
+          parentNodeId: node.id,
+          getCache,
+          createNode,
+          createNodeId,
+        })
+      } catch (error) {
+        console.warn("Dead image link (ignoring):", node.metadata.icon)
+        delete node.metadata.icon
+      }
     }
 
     // The status could be an array *or* a string, so make it consistent by wrapping in an array
