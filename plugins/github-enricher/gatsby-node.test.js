@@ -481,6 +481,90 @@ describe("the github data handler", () => {
     it("does not create any remote file nodes", async () => {
       expect(createRemoteFileNode).not.toHaveBeenCalled()
     })
+
+    describe("where the scm-url ends with .git", () => {
+
+      const url = "http://phony.github.com/thing.git"
+      const otherUrl = "http://fake.github.com/someuser/other" + projectName
+
+      const response = {
+        data: {
+          repository: {
+            issues: {
+              totalCount: 16,
+            },
+            defaultBranchRef: { name: "unusual" },
+            metaInfs: null,
+            subfolderMetaInfs: null,
+            shortenedSubfolderMetaInfs: {
+              entries: [
+                { path: "runtime/src/main/resources/META-INF/beans.xml" },
+                {
+                  path: "some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+                },
+                { path: "runtime/src/main/resources/META-INF/services" },
+              ],
+            },
+            openGraphImageUrl: socialMediaPreviewUrl,
+          },
+          repositoryOwner: { avatarUrl: avatarUrl },
+        },
+      }
+
+      const metadata = {
+        maven: { artifactId: "something", groupId: "grouper" },
+        sourceControl: `${url},mavenstuff`,
+      }
+
+      const node = {
+        metadata,
+        internal,
+      }
+
+      const otherMetadata = {
+        maven: { artifactId: "something", groupId: "grouper" },
+        sourceControl: `${otherUrl},mavenstuff`,
+      }
+
+      const otherNode = {
+        metadata: otherMetadata,
+        internal,
+      }
+
+      beforeAll(async () => {
+        queryGraphQl.mockResolvedValue(response)
+        getContributors.mockResolvedValue({ contributors: [{ name: "someone" }], lastUpdated: Date.now() })
+        await onPreBootstrap({ cache, actions: {} })
+      })
+
+      beforeEach(async () => {
+        // Clear the cache
+        onPluginInit()
+
+        // Needed so that we do not short circuit the git path
+        return onCreateNode({
+          node,
+          createContentDigest,
+          createNodeId,
+          actions,
+        })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("fills in an issues url", async () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({ issuesUrl: "http://phony.github.com/thing/issues" })
+        )
+      })
+
+    })
   })
 
   describe("where a label should be used", () => {

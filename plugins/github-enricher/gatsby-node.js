@@ -479,13 +479,15 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
     ? `, filterBy: { labels:  [${labels.map(label => `"${label}"`).join()}] }`
     : ""
 
+  // Tolerate scm urls ending in .git, but don't try and turn them into issues urls without patching
+  const topLevelIssuesUrl = (scmUrl + "/issues").replace("\.git/issues", "/issues")
   const issuesUrl = labels
     ? encodeUrl(
       scmUrl +
       "/issues?q=is%3Aopen+is%3Aissue+label%3A" +
       labels.map(label => label.replace("/", "%2F")).join(",")
     )
-    : scmUrl + "/issues"
+    : topLevelIssuesUrl
 
   // Batching this with other queries is not needed because rate limits are done on query complexity and cost,
   // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
