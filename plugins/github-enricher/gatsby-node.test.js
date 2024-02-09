@@ -485,7 +485,6 @@ describe("the github data handler", () => {
     describe("where the scm-url ends with .git", () => {
 
       const url = "http://phony.github.com/thing.git"
-      const otherUrl = "http://fake.github.com/someuser/other" + projectName
 
       const response = {
         data: {
@@ -494,18 +493,6 @@ describe("the github data handler", () => {
               totalCount: 16,
             },
             defaultBranchRef: { name: "unusual" },
-            metaInfs: null,
-            subfolderMetaInfs: null,
-            shortenedSubfolderMetaInfs: {
-              entries: [
-                { path: "runtime/src/main/resources/META-INF/beans.xml" },
-                {
-                  path: "some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-                },
-                { path: "runtime/src/main/resources/META-INF/services" },
-              ],
-            },
-            openGraphImageUrl: socialMediaPreviewUrl,
           },
           repositoryOwner: { avatarUrl: avatarUrl },
         },
@@ -518,16 +505,6 @@ describe("the github data handler", () => {
 
       const node = {
         metadata,
-        internal,
-      }
-
-      const otherMetadata = {
-        maven: { artifactId: "something", groupId: "grouper" },
-        sourceControl: `${otherUrl},mavenstuff`,
-      }
-
-      const otherNode = {
-        metadata: otherMetadata,
         internal,
       }
 
@@ -561,6 +538,74 @@ describe("the github data handler", () => {
       it("fills in an issues url", async () => {
         expect(createNode).toHaveBeenCalledWith(
           expect.objectContaining({ issuesUrl: "http://phony.github.com/thing/issues" })
+        )
+      })
+
+    })
+
+    describe("where the scm-url is a gitbox url", () => {
+
+      const url = "https://gitbox.apache.org/repos/asf?p=camel-quarkus.git;a=summary"
+      const expectedUrl = "https://github.com/apache/camel-quarkus"
+
+      const response = {
+        data: {
+          repository: {
+            issues: {
+              totalCount: 16,
+            },
+            defaultBranchRef: { name: "unusual" },
+          },
+          repositoryOwner: { avatarUrl: avatarUrl },
+        },
+      }
+
+      const metadata = {
+        maven: { artifactId: "something", groupId: "grouper" },
+        sourceControl: `${url},mavenstuff`,
+      }
+
+      const node = {
+        metadata,
+        internal,
+      }
+
+      beforeAll(async () => {
+        queryGraphQl.mockResolvedValue(response)
+        getContributors.mockResolvedValue({ contributors: [{ name: "someone" }], lastUpdated: Date.now() })
+        await onPreBootstrap({ cache, actions: {} })
+      })
+
+      beforeEach(async () => {
+        // Clear the cache
+        onPluginInit()
+
+        // Needed so that we do not short circuit the git path
+        return onCreateNode({
+          node,
+          createContentDigest,
+          createNodeId,
+          actions,
+        })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("adjusts the scm url", async () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({ repository: expectedUrl })
+        )
+      })
+
+      it("fills in an issues url", async () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({ issuesUrl: `${expectedUrl}/issues` })
         )
       })
 
