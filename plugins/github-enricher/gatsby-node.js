@@ -141,7 +141,14 @@ exports.onCreateNode = async (
 
   // A bit ugly, we need a unique identifier in string form, and we also need the url; use a comma-separated string
   const id = metadata?.sourceControl
-  const scmUrl = id?.split(",")[0]
+  let scmUrl = id?.split(",")[0]
+
+  if (scmUrl?.includes("gitbox.apache.org")) {
+    const urlState = new URL(scmUrl).search
+    const matches = urlState?.match(/p=(.*).git;/)
+    const projectName = matches?.length > 0 && matches[1]
+    scmUrl = `https://github.com/apache/${projectName}`
+  }
 
   if (scmUrl) {
 
