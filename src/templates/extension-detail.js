@@ -215,7 +215,9 @@ const ExtensionDetailTemplate = ({
         duplicates.map(duplicate => (
           <SupersededWarning key={duplicate.groupId}>
             {/^[aeiou]/i.test(duplicate.relationship) ? "An " : "A "}
-            {duplicate.relationship} version of this extension has been released
+            <Link to={`/${duplicate.slug}`}>{duplicate.relationship} version</Link> of this
+            extension has
+            been released
             with the group id{" "}
             <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>
           </SupersededWarning>
