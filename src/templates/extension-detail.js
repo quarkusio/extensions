@@ -218,8 +218,8 @@ const ExtensionDetailTemplate = ({
             <Link to={`/${duplicate.slug}`}>{duplicate.relationship} version</Link> of this
             extension has
             been released
-            with the group id{" "}
-            <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>
+            with the{" "}{duplicate.differenceReason}{" "}
+            <MavenCoordinate>{duplicate.differentId}</MavenCoordinate>
           </SupersededWarning>
         ))}
 
@@ -263,8 +263,8 @@ const ExtensionDetailTemplate = ({
                       <Link to={"/" + duplicate.slug}>
                         {duplicate.relationship} version
                       </Link>{" "}
-                      of this extension was published with the group id{" "}
-                      <MavenCoordinate>{duplicate.groupId}</MavenCoordinate>.
+                      of this extension was published with the {duplicate.differenceReason}{" "}
+                      <MavenCoordinate>{duplicate.differentId}</MavenCoordinate>.
                     </DuplicateReference>
                   ))}
                 </DocumentationSection>)}
@@ -566,7 +566,8 @@ export const pageQuery = graphql`
       }
       duplicates {
         relationship
-        groupId
+        differentId
+        differenceReason
         slug
       }
       isSuperseded

@@ -1,10 +1,11 @@
 const { default: parse } = require("mvn-artifact-name-parser")
 const {
   createMavenUrlFromCoordinates,
-  createMavenArtifactsUrlFromCoordinates,
+  createMavenArtifactsUrlFromCoordinates
 } = require("./maven-url")
 const axios = require("axios")
 const promiseRetry = require("promise-retry")
+const { readPom } = require("./pom-reader")
 
 const getTimestampFromMavenArtifactsListing = async maven => {
   const mavenArtifactsUrl = await createMavenArtifactsUrlFromCoordinates(maven)
@@ -50,12 +51,78 @@ const tolerantlyGetTimestampFromMavenSearch = async maven => {
   })
 }
 
+const getLatestVersionFromMavenSearch = async maven => {
+  const response = await axios.get(
+    "https://search.maven.org/solrsearch/select",
+    {
+      params: {
+        q: `g:${maven.groupId} AND a:${maven.artifactId}`,
+        rows: 20,
+        wt: "json",
+      },
+      headers: {
+        Accept: "application/json",
+        "Accept-Encoding": "UTF-8",
+      },
+    }
+  )
+  const { data } = response
+  return data?.response?.docs[0]?.latestVersion
+}
+
+const tolerantlyGetLatestVersionFromMavenSearch = async maven => {
+  return await promiseRetry(async () => getLatestVersionFromMavenSearch(maven), {
+    retries: 6,
+    factor: 3,
+    minTimeout: 4 * 1000,
+  }).catch(e => {
+    // Don't even log 429 errors, they're kind of expected
+    if (e.response?.status !== 429) {
+      // We see 502 and other errors from maven, so handle failures gracefully
+      console.warn("Could not fetch information from maven central", e)
+    }
+  })
+}
+
 const generateMavenInfo = async artifact => {
   const maven = parse(artifact)
   const mavenUrl = await createMavenUrlFromCoordinates(maven)
 
   if (mavenUrl) {
     maven.url = mavenUrl
+  }
+
+  //
+
+  const latestVersion = await tolerantlyGetLatestVersionFromMavenSearch(maven)
+  // If the latest version of an artifact is also its current version, there's unlikely to be a relocation on it
+  if (latestVersion && latestVersion !== maven.version) {
+    const latestPomUrl = await createMavenArtifactsUrlFromCoordinates({
+      artifactId: maven.artifactId,
+      groupId: maven.groupId,
+      version: latestVersion
+    })
+
+    const response = await axios.get(
+      latestPomUrl,
+      {}
+    )
+    const { data } = response
+
+    const processed = await readPom(data)
+
+    maven.relocation = processed.relocation
+
+    // Sometimes a relocation stanza might be missing a group id or artifact id, so fill in gaps
+    if (maven.relocation) {
+      if (!maven.relocation.artifactId) {
+        maven.relocation.artifactId = maven.artifactId
+      }
+      if (!maven.relocation.groupId) {
+        maven.relocation.groupId = maven.groupId
+      }
+    }
+
   }
 
   let timestamp

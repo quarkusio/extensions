@@ -6,7 +6,7 @@ const {
   getStream,
 } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
-const { extensionSlug } = require("./src/components/util/extension-slugger")
+const { extensionSlug, extensionSlugFromCoordinates } = require("./src/components/util/extension-slugger")
 const { generateMavenInfo } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
@@ -137,37 +137,45 @@ exports.sourceNodes = async ({
 
     // Look for extensions which are not the same, but which have the same artifact id
     // (artifactId is just the 'a' part of the gav, artifact is the whole gav string)
+
+    const relocation = node.metadata.maven?.relocation
+    node.isSuperseded = false
+
+    if (relocation) {
+      node.duplicates = [{
+        artifactId: relocation.artifactId,
+        groupId: relocation.groupId,
+        slug: extensionSlugFromCoordinates(relocation),
+        relationship: "newer",
+        differentId: relocation.artifactId !== node.metadata.maven?.artifactId ? relocation.artifactId : relocation.groupId,
+        differenceReason: relocation.artifactId !== node.metadata?.maven?.artifactId ? "artifact id" : "group id"
+      }]
+
+      node.isSuperseded = true
+    }
+
+// Look for things that mark this extension as a duplicate
     const duplicates = extensions.filter(
       ext =>
-        ext.metadata.maven?.artifactId === node.metadata.maven?.artifactId &&
-        ext.artifact !== node.artifact
+        ext.metadata.maven?.relocation?.artifactId === node.metadata.maven?.artifactId &&
+        ext.metadata.maven?.relocation?.groupId === node.metadata.maven?.groupId
     )
-    if (duplicates && duplicates.length > 0) {
+    if (duplicates) {
       const condensedDuplicates = duplicates.map(dupe => {
-        // If we're missing a timestamp because we couldn't get it from maven, all we can do is describe the versions as 'different' from each other.
-        const relationship =
-          dupe.metadata.maven.timestamp && extension.metadata.maven.timestamp
-            ? dupe.metadata.maven.timestamp > extension.metadata.maven.timestamp
-              ? "newer"
-              : "older"
-            : "different"
+        // It's possible both might be different, but we've never seen it, so in that case just mention the different artifact id
 
         return {
           artifact: dupe.artifact,
-          groupId: dupe.metadata.maven.groupId,
+          artifactId: dupe.metadata.maven?.artifactId,
+          groupId: dupe.metadata.maven?.groupId,
           slug: extensionSlug(dupe.artifact),
-          timestamp: dupe.metadata.maven.timestamp,
-          relationship,
+          relationship: "older",
+          differentId: dupe.metadata.maven?.artifactId !== node.metadata.maven?.artifactId ? dupe.metadata.maven?.artifactId : dupe.metadata.maven?.groupId,
+          differenceReason: dupe.metadata.maven?.artifactId !== node.metadata?.maven?.artifactId ? "artifact id" : "group id"
         }
       })
-      node.duplicates = condensedDuplicates
+      node.duplicates = node.duplicates ? [...condensedDuplicates, ...node.duplicates] : condensedDuplicates
 
-      if (
-        condensedDuplicates &&
-        condensedDuplicates.find(dupe => dupe.relationship === "newer")
-      ) {
-        node.isSuperseded = true
-      }
     }
 
     return createNode(node)
@@ -305,6 +313,11 @@ exports.createSchemaCustomization = ({ actions }) => {
       url: String
       version: String
       timestamp: String
+      relocation: RelocationInfo
+    }
+    
+    type RelocationInfo {
+       artifactId: String
     }
  
   `)

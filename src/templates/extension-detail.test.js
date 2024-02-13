@@ -76,7 +76,13 @@ describe("extension detail page", () => {
         "org.quarkus.registry:" + nonPlatform + ":1",
       ],
       duplicates: [
-        { slug: olderUrl, relationship: "older", groupId: "old-group-id" },
+        {
+          slug: olderUrl,
+          relationship: "older",
+          groupId: "old-group-id",
+          differenceReason: "group id",
+          differentId: "old-group-id"
+        },
       ],
     }
 

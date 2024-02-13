@@ -90,7 +90,7 @@ describe("extension list", () => {
   })
 
   it("displays a brief message about how many extensions there are", async () => {
-    // The superceded extension should not be counted
+    // The superseded extension should not be counted
     const num = extensions.length - 1
     expect(screen.getByText(`Showing ${num} extensions`)).toBeTruthy()
   })
