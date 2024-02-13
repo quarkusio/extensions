@@ -18,7 +18,6 @@ describe.skip("real data contributor information", () => {
 
   it("correctly counts contributors for iron jacamar", async () => {
     const answer = await getContributors("quarkiverse", "quarkus-ironjacamar")
-    console.log("answer", answer)
     // This expectation will change over time, obviously
     expect(answer).toEqual(expect.arrayContaining([{
       "contributions": 145,

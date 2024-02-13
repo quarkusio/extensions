@@ -13,11 +13,22 @@ const resolvedMavenUrl = "http://reallygoodurl.mvn"
 const { generateMavenInfo } = require("./src/maven/maven-info")
 jest.mock("./src/maven/maven-info")
 
+const dataCatRelocation = {
+  artifactId: "quarkus-micrometer-registry-datadog",
+  groupId: "io.quarkiverse.micrometer.registry"
+}
+
 generateMavenInfo.mockImplementation(artifactId => {
   const coordinates = parse(artifactId)
   // This is totally unscientific and arbitrary, but it's reproducible
   coordinates.timestamp = artifactId.length
   coordinates.url = resolvedMavenUrl
+
+  // Special case the datacat artifact by doing some hardcoding
+  if (artifactId.includes("datacat")) {
+    coordinates.relocation = dataCatRelocation
+  }
+
   return coordinates
 })
 
@@ -433,7 +444,7 @@ describe("the main gatsby entrypoint", () => {
     })
   })
 
-  describe("for an extension with an other extension sharing the artifact id", () => {
+  describe("for an extension with a relocation to another extension", () => {
     const extension = {
       artifact:
         "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
@@ -443,10 +454,10 @@ describe("the main gatsby entrypoint", () => {
     }
     const olderExtension = {
       artifact:
-        "io.quarkelsewhere:quarkus-micrometer-registry-datadog::jar:3.12.0",
+        "io.quarkelsewhere:quarkus-micrometer-registry-datacat::jar:3.12.0",
       origins: [
         "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
-      ],
+      ]
     }
 
     // A cut down version of what the registry returns us, with just the relevant bits
@@ -473,27 +484,28 @@ describe("the main gatsby entrypoint", () => {
       expect(createNodeId).toHaveBeenCalledTimes(2)
     })
 
-    it("adds a link to the older extension from the new one", () => {
+    it("adds a link to the newer extension from the older one", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
           artifact: extension.artifact,
           duplicates: [
             expect.objectContaining({
               groupId: "io.quarkelsewhere",
-              slug: "io.quarkelsewhere/quarkus-micrometer-registry-datadog",
+              slug: "io.quarkelsewhere/quarkus-micrometer-registry-datacat",
             }),
           ],
         })
       )
     })
 
-    it("adds a link to the newer extension from the old one", () => {
+    it("adds a link to the older extension from the new one", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
           artifact: olderExtension.artifact,
           duplicates: [
             expect.objectContaining({
               groupId: "io.quarkiverse.micrometer.registry",
+              slug: "io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-datadog",
             }),
           ],
         })
@@ -507,7 +519,20 @@ describe("the main gatsby entrypoint", () => {
           duplicates: [
             expect.objectContaining({
               relationship: "older",
-              timestamp: 65,
+            }),
+          ],
+        })
+      )
+    })
+
+    it("adds data to the older one explaining what is different", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: extension.artifact,
+          duplicates: [
+            expect.objectContaining({
+              differenceReason: "artifact id",
+              differentId: "quarkus-micrometer-registry-datacat"
             }),
           ],
         })
@@ -521,7 +546,20 @@ describe("the main gatsby entrypoint", () => {
           duplicates: [
             expect.objectContaining({
               relationship: "newer",
-              timestamp: 82,
+            }),
+          ],
+        })
+      )
+    })
+
+    it("adds data to the newer one explaining what is different", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          artifact: olderExtension.artifact,
+          duplicates: [
+            expect.objectContaining({
+              differenceReason: "artifact id",
+              differentId: "quarkus-micrometer-registry-datadog"
             }),
           ],
         })
@@ -544,101 +582,6 @@ describe("the main gatsby entrypoint", () => {
           isSuperseded: true,
         })
       )
-    })
-
-    describe("when maven conks out and does not give a timestamp", () => {
-      beforeAll(async () => {
-        // Clear any history from the parent beforeAll()
-        jest.clearAllMocks()
-
-        generateMavenInfo.mockImplementation(artifactId => {
-          const coordinates = parse(artifactId)
-          // This is totally unscientific and arbitrary, but it's reproducible
-          coordinates.timestamp = undefined
-          coordinates.url = resolvedMavenUrl
-          return coordinates
-        })
-
-        axios.get = jest.fn().mockReturnValue({
-          data: {
-            extensions: [extension, olderExtension],
-            platforms: currentPlatforms.platforms,
-          },
-        })
-
-        await sourceNodes({ actions, createNodeId, createContentDigest })
-      })
-
-      it("adds a link to the older extension from the new one", () => {
-        expect(createNode).toHaveBeenCalledWith(
-          expect.objectContaining({
-            artifact: extension.artifact,
-            duplicates: [
-              expect.objectContaining({
-                groupId: "io.quarkelsewhere",
-                slug: "io.quarkelsewhere/quarkus-micrometer-registry-datadog",
-              }),
-            ],
-          })
-        )
-      })
-
-      it("does not mark the new extension as superseded", () => {
-        expect(createNode).not.toHaveBeenCalledWith(
-          expect.objectContaining({
-            artifact: extension.artifact,
-            isSuperseded: true,
-          })
-        )
-      })
-
-      it("adds a link to the newer extension from the old one", () => {
-        expect(createNode).toHaveBeenCalledWith(
-          expect.objectContaining({
-            artifact: olderExtension.artifact,
-            duplicates: [
-              expect.objectContaining({
-                groupId: "io.quarkiverse.micrometer.registry",
-              }),
-            ],
-          })
-        )
-      })
-
-      it("does not mark the older extension as superseded", () => {
-        expect(createNode).not.toHaveBeenCalledWith(
-          expect.objectContaining({
-            artifact: olderExtension.artifact,
-            isSuperseded: true,
-          })
-        )
-      })
-
-      it("marks the older duplicate as just different", () => {
-        expect(createNode).toHaveBeenCalledWith(
-          expect.objectContaining({
-            artifact: extension.artifact,
-            duplicates: [
-              expect.objectContaining({
-                relationship: "different",
-              }),
-            ],
-          })
-        )
-      })
-
-      it("marks the newer duplicate as just different", () => {
-        expect(createNode).toHaveBeenCalledWith(
-          expect.objectContaining({
-            artifact: olderExtension.artifact,
-            duplicates: [
-              expect.objectContaining({
-                relationship: "different",
-              }),
-            ],
-          })
-        )
-      })
     })
   })
 })

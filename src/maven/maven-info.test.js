@@ -83,7 +83,7 @@ describe("the maven information generator", () => {
     })
 
     it("handles errors in maven central gracefully", async () => {
-      axios.get.mockRejectedValueOnce(
+      axios.get.mockRejectedValue(
         "(this is a deliberate error to exercise the error path)"
       )
       const mavenInfo = await generateMavenInfo(artifact)
