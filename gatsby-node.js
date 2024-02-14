@@ -7,7 +7,7 @@ const {
 } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
 const { extensionSlug, extensionSlugFromCoordinates } = require("./src/components/util/extension-slugger")
-const { generateMavenInfo } = require("./src/maven/maven-info")
+const { generateMavenInfo, initMavenCache } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
@@ -182,6 +182,11 @@ exports.sourceNodes = async ({
   })
   return Promise.all(secondPromises)
 }
+
+exports.onPreBootstrap = async () => {
+  await initMavenCache()
+}
+
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
