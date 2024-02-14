@@ -6,6 +6,35 @@ const {
 const axios = require("axios")
 const promiseRetry = require("promise-retry")
 const { readPom } = require("./pom-reader")
+const PersistableCache = require("../../plugins/github-enricher/persistable-cache")
+
+const DAY_IN_SECONDS = 60 * 60 * 24
+
+let timestampCache, latestVersionCache
+
+const initMavenCache = async () => {
+  // If there are problems with the cache, it works well to add something like latestVersionCache.flushAll() on a main-branch build
+  // (and then remove it next build)
+
+  timestampCache = new PersistableCache({
+    key: "maven-api-for-timestamps",
+    stdTTL: 5 * DAY_IN_SECONDS
+  })
+  latestVersionCache = new PersistableCache({
+    key: "maven-api-for-latest-versions",
+    stdTTL: 5 * DAY_IN_SECONDS // the worst that happens if this is out of of date is we do one extra query to read the pom
+  })
+
+  await latestVersionCache.ready()
+  console.log("Ingested cached maven information for", latestVersionCache.size(), "artifacts.")
+  await timestampCache.ready()
+  console.log("Ingested cached timestamp information for", timestampCache.size(), "maven artifacts.")
+}
+
+const clearMavenCache = () => {
+  timestampCache?.flushAll()
+  latestVersionCache?.flushAll()
+}
 
 const getTimestampFromMavenArtifactsListing = async maven => {
   const mavenArtifactsUrl = await createMavenArtifactsUrlFromCoordinates(maven)
@@ -86,6 +115,7 @@ const tolerantlyGetLatestVersionFromMavenSearch = async maven => {
 
 const generateMavenInfo = async artifact => {
   const maven = parse(artifact)
+
   const mavenUrl = await createMavenUrlFromCoordinates(maven)
 
   if (mavenUrl) {
@@ -94,7 +124,7 @@ const generateMavenInfo = async artifact => {
 
   //
 
-  const latestVersion = await tolerantlyGetLatestVersionFromMavenSearch(maven)
+  const latestVersion = await latestVersionCache.getOrSet(artifact, () => tolerantlyGetLatestVersionFromMavenSearch(maven))
   // If the latest version of an artifact is also its current version, there's unlikely to be a relocation on it
   if (latestVersion && latestVersion !== maven.version) {
     const latestPomUrl = await createMavenArtifactsUrlFromCoordinates({
@@ -103,10 +133,10 @@ const generateMavenInfo = async artifact => {
       version: latestVersion
     })
 
-    const response = await axios.get(
+    const response = await latestVersionCache.getOrSet(latestPomUrl, () => axios.get(
       latestPomUrl,
       {}
-    )
+    ))
     const { data } = response
 
     const processed = await readPom(data)
@@ -125,20 +155,24 @@ const generateMavenInfo = async artifact => {
 
   }
 
-  let timestamp
-  // This will be slow because we need to need hit the endpoint too fast and we need to back off; we perhaps should batch, but that's hard to implement with our current model
-  // We should perhaps also consider a soft-cache locally for when we fail completely
-  try {
-    timestamp = await getTimestampFromMavenArtifactsListing(maven)
-  } catch (e) {
-    console.log(
-      "Could not get timestamp from repository folder, querying maven directly."
-    )
-    console.log("Error is:", e)
-    timestamp = tolerantlyGetTimestampFromMavenSearch(maven)
-  }
+  let timestamp = await timestampCache.getOrSet(artifact, async () => {
+    // This will be slow because we need to need hit the endpoint too fast and we need to back off; we perhaps should batch, but that's hard to implement with our current model
+    let thing
+    try {
+      thing = await getTimestampFromMavenArtifactsListing(maven)
+    } catch (e) {
+      console.log(
+        "Could not get timestamp from repository folder, querying maven directly."
+      )
+      console.log("Error is:", e)
+      thing = await tolerantlyGetTimestampFromMavenSearch(maven)
+    }
+    return thing
+  })
+
   maven.timestamp = await timestamp
+
 
   return maven
 }
-module.exports = { generateMavenInfo }
+module.exports = { generateMavenInfo, clearMavenCache, initMavenCache }

@@ -1,4 +1,5 @@
-import { generateMavenInfo } from "./maven-info"
+import { generateMavenInfo, initMavenCache } from "./maven-info"
+import { clearCaches } from "../../plugins/github-enricher/sponsorFinder"
 
 jest.mock("./maven-url")
 const axios = require("axios")
@@ -30,6 +31,11 @@ axios.head.mockReturnValue({
 describe("the maven information generator", () => {
   const artifact = "io.quarkus:quarkus-vertx::jar:3.0.0.Alpha1"
 
+  beforeEach(async () => {
+    clearCaches()
+    await initMavenCache()
+  })
+
   describe("when the repo listing is working well", () => {
     it("adds a maven url", async () => {
       const mavenInfo = await generateMavenInfo(artifact)
@@ -44,6 +50,16 @@ describe("the maven information generator", () => {
     it("adds a timestamp", async () => {
       const mavenInfo = await generateMavenInfo(artifact)
       expect(mavenInfo.timestamp).toBe(1675955892000)
+    })
+
+    it("uses the cache on subsequent calls", async () => {
+      const startingCallCount = axios.get.mock.calls.length
+      // Warm the cache
+      await generateMavenInfo(artifact)
+      expect(axios.get.mock.calls.length).toBe(startingCallCount + 1)
+      // Now go again
+      await generateMavenInfo(artifact)
+      expect(axios.get.mock.calls.length).toBe(startingCallCount + 1)
     })
   })
 
