@@ -158,6 +158,9 @@ const mergeNode = {
 
 const nullUserNode = {
   "node": {
+    parents: {
+      totalCount: 1
+    },
     "author": {
       "user": null
     }
@@ -187,9 +190,14 @@ describe("the github sponsor finder", () => {
 
     queryGraphQl.mockResolvedValue(graphQLResponse)
 
-    queryRest.mockImplementation(url => Promise.resolve(
-      urls[url] || urls[url.toLowerCase()] || {})
-    )
+    queryRest.mockImplementation(url => {
+      if (url.split("@").length > 1 || url.split(" ").length > 1) {
+        return Promise.reject("Malformed url: " + url)
+      } else
+        return Promise.resolve(
+          urls[url] || urls[url.toLowerCase()] || {})
+    })
+
   })
 
   beforeEach(async () => {
@@ -402,6 +410,18 @@ describe("the github sponsor finder", () => {
       // This case is tricky, because we could tokenise on commas, but we only let people have one company, because otherwise the graph could be chaos.
       const sponsor = await resolveAndNormalizeCompanyName("Red Hat, @xlate")
       expect(sponsor).toBe("Red Hat")
+    })
+
+    it("normalises a company name with several @-delimited clauses", async () => {
+      // This case is also tricky, because we could tokenise on at signs, but we only let people have one company, because otherwise the graph could be chaos.
+      const sponsor = await resolveAndNormalizeCompanyName("@bear-metal @Shopify @TuneMyGC")
+      expect(sponsor).toBe("bear-metal")
+    })
+
+    it("normalises a company name with words after an @-delimited name", async () => {
+      // This case is also tricky, because we could tokenise on at signs, but we only let people have one company, because otherwise the graph could be chaos.
+      const sponsor = await resolveAndNormalizeCompanyName("@bear-metal and also some other companies, you know?")
+      expect(sponsor).toBe("bear-metal")
     })
   })
 

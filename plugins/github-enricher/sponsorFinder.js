@@ -189,7 +189,10 @@ const resolveAndNormalizeCompanyName = async (company) => {
 
   if (company) {
     if (company.startsWith("@")) {
-      return normalizeCompanyName(await getCompanyFromGitHubLogin(company.replace("@", "")))
+      // Only take the first entry after the @
+      const split = company.split(/[@ ]/)
+      // The first array element is an empty string where the @ was, so take the second
+      return normalizeCompanyName(await getCompanyFromGitHubLogin(split[1]))
     } else {
       return normalizeCompanyName(company)
     }
