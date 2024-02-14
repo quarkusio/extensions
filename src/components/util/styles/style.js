@@ -20,7 +20,7 @@ const getPalette = (n, baseCode) => {
     // Do a cyclical range of colours, from coloured down to white, then through shades of grey, then black from black to coloured
     // In pie charts, thin widges tend to look white because of the border, no matter what colour we set
     const colouredElements = Math.max(Math.round(n / 3) + 1, 6)
-    const greyElements = n - 2 * colouredElements
+    const greyElements = Math.max(0, n - 2 * colouredElements)
     const colouredIncrement = 100 / (2 * colouredElements)
     const greyIncrement = 100 / greyElements
 
