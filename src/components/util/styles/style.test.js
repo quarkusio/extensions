@@ -12,6 +12,13 @@ describe("the styles helper", () => {
       expect(palette[0]).toBe(QUARKUS_BLUE)
     })
 
+    it("can handle palettes with odd lengths", () => {
+      const len = 11
+      const palette = getPalette(len, QUARKUS_BLUE)
+      expect(palette).toHaveLength(len + 1) // As the length is odd and below 12, we get an even-length palette
+      expect(palette[0]).toBe(QUARKUS_BLUE)
+    })
+
     it("returns palettes of the correct length", () => {
       expect(getPalette(6)).toHaveLength(6)
       expect(getPalette(14)).toHaveLength(14)
