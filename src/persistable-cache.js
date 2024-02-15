@@ -110,6 +110,7 @@ class PersistableCache {
       return this.get(key)
     } else {
       const answer = await functionThatReturnsAPromise()
+      console.log("caching ", answer)
       this.set(key, answer)
       return answer
     }
