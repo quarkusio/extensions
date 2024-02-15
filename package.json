@@ -34,7 +34,7 @@
     "gatsby-source-filesystem": "^4.25.0",
     "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^4.25.0",
-    "jest-environment-puppeteer": "^9.0.0",
+    "jest-environment-puppeteer": "^10.0.1",
     "js-yaml": "^4.1.0",
     "mvn-artifact-name-parser": "^6.1.0",
     "node-cache": "^5.1.2",
