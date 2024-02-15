@@ -6,7 +6,7 @@ const {
 const axios = require("axios")
 const promiseRetry = require("promise-retry")
 const { readPom } = require("./pom-reader")
-const PersistableCache = require("../../plugins/github-enricher/persistable-cache")
+const PersistableCache = require("../persistable-cache")
 
 const DAY_IN_SECONDS = 60 * 60 * 24
 
@@ -133,11 +133,16 @@ const generateMavenInfo = async artifact => {
       version: latestVersion
     })
 
-    const response = await latestVersionCache.getOrSet(latestPomUrl, () => axios.get(
-      latestPomUrl,
-      {}
-    ))
-    const { data } = response
+    const data = await latestVersionCache.getOrSet(latestPomUrl, async () => {
+        const options = {
+          retries: 6,
+          factor: 3,
+          minTimeout: 4 * 1000,
+        }
+        const response = await promiseRetry(async () => axios.get(latestPomUrl, {}), options)
+        return response.data
+      }
+    )
 
     const processed = await readPom(data)
 

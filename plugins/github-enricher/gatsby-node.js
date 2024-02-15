@@ -6,7 +6,7 @@ const { createRepository, getResolvers } = require("./repository-creator")
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { labelExtractor } = require("./labelExtractor")
-const PersistableCache = require("./persistable-cache")
+const PersistableCache = require("../../src/persistable-cache")
 const {
   findSponsor,
   clearCaches,

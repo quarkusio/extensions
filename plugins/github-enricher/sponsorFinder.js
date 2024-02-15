@@ -1,4 +1,4 @@
-const PersistableCache = require("./persistable-cache")
+const PersistableCache = require("../../src/persistable-cache")
 const { queryGraphQl, queryRest } = require("./github-helper")
 
 // We store the raw(ish) data in the cache, to avoid repeating the same request multiple times and upsetting the github rate limiter
