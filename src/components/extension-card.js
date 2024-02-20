@@ -9,12 +9,11 @@ import ExtensionImage from "./extension-image"
 const Card = styled(props => <Link {...props} />)`
   font-size: 3.5em;
   text-align: center;
-  margin: 15px;
   padding: 1rem;
   width: 100%;
   background: var(--white) 0 0 no-repeat padding-box;
   border: ${props =>
-    props.$unlisted ? "1px solid var(--grey-0)" : "1px solid var(--grey-1)"};
+          props.$unlisted ? "1px solid var(--grey-0)" : "1px solid var(--grey-1)"};
   border-radius: 10px;
   opacity: 1;
   display: flex;
@@ -141,9 +140,9 @@ const ExtensionCard = ({ extension }) => {
           {extension.metadata.maven?.timestamp &&
           isValid(+extension.metadata.maven?.timestamp)
             ? `Publish Date: ${format(
-                new Date(+extension.metadata.maven.timestamp),
-                "MMM dd, yyyy"
-              )}`
+              new Date(+extension.metadata.maven.timestamp),
+              "MMM dd, yyyy"
+            )}`
             : spacer}
         </ExtensionInfo>
       </FinerDetails>

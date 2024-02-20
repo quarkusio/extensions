@@ -1,7 +1,6 @@
 const HOURS_IN_MS = 60 * 60 * 1000
 
-const extensionComparator = (a, b) => {
-
+function compareByTimestamp(a, b) {
   const timestampA = roundToTheNearestHour(a?.metadata?.maven?.timestamp)
   const timestampB = roundToTheNearestHour(b?.metadata?.maven?.timestamp)
 
@@ -17,7 +16,15 @@ const extensionComparator = (a, b) => {
   } else if (timestampB) {
     return 1
   }
-  return compareAlphabetically(a, b)
+}
+
+const alphabeticalExtensionComparator = (a, b) => {
+
+  let comp = compareAlphabetically(a, b)
+  if (comp === 0) {
+    comp = compareByTimestamp(a, b)
+  }
+  return comp
 }
 
 function roundToTheNearestHour(n) {
@@ -36,4 +43,4 @@ function compareAlphabetically(a, b) {
   }
 }
 
-module.exports = { extensionComparator }
+module.exports = { alphabeticalExtensionComparator }
