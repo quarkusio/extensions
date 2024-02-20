@@ -24,17 +24,23 @@ exports.onCreateNode = async ({ node, actions, createNodeId }) => {
     return
   }
 
-  const buffer = await crop(node.absolutePath)
+  try {
+    const buffer = await crop(node.absolutePath)
+    // We could also use one of the available OCR libraries to detect text and filter out images with text, but let's wait until we have that problem
+    const name = "smartcrop-" + path.basename(node.absolutePath)
 
-  // We could also use one of the available OCR libraries to detect text and filter out images with text, but let's wait until we have that problem
-  const name = "smartcrop-" + path.basename(node.absolutePath)
+    // Return a promise to make sure we wait
+    return await createFileNodeFromBuffer({
+      buffer,
+      name,
+      getCache,
+      createNode,
+      createNodeId,
+    })
+  } catch (error) {
+    console.error(error, "Could not crop", node.url)
+    return
+  }
 
-  // Return a promise to make sure we wait
-  return await createFileNodeFromBuffer({
-    buffer,
-    name,
-    getCache,
-    createNode,
-    createNodeId,
-  })
+
 }
