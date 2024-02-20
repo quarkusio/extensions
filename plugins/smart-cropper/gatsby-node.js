@@ -1,5 +1,5 @@
 const path = require("path")
-
+const fs = require("fs/promises")
 const { crop } = require("./image-processing")
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createFileNodeFromBuffer } = require("gatsby-source-filesystem")
@@ -39,7 +39,16 @@ exports.onCreateNode = async ({ node, actions, createNodeId }) => {
     })
   } catch (error) {
     console.error(error, "Could not crop", node.url)
-    return
+    const name = "format-failure-" + path.basename(node.absolutePath)
+    const buffer = await fs.readFile(path.join(__dirname, "bad-format.png"))
+
+    return await createFileNodeFromBuffer({
+      buffer,
+      name,
+      getCache,
+      createNode,
+      createNodeId,
+    })
   }
 
 
