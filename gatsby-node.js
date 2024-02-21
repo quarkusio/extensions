@@ -95,6 +95,12 @@ exports.sourceNodes = async ({
     node.metadata.icon = node.metadata["icon-url"]
     delete node.metadata["icon-url"]
 
+    // Tactical workaround for nasty issue
+    if (node.metadata.icon?.includes("HiveMQlogo.png")) {
+      console.warn("Tactically forgetting ", node.metadata.icon)
+      delete node.metadata["icon"]
+    }
+
     if (node.metadata.icon) {
       try {
         await createRemoteFileNode({
