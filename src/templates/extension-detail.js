@@ -507,9 +507,6 @@ export const pageQuery = graphql`
         sponsor
         sponsors
         icon {
-          childImageSharp {
-            gatsbyImageData(width: 220)
-          }
           publicURL
         }
         maven {
@@ -540,11 +537,6 @@ export const pageQuery = graphql`
           companies {
             name
             contributions
-          }
-          projectImage {
-            childImageSharp {
-              gatsbyImageData(width: 220)
-            }
           }
           extensionYamlUrl
           extensionRootUrl
