@@ -122,8 +122,6 @@ const generateMavenInfo = async artifact => {
     maven.url = mavenUrl
   }
 
-  //
-
   const latestVersion = await latestVersionCache.getOrSet(artifact, () => tolerantlyGetLatestVersionFromMavenSearch(maven))
   // If the latest version of an artifact is also its current version, there's unlikely to be a relocation on it
   if (latestVersion && latestVersion !== maven.version) {
@@ -133,29 +131,36 @@ const generateMavenInfo = async artifact => {
       version: latestVersion
     })
 
-    const data = await latestVersionCache.getOrSet(latestPomUrl, async () => {
-        const options = {
-          retries: 6,
-          factor: 3,
-          minTimeout: 4 * 1000,
+    const options = {
+      retries: 6,
+      factor: 3,
+      minTimeout: 4 * 1000,
+    }
+
+    try {
+      const data = await latestVersionCache.getOrSet(latestPomUrl, async () => {
+          const response = await promiseRetry(async () => axios.get(latestPomUrl, {}), options)
+          return response.data
         }
-        const response = await promiseRetry(async () => axios.get(latestPomUrl, {}), options)
-        return response.data
-      }
-    )
+      )
 
-    const processed = await readPom(data)
+      if (data) {
+        const processed = await promiseRetry(async () => readPom(data), options)
 
-    maven.relocation = processed.relocation
+        maven.relocation = processed.relocation
 
-    // Sometimes a relocation stanza might be missing a group id or artifact id, so fill in gaps
-    if (maven.relocation) {
-      if (!maven.relocation.artifactId) {
-        maven.relocation.artifactId = maven.artifactId
+        // Sometimes a relocation stanza might be missing a group id or artifact id, so fill in gaps
+        if (maven.relocation) {
+          if (!maven.relocation.artifactId) {
+            maven.relocation.artifactId = maven.artifactId
+          }
+          if (!maven.relocation.groupId) {
+            maven.relocation.groupId = maven.groupId
+          }
+        }
       }
-      if (!maven.relocation.groupId) {
-        maven.relocation.groupId = maven.groupId
-      }
+    } catch (error) {
+      console.warn("Tried to read", latestPomUrl, "Error made it through the promise retry", error)
     }
 
   }
