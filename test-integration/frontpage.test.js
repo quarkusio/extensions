@@ -24,25 +24,25 @@ describe("main site", () => {
   describe("extensions list", () => {
     it("should have a well-known non-platform extension", async () => {
       await expect(
-        page.waitForXPath("//*[text()=\"RabbitMQ Client\"]")
+        page.waitForSelector("xpath///*[text()=\"RabbitMQ Client\"]")
       ).resolves.toBeTruthy()
     })
 
     it("should have more than one well-known non-platform extension", async () => {
       await expect(
-        page.waitForXPath("//*[text()=\"GitHub App\"]")
+        page.waitForSelector("xpath///*[text()=\"GitHub App\"]")
       ).resolves.toBeTruthy()
     })
 
     it("should have a well-known platform extension", async () => {
       await expect(
-        page.waitForXPath("//*[text()=\"Cache\"]")
+        page.waitForSelector("xpath///*[text()=\"Cache\"]")
       ).resolves.toBeTruthy()
     })
 
     it("should have more than one well-known platform extension", async () => {
       await expect(
-        page.waitForXPath("//*[text()=\"gRPC\"]")
+        page.waitForSelector("xpath///*[text()=\"gRPC\"]")
       ).resolves.toBeTruthy()
     })
 
@@ -50,10 +50,10 @@ describe("main site", () => {
       it("should should filter out extensions when the search bar is used", async () => {
         // Sense check - is the thing we wanted there to start with
         await expect(
-          page.waitForXPath("//*[text()=\"RabbitMQ Client\"]")
+          page.waitForSelector("xpath///*[text()=\"RabbitMQ Client\"]")
         ).resolves.toBeTruthy()
         await expect(
-          page.waitForXPath("//*[text()=\"GitHub App\"]")
+          page.waitForSelector("xpath///*[text()=\"GitHub App\"]")
         ).resolves.toBeTruthy()
 
         await page.focus("input[name=\"search-regex\"]")
@@ -61,14 +61,14 @@ describe("main site", () => {
 
         // RabbitMQ should still be there ...
         await expect(
-          page.waitForXPath("//*[text()=\"RabbitMQ Client\"]")
+          page.waitForSelector("xpath///*[text()=\"RabbitMQ Client\"]")
         ).resolves.toBeTruthy()
         // ... but others should be gone
 
-        await page.waitForXPath("//*[text()=\"GitHub App\"]", { hidden: true })
+        await page.waitForSelector("xpath///*[text()=\"GitHub App\"]", { hidden: true })
 
         const gitHubApp = await page
-          .waitForXPath("//*[text()=\"GitHub App\"]", { timeout: 2000 })
+          .waitForSelector("xpath///*[text()=\"GitHub App\"]", { timeout: 2000 })
           .catch(() => {
             return false
           })
@@ -79,13 +79,13 @@ describe("main site", () => {
     describe("header navigation bar", () => {
       it("should have a Start Coding button", async () => {
         await expect(
-          page.waitForXPath("//*[text()=\"Start Coding\"]")
+          page.waitForSelector("xpath///*[text()=\"Start Coding\"]")
         ).resolves.toBeTruthy()
       })
 
       it("should have a Learn option", async () => {
         await expect(
-          page.waitForXPath("//*[text()=\"Learn\"]")
+          page.waitForSelector("xpath///*[text()=\"Learn\"]")
         ).resolves.toBeTruthy()
       })
     })
