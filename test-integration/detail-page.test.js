@@ -15,7 +15,7 @@ describe("an extension details page", () => {
   it("should have a Quarkus logo", async () => {
     // At the moment we use a non-specific alt text for the icon
     await expect(
-      page.waitForXPath(`//img[contains(@alt,"The icon of the organisation")]`)
+      page.waitForSelector(`xpath///img[contains(@alt,"The icon of the organisation")]`)
     ).resolves.toBeTruthy()
   })
 
@@ -31,46 +31,46 @@ describe("an extension details page", () => {
 
   it("should have the extension name", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Hibernate ORM"]`)
+      page.waitForSelector(`xpath///*[text()="Hibernate ORM"]`)
     ).resolves.toBeTruthy()
   })
 
   it("should have a publish date", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Publish Date"]`)
+      page.waitForSelector(`xpath///*[text()="Publish Date"]`)
     ).resolves.toBeTruthy()
   })
 
   it("should show the status", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Status"]`)
+      page.waitForSelector(`xpath///*[text()="Status"]`)
     ).resolves.toBeTruthy()
     await expect(
-      page.waitForXPath(`//*[text()="stable"]`)
+      page.waitForSelector(`xpath///*[text()="stable"]`)
     ).resolves.toBeTruthy()
   })
 
   it("should have a link to the documentation", async () => {
     await expect(
-      page.waitForXPath(`//*[contains(text(), "documentation")]`)
+      page.waitForSelector(`xpath///*[contains(text(), "documentation")]`)
     ).resolves.toBeTruthy()
   })
 
   it("should show the issue count", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Issues"]`)
+      page.waitForSelector(`xpath///*[text()="Issues"]`)
     ).resolves.toBeTruthy()
   })
 
   it("should show a community tab", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Community"]`)
+      page.waitForSelector(`xpath///*[text()="Community"]`)
     ).resolves.toBeTruthy()
   })
 
   it("should show a sponsor", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Sponsor"]`)
+      page.waitForSelector(`xpath///*[text()="Sponsor"]`)
     ).resolves.toBeTruthy()
   })
 

@@ -11,13 +11,13 @@ describe("main site", () => {
 
   it("should have a Quarkus logo on it somewhere", async () => {
     await expect(
-      page.waitForXPath(`//img[contains(@alt,"Quarkus")]`)
+      page.waitForSelector(`xpath///img[contains(@alt,"Quarkus")]`)
     ).resolves.toBeTruthy()
   })
 
   it("should have an extensions heading on it somewhere", async () => {
     await expect(
-      page.waitForXPath(`//*[text()="Extensions"]`)
+      page.waitForSelector(`xpath///*[text()="Extensions"]`)
     ).resolves.toBeTruthy()
   })
 
@@ -96,7 +96,7 @@ describe("main site", () => {
     it("should have an extensions heading on it somewhere", async () => {
       await page.setExtraHTTPHeaders({ DNT: "1" })
       await expect(
-        page.waitForXPath(`//*[text()="Extensions"]`)
+        page.waitForSelector(`xpath///*[text()="Extensions"]`)
       ).resolves.toBeTruthy()
     })
   })
