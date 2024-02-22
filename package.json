@@ -80,7 +80,7 @@
     "jest-puppeteer": "^10.0.0",
     "jest-puppeteer-preset": "^7.0.0",
     "linkinator": "^6.0.3",
-    "node-libcurl": "^3.0.0",
+    "node-libcurl": "^4.0.0",
     "prettier": "^3.1.0",
     "promise-retry": "^2.0.1",
     "puppeteer": "^22.1.0",
