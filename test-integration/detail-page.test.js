@@ -22,7 +22,7 @@ describe("an extension details page", () => {
   it("should not have the generic placeholder logo", async () => {
     // At the moment we use the following alt text for placeholders A generic image as a placeholder for the extension icon
     const greyImage = await page
-      .waitForXPath("//img[contains(@alt,\"placeholder\") or contains(@alt,\"generic\")]", { timeout: 2000 })
+      .waitForSelector("xpath///img[contains(@alt,\"placeholder\") or contains(@alt,\"generic\")]", { timeout: 2000 })
       .catch(() => {
         return false
       })
