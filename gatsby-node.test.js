@@ -3,6 +3,11 @@ const { default: parse } = require("mvn-artifact-name-parser")
 const axios = require("axios")
 jest.mock("axios")
 
+jest.mock("gatsby-source-filesystem")
+
+const imageValidation = require("./src/data/image-validation")
+jest.mock("./src/data/image-validation")
+
 const { sourceNodes } = require("./gatsby-node")
 
 const createNode = jest.fn()
@@ -260,6 +265,179 @@ describe("the main gatsby entrypoint", () => {
           }),
         })
       )
+    })
+  })
+
+  describe("for an extension with an icon-url", () => {
+    const getCache = jest.fn().mockReturnValue({})
+
+
+    describe("where the icon is a dead link", () => {
+      // This test needs to go first, because there's some cross-talk on the mocks I can't quite figure out
+      const extension = {
+        artifact:
+          "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+        metadata: {
+          "icon-url": "missing.png"
+        }
+      }
+
+
+      beforeAll(async () => {
+        jest.mock("axios")
+        // First call is the registry data, second is the platforms, third is the contents of the image url
+        axios.get = jest.fn().mockReturnValueOnce({
+          data: {
+            extensions: [extension],
+            platforms: [],
+          },
+        }).mockReturnValueOnce({
+          data: {
+            extensions: [extension],
+            platforms: [],
+          },
+        }).mockRejectedValueOnce(new Error("missing contents"))
+
+        await sourceNodes({ actions, getCache, createNodeId, createContentDigest })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      it("creates a node but without an icon url", () => {
+        expect(createNode).not.toHaveBeenCalledWith(
+          expect.objectContaining({
+            metadata: expect.objectContaining({
+              icon: expect.anything(),
+            }),
+          })
+        )
+      })
+    })
+
+    describe("where the icon points to a valid image", () => {
+      const extension = {
+        artifact:
+          "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+        metadata: {
+          "icon-url": "http://valid.png"
+        }
+      }
+
+
+      beforeAll(async () => {
+        // First call is the registry data, second is the contents of the image url
+        axios.get = jest.fn().mockReturnValueOnce({
+          data: {
+            extensions: [extension],
+            platforms: [],
+          },
+        }).mockReturnValueOnce({
+          data: [],
+        })
+
+        imageValidation.validate.mockResolvedValue(true)
+
+        await sourceNodes({ actions, getCache, createNodeId, createContentDigest })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      it("creates a node with an icon url", () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({
+            metadata: expect.objectContaining({
+              icon: "http://valid.png",
+            }),
+          })
+        )
+      })
+    })
+
+
+    describe("where the icon is a github blob page", () => {
+      const blobPath =
+        "https://github.com/quarkiverse/quarkus-extension/blob/main/docs/img/nope.png"
+      const extension = {
+        artifact:
+          "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+        origins: [
+          "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
+        ],
+        metadata: {
+          "icon-url": blobPath
+        }
+      }
+
+
+      beforeAll(async () => {
+        axios.get = jest.fn().mockReturnValue({
+          data: {
+            extensions: [extension],
+            platforms: [],
+          },
+        })
+
+        await sourceNodes({ actions, getCache, createNodeId, createContentDigest })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      it("creates a node but without an icon url", () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({
+            metadata: expect.not.objectContaining({
+              icon: expect.anything(),
+            }),
+          })
+        )
+      })
+    })
+
+    describe("where the icon exists but is corrupted", () => {
+      const extension = {
+        artifact:
+          "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0",
+        origins: [
+          "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
+        ],
+        metadata: {
+          "icon-url": "invalid.png"
+        }
+      }
+
+
+      beforeAll(async () => {
+        axios.get = jest.fn().mockReturnValue({
+          data: {
+            extensions: [extension],
+            platforms: [],
+          },
+        })
+
+        imageValidation.validate.mockResolvedValue(false)
+
+        await sourceNodes({ actions, getCache, createNodeId, createContentDigest })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      it("does not creates a node with an icon url", () => {
+        expect(createNode).not.toHaveBeenCalledWith(
+          expect.objectContaining({
+            metadata: expect.objectContaining({
+              icon: expect.anything(),
+            }),
+          })
+        )
+      })
     })
   })
 
