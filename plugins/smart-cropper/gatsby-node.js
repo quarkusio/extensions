@@ -19,8 +19,8 @@ exports.onCreateNode = async ({ node, actions, createNodeId }) => {
     return
   }
 
-  // Only look at images that came from GitHub
-  if (!node.url || !node.url.includes("github")) {
+  // Only look at images that appear to be github social media previews (we could restrict this if we see other images want to be cropped)
+  if (!node.url || !node.url.includes("repository-images.githubusercontent.com")) {
     return
   }
 

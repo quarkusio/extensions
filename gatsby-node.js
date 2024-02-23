@@ -11,6 +11,7 @@ const { generateMavenInfo, initMavenCache } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
+const { validate } = require("./src/data/image-validation")
 
 exports.sourceNodes = async ({
                                actions,
@@ -95,25 +96,34 @@ exports.sourceNodes = async ({
     node.metadata.icon = node.metadata["icon-url"]
     delete node.metadata["icon-url"]
 
-    // Tactical workaround for nasty issue
-    if (node.metadata.icon?.includes("HiveMQlogo.png")) {
-      console.warn("Tactically forgetting ", node.metadata.icon)
-      delete node.metadata["icon"]
-    }
-
+    // Make sure images are valid images, because the sharp plugin will kill the build if it gets anything malformed with an image extension
     if (node.metadata.icon) {
-      try {
-        await createRemoteFileNode({
-          url: node.metadata.icon,
-          name: path.basename(node.metadata.icon),
-          parentNodeId: node.id,
-          getCache,
-          createNode,
-          createNodeId,
-        })
-      } catch (error) {
-        console.warn("Dead image link (ignoring):", node.metadata.icon)
+      const iconUrl = node.metadata.icon
+
+      // We can't delete a node once it's created, so we need to (rather tediously) validate the images before creating the node, which means a double download
+      // Rule out git hub urls that are not raw
+      const isGitHubBlobPage = iconUrl.includes("github.com") && iconUrl.includes("blob") && !iconUrl.includes("raw")
+
+      const isValid = await validate(node.absolutePath)
+
+      if (!isValid || isGitHubBlobPage) {
+        // TODO more info in log message, add to an object we can write to disk in a post-something method
+        console.warn("Not a valid image in", node.artifact, ". Image link is:", iconUrl)
         delete node.metadata.icon
+      } else {
+        try {
+          await createRemoteFileNode({
+            url: iconUrl,
+            name: path.basename(iconUrl),
+            parentNodeId: node.id,
+            getCache,
+            createNode,
+            createNodeId,
+          })
+        } catch (error) {
+          console.warn("Dead image link (ignoring):", node.metadata.icon)
+          delete node.metadata.icon
+        }
       }
     }
 
