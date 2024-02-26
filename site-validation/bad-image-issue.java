@@ -174,18 +174,14 @@ class Report implements Runnable {
         Path filePath = FileSystems.getDefault()
                 .getPath(OUTPUT_PATH);
         if (Files.exists(filePath)) {
-            return Files.lines(filePath)
-                    .map(line -> {
-                        try {
-                            return new ObjectMapper().readValue(line, BadImage.class);
-                        } catch (JsonProcessingException e) {
-                            throw new RuntimeException(e);
-                        }
-                    })
-                    .toList();
-        } else {
-            return Collections.emptyList();
-        }
+            try {
+                return new ObjectMapper().readValue(Files.lines(filePath), BadImage[].class);
+                            } catch (JsonProcessingException e) {
+                                throw new RuntimeException(e);
+                            }
+            } else {
+                return Collections.emptyList();
+            }
     }
 
     public static void main(String... args) {
