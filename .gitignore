@@ -1,6 +1,8 @@
 .idea/workspace.xml
 .idea/checkstyle-idea.xml
 
+bad-image-check-results.json
+
 # Logs
 logs
 *.log

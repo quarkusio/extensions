@@ -1,5 +1,5 @@
-const sharp = require("sharp")
 const axios = require("axios")
+const { validateBufferMIMEType } = require("validate-image-type")
 
 const validate = async url => {
   try {
@@ -9,10 +9,12 @@ const validate = async url => {
       })
     const buffer = Buffer.from(response.data, "binary")
 
-
-    const sharped = sharp(buffer)
-    return sharped.stats().then(() => true).catch(() => false)
+    const result = await validateBufferMIMEType(buffer, {
+      allowMimeTypes: ["image/jpeg", "image/png", "image/tiff", "image/webp", "image/svg+xml"] // This list is https://www.gatsbyjs.com/plugins/gatsby-transformer-sharp#parsing-algorithm + svg
+    })
+    return result.ok
   } catch {
+    // Squash the error, since we'll log the problem URL
   }
   return false
 }

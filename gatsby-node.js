@@ -12,6 +12,8 @@ const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
 const { validate } = require("./src/data/image-validation")
+const fs = require("fs/promises")
+let badImages = []
 
 exports.sourceNodes = async ({
                                actions,
@@ -104,12 +106,12 @@ exports.sourceNodes = async ({
       // Rule out git hub urls that are not raw
       const isGitHubBlobPage = iconUrl.includes("github.com") && iconUrl.includes("blob") && !iconUrl.includes("raw")
 
-      const isValid = await validate(node.absolutePath)
+      const isValid = await validate(iconUrl)
 
       if (!isValid || isGitHubBlobPage) {
-        // TODO more info in log message, add to an object we can write to disk in a post-something method
         console.warn("Not a valid image in", node.artifact, ". Image link is:", iconUrl)
         delete node.metadata.icon
+        badImages.push({ url: iconUrl, artifact: node.artifact })
       } else {
         try {
           await createRemoteFileNode({
@@ -201,6 +203,7 @@ exports.sourceNodes = async ({
 
 exports.onPreBootstrap = async () => {
   await initMavenCache()
+  badImages = []
 }
 
 
@@ -303,6 +306,17 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
   })
 }
 
+exports.onPostBootstrap = async () => {
+  // Write out to a file
+  if (badImages?.length > 0) {
+    console.warn(`Recording details of ${badImages.length} bad images.`)
+    const content = JSON.stringify(badImages)
+    const resultsFile = "bad-image-check-results.json"
+    await fs.writeFile(resultsFile, content, { flag: "w+" }, err => {
+      console.warn("Error writing results:", err)
+    })
+  }
+}
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
