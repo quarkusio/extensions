@@ -4,14 +4,8 @@ const { validate } = require("./image-validation")
 const axios = require("axios")
 jest.mock("axios")
 
-const sharp = require("sharp")
-const statsFn = jest.fn()
-
-jest.mock("sharp")
-sharp.mockReturnValue({
-  stats: statsFn
-})
-
+const { validateBufferMIMEType } = require("validate-image-type")
+jest.mock("validate-image-type")
 
 describe("validating", () => {
 
@@ -21,7 +15,7 @@ describe("validating", () => {
   describe("when the image is valid", () => {
     beforeAll(async () => {
       axios.get.mockResolvedValue({ data: image })
-      statsFn.mockResolvedValue({ height: 6, width: 10 })
+      validateBufferMIMEType.mockResolvedValue({ ok: true })
       answer = await validate(image)
     })
 
@@ -29,12 +23,9 @@ describe("validating", () => {
       jest.clearAllMocks()
     })
 
-    it("calls sharp with the right image", async () => {
-      expect(sharp).toHaveBeenCalledWith(Buffer.from(image))
-    })
 
     it("calls stats to establish validity", async () => {
-      expect(statsFn).toHaveBeenCalled()
+      expect(validateBufferMIMEType).toHaveBeenCalled()
     })
 
     it("returns true", async () => {
@@ -44,7 +35,7 @@ describe("validating", () => {
 
   describe("when the image is corrupted", () => {
     beforeAll(async () => {
-      statsFn.mockRejectedValue(new Error())
+      validateBufferMIMEType.mockRejectedValue(new Error())
       answer = await validate(image)
     })
 
@@ -52,12 +43,8 @@ describe("validating", () => {
       jest.clearAllMocks()
     })
 
-    it("calls sharp with the right image", async () => {
-      expect(sharp).toHaveBeenCalledWith(Buffer.from(image))
-    })
-
     it("calls stats to establish validity", async () => {
-      expect(statsFn).toHaveBeenCalled()
+      expect(validateBufferMIMEType).toHaveBeenCalled()
     })
 
     it("returns false", async () => {
