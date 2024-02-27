@@ -26,6 +26,7 @@ import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 @Command(name = "report", mixinStandardHelpOptions = true,
         description = "Raises and closes issues depending on the results of bad image checking")
@@ -118,6 +119,9 @@ class Report implements Runnable {
         }
     }
 
+    private String getOwningPages(String[] slugs) {
+        return Arrays.stream(slugs).map(slug -> siteUrl + "/" + slug).collect(Collectors.joining("\n - "));
+    }
 
     private void processBadImage(GitHub github, BadImage link) {
         try {
@@ -135,18 +139,19 @@ class Report implements Runnable {
 
             // If there's no matching defect ...
             if (answer.getTotalCount() == 0) {
-                String title = String.format("Invalid image: %s", link.url);
-                // Eventually, we would like to customise the message depending on the exact nature of the broken link.
-                // For now, just do something generic.
+                String title = String.format("%s image: %s", link.reason, link.url);
                 String body = String.format("""
-                        Invalid image: %s
+                        %s image: %s
 
-                        The problem image was found on %s
+                        The problem image was found on these artifacts: %s
+                        
+                        Affected pages are 
+                        - %s
 
                         This issue was auto-created by the bad image helper.
 
                          --- %s --- Do not remove this line or the bad image helper will not be able to manage this issue
-                         """, link.url, link.artifact, EYECATCHER);
+                         """, link.reason, link.url, Arrays.toString(link.artifacts), getOwningPages(link.slugs), EYECATCHER);
 
                 if (!dryRun) {
                     GHIssue issue = repository.createIssue(title)
@@ -193,6 +198,8 @@ class Report implements Runnable {
 
     record BadImage(
             String url,
-            String artifact) {
+            String reason,
+            String[] artifacts,
+            String[] slugs) {
     }
 }
