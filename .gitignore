@@ -1,6 +1,9 @@
 .idea/workspace.xml
 .idea/checkstyle-idea.xml
 
+site-validation/.idea/
+site-validation/site-validation.iml
+
 bad-image-check-results.json
 
 # Logs

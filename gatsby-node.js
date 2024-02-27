@@ -13,7 +13,7 @@ const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
 const { validate } = require("./src/data/image-validation")
 const fs = require("fs/promises")
-let badImages = []
+let badImages = { }
 
 exports.sourceNodes = async ({
                                actions,
@@ -111,7 +111,13 @@ exports.sourceNodes = async ({
       if (!isValid || isGitHubBlobPage) {
         console.warn("Not a valid image in", node.artifact, ". Image link is:", iconUrl)
         delete node.metadata.icon
-        badImages.push({ url: iconUrl, artifact: node.artifact })
+        if (badImages[iconUrl]) {
+          badImages[iconUrl].artifacts.push(node.artifact)
+          badImages[iconUrl].slugs.push(node.slug)
+        } else {
+          badImages[iconUrl] = { url: iconUrl, reason: "Invalid", slugs: [node.slug], artifacts: [node.artifact] }
+        }
+
       } else {
         try {
           await createRemoteFileNode({
@@ -307,10 +313,11 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
 }
 
 exports.onPostBootstrap = async () => {
+  const badImageDetails = Object.values(badImages);
   // Write out to a file
-  if (badImages?.length > 0) {
-    console.warn(`Recording details of ${badImages.length} bad images.`)
-    const content = JSON.stringify(badImages)
+  if (badImageDetails?.length > 0) {
+    console.warn(`Recording details of ${badImageDetails.length} bad images.`)
+    const content = JSON.stringify(badImageDetails)
     const resultsFile = "bad-image-check-results.json"
     await fs.writeFile(resultsFile, content, { flag: "w+" }, err => {
       console.warn("Error writing results:", err)
