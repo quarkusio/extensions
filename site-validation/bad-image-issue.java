@@ -17,11 +17,13 @@ import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Option;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Collections;
 
@@ -175,7 +177,7 @@ class Report implements Runnable {
                 .getPath(OUTPUT_PATH);
         if (Files.exists(filePath)) {
             try {
-                return new ObjectMapper().readValue(Files.lines(filePath), BadImage[].class);
+                return Arrays.asList(new ObjectMapper().readValue(filePath.toFile(), BadImage[].class));
                             } catch (JsonProcessingException e) {
                                 throw new RuntimeException(e);
                             }
