@@ -6,6 +6,7 @@ const rewriteGuideUrl = async ({ name, metadata }) => {
   // In general, links should be valid. However, relax that requirement for deprecated extensions because
   // the guide may have been taken down well after the release, and an extension is not going to do a new release
   // to remove a dead guide link, on an extension which is dead anyway.
+  //Also relax it for Camel extensions - see https://github.com/apache/camel-quarkus/issues/5814#issuecomment-1968999263
   if (!exists) {
     if (metadata?.status?.includes("deprecated")) {
       console.warn(
@@ -63,6 +64,17 @@ const rewriteGuideUrl = async ({ name, metadata }) => {
           return newLink
         }
       }
+    }
+
+    // If none of the transforms worked, if this is a camel link, drop the dead link
+    if (metadata?.maven?.groupId === "org.apache.camel.quarkus") {
+      console.warn(
+        "Dropping dead guide link from Camel extension. Extension is:",
+        name,
+        "and guide link is",
+        originalLink
+      )
+      return undefined
     }
   }
 
