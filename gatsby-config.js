@@ -27,6 +27,12 @@ module.exports = {
     `github-enricher`,
     `smart-cropper`,
     {
+      resolve: "gatsby-plugin-force-file-loader",
+      options: {
+        /* gatsby-plugin-force-file-loader options here */
+      }
+    },
+    {
       resolve: `gatsby-plugin-remote-images`,
       options: {
         nodeType: "SourceControlInfo",

@@ -13,7 +13,7 @@ const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
 const { validate } = require("./src/data/image-validation")
 const fs = require("fs/promises")
-let badImages = { }
+let badImages = {}
 
 exports.sourceNodes = async ({
                                actions,
@@ -287,7 +287,7 @@ const getNextPost = (index, posts) => {
   }
 }
 
-exports.onCreateWebpackConfig = ({ stage, actions }) => {
+exports.onCreateWebpackConfig = ({ stage }) => {
   let plugins
   if (stage === "develop") {
     plugins = [
@@ -298,22 +298,10 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
       }),
     ]
   }
-
-  actions.setWebpackConfig({
-    plugins,
-    module: {
-      rules: [
-        {
-          test: /\.(woff|woff2|eot|ttf|otf)$/,
-          use: ["file-loader"],
-        },
-      ],
-    },
-  })
 }
 
 exports.onPostBootstrap = async () => {
-  const badImageDetails = Object.values(badImages);
+  const badImageDetails = Object.values(badImages)
   // Write out to a file
   if (badImageDetails?.length > 0) {
     console.warn(`Recording details of ${badImageDetails.length} bad images.`)
