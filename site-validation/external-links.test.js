@@ -84,11 +84,12 @@ describe("site external links", () => {
           replacement: "http://localhost:9000",
         },
       ],
-      concurrency: 50,
+      concurrency: 10,
       timeout: 30 * 1000,
       retry: true, // Retry on 429
       retryErrors: true, // Retry on 5xx
       retryErrorsCount: 6,
+      "retryErrorsJitter": 5,
     })
   })
 
