@@ -36,6 +36,13 @@ describe("site external links", () => {
           // Twitter gives 404s, I think if it feels bombarded, so let's try a retry
           retryWorked = await retryUrl(result.url)
         }
+
+        // Some APIs give 429s but no retry-after header, and linkinator will not retry in that case
+        // Retry the hard way
+        if (!retryWorked && result.status === status.TOO_MANY_REQUESTS) {
+          retryWorked = await retryUrl(result.url)
+        }
+
         if (!retryWorked && !isPaywalled) {
           const errorText =
             result.failureDetails[0].statusText || result.failureDetails[0].code
@@ -84,12 +91,12 @@ describe("site external links", () => {
           replacement: "http://localhost:9000",
         },
       ],
-      concurrency: 10,
+      concurrency: 5,
       timeout: 30 * 1000,
       retry: true, // Retry on 429
       retryErrors: true, // Retry on 5xx
       retryErrorsCount: 6,
-      "retryErrorsJitter": 5,
+      retryErrorsJitter: 8000, // Default is 3000
     })
   })
 
