@@ -65,6 +65,8 @@ describe("site external links", () => {
             }
           }
         }
+
+        return retryWorked
       }
     })
 
@@ -108,7 +110,7 @@ describe("site external links", () => {
 
 const retryUrl = async url => {
   const hitUrl = async retry => {
-    // Use a different client, which seems less affected by the 404s from twitter
+    // Use a different client, which allows us to retry many times for 429s
     const { statusCode } = await curly.get(url)
 
     if (status[`${statusCode}_CLASS`] !== status.classes.SUCCESSFUL) {
