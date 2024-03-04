@@ -75,6 +75,7 @@ class Report implements Runnable {
                     .build();
 
             List<DeadLink> links = readTestOutputFile();
+            System.out.println("Processing " + links.size() + " dead links.");
 
             links.forEach(link -> processDeadLink(github, link));
 
@@ -122,9 +123,9 @@ class Report implements Runnable {
             } else {
                 // Do nothing
                 System.out.println(
-                        String.format("Keeping %s open as it is still broken in tests.",
+                        String.format("Keeping %s open as it is still broken in tests. The dead link flagged by tests is %s",
                                 issue.getHtmlUrl()
-                                        .toString()));
+                                        .toString(), matchingLink.url()));
 
             }
 
