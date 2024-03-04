@@ -115,7 +115,7 @@ const retryUrl = async url => {
       return retry(statusCode)
     }
   }
-  return promiseRetry(hitUrl, { retries: 4, minTimeout: 4 * 1000 })
+  return promiseRetry(hitUrl, { retries: 8, minTimeout: 8 * 1000 })
     .then(() => true)
     .catch(() => false)
 }
