@@ -18,7 +18,7 @@
     "date-fns": "^3.3.1",
     "encodeurl": "^1.0.2",
     "eslint-plugin-gatsby": "^1.0.2",
-    "gatsby": "^4.25.7",
+    "gatsby": "^4.25.8",
     "gatsby-plugin-feed": "^4.25.0",
     "gatsby-plugin-force-file-loader": "^4.0.2",
     "gatsby-plugin-image": "^2.22.0",
