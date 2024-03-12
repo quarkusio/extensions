@@ -62,6 +62,8 @@ jobs:
           NODE_ENV: production
           GATSBY_ACTIVE_ENV: production
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TABLEAU_PERSONAL_ACCESS_TOKEN: ${{ secrets.TABLEAU_PERSONAL_ACCESS_TOKEN }}
+          TABLEAU_SITE: ${{ secrets.TABLEAU_SITE }}
           SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
 
       - name: Caching GitHub API results

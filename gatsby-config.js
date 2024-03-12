@@ -87,6 +87,7 @@ module.exports = {
         },
       },
     },
+    "download-data",
     {
       resolve: `gatsby-plugin-feed`,
       options: {

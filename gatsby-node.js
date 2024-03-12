@@ -202,6 +202,11 @@ exports.sourceNodes = async ({
 
     }
 
+    if (node.metadata) {
+      // Do the link to the download data
+      node.metadata.downloads = node.metadata?.maven?.artifactId
+    }
+
     return createNode(node)
   })
   return Promise.all(secondPromises)
@@ -337,6 +342,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       icon: File @link(by: "url")
       sponsors: [String]
       sponsor: String
+      downloads: DownloadRanking @link(by: "artifactId")
     }
     
     type MavenInfo {
