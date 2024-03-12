@@ -1,9 +1,16 @@
 import * as React from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import Select from "react-select"
 import { styles } from "../util/styles/style"
 import { timestampExtensionComparator } from "./timestamp-extension-comparator"
 import { alphabeticalExtensionComparator } from "./alphabetical-extension-comparator"
+import { downloadsExtensionComparator } from "./downloads-extension-comparator"
+
+const format = new Intl.DateTimeFormat("default", {
+  year: "numeric",
+  month: "long"
+})
 
 const Title = styled.label`
   font-size: var(--font-size-16);
@@ -19,6 +26,7 @@ const SortBar = styled.div`
   justify-content: flex-end;
   align-items: center;
   gap: var(--a-small-space);
+  flex-grow: 2;
 `
 
 const Element = styled.form`
@@ -27,6 +35,15 @@ const Element = styled.form`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 16px;
+`
+
+const DownloadDataData = styled.h2`
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 400;
+  font-style: italic;
 `
 
 // Grab CSS variables in javascript
@@ -58,25 +75,37 @@ const colourStyles = {
   }),
 }
 
+const downloads = "downloads"
 const sortings = [
   { label: "Most recently released", value: "time", comparator: timestampExtensionComparator },
-  { label: "Alphabetical", value: "alpha", comparator: alphabeticalExtensionComparator }]
+  { label: "Alphabetical", value: "alpha", comparator: alphabeticalExtensionComparator },
+  { label: "Downloads", value: downloads, comparator: downloadsExtensionComparator }]
 
-const Sortings = ({ sorterAction }) => {
+const Sortings = ({ sorterAction, downloadData }) => {
+  const [selectedOption, setSelectedOption] = useState(null)
+
+  const filteredSortings = downloadData?.date ? sortings : sortings.filter(e => e.value !== downloads)
 
   const setSortByDescription = (entry) => {
     // We need to wrap our comparator functions in functions or they get called, which goes very badly
     sorterAction && sorterAction(() => entry.comparator)
   }
 
+  const formattedDate = downloadData?.date ? format.format(new Date(Number(downloadData.date))) : ""
   return (
     <SortBar className="sortings">
+      {selectedOption?.value === downloads &&
+        <DownloadDataData>Maven download data only available for extensions in quarkusio and quarkiverse repositories.
+          Last updated {formattedDate}</DownloadDataData>}
       <Title htmlFor="sort">Sort by</Title>
       <Element data-testid="sort-form">
         <Select
           placeholder="Default"
-          options={sortings}
-          onChange={label => setSortByDescription(label)}
+          options={filteredSortings}
+          onChange={label => {
+            setSelectedOption(label)
+            setSortByDescription(label)
+          }}
           name="sort"
           inputId="sort"
           styles={colourStyles}

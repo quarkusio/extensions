@@ -27,8 +27,15 @@ nvm use 18
 
 ## Environment variables 
 
-Information is more complete if a GitHub access token is provided. It should only be granted read access. 
-Set it as an environment variable called `GITHUB_TOKEN`. (In the CI, this will be provided by the platform.)
+The site pulls data from a range of sources, some of which need credentials. For the full build, set the following environment variables:
+
+- `GITHUB_TOKEN` (this will be automatically set in a GitHub CI, and should only be granted read access)
+- `TABLEAU_PERSONAL_ACCESS_TOKEN`
+- `TABLEAU_SITE`
+- `SEGMENT_KEY` (used for anonymised analytics)
+
+Information is more complete if a these tokens are provided, but the build should still succeed if they are missing. If it fails without them, please raise an issue.
+In PR builds, everything except the `GITHUB_TOKEN` will be missing.
 
 ## Caching 
 

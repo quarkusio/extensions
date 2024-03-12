@@ -33,6 +33,7 @@ const InfoSortRow = styled.div`
   padding-left: var(--site-margins);
   padding-right: var(--site-margins);
   display: flex;
+  column-gap: var(--a-modest-space);
   justify-content: space-between;
 `
 
@@ -46,13 +47,12 @@ const RightColumn = styled.div`
 const ExtensionCount = styled.h2`
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
-  width: 100%;
   font-size: 1rem;
   font-weight: 400;
   font-style: italic;
 `
 
-const ExtensionsList = ({ extensions, categories }) => {
+const ExtensionsList = ({ extensions, categories, downloadData }) => {
   // Do some pre-filtering for content we will never want, like superseded extensions
   const allExtensions = extensions.filter(extension => !extension.isSuperseded)
 
@@ -75,7 +75,7 @@ const ExtensionsList = ({ extensions, categories }) => {
     return (
       <div>
         <InfoSortRow><ExtensionCount>{countMessage}</ExtensionCount>
-          <Sortings sorterAction={setExtensionComparator}></Sortings>
+          <Sortings sorterAction={setExtensionComparator} downloadData={downloadData}></Sortings>
         </InfoSortRow>
         <FilterableList className="extensions-list">
           <Filters

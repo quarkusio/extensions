@@ -9,6 +9,7 @@ const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const extensions = data.allExtension.nodes
   const categories = data.allCategory.nodes.map(c => c.name)
+  const downloadData = data.downloadDataDate
 
   if (extensions.length === 0) {
     return (
@@ -20,7 +21,7 @@ const Index = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
-      <ExtensionsList extensions={extensions} categories={categories} />
+      <ExtensionsList extensions={extensions} categories={categories} downloadData={downloadData} />
     </Layout>
   )
 }
@@ -45,6 +46,10 @@ export const pageQuery = graphql`
       nodes {
         name
       }
+    }
+    
+    downloadDataDate( id: {regex: "/.*/g"}) {
+      date
     }
 
     allExtension(sort: { fields: [name], order: DESC }) {
@@ -80,6 +85,9 @@ export const pageQuery = graphql`
                 gatsbyImageData(width: 80)
               }
             }
+          }
+          downloads {
+            rank
           }
         }
         platforms
