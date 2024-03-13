@@ -1,11 +1,11 @@
 import * as React from "react"
-import { useState } from "react"
 import styled from "styled-components"
 import Select from "react-select"
 import { styles } from "../util/styles/style"
 import { timestampExtensionComparator } from "./timestamp-extension-comparator"
 import { alphabeticalExtensionComparator } from "./alphabetical-extension-comparator"
 import { downloadsExtensionComparator } from "./downloads-extension-comparator"
+import { useQueryParamString } from "react-use-query-param-string"
 
 const format = new Intl.DateTimeFormat("default", {
   year: "numeric",
@@ -75,37 +75,53 @@ const colourStyles = {
   }),
 }
 
+const key = "sort"
 const downloads = "downloads"
+
 const sortings = [
   { label: "Most recently released", value: "time", comparator: timestampExtensionComparator },
   { label: "Alphabetical", value: "alpha", comparator: alphabeticalExtensionComparator },
   { label: "Downloads", value: downloads, comparator: downloadsExtensionComparator }]
 
 const Sortings = ({ sorterAction, downloadData }) => {
-  const [selectedOption, setSelectedOption] = useState(null)
+  const [sort, setSort] = useQueryParamString(key, undefined, true)
 
-  const filteredSortings = downloadData?.date ? sortings : sortings.filter(e => e.value !== downloads)
-
-  const setSortByDescription = (entry) => {
+  const applySort = (entry) => {
     // We need to wrap our comparator functions in functions or they get called, which goes very badly
     sorterAction && sorterAction(() => entry.comparator)
   }
 
+
+  const filteredSortings = downloadData?.date ? sortings : sortings.filter(e => e.value !== downloads)
+
+  const selected = filteredSortings.find(entry => entry.value === sort)
+
+  if (selected) {
+    applySort(selected)
+  }
+
+
   const formattedDate = downloadData?.date ? format.format(new Date(Number(downloadData.date))) : ""
+
+
   return (
     <SortBar className="sortings">
-      {selectedOption?.value === downloads &&
+      {sort === downloads &&
         <DownloadDataData>Maven download data only available for extensions in quarkusio and quarkiverse repositories.
           Last updated {formattedDate}</DownloadDataData>}
       <Title htmlFor="sort">Sort by</Title>
       <Element data-testid="sort-form">
         <Select
           placeholder="Default"
+          value={selected}
           options={filteredSortings}
-          onChange={label => {
-            setSelectedOption(label)
-            setSortByDescription(label)
+          onChange={entry => {
+            if (entry.value !== sort) {
+              setSort(entry.value)
+              applySort(entry)
+            }
           }}
+
           name="sort"
           inputId="sort"
           styles={colourStyles}
