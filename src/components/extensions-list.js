@@ -3,7 +3,6 @@ import { useState } from "react"
 import Filters from "./filters/filters"
 import ExtensionCard from "./extension-card"
 import styled from "styled-components"
-import { timestampExtensionComparator } from "./sortings/timestamp-extension-comparator"
 import Sortings from "./sortings/sortings"
 
 const FilterableList = styled.div`
@@ -57,7 +56,7 @@ const ExtensionsList = ({ extensions, categories, downloadData }) => {
   const allExtensions = extensions.filter(extension => !extension.isSuperseded)
 
   const [filteredExtensions, setExtensions] = useState(allExtensions)
-  const [extensionComparator, setExtensionComparator] = useState(() => timestampExtensionComparator)
+  const [extensionComparator, setExtensionComparator] = useState(() => undefined)
 
   if (allExtensions) {
     // Exclude unlisted extensions from the count, even though we sometimes show them if there's a direct search for it
@@ -65,7 +64,9 @@ const ExtensionsList = ({ extensions, categories, downloadData }) => {
       extension => !extension.metadata.unlisted
     ).length
 
-    filteredExtensions.sort(extensionComparator)
+    if (extensionComparator) {
+      filteredExtensions.sort(extensionComparator)
+    }
 
     const countMessage =
       extensionCount === filteredExtensions.length
