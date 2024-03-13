@@ -77,14 +77,14 @@ const colourStyles = {
 
 const key = "sort"
 const downloads = "downloads"
-
+const time = "time"
 const sortings = [
-  { label: "Most recently released", value: "time", comparator: timestampExtensionComparator },
+  { label: "Most recently released", value: time, comparator: timestampExtensionComparator },
   { label: "Alphabetical", value: "alpha", comparator: alphabeticalExtensionComparator },
   { label: "Downloads", value: downloads, comparator: downloadsExtensionComparator }]
 
 const Sortings = ({ sorterAction, downloadData }) => {
-  const [sort, setSort] = useQueryParamString(key, undefined, true)
+  const [sort, setSort] = useQueryParamString(key, time, true)
 
   const applySort = (entry) => {
     // We need to wrap our comparator functions in functions or they get called, which goes very badly
@@ -100,9 +100,7 @@ const Sortings = ({ sorterAction, downloadData }) => {
     applySort(selected)
   }
 
-
   const formattedDate = downloadData?.date ? format.format(new Date(Number(downloadData.date))) : ""
-
 
   return (
     <SortBar className="sortings">
