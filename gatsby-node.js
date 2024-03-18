@@ -204,7 +204,7 @@ exports.sourceNodes = async ({
 
     if (node.metadata) {
       // Do the link to the download data
-      node.metadata.downloads = node.metadata?.maven?.artifactId
+      node.metadata.downloads = node.metadata?.maven?.artifactId ? `${node.metadata.maven.groupId}:${node.metadata.maven.artifactId}` : undefined
     }
 
     return createNode(node)
@@ -342,7 +342,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       icon: File @link(by: "url")
       sponsors: [String]
       sponsor: String
-      downloads: DownloadRanking @link(by: "artifactId")
+      downloads: DownloadRanking @link(by: "uniqueId")
     }
     
     type MavenInfo {
