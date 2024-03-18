@@ -94,6 +94,7 @@ const getMostRecentData = async () => {
     const withDates = json
       .map(entry => {
         return {
+          groupId: entry["GroupId"],
           artifactId: entry["data.artifactId"],
           month: entry["Month of Data.Date"],
           downloads: convertToNumber(entry["Data.Timeline"])
@@ -109,7 +110,12 @@ const getMostRecentData = async () => {
       .sort((a, b) => b.downloads - a.downloads)
 
     const ranking = onlyMostRecentDownloads.map((entry, i) => {
-      return { artifactId: entry.artifactId, rank: i + 1 }
+      return {
+        uniqueId: entry.groupId + ":" + entry.artifactId,
+        groupId: entry.groupId,
+        artifactId: entry.artifactId,
+        rank: i + 1
+      }
     })
 
     return { date: mostRecentDate, ranking }

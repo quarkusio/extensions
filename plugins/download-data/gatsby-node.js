@@ -8,7 +8,7 @@ exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => 
   const allData = await getMostRecentData()
 
   if (allData) {
-    
+
     createNode({
       date: allData.date,
       id: createNodeId(allData.date.toString()),
@@ -32,6 +32,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   const typeDefs = `
   type DownloadRanking implements Node {
     artifactId: String
+    uniqueId: String
     rank: Int
   }
   
