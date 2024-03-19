@@ -11,9 +11,10 @@ const Card = styled(props => <Link {...props} />)`
   text-align: center;
   padding: 1rem;
   width: 100%;
-  background: var(--white) 0 0 no-repeat padding-box;
+  background: var(--card-background-color) 0 0 no-repeat padding-box;
+  color: var(--main-text-color);
   border: ${props =>
-          props.$unlisted ? "1px solid var(--grey-0)" : "1px solid var(--grey-1)"};
+          props.$unlisted ? "1px solid var(--unlisted-outline-color)" : "1px solid var(--card-outline)"};
   border-radius: 10px;
   opacity: 1;
   display: flex;
@@ -22,8 +23,8 @@ const Card = styled(props => <Link {...props} />)`
 
   &:hover,
   :focus {
-    background-color: var(--light-blue);
-    border: 1px solid var(--light-blue);
+    background-color: var(--card-background-color-hover);
+    border: 1px solid var(--card-background-color-hover);
   }
 `
 
@@ -46,7 +47,7 @@ const ExtensionName = styled.div`
   font-size: var(--font-size);
   font-weight: var(--font-weight-awfully-bold);
   letter-spacing: 0;
-  color: ${props => (props.$unlisted ? "var(--grey-1)" : "var(--grey-2)")};
+  color: ${props => (props.$unlisted ? "var(--card-outline)" : "var(--link-color)")};
   opacity: 1;
   width: 100%;
   padding-bottom: 2px;
@@ -68,7 +69,7 @@ const ExtensionDescription = styled.div`
   --num-lines: 3.05; // Add a bit of padding so g and other hanging letters don't get cut off
   --font-size: var(--font-size-14);
   --line-height: calc(var(--font-size) * var(--line-height-multiplier));
-  color: var(--grey-2);
+  color: var(--main-text-color);
   text-align: left;
   font-size: var(--font-size);
   opacity: 1;
@@ -86,7 +87,7 @@ const ExtensionDescription = styled.div`
 `
 
 const ExtensionInfo = styled.div`
-  color: ${props => (props.$unlisted ? "var(--dark-red)" : "var(--grey-2)")};
+  color: ${props => (props.$unlisted ? "var(--danger-color)" : "var(--main-text-color)")};
   text-transform: ${props => (props.$unlisted ? "uppercase" : "none")};
   text-align: left;
   font-size: 0.7rem;

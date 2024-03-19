@@ -7,12 +7,12 @@ const Band = styled.header`
   padding-right: var(--site-margins);
   padding-top: 4rem;
   padding-bottom: 3rem;
-  color: var(--white);
+  color: var(--title-text-color);
   text-align: left;
   font-size: var(--font-size-28);
   opacity: 1;
   margin: 0;
-  background-color: var(--dark-blue-alt);
+  background-color: var(--title-background-color);
   display: block; /* No flex, since otherwise we have to fuss with reproducing margin collapse */
 `
 

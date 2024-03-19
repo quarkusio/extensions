@@ -5,14 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const MetadataBlock = styled.section`
   width: calc((50%) - var(--a-modest-space));
-  color: var(--grey-2);
+  color: var(--sec-text-color);
   text-align: left;
   overflow-wrap: break-word;
   font-size: var(--font-size-16);
   padding-left: var(--a-modest-space);
   padding-bottom: var(--a-modest-space);
   padding-top: var(--a-modest-space);
-  border-bottom: 1px solid var(--grey-1);
+  border-bottom: 1px solid var(--card-outline);
 `
 
 const MetadataTitle = styled.div`
@@ -29,8 +29,8 @@ const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
 `
 
 const ExtensionMetadata = ({
-  data: { name, plural, fieldName, metadata, transformer, text, url, icon },
-}) => {
+                             data: { name, plural, fieldName, metadata, transformer, text, url, icon },
+                           }) => {
   const field = fieldName ? fieldName : name.toLowerCase()
 
   const content = text ? text : metadata?.[field]

@@ -13,7 +13,7 @@ const Element = styled.div`
 `
 
 const SearchBox = styled.div`
-  border: 1px solid var(--grey-1);
+  border: 1px solid var(--controls-outline-color);
   height: 36px;
   width: 224px;
   display: flex;
@@ -21,7 +21,7 @@ const SearchBox = styled.div`
   align-items: center;
 
   &:focus-within {
-    outline: var(--quarkus-blue) solid 2px;
+    outline: var(--breadcrumb-background-color) solid 2px;
   }
 `
 
@@ -29,6 +29,8 @@ const Input = styled.input`
   padding: 0;
   border: 0;
   font-size: var(--font-size-14);
+  background-color: var(--main-background-color);
+  color: var(--main-text-color);
 
   outline: none; // change to the defaults, which otherwise give a blue ring inside the white area
 `

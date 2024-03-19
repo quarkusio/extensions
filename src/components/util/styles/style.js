@@ -1,11 +1,4 @@
-// Ideally, we would import these variables from the styles.css, to be DRY
-// However, I've tried getComputedValue and css-variables-parser, and I cannot find a solution
-// that works in both `gatsby build` and in `gatsby develop`.
-// So WET it is.
-
 import Values from "values.js"
-
-const styles = { "grey-2": "#555555", "border-radius": "10px" }
 
 const white = new Values("#ffffff")
 
@@ -32,4 +25,4 @@ const getPalette = (n, baseCode) => {
   }
 }
 
-export { styles, getPalette }
+export { getPalette }

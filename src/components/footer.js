@@ -5,8 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const FooterBar = styled.footer`
   height: 64px;
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--navbar-background-color);
+  color: var(--main-background-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,7 +22,7 @@ const Spacer = styled.div`
 `
 
 const Logo = styled(props => <a {...props} />)`
-  background-color: var(--black);
+  background-color: var(--navbar-background-color);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,7 +31,8 @@ const Logo = styled(props => <a {...props} />)`
   margin-left: 7px;
 `
 const SponsorInfo = styled.div`
-  background-color: var(--black);
+  background-color: var(--navbar-background-color);
+  color: var(--navbar-text-color);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -42,14 +43,15 @@ const SponsorInfo = styled.div`
 
 const LicenseText = styled(props => <a {...props} />)`
   margin: 8px;
+  color: var(--navbar-text-color);
 
   &:visited {
-    color: var(--white);
+    color: var(--navbar-text-color);
     text-decoration: underline;
   }
 
   &:link {
-    color: var(--white);
+    color: var(--navbar-text-color);
     text-decoration: underline;
   }
 `
@@ -63,6 +65,7 @@ const LicenseInfo = styled.div`
 const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
   margin-left: 1px;
   margin-right: 1px;
+  color: var(--navbar-text-color);
 `
 
 const Footer = () => {

@@ -13,7 +13,8 @@ const DesktopSubmenu = styled.ul`
 
   list-style: none;
 
-  background: var(--grey-3);
+  background: var(--submenu-background-color);
+  color: var(--navbar-text-color);
 
   position: absolute;
   z-index: 1;
@@ -40,7 +41,8 @@ const MobileSubmenu = styled.ul`
 
   list-style: none;
 
-  background: var(--grey-3);
+  background: var(--submenu-background-color);
+  color: var(--navbar-text-color);
 
   width: 100%;
   top: 1rem; // The same as the padding on the entries in the parent menu
@@ -92,7 +94,7 @@ const Anchor = styled.div`
 `
 
 const NavEntry = styled(props => <li {...props} />)`
-  border-bottom: 1px solid var(--grey-2);
+  border-bottom: 1px solid var(--submenu-separator-color);
   width: 100%;
   height: 100%;
   font-weight: var(--font-weight-bold);
@@ -101,18 +103,18 @@ const NavEntry = styled(props => <li {...props} />)`
   position: relative;
 
   &:hover {
-    color: var(--white);
-    background-color: var(--quarkus-blue);
+    color: var(--navbar-text-color);
+    background-color: var(--submenu-hover-color);
   }
 
   a {
     padding: 5px 10px;
-    color: var(--white);
+    color: var(--navbar-text-color);
     white-space: nowrap;
     width: 100%;
 
     &:visited {
-      color: var(--white);
+      color: var(--navbar-text-color);
     }
 
     ${({ current }) =>

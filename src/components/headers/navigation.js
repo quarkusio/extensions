@@ -14,8 +14,8 @@ const NavToggle = styled.label`
 `
 
 const NavBar = styled.nav`
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--navbar-background-color);
+  color: var(--navbar-text-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -57,8 +57,8 @@ const DesktopNavigation = styled.ul`
   padding-bottom: 0;
   align-content: center;
   align-items: center;
-  background-color: var(--black);
-  color: var(--white);
+  background-color: var(--navbar-background-color);
+  color: var(--navbar-text-color);
   margin: 0 0;
 `
 
@@ -89,7 +89,7 @@ const LogoWrapper = styled.div`
 `
 
 const Logo = styled.a`
-  background-color: var(--black);
+  background-color: var(--navbar-background-color);
   width: var(--logo-width);
   display: flex;
   // The main site sets a height, but that inflates and crops the image, so we need to do it in a wrapper div
@@ -112,7 +112,7 @@ const CallToActionWrapper = styled.li`
 
 const CallToAction = styled(props => <a {...props} />)`
   white-space: nowrap;
-  color: var(--white);
+  color: var(--navbar-text-color);
 
   border: 2px solid white;
   border-radius: var(--border-radius);
@@ -125,13 +125,13 @@ const CallToAction = styled(props => <a {...props} />)`
   font-weight: var(--font-weight-normal);
 
   &:visited {
-    color: var(--white);
+    color: var(--navbar-text-color);
   }
 
   &:hover {
-    color: var(--white);
-    background-color: var(--link);
-    border: 2px solid var(--link);
+    color: var(--navbar-text-color);
+    background-color: var(--link-color);
+    border: 2px solid var(--link-color);
   }
 `
 
@@ -261,7 +261,7 @@ const Navigation = () => {
     </CallToActionWrapper>
   )
 
-  const langIcon = <LangIcon icon={faGlobe} title="globe" />
+  const langIcon = <LangIcon icon={faGlobe} color="var(--navbar-text-color)" title="globe" />
 
   const translations = (
     <Submenu title={langIcon}>

@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const BreadcrumbBart = styled.header`
   height: 90px;
-  color: var(--white);
+  color: var(--breadcrumb-text-color);
   text-align: left;
   font-size: var(--font-size-24);
   opacity: 1;
   margin: 0;
   padding-left: var(--site-margins);
-  background-color: var(--quarkus-blue);
+  background-color: var(--breadcrumb-background-color);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -20,7 +20,11 @@ const BreadcrumbBart = styled.header`
 const StyledLink = styled(props => <Link {...props} />)`
   font-weight: var(--font-weight-awfully-bold);
   text-decoration: none;
-  color: var(--white);
+  color: var(--breadcrumb-text-color);
+
+  &:visited {
+    color: var(--breadcrumb-text-color);
+  }
 `
 
 const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`

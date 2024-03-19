@@ -15,7 +15,7 @@ const Element = styled.div`
 
 const Category = styled.li`
   font-size: var(--font-size-16);
-  color: var(--black);
+  color: var(--main-text-color);
   display: flex;
   padding: 0;
   gap: 8px;
@@ -30,6 +30,7 @@ const Categories = styled.ul`
 
 const TickyBox = styled(props => <FontAwesomeIcon {...props} />)`
   font-size: 16px;
+  color: var(--main-text-color);
 `
 
 const toggleCategory = (

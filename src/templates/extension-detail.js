@@ -15,6 +15,15 @@ import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import "react-tabs/style/react-tabs.css"
 import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
 
+// This caching is important to allow our styles to take precedence over the default ones
+// See https://github.com/JedWatson/react-select/issues/4230
+import createCache from "@emotion/cache"
+
+createCache({
+  key: "my-select-cache",
+  prepend: true
+})
+
 const ExtensionDetails = styled.main`
   margin-left: var(--site-margins);
   margin-right: var(--site-margins);
@@ -35,11 +44,11 @@ const Headline = styled.header`
 
 const UnlistedWarning = styled.header`
   padding-left: var(--site-margins);
-  background-color: var(--grey-0);
+  background-color: var(--sec-background-color);
   text-align: left;
   font-size: var(--font-size-24);
   font-weight: var(--font-weight-bold);
-  color: var(--grey-2);
+  color: var(--sec-text-color);
   padding-top: var(--a-modest-space);
   padding-bottom: var(--a-modest-space);
 `
@@ -60,7 +69,7 @@ const Columns = styled.div`
 `
 
 const LogoImage = styled.div`
-  width: 220px;
+  width: var(--logo-width);
   margin-right: 60px;
   margin-bottom: 25px;
   border-radius: 10px;
@@ -87,13 +96,13 @@ const ExtensionName = styled.div`
   font-size: var(--font-size-48);
   font-weight: var(--font-weight-bold);
   letter-spacing: 0;
-  color: var(--grey-2);
+  color: var(--sec-text-color);
   text-transform: uppercase;
   opacity: 1;
 `
 
 const ExtensionDescription = styled.div`
-  color: var(--grey-2);
+  color: var(--sec-text-color);
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
@@ -114,7 +123,7 @@ const MavenCoordinate = styled.span`
 
 const VisibleLink = styled.a`
   &:link {
-    color: var(--link);
+    color: var(--link-color);
     text-decoration: underline;
   }
 
@@ -158,7 +167,7 @@ const ClosingRule = styled.div`
   position: relative;
   top: -1px;
   padding-left: var(--a-modest-space);
-  border-bottom: 1px solid var(--grey-1);`
+  border-bottom: 1px solid var(--card-outline);`
 
 // Semi-duplicate the tab headings so we get prettier search strings :)
 const tabs = ["docs", "community"]

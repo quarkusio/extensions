@@ -2,7 +2,7 @@ import * as React from "react"
 import styled from "styled-components"
 import Select from "react-select"
 import Title from "./title"
-import { styles } from "../util/styles/style"
+
 
 const Element = styled.form`
   padding-top: 36px;
@@ -17,33 +17,14 @@ const onChange = (value, { action }, filterer) => {
   if (action === "select-option" && filterer) filterer(value.value)
 }
 
-// Grab CSS variables in javascript
-const grey = styles["grey-2"]
 
-const colourStyles = {
-  control: styles => ({
-    ...styles,
-    borderRadius: 0,
-    color: grey,
-    borderColor: grey,
-    width: "220px",
-  }),
-  option: (styles, { isDisabled }) => {
-    return {
-      ...styles,
-      cursor: isDisabled ? "not-allowed" : "default",
-      borderRadius: 0,
-    }
-  },
-  dropdownIndicator: styles => ({
-    ...styles,
-    color: grey, // Custom colour
-  }),
-  indicatorSeparator: styles => ({
-    ...styles,
-    margin: 0,
-    backgroundColor: grey,
-  }),
+const classNames = {
+  menu: state => state.isFocused ? "select-menu__focused" : "select-menu",
+  singleValue: () => "select-single-value",
+  control: () => "select-control",
+  option: state => state.isSelected ? "select-option__selected" : state.isDisabled ? "select-option__disabled" : state.isFocused ? "select-option__focused" : "select-option__default",
+  dropdownIndicator: () => "select-dropdown-indicator",
+  indicatorSeparator: () => "select-indicator-separator"
 }
 
 // We may get things that aren't strings, so we can't just use compareTo
@@ -92,7 +73,7 @@ const DropdownFilter = ({
         onChange={(a, b) => onChange(a, b, filterer)}
         name={label}
         inputId={label}
-        styles={colourStyles}
+        classNames={classNames}
       />
     </Element>
   )

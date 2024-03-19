@@ -4,6 +4,13 @@
  * See: https://www.gatsbyjs.com/docs/ssr-apis/
  */
 
-exports.onRenderBody = ({ setHtmlAttributes }) => {
-  setHtmlAttributes({ lang: `en` })
+export const onRenderBody = ({ setBodyAttributes, setHtmlAttributes }) => {
+  //setPreBodyComponents(<MagicScriptTag />)
+  // setPreBodyComponents(<div>HI</div>)
+  setHtmlAttributes({ lang: `en` })// Affect the HTML that gets loaded before React here
+  setBodyAttributes({
+    style: {
+      backgroundColor: "var(--main-background-color)"
+    }
+  })
 }
