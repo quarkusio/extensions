@@ -16,7 +16,7 @@ const LegendSwatch = styled.div`
 const ContributorList = styled.ul`
   overflow: scroll;
   height: 400px;
-  background-color: var(--white); // this very slightly reduces quite how awful it is if the content overflows to the right-hand side
+  background-color: var(--main-background-color); // this very slightly reduces quite how awful it is if the content overflows to the right-hand side
   padding-inline-start: 0;
 `
 
@@ -25,7 +25,7 @@ const ContributorInformation = styled.li`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  color: black;
+  color: var(--main-text-color);
   column-gap: 0.75rem;
   font-size: var(--font-size-10);
   padding: 2px;
@@ -40,12 +40,12 @@ const Contributor = styled.div`
   column-gap: 0.25rem;
 
   &:link {
-    color: var(--black);
+    color: var(--main-text-color);
     text-decoration: underline;
   }
 
   &:visited {
-    color: var(--black);
+    color: var(--main-text-color);
     text-decoration: underline;
   }
 `
@@ -102,7 +102,7 @@ const ContributionsChart = (props) => {
 
             {lotsOfContributors ||
               <LabelList position="outside" offset={21} stroke="none"
-                         fill="black"
+                         fill="var(--main-text-color)"
                          content={renderCustomizedLabel} valueAccessor={(p) => p} />}
             }
           </Pie>
@@ -135,7 +135,7 @@ const renderCustomizedLabel = (props) => {
     <g>
       <a href={profileUrl}>
         <Text offset={offset} stroke={stroke} cx={cx} cy={cy} x={x}
-              y={y} fill="black" textAnchor={anchor}
+              y={y} fill="var(--main-text-color)" textAnchor={anchor}
               verticalAnchor="middle"
               className="recharts-pie-label-text"
         >

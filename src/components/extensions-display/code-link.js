@@ -4,7 +4,7 @@ import styled from "styled-components"
 import codeQuarkusUrl from "../util/code-quarkus-url"
 
 const Button = styled(props => <a {...props} />)`
-  color: var(--white);
+  color: var(--navbar-text-color);
   display: flex;
   justify-content: center;
 
@@ -16,11 +16,11 @@ const Button = styled(props => <a {...props} />)`
   padding: 0.5rem 2rem;
 
   &:visited {
-    color: var(--white);
+    color: var(--navbar-text-color);
   }
 
   &:hover {
-    color: var(--white);
+    color: var(--navbar-text-color);
     background-color: var(--dark-red);
   }
 `

@@ -12,6 +12,7 @@ import {
 import Navigation from "./headers/navigation"
 import TitleBand from "./headers/title-band"
 import Footer from "./footer"
+import styled from "styled-components"
 
 library.add(
   faAngleRight,
@@ -27,6 +28,11 @@ library.add(
   faGitlab
 )
 
+const GlobalWrapper = styled.div`
+  color: var(--main-text-color);
+  background-color: var(--main-background-color);
+`
+
 const Layout = ({ location, title, children }) => {
   const rootPath = `${__PATH_PREFIX__}/`
   const isRootPath = location.pathname === rootPath
@@ -34,25 +40,25 @@ const Layout = ({ location, title, children }) => {
 
   if (isRootPath) {
     header = (
-      <div>
+      <GlobalWrapper>
         <Navigation />
         <TitleBand title={title} />
-      </div>
+      </GlobalWrapper>
     )
   } else {
     header = (
-      <div>
+      <GlobalWrapper>
         <Navigation />
-      </div>
+      </GlobalWrapper>
     )
   }
 
   return (
-    <div className="global-wrapper" data-is-root-path={isRootPath}>
+    <GlobalWrapper className="global-wrapper" data-is-root-path={isRootPath}>
       <header className="global-header">{header}</header>
       {children}
       <Footer />
-    </div>
+    </GlobalWrapper>
   )
 }
 

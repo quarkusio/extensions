@@ -3,12 +3,12 @@ import styled from "styled-components"
 import CopyToClipboard from "../util/copy-to-clipboard"
 
 const CodeBlock = styled.pre`
-  background-color: var(--grey-0);
-  border: 1px solid var(--grey-1);
+  background-color: var(--code-background-color);
+  border: 1px solid var(--code-border-color);
   padding: 1rem;
   line-height: 1.2em;
   overflow-x: auto;
-  color: var(--grey-4);
+  color: var(--code-text-color);
   display: flex;
   flex-direction: row;
   justify-content: space-between;

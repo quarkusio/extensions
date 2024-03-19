@@ -4,6 +4,7 @@ import styled from "styled-components"
 
 const CopyButton = styled.button`
   border: none;
+  background-color: transparent;
 `
 
 const CopyToClipboard = ({ children }) => {
@@ -18,7 +19,7 @@ const CopyToClipboard = ({ children }) => {
     <React.Fragment>
       {children}
       <CopyButton onClick={doCopy}>
-        <FontAwesomeIcon icon={buttonText} />
+        <FontAwesomeIcon icon={buttonText} className="icon" />
       </CopyButton>
     </React.Fragment>
   )

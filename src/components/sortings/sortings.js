@@ -1,7 +1,6 @@
 import * as React from "react"
 import styled from "styled-components"
 import Select from "react-select"
-import { styles } from "../util/styles/style"
 import { timestampExtensionComparator } from "./timestamp-extension-comparator"
 import { alphabeticalExtensionComparator } from "./alphabetical-extension-comparator"
 import { downloadsExtensionComparator } from "./downloads-extension-comparator"
@@ -15,7 +14,7 @@ const format = new Intl.DateTimeFormat("default", {
 const Title = styled.label`
   font-size: var(--font-size-16);
   letter-spacing: 0;
-  color: var(--grey-2);
+  color: var(--sec-text-color);
   width: 100px;
   text-align: right;
 `
@@ -46,33 +45,13 @@ const DownloadDataData = styled.h2`
   font-style: italic;
 `
 
-// Grab CSS variables in javascript
-const grey = styles["grey-2"]
-
-const colourStyles = {
-  control: styles => ({
-    ...styles,
-    borderRadius: 0,
-    color: grey,
-    borderColor: grey,
-    width: "280px",
-  }),
-  option: (styles, { isDisabled }) => {
-    return {
-      ...styles,
-      cursor: isDisabled ? "not-allowed" : "default",
-      borderRadius: 0,
-    }
-  },
-  dropdownIndicator: styles => ({
-    ...styles,
-    color: grey, // Custom colour
-  }),
-  indicatorSeparator: styles => ({
-    ...styles,
-    margin: 0,
-    backgroundColor: grey,
-  }),
+const classNames = {
+  menu: state => state.isFocused ? "select-menu__focused" : "select-menu",
+  singleValue: () => "select-single-value",
+  control: () => "select-control-sort",
+  option: state => state.isSelected ? "select-option__selected" : state.isDisabled ? "select-option__disabled" : state.isFocused ? "select-option__focused" : "select-option__default",
+  dropdownIndicator: () => "select-dropdown-indicator",
+  indicatorSeparator: () => "select-indicator-separator"
 }
 
 const key = "sort"
@@ -122,7 +101,7 @@ const Sortings = ({ sorterAction, downloadData }) => {
 
           name="sort"
           inputId="sort"
-          styles={colourStyles}
+          classNames={classNames}
         />
       </Element>
     </SortBar>
