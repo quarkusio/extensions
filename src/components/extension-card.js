@@ -47,7 +47,7 @@ const ExtensionName = styled.div`
   font-size: var(--font-size);
   font-weight: var(--font-weight-awfully-bold);
   letter-spacing: 0;
-  color: ${props => (props.$unlisted ? "var(--card-outline)" : "var(--link-color)")};
+  color: ${props => (props.$unlisted ? "var(--card-outline)" : "var(--main-text-color)")};
   opacity: 1;
   width: 100%;
   padding-bottom: 2px;
