@@ -3,8 +3,6 @@ import * as React from "react"
 import styled from "styled-components"
 
 const Band = styled.header`
-  padding-left: var(--site-margins);
-  padding-right: var(--site-margins);
   padding-top: 4rem;
   padding-bottom: 3rem;
   color: var(--title-text-color);
@@ -21,6 +19,9 @@ const Heroic = styled.h1`
   line-height: 3.75rem;
   font-weight: var(--font-weight-boldest);
   margin: 2.5rem 0 1.5rem 0;
+  width: calc(100vw - 2 * var(--site-margins));
+  padding-left: var(--site-margins);
+  padding-right: var(--site-margins);
 `
 
 const Modest = styled.h3`
@@ -28,6 +29,9 @@ const Modest = styled.h3`
   line-height: 1.8rem;
   font-weight: 400;
   margin: 2.5rem 0 0 0;
+  width: calc(100vw - 2 * var(--site-margins));
+  padding-left: var(--site-margins);
+  padding-right: var(--site-margins);
 `
 
 const TitleBand = ({ title }) => {
