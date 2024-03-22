@@ -12,9 +12,12 @@ import config from "../../../gatsby-config.js"
 const NavToggle = styled.label`
   font-size: 27.2px;
 `
+/* Container to ensure colour goes all the way to the edge */
+const NavBarContainer = styled.nav`
+  background-color: var(--navbar-background-color);
+`
 
 const NavBar = styled.nav`
-  background-color: var(--navbar-background-color);
   color: var(--navbar-text-color);
   display: flex;
   flex-direction: row;
@@ -32,6 +35,7 @@ const NavBar = styled.nav`
   text-transform: uppercase;
 
   padding: var(--navbar-padding) var(--site-margins);
+  width: calc(100vw - 2 * var(--site-margins));
 
   ${({ isMobile }) =>
           isMobile
@@ -43,7 +47,6 @@ const NavBar = styled.nav`
                   : `  
       flex-flow: wrap;
       column-gap: 10rem;
-
 `}
 `
 
@@ -295,26 +298,28 @@ const Navigation = () => {
   )
 
   return (
-    <NavBar $isMobile={isMobile}>
-      <LogoWrapper>
-        <Logo href={config.siteMetadata.parentSiteUrl}>
-          <StaticImage
-            className="logo"
-            placeholder="none"
-            backgroundColor="black"
-            src="../../images/quarkus_logo_horizontal_rgb_600px_reverse.png"
-            alt="Quarkus logo"
-          />
-        </Logo>
-      </LogoWrapper>
-      {isMobile && (
-        <NavToggle onClick={handleOpen}>
-          <FontAwesomeIcon icon={faBars} title="bars" />
-        </NavToggle>
-      )}
-      {isMobile && open && <MobileNavigation> {menus} </MobileNavigation>}
-      {!isMobile && <DesktopNavigation>{menus}</DesktopNavigation>}
-    </NavBar>
+    <NavBarContainer>
+      <NavBar $isMobile={isMobile}>
+        <LogoWrapper>
+          <Logo href={config.siteMetadata.parentSiteUrl}>
+            <StaticImage
+              className="logo"
+              placeholder="none"
+              backgroundColor="black"
+              src="../../images/quarkus_logo_horizontal_rgb_600px_reverse.png"
+              alt="Quarkus logo"
+            />
+          </Logo>
+        </LogoWrapper>
+        {isMobile && (
+          <NavToggle onClick={handleOpen}>
+            <FontAwesomeIcon icon={faBars} title="bars" />
+          </NavToggle>
+        )}
+        {isMobile && open && <MobileNavigation> {menus} </MobileNavigation>}
+        {!isMobile && <DesktopNavigation>{menus}</DesktopNavigation>}
+      </NavBar>
+    </NavBarContainer>
   )
 }
 

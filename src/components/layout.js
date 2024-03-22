@@ -31,6 +31,11 @@ library.add(
 const GlobalWrapper = styled.div`
   color: var(--main-text-color);
   background-color: var(--main-background-color);
+  display: inline-block;
+  /* the inline-block is to make sure if things overflow on mobile, the headers take the full width */
+`
+
+const HeaderWrapper = styled.header`
 `
 
 const Layout = ({ location, title, children }) => {
@@ -40,16 +45,16 @@ const Layout = ({ location, title, children }) => {
 
   if (isRootPath) {
     header = (
-      <GlobalWrapper>
+      <HeaderWrapper>
         <Navigation />
         <TitleBand title={title} />
-      </GlobalWrapper>
+      </HeaderWrapper>
     )
   } else {
     header = (
-      <GlobalWrapper>
+      <HeaderWrapper>
         <Navigation />
-      </GlobalWrapper>
+      </HeaderWrapper>
     )
   }
 
