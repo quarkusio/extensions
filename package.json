@@ -16,7 +16,7 @@
     "cacache": "^18.0.1",
     "compare-version": "^0.1.2",
     "csvtojson": "^2.0.10",
-    "date-fns": "^3.3.1",
+    "date-fns": "^3.6.0",
     "encodeurl": "^1.0.2",
     "eslint-plugin-gatsby": "^1.0.2",
     "gatsby": "^4.25.8",
