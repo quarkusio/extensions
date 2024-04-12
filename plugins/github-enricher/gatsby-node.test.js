@@ -612,6 +612,465 @@ describe("the github data handler", () => {
     })
   })
 
+  describe("for an extension with a scm-url with a trailing slash", () => {
+    const projectName = "somerepo"
+    const ownerName = "someuser"
+    const url = "http://fake.github.com/someuser/" + projectName + "/"
+    const otherUrl = "http://fake.github.com/someuser/other" + projectName
+    const issuesUrl = "http://fake.github.com/someuser/somerepo/issues"
+    const avatarUrl = "http://something.com/someuser.png"
+    const socialMediaPreviewUrl =
+      "https://testopengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-some-extension"
+
+    const response = {
+      data: {
+        repository: {
+          issues: {
+            totalCount: 16,
+          },
+          defaultBranchRef: { name: "unusual" },
+          metaInfs: null,
+          subfolderMetaInfs: null,
+          shortenedSubfolderMetaInfs: {
+            entries: [
+              { path: "runtime/src/main/resources/META-INF/beans.xml" },
+              {
+                path: "some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+              },
+              { path: "runtime/src/main/resources/META-INF/services" },
+            ],
+          },
+          openGraphImageUrl: socialMediaPreviewUrl,
+        },
+        repositoryOwner: { avatarUrl: avatarUrl },
+      },
+    }
+
+    const metadata = {
+      maven: { artifactId: "something", groupId: "grouper" },
+      sourceControl: `${url},mavenstuff`,
+    }
+
+    const node = {
+      metadata,
+      internal,
+    }
+
+    const otherMetadata = {
+      maven: { artifactId: "something", groupId: "grouper" },
+      sourceControl: `${otherUrl},mavenstuff`,
+    }
+
+    const otherNode = {
+      metadata: otherMetadata,
+      internal,
+    }
+
+    beforeAll(async () => {
+      queryGraphQl.mockResolvedValue(response)
+      getContributors.mockResolvedValue({ contributors: [{ name: "someone" }], lastUpdated: Date.now() })
+      await onPreBootstrap({ cache, actions: {} })
+    })
+
+    beforeEach(async () => {
+      // Clear the cache
+      onPluginInit()
+
+      // Needed so that we do not short circuit the git path
+      return onCreateNode({
+        node,
+        createContentDigest,
+        createNodeId,
+        actions,
+      })
+    })
+
+    afterAll(() => {
+      jest.clearAllMocks()
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    it("creates an scm node", async () => {
+      expect(createNode).toHaveBeenCalled()
+    })
+
+
+    it("creates a repository node", async () => {
+      expect(createRepository).toHaveBeenCalledWith(expect.anything(),
+        expect.objectContaining({
+          url: url,
+          project: projectName,
+          owner: ownerName
+        })
+      )
+    })
+
+    it("sets the type", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          internal: expect.objectContaining({ type: "SourceControlInfo" }),
+        })
+      )
+    })
+
+    it("sets an id", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          id: `${url},mavenstuff`,
+        })
+      )
+    })
+
+    it("copies across the url", async () => {
+      expect(createNode).toHaveBeenCalledWith(expect.objectContaining({ repository: url }))
+    })
+
+    it("fills in an issues url", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ issuesUrl })
+      )
+    })
+
+    it("fills in an image with the owner avatar", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ ownerImageUrl: avatarUrl })
+      )
+    })
+
+
+    it("fills in an issue count", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ issues: 16 })
+      )
+    })
+
+    it("fills in last updated information", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ lastUpdated: expect.anything() })
+      )
+    })
+
+    it("fills in contributor information", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ contributorsWithFullCompanyInfo: expect.arrayContaining([expect.anything()]) })
+      )
+    })
+
+    it("does not populate a label", async () => {
+      expect(createNode).not.toHaveBeenCalledWith(
+        expect.objectContaining({ labels: expect.anything() })
+      )
+      expect(createNode).not.toHaveBeenCalledWith(
+        expect.objectContaining({ label: expect.anything() })
+      )
+    })
+
+    it("fills in a url for the extension yaml", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          extensionYamlUrl:
+            "http://fake.github.com/someuser/somerepo/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+        })
+      )
+    })
+
+    it("fills in a path for the extension", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          extensionPathInRepo:
+            "some-folder-name/",
+        })
+      )
+    })
+
+    it("fills in a url for the extension", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          extensionRootUrl:
+            "http://fake.github.com/someuser/somerepo/blob/unusual/some-folder-name/",
+        })
+      )
+    })
+
+    it("invokes the github graphql api", async () => {
+      expect(queryGraphQl).toHaveBeenCalled()
+      expect(queryGraphQl).toHaveBeenCalledWith(
+        // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
+        expect.stringMatching(/name: ?\"somerepo\"/),
+      )
+    })
+
+    it("caches the issue count", async () => {
+      expect(queryGraphQl).toHaveBeenCalledWith(expect.stringMatching(/issues\(states:OPEN/))
+
+      // Reset call counts and histories, since the code may not even do a query
+      jest.clearAllMocks()
+
+      // Now re-trigger the invocation
+      await onCreateNode(
+        {
+          node,
+          createContentDigest,
+          createNodeId,
+          actions,
+        },
+        {}
+      )
+
+      // But it should not ask for the issues
+      expect(queryGraphQl).not.toHaveBeenCalledWith(expect.stringMatching(/issues\(states:OPEN/))
+
+      // It should set an issue count, even though it didn't ask for one
+      expect(createNode).toHaveBeenLastCalledWith(
+        expect.objectContaining({ issues: 16 })
+      )
+    })
+
+    it("caches the top-level quarkus-extension.yaml", async () => {
+      expect(queryGraphQl).toHaveBeenCalledWith(expect.stringMatching(
+          /HEAD:runtime\/src\/main\/resources\/META-INF/
+        )
+      )
+
+      // Reset call counts and histories, since the code may not even do a query
+      jest.clearAllMocks()
+
+      // Now re-trigger the invocation
+      await onCreateNode(
+        {
+          node,
+          createContentDigest,
+          createNodeId,
+          actions,
+        },
+        {}
+      )
+
+      // But it should not ask for the top-level meta-inf listing
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
+        expect.stringMatching(/HEAD:runtime\/src\/main\/resources\/META-INF/),
+      )
+
+      // It should set an extension descriptor path, even though it didn't ask for one
+      expect(createNode).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          extensionYamlUrl:
+            url +
+            "blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+          extensionPathInRepo:
+            "some-folder-name/",
+        })
+      )
+
+      // It should fill in the cached information for everything else
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          ownerImageUrl: "http://something.com/someuser.png",
+        })
+      )
+    })
+
+    it("caches the quarkus-extension.yaml in subfolders", async () => {
+      // Sense check of what happened in beforeEach
+      expect(queryGraphQl).toHaveBeenCalledWith(
+        expect.stringMatching(
+          /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
+        ),
+      )
+
+      // Reset call counts and histories, since the code may not even do a query
+      jest.clearAllMocks()
+      // Now re-trigger the invocation
+      await onCreateNode(
+        {
+          node,
+          createContentDigest,
+          createNodeId,
+          actions,
+        },
+        {}
+      )
+
+      // And it should not ask for the subfolder meta-inf listing
+      // It possibly won't ask for anything at all
+      expect(queryGraphQl).not.toHaveBeenCalledWith(
+        expect.stringMatching(
+          /HEAD:something\/runtime\/src\/main\/resources\/META-INF/
+        ),
+      )
+
+      // It should set an extension descriptor path and extension path
+      expect(createNode).toHaveBeenLastCalledWith(
+        expect.objectContaining({
+          extensionYamlUrl:
+            url +
+            "blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+        })
+      )
+    })
+
+    it("does not cache the issue count on a subsequent call for a different project", async () => {
+      // Re-trigger the invocation
+      const newIssueCount = 56
+      response.data.repository.issues.totalCount = newIssueCount
+
+      await onCreateNode(
+        {
+          node: otherNode,
+          createContentDigest,
+          createNodeId,
+          actions,
+        },
+        {}
+      )
+
+      expect(queryGraphQl).toHaveBeenCalledWith(
+        expect.stringMatching(/issues\(states:OPEN/),
+      )
+
+      expect(createNode).toHaveBeenLastCalledWith(
+        expect.objectContaining({ issues: newIssueCount })
+      )
+    })
+
+    it("does not create any remote file nodes", async () => {
+      expect(createRemoteFileNode).not.toHaveBeenCalled()
+    })
+
+    describe("where the scm-url ends with .git", () => {
+
+      const url = "http://phony.github.com/thing.git"
+
+      const response = {
+        data: {
+          repository: {
+            issues: {
+              totalCount: 16,
+            },
+            defaultBranchRef: { name: "unusual" },
+          },
+          repositoryOwner: { avatarUrl: avatarUrl },
+        },
+      }
+
+      const metadata = {
+        maven: { artifactId: "something", groupId: "grouper" },
+        sourceControl: `${url},mavenstuff`,
+      }
+
+      const node = {
+        metadata,
+        internal,
+      }
+
+      beforeAll(async () => {
+        queryGraphQl.mockResolvedValue(response)
+        getContributors.mockResolvedValue({ contributors: [{ name: "someone" }], lastUpdated: Date.now() })
+        await onPreBootstrap({ cache, actions: {} })
+      })
+
+      beforeEach(async () => {
+        // Clear the cache
+        onPluginInit()
+
+        // Needed so that we do not short circuit the git path
+        return onCreateNode({
+          node,
+          createContentDigest,
+          createNodeId,
+          actions,
+        })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("fills in an issues url", async () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({ issuesUrl: "http://phony.github.com/thing/issues" })
+        )
+      })
+
+    })
+
+    describe("where the scm-url is a gitbox url", () => {
+
+      const url = "https://gitbox.apache.org/repos/asf?p=camel-quarkus.git;a=summary"
+      const expectedUrl = "https://github.com/apache/camel-quarkus"
+
+      const response = {
+        data: {
+          repository: {
+            issues: {
+              totalCount: 16,
+            },
+            defaultBranchRef: { name: "unusual" },
+          },
+          repositoryOwner: { avatarUrl: avatarUrl },
+        },
+      }
+
+      const metadata = {
+        maven: { artifactId: "something", groupId: "grouper" },
+        sourceControl: `${url},mavenstuff`,
+      }
+
+      const node = {
+        metadata,
+        internal,
+      }
+
+      beforeAll(async () => {
+        queryGraphQl.mockResolvedValue(response)
+        getContributors.mockResolvedValue({ contributors: [{ name: "someone" }], lastUpdated: Date.now() })
+        await onPreBootstrap({ cache, actions: {} })
+      })
+
+      beforeEach(async () => {
+        // Clear the cache
+        onPluginInit()
+
+        // Needed so that we do not short circuit the git path
+        return onCreateNode({
+          node,
+          createContentDigest,
+          createNodeId,
+          actions,
+        })
+      })
+
+      afterAll(() => {
+        jest.clearAllMocks()
+      })
+
+      afterEach(() => {
+        jest.clearAllMocks()
+      })
+
+      it("adjusts the scm url", async () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({ repository: expectedUrl })
+        )
+      })
+
+      it("fills in an issues url", async () => {
+        expect(createNode).toHaveBeenCalledWith(
+          expect.objectContaining({ issuesUrl: `${expectedUrl}/issues` })
+        )
+      })
+
+    })
+  })
+
+
   describe("where a label should be used", () => {
     const url = "https://github.com/quarkusio/quarkus"
     const issuesUrl =
