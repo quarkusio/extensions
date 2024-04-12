@@ -374,8 +374,8 @@ const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
 
     const extensionYamlPath = extensionYamls[0].path
     const extensionPathInRepo = extensionYamlPath.replace("runtime/src/main/resources/META-INF/quarkus-extension.yaml", "")
-    const extensionRootUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionPathInRepo}`
-    const extensionYamlUrl = `${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`
+    const extensionRootUrl = removeDoubleSlashes(`${scmUrl}/blob/${defaultBranchRef.name}/${extensionPathInRepo}`)
+    const extensionYamlUrl = removeDoubleSlashes(`${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`)
 
     return { extensionYamlUrl, extensionPathInRepo, extensionRootUrl }
 
@@ -479,6 +479,10 @@ const getIssueInformation = async (coords, labels, scmUrl) => {
   )
 }
 
+function removeDoubleSlashes(issuesUrl) {
+  return issuesUrl.replace(/(?<!:)\/{2,}/, "/")
+}
+
 const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
 
   // TODO we can just treat label as an array, almost
@@ -488,13 +492,17 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
 
   // Tolerate scm urls ending in .git, but don't try and turn them into issues urls without patching
   const topLevelIssuesUrl = (scmUrl + "/issues").replace("\.git/issues", "/issues")
-  const issuesUrl = labels
+  let issuesUrl = labels
     ? encodeUrl(
       scmUrl +
       "/issues?q=is%3Aopen+is%3Aissue+label%3A" +
       labels.map(label => label.replace("/", "%2F")).join(",")
     )
     : topLevelIssuesUrl
+
+  // Tidy double slashes
+  issuesUrl = removeDoubleSlashes(issuesUrl)
+
 
   // Batching this with other queries is not needed because rate limits are done on query complexity and cost,
   // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
@@ -510,6 +518,21 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
 
   // The parent objects may be undefined and destructuring nested undefineds is not good
   const issues = body?.data?.repository?.issues?.totalCount
+
+  // If we got an issue count we can be pretty confident our url will be ok, but otherwise, it might not be,
+  // so check it. We don't check for every url because otherwise we start getting 429s and dropping good URLs
+  if (!issues) {
+    // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
+    // A simple property read won't work
+    const {
+      default: urlExist,
+    } = await import("url-exist")
+
+    const isValidUrl = await urlExist(issuesUrl)
+    if (!isValidUrl) {
+      issuesUrl = undefined
+    }
+  }
 
   return { issues, issuesUrl }
 }
