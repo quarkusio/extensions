@@ -17,6 +17,7 @@ const Extensions = styled.ol`
   list-style: none;
   display: grid;
   gap: 30px;
+  width: 100%;
   grid-template-columns: repeat(auto-fill, minmax(260px, auto));
   grid-template-rows: repeat(auto-fill, 1fr);
 `
@@ -25,6 +26,7 @@ const CardItem = styled.li`
   height: 100%;
   width: 100%;
   display: flex;
+  max-height: 34rem;
 `
 
 const InfoSortRow = styled.div`
@@ -34,13 +36,6 @@ const InfoSortRow = styled.div`
   display: flex;
   column-gap: var(--a-modest-space);
   justify-content: space-between;
-`
-
-const RightColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  width: 100%;
 `
 
 const ExtensionCount = styled.h2`
@@ -84,18 +79,15 @@ const ExtensionsList = ({ extensions, categories, downloadData }) => {
             categories={categories}
             filterAction={setExtensions}
           />
-          <RightColumn>
-            {" "}
-            <Extensions>
-              {filteredExtensions.map(extension => {
-                return (
-                  <CardItem key={extension.id}>
-                    <ExtensionCard extension={extension} />
-                  </CardItem>
-                )
-              })}
-            </Extensions>{" "}
-          </RightColumn>
+          <Extensions>
+            {filteredExtensions.map(extension => {
+              return (
+                <CardItem key={extension.id}>
+                  <ExtensionCard extension={extension} />
+                </CardItem>
+              )
+            })}
+          </Extensions>{" "}
         </FilterableList>
       </div>
     )
