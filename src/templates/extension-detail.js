@@ -382,6 +382,13 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "Keywords",
+                fieldName: "keywords",
+                metadata,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Platform",
                 plural: "Platforms",
                 fieldName: "origins", // We label this 'platform' but include the platform and platform member both, so need to read origins
@@ -509,6 +516,7 @@ export const pageQuery = graphql`
       metadata {
         status
         categories
+        keywords
         guide
         builtWithQuarkusCore
         unlisted

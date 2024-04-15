@@ -17,6 +17,7 @@ jest.mock("react-use-query-param-string", () => {
 describe("extension detail page", () => {
   describe("for an extension with lots of information", () => {
     const category = "jewellery"
+    const keyword = "shiny"
     const guideUrl = "http://quarkus.io/theguide"
     const platform1 = "A Box"
     const platform2 = "quarkus-bom-quarkus-platform-descriptor"
@@ -41,6 +42,7 @@ describe("extension detail page", () => {
       slug: "jruby-slug",
       metadata: {
         categories: [category],
+        keywords: [keyword],
         status: status,
         guide: guideUrl,
         builtWithQuarkusCore: "2.23.0",
@@ -109,6 +111,10 @@ describe("extension detail page", () => {
 
     it("renders the category", () => {
       expect(screen.getByText(category)).toBeTruthy()
+    })
+
+    it("renders the keywords", () => {
+      expect(screen.getByText(keyword)).toBeTruthy()
     })
 
     it("renders the artifact id", () => {
