@@ -374,8 +374,8 @@ const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
 
     const extensionYamlPath = extensionYamls[0].path
     const extensionPathInRepo = extensionYamlPath.replace("runtime/src/main/resources/META-INF/quarkus-extension.yaml", "")
-    const extensionRootUrl = removeDoubleSlashes(`${scmUrl}/blob/${defaultBranchRef.name}/${extensionPathInRepo}`)
-    const extensionYamlUrl = removeDoubleSlashes(`${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`)
+    const extensionRootUrl = normaliseUrl(`${scmUrl}/blob/${defaultBranchRef.name}/${extensionPathInRepo}`)
+    const extensionYamlUrl = normaliseUrl(`${scmUrl}/blob/${defaultBranchRef.name}/${extensionYamlPath}`)
 
     return { extensionYamlUrl, extensionPathInRepo, extensionRootUrl }
 
@@ -479,6 +479,14 @@ const getIssueInformation = async (coords, labels, scmUrl) => {
   )
 }
 
+function normaliseUrl(issuesUrl) {
+  return removePlainHttp(removeDoubleSlashes(issuesUrl))
+}
+
+function removePlainHttp(url) {
+  return url?.replace("http://github.com", "https://github.com")
+}
+
 function removeDoubleSlashes(issuesUrl) {
   return issuesUrl.replace(/(?<!:)\/{2,}/, "/")
 }
@@ -501,7 +509,7 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
     : topLevelIssuesUrl
 
   // Tidy double slashes
-  issuesUrl = removeDoubleSlashes(issuesUrl)
+  issuesUrl = normaliseUrl(issuesUrl)
 
 
   // Batching this with other queries is not needed because rate limits are done on query complexity and cost,
