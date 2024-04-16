@@ -3,6 +3,20 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import VersionFilter from "./version-filter"
 import selectEvent from "react-select-event"
 
+let mockQueryParamSearchString = undefined
+
+jest.mock("react-use-query-param-string", () => {
+
+  const original = jest.requireActual("react-use-query-param-string")
+  const setQueryParam = jest.fn().mockImplementation((val) => {
+    mockQueryParamSearchString = val
+  })
+  return {
+    ...original,
+    useQueryParamString: jest.fn().mockImplementation(() => [mockQueryParamSearchString, setQueryParam, true]),
+  }
+})
+
 describe("version filter", () => {
   const label = "Built With"
 
@@ -34,6 +48,7 @@ describe("version filter", () => {
     const filterer = jest.fn()
     beforeEach(() => {
       filterer.mockReset()
+      mockQueryParamSearchString = undefined
 
       render(
         <VersionFilter

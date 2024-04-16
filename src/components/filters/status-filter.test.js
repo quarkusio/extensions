@@ -2,6 +2,21 @@ import React from "react"
 import { fireEvent, render, screen } from "@testing-library/react"
 import StatusFilter from "./status-filter"
 import selectEvent from "react-select-event"
+import { useQueryParamString } from "react-use-query-param-string"
+
+let mockQueryParamSearchString = undefined
+
+jest.mock("react-use-query-param-string", () => {
+
+  const original = jest.requireActual("react-use-query-param-string")
+  const setQueryParam = jest.fn().mockImplementation((val) => {
+    mockQueryParamSearchString = val
+  })
+  return {
+    ...original,
+    useQueryParamString: jest.fn().mockImplementation(() => [mockQueryParamSearchString, setQueryParam, true]),
+  }
+})
 
 describe("status filter", () => {
   const label = "Status"
@@ -34,18 +49,22 @@ describe("status filter", () => {
     const filterer = jest.fn()
     beforeEach(() => {
       filterer.mockReset()
+      mockQueryParamSearchString = undefined
+
+      const extensions = [
+        { metadata: { status: "shinyduplicate" } },
+        { metadata: { status: "sublime" } },
+        { metadata: { status: "sad" } },
+        { metadata: { status: "shinyduplicate" } },
+      ]
 
       render(
         <StatusFilter
           filterer={filterer}
-          extensions={[
-            { metadata: { status: "shinyduplicate" } },
-            { metadata: { status: "sublime" } },
-            { metadata: { status: "sad" } },
-            { metadata: { status: "shinyduplicate" } },
-          ]}
+          extensions={extensions}
         />
       )
+
     })
 
     it("renders a title", () => {
@@ -77,6 +96,17 @@ describe("status filter", () => {
       })
       await selectEvent.select(screen.getByLabelText(label), "sublime")
       expect(filterer).toHaveBeenCalledWith("sublime")
+    })
+
+    it("sets search parameters", async () => {
+
+      const [, setQueryParam] = useQueryParamString()
+      expect(screen.getByTestId("status-form")).toHaveFormValues({
+        status: "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "sublime")
+
+      expect(setQueryParam).toHaveBeenCalledWith("sublime")
     })
   })
 })

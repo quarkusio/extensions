@@ -1,7 +1,9 @@
 import * as React from "react"
+import { useEffect } from "react"
 import styled from "styled-components"
 import Select from "react-select"
 import Title from "./title"
+import { useQueryParamString } from "react-use-query-param-string"
 
 
 const Element = styled.form`
@@ -13,8 +15,13 @@ const Element = styled.form`
   gap: 16px;
 `
 
-const onChange = (value, { action }, filterer) => {
-  if (action === "select-option" && filterer) filterer(value.value)
+const onChange = (value, { action }, filterer, setSelectedOption) => {
+  if (action === "select-option") {
+    setSelectedOption && setSelectedOption(value.value)
+    if (filterer) {
+      filterer(value.value)
+    }
+  }
 }
 
 
@@ -50,6 +57,8 @@ const DropdownFilter = ({
     ? displayLabel.toLowerCase().replace(" ", "-")
     : "unknown"
 
+  const [selectedOption, setSelectedOption] = useQueryParamString(label, undefined, true)
+
   const deduplicatedOptions = options ? [...new Set(options)] : []
 
   const processedOptions = deduplicatedOptions.map(option => {
@@ -64,13 +73,21 @@ const DropdownFilter = ({
   // A filter string of zero length is interpreted as 'everything'
   processedOptions.unshift({ value: "", label: "All" })
 
+  // This is what makes the selection work if the page is loaded from a url with a query parameter
+  useEffect(() => {
+    if (selectedOption && selectedOption.length > 0) {
+      filterer(selectedOption)
+    }
+  }, [selectedOption, filterer])
+
   return (
     <Element data-testid={label + "-form"}>
       <Title htmlFor={label}>{displayLabel}</Title>
       <Select
+        value={processedOptions.find(o => o.value === selectedOption)}
         placeholder="All"
         options={processedOptions}
-        onChange={(a, b) => onChange(a, b, filterer)}
+        onChange={(a, b) => onChange(a, b, filterer, setSelectedOption)}
         name={label}
         inputId={label}
         classNames={classNames}
