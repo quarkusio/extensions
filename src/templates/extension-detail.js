@@ -378,6 +378,7 @@ const ExtensionDetailTemplate = ({
                 name: "Category",
                 fieldName: "categories",
                 metadata,
+                linkGenerator: element => "/?categories=" + element
               }}
             />
             <ExtensionMetadata
@@ -385,6 +386,9 @@ const ExtensionDetailTemplate = ({
                 name: "Keywords",
                 fieldName: "keywords",
                 metadata,
+                transformer: element =>
+                  "#" + element,
+                linkGenerator: element => "/?keywords=" + element.replace("#", "")
               }}
             />
             <ExtensionMetadata

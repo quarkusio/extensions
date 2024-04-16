@@ -2,6 +2,7 @@ import * as React from "react"
 
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Link from "gatsby-link"
 
 const MetadataBlock = styled.section`
   width: calc((50%) - var(--a-modest-space));
@@ -13,6 +14,10 @@ const MetadataBlock = styled.section`
   padding-bottom: var(--a-modest-space);
   padding-top: var(--a-modest-space);
   border-bottom: 1px solid var(--card-outline);
+
+  :visited {
+    color: var(--link-color);
+  }
 `
 
 const MetadataTitle = styled.div`
@@ -29,7 +34,7 @@ const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
 `
 
 const ExtensionMetadata = ({
-                             data: { name, plural, fieldName, metadata, transformer, text, url, icon },
+                             data: { name, plural, fieldName, metadata, transformer, text, url, linkGenerator, icon },
                            }) => {
   const field = fieldName ? fieldName : name.toLowerCase()
 
@@ -48,15 +53,23 @@ const ExtensionMetadata = ({
           <MetadataBlock>
             <MetadataTitle>{title}</MetadataTitle>
             {prettyPrinted.map(
-              (element, i) =>
-                element && <MetadataValue key={i}>{element}</MetadataValue>
+              (element, i) => {
+                if (element) {
+                  const displayed = linkGenerator ?
+                    <Link to={linkGenerator(element).replaceAll(" ", "+")}>{element}</Link> : url ?
+                      <a href={url}>{element}</a> : element
+                  return <MetadataValue key={i}>{displayed}</MetadataValue>
+                }
+              }
             )}
           </MetadataBlock>
         )
       }
     } else {
       const prettyPrinted = transform(content)
-      const displayed = url ? <a href={url}>{prettyPrinted}</a> : prettyPrinted
+      const displayed = linkGenerator ?
+        <Link to={linkGenerator(content).replaceAll(" ", "+")}>{prettyPrinted}</Link> : url ?
+          <a href={url}>{prettyPrinted}</a> : prettyPrinted
 
       return (
         <MetadataBlock>
