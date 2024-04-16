@@ -66,7 +66,7 @@ describe("extension metadata block", () => {
     })
   })
 
-  describe("for link", () => {
+  describe("for an external link", () => {
     const displayName = "Category"
     const text = "some text"
     const url = "http://thing"
@@ -94,6 +94,38 @@ describe("extension metadata block", () => {
 
       it("renders the link", () => {
         expect(screen.getByRole("link")).toHaveAttribute("href", url)
+      })
+    })
+  })
+
+  describe("for an internal link", () => {
+    const displayName = "Category"
+    const text = "some text"
+    const expectedUrl = "/?thing=some+text"
+
+    describe("in the simple case", () => {
+      beforeEach(() => {
+        render(
+          <ExtensionMetadata
+            data={{
+              name: displayName,
+              text,
+              linkGenerator: element => "/?thing=" + element,
+            }}
+          />
+        )
+      })
+
+      it("renders the field name", () => {
+        expect(screen.getByText(displayName)).toBeTruthy()
+      })
+
+      it("renders the link title", () => {
+        expect(screen.getByText(text)).toBeTruthy()
+      })
+
+      it("renders the link", () => {
+        expect(screen.getByRole("link")).toHaveAttribute("href", expectedUrl)
       })
     })
   })
@@ -154,6 +186,40 @@ describe("extension metadata block", () => {
 
       it("renders the first element of the content", () => {
         expect(screen.getAllByText(frogs)).toHaveLength(2)
+      })
+
+    })
+
+    describe("with a link generator", () => {
+      const frogs = "frogs"
+      let i = 0
+
+      beforeEach(() => {
+        i = 0
+        render(
+          <ExtensionMetadata
+            data={{
+              name: displayName,
+              fieldName,
+              metadata,
+              transformer: () => frogs + i++,
+              linkGenerator: element => "l" + element
+            }}
+          />
+        )
+      })
+
+      it("renders the field name", () => {
+        expect(screen.getByText(displayName)).toBeTruthy()
+      })
+
+      it("renders the first element of the content", () => {
+        expect(screen.getAllByText(/frogs/)).toHaveLength(2)
+      })
+
+      it("renders the link", () => {
+        expect(screen.getAllByRole("link")).toHaveLength(2)
+        expect(screen.getAllByText(frogs + "1")[0].href).toBe("http://localhost/lfrogs1")
       })
     })
 

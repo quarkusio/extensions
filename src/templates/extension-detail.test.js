@@ -113,8 +113,18 @@ describe("extension detail page", () => {
       expect(screen.getByText(category)).toBeTruthy()
     })
 
-    it("renders the keywords", () => {
-      expect(screen.getByText(keyword)).toBeTruthy()
+    it("renders the category as a link", () => {
+      expect(screen.getByText(category).href).toBe(
+        "http://localhost/?categories=" + category)
+    })
+
+    it("renders the keywords, with a hash prefix", () => {
+      expect(screen.getByText("#" + keyword)).toBeTruthy()
+    })
+
+    it("renders the keywords as a link", () => {
+      expect(screen.getByText("#" + keyword).href).toBe(
+        "http://localhost/?keywords=" + keyword)
     })
 
     it("renders the artifact id", () => {
