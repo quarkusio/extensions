@@ -4,6 +4,7 @@ import styled from "styled-components"
 import CategoryFilter from "./category-filter"
 import Search from "./search"
 import StatusFilter from "./status-filter"
+import KeywordFilter from "./keyword-filter"
 
 const FilterBar = styled.aside`
   width: 224px;
@@ -16,7 +17,7 @@ const FilterBar = styled.aside`
 
 const filterExtensions = (
   extensions,
-  { regex, categoryFilter, statusFilter, compatibilityFilter }
+  { regex, categoryFilter, keywordFilter, statusFilter, compatibilityFilter }
 ) => {
   return (
     extensions
@@ -37,10 +38,16 @@ const filterExtensions = (
       )
       .filter(
         extension =>
-          statusFilter.length === 0 ||
-          (extension.metadata.status &&
-            statusFilter.includes(extension.metadata.status))
-      )
+          keywordFilter.length === 0 ||
+          extension.metadata.keywords?.find(keyword =>
+            keywordFilter.includes(keyword.toLowerCase())
+          )
+      ).filter(
+      extension =>
+        statusFilter.length === 0 ||
+        (extension.metadata.status &&
+          statusFilter.includes(extension.metadata.status))
+    )
       .filter(
         extension =>
           compatibilityFilter.length === 0 ||
@@ -52,15 +59,17 @@ const filterExtensions = (
   )
 }
 
-const Filters = ({ extensions, categories, filterAction }) => {
+const Filters = ({ extensions, categories, keywords, filterAction }) => {
   const [regex, setRegex] = useState(".*")
   const [categoryFilter, setCategoryFilter] = useState([])
+  const [keywordFilter, setKeywordFilter] = useState([])
   const [statusFilter, setStatusFilter] = useState([])
   const [compatibilityFilter, setCompatibilityFilter] = useState([])
 
   const filters = {
     regex,
     categoryFilter,
+    keywordFilter,
     statusFilter,
     compatibilityFilter,
   }
@@ -72,6 +81,7 @@ const Filters = ({ extensions, categories, filterAction }) => {
   const dependencyList = [
     regex,
     categoryFilter,
+    keywordFilter,
     statusFilter,
     compatibilityFilter,
   ]
@@ -85,6 +95,10 @@ const Filters = ({ extensions, categories, filterAction }) => {
       <Search searcher={setRegex} />
       <StatusFilter extensions={extensions} filterer={setStatusFilter} />
       <CategoryFilter categories={categories} filterer={setCategoryFilter} />
+      {/* This will be invisible, because we don't pass through keywords, but it will allow filtering via query
+      parameters */}
+      <KeywordFilter keywords={keywords} filterer={setKeywordFilter} />
+
     </FilterBar>
   )
 }

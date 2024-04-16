@@ -37,6 +37,7 @@ describe("filters bar", () => {
     name: "Pascal",
     metadata: {
       categories: ["skunks"],
+      keywords: ["cool"],
       status: "shonky",
       quarkus_core_compatibility: "COMPATIBLE",
     },
@@ -64,6 +65,7 @@ describe("filters bar", () => {
 
   const extensions = [alice, pascal, fluffy, secret]
   const categories = ["moose", "skunks", "lynx"]
+  const keywords = ["shiny", "cool", "sad"]
 
   beforeEach(() => {
     user = userEvent.setup()
@@ -72,6 +74,7 @@ describe("filters bar", () => {
       <Filters
         extensions={extensions}
         categories={categories}
+        keywords={keywords}
         filterAction={extensionsListener}
       />
     )
@@ -205,6 +208,46 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(secret)
     })
   })
+
+  describe("keyword filter", () => {
+    const displayKeyword = "Cool"
+
+    it("has a list of keywords", async () => {
+      expect(screen.queryAllByText(displayKeyword)).toHaveLength(1)
+    })
+
+    it("leaves in extensions which match keyword filter", async () => {
+      await user.click(screen.getByText(displayKeyword))
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(pascal)
+    })
+
+    it("filters out extensions which do not match the ticked keyword", async () => {
+      expect(newExtensions).toContain(alice)
+      await user.click(screen.getByText(displayKeyword))
+
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).not.toContain(alice)
+    })
+
+    it("reinstates extensions when a keyword is unticked", async () => {
+      expect(newExtensions).toContain(alice)
+
+      await user.click(screen.getByText(displayKeyword))
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).not.toContain(alice)
+
+      await user.click(screen.getByText(displayKeyword))
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
+    })
+
+    it("excludes unlisted extensions", () => {
+      expect(newExtensions).not.toContain(secret)
+    })
+  })
+
 
   describe("status filter", () => {
     const label = "Status"
