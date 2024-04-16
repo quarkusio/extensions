@@ -47,7 +47,8 @@ const key = "search-regex"
 const Search = ({ searcher: listener }) => {
   const onInputChange = e => {
     if (e.target.value !== realSearchText) {
-      setSearchText(e.target.value)
+      const newValue = e.target.value !== "" ? e.target.value : undefined
+      setSearchText(newValue)
     }
     //  Make sure the listener knows about the right values, even before any re-render
     listener(e.target.value)
