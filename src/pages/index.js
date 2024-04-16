@@ -61,6 +61,7 @@ export const pageQuery = graphql`
         slug
         metadata {
           categories
+          keywords
           guide
           status
           unlisted
