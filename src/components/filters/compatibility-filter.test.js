@@ -3,6 +3,21 @@ import { fireEvent, render, screen } from "@testing-library/react"
 import selectEvent from "react-select-event"
 import CompatibilityFilter from "./compatibility-filter"
 
+
+let mockQueryParamSearchString = undefined
+
+jest.mock("react-use-query-param-string", () => {
+
+  const original = jest.requireActual("react-use-query-param-string")
+  const setQueryParam = jest.fn().mockImplementation((val) => {
+    mockQueryParamSearchString = val
+  })
+  return {
+    ...original,
+    useQueryParamString: jest.fn().mockImplementation(() => [mockQueryParamSearchString, setQueryParam, true]),
+  }
+})
+
 describe("compatibility filter", () => {
   const label = "Compatibility"
 
@@ -34,6 +49,7 @@ describe("compatibility filter", () => {
     const filterer = jest.fn()
     beforeEach(() => {
       filterer.mockReset()
+      mockQueryParamSearchString = undefined
 
       render(
         <CompatibilityFilter
