@@ -1,9 +1,10 @@
-import React, { useState } from "react"
+import React, { useEffect } from "react"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Title from "./title"
 import prettyCategory from "../util/pretty-category"
+import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
 
 const Element = styled.div`
   padding-top: 36px;
@@ -33,6 +34,8 @@ const TickyBox = styled(props => <FontAwesomeIcon {...props} />)`
   color: var(--main-text-color);
 `
 
+const separator = ","
+
 const toggleCategory = (
   category,
   tickedCategories,
@@ -44,28 +47,45 @@ const toggleCategory = (
   } else {
     tickedCategories = [...tickedCategories, category] // It's important to make a new array or nothing will be re-rendered
   }
-  setTickedCategories(tickedCategories)
+  if (tickedCategories.length > 0) {
+    setTickedCategories(tickedCategories?.join(separator))
+  } else {
+    // Clear this filter from the URL bar if there's nothing in it
+    setTickedCategories(undefined)
+  }
   filterer && filterer(tickedCategories)
 }
 
+const key = "categories"
 const CategoryFilter = ({ categories, filterer }) => {
-  const [tickedCategories, setTickedCategories] = useState([])
+  const [stringedTickedCategories, setTickedCategories, initialized] = useQueryParamString(key, undefined, true)
+  const realStringedTickedCategories = initialized ? stringedTickedCategories : getQueryParams() ? getQueryParams()[key] : undefined
 
+  const tickedCategories = stringedTickedCategories ? stringedTickedCategories.split(separator) : []
+
+  const onClick = category => () =>
+    toggleCategory(
+      category,
+      tickedCategories,
+      setTickedCategories,
+      filterer
+    )
+
+  useEffect(() => {  // Make sure that even if the url is pasted in a browser, the list updates with the right value
+    if (realStringedTickedCategories && realStringedTickedCategories.length > 0) {
+      filterer(realStringedTickedCategories.split(separator))
+    }
+  }, [realStringedTickedCategories], filterer)
+  
   return (
-    <Element>
+    categories && <Element>
       <Title>Category</Title>
       <Categories>
         {categories &&
           categories.map(category => (
             <Category
               key={category}
-              onClick={() =>
-                toggleCategory(
-                  category,
-                  tickedCategories,
-                  setTickedCategories,
-                  filterer
-                )
+              onClick={onClick(category)
               }
             >
               <div>

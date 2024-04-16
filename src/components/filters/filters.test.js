@@ -1,23 +1,25 @@
 import React from "react"
-import { fireEvent, render, screen } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import Filters from "./filters"
 import selectEvent from "react-select-event"
 import userEvent from "@testing-library/user-event"
 
-let mockQueryParamSearchString = undefined
+let mockQueryParamSearchStrings = undefined
 
+// We have multiple things using the query string, so we need to pay attention to keys to avoid mixing up different elements
 jest.mock("react-use-query-param-string", () => {
 
   const original = jest.requireActual("react-use-query-param-string")
   return {
     ...original,
-    useQueryParamString: jest.fn().mockImplementation(() => [mockQueryParamSearchString, jest.fn().mockImplementation((val) => mockQueryParamSearchString = val), true]),
-    getQueryParams: jest.fn().mockReturnValue({ "search-regex": mockQueryParamSearchString })
-
+    useQueryParamString: jest.fn().mockImplementation((key) => [mockQueryParamSearchStrings[key], jest.fn().mockImplementation((val) => {
+      mockQueryParamSearchStrings[key] = val
+    }), true])
   }
 })
 
 describe("filters bar", () => {
+  let user
   let newExtensions
   const extensionsListener = jest.fn(extensions => (newExtensions = extensions))
 
@@ -64,7 +66,8 @@ describe("filters bar", () => {
   const categories = ["moose", "skunks", "lynx"]
 
   beforeEach(() => {
-    mockQueryParamSearchString = undefined
+    user = userEvent.setup()
+    mockQueryParamSearchStrings = {}
     render(
       <Filters
         extensions={extensions}
@@ -172,7 +175,7 @@ describe("filters bar", () => {
     })
 
     it("leaves in extensions which match category filter", async () => {
-      fireEvent.click(screen.getByText(displayCategory))
+      await user.click(screen.getByText(displayCategory))
 
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(pascal)
@@ -180,7 +183,7 @@ describe("filters bar", () => {
 
     it("filters out extensions which do not match the ticked category", async () => {
       expect(newExtensions).toContain(alice)
-      fireEvent.click(screen.getByText(displayCategory))
+      await user.click(screen.getByText(displayCategory))
 
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).not.toContain(alice)
@@ -189,11 +192,11 @@ describe("filters bar", () => {
     it("reinstates extensions when a category is unticked", async () => {
       expect(newExtensions).toContain(alice)
 
-      fireEvent.click(screen.getByText(displayCategory))
+      await user.click(screen.getByText(displayCategory))
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).not.toContain(alice)
 
-      fireEvent.click(screen.getByText(displayCategory))
+      await user.click(screen.getByText(displayCategory))
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
     })

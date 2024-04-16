@@ -127,17 +127,18 @@ describe("extension list", () => {
         expect(screen.queryAllByText(displayCategory)).toHaveLength(1) // One for the filter, and in the card the name is concatenated with something else
       })
 
+      // Cross-talk means this test has to go first
+      it("filters out extensions which do not match the ticked category", async () => {
+        fireEvent.click(screen.getByText(displayCategory))
+
+        expect(screen.queryByText(molluscs.name)).toBeFalsy()
+      })
+
       it("leaves in extensions which match category filter", async () => {
         fireEvent.click(screen.getByText(displayCategory))
 
         expect(screen.queryByText(ruby.name)).toBeTruthy()
         expect(screen.queryByText(diamond.name)).toBeTruthy()
-      })
-
-      it("filters out extensions which do not match the ticked category", async () => {
-        fireEvent.click(screen.getByText(displayCategory))
-
-        expect(screen.queryByText(molluscs.name)).toBeFalsy()
       })
 
       it("displays a longer message about how many extensions are still shown", async () => {
