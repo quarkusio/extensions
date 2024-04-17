@@ -23,6 +23,10 @@ html {
 
     --controls-outline-color: #555555;
 
+    /* not in the main site additions */
+
+    --cta-background-color: #4695EB;
+    --cta-hover-color: #cc0000;
     --code-background-color: #EFEFEF; /* not in the main site */
     --code-border-color: #EFEFEF; /* not in the main site */
     --code-text-color: #333333; /* not in the main site */
@@ -51,8 +55,7 @@ html {
         --title-background-color: #0e0e0e;
         --breadcrumb-background-color: #0d1c2c;
 
-        --code-background-color: #333333; /* not in the main site */
-        --code-border-color: #222222; /* not in the main site */
+
         --code-text-color: #B5B5B5;
 
         --card-outline: #555555;
@@ -60,6 +63,12 @@ html {
         --unlisted-text-color: #CCCCCC;
         --card-background-color-hover: #333333;
         --card-background-color: #0f0f0f;
+
+        /* not in the main site additions */
+        --code-background-color: #333333;
+        --code-border-color: #222222;
+
+        --cta-background-color: #0B58AB;
     }
 
     /* code highlighting overrides */
