@@ -7,8 +7,8 @@ const DAY_IN_MILLISECONDS = 1000 * DAY_IN_SECONDS
 
 let repoContributorCache, companyCache
 
-let minimumContributorCount = 2
-let minimumContributionPercent = 20
+let minimumContributorCount = 1
+let minimumContributionPercent = 35
 
 const setMinimumContributionPercent = n => {
   minimumContributionPercent = n
