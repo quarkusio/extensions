@@ -10,10 +10,14 @@ const Button = styled(props => <a {...props} />)`
 
   white-space: nowrap;
 
-  background-color: var(--quarkus-blue);
+  background-color: var(--cta-background-color);
   border-radius: var(--border-radius);
 
   padding: 0.5rem 2rem;
+
+  :link {
+    color: var(--navbar-text-color);
+  }
 
   &:visited {
     color: var(--navbar-text-color);
@@ -21,7 +25,7 @@ const Button = styled(props => <a {...props} />)`
 
   &:hover {
     color: var(--navbar-text-color);
-    background-color: var(--dark-red);
+    background-color: var(--cta-hover-color);
   }
 `
 const CallToAction = styled.span`
