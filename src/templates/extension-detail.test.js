@@ -17,7 +17,7 @@ jest.mock("react-use-query-param-string", () => {
 describe("extension detail page", () => {
   describe("for an extension with lots of information", () => {
     const category = "jewellery"
-    const keyword = "shiny"
+    const keyword = "Shiny"
     const guideUrl = "http://quarkus.io/theguide"
     const platform1 = "A Box"
     const platform2 = "quarkus-bom-quarkus-platform-descriptor"
@@ -124,7 +124,7 @@ describe("extension detail page", () => {
 
     it("renders the keywords as a link", () => {
       expect(screen.getByText("#" + keyword).href).toBe(
-        "http://localhost/?keywords=" + keyword)
+        "http://localhost/?keywords=" + keyword.toLowerCase())
     })
 
     it("renders the artifact id", () => {

@@ -56,7 +56,7 @@ const ExtensionMetadata = ({
               (element, i) => {
                 if (element) {
                   const displayed = linkGenerator ?
-                    <Link to={linkGenerator(element).replaceAll(" ", "+")}>{element}</Link> : url ?
+                    <Link to={linkGenerator(element).replaceAll(" ", "+").toLowerCase()}>{element}</Link> : url ?
                       <a href={url}>{element}</a> : element
                   return <MetadataValue key={i}>{displayed}</MetadataValue>
                 }
