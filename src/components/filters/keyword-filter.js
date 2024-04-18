@@ -61,11 +61,11 @@ const KeywordFilter = ({ keywords, filterer }) => {
   const [stringedTickedKeywords, setTickedKeywords, initialized] = useQueryParamString(key, undefined, true)
   const realStringedTickedKeywords = initialized ? stringedTickedKeywords : getQueryParams() ? getQueryParams()[key] : undefined
 
-  const tickedKeywords = stringedTickedKeywords ? stringedTickedKeywords.split(separator) : []
+  const tickedKeywords = stringedTickedKeywords ? stringedTickedKeywords.split(separator).map(keyword => keyword.replaceAll("+", " ")) : []
 
-  const onClick = category => () =>
+  const onClick = keyword => () =>
     toggleKeyword(
-      category,
+      keyword,
       tickedKeywords,
       setTickedKeywords,
       filterer
