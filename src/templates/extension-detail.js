@@ -55,7 +55,7 @@ const UnlistedWarning = styled.header`
 
 const SupersededWarning = styled.header`
   padding-left: var(--site-margins);
-  background-color: var(--soft-yellow);
+  background-color: var(--gentle-alert-background-color);
   text-align: left;
   font-size: var(--font-size-24);
   font-weight: var(--font-weight-bold);

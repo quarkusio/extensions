@@ -25,6 +25,8 @@ html {
 
     /* not in the main site additions */
 
+    --gentle-alert-background-color: #FDE9BF;
+
     --cta-background-color: #4695EB;
     --cta-hover-color: #cc0000;
     --code-background-color: #EFEFEF; /* not in the main site */
@@ -65,6 +67,8 @@ html {
         --card-background-color: #0f0f0f;
 
         /* not in the main site additions */
+        --gentle-alert-background-color: #292929;
+
         --code-background-color: #333333;
         --code-border-color: #222222;
 
