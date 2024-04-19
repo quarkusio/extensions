@@ -18,7 +18,7 @@ const Extensions = styled.ol`
   display: grid;
   gap: 30px;
   width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(260px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   grid-template-rows: repeat(auto-fill, 1fr);
 `
 
