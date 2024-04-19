@@ -44,7 +44,8 @@ html {
 
 }
 
-@media (prefers-color-scheme: dark) {
+/*@media (prefers-color-scheme: dark) {*/
+@media screen and (max-width: 1px) {
     html {
         --link-color: #9BCAFA;
         --link-color-hover: #CC0000;
