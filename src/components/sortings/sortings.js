@@ -84,8 +84,10 @@ const Sortings = ({ sorterAction, downloadData }) => {
   return (
     <SortBar className="sortings">
       {sort === downloads &&
-        <DownloadDataData>Maven download data only available for extensions in Quarkus, Quarkiverse, and Camel orgs.
-          Last updated {formattedDate}</DownloadDataData>}
+        <DownloadDataData>Based on Maven Central downloads in {formattedDate}. Download data is only available for
+          extensions in Quarkus,
+          Quarkiverse, and Camel orgs.
+        </DownloadDataData>}
       <Title htmlFor="sort">Sort by</Title>
       <Element data-testid="sort-form">
         <Select

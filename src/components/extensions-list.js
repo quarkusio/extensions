@@ -34,7 +34,7 @@ const InfoSortRow = styled.div`
   padding-left: var(--site-margins);
   padding-right: var(--site-margins);
   display: flex;
-  column-gap: var(--a-modest-space);
+  column-gap: var(--a-generous-space);
   justify-content: space-between;
 `
 
