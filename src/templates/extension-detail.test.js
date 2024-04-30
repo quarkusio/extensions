@@ -64,6 +64,7 @@ describe("extension detail page", () => {
           sponsors: ["Automatically Calculated Sponsor"],
           lastUpdated: "1698924315702",
           contributors: [{ name: "Alice", contributions: 6 }, { name: "Bob", contributions: 2 }],
+          samplesUrl: [{ description: "samples", url: "https://github.com/someorg/someproject/main/blob/samples" }],
           ownerImage: {
             childImageSharp: {
               gatsbyImageData: "specific-logo.png",
@@ -196,6 +197,16 @@ describe("extension detail page", () => {
       const link = links.find(link => link.href === gitUrl)
       expect(link).toBeTruthy()
     })
+
+    it("renders a link to samples", () => {
+      expect(screen.getByText("Samples")).toBeTruthy()
+
+      const links = screen.getAllByRole("link")
+      expect(links).toBeTruthy()
+      const link = links.find(link => link.href === "https://github.com/someorg/someproject/main/blob/samples")
+      expect(link).toBeTruthy()
+    })
+
 
     it("renders a link to an issue count", () => {
       expect(screen.getByText("Issues")).toBeTruthy()
@@ -556,6 +567,11 @@ describe("extension detail page", () => {
 
     it("does not render anything about guides", async () => {
       const link = await screen.queryByText(/Guides/)
+      expect(link).toBeNull()
+    })
+
+    it("does not render anything about samples", async () => {
+      const link = await screen.queryByText(/Sample/)
       expect(link).toBeNull()
     })
 

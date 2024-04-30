@@ -26,7 +26,7 @@ const defaultOptions = {
 const DAY_IN_SECONDS = 24 * 60 * 60
 
 // Defer initialization of these so we're playing at the right points in the plugin lifecycle
-let imageCache, extensionYamlCache, issueCountCache
+let imageCache, extensionYamlCache, issueCountCache, samplesCache
 
 let getLabels
 
@@ -37,6 +37,11 @@ exports.onPreBootstrap = async () => {
   extensionYamlCache = new PersistableCache({
     key: "github-api-for-extension-metadata-paths",
     stdTTL: 0.8 * DAY_IN_SECONDS
+  })
+
+  samplesCache = new PersistableCache({
+    key: "samples-urls",
+    stdTTL: 5 * DAY_IN_SECONDS
   })
 
   issueCountCache = new PersistableCache({
@@ -104,6 +109,9 @@ exports.onPostBootstrap = async () => {
 
   await extensionYamlCache.persist()
   console.log("Persisted", extensionYamlCache.size(), "cached metadata file locations.")
+
+  await samplesCache.persist()
+  console.log("Persisted", samplesCache.size(), "cached samples folder locations.")
 
   await issueCountCache.persist()
   console.log("Persisted", issueCountCache.size(), "issue counts.")
@@ -263,7 +271,6 @@ const fetchScmInfo = async (scmUrl, groupId, artifactId, labels) => {
   }
 }
 
-
 const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   const coords = gh(scmUrl)
   const project = coords.name
@@ -296,6 +303,11 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
     scmInfo.extensionRootUrl = extensionRootUrl
   } else {
     console.warn("Could not locate the extension metadata path for", artifactId)
+  }
+
+  const samples = await getSamplesPath(coords, groupId, artifactId, scmUrl)
+  if (samples && samples.length > 0) {
+    scmInfo.samplesUrl = samples
   }
 
   // scmInfo.extensionPathInRepo may be undefined, but these methods will cope with that
@@ -362,6 +374,15 @@ const getImageInformationNoCache = async (coords) => {
 
 }
 
+const getSamplesPath = async (coords, groupId, artifactId, scmUrl) => {
+  const artifactKey = groupId + ":" + artifactId
+  const
+    samplesUrl
+      = await samplesCache.getOrSet(artifactKey, () => getSamplesPathNoCache(coords, groupId, artifactId, scmUrl)) ?? {}
+
+  return samplesUrl
+}
+
 const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
   const artifactKey = groupId + ":" + artifactId
   const {
@@ -382,6 +403,108 @@ const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
   } else {
     console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId}; found `, extensionYamls)
   }
+}
+
+const getSamplesPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
+
+
+  if (artifactId?.startsWith("camel-quarkus")) {
+    const shortArtifactId = artifactId?.replace("camel-quarkus-", "")
+    const query = `query {
+        repository(owner:"apache", name:"camel-quarkus-examples") {    
+            defaultBranchRef {
+              name
+            }
+            
+            shortenedSubfolderSamples: object(expression: "HEAD:${shortArtifactId}/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+         }
+    }`
+
+    const body = await queryGraphQl(query)
+    const data = body?.data
+
+    // If we got rate limited, there may not be a repository field
+    if (data?.repository) {
+      const defaultBranchRef = data.repository.defaultBranchRef
+
+      const allSampleContent = Object.values(data.repository).map(e => e?.entries).flat().filter(e => e?.path != null).map(e => e.path)
+      if (allSampleContent.length > 0) {
+        const samplesPath = allSampleContent[0].substring(0, allSampleContent[0].indexOf(shortArtifactId) + shortArtifactId.length)
+
+        const samplesUrl = normaliseUrl(`https://github.com/apache/camel-quarkus-examples/blob/${defaultBranchRef.name}/${samplesPath}`)
+
+        // This is a specific sample, so use singular
+        return [{ description: "sample", url: samplesUrl }]
+      } else {
+        return []  // return something, so we can cache it and not thrash the github api
+      }
+      // If we didn't find one, that's pretty expected, so don't complain
+    }
+  } else {
+
+    // Some multi-extension projects use just the 'different' part of the name in the folder structure
+    const shortArtifactId = artifactId?.replace(coords.name + "-", "")
+
+    const query = `query {
+        repository(owner:"${coords.owner}", name:"${coords.name}") {    
+            defaultBranchRef {
+              name
+            }
+            
+            samples: object(expression: "HEAD:samples/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+            
+            subfolderSamples: object(expression: "HEAD:${artifactId}/samples") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+            
+            shortenedSubfolderSamples: object(expression: "HEAD:${shortArtifactId}/samples/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+         }
+    }`
+
+    const body = await queryGraphQl(query)
+    const data = body?.data
+
+    // If we got rate limited, there may not be a repository field
+    if (data?.repository) {
+      const defaultBranchRef = data.repository.defaultBranchRef
+
+      const allSampleContent = Object.values(data.repository).map(e => e?.entries).flat().filter(e => e?.path?.includes("sample")).map(e => e.path)
+      if (allSampleContent.length > 0) {
+        const s = allSampleContent[0]
+        const samplesPath = s?.substring(0, s.indexOf("samples") + "samples".length)
+
+        const samplesUrl = normaliseUrl(`${scmUrl}/blob/${defaultBranchRef.name}/${samplesPath}`)
+
+        return [{ description: "samples", url: samplesUrl }]
+      } else {
+        return []  // return something, so we can cache it and not thrash the github api
+      }
+      // If we didn't find one, that's pretty expected, so don't complain
+    }
+  }
+
 }
 
 const getMetadataPathNoCache = async (coords, groupId, artifactId) => {

@@ -44,8 +44,10 @@ const ExtensionMetadata = ({
 
     if (Array.isArray(content)) {
       const prettyPrinted = content
-        .map(element => transform(element))
-        .filter(el => el != null)
+        .map(element => {
+          return { pretty: transform(element), raw: element }
+        })
+        .filter(el => el.pretty != null)
       // Do an extra check, in case transforming the array removed its content
       if (prettyPrinted.length > 0) {
         const title = plural && content.length > 1 ? plural : name
@@ -56,8 +58,9 @@ const ExtensionMetadata = ({
               (element, i) => {
                 if (element) {
                   const displayed = linkGenerator ?
-                    <Link to={linkGenerator(element).replaceAll(" ", "+").toLowerCase()}>{element}</Link> : url ?
-                      <a href={url}>{element}</a> : element
+                    <Link
+                      to={linkGenerator(element.raw).replaceAll(" ", "+").toLowerCase()}>{element.pretty}</Link> : element.raw.url ?
+                      <a href={element.raw.url}>{element.pretty}</a> : element.pretty
                   return <MetadataValue key={i}>{displayed}</MetadataValue>
                 }
               }

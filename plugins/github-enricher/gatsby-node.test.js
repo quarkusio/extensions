@@ -640,6 +640,11 @@ describe("the github data handler", () => {
               { path: "runtime/src/main/resources/META-INF/services" },
             ],
           },
+          samples: {
+            entries: [
+              { path: "some-other-path/samples" }
+            ]
+          },
           openGraphImageUrl: socialMediaPreviewUrl,
         },
         repositoryOwner: { avatarUrl: avatarUrl },
@@ -773,6 +778,18 @@ describe("the github data handler", () => {
         expect.objectContaining({
           extensionYamlUrl:
             "http://fake.github.com/someuser/somerepo/blob/unusual/some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
+        })
+      )
+    })
+
+    it("fills in a url for the samples", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          samplesUrl:
+            [{
+              description: "samples",
+              url: "http://fake.github.com/someuser/somerepo/blob/unusual/some-other-path/samples"
+            }],
         })
       )
     })
