@@ -219,7 +219,7 @@ describe("extension metadata block", () => {
 
       it("renders the link", () => {
         expect(screen.getAllByRole("link")).toHaveLength(2)
-        expect(screen.getAllByText(frogs + "1")[0].href).toBe("http://localhost/lfrogs1")
+        expect(screen.getAllByText(frogs + "1")[0].href).toBe("http://localhost/lmittens")
       })
     })
 

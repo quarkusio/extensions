@@ -388,7 +388,7 @@ const ExtensionDetailTemplate = ({
                 metadata,
                 transformer: element =>
                   "#" + element,
-                linkGenerator: element => "/?keywords=" + element.replace("#", "")
+                linkGenerator: element => "/?keywords=" + element
               }}
             />
             <ExtensionMetadata
@@ -439,6 +439,14 @@ const ExtensionDetailTemplate = ({
                   ? extension.metadata?.sourceControl?.repository?.project
                   : extension.metadata?.sourceControl?.repository?.url ? "source" : undefined,
                 url: extension.metadata?.sourceControl?.repository?.url,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: (metadata?.sourceControl?.samplesUrl?.length > 1 || (metadata?.sourceControl?.samplesUrl?.length === 1 && metadata.sourceControl.samplesUrl[0].description?.endsWith("s"))) ? "Samples" : "Sample",
+                fieldName: "samplesUrl",
+                metadata: metadata?.sourceControl,
+                transformer: element => element.description,
               }}
             />
             <ExtensionMetadata
@@ -549,6 +557,10 @@ export const pageQuery = graphql`
           }
           issues
           issuesUrl
+          samplesUrl {
+            description
+            url
+          }
           sponsors
           lastUpdated
           contributors {
