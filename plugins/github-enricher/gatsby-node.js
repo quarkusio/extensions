@@ -40,7 +40,7 @@ exports.onPreBootstrap = async () => {
   })
 
   samplesCache = new PersistableCache({
-    key: "samples-urls",
+    key: "samples-url",
     stdTTL: 5 * DAY_IN_SECONDS
   })
 
@@ -405,12 +405,9 @@ const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
   }
 }
 
-const getSamplesPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
-
-
-  if (artifactId?.startsWith("camel-quarkus")) {
-    const shortArtifactId = artifactId?.replace("camel-quarkus-", "")
-    const query = `query {
+const discoverCamelSamplesPath = async (artifactId) => {
+  const shortArtifactId = artifactId?.replace("camel-quarkus-", "")
+  const query = `query {
         repository(owner:"apache", name:"camel-quarkus-examples") {    
             defaultBranchRef {
               name
@@ -426,32 +423,73 @@ const getSamplesPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
          }
     }`
 
-    const body = await queryGraphQl(query)
-    const data = body?.data
+  const body = await queryGraphQl(query)
+  const data = body?.data
 
-    // If we got rate limited, there may not be a repository field
-    if (data?.repository) {
-      const defaultBranchRef = data.repository.defaultBranchRef
+  // If we got rate limited, there may not be a repository field
+  if (data?.repository) {
+    const defaultBranchRef = data.repository.defaultBranchRef
 
-      const allSampleContent = Object.values(data.repository).map(e => e?.entries).flat().filter(e => e?.path != null).map(e => e.path)
-      if (allSampleContent.length > 0) {
-        const samplesPath = allSampleContent[0].substring(0, allSampleContent[0].indexOf(shortArtifactId) + shortArtifactId.length)
+    const allSampleContent = Object.values(data.repository).map(e => e?.entries).flat().filter(e => e?.path != null).map(e => e.path)
+    if (allSampleContent.length > 0) {
+      const samplesPath = allSampleContent[0].substring(0, allSampleContent[0].indexOf(shortArtifactId) + shortArtifactId.length)
 
-        const samplesUrl = normaliseUrl(`https://github.com/apache/camel-quarkus-examples/blob/${defaultBranchRef.name}/${samplesPath}`)
+      const samplesUrl = normaliseUrl(`https://github.com/apache/camel-quarkus-examples/blob/${defaultBranchRef.name}/${samplesPath}`)
 
-        // This is a specific sample, so use singular
-        return [{ description: "sample", url: samplesUrl }]
-      } else {
-        return []  // return something, so we can cache it and not thrash the github api
-      }
-      // If we didn't find one, that's pretty expected, so don't complain
+      // This is a specific sample, so use singular
+      return [{ description: "sample", url: samplesUrl }]
+    } else {
+      return []  // return something, so we can cache it and not thrash the github api
     }
-  } else {
+    // If we didn't find one, that's pretty expected, so don't complain
+  }
+}
 
-    // Some multi-extension projects use just the 'different' part of the name in the folder structure
-    const shortArtifactId = artifactId?.replace(coords.name + "-", "")
+const discoverQuarkusCoreQuickstartPath = async (artifactId) => {
+  const shortArtifactId = artifactId?.replace("quarkus-", "")
+  let quickstartRepoName = `"quarkus-quickstarts"`
+  let quickstartOrgName = `"quarkusio"`
+  const possibleQuickStartName = `${shortArtifactId}-quickstart`
+  const query = `query {
+        repository(owner:${quickstartOrgName}, name:${quickstartRepoName}) {    
+            defaultBranchRef {
+              name
+            }
+            
+            quickstarts: object(expression: "HEAD:${possibleQuickStartName}/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+         }
+    }`
 
-    const query = `query {
+  const body = await queryGraphQl(query)
+  const data = body?.data
+
+  // If we got rate limited, there may not be a repository field
+  if (data?.repository) {
+    const defaultBranchRef = data.repository.defaultBranchRef
+
+    const allSampleContent = Object.values(data.repository).map(e => e?.entries).flat().filter(e => e?.path != null).map(e => e.path)
+    if (allSampleContent.length > 0) {
+      const samplesUrl = normaliseUrl(`https://github.com/quarkusio/quarkus-quickstarts/blob/${defaultBranchRef.name}/${possibleQuickStartName}`)
+
+      return [{ description: "quickstart", url: samplesUrl }]
+    } else {
+      return []  // return something, so we can cache it and not thrash the github api
+    }
+    // If we didn't find one, that's pretty expected, so don't complain
+  }
+}
+
+const discoverSamplesPath = async (artifactId, coords, scmUrl) => {
+  // Some multi-extension projects use just the 'different' part of the name in the folder structure
+  const shortArtifactId = artifactId?.replace(coords.name + "-", "")
+
+  const query = `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {    
             defaultBranchRef {
               name
@@ -483,26 +521,37 @@ const getSamplesPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
          }
     }`
 
-    const body = await queryGraphQl(query)
-    const data = body?.data
+  const body = await queryGraphQl(query)
+  const data = body?.data
 
-    // If we got rate limited, there may not be a repository field
-    if (data?.repository) {
-      const defaultBranchRef = data.repository.defaultBranchRef
+  // If we got rate limited, there may not be a repository field
+  if (data?.repository) {
+    const defaultBranchRef = data.repository.defaultBranchRef
 
-      const allSampleContent = Object.values(data.repository).map(e => e?.entries).flat().filter(e => e?.path?.includes("sample")).map(e => e.path)
-      if (allSampleContent.length > 0) {
-        const s = allSampleContent[0]
-        const samplesPath = s?.substring(0, s.indexOf("samples") + "samples".length)
+    const allSampleContent = Object.values(data.repository).map(e => e?.entries).flat().filter(e => e?.path?.includes("sample")).map(e => e.path)
+    if (allSampleContent.length > 0) {
+      const s = allSampleContent[0]
+      const samplesPath = s?.substring(0, s.indexOf("samples") + "samples".length)
 
-        const samplesUrl = normaliseUrl(`${scmUrl}/blob/${defaultBranchRef.name}/${samplesPath}`)
+      const samplesUrl = normaliseUrl(`${scmUrl}/blob/${defaultBranchRef.name}/${samplesPath}`)
 
-        return [{ description: "samples", url: samplesUrl }]
-      } else {
-        return []  // return something, so we can cache it and not thrash the github api
-      }
-      // If we didn't find one, that's pretty expected, so don't complain
+      return [{ description: "samples", url: samplesUrl }]
+    } else {
+      return []  // return something, so we can cache it and not thrash the github api
     }
+    // If we didn't find one, that's pretty expected, so don't complain
+  }
+}
+
+const getSamplesPathNoCache = async (coords, groupId, artifactId, scmUrl) => {
+
+
+  if (artifactId?.startsWith("camel-quarkus")) {
+    return discoverCamelSamplesPath(artifactId)
+  } else if (coords?.owner === "quarkusio" && coords.name === "quarkus") {
+    return discoverQuarkusCoreQuickstartPath(artifactId)
+  } else {
+    return await discoverSamplesPath(artifactId, coords, scmUrl)
   }
 
 }
