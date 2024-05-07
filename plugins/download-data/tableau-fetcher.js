@@ -94,7 +94,7 @@ const getMostRecentData = async () => {
     const withDates = json
       .map(entry => {
         return {
-          groupId: entry["GroupId"],
+          groupId: entry["Group Id"],
           artifactId: entry["data.artifactId"],
           month: entry["Month of Data.Date"],
           downloads: convertToNumber(entry["Data.Timeline"])
@@ -116,9 +116,15 @@ const getMostRecentData = async () => {
         artifactId: entry.artifactId,
         rank: i + 1
       }
-    })
+    }).filter(e => e.groupId !== undefined && e.artifactId !== undefined && e.rank !== undefined)
 
-    return { date: mostRecentDate, ranking }
+    if (onlyMostRecentDownloads.length !== ranking.length) {
+      console.warn((onlyMostRecentDownloads.length - ranking.length), " download data entries had undefined entries, dropping them. Has the schema changed?")
+    }
+    // Only return download data if we have a non-zero amount
+    if (ranking.length > 1) {
+      return { date: mostRecentDate, ranking }
+    }
   }
 
 }

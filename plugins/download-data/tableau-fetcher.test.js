@@ -60,7 +60,7 @@ describe("the tableau data fetcher", () => {
 
     axios.post.mockResolvedValueOnce({ data: { credentials: { token, site: { id } } } })
     axios.get.mockResolvedValueOnce({ data: { views: { view: [{ id: "view-id" }] } } })
-    axios.get.mockResolvedValueOnce({ data: "GroupId,data.artifactId,Month of Data.Date,Year of Data.Date,Data.Timeline\nquarkus-soso,-1,2023,19\n" + mockTableauOutput + "\nquarkus-whatever,whenever,2023,19\n" })
+    axios.get.mockResolvedValueOnce({ data: "Group Id,data.artifactId,Month of Data.Date,Year of Data.Date,Data.Timeline\nquarkus-soso,-1,2023,19\n" + mockTableauOutput + "\nquarkus-whatever,whenever,2023,19\n" })
 
     const answer = await fetcher.getMostRecentData()
     expect(answer?.date).toStrictEqual(new Date("December 2023"))
@@ -68,7 +68,7 @@ describe("the tableau data fetcher", () => {
   })
 })
 
-const mockTableauOutput = `GroupId,data.artifactId,Month of Data.Date,Year of Data.Date,Data.Timeline
+const mockTableauOutput = `Group Id,data.artifactId,Month of Data.Date,Year of Data.Date,Data.Timeline
 thing,quarkus-soso,May 2023,2023,19
 thing,quarkus-soso,October 2023,2023,21
 thing,quarkus-soso,November 2022,2022,23
