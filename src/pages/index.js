@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import ExtensionsList from "../components/extensions-list"
+import { initialiseDisplayModeFromLocalStorage } from "../components/util/dark-mode-helper"
 
 const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
@@ -33,7 +34,10 @@ export default Index
  *
  * See: https://www.gatsbyjs.com/docs/reference/built-in-components/gatsby-head/
  */
-export const Head = () => <Seo title="All extensions" />
+export const Head = () => {
+  initialiseDisplayModeFromLocalStorage()
+  return <Seo title="All extensions" />
+}
 
 export const pageQuery = graphql`
   query {
