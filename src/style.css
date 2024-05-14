@@ -44,37 +44,35 @@ html {
 
 }
 
-/*@media (prefers-color-scheme: dark) {*/
-@media screen and (max-width: 1px) {
-    html {
-        --link-color: #9BCAFA;
-        --link-color-hover: #CC0000;
-        --link-color-visited: #AA4494;
-        --main-background-color: #121212;
-        --main-text-color: #B5B5B5;
-        --main-code-color: #F59B00;
-        --sec-background-color: #333333;
-        --sec-text-color: #B5B5B5;
-        --title-background-color: #0e0e0e;
-        --breadcrumb-background-color: #0d1c2c;
+html.dark {
+    --link-color: #9BCAFA;
+    --link-color-hover: #CC0000;
+    --link-color-visited: #AA4494;
+    --main-background-color: #121212;
+    --main-text-color: #B5B5B5;
+    --main-code-color: #F59B00;
+    --sec-background-color: #333333;
+    --sec-text-color: #B5B5B5;
+    --title-background-color: #0e0e0e;
+    --breadcrumb-background-color: #0d1c2c;
 
 
-        --code-text-color: #B5B5B5;
+    --code-text-color: #B5B5B5;
 
-        --card-outline: #555555;
-        --unlisted-outline-color: #DCDCDC;
-        --unlisted-text-color: #CCCCCC;
-        --card-background-color-hover: #333333;
-        --card-background-color: #0f0f0f;
+    --card-outline: #555555;
+    --unlisted-outline-color: #DCDCDC;
+    --unlisted-text-color: #CCCCCC;
+    --card-background-color-hover: #333333;
+    --card-background-color: #0f0f0f;
 
-        /* not in the main site additions */
-        --gentle-alert-background-color: #292929;
+    /* not in the main site additions */
+    --gentle-alert-background-color: #292929;
 
-        --code-background-color: #333333;
-        --code-border-color: #222222;
+    --code-background-color: #333333;
+    --code-border-color: #222222;
 
-        --cta-background-color: #0B58AB;
-    }
+    --cta-background-color: #0B58AB;
+
 
     /* code highlighting overrides */
     .hljs-built_in, .hljs-selector-tag, .hljs-section, .hljs-link, .hljs-function, .hljs-params {

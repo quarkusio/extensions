@@ -6,6 +6,7 @@ import userEvent from "@testing-library/user-event"
 
 const barsIconTitle = "bars"
 const globeIconTitle = "globe"
+const sunIconTitle = "sun"
 
 describe("navigation bar", () => {
   const linkTitle = "Community"
@@ -26,6 +27,10 @@ describe("navigation bar", () => {
 
     it("renders a globe icon", () => {
       expect(screen.getByTitle(globeIconTitle)).toBeInTheDocument()
+    })
+
+    it("renders a dark light mode icon", () => {
+      expect(screen.getByTitle(sunIconTitle)).toBeInTheDocument()
     })
 
     it("does not render a hamburger menu", () => {

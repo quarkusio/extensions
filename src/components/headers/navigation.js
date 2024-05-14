@@ -8,6 +8,7 @@ import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons"
 import { NavEntry, Submenu } from "./submenu"
 
 import config from "../../../gatsby-config.js"
+import { DarkModeToggle } from "./dark-mode-toggle"
 
 const NavToggle = styled.label`
   font-size: 27.2px;
@@ -286,6 +287,9 @@ const Navigation = () => {
     </Submenu>
   )
 
+  const darkModeToggle = <DarkModeToggle />
+
+
   const menus = (
     <>
       {about}
@@ -294,6 +298,7 @@ const Navigation = () => {
       {community}
       {callToAction}
       {translations}
+      {darkModeToggle}
     </>
   )
 

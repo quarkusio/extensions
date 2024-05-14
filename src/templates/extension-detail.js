@@ -18,6 +18,7 @@ import { getQueryParams, useQueryParamString } from "react-use-query-param-strin
 // This caching is important to allow our styles to take precedence over the default ones
 // See https://github.com/JedWatson/react-select/issues/4230
 import createCache from "@emotion/cache"
+import { initialiseDisplayModeFromLocalStorage } from "../components/util/dark-mode-helper"
 
 createCache({
   key: "my-select-cache",
@@ -513,6 +514,7 @@ const ExtensionDetailTemplate = ({
 
 // TODO how is this used?
 export const Head = ({ data: { extension } }) => {
+  initialiseDisplayModeFromLocalStorage()
   return <Seo title={extension.name} description={extension.description} />
 }
 

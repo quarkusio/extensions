@@ -7,7 +7,8 @@
 
 import * as React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
+import { getDisplayModeFromLocalStorage } from "./util/dark-mode-helper"
 
 const Seo = ({ description, lang, title, children }) => {
   const { site } = useStaticQuery(
@@ -43,6 +44,8 @@ const Seo = ({ description, lang, title, children }) => {
       />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={metaDescription} />
+      <meta name="theme-color" content={getDisplayModeFromLocalStorage()} />
+
       {children}
     </>
   )
