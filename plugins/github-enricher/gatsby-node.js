@@ -816,6 +816,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     extensionYamlUrl: String
     extensionRootUrl: String
     issues: String
+    samplesUrl: SampleInfo
     lastUpdated: String
     contributors: [ContributorInfo]
     companies: [CompanyContributorInfo]
@@ -824,6 +825,11 @@ exports.createSchemaCustomization = ({ actions }) => {
     allSponsors: [String]
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
+  }
+  
+  type SampleInfo implements Node {
+    url: String
+    description: String 
   }
   
   type Repository implements Node {
