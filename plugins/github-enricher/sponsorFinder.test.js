@@ -434,6 +434,17 @@ describe("the github sponsor finder", () => {
       expect(queryGraphQl).not.toHaveBeenCalled()
     })
 
+    it("returns the time period over which data was analysed", async () => {
+      const { numMonthsForContributions } = await getContributors("someorg", "someproject")
+      // The months could be 6, or it could be 1, depending on if this is CI or not
+      try {
+        expect(numMonthsForContributions).toBe(6)
+      } catch (e) {
+        // eslint-disable-next-line jest/no-conditional-expect
+        expect(numMonthsForContributions).toBe(1)
+      }
+    })
+
     it("returns a list of individuals, given an org and project", async () => {
       const contributors = await getContributors("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()

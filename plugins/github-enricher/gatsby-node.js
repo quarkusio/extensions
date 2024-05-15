@@ -46,7 +46,7 @@ exports.onPreBootstrap = async () => {
 
   issueCountCache = new PersistableCache({
     key: "github-api-for-issue-count",
-    stdTTL: 1 * DAY_IN_SECONDS
+    stdTTL: DAY_IN_SECONDS
   })
 
   await imageCache.ready()
@@ -315,18 +315,19 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   const {
     contributors,
     lastUpdated,
+    numMonthsForContributions,
     companies
   } = await getContributors(coords.owner, project, scmInfo.extensionPathInRepo) ?? {}
   scmInfo.contributorsWithFullCompanyInfo = contributors
   scmInfo.allCompanies = companies
   scmInfo.lastUpdated = lastUpdated
+  scmInfo.numMonthsForContributions = numMonthsForContributions
 
   return scmInfo
 }
 
 const getImageInformation = async (coords, scmUrl) => {
-  const repoKey = scmUrl
-  return await imageCache.getOrSet(repoKey, () => getImageInformationNoCache(coords))
+  return await imageCache.getOrSet(scmUrl, () => getImageInformationNoCache(coords))
 }
 
 const getImageInformationNoCache = async (coords) => {
@@ -376,11 +377,7 @@ const getImageInformationNoCache = async (coords) => {
 
 const getSamplesPath = async (coords, groupId, artifactId, scmUrl) => {
   const artifactKey = groupId + ":" + artifactId
-  const
-    samplesUrl
-      = await samplesCache.getOrSet(artifactKey, () => getSamplesPathNoCache(coords, groupId, artifactId, scmUrl)) ?? {}
-
-  return samplesUrl
+  return await samplesCache.getOrSet(artifactKey, () => getSamplesPathNoCache(coords, groupId, artifactId, scmUrl)) ?? {}
 }
 
 const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
@@ -825,6 +822,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     allSponsors: [String]
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
+    numMonthsForContributions: Int
   }
   
   type SampleInfo implements Node {
