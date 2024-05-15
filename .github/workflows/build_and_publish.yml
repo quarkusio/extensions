@@ -22,8 +22,8 @@ jobs:
   unit-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: "npm" # this only caches global dependencies
@@ -34,7 +34,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Get current date
         id: date
         run: |
@@ -50,7 +50,7 @@ jobs:
             gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}
             gatsby-build-github-queries-
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: "npm" # this only caches global dependencies
@@ -119,7 +119,7 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3 # not needed for the code, but needed for the git config
+      - uses: actions/checkout@v4 # not needed for the code, but needed for the git config
       - name: Download Built site
         uses: actions/download-artifact@v3
         with:
