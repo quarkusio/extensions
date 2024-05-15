@@ -8,7 +8,9 @@ const dark = "dark"
 const system = "system"
 
 export function getDisplayModeFromLocalStorageNoDefault() {
-  return localStorage.getItem(localStorageKey)
+  if (typeof localStorage !== `undefined`) {
+    return localStorage.getItem(localStorageKey)
+  }
 }
 
 export const getDisplayModeFromLocalStorage = () => {
@@ -16,10 +18,12 @@ export const getDisplayModeFromLocalStorage = () => {
 }
 
 function adjustCssClasses(storedTheme) {
-  if (storedTheme === dark || (storedTheme === system && prefersDarkMode())) {
-    document.documentElement.classList.add(dark)
-  } else {
-    document.documentElement.classList.remove(dark)
+  if (typeof document !== `undefined`) {
+    if (storedTheme === dark || (storedTheme === system && prefersDarkMode())) {
+      document.documentElement.classList.add(dark)
+    } else {
+      document.documentElement.classList.remove(dark)
+    }
   }
 }
 
@@ -29,8 +33,10 @@ export const initialiseDisplayModeFromLocalStorage = () => {
 }
 
 export const setDisplayMode = (newTheme) => {
-  localStorage.setItem(localStorageKey, newTheme)
-  adjustCssClasses(newTheme)
-  const themeMetadata = document.querySelector("meta[name=\"theme-color\"]")
-  if (themeMetadata) themeMetadata.content = newTheme
+  if (typeof localStorage !== `undefined`) {
+    localStorage.setItem(localStorageKey, newTheme)
+    adjustCssClasses(newTheme)
+    const themeMetadata = document.querySelector("meta[name=\"theme-color\"]")
+    if (themeMetadata) themeMetadata.content = newTheme
+  }
 }
