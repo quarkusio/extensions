@@ -5,6 +5,9 @@ const { queryGraphQl, queryRest } = require("./github-helper")
 const DAY_IN_SECONDS = 60 * 60 * 24
 const DAY_IN_MILLISECONDS = 1000 * DAY_IN_SECONDS
 
+// Search over a longer time period in prod builds, to speed up local builds and avoid having to wait for rate limiters
+const numMonthsForContributions = process.env.CI ? 6 : 1
+
 let repoContributorCache, companyCache
 
 let minimumContributorCount = 1
@@ -69,7 +72,7 @@ const getContributors = async (org, project, inPath) => {
 
       const sortedCompanies = companies.sort((c, d) => d.contributions - c.contributions)
 
-      return { contributors, companies: sortedCompanies, lastUpdated }
+      return { contributors, companies: sortedCompanies, lastUpdated, numMonthsForContributions }
     }
   }
 
@@ -78,7 +81,7 @@ const getContributors = async (org, project, inPath) => {
 const getContributorsNoCache = async (org, project, inPath) => {
   const pathParam = inPath ? `path: "${inPath}", ` : ""
   // We're only doing one, easy, date manipulation, so don't bother with a library
-  const timePeriodInDays = 180
+  const timePeriodInDays = numMonthsForContributions * 30.5
   const someMonthsAgo = new Date(Date.now() - timePeriodInDays * DAY_IN_MILLISECONDS).toISOString()
   const query = `query { 
   repository(owner: "${org}", name: "${project}") {

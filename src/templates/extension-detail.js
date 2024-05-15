@@ -209,6 +209,9 @@ const ExtensionDetailTemplate = ({
 
   const extensionRootUrl = metadata?.sourceControl?.extensionRootUrl
 
+  const numMonths = metadata?.sourceControl?.numMonthsForContributions ? metadata?.sourceControl?.numMonthsForContributions : "0"
+  const numMonthsWithUnit = numMonths === 1 ? `month` : `${numMonths} months` // We could convert this to an actual spelled out number, but I don't know if its helpful
+
   // Honour manual overrides of the sponsor
   const sponsors = metadata?.sponsors || metadata?.sponsor || metadata.sourceControl?.sponsors
 
@@ -288,9 +291,10 @@ const ExtensionDetailTemplate = ({
                       <p>Commits to the <a
                         href={metadata.sourceControl.url}><code>{metadata.sourceControl.repository.owner}/{metadata.sourceControl.repository.project}</code> repository</a>,
                         which hosts this extension{alongWith} in
-                        the past six months (excluding merge commits).</p>)}
+                        the past {numMonthsWithUnit}{" "}(excluding merge commits).</p>)}
                     {extensionRootUrl && (
-                      <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the past six months
+                      <p>Commits to <a href={extensionRootUrl}>this extension's source code</a> in the
+                        past {numMonthsWithUnit}{" "}
                         (excluding merge commits).</p>)}
 
                     <ChartHolder>
@@ -563,6 +567,7 @@ export const pageQuery = graphql`
           }
           sponsors
           lastUpdated
+          numMonthsForContributions
           contributors {
             name
             contributions
