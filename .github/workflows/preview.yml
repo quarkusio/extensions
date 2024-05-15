@@ -5,7 +5,8 @@ on:
     workflows: [ "Gatsby Publish" ]
     types:
       - completed
-    branches-ignore: [ main ]
+    branches-ignore: [ "main" ]
+
 jobs:
   preview:
     runs-on: ubuntu-20.04
