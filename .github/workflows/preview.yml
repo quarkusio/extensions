@@ -5,6 +5,8 @@ on:
     workflows: [ "Gatsby Publish" ]
     types:
       - completed
+    branches-ignore:
+      - "main"
 
 jobs:
   preview:
