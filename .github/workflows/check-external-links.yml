@@ -2,7 +2,7 @@ name: Check external links
 
 on:
   schedule: ## Do a run once daily, to catch new regressions
-    - cron: '45 10 * * *'
+    - cron: '45 23 * * *'
   workflow_dispatch:
 
 defaults:
