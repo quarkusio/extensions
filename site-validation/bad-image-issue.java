@@ -2,7 +2,7 @@
 
 //JAVA 17+
 
-//DEPS org.kohsuke:github-api:1.308
+//DEPS org.kohsuke:github-api:1.321
 //DEPS info.picocli:picocli:4.2.0
 
 import com.fasterxml.jackson.core.JsonProcessingException;
