@@ -5,10 +5,9 @@ on:
     workflows: [ "Gatsby Publish" ]
     types:
       - completed
-    branches: # yes, branches-ignore would be easier, but it ignores all branches and never triggers
-      - '*'         # matches every branch that doesn't contain a '/'
-      - '*/*'       # matches every branch containing a single '/'
-      - '**'        # matches every branch
+    branches-ignore:
+      - 'main'
+
 
 jobs:
   preview:
