@@ -20,18 +20,18 @@ const modes = [{
   alt: "sun",
   icon: faSun,
   theme: "light",
-  title: "'light': 'Color scheme: light; next: system preferences"
+  title: "'light': 'Color scheme: light; next: dark"
 }, {
   alt: "moon",
   icon: faMoon,
   theme: "dark",
-  title: "'dark': 'Color scheme: dark; next: light"
+  title: "'dark': 'Color scheme: dark; next: system preferences"
 },
   {
     alt: "cog",
     icon: faCog,
     theme: "system",
-    title: "'system': 'Color scheme: system preferences; next: dark'"
+    title: "'system': 'Color scheme: system preferences; next: light'"
   }]
 
 const DarkModeToggle = () => {
