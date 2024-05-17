@@ -13,6 +13,9 @@ const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
 const { validate } = require("./src/data/image-validation")
 const fs = require("fs/promises")
+const {
+  createJavadocUrlFromCoordinates, initJavadocCache,
+} = require("./src/javadoc/javadoc-url")
 let badImages = {}
 
 exports.sourceNodes = async ({
@@ -36,6 +39,11 @@ exports.sourceNodes = async ({
     if (extension.artifact) {
       // This is very slow. Would doing it as a remote file help speed things up?
       extension.metadata.maven = await generateMavenInfo(extension.artifact)
+
+      const javadocUrl = await createJavadocUrlFromCoordinates(extension.metadata.maven)
+      if (javadocUrl) {
+        extension.metadata.javadoc = { url: javadocUrl }
+      }
     }
   })
 
@@ -214,6 +222,7 @@ exports.sourceNodes = async ({
 
 exports.onPreBootstrap = async () => {
   await initMavenCache()
+  await initJavadocCache()
   badImages = []
 }
 
@@ -339,6 +348,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       unlisted: Boolean
       maven: MavenInfo
       sourceControl: SourceControlInfo @link(by: "key")
+      javadoc: JavadocInfo
       icon: File @link(by: "url")
       sponsors: [String]
       sponsor: String
@@ -351,7 +361,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       timestamp: String
       relocation: RelocationInfo
     }
-    
+
+    type JavadocInfo {
+      url: String
+      version: String
+      timestamp: String
+      relocation: RelocationInfo
+    }
+        
     type RelocationInfo {
        artifactId: String
     }

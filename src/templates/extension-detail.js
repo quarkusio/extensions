@@ -416,6 +416,14 @@ const ExtensionDetailTemplate = ({
                 metadata,
               }}
             />
+
+            <ExtensionMetadata
+              data={{
+                name: "Javadoc",
+                text: metadata.javadoc?.url ? "javadoc.io" : null, // Slight workaround to make sure we don't display the field if the url is null
+                url: metadata.javadoc?.url,
+              }}
+            />
             <ExtensionMetadata
               data={{
                 name: "Sponsor",
@@ -512,7 +520,6 @@ const ExtensionDetailTemplate = ({
   )
 }
 
-// TODO how is this used?
 export const Head = ({ data: { extension } }) => {
   initialiseDisplayModeFromLocalStorage()
   return <Seo title={extension.name} description={extension.description} />
@@ -553,6 +560,9 @@ export const pageQuery = graphql`
           artifactId
           url
           timestamp
+        }
+        javadoc {
+          url
         }
         sourceControl {
           repository {
