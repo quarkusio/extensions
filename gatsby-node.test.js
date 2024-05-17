@@ -14,7 +14,15 @@ const createNode = jest.fn()
 const createNodeId = jest.fn()
 const createContentDigest = jest.fn()
 
+const resolvedJavadocUrl = "http://reallygoodurl.javadoc"
+const { createJavadocUrlFromCoordinates } = require("./src/javadoc/javadoc-url")
+jest.mock("./src/javadoc/javadoc-url")
+createJavadocUrlFromCoordinates.mockImplementation(artifactId => {
+  return resolvedJavadocUrl
+})
+
 const resolvedMavenUrl = "http://reallygoodurl.mvn"
+
 const { generateMavenInfo } = require("./src/maven/maven-info")
 jest.mock("./src/maven/maven-info")
 
@@ -203,6 +211,18 @@ describe("the main gatsby entrypoint", () => {
           metadata: expect.objectContaining({
             maven: expect.objectContaining({
               url: resolvedMavenUrl,
+            }),
+          }),
+        })
+      )
+    })
+
+    it("adds a javadoc url", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          metadata: expect.objectContaining({
+            javadoc: expect.objectContaining({
+              url: resolvedJavadocUrl,
             }),
           }),
         })

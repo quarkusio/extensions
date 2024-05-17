@@ -27,6 +27,7 @@ describe("extension detail page", () => {
     const artifactId = "art.somethingelse"
 
     const mvnUrl = "http://yup.its.maven/"
+    const javadocUrl = "http://ooh.its.javadoc/"
     const gitUrl = "https://github.com/someorg/someproject"
     const olderUrl = "old-slug"
 
@@ -53,6 +54,9 @@ describe("extension detail page", () => {
           artifactId,
           url: mvnUrl,
           timestamp: "1666716560000",
+        },
+        javadoc: {
+          url: javadocUrl,
         },
         sourceControl: {
           repository: {
@@ -186,6 +190,11 @@ describe("extension detail page", () => {
       expect(screen.getByText("Repository")).toBeTruthy()
       expect(screen.getByText("Maven Central")).toBeTruthy()
       expect(screen.getByText("Maven Central").href).toBe(mvnUrl)
+    })
+
+    it("renders a link to the javadoc", () => {
+      expect(screen.getByText("Javadoc")).toBeTruthy()
+      expect(screen.getByText("javadoc.io").href).toBe(javadocUrl)
     })
 
     it("renders a link to source control", () => {
@@ -573,6 +582,10 @@ describe("extension detail page", () => {
     it("does not render anything about samples", async () => {
       const link = await screen.queryByText(/Sample/)
       expect(link).toBeNull()
+    })
+
+    it("does not render a link to the javadoc", () => {
+      expect(screen.queryByText("Javadoc")).toBeFalsy()
     })
 
     it("does not render fields for which there is no information", async () => {
