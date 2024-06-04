@@ -105,7 +105,7 @@ jobs:
         run: echo ${{ github.event.number }} > ./public/pr-id.txt
 
       - name: Publishing directory for site deployment
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: site
           path: ./public
