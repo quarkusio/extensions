@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Restoring cached GitHub API results
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             .cache-github-api
@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
       - name: Caching GitHub API results
-        uses: actions/cache/save@v3  # save the cache even if the integration tests fail
+        uses: actions/cache/save@v4  # save the cache even if the integration tests fail
         with:
           path: |
             .cache-github-api

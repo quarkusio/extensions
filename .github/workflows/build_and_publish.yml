@@ -41,7 +41,7 @@ jobs:
           echo "month=$(date +'%Y-%m')" >> "$GITHUB_OUTPUT"
           echo "day=$(date +'%d')" >> "$GITHUB_OUTPUT"
       - name: Restoring cached GitHub API results
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             .cache-github-api
@@ -67,7 +67,7 @@ jobs:
           SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
 
       - name: Caching GitHub API results
-        uses: actions/cache/save@v3  # save the cache even if the integration tests fail
+        uses: actions/cache/save@v4  # save the cache even if the integration tests fail
         with:
           path: |
             .cache-github-api
