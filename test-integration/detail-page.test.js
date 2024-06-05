@@ -52,7 +52,7 @@ describe("an extension details page", () => {
 
   it("should have a link to the documentation", async () => {
     await expect(
-      page.waitForSelector(`xpath///*[contains(text(), "documentation")]`)
+      page.waitForSelector(`xpath///*[contains(text(), "guide")]`)
     ).resolves.toBeTruthy()
   })
 
