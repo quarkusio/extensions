@@ -217,7 +217,7 @@ const ExtensionDetailTemplate = ({
   const sponsors = metadata?.sponsors || metadata?.sponsor || metadata.sourceControl?.sponsors
 
   const extensionCount = metadata?.sourceControl?.repository?.extensionCount
-
+  const guideDescription = metadata.guide?.includes("quarkus.io/") ? "quarkus.io/guides" : metadata.guide?.includes("docs.quarkiverse.io/") || metadata.guide?.includes("https://quarkiverse.github.io/quarkiverse-docs/") ? "docs.quarkiverse.io" : metadata.guide?.includes("README.md") ? "readme" : metadata.guide?.includes(".") ? "docs" : null
   const alongWith = extensionCount > 1 ? `, along with ${extensionCount} other extensions,` : ""
 
   return (
@@ -257,11 +257,11 @@ const ExtensionDetailTemplate = ({
                 {metadata.guide && (
                   <DocumentationSection>
                     <DocumentationHeading>Guides</DocumentationHeading>
-                    Make sure to use the extension's{" "}
+                    This extension has a{" "}
                     <VisibleLink href={metadata.guide}>
-                      documentation
+                      guide
                     </VisibleLink>{" "}
-                    to get your questions answered.
+                    to get you going.
                   </DocumentationSection>
                 )}
                 <DocumentationSection>
@@ -367,6 +367,20 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "Guide",
+                text: guideDescription,
+                url: metadata.guide,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Javadoc",
+                text: metadata.javadoc?.url ? "javadoc.io" : null, // Slight workaround to make sure we don't display the field if the url is null
+                url: metadata.javadoc?.url,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Built with",
                 fieldName: "builtWithQuarkusCore",
                 metadata,
@@ -407,21 +421,6 @@ const ExtensionDetailTemplate = ({
                   /quarkus-non-platform-extensions/.test(element)
                     ? null
                     : qualifiedPrettyPlatform(element),
-              }}
-            />
-            <ExtensionMetadata
-              data={{
-                name: "Minimum Java version",
-                fieldName: "minimumJavaVersion",
-                metadata,
-              }}
-            />
-
-            <ExtensionMetadata
-              data={{
-                name: "Javadoc",
-                text: metadata.javadoc?.url ? "javadoc.io" : null, // Slight workaround to make sure we don't display the field if the url is null
-                url: metadata.javadoc?.url,
               }}
             />
             <ExtensionMetadata
@@ -470,7 +469,13 @@ const ExtensionDetailTemplate = ({
                 url: extension.metadata?.sourceControl?.issuesUrl,
               }}
             />
-
+            <ExtensionMetadata
+              data={{
+                name: "Minimum Java version",
+                fieldName: "minimumJavaVersion",
+                metadata,
+              }}
+            />
             <ClosingRule />
 
             <AuthorGuidance>
