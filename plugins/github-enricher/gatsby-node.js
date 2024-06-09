@@ -1,3 +1,5 @@
+const followRedirect = require("follow-redirect-url")
+
 const gh = require("parse-github-url")
 const path = require("path")
 const encodeUrl = require("encodeurl")
@@ -275,11 +277,14 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
   const coords = gh(scmUrl)
   const project = coords.name
 
+  const scmInfo = { labels }
+
   const { issuesUrl, issues } = await getIssueInformation(coords, labels, scmUrl)
 
-  const scmInfo = { issuesUrl, issues }
-
-  scmInfo.labels = labels
+  if (issuesUrl) {
+    scmInfo.issuesUrl = issuesUrl
+    scmInfo.issues = issues
+  }
 
   const imageInfo = await getImageInformation(coords, scmUrl)
 
@@ -696,9 +701,17 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
   // The parent objects may be undefined and destructuring nested undefineds is not good
   const issues = body?.data?.repository?.issues?.totalCount
 
-  // If we got an issue count we can be pretty confident our url will be ok, but otherwise, it might not be,
-  // so check it. We don't check for every url because otherwise we start getting 429s and dropping good URLs
-  if (!issues) {
+  issuesUrl = await maybeIssuesUrl(issues, issuesUrl)
+
+  return { issues, issuesUrl }
+}
+
+const maybeIssuesUrl = async (issues, issuesUrl) => {
+  if (issues) {
+    return issuesUrl
+  } else {
+    // If we got an issue count we can be pretty confident our url will be ok, but otherwise, it might not be,
+    // so check it. We don't check for every url because otherwise we start getting 429s and dropping good URLs
     // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
     // A simple property read won't work
     const {
@@ -706,12 +719,18 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
     } = await import("url-exist")
 
     const isValidUrl = await urlExist(issuesUrl)
-    if (!isValidUrl) {
-      issuesUrl = undefined
-    }
-  }
 
-  return { issues, issuesUrl }
+    let isOriginalUrl = isValidUrl && await isNotRedirectToPulls(issuesUrl)
+
+    return isOriginalUrl ? issuesUrl : undefined
+  }
+}
+
+const isNotRedirectToPulls = async (issuesUrl) => {
+  // Being a valid url may not be enough, we also want to check for redirects to /pulls
+  const urls = await followRedirect.startFollowing(issuesUrl)
+  const finalUrl = urls[urls.length - 1]
+  return !(finalUrl.url.includes("/pulls"))
 }
 
 // This combines the sponsor opt-in information (which we only fully have after processing all nodes) with the companies and sponsor information for individual nodes,
