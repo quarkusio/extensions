@@ -53,7 +53,7 @@ jobs:
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
       - name: Raise defects if needed
-        uses: jbangdev/jbang-action@v0.116.0
+        uses: jbangdev/jbang-action@v0.111.0
         if: always() # we *especially* want to run this if the link checker failed
         with:
           script: site-validation/dead-link-issue.java

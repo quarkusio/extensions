@@ -74,7 +74,7 @@ jobs:
           key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Raise defects if needed
-        uses: jbangdev/jbang-action@v0.116.0
+        uses: jbangdev/jbang-action@v0.111.0
         # Only try and raise defects on the main builds
         if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule')"
         with:
