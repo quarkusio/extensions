@@ -2,7 +2,7 @@
 
 //JAVA 17+
 
-//DEPS org.kohsuke:github-api:1.321
+//DEPS org.kohsuke:github-api:1.322
 //DEPS info.picocli:picocli:4.2.0
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -144,7 +144,7 @@ class Report implements Runnable {
                         %s image: %s
 
                         The problem image was found on these artifacts: %s
-                        
+                                                
                         Affected pages are 
                         - %s
 
@@ -183,12 +183,12 @@ class Report implements Runnable {
         if (Files.exists(filePath)) {
             try {
                 return Arrays.asList(new ObjectMapper().readValue(filePath.toFile(), BadImage[].class));
-                            } catch (JsonProcessingException e) {
-                                throw new RuntimeException(e);
-                            }
-            } else {
-                return Collections.emptyList();
+            } catch (JsonProcessingException e) {
+                throw new RuntimeException(e);
             }
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     public static void main(String... args) {
