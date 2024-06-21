@@ -19,6 +19,7 @@ const filterExtensions = (
   extensions,
   { regex, categoryFilter, keywordFilter, statusFilter, compatibilityFilter }
 ) => {
+  console.log(extensions[0])
   return (
     extensions
       // Exclude unlisted extensions, unless they happen to match a non-trivial search filter
@@ -27,6 +28,7 @@ const filterExtensions = (
       .filter(
         extension =>
           extension.name.toLowerCase().match(regex.toLowerCase()) ||
+          extension.artifact?.toLowerCase().match(regex.toLowerCase()) ||
           extension.description?.toLowerCase().match(regex.toLowerCase())
       )
       .filter(

@@ -59,6 +59,7 @@ export const pageQuery = graphql`
     allExtension(sort: { fields: [name], order: DESC }) {
       nodes {
         name
+        artifact
         id
         sortableName
         description

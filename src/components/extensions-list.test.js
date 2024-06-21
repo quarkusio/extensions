@@ -48,6 +48,7 @@ describe("extension list", () => {
   const maybeObsolete = {
     name: "Maybebsolete",
     id: "maybe-old",
+    artifact: "maybe-old-or-not",
     sortableName: "maybe-old",
     slug: "ambiguous-slug",
     metadata: { categories: [otherCategory] },
@@ -119,6 +120,16 @@ describe("extension list", () => {
         await user.clear(searchInput)
         await user.keyboard("ruby")
         expect(screen.queryByText(ruby.name)).toBeTruthy()
+      })
+
+      it("includes the artifact id in what it searches", async () => {
+        expect(screen.queryByText(maybeObsolete.name)).toBeTruthy()
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.clear(searchInput)
+        await user.keyboard(maybeObsolete.artifact)
+        expect(screen.queryByText(maybeObsolete.name)).toBeTruthy()
+        expect(screen.queryByText(ruby.name)).toBeFalsy()
       })
     })
 
