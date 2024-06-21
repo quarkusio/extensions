@@ -26,6 +26,7 @@ describe("filters bar", () => {
   const alice = {
     name: "Alice",
     description: "a nice person",
+    artifact: "some complex id",
     metadata: {
       categories: ["lynx"],
       status: "wonky",
@@ -120,6 +121,15 @@ describe("filters bar", () => {
       const searchInput = screen.getByRole("textbox")
       await user.click(searchInput)
       await user.keyboard("nice")
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toContain(alice)
+      expect(newExtensions).not.toContain(pascal)
+    })
+
+    it("leaves in extensions whose id match the search filter", async () => {
+      const searchInput = screen.getByRole("textbox")
+      await user.click(searchInput)
+      await user.keyboard(alice.artifact)
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
       expect(newExtensions).not.toContain(pascal)
