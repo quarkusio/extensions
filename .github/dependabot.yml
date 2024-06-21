@@ -15,3 +15,9 @@ updates:
       interval: daily
     labels:
       - area/infra
+    groups:
+      # Specify a name for the group, which will be used in pull request titles
+      # and branch names
+      artifact-management:
+        patterns:
+          - "*-artifact"  # A wildcard string that matches multiple dependency names
