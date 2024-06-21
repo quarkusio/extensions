@@ -43,7 +43,7 @@ const getTimestampFromMavenArtifactsListing = async maven => {
     const lastModified = listingHeaders.headers["last-modified"]
     return Date.parse(lastModified)
   } else {
-    throw "Artifact url did not exist (probably temporarily)."
+    throw new Error("Artifact url did not exist (probably temporarily).")
   }
 }
 
@@ -80,13 +80,13 @@ const tolerantlyGetTimestampFromMavenSearch = async maven => {
   })
 }
 
-const getLatestVersionFromMavenSearch = async maven => {
+const getLatestVersionFromMavenSearch = async (groupId, artifactId) => {
   const response = await axios.get(
     "https://search.maven.org/solrsearch/select",
     {
       params: {
-        q: `g:${maven.groupId} AND a:${maven.artifactId}`,
-        rows: 20,
+        q: `g:${groupId} AND a:${artifactId}`,
+        rows: 1,
         wt: "json",
       },
       headers: {
@@ -99,8 +99,8 @@ const getLatestVersionFromMavenSearch = async maven => {
   return data?.response?.docs[0]?.latestVersion
 }
 
-const tolerantlyGetLatestVersionFromMavenSearch = async maven => {
-  return await promiseRetry(async () => getLatestVersionFromMavenSearch(maven), {
+const tolerantlyGetLatestVersionFromMavenSearch = async (groupId, artifactId) => {
+  return await promiseRetry(async () => getLatestVersionFromMavenSearch(groupId, artifactId), {
     retries: 6,
     factor: 3,
     minTimeout: 4 * 1000,
@@ -113,21 +113,13 @@ const tolerantlyGetLatestVersionFromMavenSearch = async maven => {
   })
 }
 
-const generateMavenInfo = async artifact => {
-  const maven = parse(artifact)
+const getRelocation = async (artifact, groupId, artifactId) => {
+  const latestVersion = await latestVersionCache.getOrSet(artifact, () => tolerantlyGetLatestVersionFromMavenSearch(groupId, artifactId))
 
-  const mavenUrl = await createMavenUrlFromCoordinates(maven)
-
-  if (mavenUrl) {
-    maven.url = mavenUrl
-  }
-
-  const latestVersion = await latestVersionCache.getOrSet(artifact, () => tolerantlyGetLatestVersionFromMavenSearch(maven))
-  // If the latest version of an artifact is also its current version, there's unlikely to be a relocation on it
-  if (latestVersion && latestVersion !== maven.version) {
+  if (latestVersion) {
     const latestPomUrl = await createMavenArtifactsUrlFromCoordinates({
-      artifactId: maven.artifactId,
-      groupId: maven.groupId,
+      artifactId,
+      groupId,
       version: latestVersion
     })
 
@@ -147,23 +139,36 @@ const generateMavenInfo = async artifact => {
       if (data) {
         const processed = await promiseRetry(async () => readPom(data), options)
 
-        maven.relocation = processed.relocation
+        const relocation = processed.relocation
 
         // Sometimes a relocation stanza might be missing a group id or artifact id, so fill in gaps
-        if (maven.relocation) {
-          if (!maven.relocation.artifactId) {
-            maven.relocation.artifactId = maven.artifactId
+        if (relocation) {
+          if (!relocation.artifactId) {
+            relocation.artifactId = artifactId
           }
-          if (!maven.relocation.groupId) {
-            maven.relocation.groupId = maven.groupId
+          if (!relocation.groupId) {
+            relocation.groupId = groupId
           }
         }
+        return relocation
       }
     } catch (error) {
       console.warn("Tried to read", latestPomUrl, "Error made it through the promise retry", error)
     }
-
   }
+}
+
+const generateMavenInfo = async artifact => {
+  const maven = parse(artifact)
+
+  const mavenUrl = await createMavenUrlFromCoordinates(maven)
+
+  if (mavenUrl) {
+    maven.url = mavenUrl
+  }
+
+  maven.relocation = await getRelocation(artifact, maven.groupId, maven.artifactId)
+
 
   let timestamp = await timestampCache.getOrSet(artifact, async () => {
     // This will be slow because we need to need hit the endpoint too fast and we need to back off; we perhaps should batch, but that's hard to implement with our current model
