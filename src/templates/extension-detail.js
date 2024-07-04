@@ -191,7 +191,7 @@ const ExtensionDetailTemplate = ({
 
   const key = "tab"
   const [searchText, setSearchText, initialized] = useQueryParamString(key, "")
-
+  
   const onSelect = (index) => {
     setSearchText(tabs[index])
     return true
@@ -219,6 +219,8 @@ const ExtensionDetailTemplate = ({
   const extensionCount = metadata?.sourceControl?.repository?.extensionCount
   const guideDescription = metadata.guide?.includes("quarkus.io/") ? "quarkus.io/guides" : metadata.guide?.includes("docs.quarkiverse.io/") || metadata.guide?.includes("https://quarkiverse.github.io/quarkiverse-docs/") ? "docs.quarkiverse.io" : metadata.guide?.includes("README.md") ? "readme" : metadata.guide?.includes(".") ? "docs" : null
   const alongWith = extensionCount > 1 ? `, along with ${extensionCount} other extensions,` : ""
+
+  const repository = metadata?.sourceControl?.repository
 
   return (
     <Layout location={location}>
@@ -290,7 +292,7 @@ const ExtensionDetailTemplate = ({
 
                     {!extensionRootUrl && (
                       <p>Commits to the <a
-                        href={metadata.sourceControl.url}><code>{metadata.sourceControl.repository.owner}/{metadata.sourceControl.repository.project}</code> repository</a>,
+                        href={repository.url}><code>{repository.owner}/{repository.project}</code> repository</a>,
                         which hosts this extension{alongWith} in
                         the past {numMonthsWithUnit}{" "}(excluding merge commits).</p>)}
                     {extensionRootUrl && (
@@ -442,15 +444,15 @@ const ExtensionDetailTemplate = ({
                 name: "Source code",
                 fieldName: "url",
                 icon:
-                  extension.metadata?.sourceControl?.url?.includes("github") ? "github" : extension.metadata?.sourceControl?.url?.includes("gitlab") ?
-                    "gitlab" : extension.metadata?.sourceControl?.url?.includes("git")
+                  repository?.url?.includes("github") ? "github" : repository?.url?.includes("gitlab") ?
+                    "gitlab" : repository?.url?.includes("git")
                       ? "git-alt"
                       : undefined,
                 // If we don't have a project name, still show a url label, but if we don't have a url, don't show a label
-                text: extension.metadata?.sourceControl?.repository?.project
-                  ? extension.metadata?.sourceControl?.repository?.project
-                  : extension.metadata?.sourceControl?.repository?.url ? "source" : undefined,
-                url: extension.metadata?.sourceControl?.repository?.url,
+                text: repository?.project
+                  ? repository?.project
+                  : repository?.url ? "source" : undefined,
+                url: repository?.url,
               }}
             />
             <ExtensionMetadata
