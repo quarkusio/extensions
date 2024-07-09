@@ -72,14 +72,6 @@ describe("site external links", () => {
 
     const linksToSkip = [
       "https://twitter.com/quarkusio",
-      // TODO remove this exemption as soon as new releases with live guide links are made (the repos are correct, the releases are not)
-      "https://quarkus.io/guides/qson",
-      // PR https://github.com/quarkiverse/quarkus-asyncapi/pull/71
-      "https://quarkiverse.github.io/quarkiverse-docs/quarkus-asyncapi-annotation-scanner/dev/",
-      // See https://github.com/quarkiverse/quarkus-itext/pull/19
-      "https://quarkiverse.github.io/quarkiverse-docs/itext/dev/",
-      // Known incorrect link in auto-generated yaml, corrected by https://github.com/apache/camel-quarkus/pull/5365
-      "https://camel.apache.org/camel-quarkus/latest/reference/extensions/camel-k.html",
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
