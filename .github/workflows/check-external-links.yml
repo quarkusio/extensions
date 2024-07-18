@@ -48,13 +48,13 @@ jobs:
             .cache-github-api
           key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
       - run: npm run test:links
+        continue-on-error: true # problems will be tracked by defects raised by the next job, not by build failures
         env:
           CI: true
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
       - name: Raise defects if needed
         uses: jbangdev/jbang-action@v0.111.0
-        if: always() # we *especially* want to run this if the link checker failed
         with:
           script: site-validation/dead-link-issue.java
           scriptargs: token=${{ secrets.GITHUB_TOKEN }} issueRepo=${{ github.repository }}  runId=${{ github.run_id }} siteUrl=https://quarkus.io/extensions
