@@ -20,7 +20,7 @@
     "encodeurl": "^2.0.0",
     "eslint-plugin-gatsby": "^1.0.2",
     "follow-redirect-url": "^2.0.2",
-    "gatsby": "^4.25.8",
+    "gatsby": "^4.25.9",
     "gatsby-plugin-feed": "^4.25.0",
     "gatsby-plugin-force-file-loader": "^4.0.2",
     "gatsby-plugin-image": "^2.22.0",
