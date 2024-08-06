@@ -47,7 +47,7 @@ exports.onPreBootstrap = async () => {
   })
 
   issueCountCache = new PersistableCache({
-    key: "github-api-for-issue-count",
+    key: "github-api-for-issue-counts",
     stdTTL: DAY_IN_SECONDS
   })
 
@@ -707,7 +707,7 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
 }
 
 const maybeIssuesUrl = async (issues, issuesUrl) => {
-  if (issues) {
+  if (issues && issues > 0) {
     return issuesUrl
   } else {
     // If we got an issue count we can be pretty confident our url will be ok, but otherwise, it might not be,
