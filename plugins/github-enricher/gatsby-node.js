@@ -592,8 +592,24 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
                 }
               }
             }
+
+            filteredSubfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources-filtered/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
             
-             quarkusSubfolderMetaInfs: object(expression: "HEAD:extensions/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+            filteredShortenedSubfolderMetaInfs: object(expression: "HEAD:${shortArtifactId}/runtime/src/main/resources-filtered/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+                        
+            quarkusSubfolderMetaInfs: object(expression: "HEAD:extensions/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
               ... on Tree {
                 entries {
                   path
