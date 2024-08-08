@@ -563,7 +563,8 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
   // Some multi-extension projects use just the 'different' part of the name in the folder structure
   const shortArtifactId = artifactId?.replace(coords.name + "-", "")
 
-  const query = `query {
+  const isNotCamel = !groupId.includes("camel")
+  const query = isNotCamel ? `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {    
             defaultBranchRef {
               name
@@ -616,8 +617,14 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
                 }
               }
             }
-            
-            camelQuarkusCoreSubfolderMetaInfs: object(expression: "HEAD:extensions-core/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+        ` :
+    `query {
+        repository(owner:"${coords.owner}", name:"${coords.name}") {    
+            defaultBranchRef {
+              name
+            }
+        
+        camelQuarkusCoreSubfolderMetaInfs: object(expression: "HEAD:extensions-core/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
               ... on Tree {
                 entries {
                   path
