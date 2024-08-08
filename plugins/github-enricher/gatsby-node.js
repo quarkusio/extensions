@@ -563,7 +563,11 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
   // Some multi-extension projects use just the 'different' part of the name in the folder structure
   const shortArtifactId = artifactId?.replace(coords.name + "-", "")
 
-  const isNotCamel = !groupId.includes("camel")
+  // Some projects just use a single word for the project names, such as the Amazon and Google extensions
+  const elements = artifactId?.split("-")
+  const oneWordArtifactId = elements && elements[elements.length - 1]
+
+  const isNotCamel = !groupId?.includes("camel")
   const query = isNotCamel ? `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {    
             defaultBranchRef {
@@ -594,6 +598,14 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
               }
             }
 
+            oneWordSubfolderMetaInfs: object(expression: "HEAD:${oneWordArtifactId}/runtime/src/main/resources/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+            
             filteredSubfolderMetaInfs: object(expression: "HEAD:${artifactId}/runtime/src/main/resources-filtered/META-INF/") {
               ... on Tree {
                 entries {
