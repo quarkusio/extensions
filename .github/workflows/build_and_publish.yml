@@ -31,6 +31,28 @@ jobs:
       - run: npm run test
         env:
           CI: true
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: "npm" # this only caches global dependencies
+      - run: npm ci --prefer-offline
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            eslintrc:
+              - '.eslint*'
+
+      # run eslint on all files if eslintrc changes
+      - name: Run eslint on changed files
+        uses: sibiraj-s/action-eslint@v3
+        with:
+          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -73,32 +95,11 @@ jobs:
             .cache-github-api
           key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
 
-      - name: Raise defects if needed
-        uses: jbangdev/jbang-action@v0.111.0
-        # Only try and raise defects on the main builds
-        if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')"
-        with:
-          script: site-validation/bad-image-issue.java
-          scriptargs: token=${{ secrets.GITHUB_TOKEN }} issueRepo=${{ github.repository }}  runId=${{ github.run_id }} siteUrl=https://quarkus.io/extensions
-
       - run: npm run test:int
         env:
           CI: true
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
-
-      - uses: dorny/paths-filter@v3
-        id: filter
-        with:
-          filters: |
-            eslintrc:
-              - '.eslint*'
-
-      # run eslint on all files if eslintrc changes
-      - name: Run eslint on changed files
-        uses: sibiraj-s/action-eslint@v3
-        with:
-          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
 
       - name: Store PR id
         if: "github.event_name == 'pull_request'"
@@ -130,3 +131,23 @@ jobs:
         with:
           folder: site # The folder the action should deploy.
           branch: pages
+
+  raise-defects:
+    # Only try and raise defects on the main builds
+    if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')"
+    # This doesn't actually need to run after the deploy, but we want it to wait as long as possible after the main build to give the github rate limit time to recover
+    needs: [ deploy ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4 # not needed for the code, but needed for the git config
+      - name: Download Built site
+        uses: actions/download-artifact@v4
+        with:
+          name: site
+          path: site
+      - name: Raise defects if needed
+        uses: jbangdev/jbang-action@v0.111.0
+        if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')"
+        with:
+          script: site-validation/bad-image-issue.java
+          scriptargs: token=${{ secrets.GITHUB_TOKEN }} issueRepo=${{ github.repository }}  runId=${{ github.run_id }} siteUrl=https://quarkus.io/extensions
