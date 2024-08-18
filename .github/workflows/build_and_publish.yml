@@ -31,27 +31,6 @@ jobs:
       - run: npm run test
         env:
           CI: true
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: "npm" # this only caches global dependencies
-      - run: npm ci --prefer-offline
-      - uses: dorny/paths-filter@v3
-        id: filter
-        with:
-          filters: |
-            eslintrc:
-              - '.eslint*'
-
-      # run eslint on all files if eslintrc changes
-      - name: Run eslint on changed files
-        uses: sibiraj-s/action-eslint@v3
-        with:
-          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
 
   build:
     runs-on: ubuntu-latest
@@ -95,6 +74,12 @@ jobs:
             .cache-github-api
           key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
 
+      # run eslint on all files if eslintrc changes
+      - name: Run eslint on changed files
+        uses: sibiraj-s/action-eslint@v3
+        with:
+          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
+          
       - run: npm run test:int
         env:
           CI: true
