@@ -1,16 +1,19 @@
 name: Check external links
 
 on:
-  schedule: ## Do a run once daily, to catch new regressions
-    - cron: '45 23 * * *'
-  workflow_dispatch:
+  workflow_run:
+    workflows: [ "Gatsby Publish" ]
+    types:
+      - completed
+    branches:
+      - 'main'
 
 defaults:
   run:
     shell: bash
 
 concurrency:
-  group: uses-github-api # do not allow any concurrency or the different builds will risk creating multiple issues
+  group: uses-github-api # do not allow any concurrency to avoid re-triggering the rate limiter
 
 jobs:
   build:
@@ -19,34 +22,20 @@ jobs:
       issues: write
       repository-projects: read
       statuses: read
+    if: github.event.workflow_run.event == 'schedule' && github.event.workflow_run.conclusion == 'success'
     steps:
       - uses: actions/checkout@v4
-      - name: Restoring cached GitHub API results
-        uses: actions/cache@v4
-        with:
-          path: |
-            .cache-github-api
-          key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
-          restore-keys: | # If there are multiple partial matches for a restore key, the action returns the most recently created cache.
-            gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}
-            gatsby-build-github-queries-
       - uses: actions/setup-node@v4
         with:
           node-version: '18'
           cache: "npm" # this only caches global dependencies
       - run: npm ci --prefer-offline
-      - run: npm run build -- ${{ github.ref_name == 'main' && '--prefix-paths' || '' }}
-        env:
-          NODE_ENV: production
-          GATSBY_ACTIVE_ENV: production
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SEGMENT_KEY: ${{ secrets.SEGMENT_KEY }}
-      - name: Caching GitHub API results
-        uses: actions/cache/save@v4  # save the cache even if the integration tests fail
+      - name: Download Built Artifact
+        uses: actions/download-artifact@v4
         with:
-          path: |
-            .cache-github-api
-          key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
+          github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
+          run-id: ${{ github.event.workflow_run.id }}
+          name: site
       - run: npm run test:links
         continue-on-error: true # problems will be tracked by defects raised by the next job, not by build failures
         env:
