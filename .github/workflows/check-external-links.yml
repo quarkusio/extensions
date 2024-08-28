@@ -35,6 +35,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
           run-id: ${{ github.event.workflow_run.id }}
+          path: public/
           name: site
       - run: npm run test:links
         continue-on-error: true # problems will be tracked by defects raised by the next job, not by build failures
