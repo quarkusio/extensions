@@ -87,7 +87,8 @@ class Report implements Runnable {
     }
 
     private void closeResolvedIssues(GitHub github, List<DeadLink> links) throws IOException {
-        String term = String.format("is:issue is:open %s in:body", EYECATCHER);
+        // If we start raising defects in other repos, the repo qualifier may need to be dropped
+        String term = String.format("is:issue is:open %s in:body repo:%s", EYECATCHER, issueRepo);
         PagedSearchIterable<GHIssue> answer = github.searchIssues()
                 .q(term)
                 .list();
@@ -143,6 +144,7 @@ class Report implements Runnable {
 
             //Be aware that double quotes are not honoured and terms are generally split and AND-ed.
             // Don't require our eyecatcher, count any existing issue about this url as good enough
+            // If we start raising defects in other repos, the repo qualifier will need to be dropped
             String term = String.format("is:issue is:open \"%s\" in:title repo:%s", link.url(), issueRepo);
             PagedSearchIterable<GHIssue> answer = github.searchIssues()
                     .q(term)
