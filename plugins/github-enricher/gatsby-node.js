@@ -629,6 +629,8 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
                 }
               }
             }
+        }
+   }
         ` :
     `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {    
