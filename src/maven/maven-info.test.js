@@ -1,5 +1,7 @@
-import { generateMavenInfo, initMavenCache } from "./maven-info"
+import { generateMavenInfo, getLatestVersionFromMavenMetadata, initMavenCache } from "./maven-info"
 import { clearCaches } from "../../plugins/github-enricher/sponsorFinder"
+
+const fs = require("fs")
 
 jest.mock("./maven-url")
 const axios = require("axios")
@@ -7,31 +9,47 @@ jest.mock("axios")
 
 const {
   createMavenUrlFromCoordinates,
-  createMavenArtifactsUrlFromCoordinates,
+  createMavenPomUrlFromCoordinates, createMavenMetadataUrlFromCoordinates
 } = require("./maven-url")
 
 const resolvedMavenUrl = "http://some.url.mvn"
 createMavenUrlFromCoordinates.mockImplementation(coordinates =>
   coordinates ? resolvedMavenUrl : undefined
 )
-createMavenArtifactsUrlFromCoordinates.mockImplementation(coordinates =>
+createMavenPomUrlFromCoordinates.mockImplementation(coordinates =>
   coordinates ? "http://repo1.some.mvn" : undefined
 )
+createMavenMetadataUrlFromCoordinates.mockResolvedValue("http://mocked.value")
 
+const mavenMetadata = fs.readFileSync("__mocks__/test-data/maven-metadata.xml", "utf8")
 
-// eslint-disable-next-line jest/no-mocks-import
-const expectedMavenCentralResponse = require("../../__mocks__/test-data/solrsearch.json")
-axios.get.mockReturnValue(expectedMavenCentralResponse)
-axios.head.mockReturnValue({
-  headers: {
-    "last-modified": "Thu, 09 Feb 2023 15:18:12 GMT",
-  },
+describe("the maven version finder", () => {
+  beforeEach(async () => {
+    axios.get.mockResolvedValue({
+      "data": mavenMetadata
+    })
+  })
+
+  it("gets the latest version", async () => {
+    const version = await getLatestVersionFromMavenMetadata("ignored", "mock")
+    expect(version).toBe("3.14.2")
+  })
 })
 
 describe("the maven information generator", () => {
   const artifact = "io.quarkus:quarkus-vertx::jar:3.0.0.Alpha1"
 
   beforeEach(async () => {
+    axios.get.mockResolvedValue({
+      "data": mavenMetadata
+    })
+
+    axios.head.mockResolvedValue({
+      headers: {
+        "last-modified": "Thu, 09 Feb 2023 15:18:12 GMT",
+      },
+    })
+
     clearCaches()
     await initMavenCache()
   })
@@ -53,13 +71,38 @@ describe("the maven information generator", () => {
     })
 
     it("uses the cache on subsequent calls", async () => {
-      const startingCallCount = axios.get.mock.calls.length
       // Warm the cache
       await generateMavenInfo(artifact)
-      expect(axios.get.mock.calls.length).toBe(startingCallCount + 1)
+      // There should be one call for the latest version, and one for the pom, but the exact value here is not critical
+      const startingCallCount = axios.get.mock.calls.length
       // Now go again
       await generateMavenInfo(artifact)
-      expect(axios.get.mock.calls.length).toBe(startingCallCount + 1)
+      expect(axios.get.mock.calls.length).toBe(startingCallCount)
+    })
+
+    describe("when there is a relocation", () => {
+
+      beforeEach(async () => {
+        axios.get.mockResolvedValueOnce({
+          "data": mavenMetadata
+        })
+        axios.get.mockResolvedValueOnce({
+          "data": "<project><distributionManagement><relocation>\n" +
+            "<groupId>io.quarkus</groupId>\n" +
+            "<artifactId>newer-and-cooler</artifactId>\n" +
+            "<version>3.14.2</version>" +
+            "</relocation></distributionManagement></project>"
+        })
+      })
+
+      it("adds a relocation", async () => {
+        const mavenInfo = await generateMavenInfo(artifact)
+        expect(mavenInfo.relocation).toStrictEqual({
+          "artifactId": "newer-and-cooler",
+          "groupId": "io.quarkus",
+          "version": "3.14.2"
+        })
+      })
     })
   })
 

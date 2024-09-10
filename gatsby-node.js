@@ -7,7 +7,7 @@ const {
 } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
 const { extensionSlug, extensionSlugFromCoordinates } = require("./src/components/util/extension-slugger")
-const { generateMavenInfo, initMavenCache } = require("./src/maven/maven-info")
+const { generateMavenInfo, initMavenCache, saveMavenCache } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
@@ -315,6 +315,8 @@ exports.onCreateWebpackConfig = ({ stage }) => {
 }
 
 exports.onPostBootstrap = async () => {
+  await saveMavenCache()
+
   const badImageDetails = Object.values(badImages)
   // Write out to a file
   if (badImageDetails?.length > 0) {

@@ -1,46 +1,85 @@
 const { default: parse } = require("mvn-artifact-name-parser")
 const {
   createMavenUrlFromCoordinates,
-  createMavenArtifactsUrlFromCoordinates
+  createMavenPomUrlFromCoordinates,
+  createMavenMetadataUrlFromCoordinates
 } = require("./maven-url")
 const axios = require("axios")
 const promiseRetry = require("promise-retry")
 const { readPom } = require("./pom-reader")
 const PersistableCache = require("../persistable-cache")
+const xml2js = require("xml2js")
+const parser = new xml2js.Parser({ explicitArray: false, trim: true })
 
 const DAY_IN_SECONDS = 60 * 60 * 24
 
-let timestampCache, latestVersionCache
+let timestampCache, versionCache, pomCache
+
+// Mirror-aware axios :)
+const maxios = {
+  get: (url, config) => {
+    try {
+      return axios.get(url, config)
+    } catch (e) {
+      // Fallback to the google mirror
+      console.log("Falling back to google mirror for", url, "because of", e)
+      const mirrorUrl = url.replace("repo1.maven.org", "maven-central.storage-download.googleapis.com")
+      return axios.get(mirrorUrl, config)
+    }
+  }, head: (url, config) => {
+    try {
+      return axios.head(url, config)
+    } catch (e) {
+      // Fallback to the google mirror
+      const mirrorUrl = url.replace("repo1.maven.org", "maven-central.storage-download.googleapis.com")
+      return axios.head(mirrorUrl, config)
+    }
+  }
+}
 
 const initMavenCache = async () => {
-  // If there are problems with the cache, it works well to add something like latestVersionCache.flushAll() on a main-branch build
+  // If there are problems with the cache, it works well to add something like pomCache.flushAll() on a main-branch build
   // (and then remove it next build)
 
   timestampCache = new PersistableCache({
     key: "maven-api-for-timestamps",
     stdTTL: 5 * DAY_IN_SECONDS
   })
-  latestVersionCache = new PersistableCache({
+  pomCache = new PersistableCache({
+    key: "maven-api-for-latest-poms",
+    stdTTL: 5 * DAY_IN_SECONDS // released poms are unlikely to change
+  })
+  versionCache = new PersistableCache({
     key: "maven-api-for-latest-versions",
-    stdTTL: 5 * DAY_IN_SECONDS // the worst that happens if this is out of of date is we do one extra query to read the pom
+    stdTTL: .5 * DAY_IN_SECONDS // versions do change often, and if this is wrong we may miss new relocations
   })
 
-  await latestVersionCache.ready()
-  console.log("Ingested cached maven information for", latestVersionCache.size(), "artifacts.")
+  await pomCache.ready()
+  console.log("Ingested cached maven information for", pomCache.size(), "artifacts.")
   await timestampCache.ready()
   console.log("Ingested cached timestamp information for", timestampCache.size(), "maven artifacts.")
+  await versionCache.ready()
 }
 
 const clearMavenCache = () => {
   timestampCache?.flushAll()
-  latestVersionCache?.flushAll()
+  pomCache?.flushAll()
+  versionCache?.flushAll()
+}
+
+const saveMavenCache = () => {
+  timestampCache?.persist()
+  pomCache?.persist()
+  versionCache?.persist()
 }
 
 const getTimestampFromMavenArtifactsListing = async maven => {
-  const mavenArtifactsUrl = await createMavenArtifactsUrlFromCoordinates(maven)
+  const mavenArtifactsUrl = await createMavenPomUrlFromCoordinates(maven)
   if (mavenArtifactsUrl) {
-    const listingHeaders = await axios.head(mavenArtifactsUrl)
-    const lastModified = listingHeaders.headers["last-modified"]
+    const listingHeaders = await maxios.head(mavenArtifactsUrl)
+    // If we went for the mirror, timestamps in the mirror will be wrong, but x-goog-meta-last-modified will be correct
+
+    const lastModified = listingHeaders.headers["x-goog-meta-last-modified"] || listingHeaders.headers["last-modified"]
     return Date.parse(lastModified)
   } else {
     throw new Error("Artifact url did not exist (probably temporarily).")
@@ -48,7 +87,7 @@ const getTimestampFromMavenArtifactsListing = async maven => {
 }
 
 const getTimestampFromMavenSearch = async maven => {
-  const response = await axios.get(
+  const response = await maxios.get(
     "https://search.maven.org/solrsearch/select",
     {
       params: {
@@ -72,72 +111,75 @@ const tolerantlyGetTimestampFromMavenSearch = async maven => {
     factor: 3,
     minTimeout: 4 * 1000,
   }).catch(e => {
-    // Don't even log 429 errors, they're kind of expected
-    if (e.response?.status !== 429) {
+    // Don't even log 429 and 403 errors, they're kind of expected
+    if (e.response?.status !== 429 || e.response?.status !== 403) {
       // We see 502 and other errors from maven, so handle failures gracefully
-      console.warn("Could not fetch information from maven central", e)
+      console.warn("Could not fetch timestamp information from maven search", e)
+    } else {
+      console.warn("Could not fetch timestamp information from maven search")
     }
   })
 }
 
-const getLatestVersionFromMavenSearch = async (groupId, artifactId) => {
-  const response = await axios.get(
-    "https://search.maven.org/solrsearch/select",
-    {
-      params: {
-        q: `g:${groupId} AND a:${artifactId}`,
-        rows: 1,
-        wt: "json",
-      },
-      headers: {
-        Accept: "application/json",
-        "Accept-Encoding": "UTF-8",
-      },
-    }
-  )
-  const { data } = response
-  return data?.response?.docs[0]?.latestVersion
+const getLatestVersionFromMavenMetadata = async (groupId, artifactId) => {
+  const url = await createMavenMetadataUrlFromCoordinates({ groupId, artifactId })
+  if (url) {
+    const response = await maxios.get(url)
+    const { data } = response
+    // Note that this parser returns a promise, so needs an await on the other side
+    const raw = await parser.parseStringPromise(data)
+    return raw?.metadata?.versioning?.release
+  }
 }
 
-const tolerantlyGetLatestVersionFromMavenSearch = async (groupId, artifactId) => {
-  return await promiseRetry(async () => getLatestVersionFromMavenSearch(groupId, artifactId), {
+const tolerantlyGetLatestVersionFromMavenMetadata = async (groupId, artifactId) => {
+  return await promiseRetry(async () => getLatestVersionFromMavenMetadata(groupId, artifactId), {
     retries: 6,
     factor: 3,
     minTimeout: 4 * 1000,
   }).catch(e => {
     // Don't even log 429 errors, they're kind of expected
-    if (e.response?.status !== 429) {
+    if (e.response?.status !== 429 || e.response?.status !== 429) {
       // We see 502 and other errors from maven, so handle failures gracefully
-      console.warn("Could not fetch information from maven central", e)
+      console.warn("Could not fetch version information from maven central")
+    } else {
+      console.warn("Could not fetch version information from maven central", e)
     }
   })
 }
 
-const getRelocation = async (artifact, groupId, artifactId) => {
-  const latestVersion = await latestVersionCache.getOrSet(artifact, () => tolerantlyGetLatestVersionFromMavenSearch(groupId, artifactId))
+const getRelocation = async (coordinates) => {
+  const { groupId, artifactId } = coordinates
 
-  if (latestVersion) {
-    const latestPomUrl = await createMavenArtifactsUrlFromCoordinates({
-      artifactId,
-      groupId,
-      version: latestVersion
-    })
+  // We need to check either the most recent version, or at the very least, one *after* the one in the registry
+  // The version of the artifact in the registry will *not* have a relocation in its pom, because it will be the last one pre-relocation
+  const version = await versionCache.getOrSet(groupId + artifactId, async () => await tolerantlyGetLatestVersionFromMavenMetadata(groupId, artifactId))
 
-    const options = {
-      retries: 6,
-      factor: 3,
-      minTimeout: 4 * 1000,
-    }
+  // If the version in the registry is the same as the latest version up on maven central, there can't be an active relocation for this artifact
+  if (version !== coordinates.version) {
 
-    try {
-      const data = await latestVersionCache.getOrSet(latestPomUrl, async () => {
-          const response = await promiseRetry(async () => axios.get(latestPomUrl, {}), options)
-          return response.data
+    const url = await createMavenPomUrlFromCoordinates({ groupId, artifactId, version })
+
+    if (url) {
+      const options = {
+        retries: 6,
+        factor: 3,
+        minTimeout: 4 * 1000,
+      }
+
+      const data = await pomCache.getOrSet(url, async () => {
+          try {
+            const response = await promiseRetry(async () => maxios.get(url, {}), options)
+            return response.data
+          } catch (error) {
+            console.warn("Tried to read", url, "Error made it through the mirror fallback and the promise retry", error)
+          }
         }
       )
 
+
       if (data) {
-        const processed = await promiseRetry(async () => readPom(data), options)
+        const processed = await readPom(data)
 
         const relocation = processed.relocation
 
@@ -152,8 +194,6 @@ const getRelocation = async (artifact, groupId, artifactId) => {
         }
         return relocation
       }
-    } catch (error) {
-      console.warn("Tried to read", latestPomUrl, "Error made it through the promise retry", error)
     }
   }
 }
@@ -167,7 +207,7 @@ const generateMavenInfo = async artifact => {
     maven.url = mavenUrl
   }
 
-  maven.relocation = await getRelocation(artifact, maven.groupId, maven.artifactId)
+  maven.relocation = await getRelocation(maven)
 
 
   let timestamp = await timestampCache.getOrSet(artifact, async () => {
@@ -179,7 +219,6 @@ const generateMavenInfo = async artifact => {
       console.log(
         "Could not get timestamp from repository folder, querying maven directly."
       )
-      console.log("Error is:", e)
       thing = await tolerantlyGetTimestampFromMavenSearch(maven)
     }
     return thing
@@ -190,4 +229,11 @@ const generateMavenInfo = async artifact => {
 
   return maven
 }
-module.exports = { generateMavenInfo, clearMavenCache, initMavenCache }
+
+module.exports = {
+  generateMavenInfo,
+  clearMavenCache,
+  initMavenCache,
+  getLatestVersionFromMavenMetadata,
+  saveMavenCache
+}
