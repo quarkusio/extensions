@@ -306,8 +306,6 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
     scmInfo.extensionYamlUrl = extensionYamlUrl
     scmInfo.extensionPathInRepo = extensionPathInRepo
     scmInfo.extensionRootUrl = extensionRootUrl
-  } else {
-    console.warn("Could not locate the extension metadata path for", artifactId)
   }
 
   const samples = await getSamplesPath(coords, groupId, artifactId, scmUrl)
@@ -402,9 +400,8 @@ const getMetadataPath = async (coords, groupId, artifactId, scmUrl) => {
 
     return { extensionYamlUrl, extensionPathInRepo, extensionRootUrl }
 
-  } else {
-    console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId}; found `, extensionYamls)
   }
+  // Warning for the else case is done in the fetching path if we hit the github APIs this run
 }
 
 const discoverCamelSamplesPath = async (artifactId) => {
@@ -567,8 +564,47 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
   const elements = artifactId?.split("-")
   const oneWordArtifactId = elements && elements[elements.length - 1]
 
-  const isNotCamel = !groupId?.includes("camel")
-  const query = isNotCamel ? `query {
+  const isCamel = groupId?.includes("camel")
+
+  const query = isCamel ? `query {
+    repository(owner:"${coords.owner}", name:"${coords.name}") {
+      defaultBranchRef {
+        name
+      }
+
+      camelQuarkusSubfolderMetaInfs: object(expression: "HEAD:extensions/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+      ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+      
+      camelQuarkusCoreSubfolderMetaInfs: object(expression: "HEAD:extensions-core/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+      ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+
+      camelQuarkusJvmSubfolderMetaInfs: object(expression: "HEAD:extensions-jvm/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+      ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+
+      camelQuarkusSupportSubfolderMetaInfs: object(expression: "HEAD:extensions-support/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
+      ... on Tree {
+          entries {
+            path
+          }
+        }
+      }
+    }
+  }` : `query {
         repository(owner:"${coords.owner}", name:"${coords.name}") {    
             defaultBranchRef {
               name
@@ -630,39 +666,7 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
               }
             }
         }
-   }
-        ` :
-    `query {
-        repository(owner:"${coords.owner}", name:"${coords.name}") {    
-            defaultBranchRef {
-              name
-            }
-        
-        camelQuarkusCoreSubfolderMetaInfs: object(expression: "HEAD:extensions-core/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
-              ... on Tree {
-                entries {
-                  path
-                }
-              }
-            }
-            
-            camelQuarkusJvmSubfolderMetaInfs: object(expression: "HEAD:extensions-jvm/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
-              ... on Tree {
-                entries {
-                  path
-                }
-              }
-            }
-            
-            camelQuarkusSupportSubfolderMetaInfs: object(expression: "HEAD:extensions-support/${shortArtifactId}/runtime/src/main/resources/META-INF/") {
-              ... on Tree {
-                entries {
-                  path
-                }
-              }
-          }
-        }
-    }`
+   }`
 
   const body = await queryGraphQl(query)
   const data = body?.data
@@ -673,11 +677,16 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
 
     const allMetaInfs = Object.values(data.repository).map(e => e?.entries).flat()
 
-    return {
-      defaultBranchRef, extensionYamls: allMetaInfs.filter(entry =>
-        entry?.path.endsWith("/quarkus-extension.yaml")
-      )
+    const extensionYamls = allMetaInfs.filter(entry =>
+      entry?.path.endsWith("/quarkus-extension.yaml")
+    )
+    const answer = { defaultBranchRef, extensionYamls }
+    if (extensionYamls.length !== 0) {
+      console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId} (no results). `)
+    } else if (extensionYamls.length > 1) {
+      console.warn(`Too many candidate extension yaml paths for ${groupId}:${artifactId}; found `, extensionYamls)
     }
+    return answer
   }
 
 }
