@@ -5,7 +5,7 @@ jest.mock("url-exist", () => jest.fn().mockReturnValue(true))
 const {
   createMavenUrlFromCoordinates,
   createMavenUrlFromArtifactString,
-  createMavenArtifactsUrlFromCoordinates,
+  createMavenPomUrlFromCoordinates,
 } = require("./maven-url")
 
 describe("maven url generator", () => {
@@ -41,7 +41,7 @@ describe("maven url generator", () => {
   describe("artifact-download url generator", () => {
     it("turns coordinates into sensible urls", async () => {
       expect(
-        await createMavenArtifactsUrlFromCoordinates({
+        await createMavenPomUrlFromCoordinates({
           groupId: "io.quarkiverse.amazonalexa",
           artifactId: "quarkus-amazon-alexa",
           version: "1.0.5",
@@ -49,16 +49,6 @@ describe("maven url generator", () => {
       ).toBe(
         "https://repo1.maven.org/maven2/io/quarkiverse/amazonalexa/quarkus-amazon-alexa/1.0.5/quarkus-amazon-alexa-1.0.5.pom"
       )
-    })
-
-    it("validates urls exist", async () => {
-      await createMavenArtifactsUrlFromCoordinates(gav)
-      expect(urlExist).toHaveBeenCalled()
-    })
-
-    it("returns null if it cannot deduce a valid url", async () => {
-      await urlExist.mockReturnValue(false)
-      expect(await createMavenArtifactsUrlFromCoordinates(gav)).toBeUndefined()
     })
   })
 })

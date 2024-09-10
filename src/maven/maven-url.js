@@ -28,29 +28,28 @@ const createMavenUrlFromCoordinates = async coordinates => {
   }
 }
 
-const createMavenArtifactsUrlFromCoordinates = async coordinates => {
+const createMavenPomUrlFromCoordinates = async coordinates => {
   const pathifiedGroupId = coordinates.groupId?.replace(/\./g, "/")
-  // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
-  // A simple property read won't work
-  const {
-    default: urlExist,
-  } = await import("url-exist")
-  
-  const url = `https://repo1.maven.org/maven2/${pathifiedGroupId}/${coordinates.artifactId}/${coordinates.version}/${coordinates.artifactId}-${coordinates.version}.pom`
-  const exists = await urlExist(url)
-  if (exists) {
-    return url
-  } else {
-    console.warn(
-      "Could not work out url. Best guess was ",
-      url,
-      "but it does not seem to exist."
-    )
-  }
+
+  // Don't validate the maven url; even the mirror sometimes returns false from urlExist, and we're better off doing retries during the fetch of the actual contents
+  return `https://repo1.maven.org/maven2/${pathifiedGroupId}/${coordinates.artifactId}/${coordinates.version}/${coordinates.artifactId}-${coordinates.version}.pom`
 }
+
+const createMavenMetadataUrlFromCoordinates = async coordinates => {
+  const pathifiedGroupId = coordinates.groupId?.replace(/\./g, "/")
+
+  if (!coordinates.version) {
+    return `https://repo1.maven.org/maven2/${pathifiedGroupId}/${coordinates.artifactId}/maven-metadata.xml`
+  } else {
+
+  }
+
+}
+
 
 module.exports = {
   createMavenUrlFromCoordinates,
   createMavenUrlFromArtifactString,
-  createMavenArtifactsUrlFromCoordinates,
+  createMavenPomUrlFromCoordinates,
+  createMavenMetadataUrlFromCoordinates
 }
