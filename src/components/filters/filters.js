@@ -19,6 +19,8 @@ const filterExtensions = (
   extensions,
   { regex, categoryFilter, keywordFilter, statusFilter, compatibilityFilter }
 ) => {
+  const regexObj = new RegExp(regex, "i")
+
   return (
     extensions
       // Exclude unlisted and superseded extensions, unless they happen to match a non-trivial search filter
@@ -26,9 +28,9 @@ const filterExtensions = (
       .filter(extension => (!extension.metadata.unlisted && !extension.isSuperseded) || regex.length > 2)
       .filter(
         extension =>
-          extension.name.toLowerCase().match(regex.toLowerCase()) ||
-          extension.artifact?.toLowerCase().match(regex.toLowerCase()) ||
-          extension.description?.toLowerCase().match(regex.toLowerCase())
+          regexObj.test(extension.name) ||
+          regexObj.test(extension.description) ||
+          regexObj.test(extension.artifact?.replace("::jar", ""))
       )
       .filter(
         extension =>

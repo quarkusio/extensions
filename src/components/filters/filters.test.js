@@ -24,9 +24,9 @@ describe("filters bar", () => {
   const extensionsListener = jest.fn(extensions => (newExtensions = extensions))
 
   const alice = {
-    name: "Alice",
+    name: "Alice Blaine",
     description: "a nice person",
-    artifact: "some complex id",
+    artifact: "io.something:some-artifact-name::jar:3.10.2",
     metadata: {
       categories: ["lynx"],
       status: "wonky",
@@ -36,6 +36,7 @@ describe("filters bar", () => {
   }
   const pascal = {
     name: "Pascal",
+    artifact: "io.something:another-artifact-name::jar:3.10.2",
     metadata: {
       categories: ["skunks"],
       keywords: ["cool"],
@@ -141,10 +142,10 @@ describe("filters bar", () => {
       expect(newExtensions).not.toContain(pascal)
     })
 
-    it("leaves in extensions whose id match the search filter", async () => {
+    it("leaves in extensions whose id matches the search filter", async () => {
       const searchInput = screen.getByRole("textbox")
       await user.click(searchInput)
-      await user.keyboard(alice.artifact)
+      await user.keyboard("some-artifact-name")
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
       expect(newExtensions).not.toContain(pascal)
@@ -156,6 +157,22 @@ describe("filters bar", () => {
       await user.keyboard("alice")
       expect(extensionsListener).toHaveBeenCalled()
       expect(newExtensions).toContain(alice)
+      expect(newExtensions).not.toContain(pascal)
+
+      // select all and clear the search term
+      searchInput.setSelectionRange(0, searchInput.value.length)
+      await user.keyboard("pAScal")
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).not.toContain(alice)
+      expect(newExtensions).toContain(pascal)
+    })
+
+    it("does not count the jar part in the maven artifact as a match", async () => {
+      const searchInput = screen.getByRole("textbox")
+      await user.click(searchInput)
+      await user.keyboard("jar")
+      expect(extensionsListener).toHaveBeenCalled()
+      expect(newExtensions).toHaveLength(0)
     })
 
     describe("for an unlisted extension", () => {
