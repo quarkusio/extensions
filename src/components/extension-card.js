@@ -14,7 +14,7 @@ const Card = styled(props => <Link {...props} />)`
   background: var(--card-background-color) 0 0 no-repeat padding-box;
   color: var(--main-text-color);
   border: ${props =>
-          props.$unlisted ? "1px solid var(--unlisted-outline-color)" : "1px solid var(--card-outline)"};
+          props.$unlisted || props.$superseded ? "1px solid var(--unlisted-outline-color)" : "1px solid var(--card-outline)"};
   border-radius: 10px;
   opacity: 1;
   display: flex;
@@ -47,7 +47,7 @@ const ExtensionName = styled.div`
   font-size: var(--font-size);
   font-weight: var(--font-weight-awfully-bold);
   letter-spacing: 0;
-  color: ${props => (props.$unlisted ? "var(--card-outline)" : "var(--main-text-color)")};
+  color: ${props => (props.$unlisted || props.superseded ? "var(--card-outline)" : "var(--main-text-color)")};
   opacity: 1;
   width: 100%;
   padding-bottom: 2px;
@@ -87,8 +87,8 @@ const ExtensionDescription = styled.div`
 `
 
 const ExtensionInfo = styled.div`
-  color: ${props => (props.$unlisted ? "var(--danger-color)" : "var(--main-text-color)")};
-  text-transform: ${props => (props.$unlisted ? "uppercase" : "none")};
+  color: ${props => (props.$unlisted ? "var(--danger-color)" : props.$superseded ? "var(--breadcrumb-background-color)" : "var(--main-text-color)")};
+  text-transform: ${props => (props.$unlisted || props.$superseded ? "uppercase" : "none")};
   text-align: left;
   font-size: 0.7rem;
   opacity: 1;
@@ -115,17 +115,18 @@ const spacer = "\u00A0"
 
 const ExtensionCard = ({ extension }) => {
   const unlisted = extension.metadata.unlisted
+  const superseded = extension.isSuperseded
 
   return (
-    <Card to={extension.slug} $unlisted={unlisted}>
+    <Card to={extension.slug} $unlisted={unlisted} $superseded={superseded}>
       <MainInformation>
         <Logo extension={extension} />
-        <ExtensionName $unlisted={unlisted}>{extension.name}</ExtensionName>
+        <ExtensionName $unlisted={unlisted} $superseded={superseded}>{extension.name}</ExtensionName>
         <ExtensionDescription>{extension.description}</ExtensionDescription>
       </MainInformation>
       <FinerDetails>
-        <ExtensionInfo $unlisted={unlisted}>
-          {unlisted ? "Unlisted" : spacer}
+        <ExtensionInfo $unlisted={unlisted} $superseded={superseded}>
+          {unlisted ? "Unlisted" : superseded ? "Relocated" : spacer}
         </ExtensionInfo>
         <ExtensionInfo>
           {extension.metadata?.categories?.length > 0
