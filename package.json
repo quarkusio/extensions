@@ -81,7 +81,7 @@
     "jest-fetch-mock": "^3.0.3",
     "jest-puppeteer": "^10.1.0",
     "jest-puppeteer-preset": "^7.0.0",
-    "linkinator": "^6.0.4",
+    "linkinator": "^6.1.1",
     "node-libcurl": "^4.0.0",
     "prettier": "^3.3.3",
     "promise-retry": "^2.0.1",
