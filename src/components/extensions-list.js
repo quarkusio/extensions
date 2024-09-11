@@ -47,16 +47,15 @@ const ExtensionCount = styled.h2`
 `
 
 const ExtensionsList = ({ extensions, categories, downloadData }) => {
-  // Do some pre-filtering for content we will never want, like superseded extensions
-  const allExtensions = extensions.filter(extension => !extension.isSuperseded)
+  const allExtensions = extensions
 
   const [filteredExtensions, setExtensions] = useState(allExtensions)
   const [extensionComparator, setExtensionComparator] = useState(() => undefined)
 
   if (allExtensions) {
-    // Exclude unlisted extensions from the count, even though we sometimes show them if there's a direct search for it
+    // Exclude unlisted and superseded extensions from the count, even though we sometimes show them if there's a direct search for it
     const extensionCount = allExtensions.filter(
-      extension => !extension.metadata.unlisted
+      extension => !(extension.metadata.unlisted || extension.isSuperseded)
     ).length
 
     if (extensionComparator) {
@@ -66,7 +65,7 @@ const ExtensionsList = ({ extensions, categories, downloadData }) => {
     const countMessage =
       extensionCount === filteredExtensions.length
         ? `Showing ${extensionCount} extensions`
-        : `Showing ${filteredExtensions.length} matching of ${extensionCount} extensions`
+        : (filteredExtensions.length < extensionCount) ? `Showing ${filteredExtensions.length} matching of ${extensionCount} extensions` : `Showing ${filteredExtensions.length} extensions (including some unlisted and relocated extensions)`
 
     return (
       <div>
