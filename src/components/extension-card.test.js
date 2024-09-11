@@ -77,4 +77,29 @@ describe("extension card", () => {
       expect(screen.getByText(/unlisted/i)).toBeTruthy()
     })
   })
+
+  describe("a superseded extension", () => {
+    const category = "jewellery"
+    const extension = {
+      name: "JRuby",
+      slug: "jruby-slug",
+      isSuperseded: true,
+      metadata: { categories: [category] },
+    }
+
+    beforeEach(() => {
+      render(<ExtensionCard extension={extension} />)
+    })
+
+    // This is a weak test, because css variables don't turn up in the computed style, so we can't make assertions about the style
+    // leaving this here just to check nothing breaks
+    it("renders the extension name", () => {
+      expect(screen.getByText(extension.name)).toBeTruthy()
+    })
+
+    it("adds a 'relocated' label", () => {
+      expect(screen.getByText(/relocated/i)).toBeTruthy()
+    })
+  })
+
 })
