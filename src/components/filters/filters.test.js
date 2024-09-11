@@ -64,7 +64,18 @@ describe("filters bar", () => {
     platforms: ["Banff"],
   }
 
-  const extensions = [alice, pascal, fluffy, secret]
+  const stale = {
+    name: "Last Year's News",
+    isSuperseded: true,
+    metadata: {
+      categories: ["moose"],
+      status: "wonky",
+      quarkus_core_compatibility: "COMPATIBLE",
+    },
+    platforms: ["Toronto"],
+  }
+
+  const extensions = [alice, pascal, fluffy, stale, secret]
   const categories = ["moose", "skunks", "lynx"]
   const keywords = ["shiny", "cool", "sad"]
 
@@ -91,6 +102,10 @@ describe("filters bar", () => {
 
   it("excludes unlisted extensions", () => {
     expect(newExtensions).not.toContain(secret)
+  })
+
+  it("excludes superseded extensions", () => {
+    expect(newExtensions).not.toContain(stale)
   })
 
   describe("searching", () => {
@@ -178,6 +193,38 @@ describe("filters bar", () => {
         expect(newExtensions).toContain(alice)
       })
     })
+
+    describe("for a superseded extension", () => {
+      const user = userEvent.setup()
+
+      it("filters out superseded extensions if the search string is too short to be meaningful", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("j")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(newExtensions).not.toContain(alice)
+        expect(newExtensions).not.toContain(pascal)
+        expect(newExtensions).not.toContain(fluffy)
+        expect(newExtensions).not.toContain(secret)
+        expect(newExtensions).not.toContain(stale)
+
+      })
+
+      it("shows superseded extensions if the search string has a meaningful length", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("last")
+        expect(extensionsListener).toHaveBeenCalled()
+
+        expect(newExtensions).toContain(stale)
+
+        expect(newExtensions).not.toContain(secret)
+        expect(newExtensions).not.toContain(alice)
+        expect(newExtensions).not.toContain(pascal)
+        expect(newExtensions).not.toContain(fluffy)
+      })
+    })
+
   })
 
   describe("category filter", () => {

@@ -19,12 +19,11 @@ const filterExtensions = (
   extensions,
   { regex, categoryFilter, keywordFilter, statusFilter, compatibilityFilter }
 ) => {
-  console.log(extensions[0])
   return (
     extensions
-      // Exclude unlisted extensions, unless they happen to match a non-trivial search filter
+      // Exclude unlisted and superseded extensions, unless they happen to match a non-trivial search filter
       // We don't need to check if the searches matches, because we do that below
-      .filter(extension => !extension.metadata.unlisted || regex.length > 2)
+      .filter(extension => (!extension.metadata.unlisted && !extension.isSuperseded) || regex.length > 2)
       .filter(
         extension =>
           extension.name.toLowerCase().match(regex.toLowerCase()) ||
