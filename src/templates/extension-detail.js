@@ -149,7 +149,7 @@ const ChartHolder = styled.div`
 const Logo = ({ extension }) => {
   return (
     <LogoImage>
-      <ExtensionImage extension={extension} size={220} />
+      <ExtensionImage extension={extension} size={208} />
     </LogoImage>
   )
 }
@@ -191,7 +191,7 @@ const ExtensionDetailTemplate = ({
 
   const key = "tab"
   const [searchText, setSearchText, initialized] = useQueryParamString(key, "")
-  
+
   const onSelect = (index) => {
     setSearchText(tabs[index])
     return true
@@ -557,7 +557,7 @@ export const pageQuery = graphql`
         sponsors
         icon {
           childImageSharp {
-            gatsbyImageData(width: 220)
+            gatsbyImageData(width: 208)
           }
           publicURL
         }
@@ -600,14 +600,14 @@ export const pageQuery = graphql`
           }
           projectImage {
             childImageSharp {
-              gatsbyImageData(width: 220)
+              gatsbyImageData(width: 208)
             }
           }
           extensionYamlUrl
           extensionRootUrl
           ownerImage {
             childImageSharp {
-              gatsbyImageData(width: 220)
+              gatsbyImageData(width: 208)
             }
           }
         }
