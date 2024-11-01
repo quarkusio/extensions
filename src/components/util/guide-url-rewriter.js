@@ -1,4 +1,4 @@
-const rewriteGuideUrl = async ({ name, metadata }) => {
+const rewriteGuideUrl = async ({ name, metadata, isSuperseded }) => {
   // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
   // A simple property read won't work
   const {
@@ -16,6 +16,14 @@ const rewriteGuideUrl = async ({ name, metadata }) => {
     if (metadata?.status?.includes("deprecated")) {
       console.warn(
         "Stripping dead guide link from deprecated extension. Extension is:",
+        name,
+        "and guide link is",
+        originalLink
+      )
+      return undefined
+    } else if (isSuperseded) {
+      console.warn(
+        "Stripping dead guide link from superseded extension. Extension is:",
         name,
         "and guide link is",
         originalLink
