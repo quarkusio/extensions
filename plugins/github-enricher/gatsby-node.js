@@ -693,10 +693,18 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
 
 const getIssueInformation = async (coords, labels, scmUrl) => {
   const key = labels ? labels.map(label => `"${label}"`).join() : `${coords.owner}-${coords.name}`
-  return await issueCountCache.getOrSet(
-    key,
-    () => getIssueInformationNoCache(coords, labels, scmUrl)
-  )
+
+  // Diagnostic - bypass the cache
+  if (coords?.name?.includes("debezium") || coords?.name?.includes("optaplanner")) {
+    console.log("Bypassing issue url cache for", coords.name)
+    return getIssueInformationNoCache(coords, labels, scmUrl)
+  } else {
+
+    return await issueCountCache.getOrSet(
+      key,
+      () => getIssueInformationNoCache(coords, labels, scmUrl)
+    )
+  }
 }
 
 function normaliseUrl(issuesUrl) {
@@ -764,6 +772,8 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
       default: urlExist,
     } = await import("url-exist")
 
+    console.log("Validating issue url for", issuesUrl, "because issues is", issues)
+
     const isValidUrl = await urlExist(issuesUrl)
 
     let isOriginalUrl = isValidUrl && await isNotRedirectToPulls(issuesUrl)
@@ -775,7 +785,10 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
 const isNotRedirectToPulls = async (issuesUrl) => {
   // Being a valid url may not be enough, we also want to check for redirects to /pulls
   const urls = await followRedirect.startFollowing(issuesUrl)
+  console.log("URL chain for", issuesUrl, "is", urls)
   const finalUrl = urls[urls.length - 1]
+  console.log("Final URL is", finalUrl, "which means", !(finalUrl.url.includes("/pulls")))
+
   return !(finalUrl.url.includes("/pulls"))
 }
 
