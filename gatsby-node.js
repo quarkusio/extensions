@@ -165,8 +165,6 @@ exports.sourceNodes = async ({
     node.metadata.minimumJavaVersion = node.metadata["minimum-java-version"]
     delete node.metadata["minimum-java-version"]
 
-    node.metadata.guide = await rewriteGuideUrl(extension)
-
     // Look for extensions which are not the same, but which have the same artifact id
     // (artifactId is just the 'a' part of the gav, artifact is the whole gav string)
 
@@ -209,6 +207,8 @@ exports.sourceNodes = async ({
       node.duplicates = node.duplicates ? [...condensedDuplicates, ...node.duplicates] : condensedDuplicates
 
     }
+
+    node.metadata.guide = await rewriteGuideUrl(node)
 
     if (node.metadata) {
       // Do the link to the download data
