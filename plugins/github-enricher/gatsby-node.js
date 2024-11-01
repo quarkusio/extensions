@@ -776,20 +776,20 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
 
     const isValidUrl = await urlExist(issuesUrl)
 
-    let isOriginalUrl = isValidUrl && await isNotRedirectToPulls(issuesUrl)
+    let isOriginalUrl = isValidUrl && (!await isRedirectToPulls(issuesUrl))
 
     return isOriginalUrl ? issuesUrl : undefined
   }
 }
 
-const isNotRedirectToPulls = async (issuesUrl) => {
+const isRedirectToPulls = async (issuesUrl) => {
   // Being a valid url may not be enough, we also want to check for redirects to /pulls
   const urls = await followRedirect.startFollowing(issuesUrl)
   console.log("URL chain for", issuesUrl, "is", urls)
   const finalUrl = urls[urls.length - 1]
-  console.log("Final URL is", finalUrl, "which means", !(finalUrl.url.includes("/pulls")))
+  console.log("Final URL is", finalUrl, "which means", (finalUrl.url.includes("/pulls")))
 
-  return !(finalUrl.url.includes("/pulls"))
+  return (finalUrl.url.includes("/pulls"))
 }
 
 // This combines the sponsor opt-in information (which we only fully have after processing all nodes) with the companies and sponsor information for individual nodes,
