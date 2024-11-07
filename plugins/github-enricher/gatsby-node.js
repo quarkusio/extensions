@@ -1,3 +1,5 @@
+const promiseRetry = require("promise-retry")
+
 const followRedirect = require("follow-redirect-url")
 
 const gh = require("parse-github-url")
@@ -23,6 +25,9 @@ const yaml = require("js-yaml")
 const defaultOptions = {
   nodeType: "Extension",
 }
+
+const RETRY_OPTIONS = { retries: 5, minTimeout: 75 * 1000, factor: 5 }
+
 
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 24 * 60 * 60
@@ -694,17 +699,11 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
 const getIssueInformation = async (coords, labels, scmUrl) => {
   const key = labels ? labels.map(label => `"${label}"`).join() : `${coords.owner}-${coords.name}`
 
-  // Diagnostic - bypass the cache
-  if (coords?.name?.includes("debezium") || coords?.name?.includes("optaplanner")) {
-    console.log("Bypassing issue url cache for", coords.name)
-    return getIssueInformationNoCache(coords, labels, scmUrl)
-  } else {
+  return await issueCountCache.getOrSet(
+    key,
+    () => getIssueInformationNoCache(coords, labels, scmUrl)
+  )
 
-    return await issueCountCache.getOrSet(
-      key,
-      () => getIssueInformationNoCache(coords, labels, scmUrl)
-    )
-  }
 }
 
 function normaliseUrl(issuesUrl) {
@@ -783,13 +782,18 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
 }
 
 const isRedirectToPulls = async (issuesUrl) => {
-  // Being a valid url may not be enough, we also want to check for redirects to /pulls
-  const urls = await followRedirect.startFollowing(issuesUrl)
-  console.log("URL chain for", issuesUrl, "is", urls)
-  const finalUrl = urls[urls.length - 1]
-  console.log("Final URL is", finalUrl, "which means", (finalUrl.url.includes("/pulls")))
+  return await promiseRetry(async () => {
+    // Being a valid url may not be enough, we also want to check for redirects to /pulls
+    const urls = await followRedirect.startFollowing(issuesUrl)
+    console.log("URL chain for", issuesUrl, "is", urls)
+    const finalUrl = urls[urls.length - 1]
+    if (finalUrl.status === 429) {
+      throw new Error("Too many requests, need to retry")
+    }
+    console.log("Final URL is", finalUrl, "which means", (finalUrl.url.includes("/pulls")))
 
-  return (finalUrl.url.includes("/pulls"))
+    return (finalUrl.url.includes("/pulls"))
+  }, RETRY_OPTIONS)
 }
 
 // This combines the sponsor opt-in information (which we only fully have after processing all nodes) with the companies and sponsor information for individual nodes,
