@@ -782,13 +782,13 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
 }
 
 const isRedirectToPulls = async (issuesUrl) => {
-  return await promiseRetry(async () => {
+  return await promiseRetry(async (retry, number) => {
     // Being a valid url may not be enough, we also want to check for redirects to /pulls
     const urls = await followRedirect.startFollowing(issuesUrl)
     console.log("URL chain for", issuesUrl, "is", urls)
     const finalUrl = urls[urls.length - 1]
     if (finalUrl.status === 429) {
-      throw new Error("Too many requests, need to retry")
+      retry(new Error("Issues URL reports 429 on attempt " + number))
     }
     console.log("Final URL is", finalUrl, "which means", (finalUrl.url.includes("/pulls")))
 
