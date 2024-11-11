@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { useMediaQuery } from "react-responsive"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons"
+import { device } from "../util/styles/breakpoints"
 
 const DesktopSubmenu = styled.ul`
   text-align: right;
@@ -78,14 +79,11 @@ const Dropdown = styled.li`
   position: relative;
   padding: 1rem 0;
 
-  ${({ isMobile }) =>
-          isMobile
-                  ? `
-        flex-wrap: nowrap;
-      `
-                  : `  
-      flex-flow: wrap;
-      `}
+  flex-flow: wrap;
+
+  @media ${device.sm} {
+    justify-content: center;
+  }
 `
 
 // This is needed to anchor the absolute dropdown to a relative position on the header
@@ -131,7 +129,9 @@ const NavEntry = styled(props => <li {...props} />)`
 `
 
 const Submenu = ({ title, children }) => {
-  const isMobile = useMediaQuery({ query: "(max-width: 1024px)" })
+  const isMobile = useMediaQuery({
+    query: device.sm
+  })
 
   const [open, setOpen] = React.useState(false)
 
@@ -146,18 +146,14 @@ const Submenu = ({ title, children }) => {
   // We use css tranforms to flip the icon, but let's adjust the title for testing and screenreaders
   const iconTitle = open ? "chevronUp" : "chevronDown"
 
-  const mobileSubmenu = <MobileSubmenu>{children}</MobileSubmenu>
 
-  const desktopSubmenu = (
-    <Anchor>
+  const menu = isMobile ? (<MobileSubmenu>{children}</MobileSubmenu>) :
+    (<Anchor>
       <DesktopSubmenu> {children} </DesktopSubmenu>
-    </Anchor>
-  )
-  const menu = isMobile ? mobileSubmenu : desktopSubmenu
+    </Anchor>)
 
   return (
     <Dropdown
-      $isMobile={isMobile}
       onMouseOver={handleOpen}
       onMouseOut={handleClose}
     >
