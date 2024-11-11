@@ -106,7 +106,7 @@ const getTimestampFromMavenSearch = async maven => {
 }
 
 const tolerantlyGetTimestampFromMavenSearch = async maven => {
-  return await promiseRetry(async () => getTimestampFromMavenSearch(maven), {
+  return await promiseRetry(async (retry) => getTimestampFromMavenSearch(maven).catch(retry), {
     retries: 6,
     factor: 3,
     minTimeout: 4 * 1000,
@@ -133,7 +133,7 @@ const getLatestVersionFromMavenMetadata = async (groupId, artifactId) => {
 }
 
 const tolerantlyGetLatestVersionFromMavenMetadata = async (groupId, artifactId) => {
-  return await promiseRetry(async () => getLatestVersionFromMavenMetadata(groupId, artifactId), {
+  return await promiseRetry(async (retry) => getLatestVersionFromMavenMetadata(groupId, artifactId).catch(retry), {
     retries: 6,
     factor: 3,
     minTimeout: 4 * 1000,
@@ -169,7 +169,7 @@ const getRelocation = async (coordinates) => {
 
       const data = await pomCache.getOrSet(url, async () => {
           try {
-            const response = await promiseRetry(async () => maxios.get(url, {}), options)
+            const response = await promiseRetry(async (retry) => maxios.get(url, {}).catch(retry), options)
             return response.data
           } catch (error) {
             console.warn("Tried to read", url, "Error made it through the mirror fallback and the promise retry", error)

@@ -1,6 +1,8 @@
 import { generateMavenInfo, getLatestVersionFromMavenMetadata, initMavenCache } from "./maven-info"
 import { clearCaches } from "../../plugins/github-enricher/sponsorFinder"
 
+jest.setTimeout(70 * 1000)
+
 const fs = require("fs")
 
 jest.mock("./maven-url")
@@ -142,10 +144,12 @@ describe("the maven information generator", () => {
     })
 
     it("handles errors in maven central gracefully", async () => {
-      axios.get.mockRejectedValue(
+      axios.get.mockRejectedValueOnce(
         "(this is a deliberate error to exercise the error path)"
       )
       const mavenInfo = await generateMavenInfo(artifact)
+
+      // Because of the implementation and how we mock, the first attempt will fail, and then it will try a different endpoint which does not include the timestamp
       expect(mavenInfo.timestamp).toBeUndefined()
 
       // Other information should be present and correct
