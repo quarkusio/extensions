@@ -9,6 +9,7 @@ import { NavEntry, Submenu } from "./submenu"
 
 import config from "../../../gatsby-config.js"
 import { DarkModeToggle } from "./dark-mode-toggle"
+import { device } from "../util/styles/breakpoints"
 
 const NavToggle = styled.label`
   font-size: 27.2px;
@@ -23,7 +24,7 @@ const NavBar = styled.nav`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  @media screen and (min-width: 1024px) and (max-width: 1450px) {
+  @media ${device.m} {
     justify-content: space-around;
   }
 
@@ -38,17 +39,13 @@ const NavBar = styled.nav`
   padding: var(--navbar-padding) var(--site-margins);
   width: calc(100vw - 2 * var(--site-margins));
 
-  ${({ isMobile }) =>
-          isMobile
-                  ? `
-      flex-wrap: nowrap;
-      column-gap: 1rem;
+  column-gap: 10rem;
 
-`
-                  : `  
-      flex-flow: wrap;
-      column-gap: 10rem;
-`}
+  // noinspection CssUnknownProperty
+  @media ${device.sm} {
+    flex-wrap: nowrap;
+    column-gap: 1rem;
+  }
 `
 
 const DesktopNavigation = styled.ul`
@@ -102,16 +99,10 @@ const Logo = styled.a`
 const LangIcon = styled(({ ...props }) => <FontAwesomeIcon {...props} />)``
 
 // This isn't needed on the main site, but we seem to need it here to properly pad the cta in the mobile menu, and also to get it to take the full width
+// noinspection CssUnknownProperty
 const CallToActionWrapper = styled.li`
   display: flex;
 
-  ${({ isMobile }) =>
-          isMobile
-                  ? `
-        padding: 15px 0;
-`
-                  : `  
-`}
 `
 
 const CallToAction = styled(props => <a {...props} />)`
@@ -140,7 +131,7 @@ const CallToAction = styled(props => <a {...props} />)`
 `
 
 const Navigation = () => {
-  const isMobile = useMediaQuery({ query: "(max-width: 1024px)" })
+  const isMobile = useMediaQuery({ query: device.sm })
 
   const [open, setOpen] = React.useState(false)
 
@@ -301,7 +292,7 @@ const Navigation = () => {
 
   return (
     <NavBarContainer>
-      <NavBar $isMobile={isMobile}>
+      <NavBar>
         <LogoWrapper>
           <Logo href={config.siteMetadata.parentSiteUrl}>
             <StaticImage
