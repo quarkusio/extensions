@@ -16,6 +16,9 @@ const Band = styled.header`
 
 const Heroic = styled.h1`
   font-size: 3rem;
+  @media screen and (max-width: 768px) {
+    font-size: 2rem;
+  }
   line-height: 3.75rem;
   font-weight: var(--font-weight-boldest);
   margin: 2.5rem 0 1.5rem 0;

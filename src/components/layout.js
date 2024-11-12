@@ -30,7 +30,7 @@ library.add(
 
 const GlobalWrapper = styled.div`
   color: var(--main-text-color);
-  background-color: var(--main-background-color);
+  width: 100%;
   display: inline-block;
   /* the inline-block is to make sure if things overflow on mobile, the headers take the full width */
 `

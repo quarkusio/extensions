@@ -4,29 +4,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Title from "./title"
 import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
+import { useMediaQuery } from "react-responsive"
+import { Element, Entries, Entry, FilterSubmenu } from "./filter-submenu"
+import { device } from "../util/styles/breakpoints"
 
-const Element = styled.div`
-  padding-top: 36px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-`
+const DesktopWrapper = styled.div``
 
-const Entry = styled.li`
-  font-size: var(--font-size-16);
-  color: var(--main-text-color);
-  display: flex;
-  padding: 0;
-  gap: 8px;
-`
-
-const Entries = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 10px;
-  line-height: 23px;
-`
 
 const TickyBox = styled(props => <FontAwesomeIcon {...props} />)`
   font-size: 16px;
@@ -57,6 +40,10 @@ const toggleEntry = (
 }
 
 const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
+  prettify = prettify || noop
+
+  entries = entries ? [...new Set(entries)] : []
+
   const key = queryKey || label.toLowerCase().replace(" ", "-")
 
   const [stringedTickedEntries, setTickedEntries, initialized] = useQueryParamString(key, undefined, true)
@@ -64,7 +51,6 @@ const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
 
   const tickedEntries = stringedTickedEntries ? stringedTickedEntries.split(separator) : []
 
-  prettify = prettify || noop
 
   const onClick = entry => () =>
     toggleEntry(
@@ -80,9 +66,12 @@ const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
     }
   }, [realStringedTickedEntries, filterer], filterer)
 
-  return (
+
+  const isMobile = useMediaQuery({ query: device.sm })
+
+
+  const filter = (
     entries && <Element>
-      <Title>{label}</Title>
       <Entries>
         {entries &&
           entries.map(entry => (
@@ -98,12 +87,27 @@ const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
                   <TickyBox icon={["far", "square"]} title="unticked" />
                 )}
               </div>
-              <div>{prettify(entry)}</div>
+              <label>{prettify(entry)}</label>
             </Entry>
           ))}
       </Entries>
     </Element>
   )
+
+  if (isMobile) {
+    return (entries &&
+      <Element name={label}>
+        <FilterSubmenu title={label}>
+          {filter}
+        </FilterSubmenu>
+      </Element>)
+  } else {
+    return entries && <DesktopWrapper>
+      <Title>{label}</Title>
+      {filter}
+    </DesktopWrapper>
+  }
+
 }
 
 export default TickyFilter

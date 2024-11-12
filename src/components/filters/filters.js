@@ -1,24 +1,63 @@
 import * as React from "react"
 import { useEffect, useState } from "react"
 import styled from "styled-components"
-import CategoryFilter from "./category-filter"
 import Search from "./search"
 import StatusFilter from "./status-filter"
 import KeywordFilter from "./keyword-filter"
+import { useMediaQuery } from "react-responsive"
+import CategoryFilter from "./category-filter"
+import { device } from "../util/styles/breakpoints"
+import Sortings from "../sortings/sortings"
+import { faSliders, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const FilterBar = styled.aside`
-  width: 224px;
-  margin-top: 1.25rem;
   display: flex;
   flex-direction: column;
+
+  width: 224px;
+  padding-right: 40px;
+  margin-top: 1.25rem;
   justify-content: flex-start;
   align-items: center;
+`
+
+const Done = styled.div``
+
+const MenuHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  padding-left: var(--a-modest-space);
+  padding-right: var(--a-modest-space);
+
+  // noinspection CssUnknownProperty
+  @media ${device.sm} {
+    padding: var(--a-vsmall-space) var(--mobile-filter-margins);
+  }
+`
+
+const MobileFilterMenu = styled.aside`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--filter-outline-color);
+`
+
+const FilterToggler = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: center;
+  align-items: flex-end;
+  gap: var(--a-vsmall-space);
 `
 
 const filterExtensions = (
   extensions,
   { regex, categoryFilter, keywordFilter, statusFilter, compatibilityFilter }
 ) => {
+  // To handle arrays in both filters and extensions, squash the filter down to a string
+  statusFilter = statusFilter?.toString()
+
   const regexObj = new RegExp(regex, "i")
 
   return (
@@ -49,8 +88,8 @@ const filterExtensions = (
       extension =>
         statusFilter.length === 0 ||
         (extension.metadata.status &&
-          statusFilter.includes(extension.metadata.status))
-    )
+          statusFilter.includes(extension.metadata.status)))
+
       .filter(
         extension =>
           compatibilityFilter.length === 0 ||
@@ -62,12 +101,14 @@ const filterExtensions = (
   )
 }
 
-const Filters = ({ extensions, categories, keywords, filterAction }) => {
+const Filters = ({ extensions, categories, keywords, filterAction, sorterAction, downloadData }) => {
   const [regex, setRegex] = useState(".*")
   const [categoryFilter, setCategoryFilter] = useState([])
   const [keywordFilter, setKeywordFilter] = useState([])
   const [statusFilter, setStatusFilter] = useState([])
   const [compatibilityFilter, setCompatibilityFilter] = useState([])
+
+  const isMobile = useMediaQuery({ query: device.sm })
 
   const filters = {
     regex,
@@ -93,17 +134,56 @@ const Filters = ({ extensions, categories, keywords, filterAction }) => {
     filterAction(filteredExtensions)
   }, dependencyList)
 
-  return (
-    <FilterBar className="filters">
-      <Search searcher={setRegex} />
-      <StatusFilter extensions={extensions} filterer={setStatusFilter} />
-      <CategoryFilter categories={categories} filterer={setCategoryFilter} />
-      {/* This will be invisible, because we don't pass through keywords, but it will allow filtering via query
-      parameters */}
-      <KeywordFilter keywords={keywords} filterer={setKeywordFilter} />
+  const [isOpen, setOpen] = React.useState(false)
 
+  const handleOpen = () => {
+    setOpen(true)
+  }
+
+  const handleClose = () => {
+    setOpen(false)
+  }
+
+  const filterElements = <>
+    <Search searcher={setRegex} />
+    <StatusFilter extensions={extensions} filterer={setStatusFilter} />
+    <CategoryFilter categories={categories} filterer={setCategoryFilter} />
+    {/* This will be invisible, because we don't pass through keywords, but it will allow filtering via query
+      parameters */}
+    <KeywordFilter keywords={keywords} filterer={setKeywordFilter} />
+  </>
+
+  if (isMobile) {
+    if (isOpen) {
+      return (
+        <MobileFilterMenu className="filters">
+          <MenuHeader>
+            <div>Filter By</div>
+            <Done onClick={handleClose}><FontAwesomeIcon icon={faXmark}
+                                                         title="Done" />
+            </Done>
+          </MenuHeader>
+          {filterElements}
+          <Sortings sorterAction={sorterAction} downloadData={downloadData}></Sortings>
+        </MobileFilterMenu>)
+    } else {
+      return <FilterToggler onClick={handleOpen}>
+        <div>Filter</div>
+        <FontAwesomeIcon icon={faSliders}
+                         title="sliders" />
+        <div hidden="true">
+          {filterElements}
+          <Sortings sorterAction={sorterAction} downloadData={downloadData}></Sortings>
+        </div>
+      </FilterToggler>
+    }
+  } else {
+    return <FilterBar className="filters">
+      {filterElements}
     </FilterBar>
-  )
+  }
+
+
 }
 
 export default Filters

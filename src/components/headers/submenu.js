@@ -129,9 +129,7 @@ const NavEntry = styled(props => <li {...props} />)`
 `
 
 const Submenu = ({ title, children }) => {
-  const isMobile = useMediaQuery({
-    query: device.sm
-  })
+  const isMobile = useMediaQuery({ query: device.sm })
 
   const [open, setOpen] = React.useState(false)
 
