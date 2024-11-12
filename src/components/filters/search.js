@@ -4,12 +4,19 @@ import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearch } from "@fortawesome/free-solid-svg-icons"
 import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
+import { device } from "../util/styles/breakpoints"
 
 const Element = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+
+  // noinspection CssUnknownProperty
+  @media ${device.sm} {
+    align-items: center;
+    padding-left: var(--mobile-filter-margins);
+    padding-right: var(--mobile-filter-margins);
+  }
 `
 
 const SearchBox = styled.div`
@@ -19,6 +26,12 @@ const SearchBox = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+
+  // noinspection CssUnknownProperty
+  @media ${device.sm} {
+    width: 100%;
+    margin-bottom: var(--a-small-space)
+  }
 
   &:focus-within {
     outline: var(--breadcrumb-background-color) solid 2px;
@@ -61,7 +74,7 @@ const Search = ({ searcher: listener }) => {
     if (realSearchText && realSearchText.length > 0) {
       listener(realSearchText)
     }
-  })
+  }, [realSearchText, listener])
 
 
   return (

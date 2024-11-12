@@ -2,17 +2,17 @@ import * as React from "react"
 import { useEffect } from "react"
 import styled from "styled-components"
 import Select from "react-select"
-import Title from "./title"
 import { useQueryParamString } from "react-use-query-param-string"
+import Title from "./title"
 
 
 const Element = styled.form`
-  padding-top: 36px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   gap: 16px;
+  width: 100%
 `
 
 const onChange = (value, { action }, filterer, setSelectedOption) => {

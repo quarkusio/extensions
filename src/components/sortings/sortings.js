@@ -5,6 +5,10 @@ import { timestampExtensionComparator } from "./timestamp-extension-comparator"
 import { alphabeticalExtensionComparator } from "./alphabetical-extension-comparator"
 import { downloadsExtensionComparator } from "./downloads-extension-comparator"
 import { useQueryParamString } from "react-use-query-param-string"
+import { useMediaQuery } from "react-responsive"
+import { device } from "../util/styles/breakpoints"
+import { Entries, Entry, FilterSubmenu } from "../filters/filter-submenu"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const format = new Intl.DateTimeFormat("default", {
   year: "numeric",
@@ -45,6 +49,11 @@ const DownloadDataData = styled.h2`
   font-style: italic;
 `
 
+const TickyBox = styled(props => <FontAwesomeIcon {...props} />)`
+  font-size: 16px;
+  color: var(--main-text-color);
+`
+
 const classNames = {
   menu: state => state.isFocused ? "select-menu__focused" : "select-menu",
   singleValue: () => "select-single-value",
@@ -65,15 +74,27 @@ const sortings = [
 const Sortings = ({ sorterAction, downloadData }) => {
   const [sort, setSort] = useQueryParamString(key, time, true)
 
+  const isMobile = useMediaQuery({ query: device.sm })
+
   const applySort = (entry) => {
     // We need to wrap our comparator functions in functions or they get called, which goes very badly
     sorterAction && sorterAction(() => entry.comparator)
   }
 
-
   const filteredSortings = downloadData?.date ? sortings : sortings.filter(e => e.value !== downloads)
 
   const selected = filteredSortings.find(entry => entry.value === sort)
+
+  const prettify = (a) => a.label
+
+
+  const onChange = entry => {
+    if (entry.value !== sort) {
+      console.log("setting sort")
+      setSort(entry.value)
+      applySort(entry)
+    }
+  }
 
   if (selected) {
     applySort(selected)
@@ -81,33 +102,57 @@ const Sortings = ({ sorterAction, downloadData }) => {
 
   const formattedDate = downloadData?.date ? format.format(new Date(Number(downloadData.date))) : ""
 
-  return (
-    <SortBar className="sortings">
-      {sort === downloads &&
-        <DownloadDataData>Based on Maven Central downloads in {formattedDate}. Download data is only available for
-          extensions in Quarkus,
-          Quarkiverse, and Camel orgs.
-        </DownloadDataData>}
-      <Title htmlFor="sort">Sort by</Title>
-      <Element data-testid="sort-form">
-        <Select
-          placeholder="Default"
-          value={selected}
-          options={filteredSortings}
-          onChange={entry => {
-            if (entry.value !== sort) {
-              setSort(entry.value)
-              applySort(entry)
-            }
-          }}
+  if (isMobile) {
+    return (
 
-          name="sort"
-          inputId="sort"
-          classNames={classNames}
-        />
-      </Element>
-    </SortBar>
-  )
+      <FilterSubmenu title="Sort by">
+        <Element>
+          <Entries>
+            {filteredSortings &&
+              filteredSortings.map(entry => (
+                <Entry
+                  key={entry.value}
+                  onClick={() => onChange(entry)}
+                >
+                  <div>
+                    {(sort === entry.value) ? (
+                      <TickyBox icon="square-check" title="ticked" />
+                    ) : (
+                      <TickyBox icon={["far", "square"]} title="unticked" />
+                    )}
+                  </div>
+                  <div>{prettify(entry)}</div>
+                </Entry>
+              ))}
+          </Entries>
+        </Element>
+      </FilterSubmenu>
+
+
+    )
+  } else {
+    return (
+      <SortBar className="sortings">
+        {sort === downloads &&
+          <DownloadDataData>Based on Maven Central downloads in {formattedDate}. Download data is only available for
+            extensions in Quarkus,
+            Quarkiverse, and Camel orgs.
+          </DownloadDataData>}
+        <Title htmlFor="sort">Sort by</Title>
+        <Element data-testid="sort-form">
+          <Select
+            placeholder="Default"
+            value={selected}
+            options={filteredSortings}
+            onChange={onChange}
+
+            name="sort"
+            inputId="sort"
+            classNames={classNames}
+          />
+        </Element>
+      </SortBar>)
+  }
 }
 
 export default Sortings

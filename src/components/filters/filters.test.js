@@ -3,6 +3,7 @@ import { render, screen } from "@testing-library/react"
 import Filters from "./filters"
 import selectEvent from "react-select-event"
 import userEvent from "@testing-library/user-event"
+import { Context as ResponsiveContext } from "react-responsive"
 
 let mockQueryParamSearchStrings = undefined
 
@@ -19,9 +20,7 @@ jest.mock("react-use-query-param-string", () => {
 })
 
 describe("filters bar", () => {
-  let user
-  let newExtensions
-  const extensionsListener = jest.fn(extensions => (newExtensions = extensions))
+  const extensionsListener = jest.fn()
 
   const alice = {
     name: "Alice Blaine",
@@ -29,7 +28,7 @@ describe("filters bar", () => {
     artifact: "io.something:some-artifact-name::jar:3.10.2",
     metadata: {
       categories: ["lynx"],
-      status: "wonky",
+      status: ["wonky"],
       quarkus_core_compatibility: "UNKNOWN",
     },
     platforms: ["Banff"],
@@ -80,126 +79,76 @@ describe("filters bar", () => {
   const categories = ["moose", "skunks", "lynx"]
   const keywords = ["shiny", "cool", "sad"]
 
-  beforeEach(() => {
-    user = userEvent.setup()
-    mockQueryParamSearchStrings = {}
-    render(
-      <Filters
-        extensions={extensions}
-        categories={categories}
-        keywords={keywords}
-        filterAction={extensionsListener}
-      />
-    )
-  })
-
-  it("renders categories", () => {
-    expect(screen.getByText("Category")).toBeTruthy()
-  })
-
-  it("renders individual categories", () => {
-    expect(screen.getByText("Skunks")).toBeTruthy()
-  })
-
-  it("excludes unlisted extensions", () => {
-    expect(newExtensions).not.toContain(secret)
-  })
-
-  it("excludes superseded extensions", () => {
-    expect(newExtensions).not.toContain(stale)
-  })
-
-  describe("searching", () => {
-    const user = userEvent.setup()
-
-    it("filters out extensions which do not match the search filter", async () => {
-      const searchInput = screen.getByRole("textbox")
-      await user.click(searchInput)
-      await user.keyboard("octopus")
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-      expect(newExtensions).not.toContain(fluffy)
-      expect(newExtensions).not.toContain(secret)
+  describe("at a desktop screen size", () => {
+    let user
+    beforeEach(() => {
+      user = userEvent.setup()
+      mockQueryParamSearchStrings = {}
+      render(
+        <Filters
+          extensions={extensions}
+          categories={categories}
+          keywords={keywords}
+          filterAction={extensionsListener}
+        />
+      )
     })
 
-    it("leaves in extensions whose name match the search filter", async () => {
-      const searchInput = screen.getByRole("textbox")
-      await user.click(searchInput)
-      await user.keyboard("Alice")
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-      expect(newExtensions).not.toContain(secret)
+    it("renders categories", () => {
+      expect(screen.getByText("Category")).toBeTruthy()
     })
 
-    it("leaves in extensions whose description match the search filter", async () => {
-      const searchInput = screen.getByRole("textbox")
-      await user.click(searchInput)
-      await user.keyboard("nice")
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
+    it("renders individual categories", () => {
+      expect(screen.getByText("Skunks")).toBeTruthy()
     })
 
-    it("leaves in extensions whose id matches the search filter", async () => {
-      const searchInput = screen.getByRole("textbox")
-      await user.click(searchInput)
-      await user.keyboard("some-artifact-name")
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
+    it("excludes unlisted extensions", () => {
+      expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
     })
 
-    it("is case insensitive in its searching", async () => {
-      const searchInput = screen.getByRole("textbox")
-      await user.click(searchInput)
-      await user.keyboard("alice")
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-
-      // select all and clear the search term
-      searchInput.setSelectionRange(0, searchInput.value.length)
-      await user.keyboard("pAScal")
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-      expect(newExtensions).toContain(pascal)
+    it("excludes superseded extensions", () => {
+      expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([stale]))
     })
 
-    it("does not count the jar part in the maven artifact as a match", async () => {
-      const searchInput = screen.getByRole("textbox")
-      await user.click(searchInput)
-      await user.keyboard("jar")
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toHaveLength(0)
-    })
+    describe("searching", () => {
 
-    describe("for an unlisted extension", () => {
-      const user = userEvent.setup()
-
-      it("filters out unlisted extensions if the search string is too short to be meaningful", async () => {
+      it("filters out extensions which do not match the search filter", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
-        await user.keyboard("j")
+        await user.keyboard("octopus")
         expect(extensionsListener).toHaveBeenCalled()
-        expect(newExtensions).not.toContain(alice)
-        expect(newExtensions).not.toContain(pascal)
-        expect(newExtensions).not.toContain(fluffy)
-        expect(newExtensions).not.toContain(secret)
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
       })
 
-      it("shows unlisted extensions if the search string has a meaningful length", async () => {
+      it("leaves in extensions whose name match the search filter", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
-        await user.keyboard("jame")
+        await user.keyboard("Alice")
         expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+      })
 
-        expect(newExtensions).toContain(secret)
+      it("leaves in extensions whose description match the search filter", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("nice")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+      })
 
-        expect(newExtensions).not.toContain(alice)
-        expect(newExtensions).not.toContain(pascal)
-        expect(newExtensions).not.toContain(fluffy)
+      it("leaves in extensions whose id matches the search filter", async () => {
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard(alice.artifact.substring(0, 20)) // The full artifact with the ::jar won't work
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.not.arrayContaining([pascal]))
       })
 
       it("is case insensitive in its searching", async () => {
@@ -207,246 +156,627 @@ describe("filters bar", () => {
         await user.click(searchInput)
         await user.keyboard("alice")
         expect(extensionsListener).toHaveBeenCalled()
-        expect(newExtensions).toContain(alice)
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+
+        // select all and clear the search term
+        searchInput.setSelectionRange(0, searchInput.value.length)
+        await user.keyboard("pAScal")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
       })
-    })
 
-    describe("for a superseded extension", () => {
-      const user = userEvent.setup()
-
-      it("filters out superseded extensions if the search string is too short to be meaningful", async () => {
+      it("does not count the jar part in the maven artifact as a match", async () => {
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
-        await user.keyboard("j")
+        await user.keyboard("jar")
         expect(extensionsListener).toHaveBeenCalled()
-        expect(newExtensions).not.toContain(alice)
-        expect(newExtensions).not.toContain(pascal)
-        expect(newExtensions).not.toContain(fluffy)
-        expect(newExtensions).not.toContain(secret)
-        expect(newExtensions).not.toContain(stale)
-
+        expect(extensionsListener).toHaveBeenLastCalledWith([])
       })
 
-      it("shows superseded extensions if the search string has a meaningful length", async () => {
+      describe("for an unlisted extension", () => {
+
+        it("filters out unlisted extensions if the search string is too short to be meaningful", async () => {
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("j")
+          expect(extensionsListener).toHaveBeenCalled()
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+        })
+
+        it("shows unlisted extensions if the search string has a meaningful length", async () => {
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("jame")
+          expect(extensionsListener).toHaveBeenCalled()
+
+          expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+        })
+
+        it("is case insensitive in its searching", async () => {
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("alice")
+          expect(extensionsListener).toHaveBeenCalled()
+          expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        })
+      })
+
+      describe("for a superseded extension", () => {
+
+        it("filters out superseded extensions if the search string is too short to be meaningful", async () => {
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("j")
+          expect(extensionsListener).toHaveBeenCalled()
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([stale]))
+
+        })
+
+        it("shows superseded extensions if the search string has a meaningful length", async () => {
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("last")
+          expect(extensionsListener).toHaveBeenCalled()
+
+          expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([stale]))
+
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+        })
+      })
+
+    })
+
+    describe("category filter", () => {
+      const displayCategory = "Skunks"
+
+      it("has a list of categories", async () => {
+        expect(screen.queryAllByText(displayCategory)).toHaveLength(1)
+      })
+
+      it("leaves in extensions which match category filter", async () => {
+        await user.click(screen.getByText(displayCategory))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+      })
+
+      it("filters out extensions which do not match the ticked category", async () => {
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        await user.click(screen.getByText(displayCategory))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      it("reinstates extensions when a category is unticked", async () => {
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await user.click(screen.getByText(displayCategory))
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await user.click(screen.getByText(displayCategory))
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      it("excludes unlisted extensions", () => {
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+      })
+    })
+
+    describe("keyword filter", () => {
+      const displayKeyword = "Cool"
+
+      it("has a list of keywords", async () => {
+        expect(screen.queryAllByText(displayKeyword)).toHaveLength(1)
+      })
+
+      it("leaves in extensions which match keyword filter", async () => {
+        await user.click(screen.getByText(displayKeyword))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+      })
+
+      it("filters out extensions which do not match the ticked keyword", async () => {
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        await user.click(screen.getByText(displayKeyword))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      it("reinstates extensions when a keyword is unticked", async () => {
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await user.click(screen.getByText(displayKeyword))
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await user.click(screen.getByText(displayKeyword))
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      it("excludes unlisted extensions", () => {
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+      })
+    })
+
+
+    describe("status filter", () => {
+      const label = "Status"
+
+      it("lists all the statuses in the menu", async () => {
+        // Don't look at what happens, just make sure the options are there
+        await selectEvent.select(screen.getByLabelText(label), "wonky")
+        await selectEvent.select(screen.getByLabelText(label), "shonky")
+        await selectEvent.select(screen.getByLabelText(label), "sparkling")
+      })
+
+      it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+        expect(screen.getByTestId("status-form")).toHaveFormValues({
+          status: "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "wonky")
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+      })
+
+      it("leaves in extensions which match another status filter and filters out extensions which do not match", async () => {
+        expect(screen.getByTestId("status-form")).toHaveFormValues({
+          status: "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "sparkling")
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+      })
+
+      it("leaves in all extensions when 'All' is selected", async () => {
+        expect(screen.getByTestId("status-form")).toHaveFormValues({
+          status: "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "sparkling")
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await selectEvent.select(screen.getByLabelText(label), "All")
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+      })
+
+      it("excludes unlisted extensions", () => {
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+      })
+    })
+
+    describe.skip("compatibility filter", () => {
+      const label = "Compatibility"
+
+      it("lists all the compatibilities in the menu", async () => {
+        // Don't look at what happens, just make sure the options are there
+        await selectEvent.select(screen.getByLabelText(label), "Unknown")
+        await selectEvent.select(screen.getByLabelText(label), "Compatible")
+      })
+
+      it("leaves in extensions which match compatibility filter and filters out extensions which do not match", async () => {
+        expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
+          "built-with": "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "Unknown")
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+      })
+
+      it("leaves in extensions which match another compatibility filter and filters out extensions which do not match", async () => {
+        expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
+          "built-with": "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "Compatible")
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+      })
+    })
+  })
+
+  describe("at a mobile screen size", () => {
+    let user
+
+    const menuTitle = "Filter"
+    const listItem = "Status"
+    const menuOpen = "Filter By"
+    const menuClosed = "sliders"
+
+    beforeEach(() => {
+      // We need skipHover or we fall off the hover menus while clicking the ticky boxes
+      user = userEvent.setup({ skipHover: true })
+      mockQueryParamSearchStrings = {}
+
+      render(
+        <ResponsiveContext.Provider value={{ width: 300 }}>
+          <Filters
+            extensions={extensions}
+            categories={categories}
+            keywords={keywords}
+            filterAction={extensionsListener}
+          />
+        </ResponsiveContext.Provider>
+      )
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    it("shows the title", () => {
+      expect(screen.getByText(menuTitle)).toBeInTheDocument()
+    })
+
+    it("calls listeners", () => {
+      expect(extensionsListener).toHaveBeenCalled()
+    })
+
+    it("shows the menu as closed before any click", async () => {
+      expect(screen.queryByTitle(menuOpen)).toBeNull()
+      expect(screen.getByTitle(menuClosed)).toBeInTheDocument()
+    })
+
+    it("clicking on the menu brings up a dropdown and shows the contents", async () => {
+      await user.click(screen.getByText(menuTitle))
+      expect(screen.getByText(listItem)).toBeTruthy() // This will always be in the document, because of hidden content
+      expect(screen.queryByTitle(menuClosed)).toBeNull()
+    })
+
+    it("clicking done after opening the menu closes it", async () => {
+      await user.click(screen.getByText(menuTitle))
+      expect(screen.queryByTitle(menuClosed)).toBeNull()
+      expect(screen.getByText(menuOpen)).toBeInTheDocument()
+
+      await user.click(screen.getByTitle("Done"))
+
+      expect(screen.queryByText(menuOpen)).toBeNull()
+      expect(screen.getByTitle(menuClosed)).toBeInTheDocument()
+    })
+
+    it("renders categories", async () => {
+      await user.click(screen.getByText(menuTitle))
+      expect(screen.getByText("Category")).toBeTruthy()
+    })
+
+    it("excludes unlisted extensions", () => {
+      expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+    })
+
+    it("excludes superseded extensions", () => {
+      expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([stale]))
+    })
+
+    describe("searching", () => {
+
+      it("filters out extensions which do not match the search filter", async () => {
+        await user.click(screen.getByText(menuTitle))
         const searchInput = screen.getByRole("textbox")
         await user.click(searchInput)
-        await user.keyboard("last")
+        await user.keyboard("octopus")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+      })
+
+      it("leaves in extensions whose name match the search filter", async () => {
+        await user.click(screen.getByText(menuTitle))
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("Alice")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+      })
+
+      it("leaves in extensions whose description match the search filter", async () => {
+        await user.click(screen.getByText(menuTitle))
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("nice")
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+      })
+
+      it("leaves in extensions whose id match the search filter", async () => {
+        await user.click(screen.getByText(menuTitle))
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard(alice.artifact.substring(0, 20))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.not.arrayContaining([pascal]))
+      })
+
+      it("is case insensitive in its searching", async () => {
+        await user.click(screen.getByText(menuTitle))
+        const searchInput = screen.getByRole("textbox")
+        await user.click(searchInput)
+        await user.keyboard("alice")
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      describe("for an unlisted extension", () => {
+
+        it("filters out unlisted extensions if the search string is too short to be meaningful", async () => {
+          await user.click(screen.getByText(menuTitle))
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("j")
+          expect(extensionsListener).toHaveBeenCalled()
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+        })
+
+        it("shows unlisted extensions if the search string has a meaningful length", async () => {
+          await user.click(screen.getByText(menuTitle))
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("jame")
+          expect(extensionsListener).toHaveBeenCalled()
+
+          expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+        })
+
+        it("is case insensitive in its searching", async () => {
+          await user.click(screen.getByText(menuTitle))
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("alice")
+          expect(extensionsListener).toHaveBeenCalled()
+          expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        })
+      })
+
+      describe("for a superseded extension", () => {
+
+        it("filters out superseded extensions if the search string is too short to be meaningful", async () => {
+          await user.click(screen.getByText(menuTitle))
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("j")
+          expect(extensionsListener).toHaveBeenCalled()
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([stale]))
+
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+
+        })
+
+        it("shows superseded extensions if the search string has a meaningful length", async () => {
+          await user.click(screen.getByText(menuTitle))
+          const searchInput = screen.getByRole("textbox")
+          await user.click(searchInput)
+          await user.keyboard("last")
+          expect(extensionsListener).toHaveBeenCalled()
+
+          expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([stale]))
+
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
+          expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+        })
+      })
+
+    })
+
+    describe("category filter", () => {
+      const displayCategory = "Skunks"
+
+      it("does not show any contents before expanding the twisty", async () => {
+        await user.click(screen.getByText(menuTitle))
+        expect(screen.queryAllByText(displayCategory)).toHaveLength(0)
+      })
+
+      it("has a list of categories", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.hover(screen.getByTestId("category-twisty"))
+        expect(screen.queryAllByText(displayCategory)).toHaveLength(1)
+      })
+
+      it("leaves in extensions which match category filter", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByText(displayCategory))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+      })
+
+      it("filters out extensions which do not match the ticked category", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByText(displayCategory))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      it("reinstates extensions when a category is unticked", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByText(displayCategory))
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByText(displayCategory))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+      })
+
+      it("excludes unlisted extensions", () => {
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
+      })
+    })
+
+    describe("keyword filter", () => {
+      const displayKeyword = "Cool"
+
+      it("has a list of keywords", async () => {
+        await user.click(screen.getByText(menuTitle))
+        expect(screen.queryAllByText(displayKeyword)).toHaveLength(1)
+      })
+
+      it("leaves in extensions which match keyword filter", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.click(screen.getByText(displayKeyword))
+
         expect(extensionsListener).toHaveBeenCalled()
 
-        expect(newExtensions).toContain(stale)
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+      })
 
-        expect(newExtensions).not.toContain(secret)
-        expect(newExtensions).not.toContain(alice)
-        expect(newExtensions).not.toContain(pascal)
-        expect(newExtensions).not.toContain(fluffy)
+      it("filters out extensions which do not match the ticked keyword", async () => {
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        await user.click(screen.getByText(menuTitle))
+        await user.click(screen.getByText(displayKeyword))
+
+        expect(extensionsListener).toHaveBeenCalled()
+
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      it("reinstates extensions when a keyword is unticked", async () => {
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await user.click(screen.getByText(menuTitle))
+        await user.click(screen.getByText(displayKeyword))
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+
+        await user.click(screen.getByText(displayKeyword))
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+      })
+
+      it("excludes unlisted extensions", () => {
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
       })
     })
 
-  })
 
-  describe("category filter", () => {
-    const displayCategory = "Skunks"
+    describe("status filter", () => {
 
-    it("has a list of categories", async () => {
-      expect(screen.queryAllByText(displayCategory)).toHaveLength(1)
-    })
+      it("lists all the statuses in the menu", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.hover(screen.getByTestId("status-twisty"))
 
-    it("leaves in extensions which match category filter", async () => {
-      await user.click(screen.getByText(displayCategory))
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(pascal)
-    })
-
-    it("filters out extensions which do not match the ticked category", async () => {
-      expect(newExtensions).toContain(alice)
-      await user.click(screen.getByText(displayCategory))
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-    })
-
-    it("reinstates extensions when a category is unticked", async () => {
-      expect(newExtensions).toContain(alice)
-
-      await user.click(screen.getByText(displayCategory))
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-
-      await user.click(screen.getByText(displayCategory))
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-    })
-
-    it("excludes unlisted extensions", () => {
-      expect(newExtensions).not.toContain(secret)
-    })
-  })
-
-  describe("keyword filter", () => {
-    const displayKeyword = "Cool"
-
-    it("has a list of keywords", async () => {
-      expect(screen.queryAllByText(displayKeyword)).toHaveLength(1)
-    })
-
-    it("leaves in extensions which match keyword filter", async () => {
-      await user.click(screen.getByText(displayKeyword))
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(pascal)
-    })
-
-    it("filters out extensions which do not match the ticked keyword", async () => {
-      expect(newExtensions).toContain(alice)
-      await user.click(screen.getByText(displayKeyword))
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-    })
-
-    it("reinstates extensions when a keyword is unticked", async () => {
-      expect(newExtensions).toContain(alice)
-
-      await user.click(screen.getByText(displayKeyword))
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-
-      await user.click(screen.getByText(displayKeyword))
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-    })
-
-    it("excludes unlisted extensions", () => {
-      expect(newExtensions).not.toContain(secret)
-    })
-  })
-
-
-  describe("status filter", () => {
-    const label = "Status"
-
-    it("lists all the statuses in the menu", async () => {
-      // Don't look at what happens, just make sure the options are there
-      await selectEvent.select(screen.getByLabelText(label), "wonky")
-      await selectEvent.select(screen.getByLabelText(label), "shonky")
-      await selectEvent.select(screen.getByLabelText(label), "sparkling")
-    })
-
-    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("status-form")).toHaveFormValues({
-        status: "",
+        // Don't look at what happens, just make sure the options are there
+        await screen.getByText("wonky")
+        await screen.getByText("shonky")
+        await screen.getByText("sparkling")
       })
-      await selectEvent.select(screen.getByLabelText(label), "wonky")
 
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-      expect(newExtensions).not.toContain(fluffy)
-    })
+      it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.hover(screen.getByTestId("status-twisty"))
 
-    it("leaves in extensions which match another status filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("status-form")).toHaveFormValues({
-        status: "",
+        await selectEvent.select(screen.getByTestId("status-twisty"), "wonky")
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
       })
-      await selectEvent.select(screen.getByLabelText(label), "sparkling")
 
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-      expect(newExtensions).toContain(fluffy)
-    })
+      it("leaves in extensions which match another status filter and filters out extensions which do not match", async () => {
+        await user.click(screen.getByText(menuTitle))
+        await user.hover(screen.getByTestId("status-twisty"))
 
-    it("leaves in all extensions when 'All' is selected", async () => {
-      expect(screen.getByTestId("status-form")).toHaveFormValues({
-        status: "",
+        await selectEvent.select(screen.getByTestId("status-twisty"), "sparkling")
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
       })
-      await selectEvent.select(screen.getByLabelText(label), "sparkling")
-      expect(newExtensions).not.toContain(alice)
 
-      await selectEvent.select(screen.getByLabelText(label), "All")
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).toContain(pascal)
-      expect(newExtensions).toContain(fluffy)
-    })
-
-    it("excludes unlisted extensions", () => {
-      expect(newExtensions).not.toContain(secret)
-    })
-  })
-
-  describe("quarkus status filter", () => {
-    const label = "Status"
-
-    it("lists all the statuses in the menu", async () => {
-      // Don't look at what happens, just make sure the options are there
-      await selectEvent.select(screen.getByLabelText(label), "wonky")
-      await selectEvent.select(screen.getByLabelText(label), "shonky")
-      await selectEvent.select(screen.getByLabelText(label), "sparkling")
-    })
-
-    it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("status-form")).toHaveFormValues({
-        status: "",
+      it("excludes unlisted extensions", () => {
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([secret]))
       })
-      await selectEvent.select(screen.getByLabelText(label), "wonky")
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-      expect(newExtensions).not.toContain(fluffy)
     })
 
-    it("leaves in extensions which match another status filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("status-form")).toHaveFormValues({
-        status: "",
+    describe.skip("compatibility filter", () => {
+      const label = "Compatibility"
+
+      it("lists all the compatibilities in the menu", async () => {
+        // Don't look at what happens, just make sure the options are there
+        await selectEvent.select(screen.getByLabelText(label), "Unknown")
+        await selectEvent.select(screen.getByLabelText(label), "Compatible")
       })
-      await selectEvent.select(screen.getByLabelText(label), "sparkling")
 
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-      expect(newExtensions).toContain(fluffy)
-    })
+      it("leaves in extensions which match compatibility filter and filters out extensions which do not match", async () => {
+        expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
+          "built-with": "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "Unknown")
 
-    it("excludes unlisted extensions", () => {
-      expect(newExtensions).not.toContain(secret)
-    })
-  })
-
-  describe.skip("compatibility filter", () => {
-    const label = "Compatibility"
-
-    it("lists all the compatibilities in the menu", async () => {
-      // Don't look at what happens, just make sure the options are there
-      await selectEvent.select(screen.getByLabelText(label), "Unknown")
-      await selectEvent.select(screen.getByLabelText(label), "Compatible")
-    })
-
-    it("leaves in extensions which match compatibility filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
-        "built-with": "",
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
       })
-      await selectEvent.select(screen.getByLabelText(label), "Unknown")
 
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).toContain(alice)
-      expect(newExtensions).not.toContain(pascal)
-      expect(newExtensions).not.toContain(fluffy)
-    })
+      it("leaves in extensions which match another compatibility filter and filters out extensions which do not match", async () => {
+        expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
+          "built-with": "",
+        })
+        await selectEvent.select(screen.getByLabelText(label), "Compatible")
 
-    it("leaves in extensions which match another compatibility filter and filters out extensions which do not match", async () => {
-      expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
-        "built-with": "",
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([fluffy]))
       })
-      await selectEvent.select(screen.getByLabelText(label), "Compatible")
-
-      expect(extensionsListener).toHaveBeenCalled()
-      expect(newExtensions).not.toContain(alice)
-      expect(newExtensions).toContain(pascal)
-      expect(newExtensions).toContain(fluffy)
     })
   })
 })

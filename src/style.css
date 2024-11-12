@@ -12,6 +12,7 @@ html {
     --main-code-color: #943000;
     --sec-background-color: #B5B5B5;
     --sec-text-color: #333333;
+    --sec-border-color: #AAA;
     --title-background-color: #0d1c2c;
     --breadcrumb-background-color: #4695EB;
 
@@ -40,6 +41,9 @@ html {
     --navbar-text-color: #FFFFFF; /* not in the main site */
     --title-text-color: #FFFFFF; /* not in the main site */
     --submenu-background-color: #333333; /* not in the main site */
+    --filter-separator-color: var(--code-background-color); /* not in the main site */
+    --filter-outline-color: #A6A6A6; /* not in the main site */
+
     --danger-color: var(--link-color-hover); /* not in the main site */
 
 }
@@ -52,6 +56,7 @@ html.dark {
     --main-text-color: #B5B5B5;
     --main-code-color: #F59B00;
     --sec-background-color: #333333;
+    --sec-border-color: #AAA;
     --sec-text-color: #B5B5B5;
     --title-background-color: #070f17;
     --breadcrumb-background-color: #0d1c2c;
@@ -72,6 +77,9 @@ html.dark {
     --code-border-color: #222222;
 
     --cta-background-color: #0B58AB;
+
+    --filter-separator-color: var(--code-background-color); /* not in the main site */
+    --filter-outline-color: #B5B5B5; /* not in the main site */
 
 
     /* code highlighting overrides */
@@ -142,6 +150,7 @@ html {
     --line-height-multiplier: 1.2; /* multiplier for making calculations easier */
 
     --site-margins: 13rem;
+    --mobile-filter-margins: 1rem;
     --navbar-padding: 1rem;
     --logo-width: 13rem;
 
@@ -151,6 +160,8 @@ html {
     --a-vsmall-space: 10px;
 
     --border-radius: 10px;
+
+    --mobile-threshold: 1024px;
 
     font-weight: var(--font-weight-normal);
 }
@@ -168,6 +179,8 @@ html {
     html {
         --site-margins: 2rem;
         --logo-width: 8rem;
+
+        --font-size-24: 16px;
     }
 }
 
