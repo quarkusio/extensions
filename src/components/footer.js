@@ -2,9 +2,10 @@ import * as React from "react"
 import { StaticImage } from "gatsby-plugin-image"
 import styled from "styled-components"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useMediaQuery } from "react-responsive"
+import { device } from "./util/styles/breakpoints"
 
 const FooterBar = styled.footer`
-  height: 64px;
   background-color: var(--navbar-background-color);
   color: var(--main-background-color);
   display: flex;
@@ -12,13 +13,18 @@ const FooterBar = styled.footer`
   justify-content: space-between;
   align-items: center;
   font-size: var(--font-size-16);
-  padding-left: var(--site-margins);
-  padding-right: var(--site-margins);
+  padding: calc(0.9 * var(--a-vsmall-space)) var(--site-margins);
   font-weight: var(--font-weight-normal);
+  gap: calc(1.5 * var(--a-modest-space));
+
+  // noinspection CssUnknownProperty
+  @media ${device.sm} {
+    flex-direction: column-reverse;
+  }
 `
 
 const Spacer = styled.div`
-  width: 190px;
+  width: 6rem;
 `
 
 const Logo = styled(props => <a {...props} />)`
@@ -28,7 +34,6 @@ const Logo = styled(props => <a {...props} />)`
   align-items: center;
   justify-content: space-between;
   font-weight: var(--font-weight-bold);
-  margin-left: 7px;
 `
 const SponsorInfo = styled.div`
   background-color: var(--navbar-background-color);
@@ -37,29 +42,30 @@ const SponsorInfo = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  font-size: var(--font-size-20);
+  font-size: var(--font-size-12);
   font-weight: var(--font-weight-bold);
+  gap: calc(.8 * var(--a-small-space));
+
+  // noinspection CssUnknownProperty
+  @media ${device.sm} {
+    flex-direction: column;
+    margin-top: 10px;
+
+  }
 `
 
-const LicenseText = styled(props => <a {...props} />)`
+const LegalText = styled(props => <a {...props} />)`
   margin: 8px;
   color: var(--navbar-text-color);
+  text-decoration: underline;
 
-  &:visited {
-    color: var(--navbar-text-color);
-    text-decoration: underline;
-  }
-
-  &:link {
-    color: var(--navbar-text-color);
-    text-decoration: underline;
-  }
 `
 
 const LicenseInfo = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-size: var(--font-size-12);
 `
 
 const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
@@ -69,15 +75,19 @@ const PaddedIcon = styled(props => <FontAwesomeIcon {...props} />)`
 `
 
 const Footer = () => {
+  const isMobile = useMediaQuery({ query: device.sm })
+
   return (
     <FooterBar className="navigation">
-      <Spacer />
+      {isMobile || <Spacer />}
       <LicenseInfo>
         <PaddedIcon icon={["fab", "creative-commons"]} />
         <PaddedIcon icon={["fab", "creative-commons-by"]} />
-        <LicenseText href="https://creativecommons.org/licenses/by/3.0/">
+        <LegalText href="https://creativecommons.org/licenses/by/3.0/">
           CC by 3.0
-        </LicenseText>
+        </LegalText>
+        <span>|</span>
+        <LegalText href="https://www.redhat.com/en/about/privacy-policy">Privacy Policy</LegalText>
       </LicenseInfo>
       <SponsorInfo>
         Sponsored by
@@ -90,7 +100,7 @@ const Footer = () => {
             formats={["auto", "webp", "avif"]}
             src="../images/redhat_reversed.svg"
             alt="Red Hat logo"
-            height={36}
+            height={26}
           />
         </Logo>
       </SponsorInfo>
