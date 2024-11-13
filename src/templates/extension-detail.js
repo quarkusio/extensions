@@ -357,18 +357,6 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
-                name: "Group ID",
-                text: metadata.maven?.groupId,
-              }}
-            />
-            <ExtensionMetadata
-              data={{
-                name: "Artifact ID",
-                text: metadata.maven?.artifactId,
-              }}
-            />
-            <ExtensionMetadata
-              data={{
                 name: "Guide",
                 text: guideDescription,
                 url: metadata.guide,
@@ -379,6 +367,41 @@ const ExtensionDetailTemplate = ({
                 name: "Javadoc",
                 text: metadata.javadoc?.url ? "javadoc.io" : null, // Slight workaround to make sure we don't display the field if the url is null
                 url: metadata.javadoc?.url,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Source code",
+                fieldName: "url",
+                icon:
+                  repository?.url?.includes("github") ? "github" : repository?.url?.includes("gitlab") ?
+                    "gitlab" : repository?.url?.includes("git")
+                      ? "git-alt"
+                      : undefined,
+                // If we don't have a project name, still show a url label, but if we don't have a url, don't show a label
+                text: repository?.project
+                  ? repository?.project
+                  : repository?.url ? "source" : undefined,
+                url: repository?.url,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Minimum Java version",
+                fieldName: "minimumJavaVersion",
+                metadata,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Group ID",
+                text: metadata.maven?.groupId,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
+                name: "Artifact ID",
+                text: metadata.maven?.artifactId,
               }}
             />
             <ExtensionMetadata
@@ -441,22 +464,6 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
-                name: "Source code",
-                fieldName: "url",
-                icon:
-                  repository?.url?.includes("github") ? "github" : repository?.url?.includes("gitlab") ?
-                    "gitlab" : repository?.url?.includes("git")
-                      ? "git-alt"
-                      : undefined,
-                // If we don't have a project name, still show a url label, but if we don't have a url, don't show a label
-                text: repository?.project
-                  ? repository?.project
-                  : repository?.url ? "source" : undefined,
-                url: repository?.url,
-              }}
-            />
-            <ExtensionMetadata
-              data={{
                 name: (metadata?.sourceControl?.samplesUrl?.length > 1 || (metadata?.sourceControl?.samplesUrl?.length === 1 && metadata.sourceControl.samplesUrl[0].description?.endsWith("s"))) ? "Samples" : "Sample",
                 fieldName: "samplesUrl",
                 metadata: metadata?.sourceControl,
@@ -469,13 +476,6 @@ const ExtensionDetailTemplate = ({
                 fieldName: "issues",
                 metadata: extension.metadata?.sourceControl,
                 url: extension.metadata?.sourceControl?.issuesUrl,
-              }}
-            />
-            <ExtensionMetadata
-              data={{
-                name: "Minimum Java version",
-                fieldName: "minimumJavaVersion",
-                metadata,
               }}
             />
             <ClosingRule />
