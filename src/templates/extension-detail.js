@@ -8,7 +8,6 @@ import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import ExtensionMetadata from "../components/extensions-display/extension-metadata"
 import InstallationInstructions from "../components/extensions-display/installation-instructions"
 import ExtensionImage from "../components/extension-image"
-import CodeLink from "../components/extensions-display/code-link"
 import { qualifiedPrettyPlatform } from "../components/util/pretty-platform"
 import ContributionsChart from "../components/charts/contributions-chart"
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
@@ -19,6 +18,9 @@ import { getQueryParams, useQueryParamString } from "react-use-query-param-strin
 // See https://github.com/JedWatson/react-select/issues/4230
 import createCache from "@emotion/cache"
 import { initialiseDisplayModeFromLocalStorage } from "../components/util/dark-mode-helper"
+import { device } from "../components/util/styles/breakpoints"
+import { useMediaQuery } from "react-responsive"
+import CodeLink from "../components/extensions-display/code-link"
 
 createCache({
   key: "my-select-cache",
@@ -28,19 +30,24 @@ createCache({
 const ExtensionDetails = styled.main`
   margin-left: var(--site-margins);
   margin-right: var(--site-margins);
-  margin-top: var(--a-generous-space);
-  margin-bottom: var(--a-generous-space);
+  margin-top: calc(2 * var(--a-modest-space));
+  margin-bottom: calc(2.5 * var(--a-modest-space));
 
   display: flex;
   flex-direction: column;
 `
 
 const Headline = styled.header`
-  height: 160px;
   display: flex;
   flex-direction: row;
-  margin-bottom: 62px;
+  margin-top: var(--a-modest-space);
+  margin-bottom: var(--a-modest-space);
   align-items: center;
+
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    margin-bottom: 0;
+  }
 `
 
 const UnlistedWarning = styled.header`
@@ -67,14 +74,23 @@ const SupersededWarning = styled.header`
 const Columns = styled.div`
   display: flex;
   flex-direction: row;
+
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    flex-direction: column-reverse;
+  }
 `
 
 const LogoImage = styled.div`
   width: var(--logo-width);
   margin-right: 60px;
-  margin-bottom: 25px;
   border-radius: 10px;
   overflow: hidden;
+
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    margin-right: 12px;
+  }
 `
 
 const Metadata = styled.div`
@@ -84,12 +100,22 @@ const Metadata = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-content: flex-start;
+
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    padding-left: 0;
+  }
 `
 
 const MainContent = styled.div`
   width: 70%;
   display: flex;
   flex-direction: column;
+
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    width: 100%;
+  }
 `
 
 const ExtensionName = styled.div`
@@ -100,6 +126,13 @@ const ExtensionName = styled.div`
   color: var(--sec-text-color);
   text-transform: uppercase;
   opacity: 1;
+
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    text-transform: none;
+    font-size: var(--font-size-24);
+    font-weight: var(--font-weight-boldest);
+  }
 `
 
 const ExtensionDescription = styled.div`
@@ -107,8 +140,8 @@ const ExtensionDescription = styled.div`
   text-align: left;
   font-size: var(--font-size-16);
   opacity: 1;
-  margin-bottom: 3rem;
-  margin-top: 2.5rem;
+  margin-top: calc(0.5 * var(--a-generous-space));
+  margin-bottom: calc(0.5 * var(--a-generous-space));
   font-weight: var(--font-weight-bold);
 `
 
@@ -146,17 +179,25 @@ const ChartHolder = styled.div`
   height: 480px; // For now, an arbitrary height, but we should tune
 `
 
-const Logo = ({ extension }) => {
-  return (
-    <LogoImage>
-      <ExtensionImage extension={extension} size={208} />
-    </LogoImage>
-  )
+const Logo = ({ extension, isMobile }) => {
+  // Size here doesn't matter that much because display size is set in css, but getting smaller makes page load quicker
+  return isMobile ?
+    (
+      <LogoImage>
+        <ExtensionImage extension={extension} size={128} />
+      </LogoImage>
+    ) : (
+      <LogoImage>
+        <ExtensionImage extension={extension} size={208} />
+      </LogoImage>
+    )
 }
 
 const AuthorGuidance = styled.div`
   font-style: italic;
-  padding-top: 2rem;
+  padding-top: var(--a-modest-space);
+  padding-bottom: var(--a-modest-space);
+
 `
 
 const Filename = styled.span`
@@ -168,7 +209,10 @@ const ClosingRule = styled.div`
   position: relative;
   top: -1px;
   padding-left: var(--a-modest-space);
-  border-bottom: 1px solid var(--card-outline);`
+  border-bottom: 1px solid var(--card-outline);
+
+  margin-bottom: calc(2 * var(--a-modest-space));
+`
 
 // Semi-duplicate the tab headings so we get prettier search strings :)
 const tabs = ["docs", "community"]
@@ -190,6 +234,7 @@ const ExtensionDetailTemplate = ({
 
 
   const key = "tab"
+  const isMobile = useMediaQuery({ query: device.xs })
   const [searchText, setSearchText, initialized] = useQueryParamString(key, "")
 
   const onSelect = (index) => {
@@ -222,6 +267,26 @@ const ExtensionDetailTemplate = ({
 
   const repository = metadata?.sourceControl?.repository
 
+  const cta = (<CodeLink
+    unlisted={metadata.unlisted}
+    artifact={artifact}
+    platforms={platforms}
+    streams={streams}
+  />)
+  const authorGuidance = (<AuthorGuidance>
+    Spot a problem? Submit a change to the {name} extension's{" "}
+    <Filename>{extensionYaml}</Filename> and this content will be
+    updated by the next extension release. This page was generated from the{" "}
+    <a href="https://quarkus.io/version/main/guides/extension-metadata#quarkus-extension-yaml">
+      extension metadata
+    </a>{" "}
+    published to the{" "}
+    <a href="https://quarkus.io/guides/extension-registry-user">
+      Quarkus registry
+    </a>
+    .
+  </AuthorGuidance>)
+
   return (
     <Layout location={location}>
       <BreadcrumbBar name={name} />
@@ -239,13 +304,16 @@ const ExtensionDetailTemplate = ({
         ))}
 
       <ExtensionDetails>
-        <Headline>
-          <Logo extension={extension} />
-          <ExtensionName>{name}</ExtensionName>
-        </Headline>
+        <div>
+          <Headline>
+            <Logo extension={extension} isMobile={isMobile} />
+            <ExtensionName>{name}</ExtensionName>
+          </Headline>
+          {isMobile && <ExtensionDescription>{description}</ExtensionDescription>}
+        </div>
         <Columns>
           <MainContent>
-            <ExtensionDescription>{description}</ExtensionDescription>
+            {isMobile || <ExtensionDescription>{description}</ExtensionDescription>}
 
             <Tabs onSelect={onSelect} defaultIndex={selected}>
               <TabList>
@@ -331,12 +399,7 @@ const ExtensionDetailTemplate = ({
           </MainContent>
 
           <Metadata>
-            <CodeLink
-              unlisted={metadata.unlisted}
-              artifact={artifact}
-              platforms={platforms}
-              streams={streams}
-            />
+            {isMobile || cta}
 
             <ExtensionMetadata
               data={{
@@ -480,21 +543,15 @@ const ExtensionDetailTemplate = ({
             />
             <ClosingRule />
 
-            <AuthorGuidance>
-              Spot a problem? Submit a change to the {name} extension's{" "}
-              <Filename>{extensionYaml}</Filename> and this content will be
-              updated by the next extension release. This page was generated from the{" "}
-              <a href="https://quarkus.io/version/main/guides/extension-metadata#quarkus-extension-yaml">
-                extension metadata
-              </a>{" "}
-              published to the{" "}
-              <a href="https://quarkus.io/guides/extension-registry-user">
-                Quarkus registry
-              </a>
-              .
-            </AuthorGuidance>
+            {isMobile || authorGuidance}
+
+
           </Metadata>
         </Columns>
+
+        {isMobile && authorGuidance}
+
+        {isMobile && cta}
 
         <nav className="extension-detail-nav">
           <ul

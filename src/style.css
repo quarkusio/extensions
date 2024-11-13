@@ -171,14 +171,22 @@ html {
     html {
         --site-margins: 4rem;
         --navbar-padding: 1.5rem;
-
+        --a-generous-space: 50px;
+        --a-modest-space: 12px;
+        --a-small-space: 6px;
+        --a-vsmall-space: 5px;
     }
 }
 
 @media screen and (max-width: 768px) {
     html {
         --site-margins: 2rem;
-        --logo-width: 8rem;
+        --a-generous-space: 20px;
+        --a-modest-space: 10px;
+        --a-small-space: 6px;
+        --a-vsmall-space: 5px;
+
+        --logo-width: 6rem;
 
         --font-size-24: 16px;
     }
