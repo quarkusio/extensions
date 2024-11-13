@@ -107,15 +107,12 @@ const Dropdown = styled.div`
   font-size: var(--font-size-14)
 `
 
+// This component is mobile-only
 const FilterSubmenu = ({ title, children }) => {
   const [open, setOpen] = React.useState(false)
 
-  const handleOpen = () => {
-    setOpen(true)
-  }
-
-  const handleClose = () => {
-    setOpen(false)
+  const toggleOpen = () => {
+    setOpen(!open)
   }
 
   // We use css tranforms to flip the icon, but let's adjust the title for testing and screenreaders
@@ -129,11 +126,8 @@ const FilterSubmenu = ({ title, children }) => {
 
 
   return (
-    <Dropdown data-testid={label + "-twisty"}
-              onMouseOver={handleOpen}
-              onMouseOut={handleClose}
-    >
-      <MenuTitle>
+    <Dropdown>
+      <MenuTitle data-testid={label + "-twisty"} onClick={toggleOpen}>
         <label>{title}</label>
         <FlippyIcon icon={faChevronDown} isOpen={open} title={iconTitle} />
       </MenuTitle>

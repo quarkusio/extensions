@@ -11,69 +11,16 @@ describe("filter hover flippy menu", () => {
   const menuOpen = "chevronUp"
   const menuClosed = "chevronDown"
 
-  describe("at normal screen size", () => {
+  describe("at a mobile screen size", () => {
     let user
     beforeEach(() => {
-      user = userEvent.setup()
+      user = userEvent.setup({ skipHover: true })
       render(
-        <>
+        <ResponsiveContext.Provider value={{ width: 300 }}>
           <div>{dummyElement}</div>
           <FilterSubmenu title={linkTitle}>
             <li>{listItem}</li>
           </FilterSubmenu>
-        </>
-      )
-    })
-
-    it("shows the title", () => {
-      expect(screen.getByText(linkTitle)).toBeInTheDocument()
-    })
-
-    it("does not show the contents", () => {
-      expect(screen.queryByText(listItem)).toBeFalsy()
-    })
-
-    it("shows the menu as closed before any hover", async () => {
-      expect(screen.queryByTitle(menuOpen)).toBeNull()
-      expect(screen.getByTitle(menuClosed)).toBeInTheDocument()
-    })
-
-    it("hovering on the menu flips the icon", async () => {
-      await user.hover(screen.getByText(linkTitle))
-
-      expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
-      expect(screen.queryByTitle(menuClosed)).toBeNull()
-    })
-
-    it("hovering on the menu brings up a dropdown and shows the contents", async () => {
-      await user.hover(screen.getByText(linkTitle))
-      expect(screen.getByText(listItem)).toBeTruthy()
-    })
-
-    it("leaving the menu after hovering flips the icon", async () => {
-      await user.hover(screen.getByText(linkTitle))
-      expect(screen.queryByTitle(menuClosed)).toBeNull()
-      expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
-
-      await user.hover(screen.getByText(dummyElement))
-
-      expect(screen.queryByTitle(menuOpen)).toBeNull()
-      expect(screen.getByTitle(menuClosed)).toBeInTheDocument()
-    })
-  })
-
-  describe("at a mobile screen size", () => {
-    let user
-    beforeEach(() => {
-      user = userEvent.setup()
-      render(
-        <ResponsiveContext.Provider value={{ width: 300 }}>
-          <>
-            <div>{dummyElement}</div>
-            <FilterSubmenu title={linkTitle}>
-              <li>{listItem}</li>
-            </FilterSubmenu>
-          </>
         </ResponsiveContext.Provider>
       )
     })
@@ -86,32 +33,55 @@ describe("filter hover flippy menu", () => {
       expect(screen.queryByText(listItem)).toBeFalsy()
     })
 
-    it("shows the menu as closed before any hover", async () => {
+    it("shows the menu as closed before any click", async () => {
       expect(screen.queryByTitle(menuOpen)).toBeNull()
       expect(screen.getByTitle(menuClosed)).toBeInTheDocument()
     })
 
-    it("hovering on the menu flips the icon", async () => {
-      await user.hover(screen.getByText(linkTitle))
+    it("clicking on the menu flips the icon", async () => {
+      await user.click(screen.getByText(linkTitle))
 
       expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
       expect(screen.queryByTitle(menuClosed)).toBeNull()
     })
 
-    it("hovering on the menu brings up a dropdown and shows the contents", async () => {
-      await user.hover(screen.getByText(linkTitle))
+    it("clicking on the menu brings up a dropdown and shows the contents", async () => {
+      await user.click(screen.getByText(linkTitle))
       expect(screen.getByText(listItem)).toBeTruthy()
     })
 
-    it("leaving the menu after hovering flips the icon", async () => {
-      await user.hover(screen.getByText(linkTitle))
+    it("clicking the twisty closes the menu and flips the icon", async () => {
+      await user.click(screen.getByText(linkTitle))
       expect(screen.queryByTitle(menuClosed)).toBeNull()
       expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
 
-      await user.hover(screen.getByText(dummyElement))
+      await user.click(screen.getByText(linkTitle))
 
       expect(screen.queryByTitle(menuOpen)).toBeNull()
       expect(screen.getByTitle(menuClosed)).toBeInTheDocument()
+    })
+
+    it("clicking elsewhere closes the menu and flips the icon", async () => {
+      await user.click(screen.getByText(linkTitle))
+      expect(screen.queryByTitle(menuClosed)).toBeNull()
+      expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
+
+      await user.click(screen.getByText(listItem))
+
+      expect(screen.queryByTitle(menuClosed)).toBeNull()
+      expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
+    })
+
+    it("clicking on the contents of an open menu does not close it", async () => {
+      await user.click(screen.getByText(linkTitle))
+      expect(screen.queryByTitle(menuClosed)).toBeNull()
+      expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
+
+      await user.click(screen.getByText(dummyElement))
+
+      // Should still be open
+      expect(screen.queryByTitle(menuClosed)).toBeNull()
+      expect(screen.getByTitle(menuOpen)).toBeInTheDocument()
     })
   })
 

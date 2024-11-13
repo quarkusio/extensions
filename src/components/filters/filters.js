@@ -171,7 +171,7 @@ const Filters = ({ extensions, categories, keywords, filterAction, sorterAction,
         <div>Filter</div>
         <FontAwesomeIcon icon={faSliders}
                          title="sliders" />
-        <div hidden="true">
+        <div hidden={true}>
           {filterElements}
           <Sortings sorterAction={sorterAction} downloadData={downloadData}></Sortings>
         </div>

@@ -419,7 +419,6 @@ describe("filters bar", () => {
     const menuClosed = "sliders"
 
     beforeEach(() => {
-      // We need skipHover or we fall off the hover menus while clicking the ticky boxes
       user = userEvent.setup({ skipHover: true })
       mockQueryParamSearchStrings = {}
 
@@ -617,13 +616,13 @@ describe("filters bar", () => {
 
       it("has a list of categories", async () => {
         await user.click(screen.getByText(menuTitle))
-        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByTestId("category-twisty"))
         expect(screen.queryAllByText(displayCategory)).toHaveLength(1)
       })
 
       it("leaves in extensions which match category filter", async () => {
         await user.click(screen.getByText(menuTitle))
-        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByTestId("category-twisty"))
         await user.click(screen.getByText(displayCategory))
 
         expect(extensionsListener).toHaveBeenCalled()
@@ -632,7 +631,7 @@ describe("filters bar", () => {
 
       it("filters out extensions which do not match the ticked category", async () => {
         await user.click(screen.getByText(menuTitle))
-        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByTestId("category-twisty"))
         await user.click(screen.getByText(displayCategory))
 
         expect(extensionsListener).toHaveBeenCalled()
@@ -641,12 +640,11 @@ describe("filters bar", () => {
 
       it("reinstates extensions when a category is unticked", async () => {
         await user.click(screen.getByText(menuTitle))
-        await user.hover(screen.getByTestId("category-twisty"))
+        await user.click(screen.getByTestId("category-twisty"))
         await user.click(screen.getByText(displayCategory))
         expect(extensionsListener).toHaveBeenCalled()
         expect(extensionsListener).not.toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
 
-        await user.hover(screen.getByTestId("category-twisty"))
         await user.click(screen.getByText(displayCategory))
         expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
 
@@ -707,7 +705,7 @@ describe("filters bar", () => {
 
       it("lists all the statuses in the menu", async () => {
         await user.click(screen.getByText(menuTitle))
-        await user.hover(screen.getByTestId("status-twisty"))
+        await user.click(screen.getByTestId("status-twisty"))
 
         // Don't look at what happens, just make sure the options are there
         await screen.getByText("wonky")
@@ -717,7 +715,7 @@ describe("filters bar", () => {
 
       it("leaves in extensions which match status filter and filters out extensions which do not match", async () => {
         await user.click(screen.getByText(menuTitle))
-        await user.hover(screen.getByTestId("status-twisty"))
+        await user.click(screen.getByTestId("status-twisty"))
 
         await selectEvent.select(screen.getByTestId("status-twisty"), "wonky")
 
@@ -729,7 +727,7 @@ describe("filters bar", () => {
 
       it("leaves in extensions which match another status filter and filters out extensions which do not match", async () => {
         await user.click(screen.getByText(menuTitle))
-        await user.hover(screen.getByTestId("status-twisty"))
+        await user.click(screen.getByTestId("status-twisty"))
 
         await selectEvent.select(screen.getByTestId("status-twisty"), "sparkling")
 
