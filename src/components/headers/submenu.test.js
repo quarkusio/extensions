@@ -90,7 +90,7 @@ describe("hover flippy menu", () => {
         await user.hover(screen.getByText(elementTitle))
         expect(screen.getByText(listItem)).toBeTruthy()
       })
-      
+
     })
   })
 
@@ -99,7 +99,7 @@ describe("hover flippy menu", () => {
     beforeEach(() => {
       user = userEvent.setup({ skipHover: true })
       render(
-        <ResponsiveContext.Provider value={{ width: 300 }}>
+        <ResponsiveContext.Provider value={{ width: 300, type: "screen" }}>
           <>
             <div>{dummyElement}</div>
             <Submenu title={linkTitle}>

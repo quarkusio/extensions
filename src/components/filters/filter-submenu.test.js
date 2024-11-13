@@ -16,7 +16,7 @@ describe("filter hover flippy menu", () => {
     beforeEach(() => {
       user = userEvent.setup({ skipHover: true })
       render(
-        <ResponsiveContext.Provider value={{ width: 300 }}>
+        <ResponsiveContext.Provider value={{ width: 300, type: "screen" }}>
           <div>{dummyElement}</div>
           <FilterSubmenu title={linkTitle}>
             <li>{listItem}</li>

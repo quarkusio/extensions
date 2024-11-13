@@ -43,7 +43,7 @@ describe("navigation bar", () => {
     beforeEach(() => {
       user = userEvent.setup()
       render(
-        <ResponsiveContext.Provider value={{ width: 300 }}>
+        <ResponsiveContext.Provider value={{ width: 300, type: "screen" }}>
           <Navigation />
         </ResponsiveContext.Provider>
       )
