@@ -3,19 +3,27 @@ import * as React from "react"
 import styled from "styled-components"
 import Link from "gatsby-link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { device } from "../util/styles/breakpoints"
 
 const BreadcrumbBart = styled.header`
-  height: 90px;
   color: var(--breadcrumb-text-color);
   text-align: left;
   font-size: var(--font-size-24);
   opacity: 1;
   margin: 0;
   padding-left: var(--site-margins);
+  padding-right: var(--site-margins);
+  padding-top: calc(1.2 * var(--a-modest-space));
+  padding-bottom: calc(1.2 * var(--a-modest-space));
   background-color: var(--breadcrumb-background-color);
   display: flex;
   justify-content: flex-start;
   align-items: center;
+
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    font-size: var(--font-size-16);
+  }
 `
 const StyledLink = styled(props => <Link {...props} />)`
   font-weight: var(--font-weight-awfully-bold);

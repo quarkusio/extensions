@@ -2,6 +2,7 @@ import * as React from "react"
 
 import styled from "styled-components"
 import codeQuarkusUrl from "../util/code-quarkus-url"
+import { device } from "../util/styles/breakpoints"
 
 const Button = styled(props => <a {...props} />)`
   color: var(--navbar-text-color);
@@ -15,7 +16,7 @@ const Button = styled(props => <a {...props} />)`
 
   padding: 0.5rem 2rem;
 
-  :link {
+  &:link {
     color: var(--navbar-text-color);
   }
 
@@ -24,7 +25,6 @@ const Button = styled(props => <a {...props} />)`
   }
 
   &:hover {
-    color: var(--navbar-text-color);
     background-color: var(--cta-hover-color);
   }
 `
@@ -41,6 +41,11 @@ const RowHog = styled.div`
   display: flex;
   justify-content: center;
   margin-bottom: var(--a-modest-space);
+
+  // noinspection CssUnknownProperty
+  @media ${device.sm} {
+    margin-top: var(--a-modest-space);
+  }
 `
 
 const CodeLink = ({ artifact, unlisted, platforms, streams }) => {
