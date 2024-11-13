@@ -141,6 +141,10 @@ const Submenu = ({ title, children }) => {
     setOpen(false)
   }
 
+  const toggleOpen = () => {
+    setOpen(!open)
+  }
+
   // We use css tranforms to flip the icon, but let's adjust the title for testing and screenreaders
   const iconTitle = open ? "chevronUp" : "chevronDown"
 
@@ -155,7 +159,7 @@ const Submenu = ({ title, children }) => {
       onMouseOver={handleOpen}
       onMouseOut={handleClose}
     >
-      <MenuTitle>
+      <MenuTitle onClick={toggleOpen}>
         <div>{title}</div>
         <FlippyIcon icon={faChevronDown} isOpen={open} title={iconTitle} />
       </MenuTitle>
