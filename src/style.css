@@ -28,6 +28,8 @@ html {
 
     --gentle-alert-background-color: #FDE9BF;
 
+    --highlight-color: #4695EB; /* not in the main site */
+
     --cta-background-color: #4695EB;
     --cta-hover-color: #cc0000;
     --code-background-color: #EFEFEF; /* not in the main site */

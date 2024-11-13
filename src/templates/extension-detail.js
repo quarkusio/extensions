@@ -10,7 +10,6 @@ import InstallationInstructions from "../components/extensions-display/installat
 import ExtensionImage from "../components/extension-image"
 import { qualifiedPrettyPlatform } from "../components/util/pretty-platform"
 import ContributionsChart from "../components/charts/contributions-chart"
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
 import "react-tabs/style/react-tabs.css"
 import { getQueryParams, useQueryParamString } from "react-use-query-param-string"
 
@@ -21,6 +20,7 @@ import { initialiseDisplayModeFromLocalStorage } from "../components/util/dark-m
 import { device } from "../components/util/styles/breakpoints"
 import { useMediaQuery } from "react-responsive"
 import CodeLink from "../components/extensions-display/code-link"
+import { Tab, TabList, TabPanel, Tabs } from "../components/extensions-display/tabs"
 
 createCache({
   key: "my-select-cache",
@@ -173,6 +173,10 @@ const DocumentationHeading = styled.h2`
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-24);
   padding-bottom: 10px;
+  // noinspection CssUnknownProperty
+  @media ${device.xs} {
+    border-bottom: 1px solid var(--card-outline);
+  }
 `
 
 const Logo = ({ extension, isMobile }) => {
