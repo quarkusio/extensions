@@ -423,7 +423,7 @@ describe("filters bar", () => {
       mockQueryParamSearchStrings = {}
 
       render(
-        <ResponsiveContext.Provider value={{ width: 300 }}>
+        <ResponsiveContext.Provider value={{ width: 300, type: "screen" }}>
           <Filters
             extensions={extensions}
             categories={categories}

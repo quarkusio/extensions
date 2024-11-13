@@ -25,16 +25,12 @@ const Extensions = styled.ol`
   width: 100%;
   padding-inline-start: 0;
   grid-template-rows: repeat(auto-fill, 1fr);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 30px;
-
+  
   // noinspection CssUnknownProperty
-  @media ${device.l} {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  }
-
-  // noinspection CssUnknownProperty
-  @media ${device.sm} {
+  @media ${device.xs} {
     display: flex;
     flex-direction: column;
   }
