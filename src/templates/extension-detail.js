@@ -109,6 +109,7 @@ const Metadata = styled.div`
 
 const MainContent = styled.div`
   width: 70%;
+  min-width: 70%;
   display: flex;
   flex-direction: column;
 
@@ -172,11 +173,6 @@ const DocumentationHeading = styled.h2`
   font-weight: var(--font-weight-normal);
   font-size: var(--font-size-24);
   padding-bottom: 10px;
-`
-
-//  I wish this wasn't here, but we need to set an explicit height for the charts, or the contents don't render at all
-const ChartHolder = styled.div`
-  height: 480px; // For now, an arbitrary height, but we should tune
 `
 
 const Logo = ({ extension, isMobile }) => {
@@ -368,11 +364,9 @@ const ExtensionDetailTemplate = ({
                         past {numMonthsWithUnit}{" "}
                         (excluding merge commits).</p>)}
 
-                    <ChartHolder>
-                      <ContributionsChart contributors={metadata.sourceControl.contributors}
-                                          companies={metadata.sourceControl.companies} baseColour={"#4695EB"}
-                                          companyColour={"#555"} />
-                    </ChartHolder>
+                    <ContributionsChart contributors={metadata.sourceControl.contributors}
+                                        companies={metadata.sourceControl.companies} baseColour={"#4695EB"}
+                                        companyColour={"#555"} />
 
                     {metadata?.sourceControl?.companies && (
                       <p><i>Company affiliations are derived from GitHub user profiles. Want your company's name to be
