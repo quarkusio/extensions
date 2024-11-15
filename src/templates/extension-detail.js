@@ -463,6 +463,14 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: (metadata?.sourceControl?.samplesUrl?.length > 1 || (metadata?.sourceControl?.samplesUrl?.length === 1 && metadata.sourceControl.samplesUrl[0].description?.endsWith("s"))) ? "Samples" : "Sample",
+                fieldName: "samplesUrl",
+                metadata: metadata?.sourceControl,
+                transformer: element => element.description,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Built with",
                 fieldName: "builtWithQuarkusCore",
                 metadata,
@@ -517,14 +525,6 @@ const ExtensionDetailTemplate = ({
                 name: "Repository",
                 text: "Maven Central", // Hardcode for now, until we need to support other repos
                 url: metadata.maven?.url,
-              }}
-            />
-            <ExtensionMetadata
-              data={{
-                name: (metadata?.sourceControl?.samplesUrl?.length > 1 || (metadata?.sourceControl?.samplesUrl?.length === 1 && metadata.sourceControl.samplesUrl[0].description?.endsWith("s"))) ? "Samples" : "Sample",
-                fieldName: "samplesUrl",
-                metadata: metadata?.sourceControl,
-                transformer: element => element.description,
               }}
             />
             <ExtensionMetadata
