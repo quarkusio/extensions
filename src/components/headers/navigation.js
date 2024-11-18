@@ -152,12 +152,10 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/continuum`}>Reactive</a>
+        <a href={`${config.siteMetadata.parentSiteUrl}/continuum`}>Versatility</a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/developer-joy`}>
-          Developer Joy
-        </a>
+        <a href={`${config.siteMetadata.parentSiteUrl}/standards`}>Standards</a>
       </NavEntry>
       <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/kubernetes-native`}>
@@ -165,8 +163,14 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/standards`}>Standards</a>
+        <a href={`${config.siteMetadata.parentSiteUrl}/performance`}>Performance</a>
       </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/developer-joy`}>
+          Developer Joy
+        </a>
+      </NavEntry>
+
     </Submenu>
   )
   const learn = (
