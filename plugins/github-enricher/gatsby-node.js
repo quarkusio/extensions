@@ -790,7 +790,6 @@ const isRedirectToPulls = async (issuesUrl) => {
     if (finalUrl.status === 429) {
       retry(new Error("Issues URL reports 429 on attempt " + number))
     }
-    console.log("Final URL is", finalUrl, "which means", (finalUrl.url.includes("/pulls")))
 
     return (finalUrl.url.includes("/pulls"))
   }, RETRY_OPTIONS)
