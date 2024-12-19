@@ -152,7 +152,7 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/continuum`}>Versatility</a>
+        <a href={`${config.siteMetadata.parentSiteUrl}/versatility`}>Versatility</a>
       </NavEntry>
       <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/standards`}>Standards</a>
