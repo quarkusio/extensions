@@ -20,7 +20,8 @@ jest.mock("react-use-query-param-string", () => {
 })
 
 describe("ticky filter", () => {
-  const entries = ["toad", "tadpole", "treefrog"]
+  const entries = ["toad", "tadpole", "treefrog", "frog", "FRog"] // Deliberate duplicates, which the filter should be able to de-duplicate in a case insensitive way
+  const expectedNumberOfEntries = entries.length - 1 // One less than the number of entries, because of the duplicate
 
   describe("when there is a prettifier", () => {
 
@@ -55,9 +56,14 @@ describe("ticky filter", () => {
       expect(screen.getByText("TADPOLE")).toBeTruthy()
     })
 
-    it("renders tickboxes", () => {
-      expect(screen.getAllByTitle("unticked")).toHaveLength(entries.length)
+    it("eliminates duplicates", () => {
+      expect(screen.getAllByText(/^frog$/i)).toHaveLength(1)
     })
+
+    it("renders tickboxes", () => {
+      expect(screen.getAllByTitle("unticked")).toHaveLength(expectedNumberOfEntries)
+    })
+
     describe("when clicking a ticky box", () => {
       const entryName = "TREEFROG"
       beforeEach(async () => {
@@ -71,7 +77,7 @@ describe("ticky filter", () => {
       it("updates the ticky box icons", async () => {
         expect(screen.getByTitle("ticked")).toBeTruthy()
         expect(screen.getAllByTitle("unticked")).toHaveLength(
-          entries.length - 1
+          expectedNumberOfEntries - 1
         )
       })
 
@@ -120,7 +126,7 @@ describe("ticky filter", () => {
       })
 
       it("renders tickboxes", () => {
-        expect(screen.getAllByTitle("unticked")).toHaveLength(entries.length)
+        expect(screen.getAllByTitle("unticked")).toHaveLength(expectedNumberOfEntries)
       })
 
 
@@ -137,7 +143,7 @@ describe("ticky filter", () => {
         it("updates the ticky box icons", async () => {
           expect(screen.getByTitle("ticked")).toBeTruthy()
           expect(screen.getAllByTitle("unticked")).toHaveLength(
-            entries.length - 1
+            expectedNumberOfEntries - 1
           )
         })
 
@@ -166,7 +172,7 @@ describe("ticky filter", () => {
 
         it("updates the ticky box icons", () => {
           expect(screen.getAllByTitle("unticked")).toHaveLength(
-            entries.length - 2
+            expectedNumberOfEntries - 2
           )
           expect(screen.getAllByTitle("ticked")).toHaveLength(2)
         })
@@ -193,7 +199,7 @@ describe("ticky filter", () => {
 
         it("updates the ticky box icons to go back to unticked", () => {
           expect(screen.queryAllByTitle("ticked")).toHaveLength(0)
-          expect(screen.getAllByTitle("unticked")).toHaveLength(entries.length)
+          expect(screen.getAllByTitle("unticked")).toHaveLength(expectedNumberOfEntries)
         })
 
         it("unsets search parameters", async () => {
@@ -218,7 +224,7 @@ describe("ticky filter", () => {
 
       it("updates the ticky box icons", () => {
         expect(screen.getAllByTitle("unticked")).toHaveLength(
-          entries.length - 1
+          expectedNumberOfEntries - 1
         )
         expect(screen.getByTitle("ticked")).toBeTruthy()
       })
@@ -253,7 +259,7 @@ describe("ticky filter", () => {
       })
 
       it("renders tickboxes", () => {
-        expect(screen.getAllByTitle("unticked")).toHaveLength(entries.length)
+        expect(screen.getAllByTitle("unticked")).toHaveLength(expectedNumberOfEntries)
       })
     })
   })

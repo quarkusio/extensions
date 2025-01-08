@@ -55,7 +55,7 @@ describe("compatibility filter", () => {
         <CompatibilityFilter
           filterer={filterer}
           extensions={[
-            { metadata: { quarkus_core_compatibility: "UNKNOWN" } },
+            { metadata: { quarkus_core_compatibility: "uNKNOWN" } },
             { metadata: { quarkus_core_compatibility: ["1.1", "1.2"] } },
           ]}
         />
@@ -71,9 +71,9 @@ describe("compatibility filter", () => {
     })
 
     it("nicely formats UNKNOWN", async () => {
-      await selectEvent.select(screen.getByLabelText(label), "Unknown")
+      await selectEvent.select(screen.getByLabelText(label), "UNKNOWN")
       expect(screen.getByTestId("compatibility-form")).toHaveFormValues({
-        compatibility: "UNKNOWN",
+        compatibility: "uNKNOWN",
       })
     })
 
