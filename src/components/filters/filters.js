@@ -51,6 +51,11 @@ const FilterToggler = styled.div`
   gap: var(--a-vsmall-space);
 `
 
+function getRegExpForFilterString(string) {
+  // Look for an exact match on keywords and categories; to change this, drop the ^$
+  return string ? new RegExp(string.map(s => `^${s}$`).join("|"), "i") : new RegExp()
+}
+
 const filterExtensions = (
   extensions,
   { regex, categoryFilter, keywordFilter, statusFilter, compatibilityFilter }
@@ -59,6 +64,8 @@ const filterExtensions = (
   statusFilter = statusFilter?.toString()
 
   const regexObj = new RegExp(regex, "i")
+  const categoryFilterRegex = getRegExpForFilterString(categoryFilter)
+  const keywordFilterRegex = getRegExpForFilterString(keywordFilter)
 
   return (
     extensions
@@ -75,14 +82,14 @@ const filterExtensions = (
         extension =>
           categoryFilter.length === 0 ||
           extension.metadata.categories?.find(category =>
-            categoryFilter.includes(category.toLowerCase())
+            categoryFilterRegex.test(category)
           )
       )
       .filter(
         extension =>
           keywordFilter.length === 0 ||
           extension.metadata.keywords?.find(keyword =>
-            keywordFilter.includes(keyword.toLowerCase())
+            keywordFilterRegex.test(keyword)
           )
       ).filter(
       extension =>
