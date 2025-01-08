@@ -79,7 +79,11 @@ jobs:
         uses: sibiraj-s/action-eslint@v3
         with:
           all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
-          
+
+      # see https://github.com/puppeteer/puppeteer/issues/12818
+      - name: Disable AppArmor
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
+
       - run: npm run test:int
         env:
           CI: true
