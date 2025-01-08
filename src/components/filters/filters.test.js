@@ -37,7 +37,7 @@ describe("filters bar", () => {
     name: "Pascal",
     artifact: "io.something:another-artifact-name::jar:3.10.2",
     metadata: {
-      categories: ["skunks"],
+      categories: ["skUNks"],
       keywords: ["cool"],
       status: "shonky",
       quarkus_core_compatibility: "COMPATIBLE",
@@ -76,8 +76,8 @@ describe("filters bar", () => {
   }
 
   const extensions = [alice, pascal, fluffy, stale, secret]
-  const categories = ["moose", "skunks", "lynx"]
-  const keywords = ["shiny", "cool", "sad"]
+  const categories = ["moose", "SKunks", "lynx"]
+  const keywords = ["shiny", "cOOl", "sad"]
 
   describe("at a desktop screen size", () => {
     let user
@@ -256,6 +256,14 @@ describe("filters bar", () => {
         expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
       })
 
+      it("leaves in extensions which match category filter when multiple are selected", async () => {
+        await user.click(screen.getByText(displayCategory))
+        await user.click(screen.getByText("Moose"))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal, fluffy]))
+      })
+
       it("filters out extensions which do not match the ticked category", async () => {
         expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([alice]))
         await user.click(screen.getByText(displayCategory))
@@ -290,6 +298,14 @@ describe("filters bar", () => {
 
       it("leaves in extensions which match keyword filter", async () => {
         await user.click(screen.getByText(displayKeyword))
+
+        expect(extensionsListener).toHaveBeenCalled()
+        expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
+      })
+
+      it("leaves in extensions which match keyword filter when multiple are selected", async () => {
+        await user.click(screen.getByText(displayKeyword))
+        await user.click(screen.getByText("Sad"))
 
         expect(extensionsListener).toHaveBeenCalled()
         expect(extensionsListener).toHaveBeenLastCalledWith(expect.arrayContaining([pascal]))
