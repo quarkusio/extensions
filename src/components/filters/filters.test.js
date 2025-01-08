@@ -99,7 +99,7 @@ describe("filters bar", () => {
     })
 
     it("renders individual categories", () => {
-      expect(screen.getByText("Skunks")).toBeTruthy()
+      expect(screen.getByText(/skunks/i)).toBeTruthy()
     })
 
     it("excludes unlisted extensions", () => {
@@ -243,7 +243,7 @@ describe("filters bar", () => {
     })
 
     describe("category filter", () => {
-      const displayCategory = "Skunks"
+      const displayCategory = /Skunks/i
 
       it("has a list of categories", async () => {
         expect(screen.queryAllByText(displayCategory)).toHaveLength(1)
@@ -290,7 +290,7 @@ describe("filters bar", () => {
     })
 
     describe("keyword filter", () => {
-      const displayKeyword = "Cool"
+      const displayKeyword = /Cool/i
 
       it("has a list of keywords", async () => {
         expect(screen.queryAllByText(displayKeyword)).toHaveLength(1)
@@ -341,6 +341,9 @@ describe("filters bar", () => {
       const label = "Status"
 
       it("lists all the statuses in the menu", async () => {
+
+        expect(screen.getByLabelText(label)).toBeTruthy()
+
         // Don't look at what happens, just make sure the options are there
         await selectEvent.select(screen.getByLabelText(label), "wonky")
         await selectEvent.select(screen.getByLabelText(label), "shonky")
@@ -623,7 +626,7 @@ describe("filters bar", () => {
     })
 
     describe("category filter", () => {
-      const displayCategory = "Skunks"
+      const displayCategory = /Skunks/i
 
       it("does not show any contents before expanding the twisty", async () => {
         await user.click(screen.getByText(menuTitle))
@@ -672,7 +675,7 @@ describe("filters bar", () => {
     })
 
     describe("keyword filter", () => {
-      const displayKeyword = "Cool"
+      const displayKeyword = /Cool/i
 
       it("has a list of keywords", async () => {
         await user.click(screen.getByText(menuTitle))

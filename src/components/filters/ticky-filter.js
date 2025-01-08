@@ -39,10 +39,20 @@ const toggleEntry = (
   filterer && filterer(tickedEntries)
 }
 
+const normalize = x => typeof x === "string" ? x.toLowerCase() : x
+
 const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
   prettify = prettify || noop
 
-  entries = entries ? [...new Set(entries)] : []
+  // Eliminate duplicates, in a case-insensitive way
+  entries = entries.reduce((result, element) => {
+
+    const normalizedElement = normalize(element)
+    if (result.every(otherElement => normalize(otherElement) !== normalizedElement))
+      result.push(element)
+
+    return result
+  }, [])
 
   const key = queryKey || label.toLowerCase().replace(" ", "-")
 

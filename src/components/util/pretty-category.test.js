@@ -9,6 +9,14 @@ describe("category name formatter", () => {
     expect(prettyCategory("chocolate cake")).toBe("Chocolate Cake")
   })
 
+  it("does not mangle acronyms", () => {
+    expect(prettyCategory("AI")).toBe("AI")
+  })
+
+  it("does not mangle camel case terms", () => {
+    expect(prettyCategory("OpenAPI")).toBe("OpenAPI")
+  })
+
   it("handles hyphens", () => {
     expect(prettyCategory("lemon-pie")).toBe("Lemon Pie")
   })
