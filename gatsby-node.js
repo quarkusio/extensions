@@ -361,6 +361,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       url: String
       version: String
       timestamp: String
+      since: String
       relocation: RelocationInfo
     }
 

@@ -217,6 +217,7 @@ const ClosingRule = styled.div`
 // Semi-duplicate the tab headings so we get prettier search strings :)
 const tabs = ["docs", "community"]
 
+const dateFormatString = "MMM dd, yyyy"
 const ExtensionDetailTemplate = ({
                                    data: { extension, previous, next },
                                    location,
@@ -412,7 +413,7 @@ const ExtensionDetailTemplate = ({
                 text: metadata.maven?.timestamp > 0 ? metadata.maven?.timestamp : undefined,
                 transformer: timestamp =>
                   timestamp
-                    ? format(new Date(+timestamp), "MMM dd, yyyy")
+                    ? format(new Date(+timestamp), dateFormatString)
                     : "unknown",
               }}
             />
@@ -539,6 +540,17 @@ const ExtensionDetailTemplate = ({
                 url: extension.metadata?.sourceControl?.issuesUrl,
               }}
             />
+            <ExtensionMetadata
+              data={{
+                name: "First released",
+                // Count dates of 0 as undefined, so we don't render them
+                text: metadata.maven?.since > 0 ? metadata.maven?.since : undefined,
+                transformer: since =>
+                  since
+                    ? format(new Date(+since), dateFormatString)
+                    : "unknown",
+              }}
+            />
             <ClosingRule />
 
             {isMobile || authorGuidance}
@@ -622,6 +634,7 @@ export const pageQuery = graphql`
           artifactId
           url
           timestamp
+          since
         }
         javadoc {
           url

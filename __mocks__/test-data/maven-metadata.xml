@@ -5,6 +5,7 @@
         <latest>3.14.2</latest>
         <release>3.14.2</release>
         <versions>
+            <version>0.4.2.CR1</version>
             <version>1.6.0.CR1</version>
             <version>1.6.0.Final</version>
             <version>1.6.1.Final</version>

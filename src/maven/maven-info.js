@@ -13,7 +13,7 @@ const parser = new xml2js.Parser({ explicitArray: false, trim: true })
 
 const DAY_IN_SECONDS = 60 * 60 * 24
 
-let timestampCache, versionCache, pomCache
+let timestampCache, earliestVersionCache, latestVersionCache, pomCache
 
 // Mirror-aware axios :)
 const maxios = {
@@ -49,28 +49,35 @@ const initMavenCache = async () => {
     key: "maven-api-for-latest-poms",
     stdTTL: 5 * DAY_IN_SECONDS // released poms are unlikely to change
   })
-  versionCache = new PersistableCache({
+  latestVersionCache = new PersistableCache({
     key: "maven-api-for-latest-versions",
     stdTTL: .5 * DAY_IN_SECONDS // versions do change often, and if this is wrong we may miss new relocations
+  })
+  earliestVersionCache = new PersistableCache({
+    key: "maven-api-for-earliest-versions",
+    stdTTL: 5 * DAY_IN_SECONDS // first versions change almost never
   })
 
   await pomCache.ready()
   console.log("Ingested cached maven information for", pomCache.size(), "artifacts.")
   await timestampCache.ready()
   console.log("Ingested cached timestamp information for", timestampCache.size(), "maven artifacts.")
-  await versionCache.ready()
+  await latestVersionCache.ready()
+  await earliestVersionCache.ready()
 }
 
 const clearMavenCache = () => {
   timestampCache?.flushAll()
   pomCache?.flushAll()
-  versionCache?.flushAll()
+  latestVersionCache?.flushAll()
+  earliestVersionCache?.flushAll()
 }
 
 const saveMavenCache = () => {
   timestampCache?.persist()
   pomCache?.persist()
-  versionCache?.persist()
+  latestVersionCache?.persist()
+  earliestVersionCache?.persist()
 }
 
 const getTimestampFromMavenArtifactsListing = async maven => {
@@ -80,6 +87,7 @@ const getTimestampFromMavenArtifactsListing = async maven => {
     // If we went for the mirror, timestamps in the mirror will be wrong, but x-goog-meta-last-modified will be correct
 
     const lastModified = listingHeaders.headers["x-goog-meta-last-modified"] || listingHeaders.headers["last-modified"]
+
     return Date.parse(lastModified)
   } else {
     throw new Error("Artifact url did not exist (probably temporarily).")
@@ -132,8 +140,42 @@ const getLatestVersionFromMavenMetadata = async (groupId, artifactId) => {
   }
 }
 
+const getEarliestVersionFromMavenMetadata = async (groupId, artifactId) => {
+  const url = await createMavenMetadataUrlFromCoordinates({ groupId, artifactId })
+  if (url) {
+    const response = await maxios.get(url)
+    const { data } = response
+    // Note that this parser returns a promise, so needs an await on the other side
+    const raw = await parser.parseStringPromise(data)
+    const versionArrayOrString = raw?.metadata?.versioning?.versions?.version
+
+    // Maven metadata could return us an array, or, if there's only one version, it gives us a string
+    if (Array.isArray(versionArrayOrString)) {
+      return versionArrayOrString[0]
+    } else {
+      return versionArrayOrString
+    }
+  }
+}
+
 const tolerantlyGetLatestVersionFromMavenMetadata = async (groupId, artifactId) => {
   return await promiseRetry(async (retry) => getLatestVersionFromMavenMetadata(groupId, artifactId).catch(retry), {
+    retries: 6,
+    factor: 3,
+    minTimeout: 4 * 1000,
+  }).catch(e => {
+    // Don't even log 429 errors, they're kind of expected
+    if (e.response?.status !== 429 || e.response?.status !== 429) {
+      // We see 502 and other errors from maven, so handle failures gracefully
+      console.warn("Could not fetch version information from maven central")
+    } else {
+      console.warn("Could not fetch version information from maven central", e)
+    }
+  })
+}
+
+const tolerantlyGetEarliestVersionFromMavenMetadata = async (groupId, artifactId) => {
+  return await promiseRetry(async (retry) => getEarliestVersionFromMavenMetadata(groupId, artifactId).catch(retry), {
     retries: 6,
     factor: 3,
     minTimeout: 4 * 1000,
@@ -153,7 +195,7 @@ const getRelocation = async (coordinates) => {
 
   // We need to check either the most recent version, or at the very least, one *after* the one in the registry
   // The version of the artifact in the registry will *not* have a relocation in its pom, because it will be the last one pre-relocation
-  const version = await versionCache.getOrSet(groupId + artifactId, async () => await tolerantlyGetLatestVersionFromMavenMetadata(groupId, artifactId))
+  const version = await latestVersionCache.getOrSet(groupId + artifactId, async () => await tolerantlyGetLatestVersionFromMavenMetadata(groupId, artifactId))
 
   // If the version in the registry is the same as the latest version up on maven central, there can't be an active relocation for this artifact
   if (version !== coordinates.version) {
@@ -200,6 +242,7 @@ const getRelocation = async (coordinates) => {
 
 const generateMavenInfo = async artifact => {
   const maven = parse(artifact)
+  const { groupId, artifactId } = maven
 
   const mavenUrl = await createMavenUrlFromCoordinates(maven)
 
@@ -226,6 +269,28 @@ const generateMavenInfo = async artifact => {
 
   maven.timestamp = await timestamp
 
+  const earliestVersion = await earliestVersionCache.getOrSet(groupId + artifactId, async () => await tolerantlyGetEarliestVersionFromMavenMetadata(groupId, artifactId))
+  maven.earliestVersion = earliestVersion
+
+  const earliestCoordinates = { groupId, artifactId, version: earliestVersion }
+  const earliestArtifact = `${groupId}:${artifactId}:${earliestVersion}`
+
+  let since = await timestampCache.getOrSet(earliestArtifact, async () => {
+    // This will be slow because we need to need hit the endpoint too fast and we need to back off; we perhaps should batch, but that's hard to implement with our current model
+    let thing
+    try {
+      thing = await getTimestampFromMavenArtifactsListing(earliestCoordinates)
+    } catch (e) {
+      console.log(
+        "Could not get timestamp from repository folder, querying maven directly."
+      )
+      thing = await tolerantlyGetTimestampFromMavenSearch(earliestCoordinates)
+    }
+    return thing
+  })
+
+  maven.since = await since
+
 
   return maven
 }
@@ -235,5 +300,6 @@ module.exports = {
   clearMavenCache,
   initMavenCache,
   getLatestVersionFromMavenMetadata,
+  getEarliestVersionFromMavenMetadata,
   saveMavenCache
 }

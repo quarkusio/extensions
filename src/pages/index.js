@@ -73,6 +73,7 @@ export const pageQuery = graphql`
           maven {
             version
             timestamp
+            since
           }
           icon {
             childImageSharp {
