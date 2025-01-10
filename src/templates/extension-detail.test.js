@@ -149,7 +149,7 @@ describe("extension detail page", () => {
     })
 
     it("renders the release date", () => {
-      const publishDate = "Publish Date"
+      const publishDate = "Last Released"
       expect(screen.getByText(publishDate)).toBeTruthy()
       const dateSection = screen.getByText(publishDate).closest("section")
 
@@ -666,7 +666,7 @@ describe("extension detail page", () => {
     })
 
     it("does not render a release date", () => {
-      const publishDate = "Publish Date"
+      const publishDate = "Last Released"
       expect(screen.queryByText(publishDate)).toBeFalsy()
     })
   })
