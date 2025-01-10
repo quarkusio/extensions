@@ -37,12 +37,15 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
           path: public/
           name: site
+      # see https://github.com/puppeteer/puppeteer/issues/12818
+      - name: Disable AppArmor
+        run: echo 0 | sudo tee /proc/sys/kernel/apparmor_restrict_unprivileged_userns
       - run: npm run test:links
-        continue-on-error: true # problems will be tracked by defects raised by the next job, not by build failures
-        env:
-          CI: true
-          PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
-          PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
+          continue-on-error: true # problems will be tracked by defects raised by the next job, not by build failures
+          env:
+            CI: true
+            PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
+            PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
       - name: Raise defects if needed
         uses: jbangdev/jbang-action@v0.119.0
         with:
