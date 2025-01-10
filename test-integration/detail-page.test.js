@@ -37,7 +37,7 @@ describe("an extension details page", () => {
 
   it("should have a publish date", async () => {
     await expect(
-      page.waitForSelector(`xpath///*[text()="Publish Date"]`)
+      page.waitForSelector(`xpath///*[text()="Last Released"]`)
     ).resolves.toBeTruthy()
   })
 

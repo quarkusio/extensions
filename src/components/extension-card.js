@@ -14,7 +14,7 @@ const Card = styled(props => <Link {...props} />)`
   background: var(--card-background-color) 0 0 no-repeat padding-box;
   color: var(--main-text-color);
   border: ${props =>
-          props.$unlisted || props.$superseded ? "1px solid var(--unlisted-outline-color)" : "1px solid var(--card-outline)"};
+  props.$unlisted || props.$superseded ? "1px solid var(--unlisted-outline-color)" : "1px solid var(--card-outline)"};
   border-radius: 10px;
   opacity: 1;
   display: flex;
@@ -141,7 +141,7 @@ const ExtensionCard = ({ extension }) => {
         <ExtensionInfo>
           {extension.metadata.maven?.timestamp &&
           isValid(+extension.metadata.maven?.timestamp)
-            ? `Publish Date: ${format(
+            ? `Last Released: ${format(
               new Date(+extension.metadata.maven.timestamp),
               "MMM dd, yyyy"
             )}`
