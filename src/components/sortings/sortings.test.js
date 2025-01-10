@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event"
 import Sortings from "./sortings"
 import selectEvent from "react-select-event"
 import { alphabeticalExtensionComparator } from "./alphabetical-extension-comparator"
-import { timestampExtensionComparator } from "./timestamp-extension-comparator"
+import { sinceExtensionComparator, timestampExtensionComparator } from "./timestamp-extension-comparator"
 import { useQueryParamString } from "react-use-query-param-string"
 
 
@@ -131,6 +131,17 @@ describe("sorting bar", () => {
       expect(sortListener).toHaveBeenCalledWith(expect.any(Function))
       const param = sortListener.mock.calls[0][0]
       expect(param()).toEqual(timestampExtensionComparator)
+    })
+
+    it("lets the listener know when a new since sort scheme is chosen", async () => {
+      expect(screen.getByTestId("sort-form")).toHaveFormValues({
+        "sort": "",
+      })
+      await selectEvent.select(screen.getByLabelText(label), "Most recently added")
+
+      expect(sortListener).toHaveBeenCalledWith(expect.any(Function))
+      const param = sortListener.mock.calls[0][0]
+      expect(param()).toEqual(sinceExtensionComparator)
     })
 
     it("lets the listener know when an alphabetical scheme is chosen", async () => {

@@ -1,7 +1,7 @@
 import * as React from "react"
 import styled from "styled-components"
 import Select from "react-select"
-import { timestampExtensionComparator } from "./timestamp-extension-comparator"
+import { sinceExtensionComparator, timestampExtensionComparator } from "./timestamp-extension-comparator"
 import { alphabeticalExtensionComparator } from "./alphabetical-extension-comparator"
 import { downloadsExtensionComparator } from "./downloads-extension-comparator"
 import { useQueryParamString } from "react-use-query-param-string"
@@ -66,10 +66,13 @@ const classNames = {
 const key = "sort"
 const downloads = "downloads"
 const time = "time"
+const since = "since"
+
 const sortings = [
   { label: "Most recently released", value: time, comparator: timestampExtensionComparator },
   { label: "Alphabetical", value: "alpha", comparator: alphabeticalExtensionComparator },
-  { label: "Downloads", value: downloads, comparator: downloadsExtensionComparator }]
+  { label: "Downloads", value: downloads, comparator: downloadsExtensionComparator },
+  { label: "Most recently added", value: since, comparator: sinceExtensionComparator }]
 
 const Sortings = ({ sorterAction, downloadData }) => {
   const [sort, setSort] = useQueryParamString(key, time, true)
