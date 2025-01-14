@@ -277,7 +277,8 @@ const generateMavenInfo = async artifact => {
 
   maven.timestamp = await timestamp
 
-  const earliestVersion = await earliestVersionCache.getOrSet(groupId + artifactId, async () => await tolerantlyGetEarliestVersionFromMavenMetadata(groupId, artifactId))
+  // Hackishly hardcode an earliest version for optaplanner, since https://repo1.maven.org/maven2/org/optaplanner/optaplanner-quarkus-jackson/maven-metadata.xml disagrees with the listing https://repo1.maven.org/maven2/org/optaplanner/optaplanner-quarkus/
+  const earliestVersion = groupId === "org.optaplanner" ? "7.39.0.CR1" : await earliestVersionCache.getOrSet(groupId + artifactId, async () => await tolerantlyGetEarliestVersionFromMavenMetadata(groupId, artifactId))
   maven.earliestVersion = earliestVersion
 
   const earliestCoordinates = { groupId, artifactId, version: earliestVersion }
