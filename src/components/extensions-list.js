@@ -8,8 +8,6 @@ import { device } from "./util/styles/breakpoints"
 import { useMediaQuery } from "react-responsive"
 
 const FilterableList = styled.div`
-  margin-left: var(--site-margins);
-  margin-right: var(--site-margins);
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -45,8 +43,6 @@ const CardItem = styled.li`
 
 const InfoSortRow = styled.div`
   margin-top: 85px;
-  padding-left: var(--site-margins);
-  padding-right: var(--site-margins);
   display: flex;
   column-gap: var(--a-generous-space);
   justify-content: space-between;
@@ -110,7 +106,7 @@ const ExtensionsList = ({ extensions, categories, downloadData }) => {
       <ExtensionCardList>
         <InfoSortRow>
           <ExtensionCount>{countMessage}</ExtensionCount>
-          {isMobile || <Sortings sorterAction={setExtensionComparator} downloadData={downloadData}></Sortings>}
+          {isMobile || <Sortings sorterAction={setExtensionComparator} downloadData={downloadData} />}
         </InfoSortRow>
         <FilterableList className="extensions-list">
           <Filters extensions={allExtensions}
