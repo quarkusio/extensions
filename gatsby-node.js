@@ -289,7 +289,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     })
   }
 
-  const months = [...new Set(extensionNodes.map(extensionNode => extensionNode.metadata?.maven?.sinceMonth))]
+  const months = [...new Set(extensionNodes.map(extensionNode => extensionNode.metadata?.maven?.sinceMonth))].filter(month => !!month)
   // Always include a page for the current month
   const thisMonth = `${getCanonicalMonthTimestamp(new Date().valueOf())}`
   if (!months.includes(thisMonth)) {
