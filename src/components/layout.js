@@ -13,6 +13,7 @@ import Navigation from "./headers/navigation"
 import TitleBand from "./headers/title-band"
 import Footer from "./footer"
 import styled from "styled-components"
+import { device } from "./util/styles/breakpoints"
 
 library.add(
   faAngleRight,
@@ -31,8 +32,19 @@ library.add(
 const GlobalWrapper = styled.div`
   color: var(--main-text-color);
   width: 100%;
-  display: inline-block;
-  /* the inline-block is to make sure if things overflow on mobile, the headers take the full width */
+
+  /* this helps make sure that if there are not enough cards, the footer is at the bottom of the visible page */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  @media ${device.sm} {
+    /* the inline-block is to make sure if things overflow on mobile, the headers take the full width */
+    display: inline-block;
+  }
+
+
+
 `
 
 const HeaderWrapper = styled.header`

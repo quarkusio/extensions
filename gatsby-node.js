@@ -6,7 +6,11 @@ const {
   getStream,
 } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
-const { extensionSlug, extensionSlugFromCoordinates } = require("./src/components/util/extension-slugger")
+const {
+  extensionSlug,
+  extensionSlugFromCoordinates,
+  slugForExtensionsAddedMonth
+} = require("./src/components/util/extension-slugger")
 const { generateMavenInfo, initMavenCache, saveMavenCache } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
@@ -16,6 +20,7 @@ const fs = require("fs/promises")
 const {
   createJavadocUrlFromCoordinates, initJavadocCache,
 } = require("./src/javadoc/javadoc-url")
+const { getCanonicalMonthTimestamp } = require("./src/components/util/date-utils")
 let badImages = {}
 
 exports.sourceNodes = async ({
@@ -232,6 +237,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Define a template for an extension
   const extensionTemplate = path.resolve(`./src/templates/extension-detail.js`)
+  const releaseMonthTemplate = path.resolve(`./src/templates/extensions-added-list.js`)
 
   // Get all extensions
   const result = await graphql(
@@ -242,6 +248,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             id
             slug
             isSuperseded
+            metadata {
+              maven {
+                sinceMonth
+              }
+            }
           }
         }
       }
@@ -256,27 +267,50 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     return
   }
 
-  const posts = result.data.allExtension.nodes
+  const extensionNodes = result.data.allExtension.nodes
 
   // Create extension pages
   // `context` is available in the template as a prop and as a variable in GraphQL
 
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = getPreviousPost(index, posts)
-      const nextPostId = getNextPost(index, posts)
+  if (extensionNodes.length > 0) {
+    extensionNodes.forEach((extensionNode, index) => {
+      const previousPostId = getPreviousPost(index, extensionNodes)
+      const nextPostId = getNextPost(index, extensionNodes)
 
       createPage({
-        path: post.slug,
+        path: extensionNode.slug,
         component: extensionTemplate,
         context: {
-          id: post.id,
+          id: extensionNode.id,
           previousPostId,
           nextPostId,
         },
       })
     })
   }
+
+  const months = [...new Set(extensionNodes.map(extensionNode => extensionNode.metadata?.maven?.sinceMonth))]
+  // Always include a page for the current month
+  const thisMonth = `${getCanonicalMonthTimestamp(new Date().valueOf())}`
+  if (!months.includes(thisMonth)) {
+    months.push(thisMonth)
+  }
+  months.sort()
+
+  months.forEach((month, index, array) => {
+    const slug = slugForExtensionsAddedMonth(month)
+    const previousMonthTimestamp = array[index - 1]
+    const nextMonthTimestamp = array[index + 1]
+    createPage({
+      path: slug,
+      component: releaseMonthTemplate,
+      context: {
+        sinceMonth: month,
+        previousMonthTimestamp,
+        nextMonthTimestamp,
+      },
+    })
+  })
 }
 
 const getPreviousPost = (index, posts) => {
@@ -362,6 +396,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       version: String
       timestamp: String
       since: String
+      sinceMonth: String
       relocation: RelocationInfo
     }
 

@@ -14,7 +14,7 @@ const Card = styled(props => <Link {...props} />)`
   background: var(--card-background-color) 0 0 no-repeat padding-box;
   color: var(--main-text-color);
   border: ${props =>
-  props.$unlisted || props.$superseded ? "1px solid var(--unlisted-outline-color)" : "1px solid var(--card-outline)"};
+          props.$unlisted || props.$superseded ? "1px solid var(--unlisted-outline-color)" : "1px solid var(--card-outline)"};
   border-radius: 10px;
   opacity: 1;
   display: flex;
@@ -118,7 +118,7 @@ const ExtensionCard = ({ extension }) => {
   const superseded = extension.isSuperseded
 
   return (
-    <Card to={extension.slug} $unlisted={unlisted} $superseded={superseded}>
+    <Card to={"/" + extension.slug} $unlisted={unlisted} $superseded={superseded}>
       <MainInformation>
         <Logo extension={extension} />
         <ExtensionName $unlisted={unlisted} $superseded={superseded}>{extension.name}</ExtensionName>

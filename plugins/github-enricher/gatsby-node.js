@@ -894,6 +894,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     extensionYamlUrl: String
     extensionRootUrl: String
     issues: String
+    issuesUrl: String
     samplesUrl: [SampleInfo]
     lastUpdated: String
     contributors: [ContributorInfo]

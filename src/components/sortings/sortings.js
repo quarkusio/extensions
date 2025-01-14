@@ -93,7 +93,6 @@ const Sortings = ({ sorterAction, downloadData }) => {
 
   const onChange = entry => {
     if (entry.value !== sort) {
-      console.log("setting sort")
       setSort(entry.value)
       applySort(entry)
     }
