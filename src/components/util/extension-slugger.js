@@ -1,5 +1,6 @@
 const parse = require("mvn-artifact-name-parser").default
 const slugify = require("slugify")
+const { dateFormatOptions } = require("./date-utils")
 
 const slugifyPart = string => {
   return slugify(string, {
@@ -28,4 +29,9 @@ const extensionSlugFromCoordinates = coordinates => {
 
 }
 
-module.exports = { extensionSlug, extensionSlugFromCoordinates }
+function slugForExtensionsAddedMonth(month) {
+  const date = new Date(+month)
+  return "extensions-added-" + date.toLocaleDateString("en-US", dateFormatOptions).toLowerCase().replaceAll(" ", "-")
+}
+
+module.exports = { extensionSlug, extensionSlugFromCoordinates, slugForExtensionsAddedMonth }

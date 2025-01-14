@@ -9,6 +9,8 @@ const promiseRetry = require("promise-retry")
 const { readPom } = require("./pom-reader")
 const PersistableCache = require("../persistable-cache")
 const xml2js = require("xml2js")
+const compareVersion = require("compare-version")
+const { getCanonicalMonthTimestamp } = require("../components/util/date-utils")
 const parser = new xml2js.Parser({ explicitArray: false, trim: true })
 
 const DAY_IN_SECONDS = 60 * 60 * 24
@@ -35,6 +37,10 @@ const maxios = {
       return axios.head(mirrorUrl, config)
     }
   }
+}
+
+const compare = (a, b) => {
+  return compareVersion(a, b)
 }
 
 const initMavenCache = async () => {
@@ -150,7 +156,9 @@ const getEarliestVersionFromMavenMetadata = async (groupId, artifactId) => {
     const versionArrayOrString = raw?.metadata?.versioning?.versions?.version
 
     // Maven metadata could return us an array, or, if there's only one version, it gives us a string
+
     if (Array.isArray(versionArrayOrString)) {
+      versionArrayOrString.sort(compare)
       return versionArrayOrString[0]
     } else {
       return versionArrayOrString
@@ -277,20 +285,22 @@ const generateMavenInfo = async artifact => {
 
   let since = await timestampCache.getOrSet(earliestArtifact, async () => {
     // This will be slow because we need to need hit the endpoint too fast and we need to back off; we perhaps should batch, but that's hard to implement with our current model
-    let thing
+    let answer
     try {
-      thing = await getTimestampFromMavenArtifactsListing(earliestCoordinates)
+      answer = await getTimestampFromMavenArtifactsListing(earliestCoordinates)
     } catch (e) {
       console.log(
         "Could not get timestamp from repository folder, querying maven directly."
       )
-      thing = await tolerantlyGetTimestampFromMavenSearch(earliestCoordinates)
+      answer = await tolerantlyGetTimestampFromMavenSearch(earliestCoordinates)
     }
-    return thing
+    return answer
   })
 
   maven.since = await since
-
+  if (since) {
+    maven.sinceMonth = getCanonicalMonthTimestamp(since)
+  }
 
   return maven
 }

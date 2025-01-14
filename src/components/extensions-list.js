@@ -28,7 +28,7 @@ const Extensions = styled.ol`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 30px;
-  
+
   // noinspection CssUnknownProperty
   @media ${device.xs} {
     display: flex;
@@ -72,6 +72,16 @@ const ExtensionCount = styled.h2`
   }
 `
 
+export const ExtensionCardList = styled.main`
+  margin-left: var(--site-margins);
+  margin-right: var(--site-margins);
+
+  display: flex;
+  flex-direction: column;
+
+  flex: 1 1 auto;
+`
+
 const ExtensionsList = ({ extensions, categories, downloadData }) => {
   const allExtensions = extensions
 
@@ -97,7 +107,7 @@ const ExtensionsList = ({ extensions, categories, downloadData }) => {
         : (filteredExtensions.length < extensionCount) ? `Showing ${filteredExtensions.length} matching of ${extensionCount} extensions` : `Showing ${filteredExtensions.length} extensions (including some unlisted and relocated extensions)`
 
     return (
-      <div>
+      <ExtensionCardList>
         <InfoSortRow>
           <ExtensionCount>{countMessage}</ExtensionCount>
           {isMobile || <Sortings sorterAction={setExtensionComparator} downloadData={downloadData}></Sortings>}
@@ -119,7 +129,7 @@ const ExtensionsList = ({ extensions, categories, downloadData }) => {
             })}
           </Extensions>{" "}
         </FilterableList>
-      </div>
+      </ExtensionCardList>
     )
   } else {
     return (
