@@ -311,6 +311,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       },
     })
   })
+
+  const month = months[months.length - 1]
+  // Also include a page for the current month, but do it as its own page, not a redirect so that the link is more shareable
+  const slug = slugForExtensionsAddedMonth()
+  const previousMonthTimestamp = months[months.length - 2]
+  createPage({
+    path: slug,
+    component: releaseMonthTemplate,
+    context: {
+      sinceMonth: month,
+      previousMonthTimestamp,
+    },
+  })
+
 }
 
 const getPreviousPost = (index, posts) => {

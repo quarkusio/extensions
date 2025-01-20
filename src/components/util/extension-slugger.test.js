@@ -1,4 +1,4 @@
-import { extensionSlug } from "./extension-slugger"
+import { extensionSlug, slugForExtensionsAddedMonth } from "./extension-slugger"
 
 describe("extension url generator", () => {
   it("handles arbitrary strings", () => {
@@ -24,6 +24,18 @@ describe("extension url generator", () => {
   it("lower cases urls", () => {
     expect(extensionSlug("Something:else:number:whatever:still")).toBe(
       "something/else"
+    )
+  })
+
+  it("turns undefined extension months into a root url", () => {
+    expect(slugForExtensionsAddedMonth()).toBe(
+      "new-extensions/"
+    )
+  })
+
+  it("turns extension months into a url with the month", () => {
+    expect(slugForExtensionsAddedMonth("487592268000")).toBe(
+      "new-extensions/june-1985"
     )
   })
 })
