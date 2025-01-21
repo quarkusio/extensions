@@ -201,11 +201,13 @@ const ExtensionsAddedListTemplate = (
 export default ExtensionsAddedListTemplate
 
 export const pageQuery = graphql`
-  query BlogPostByMonthAdded(
+  query ExtensionByMonthAdded(
     $sinceMonth: String!
   ) {
     allExtension(
-    filter: {metadata: {maven: {sinceMonth: {glob: $sinceMonth }}}}) {
+    filter: {metadata: {maven: {sinceMonth: {glob: $sinceMonth }}}}
+    sort: {fields: metadata___maven___timestamp, order: DESC}
+    ) {
     edges {
       node {
       name
