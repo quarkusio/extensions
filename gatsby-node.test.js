@@ -822,13 +822,13 @@ describe("the main gatsby entrypoint", () => {
 
     it("creates pages for release months", () => {
       expect(createPage).toHaveBeenCalledWith(
-        expect.objectContaining({ path: "new-extensions/january-2025" })
+        expect.objectContaining({ path: "new-extensions/2025/january" })
       )
     })
 
     it("creates multiple pages for each release months", () => {
       expect(createPage).toHaveBeenCalledWith(
-        expect.objectContaining({ path: "new-extensions/july-2021" })
+        expect.objectContaining({ path: "new-extensions/2021/july" })
       )
     })
 
@@ -848,8 +848,12 @@ describe("the main gatsby entrypoint", () => {
           },
         })
       )
+    })
 
-
+    it("creates pages for release years", () => {
+      expect(createPage).toHaveBeenCalledWith(
+        expect.objectContaining({ path: "new-extensions/2025" })
+      )
     })
   })
 })
