@@ -14,7 +14,7 @@ const NotFoundPage = ({ data, location }) => {
 
   let message
   if (isLookingForNewExtensions) {
-    const date = location.pathname.replaceAll("/new-extensions/", "").split("/").reverse().join(" ")
+    const date = location.pathname.replaceAll("/extensions/new-extensions", "").replaceAll("/new-extensions/", "").split("/").reverse().join(" ")
     const explanation = isPast ? `No Quarkus extensions were released in ${date}.` : isFuture ? `The Quarkus extensions for ${date} haven't been created yet.` : `There are no Quarkus extensions for ${date}.`
     message = "Quarkus contributors can do a lot of nifty things, but time travel isn't one of them. " + explanation
   } else {
