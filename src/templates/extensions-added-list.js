@@ -15,7 +15,7 @@ import Link from "gatsby-link"
 import { dateFormatOptions } from "../components/util/date-utils"
 import { ExtensionCardList } from "../components/extensions-list"
 
-const FilterableList = styled.div`
+export const FilterableList = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
@@ -26,7 +26,7 @@ const FilterableList = styled.div`
   }
 `
 
-const Extensions = styled.ol`
+export const Extensions = styled.ol`
   list-style: none;
   width: 100%;
   padding-inline-start: 0;
@@ -42,14 +42,14 @@ const Extensions = styled.ol`
   }
 `
 
-const CardItem = styled.li`
+export const CardItem = styled.li`
   height: 100%;
   width: 100%;
   display: flex;
   max-height: 34rem;
 `
 
-const InfoSortRow = styled.div`
+export const InfoSortRow = styled.div`
   display: flex;
   column-gap: var(--a-generous-space);
   justify-content: space-between;
@@ -62,7 +62,7 @@ const InfoSortRow = styled.div`
   }
 `
 
-const Heading = styled.h1`
+export const Heading = styled.h1`
   font-size: 3rem;
   @media screen and (max-width: 768px) {
     font-size: 2rem;
@@ -77,7 +77,7 @@ const Heading = styled.h1`
   }
 `
 
-const ExtensionCount = styled.h4`
+export const ExtensionCount = styled.h4`
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
   font-size: 1rem;
