@@ -602,7 +602,7 @@ export const Head = ({ data: { extension } }) => {
 export default ExtensionDetailTemplate
 
 export const pageQuery = graphql`
-  query BlogPostBySlug(
+  query ExtensionBySlug(
     $id: String!
     $previousPostId: String
     $nextPostId: String
