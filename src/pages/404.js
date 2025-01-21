@@ -18,7 +18,7 @@ const NotFoundPage = ({ data, location }) => {
     const explanation = isPast ? `No Quarkus extensions were released in ${date}.` : isFuture ? `The Quarkus extensions for ${date} haven't been created yet.` : `There are no Quarkus extensions for ${date}.`
     message = "Quarkus contributors can do a lot of nifty things, but time travel isn't one of them. " + explanation
   } else {
-    message = "You just hit a route that doesn&#39;t exist... the sadness."
+    message = "You just hit a route that does not exist... the sadness."
   }
 
   return (
