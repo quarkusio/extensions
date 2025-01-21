@@ -9,7 +9,7 @@ const { sortableName } = require("./src/components/util/sortable-name")
 const {
   extensionSlug,
   extensionSlugFromCoordinates,
-  slugForExtensionsAddedMonth
+  slugForExtensionsAddedMonth, slugForExtensionsAddedYear
 } = require("./src/components/util/extension-slugger")
 const { generateMavenInfo, initMavenCache, saveMavenCache } = require("./src/maven/maven-info")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
@@ -20,7 +20,7 @@ const fs = require("fs/promises")
 const {
   createJavadocUrlFromCoordinates, initJavadocCache,
 } = require("./src/javadoc/javadoc-url")
-const { getCanonicalMonthTimestamp } = require("./src/components/util/date-utils")
+const { getCanonicalMonthTimestamp, getCanonicalYearTimestamp } = require("./src/components/util/date-utils")
 let badImages = {}
 
 exports.sourceNodes = async ({
@@ -238,6 +238,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Define a template for an extension
   const extensionTemplate = path.resolve(`./src/templates/extension-detail.js`)
   const releaseMonthTemplate = path.resolve(`./src/templates/extensions-added-list.js`)
+  const releaseYearTemplate = path.resolve(`./src/templates/extensions-added-by-year-list.js`)
 
   // Get all extensions
   const result = await graphql(
@@ -251,6 +252,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             metadata {
               maven {
                 sinceMonth
+                sinceYear
               }
             }
           }
@@ -325,6 +327,28 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     },
   })
 
+  const years = [...new Set(extensionNodes.map(extensionNode => extensionNode.metadata?.maven?.sinceYear))].filter(year => !!year)
+  // Always include a page for the current year
+  const thisYear = `${getCanonicalYearTimestamp(new Date().valueOf())}`
+  if (!years.includes(thisYear)) {
+    years.push(thisYear)
+  }
+  years.sort()
+
+  years.forEach((year, index, array) => {
+    const slug = slugForExtensionsAddedYear(year)
+    const previousYearTimestamp = array[index - 1]
+    const nextYearTimestamp = array[index + 1]
+    createPage({
+      path: slug,
+      component: releaseYearTemplate,
+      context: {
+        sinceYear: year,
+        previousYearTimestamp,
+        nextYearTimestamp,
+      },
+    })
+  })
 }
 
 const getPreviousPost = (index, posts) => {
@@ -411,6 +435,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       timestamp: String
       since: String
       sinceMonth: String
+      sinceYear: String
       relocation: RelocationInfo
     }
 

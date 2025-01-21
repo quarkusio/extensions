@@ -10,7 +10,7 @@ const { readPom } = require("./pom-reader")
 const PersistableCache = require("../persistable-cache")
 const xml2js = require("xml2js")
 const compareVersion = require("compare-version")
-const { getCanonicalMonthTimestamp } = require("../components/util/date-utils")
+const { getCanonicalMonthTimestamp, getCanonicalYearTimestamp } = require("../components/util/date-utils")
 const parser = new xml2js.Parser({ explicitArray: false, trim: true })
 
 const DAY_IN_SECONDS = 60 * 60 * 24
@@ -301,6 +301,7 @@ const generateMavenInfo = async artifact => {
   maven.since = await since
   if (since) {
     maven.sinceMonth = getCanonicalMonthTimestamp(since)
+    maven.sinceYear = getCanonicalYearTimestamp(since)
   }
 
   return maven
