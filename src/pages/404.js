@@ -4,6 +4,12 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import { initialiseDisplayModeFromLocalStorage } from "../components/util/dark-mode-helper"
+import styled from "styled-components"
+
+const Message = styled.div`
+  margin-left: var(--site-margins);
+  margin-right: var(--site-margins);
+`
 
 const NotFoundPage = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata.title
@@ -23,8 +29,10 @@ const NotFoundPage = ({ data, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
+      <Message>
       <h1>404: Not Found</h1>
-      <p>{message}</p>
+        <p>{message}</p>
+      </Message>
     </Layout>
   )
 }
