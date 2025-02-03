@@ -98,9 +98,10 @@ const ExtensionsAddedListTemplate = (
     data: {
       allExtension, downloadDataDate,
     },
-    pageContext: { nextMonthTimestamp, previousMonthTimestamp },
+    pageContext: { nextMonthTimestamp, previousMonthTimestamp, sinceMonth },
     location,
   }) => {
+  const monthTimestamp = sinceMonth
   const downloadData = downloadDataDate
 
   // Convert the data to the same format as what the other list page uses
@@ -138,10 +139,10 @@ const ExtensionsAddedListTemplate = (
     </ul>
   </nav>)
 
-  const monthTimestamp = extensions[0].metadata.maven.sinceMonth
   const now = new Date()
   const date = new Date(+monthTimestamp)
   const verb = now.getUTCMonth() === date.getUTCMonth() && now.getUTCFullYear() === date.getUTCFullYear() ? "have been" : "were"
+  const formattedMonth = prettyDate(monthTimestamp)
 
   if (extensions && extensions.length > 0) {
 
@@ -153,9 +154,6 @@ const ExtensionsAddedListTemplate = (
     if (extensionComparator) {
       extensions.sort(extensionComparator)
     }
-
-    const formattedMonth = prettyDate(monthTimestamp)
-
 
     const countMessage = `${extensionCount} new extensions ${verb} added this month.`
 
@@ -191,7 +189,7 @@ const ExtensionsAddedListTemplate = (
   } else {
     return (
       <div className="extensions-list" style={{ display: "flex" }}>
-        No new extensions {verb} added this month.
+        No new extensions {verb} added in {formattedMonth}.
         {nav}
       </div>
     )
