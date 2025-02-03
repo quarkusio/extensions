@@ -143,6 +143,7 @@ const ExtensionsAddedListTemplate = (
   const date = new Date(+monthTimestamp)
   const verb = now.getUTCMonth() === date.getUTCMonth() && now.getUTCFullYear() === date.getUTCFullYear() ? "have been" : "were"
   const formattedMonth = prettyDate(monthTimestamp)
+  const name = `Extensions added in ${formattedMonth}`
 
   if (extensions && extensions.length > 0) {
 
@@ -156,9 +157,6 @@ const ExtensionsAddedListTemplate = (
     }
 
     const countMessage = `${extensionCount} new extensions ${verb} added this month.`
-
-
-    const name = `Extensions added in ${formattedMonth}`
 
     return (
       <Layout location={location}>
@@ -188,10 +186,15 @@ const ExtensionsAddedListTemplate = (
     )
   } else {
     return (
-      <div className="extensions-list" style={{ display: "flex" }}>
-        No new extensions {verb} added in {formattedMonth}.
-        {nav}
-      </div>
+      <Layout location={location}>
+        <BreadcrumbBar name={name} />
+        <ExtensionCardList>
+          <h4>
+            No new extensions {verb} added in {formattedMonth}.
+          </h4>
+          {nav}
+        </ExtensionCardList>
+      </Layout>
     )
   }
 }
