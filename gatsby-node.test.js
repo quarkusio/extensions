@@ -822,7 +822,7 @@ describe("the main gatsby entrypoint", () => {
 
     it("creates pages for release months", () => {
       expect(createPage).toHaveBeenCalledWith(
-        expect.objectContaining({ path: "new-extensions/2025/january" })
+        expect.objectContaining({ path: "new-extensions/2024/january" })
       )
     })
 
