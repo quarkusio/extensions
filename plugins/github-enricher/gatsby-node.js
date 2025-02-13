@@ -18,6 +18,7 @@ const { getRawFileContents, queryGraphQl } = require("./github-helper")
 const yaml = require("js-yaml")
 const { getIssueInformationNoCache } = require("./issue-count-helper")
 const { normaliseUrl } = require("./url-helper")
+const { initialiseLabels } = require("./issue-count-helper")
 
 const defaultOptions = {
   nodeType: "Extension",
@@ -98,8 +99,7 @@ exports.onPreBootstrap = async () => {
   const pathsRes = await queryGraphQl(query)
   const repoListing = pathsRes?.repository?.object?.entries
 
-  getLabels = labelExtractor(yaml, repoListing).getLabels
-
+  initialiseLabels(yaml, repoListing)
   // Return the promise so the execution waits for us
   return yaml
 }
@@ -166,13 +166,10 @@ exports.onCreateNode = async (
     const project = coords.name
     const owner = coords.owner
 
-    const labels = await fetchScmLabel(scmUrl, node.metadata?.maven?.artifactId)
-
     const scmInfo = await fetchScmInfo(
       scmUrl,
       node.metadata?.maven?.groupId,
       node.metadata?.maven?.artifactId,
-      labels
     )
 
     createRepository({ actions, createNodeId, createContentDigest }, { url: scmUrl, project, owner })
@@ -256,15 +253,8 @@ const createSponsor = ({ actions: { createNode }, createNodeId, createContentDig
   }
 }
 
-async function fetchScmLabel(scmUrl, artifactId) {
-  // Special case extensions which live in the quarkus repo; in the future we could generalise,
-  // but at the moment we only know how to find a label for quarkus
-  if (scmUrl === "https://github.com/quarkusio/quarkus") {
-    return getLabels(artifactId)
-  }
-}
-
 const fetchScmInfo = async (scmUrl, groupId, artifactId, labels) => {
+  console.log("fetchScmInfo")
   if (scmUrl && scmUrl.includes("github.com")) {
     return fetchGitHubInfo(scmUrl, groupId, artifactId, labels)
   } else {
@@ -272,13 +262,14 @@ const fetchScmInfo = async (scmUrl, groupId, artifactId, labels) => {
   }
 }
 
-const fetchGitHubInfo = async (scmUrl, groupId, artifactId, labels) => {
+const fetchGitHubInfo = async (scmUrl, groupId, artifactId) => {
   const coords = gh(scmUrl)
   const project = coords.name
 
-  const scmInfo = { labels }
+  const scmInfo = {}
 
-  const { issuesUrl, issues } = await getIssueInformation(coords, labels, scmUrl)
+  console.log("feting ", artifactId)
+  const { issuesUrl, issues } = await getIssueInformation(coords, artifactId, scmUrl)
 
   if (issuesUrl) {
     scmInfo.issuesUrl = issuesUrl
@@ -690,12 +681,12 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
 
 }
 
-const getIssueInformation = async (coords, labels, scmUrl) => {
-  const key = labels ? labels.map(label => `"${label}"`).join() : `${coords.owner}-${coords.name}`
+const getIssueInformation = async (coords, artifactId, scmUrl) => {
+  const key = `${coords.owner}-${coords.name}-${artifactId}`
 
   return await issueCountCache.getOrSet(
     key,
-    () => getIssueInformationNoCache(coords, labels, scmUrl)
+    () => getIssueInformationNoCache(coords, artifactId, scmUrl)
   )
 
 }

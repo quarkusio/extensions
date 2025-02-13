@@ -1,15 +1,28 @@
-import encodeUrl from "encodeurl"
-import { normaliseUrl } from "./url-helper"
+const encodeUrl = require("encodeurl")
+const { normaliseUrl } = require("./url-helper")
+const { labelExtractor } = require("./labelExtractor")
 
 const promiseRetry = require("promise-retry")
 
 const followRedirect = require("follow-redirect-url")
 
 const { queryGraphQl } = require("./github-helper")
+let getLabels
 
 const RETRY_OPTIONS = { retries: 5, minTimeout: 75 * 1000, factor: 5 }
 
-const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
+
+async function fetchScmLabel(scmUrl, artifactId) {
+  // Special case extensions which live in the quarkus repo; in the future we could generalise,
+  // but at the moment we only know how to find a label for quarkus
+  if (scmUrl === "https://github.com/quarkusio/quarkus") {
+    return getLabels(artifactId)
+  }
+}
+
+
+const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
+  const labels = await fetchScmLabel(scmUrl, artifactId)
 
   // TODO we can just treat label as an array, almost
   const labelFilterString = labels
@@ -18,7 +31,6 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
 
   // Tolerate scm urls ending in .git, but don't try and turn them into issues urls without patching
   const topLevelIssuesUrl = (scmUrl + "/issues").replace("\.git/issues", "/issues")
-  console.log("toss", topLevelIssuesUrl)
   let issuesUrl = labels
     ? encodeUrl(
       scmUrl +
@@ -26,8 +38,6 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
       labels.map(label => label.replace("/", "%2F")).join(",")
     )
     : topLevelIssuesUrl
-
-  console.log("pruss", issuesUrl)
 
   // Tidy double slashes
   issuesUrl = normaliseUrl(issuesUrl)
@@ -48,7 +58,6 @@ const getIssueInformationNoCache = async (coords, labels, scmUrl) => {
   // The parent objects may be undefined and destructuring nested undefineds is not good
   const issues = body?.data?.repository?.issues?.totalCount
 
-  console.log("uss", issuesUrl)
   issuesUrl = await maybeIssuesUrl(issues, issuesUrl)
 
   return { issues, issuesUrl }
@@ -89,5 +98,9 @@ const isRedirectToPulls = async (issuesUrl) => {
   }, RETRY_OPTIONS)
 }
 
+const initialiseLabels = (yaml, repoListing) => {
+  getLabels = labelExtractor(yaml, repoListing).getLabels
+}
 
-module.exports = { getIssueInformationNoCache }
+
+module.exports = { getIssueInformationNoCache, initialiseLabels }
