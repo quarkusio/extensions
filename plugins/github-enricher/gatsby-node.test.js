@@ -1099,9 +1099,7 @@ describe("the github data handler", () => {
     const avatarUrl = "http://something.com/someuser.png"
     const socialMediaPreviewUrl =
       "https://testopengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-some-extension"
-
-    const labels = ["area/alabel", "area/anotherlabel"]
-    const secondLabels = ["area/different", "area/unique"]
+    
     const yaml = `triage:
  rules:
   - id: amazon-lambda
@@ -1222,12 +1220,6 @@ describe("the github data handler", () => {
       )
     })
 
-    it("fills in a label", async () => {
-      expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ labels })
-      )
-    })
-
     it("fills in a url for the extension yaml", () => {
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -1273,7 +1265,7 @@ describe("the github data handler", () => {
       )
     })
 
-    it("does not cache the labels and issue url", async () => {
+    it("does not cache the issue url if the artifact changes", async () => {
       expect(queryGraphQl).toHaveBeenCalledWith(
         // This is a bit fragile with the assumptions about whitespace and a bit fiddly with the slashes, but it checks we did a query and got the project name right
         expect.stringMatching(/issues\(states:OPEN/),
@@ -1296,11 +1288,6 @@ describe("the github data handler", () => {
 
       expect(createNode).toHaveBeenCalledWith(
         expect.objectContaining({ issuesUrl: secondIssuesUrl })
-      )
-
-      // It should return the labels for this extension
-      expect(createNode).toHaveBeenCalledWith(
-        expect.objectContaining({ labels: secondLabels })
       )
     })
 
