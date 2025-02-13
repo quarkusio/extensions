@@ -1,4 +1,5 @@
 const promiseRetry = require("promise-retry")
+const { source } = require("puppeteer-core/internal/generated/injected")
 const RETRY_OPTIONS = { retries: 3, minTimeout: 75 * 1000, factor: 3 }
 const PAGE_INFO_SUBQUERY = "pageInfo {\n" +
   "      hasNextPage\n" +
