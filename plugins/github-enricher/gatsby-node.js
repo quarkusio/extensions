@@ -4,7 +4,6 @@ const { createRepository, getResolvers } = require("./repository-creator")
 
 const { getCache } = require("gatsby/dist/utils/get-cache")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
-const { labelExtractor } = require("./labelExtractor")
 const PersistableCache = require("../../src/persistable-cache")
 const {
   findSponsor,
@@ -29,8 +28,6 @@ const DAY_IN_SECONDS = 24 * 60 * 60
 
 // Defer initialization of these so we're playing at the right points in the plugin lifecycle
 let imageCache, extensionYamlCache, issueCountCache, samplesCache
-
-let getLabels
 
 exports.onPreBootstrap = async () => {
   imageCache = new PersistableCache({ key: "github-api-for-images", stdTTL: 3 * DAY_IN_SECONDS })
@@ -254,7 +251,6 @@ const createSponsor = ({ actions: { createNode }, createNodeId, createContentDig
 }
 
 const fetchScmInfo = async (scmUrl, groupId, artifactId, labels) => {
-  console.log("fetchScmInfo")
   if (scmUrl && scmUrl.includes("github.com")) {
     return fetchGitHubInfo(scmUrl, groupId, artifactId, labels)
   } else {
@@ -268,7 +264,6 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId) => {
 
   const scmInfo = {}
 
-  console.log("feting ", artifactId)
   const { issuesUrl, issues } = await getIssueInformation(coords, artifactId, scmUrl)
 
   if (issuesUrl) {
