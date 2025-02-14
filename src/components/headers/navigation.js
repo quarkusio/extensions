@@ -184,6 +184,9 @@ const Navigation = () => {
         <a href={`${config.siteMetadata.parentSiteUrl}/guides`}>Documentation</a>
       </NavEntry>
       <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/userstories`}>User Stories</a>
+      </NavEntry>
+      <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/qtips`}>
           "Q" Tip Videos
         </a>
