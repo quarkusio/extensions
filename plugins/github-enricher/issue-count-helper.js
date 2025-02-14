@@ -60,7 +60,7 @@ const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
       totalCountAvailable = false
       graphqlQuery = `query SearchIssues {
   search(
-    query: "repo:${coords.owner}/${coords.name} state:open is:issue ${shortArtifactId}"
+    query: "repo:${coords.owner}/${coords.name} state:open is:issue in:body in:title ${shortArtifactId}"
     type: ISSUE
     first: 100
   ) {
@@ -71,7 +71,7 @@ const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
     }
   }
 }`
-      urlSearchString = URL_QUERY + shortArtifactId
+      urlSearchString = URL_QUERY + "+in%3Abody+in%3Atitle+" + shortArtifactId
     }
   } else {
     graphqlQuery = `query {
