@@ -10,34 +10,86 @@ const { queryGraphQl } = require("./github-helper")
 let getLabels
 
 const RETRY_OPTIONS = { retries: 5, minTimeout: 75 * 1000, factor: 5 }
+const URL_QUERY = "?q=is%3Aopen+is%3Aissue+"
 
 
-async function fetchScmLabel(scmUrl, artifactId) {
+async function fetchScmLabel(artifactId) {
   // Special case extensions which live in the quarkus repo; in the future we could generalise,
   // but at the moment we only know how to find a label for quarkus
-  if (scmUrl === "https://github.com/quarkusio/quarkus") {
+
+  // The getLabels function needs to be initialised, so check its there
+  if (getLabels) {
     return getLabels(artifactId)
   }
 }
 
 
-const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
-  const labels = await fetchScmLabel(scmUrl, artifactId)
+function isQuarkusRepo(scmUrl) {
+  return scmUrl === "https://github.com/quarkusio/quarkus"
+}
 
-  // TODO we can just treat label as an array, almost
-  const labelFilterString = labels
-    ? `, filterBy: { labels:  [${labels.map(label => `"${label}"`).join()}] }`
-    : ""
+const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
+
+  let graphqlQuery
+  let urlSearchString = ""
+
+  const shouldFindSubsetOfIssues = isQuarkusRepo(scmUrl)
+  let totalCountAvailable = true
+
+  if (shouldFindSubsetOfIssues) {
+
+    const labels = await fetchScmLabel(artifactId)
+
+    if (labels && labels.length > 0) {
+      // TODO we can just treat label as an array, almost
+      const graphqlSearchString = `, filterBy: { labels:  [${labels.map(label => `"${label}"`).join()}] }`
+      graphqlQuery = `query {
+          repository(owner:"${coords.owner}", name:"${coords.name}") {
+            issues(states:OPEN ${graphqlSearchString}) {
+                    totalCount
+                  }
+            }
+        }`
+      urlSearchString = URL_QUERY + "label%3A" +
+        labels.map(label => label.replaceAll("/", "%2F")).join(",")
+    } else {
+      // The github search API automatically seems to count dashes as spaces, so no need to replaceAll dashes with spaces
+      const shortArtifactId = artifactId.replaceAll("quarkus-", "")
+
+      // We cannot use a filter in this case, instead we need to use the search endpoint
+      totalCountAvailable = false
+      graphqlQuery = `query SearchIssues {
+  search(
+    query: "repo:${coords.owner}/${coords.name} state:open is:issue ${shortArtifactId}"
+    type: ISSUE
+    first: 100
+  ) {
+    nodes {
+      ... on Issue {
+        number
+      }
+    }
+  }
+}`
+      urlSearchString = URL_QUERY + shortArtifactId
+    }
+  } else {
+    graphqlQuery = `query {
+          repository(owner:"${coords.owner}", name:"${coords.name}") {
+            issues(states:OPEN) {
+                    totalCount
+                  }
+            }
+        }`
+  }
+
+  // TODO check pagination
+
 
   // Tolerate scm urls ending in .git, but don't try and turn them into issues urls without patching
-  const topLevelIssuesUrl = (scmUrl + "/issues").replace("\.git/issues", "/issues")
-  let issuesUrl = labels
-    ? encodeUrl(
-      scmUrl +
-      "/issues?q=is%3Aopen+is%3Aissue+label%3A" +
-      labels.map(label => label.replace("/", "%2F")).join(",")
-    )
-    : topLevelIssuesUrl
+  const topLevelIssuesUrl = scmUrl.replace(/.git\/?$/, "")
+
+  let issuesUrl = encodeUrl(topLevelIssuesUrl + "/issues" + urlSearchString)
 
   // Tidy double slashes
   issuesUrl = normaliseUrl(issuesUrl)
@@ -45,18 +97,12 @@ const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
 
   // Batching this with other queries is not needed because rate limits are done on query complexity and cost,
   // not the number of actual http calls; see https://docs.github.com/en/graphql/overview/resource-limitations
-  const query = `query {
-          repository(owner:"${coords.owner}", name:"${coords.name}") {
-            issues(states:OPEN, ${labelFilterString}) {
-                    totalCount
-                  }
-                }
-        }`
 
-  const body = query ? await queryGraphQl(query) : undefined
+  const body = graphqlQuery ? await queryGraphQl(graphqlQuery) : undefined
 
   // The parent objects may be undefined and destructuring nested undefineds is not good
-  const issues = body?.data?.repository?.issues?.totalCount
+  // If we had to use a search, there's no total count field and we just have to count nodes
+  const issues = totalCountAvailable ? body?.data?.repository?.issues?.totalCount : body.data.search.nodes.length
 
   issuesUrl = await maybeIssuesUrl(issues, issuesUrl)
 
