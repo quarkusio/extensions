@@ -13,7 +13,8 @@ const foldersWhichAreNotExtensions = [
   "server",
 ]
 // Eventually we may want to tack 'client' and 'server' on to the parent folder name, but for now ignore them
-
+// The label-matching logic doesn't use the yaml path. This means special casing that we did for yaml discovery doesn't apply here; for example, the extra smallrye-reactive in some directory name still confuses the label matcher.
+// We could rewrite the label matcher to use the yaml path, but a simplistic implementation of that would cause extra, over-general, labels to be pulled in, like smallrye for extensions/smallrye-.
 const labelExtractor = (yamlString, repositoryListing) => {
   const json = yaml.load(yamlString)
 
