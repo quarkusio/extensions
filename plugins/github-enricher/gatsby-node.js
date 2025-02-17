@@ -650,9 +650,19 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
                 }
               }
             }
+            
+            smallryeMessagingMetaInfs: object(expression: "HEAD:extensions/smallrye-reactive-${shortArtifactId?.replace("reactive-", "")}/runtime/src/main/resources/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
         }
    }`
+  // Some extensions, like the smallrye-reactive messaging ones, had a relocation but the path names in the repo were not updated, so they need special casing
 
+  // TODO we should probably split this up and query one by one until we get a match, but that might not be faster, and we wouldn't detect the case where we have multiple matches
   const body = await queryGraphQl(query)
   const data = body?.data
 
@@ -666,7 +676,7 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
       entry?.path.endsWith("/quarkus-extension.yaml")
     )
     const answer = { defaultBranchRef, extensionYamls }
-    if (extensionYamls.length !== 0) {
+    if (extensionYamls.length === 0) {
       console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId} (no results). `)
     } else if (extensionYamls.length > 1) {
       console.warn(`Too many candidate extension yaml paths for ${groupId}:${artifactId}; found `, extensionYamls)
