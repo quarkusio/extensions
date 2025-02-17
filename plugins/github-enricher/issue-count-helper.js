@@ -87,7 +87,7 @@ const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
 
 
   // Tolerate scm urls ending in .git, but don't try and turn them into issues urls without patching
-  const topLevelIssuesUrl = scmUrl.replace(/.git\/?$/, "")
+  const topLevelIssuesUrl = scmUrl.replace(/\.git\/?$/, "")
 
   let issuesUrl = encodeUrl(topLevelIssuesUrl + "/issues" + urlSearchString)
 
