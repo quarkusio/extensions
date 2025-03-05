@@ -104,7 +104,8 @@ const getMostRecentData = async () => {
         return { date: new Date(entry.month), ...entry }
       })
 
-    const mostRecentDate = withDates.map(entry => entry.date).filter(date => date.getTime() > 0).sort((a, b) => b - a)[0]
+    // Drop columns where every entry is 0
+    const mostRecentDate = withDates.filter(entry => entry.downloads > 0).map(entry => entry.date).filter(date => date.getTime() > 0).sort((a, b) => b - a)[0]
 
     const onlyMostRecentDownloads = withDates.filter(entry => entry.date.getTime() === mostRecentDate.getTime())
       .sort((a, b) => b.downloads - a.downloads)
