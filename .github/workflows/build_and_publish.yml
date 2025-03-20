@@ -135,7 +135,7 @@ jobs:
           name: site
           path: site
       - name: Raise defects if needed
-        uses: jbangdev/jbang-action@v0.119.0
+        uses: jbangdev/jbang-action@v0.125.1
         if: "github.repository == 'quarkusio/extensions' && github.ref_name == 'main' && (github.event_name == 'push' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch')"
         with:
           script: site-validation/bad-image-issue.java
