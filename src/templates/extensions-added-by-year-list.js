@@ -4,14 +4,20 @@ import { useState } from "react"
 import { useMediaQuery } from "react-responsive"
 import { device } from "../components/util/styles/breakpoints"
 import ExtensionCard from "../components/extension-card"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import BreadcrumbBar from "../components/extensions-display/breadcrumb-bar"
 import Layout from "../components/layout"
 import Sortings from "../components/sortings/sortings"
 import { slugForExtensionsAddedYear } from "../components/util/extension-slugger"
-import Link from "gatsby-link"
 import { ExtensionCardList } from "../components/extensions-list"
-import { CardItem, ExtensionCount, Extensions, FilterableList, Heading, InfoSortRow } from "./extensions-added-list"
+import {
+  CardItem,
+  ExtensionCount,
+  ExtensionListHeading,
+  Extensions,
+  FilterableList,
+  InfoSortRow
+} from "../components/extensions-display/list-elements"
 
 const prettyDate = (timestamp) => new Date(+timestamp).getFullYear()
 
@@ -89,7 +95,7 @@ const ExtensionsAddedByYearListTemplate = (
         <BreadcrumbBar name={name} />
 
         <ExtensionCardList>
-          <Heading>New extensions added in {formattedYear}</Heading>
+          <ExtensionListHeading>New extensions added in {formattedYear}</ExtensionListHeading>
           <InfoSortRow>
             <ExtensionCount>{countMessage}</ExtensionCount>
             {isMobile || <Sortings sorterAction={setExtensionComparator} downloadData={downloadData} />}
