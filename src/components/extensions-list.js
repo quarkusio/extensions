@@ -6,54 +6,8 @@ import styled from "styled-components"
 import Sortings from "./sortings/sortings"
 import { device } from "./util/styles/breakpoints"
 import { useMediaQuery } from "react-responsive"
+import { CardItem, Extensions, FilterableList, InfoSortRow } from "./extensions-display/list-elements"
 
-const FilterableList = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
-
-  // noinspection CssUnknownProperty
-  @media ${device.sm} {
-    flex-direction: column;
-  }
-`
-
-const Extensions = styled.ol`
-  list-style: none;
-  width: 100%;
-  padding-inline-start: 0;
-  grid-template-rows: repeat(auto-fill, 1fr);
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 30px;
-
-  // noinspection CssUnknownProperty
-  @media ${device.xs} {
-    display: flex;
-    flex-direction: column;
-  }
-`
-
-const CardItem = styled.li`
-  height: 100%;
-  width: 100%;
-  display: flex;
-  max-height: 34rem;
-`
-
-const InfoSortRow = styled.div`
-  margin-top: 85px;
-  display: flex;
-  column-gap: var(--a-generous-space);
-  justify-content: space-between;
-  flex-direction: row;
-
-  // noinspection CssUnknownProperty
-  @media ${device.sm} {
-    flex-direction: column;
-    margin-top: 0;
-  }
-`
 
 const ExtensionCount = styled.h2`
   margin-top: 1.25rem;
