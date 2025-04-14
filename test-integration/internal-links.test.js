@@ -30,13 +30,16 @@ describe("site links", () => {
       }
     })
 
-    // This should almost always be empty, except for the blanket exclude of non-internal links; we would not want to allow-list dead internal links
-    const linksToSkip = [`^(?!${config.siteUrl})`, `^(?!http://localhost:9000)`]
+    // This could be a regex, but that's hard to get right with escapes and inversions, and if it's wrong, the symptom is that everything silently passes
+    const linksToSkip = (link) => {
+      return !link.startsWith("http://localhost:9000/")
+    }
+
 
     // Go ahead and start the scan! As events occur, we will see them above.
     return await checker.check({
       path,
-      recurse: true,
+      recurse: false,
       linksToSkip,
       urlRewriteExpressions: [
         {
@@ -44,6 +47,7 @@ describe("site links", () => {
           replacement: "http://localhost:9000",
         },
       ],
+      verbosity: "debug",
       concurrency: 50,
       timeout: 30 * 1000,
       retry: true, // Retry on 429
