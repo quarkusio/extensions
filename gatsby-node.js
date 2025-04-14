@@ -244,7 +244,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       {
-        allExtension(sort: { fields: [name], order: ASC }, limit: 1000) {
+        allExtension(sort: { fields: [name], order: ASC }) {
           nodes {
             id
             slug
