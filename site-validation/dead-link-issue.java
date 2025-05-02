@@ -75,9 +75,13 @@ class Report implements Runnable {
                     .build();
 
             List<DeadLink> links = readTestOutputFile();
-            System.out.println("Processing " + links.size() + " dead links.");
 
-            links.forEach(link -> processDeadLink(github, link));
+            if (links.size() > 30) {
+                System.out.println("Processing " + links.size() + " dead links.");
+                links.forEach(link -> processDeadLink(github, link));
+            } else {
+                throw new Exception("There were " + links.size() + " dead links, which seems implausible.");
+            }
 
             // Close any issues that don't relate to these
             closeResolvedIssues(github, links);
