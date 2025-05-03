@@ -80,7 +80,7 @@ class Report implements Runnable {
                 System.out.println("Processing " + links.size() + " dead links.");
                 links.forEach(link -> processDeadLink(github, link));
             } else {
-                throw new Exception("There were " + links.size() + " dead links, which seems implausible.");
+                throw new RuntimeException("There were " + links.size() + " dead links, which seems implausible.");
             }
 
             // Close any issues that don't relate to these
