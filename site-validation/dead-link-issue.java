@@ -76,7 +76,7 @@ class Report implements Runnable {
 
             List<DeadLink> links = readTestOutputFile();
 
-            if (links.size() > 30) {
+            if (links.size() < 30) {
                 System.out.println("Processing " + links.size() + " dead links.");
                 links.forEach(link -> processDeadLink(github, link));
             } else {
