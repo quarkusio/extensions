@@ -1,4 +1,4 @@
-jest.setTimeout(10 * 60 * 1000)
+jest.setTimeout(120 * 60 * 1000)
 
 const link = require("linkinator")
 const status = require("http-status")
@@ -89,7 +89,7 @@ describe("site external links", () => {
       timeout: 30 * 1000,
       retry: true, // Retry on 429
       retryErrors: true, // Retry on 5xx
-      retryErrorsCount: 6,
+      retryErrorsCount: 12,
       retryErrorsJitter: 8000, // Default is 3000
     })
   })
@@ -109,7 +109,7 @@ const retryUrl = async url => {
       return retry(statusCode)
     }
   }
-  return promiseRetry(hitUrl, { retries: 8, minTimeout: 8 * 1000 })
+  return promiseRetry(hitUrl, { retries: 8, minTimeout: 80 * 1000 })
     .then(() => true)
     .catch(() => false)
 }
