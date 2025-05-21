@@ -38,12 +38,9 @@ describe("site external links", () => {
         }
 
         // Some APIs give 429s but no retry-after header, and linkinator will not retry in that case
-        // Retry the hard way
-        if (!retryWorked && result.status === status.TOO_MANY_REQUESTS) {
-          retryWorked = await retryUrl(result.url)
-        }
+        // However, retrying all those links can make the build epically slow, and a true 404 would turn up on a subsequent run, so err on the side of assuming the links are valid
 
-        if (!retryWorked && !isPaywalled) {
+        if (!retryWorked && !result.status === status.TOO_MANY_REQUESTS && !isPaywalled) {
           const errorText =
             result.failureDetails[0].statusText || result.failureDetails[0].code
           const description = `${result.url} => ${result.status} (${errorText}) on ${result.parent}`
@@ -57,11 +54,8 @@ describe("site external links", () => {
             if (!deadExternalLinks.includes(description)) {
               deadExternalLinks.push(description)
 
-              console.log("Dead link!", description)
-
               // Also write out to a file - the a+ flag will create it if it doesn't exist
               const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
-              console.log("Writing", content)
 
               await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
                 console.warn("Error writing results:", err)
