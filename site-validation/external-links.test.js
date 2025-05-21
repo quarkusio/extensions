@@ -57,8 +57,12 @@ describe("site external links", () => {
             if (!deadExternalLinks.includes(description)) {
               deadExternalLinks.push(description)
 
+              console.log("Dead link!", description)
+
               // Also write out to a file - the a+ flag will create it if it doesn't exist
               const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
+              console.log("Writing", content)
+
               await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
                 console.warn("Error writing results:", err)
               })
