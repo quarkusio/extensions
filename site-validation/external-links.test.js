@@ -37,30 +37,39 @@ describe("site external links", () => {
           retryWorked = await retryUrl(result.url)
         }
 
+        if (result.status === status.TOO_MANY_REQUESTS) {
+          // Twitter gives 404s, I think if it feels bombarded, so let's try a retry
+          retryWorked = await retryUrl(result.url)
+        }
+
         // Some APIs give 429s but no retry-after header, and linkinator will not retry in that case
         // However, retrying all those links can make the build epically slow, and a true 404 would turn up on a subsequent run, so err on the side of assuming the links are valid
 
-        if (!retryWorked && !result.status === status.TOO_MANY_REQUESTS && !isPaywalled) {
-          const errorText =
-            result.failureDetails[0].statusText || result.failureDetails[0].code
-          const description = `${result.url} => ${result.status} (${errorText}) on ${result.parent}`
-          if (result.url.includes(path)) {
-            // This will still miss links where the platform uses the configured url to make it an absolute path, but hopefully we don't care
-            // too much about the categorisation as long as *a* break happens
-            if (!deadInternalLinks.includes(description)) {
-              deadInternalLinks.push(description)
+        if (!retryWorked) {
+          if (!result.status === status.TOO_MANY_REQUESTS && !isPaywalled) {
+            const errorText =
+              result.failureDetails[0].statusText || result.failureDetails[0].code
+            const description = `${result.url} => ${result.status} (${errorText}) on ${result.parent}`
+            if (result.url.includes(path)) {
+              // This will still miss links where the platform uses the configured url to make it an absolute path, but hopefully we don't care
+              // too much about the categorisation as long as *a* break happens
+              if (!deadInternalLinks.includes(description)) {
+                deadInternalLinks.push(description)
+              }
+            } else {
+              if (!deadExternalLinks.includes(description)) {
+                deadExternalLinks.push(description)
+
+                // Also write out to a file - the a+ flag will create it if it doesn't exist
+                const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
+
+                await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
+                  console.warn("Error writing results:", err)
+                })
+              }
             }
           } else {
-            if (!deadExternalLinks.includes(description)) {
-              deadExternalLinks.push(description)
-
-              // Also write out to a file - the a+ flag will create it if it doesn't exist
-              const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
-
-              await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
-                console.warn("Error writing results:", err)
-              })
-            }
+            console.log("Giving a pass to", result)
           }
         }
 
@@ -107,7 +116,7 @@ const retryUrl = async url => {
       return retry(statusCode)
     }
   }
-  return promiseRetry(hitUrl, { retries: 8, minTimeout: 80 * 1000 })
+  return promiseRetry(hitUrl, { retries: 3, minTimeout: 80 * 1000 })
     .then(() => true)
     .catch(() => false)
 }
