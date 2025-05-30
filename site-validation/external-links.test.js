@@ -46,7 +46,11 @@ describe("site external links", () => {
         // However, retrying all those links can make the build epically slow, and a true 404 would turn up on a subsequent run, so err on the side of assuming the links are valid
 
         if (!retryWorked) {
-          if (!result.status === status.TOO_MANY_REQUESTS && !isPaywalled) {
+          if (result.status === status.TOO_MANY_REQUESTS) {
+            console.log("Giving a pass because of too many tries to", result)
+          } else if (isPaywalled) {
+            console.log("Giving a pass to paywalled link", result)
+          } else {
             const errorText =
               result.failureDetails[0].statusText || result.failureDetails[0].code
             const description = `${result.url} => ${result.status} (${errorText}) on ${result.parent}`
@@ -68,8 +72,6 @@ describe("site external links", () => {
                 })
               }
             }
-          } else {
-            console.log("Giving a pass to", result)
           }
         }
 
