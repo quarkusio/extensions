@@ -6,6 +6,7 @@ const { curly } = require("node-libcurl")
 const promiseRetry = require("promise-retry")
 const fs = require("fs/promises")
 const config = require("../gatsby-config.js")
+const pendingRetries = require("../.cache/page-ssr/routes/render-page")
 const { port } = require("../jest-puppeteer.config").server
 
 const pathPrefix = process.env.PATH_PREFIX || ""
@@ -20,6 +21,7 @@ describe("site external links", () => {
     await fs.rm(resultsFile, { force: true })
 
     const path = `http://localhost:${port}/${pathPrefix}`
+    const pendingRetries = []
 
     // create a new `LinkChecker` that we'll use to run the scan.
     const checker = new link.LinkChecker()
@@ -35,11 +37,13 @@ describe("site external links", () => {
         if (result.url.includes("twitter")) {
           // Twitter gives 404s, I think if it feels bombarded, so let's try a retry
           retryWorked = await retryUrl(result.url)
+          pendingRetries.push(retryWorked)
         }
 
         if (result.status === status.TOO_MANY_REQUESTS) {
           // Twitter gives 404s, I think if it feels bombarded, so let's try a retry
           retryWorked = await retryUrl(result.url)
+          pendingRetries.push(retryWorked)
         }
 
         // Some APIs give 429s but no retry-after header, and linkinator will not retry in that case
@@ -67,9 +71,10 @@ describe("site external links", () => {
                 // Also write out to a file - the a+ flag will create it if it doesn't exist
                 const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
 
-                await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
+                const write = await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
                   console.warn("Error writing results:", err)
                 })
+                pendingRetries.push(write)
               }
             }
           }
@@ -84,7 +89,7 @@ describe("site external links", () => {
     ]
 
     // Go ahead and start the scan! As events occur, we will see them above.
-    return await checker.check({
+    return checker.check({
       path,
       recurse: true,
       linksToSkip,
@@ -101,6 +106,7 @@ describe("site external links", () => {
       retryErrorsCount: 12,
       retryErrorsJitter: 8000, // Default is 3000
     })
+      .then(() => Promise.all(pendingRetries))
   })
 
 
