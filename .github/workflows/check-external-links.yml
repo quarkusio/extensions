@@ -1,6 +1,7 @@
 name: Check external links
 
 on:
+  workflow_dispatch:
   workflow_run:
     workflows: [ "Gatsby Publish" ]
     types:
