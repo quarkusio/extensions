@@ -6,7 +6,6 @@ const { curly } = require("node-libcurl")
 const promiseRetry = require("promise-retry")
 const fs = require("fs/promises")
 const config = require("../gatsby-config.js")
-const pendingRetries = require("../.cache/page-ssr/routes/render-page")
 const { port } = require("../jest-puppeteer.config").server
 
 const pathPrefix = process.env.PATH_PREFIX || ""
