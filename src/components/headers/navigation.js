@@ -147,15 +147,12 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/container-first`}>
-          Container First
+        <a href={`${config.siteMetadata.parentSiteUrl}/developer-joy`}>
+          Developer Joy
         </a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/versatility`}>Versatility</a>
-      </NavEntry>
-      <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/standards`}>Standards</a>
+        <a href={`${config.siteMetadata.parentSiteUrl}/performance`}>Performance</a>
       </NavEntry>
       <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/kubernetes-native`}>
@@ -163,11 +160,19 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/performance`}>Performance</a>
+        <a href={`${config.siteMetadata.parentSiteUrl}/standards`}>Standards</a>
       </NavEntry>
       <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/developer-joy`}>
-          Developer Joy
+        <a href={`${config.siteMetadata.parentSiteUrl}/versatility`}>Versatility</a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/container-first`}>
+          Container First
+        </a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/spring`}>
+          Using Spring?
         </a>
       </NavEntry>
 
