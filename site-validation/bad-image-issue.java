@@ -1,6 +1,6 @@
 //usr/bin/env jbang "$0" "$@" ; exit $?
 
-//JAVA 17+
+//JAVA 21+
 
 //DEPS https://github.com/holly-cummins/github-api/tree/785cd3f243b3
 //DEPS info.picocli:picocli:4.2.0
