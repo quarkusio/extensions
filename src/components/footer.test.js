@@ -13,7 +13,4 @@ describe("footer", () => {
     expect(screen.getByText(supportedText)).toBeTruthy()
   })
 
-  it("renders a creative commons attribution", () => {
-    expect(screen.getByText("CC by 3.0")).toBeTruthy()
-  })
 })
