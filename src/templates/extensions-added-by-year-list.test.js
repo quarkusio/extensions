@@ -90,7 +90,7 @@ describe("extensions added page for a year", () => {
 
   it("renders the correct link", () => {
     const links = screen.getAllByRole("link")
-    const link = links[links.length - 6]// Look at the last one that's not in the footer, because the top of the page will have a menu and the bottom will have footers - this is also testing the sorting
+    const link = links[links.length - 7]// Look at the last one that's not in the footer, because the top of the page will have a menu and the bottom will have footers - this is also testing the sorting
     expect(link).toBeTruthy()
     // Hardcoding the host is a bit risky but this should always be true in  test environment
     expect(link.href).toBe("http://localhost/ambiguous-slug")
