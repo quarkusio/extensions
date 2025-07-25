@@ -169,7 +169,7 @@ html {
 }
 
 /** Adjustments for small screens  */
-@media screen and (max-width: 1366px) {
+@media screen and (max-width: 1024px) {
     html {
         --site-margins: 4rem;
         --navbar-padding: 1.5rem;
