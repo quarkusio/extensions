@@ -8,12 +8,13 @@ const ModeIcon = styled(({ ...props }) => <FontAwesomeIcon {...props} />)`
   padding-left: 0;
   display: inline-block;
   width: 1em;
+  transform: translateX(0.5px); // To ensure alignment with parent site
 `
 
 const Toggle = styled.li`
   display: block;
-  padding: 16px 15px;
-  padding-left: 10px; /* hacky override to match spacing (more or less) to parent site */
+  padding: 0 0;
+  padding-left: 4px; /* hacky override to match spacing (more or less) to parent site */
 `
 
 const modes = [{

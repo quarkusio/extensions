@@ -53,6 +53,8 @@ const MobileSubmenu = styled.ul`
 const FlippyIcon = styled(({ isOpen, ...props }) => (
   <FontAwesomeIcon {...props} />
 ))`
+  transform: translateX(-1px); // To ensure alignment with parent site
+
   ${({ isOpen }) =>
           isOpen &&
           ` 
@@ -64,7 +66,7 @@ const FlippyIcon = styled(({ isOpen, ...props }) => (
 const MenuTitle = styled.div`
   display: flex;
   flex-direction: row;
-  gap: 3.8px;
+  gap: 6px;
   justify-content: flex-end;
   align-items: center;
   padding: 0 14.4px; // Occult values to match the main site
