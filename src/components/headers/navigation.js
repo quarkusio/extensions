@@ -96,7 +96,10 @@ const Logo = styled.a`
   // The main site sets a height, but that inflates and crops the image, so we need to do it in a wrapper div
 `
 
-const LangIcon = styled(({ ...props }) => <FontAwesomeIcon {...props} />)``
+const LangIcon = styled(({ ...props }) => <FontAwesomeIcon {...props} />)`
+  transform: translateX(1px); // To ensure alignment with parent site
+  padding-right: 1px;
+`
 
 // This isn't needed on the main site, but we seem to need it here to properly pad the cta in the mobile menu, and also to get it to take the full width
 // noinspection CssUnknownProperty
