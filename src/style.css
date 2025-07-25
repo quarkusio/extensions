@@ -13,6 +13,7 @@ html {
     --sec-background-color: #B5B5B5;
     --sec-text-color: #333333;
     --sec-border-color: #AAA;
+    --footer-text-color: #AAA;
     --title-background-color: #0d1c2c;
     --breadcrumb-background-color: #4695EB;
 
@@ -85,6 +86,7 @@ html.dark {
 
 
     /* code highlighting overrides */
+
     .hljs-built_in, .hljs-selector-tag, .hljs-section, .hljs-link, .hljs-function, .hljs-params {
         color: #6a9fb5 !important;
     }
@@ -106,6 +108,7 @@ html.dark {
     }
 
     /* Table overrides */
+
     table.tableblock tbody tr:nth-child(even) {
         background-color: transparent !important;
     }
