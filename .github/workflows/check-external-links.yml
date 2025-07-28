@@ -48,7 +48,7 @@ jobs:
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
       - name: Raise defects if needed
-        uses: jbangdev/jbang-action@v0.126.3
+        uses: jbangdev/jbang-action@v0.128.5
         with:
           script: site-validation/dead-link-issue.java
           scriptargs: token=${{ secrets.GITHUB_TOKEN }} issueRepo=${{ github.repository }}  runId=${{ github.run_id }} siteUrl=https://quarkus.io/extensions
