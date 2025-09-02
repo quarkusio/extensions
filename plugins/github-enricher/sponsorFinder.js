@@ -202,6 +202,7 @@ const resolveAndNormalizeCompanyName = async (company) => {
   }
 }
 
+const redHatIBM = "Red Hat & IBM"
 const normalizeCompanyName = (company) => {
 
   if (!company) return
@@ -229,9 +230,6 @@ const normalizeCompanyName = (company) => {
     companyName = byMatch[1]
   }
 
-  // Special case for some acquisitions
-  companyName = companyName.replace("JBoss", "Red Hat")
-
   // Special case for some URLs
   companyName = companyName.replace("https://www.redhat.com/", "Red Hat")
   companyName = companyName.replace("http://www.redhat.com/", "Red Hat")
@@ -239,6 +237,13 @@ const normalizeCompanyName = (company) => {
   // Strip out commas and whitespace
   companyName = companyName.replace(",", "")
   companyName = companyName?.trim()
+
+
+  // Special case for some acquisitions
+  companyName = companyName.replace("JBoss", "Red Hat")
+
+  companyName = companyName.replace(/^Red Hat$/, redHatIBM)
+  companyName = companyName.replace(/^IBM$/, redHatIBM)
 
   return companyName
 }

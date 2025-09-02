@@ -18,7 +18,7 @@ const urls = {}
 
 const pactContributors = [
   {
-    name: "Red Hat",
+    name: "Orange Hat",
     contributions: 68,
     contributors: 10
   },
@@ -54,7 +54,7 @@ const manyContributors = [
     contributors: 3
   },
   {
-    name: "Red Hat",
+    name: "Orange Hat",
     contributions: 33,
     contributors: 5
   },
@@ -65,7 +65,7 @@ const manyContributors = [
 urls["users/redhatofficial"] = {
   login: "RedHatOfficial",
   type: "Organization",
-  name: "Red Hat",
+  name: "Orange Hat",
   company: null,
 }
 
@@ -79,7 +79,7 @@ const frogNode = {
     "author": {
       "user": {
         "login": "someonewhoribbits",
-        "company": "Red Hat"
+        "company": "Orange Hat"
       }
     }
   }
@@ -122,7 +122,7 @@ const frogNodeDifferentCompany = {
     "author": {
       "user": {
         "login": "some-name",
-        "company": "Red Hat @somewhere"
+        "company": "Orange Hat @somewhere"
       }
     }
   }
@@ -232,7 +232,7 @@ describe("the github sponsor finder", () => {
     it("returns a list of company sponsors, given an org and project", async () => {
       const sponsor = await findSponsor("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
-      expect(sponsor).toContain("Red Hat")
+      expect(sponsor).toContain("Orange Hat")
     })
 
     it("orders company sponsors by contribution level", async () => {
@@ -240,7 +240,7 @@ describe("the github sponsor finder", () => {
       setMinimumContributionPercent(1)
       const sponsor = await findSponsor("someorg", "someproject")
       expect(queryGraphQl).toHaveBeenCalled()
-      expect(sponsor).toStrictEqual(["Rabbit", "Red Hat", "Tortoise"])
+      expect(sponsor).toStrictEqual(["Rabbit", "Orange Hat", "Tortoise"])
     })
 
     it("filters out companies which do not have enough contributors", async () => {
@@ -278,7 +278,7 @@ describe("the github sponsor finder", () => {
           companyWithASingleContributor,
           "Occasional Company",
           "Another Company",
-          "Red Hat",
+          "Orange Hat",
         ])
       })
 
@@ -377,23 +377,31 @@ describe("the github sponsor finder", () => {
     })
 
     it("normalises a company name with Inc at the end", async () => {
-      const sponsor = await resolveAndNormalizeCompanyName("Red Hat, Inc")
-      expect(sponsor).toBe("Red Hat")
+      const sponsor = await resolveAndNormalizeCompanyName("Orange Hat, Inc")
+      expect(sponsor).toBe("Orange Hat")
     })
 
     it("normalises a company name with Inc. at the end", async () => {
-      const sponsor = await resolveAndNormalizeCompanyName("Red Hat, Inc.")
-      expect(sponsor).toBe("Red Hat")
+      const sponsor = await resolveAndNormalizeCompanyName("Orange Hat, Inc.")
+      expect(sponsor).toBe("Orange Hat")
     })
 
     it("normalises a company name with a 'by' structure at the end", async () => {
       const sponsor = await resolveAndNormalizeCompanyName("JBoss by Red Hat by IBM")
-      expect(sponsor).toBe("Red Hat")
+      expect(sponsor).toBe("Red Hat & IBM")
+    })
+
+    it("handles complex ownership relationships", async () => {
+      let sponsor = await resolveAndNormalizeCompanyName("Red Hat, Inc")
+      expect(sponsor).toBe("Red Hat & IBM")
+
+      sponsor = await resolveAndNormalizeCompanyName("IBM")
+      expect(sponsor).toBe("Red Hat & IBM")
     })
 
     it("normalises a company name with an '@' structure at the end", async () => {
-      const sponsor = await resolveAndNormalizeCompanyName("Red Hat @kiegroup")
-      expect(sponsor).toBe("Red Hat")
+      const sponsor = await resolveAndNormalizeCompanyName("Orange Hat @kiegroup")
+      expect(sponsor).toBe("Orange Hat")
     })
 
     it("normalises a company name with a parenthetical structure at the end", async () => {
@@ -402,14 +410,14 @@ describe("the github sponsor finder", () => {
     })
 
     it("normalises a company name with a hyphenated '@' structure at the end", async () => {
-      const sponsor = await resolveAndNormalizeCompanyName("Red Hat - @hibernate")
-      expect(sponsor).toBe("Red Hat")
+      const sponsor = await resolveAndNormalizeCompanyName("Orange Hat - @hibernate")
+      expect(sponsor).toBe("Orange Hat")
     })
 
     it("normalises a company name with several comma-separated clauses", async () => {
       // This case is tricky, because we could tokenise on commas, but we only let people have one company, because otherwise the graph could be chaos.
-      const sponsor = await resolveAndNormalizeCompanyName("Red Hat, @xlate")
-      expect(sponsor).toBe("Red Hat")
+      const sponsor = await resolveAndNormalizeCompanyName("Orange Hat, @xlate")
+      expect(sponsor).toBe("Orange Hat")
     })
 
     it("normalises a company name with several @-delimited clauses", async () => {
@@ -478,7 +486,7 @@ describe("the github sponsor finder", () => {
         const contributors = await getContributors("someorg", "someproject")
         expect(contributors.contributors).toContainEqual(expect.objectContaining({
           login: "link-name",
-          company: "Red Hat"
+          company: "Orange Hat"
         }))
       })
     })
@@ -502,7 +510,7 @@ describe("the github sponsor finder", () => {
       expect(queryGraphQl).toHaveBeenCalled()
       expect(contributors.companies).toHaveLength(3)
       expect(contributors.companies[1]).toStrictEqual({
-        "name": "Red Hat",
+        "name": "Orange Hat",
         contributions: 4,
         contributors: 3
       })

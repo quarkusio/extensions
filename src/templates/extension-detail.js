@@ -376,7 +376,7 @@ const ExtensionDetailTemplate = ({
                     {metadata?.sourceControl?.companies && (
                       <p><i>Company affiliations are derived from GitHub user profiles. Want your company's name to be
                         shown in this chart? <a
-                          href={"https://hub.quarkiverse.io/checklist/#allow-your-company-to-be-named-as-a-sponsor-or-contributor-optional"}>Opt-in
+                          href={"https://hub.quarkiverse.io/checklistfornewprojects/#allow-your-company-to-be-named-as-a-sponsor-or-contributor-optional"}>Opt-in
                           to have it included.</a></i></p>
                     )}
 
