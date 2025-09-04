@@ -23,7 +23,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '18'
           cache: "npm" # this only caches global dependencies
@@ -51,7 +51,7 @@ jobs:
             gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}
             gatsby-build-github-queries-
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v5
         with:
           node-version: '18'
           cache: "npm" # this only caches global dependencies
