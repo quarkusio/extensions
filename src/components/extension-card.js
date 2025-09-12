@@ -135,13 +135,13 @@ const ExtensionCard = ({ extension }) => {
         </ExtensionInfo>
         <ExtensionInfo>
           {extension.metadata.maven?.version
-            ? `Latest Version: ${extension.metadata.maven.version}`
+            ? `Latest version: ${extension.metadata.maven.version}`
             : spacer}
         </ExtensionInfo>
         <ExtensionInfo>
           {extension.metadata.maven?.timestamp &&
           isValid(+extension.metadata.maven?.timestamp)
-            ? `Last Released: ${format(
+            ? `Last released: ${format(
               new Date(+extension.metadata.maven.timestamp),
               "MMM dd, yyyy"
             )}`

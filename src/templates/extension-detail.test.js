@@ -149,7 +149,7 @@ describe("extension detail page", () => {
     })
 
     it("renders the release date", () => {
-      const publishDate = "Last Released"
+      const publishDate = "Last released"
       expect(screen.getByText(publishDate)).toBeTruthy()
       const dateSection = screen.getByText(publishDate).closest("section")
 
@@ -226,7 +226,7 @@ describe("extension detail page", () => {
     })
 
     it("renders a sponsor field", () => {
-      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.getByText("Maintained by")).toBeTruthy()
       expect(screen.getByText("Automatically Calculated Sponsor")).toBeTruthy()
     })
 
@@ -379,7 +379,7 @@ describe("extension detail page", () => {
     })
 
     it("renders a sponsor field, using the information manually set", () => {
-      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.getByText("Maintained by")).toBeTruthy()
       expect(screen.getByText("Manual Sponsor Override")).toBeTruthy()
       expect(screen.queryByText("Automatically Calculated Sponsor")).toBeFalsy()
     })
@@ -423,7 +423,7 @@ describe("extension detail page", () => {
     })
 
     it("renders a sponsor field, using the information manually set", () => {
-      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.getByText("Maintained by")).toBeTruthy()
       expect(screen.queryByText("Automatically Calculated Sponsor")).toBeFalsy()
       expect(screen.getByText("Manual Sponsor Override")).toBeTruthy()
     })
@@ -468,7 +468,7 @@ describe("extension detail page", () => {
     })
 
     it("renders a sponsor field, using the information manually set", () => {
-      expect(screen.getByText("Sponsor")).toBeTruthy()
+      expect(screen.getByText("Maintained by")).toBeTruthy()
       expect(screen.getByText("Manual Sponsor Override")).toBeTruthy()
       expect(screen.queryByText("Automatically Calculated Sponsor")).toBeFalsy()
     })
@@ -598,13 +598,13 @@ describe("extension detail page", () => {
       link = await screen.queryByText("Version")
       expect(link).toBeNull()
 
-      link = await screen.queryByText("Latest Version")
+      link = await screen.queryByText("Latest version")
       expect(link).toBeNull()
 
       link = await screen.queryByText("Issues")
       expect(link).toBeNull()
 
-      link = await screen.queryByText("Sponsor")
+      link = await screen.queryByText("Maintained by")
       expect(link).toBeNull()
     })
 
@@ -666,7 +666,7 @@ describe("extension detail page", () => {
     })
 
     it("does not render a release date", () => {
-      const publishDate = "Last Released"
+      const publishDate = "Last released"
       expect(screen.queryByText(publishDate)).toBeFalsy()
     })
   })
