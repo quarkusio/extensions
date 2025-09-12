@@ -171,6 +171,17 @@ html {
     font-weight: var(--font-weight-normal);
 }
 
+@media screen and (max-width: 1366px) {
+    html {
+        --site-margins: 4rem;
+        --navbar-padding: 1.5rem;
+        --a-generous-space: 50px;
+        --a-modest-space: 12px;
+        --a-small-space: 6px;
+        --a-vsmall-space: 5px;
+    }
+}
+
 /** Adjustments for small screens  */
 @media screen and (max-width: 1024px) {
     html {
