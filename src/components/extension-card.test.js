@@ -39,11 +39,11 @@ describe("extension card", () => {
     })
 
     it("renders the version", () => {
-      expect(screen.getByText("Latest Version: " + version)).toBeTruthy()
+      expect(screen.getByText("Latest version: " + version)).toBeTruthy()
     })
 
-    it("renders the Last Released", () => {
-      expect(screen.getByText("Last Released: Oct 25, 2022")).toBeTruthy()
+    it("renders the Last released", () => {
+      expect(screen.getByText("Last released: Oct 25, 2022")).toBeTruthy()
     })
 
     it("renders a placeholder image with appropriate source", async () => {

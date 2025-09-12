@@ -37,7 +37,7 @@ describe("an extension details page", () => {
 
   it("should have a publish date", async () => {
     await expect(
-      page.waitForSelector(`xpath///*[text()="Last Released"]`)
+      page.waitForSelector(`xpath///*[text()="Last released"]`)
     ).resolves.toBeTruthy()
   })
 
@@ -70,7 +70,7 @@ describe("an extension details page", () => {
 
   it("should show a sponsor", async () => {
     await expect(
-      page.waitForSelector(`xpath///*[text()="Sponsor"]`)
+      page.waitForSelector(`xpath///*[text()="Maintained by"]`)
     ).resolves.toBeTruthy()
   })
 

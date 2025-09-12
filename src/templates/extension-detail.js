@@ -402,13 +402,13 @@ const ExtensionDetailTemplate = ({
 
             <ExtensionMetadata
               data={{
-                name: "Latest Version",
+                name: "Latest version",
                 text: metadata.maven?.version,
               }}
             />
             <ExtensionMetadata
               data={{
-                name: "Last Released",
+                name: "Last released",
                 // Count dates of 0 as undefined, so we don't render them
                 text: metadata.maven?.timestamp > 0 ? metadata.maven?.timestamp : undefined,
                 transformer: timestamp =>
@@ -520,8 +520,7 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
-                name: "Sponsor",
-                plural: "Sponsors",
+                name: "Maintained by",
                 text: sponsors,
               }}
             />
