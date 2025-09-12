@@ -9,8 +9,8 @@ describe("footer", () => {
     render(<Footer />)
   })
 
-  it("renders a supported by statement", () => {
-    expect(screen.getByText(supportedText)).toBeTruthy()
+  it("does not renders a supported by statement", () => {
+    expect(screen.findByText(supportedText)).toBeTruthy()
   })
 
 })

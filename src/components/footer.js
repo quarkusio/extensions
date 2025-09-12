@@ -89,21 +89,6 @@ const Footer = () => {
         href="https://www.commonhaus.org/trademarks/">Trademark List</LegalText>. Trademarks of third parties are owned
         by their respective holders and their mention here does not suggest any endorsement or association.
       </LicenseInfo>
-
-      <SponsorInfo>
-        Sponsored by
-        <Logo href="https://www.redhat.com/" style={{ width: "6rem" }}>
-          <StaticImage
-            className="logo"
-            placeholder="none"
-            backgroundColor="black"
-            layout="constrained"
-            formats={["auto", "webp", "avif"]}
-            src="../images/redhat_reversed.svg"
-            alt="Red Hat logo"
-          />
-        </Logo>
-      </SponsorInfo>
     </FooterBar>
   )
 }
