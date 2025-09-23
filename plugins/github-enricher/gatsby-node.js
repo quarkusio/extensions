@@ -651,6 +651,14 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
               }
             }
             
+            quarkusSubfolderMetaInfs: object(expression: "HEAD:extension/runtime/src/main/resources/META-INF/") {
+              ... on Tree {
+                entries {
+                  path
+                }
+              }
+            }
+            
             smallryeMessagingMetaInfs: object(expression: "HEAD:extensions/smallrye-reactive-${shortArtifactId?.replace("reactive-", "")}/runtime/src/main/resources/META-INF/") {
               ... on Tree {
                 entries {
