@@ -27,14 +27,19 @@ const ExtensionsAddedByYearListTemplate = (
     data: {
       allExtension, downloadDataDate,
     },
-    pageContext: { nextYearTimestamp, previousYearTimestamp },
+    pageContext: { nextYearTimestamp, previousYearTimestamp, sinceYear },
     location,
   }) => {
   const downloadData = downloadDataDate
 
+  const now = new Date()
+  const date = new Date(+sinceYear)
+  const verb = now.getFullYear() === date.getFullYear() ? "have been" : "were"
+
   // Convert the data to the same format as what the other list page uses
   const { edges } = allExtension
   const extensions = edges.map(e => e.node)
+
 
   const [extensionComparator, setExtensionComparator] = useState(() => undefined)
 
@@ -67,10 +72,8 @@ const ExtensionsAddedByYearListTemplate = (
     </ul>
   </nav>)
 
-  const yearTimestamp = extensions[0].metadata.maven.sinceYear
-  const now = new Date()
-  const date = new Date(+yearTimestamp)
-  const verb = now.getFullYear() === date.getFullYear() ? "have been" : "were"
+  const formattedYear = prettyDate(sinceYear)
+  const name = `Extensions added in ${formattedYear}`
 
   if (extensions && extensions.length > 0) {
 
@@ -83,12 +86,9 @@ const ExtensionsAddedByYearListTemplate = (
       extensions.sort(extensionComparator)
     }
 
-    const formattedYear = prettyDate(yearTimestamp)
-
 
     const countMessage = `${extensionCount} new extensions ${verb} added this year.`
 
-    const name = `Extensions added in ${formattedYear}`
 
     return (
       <Layout location={location}>
@@ -118,10 +118,15 @@ const ExtensionsAddedByYearListTemplate = (
     )
   } else {
     return (
-      <div className="extensions-list" style={{ display: "flex" }}>
-        No new extensions {verb} added this year.
-        {nav}
-      </div>
+      <Layout location={location}>
+        <BreadcrumbBar name={name} />
+
+        <ExtensionListHeading>New extensions added in {formattedYear}</ExtensionListHeading>
+        <div className="extensions-list" style={{ display: "flex" }}>
+          No new extensions {verb} added this year.
+          {nav}
+        </div>
+      </Layout>
     )
   }
 }
