@@ -799,7 +799,7 @@ describe("the main gatsby entrypoint", () => {
           allExtension: {
             nodes: [{
               slug,
-              metadata: { maven: { sinceMonth: "1705250589000" } }
+              metadata: { maven: { sinceMonth: "1705250589000", sinceYear: "1705250589000" } }
             },
               {
                 slug,
@@ -852,7 +852,14 @@ describe("the main gatsby entrypoint", () => {
 
     it("creates pages for release years", () => {
       expect(createPage).toHaveBeenCalledWith(
-        expect.objectContaining({ path: "new-extensions/2025" })
+        expect.objectContaining({ path: "new-extensions/2024" })
+      )
+    })
+
+    it("creates a page for the current release year", () => {
+      expect(createPage).toHaveBeenCalledWith(
+        // There should always be a page for the current year, but we don't want to hardcode that because otherwise the test starts failing on January 1st :)
+        expect.objectContaining({ path: "new-extensions/" + new Date().getFullYear() })
       )
     })
   })
