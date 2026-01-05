@@ -120,9 +120,14 @@ const ExtensionsAddedListTemplate = (
       <Layout location={location}>
         <BreadcrumbBar name={name} />
         <ExtensionCardList>
-          <h4>
-            No new extensions {verb} added in {formattedMonth}.
-          </h4>
+          <ExtensionListHeading>New extensions added in {formattedMonth.replaceAll(" ", ", ")}</ExtensionListHeading>
+          <InfoSortRow>
+            <ExtensionCount>
+              No new extensions {verb} added this month.
+            </ExtensionCount>
+          </InfoSortRow>
+          <br />
+          <br />
           {nav}
         </ExtensionCardList>
       </Layout>

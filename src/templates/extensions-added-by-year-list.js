@@ -120,12 +120,18 @@ const ExtensionsAddedByYearListTemplate = (
     return (
       <Layout location={location}>
         <BreadcrumbBar name={name} />
-
-        <ExtensionListHeading>New extensions added in {formattedYear}</ExtensionListHeading>
-        <div className="extensions-list" style={{ display: "flex" }}>
-          No new extensions {verb} added this year.
+        <ExtensionCardList>
+          <ExtensionListHeading>New extensions added in {formattedYear}</ExtensionListHeading>
+          <InfoSortRow>
+            <ExtensionCount>
+              No new extensions {verb} added this year.
+            </ExtensionCount>
+          </InfoSortRow>
+          <br />
+          <br />
           {nav}
-        </div>
+        </ExtensionCardList>
+
       </Layout>
     )
   }
