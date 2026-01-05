@@ -651,7 +651,7 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
               }
             }
             
-            quarkusSubfolderMetaInfs: object(expression: "HEAD:extension/runtime/src/main/resources/META-INF/") {
+            quarkusSubfolderMetaInfsNoArtifactId: object(expression: "HEAD:extension/runtime/src/main/resources/META-INF/") {
               ... on Tree {
                 entries {
                   path
