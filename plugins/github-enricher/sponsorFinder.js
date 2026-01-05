@@ -195,7 +195,7 @@ const resolveAndNormalizeCompanyName = async (company) => {
       // Only take the first entry after the @
       const split = company.split(/[@ ]/)
       // The first array element is an empty string where the @ was, so take the second
-      return normalizeCompanyName(await getCompanyFromGitHubLogin(split[1]))
+      return normalizeCompanyName(await getCompanyFromGitHubLogin(sanitiseWhitespaceInCompanyName(split[1])))
     } else {
       return normalizeCompanyName(company)
     }
@@ -203,13 +203,26 @@ const resolveAndNormalizeCompanyName = async (company) => {
 }
 
 const redHatIBM = "Red Hat & IBM"
+
+function sanitiseWhitespaceInCompanyName(companyName) {
+  // Strip out commas and whitespace
+  companyName = companyName.replace(",", "")
+  return companyName?.trim()
+}
+
 const normalizeCompanyName = (company) => {
 
   if (!company) return
 
+  let companyName = company
+
+
+  // If multiple companies are listed, just take the first one, because otherwise there could be double-counting contributions
+  companyName = companyName.split(/(,|and|&)/)[0]
+
   // Do some normalisation
   // This is a bit fragile, and we just have to handle patterns as we discover them
-  let companyName = company
+  companyName = companyName
     .replace(", Inc.", "")
     .replace(", Inc", "")
     .replace("  GmbH", "")
@@ -234,16 +247,21 @@ const normalizeCompanyName = (company) => {
   companyName = companyName.replace("https://www.redhat.com/", "Red Hat")
   companyName = companyName.replace("http://www.redhat.com/", "Red Hat")
 
-  // Strip out commas and whitespace
-  companyName = companyName.replace(",", "")
-  companyName = companyName?.trim()
+  companyName = sanitiseWhitespaceInCompanyName(companyName)
+
+  // No one wants to see the full IBM name, even though it's the name in the GitHub profile
+  companyName = companyName.replace("International Business Machines", "IBM")
 
 
   // Special case for some acquisitions
   companyName = companyName.replace("JBoss", "Red Hat")
 
-  companyName = companyName.replace(/^Red Hat$/, redHatIBM)
-  companyName = companyName.replace(/^IBM$/, redHatIBM)
+  if (companyName) {
+
+  }
+
+  companyName = companyName.replace(/^Red Hat/, redHatIBM)
+  companyName = companyName.replace(/^IBM/, redHatIBM)
 
   return companyName
 }

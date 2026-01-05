@@ -69,6 +69,13 @@ urls["users/redhatofficial"] = {
   company: null,
 }
 
+urls["users/IBM"] = {
+  login: "IBM",
+  type: "Organization",
+  name: "International Business Machines",
+  company: null,
+}
+
 const merger = "a person who did merges"
 
 const frogNode = {
@@ -191,7 +198,7 @@ describe("the github sponsor finder", () => {
     queryGraphQl.mockResolvedValue(graphQLResponse)
 
     queryRest.mockImplementation(url => {
-      if (url.split("@").length > 1 || url.split(" ").length > 1) {
+      if (url.split("@").length > 1 || url.split(" ").length > 1 || url.includes(",")) {
         return Promise.reject("Malformed url: " + url)
       } else
         return Promise.resolve(
@@ -391,6 +398,21 @@ describe("the github sponsor finder", () => {
       expect(sponsor).toBe("Red Hat & IBM")
     })
 
+    it("normalises a company name with a comma at the end", async () => {
+      const sponsor = await resolveAndNormalizeCompanyName("IBM, something else")
+      expect(sponsor).toBe("Red Hat & IBM")
+    })
+
+    it("does not duplicate content for special cases", async () => {
+      const sponsor = await resolveAndNormalizeCompanyName("IBM and Red Hat")
+      expect(sponsor).toBe("Red Hat & IBM")
+    })
+
+    it("normalises a company name with an @ and a comma at the end", async () => {
+      const sponsor = await resolveAndNormalizeCompanyName("@IBM, something else")
+      expect(sponsor).toBe("Red Hat & IBM")
+    })
+
     it("handles complex ownership relationships", async () => {
       let sponsor = await resolveAndNormalizeCompanyName("Red Hat, Inc")
       expect(sponsor).toBe("Red Hat & IBM")
@@ -430,6 +452,11 @@ describe("the github sponsor finder", () => {
       // This case is also tricky, because we could tokenise on at signs, but we only let people have one company, because otherwise the graph could be chaos.
       const sponsor = await resolveAndNormalizeCompanyName("@bear-metal and also some other companies, you know?")
       expect(sponsor).toBe("bear-metal")
+    })
+
+    it("handles the full IBM name", async () => {
+      const sponsor = await resolveAndNormalizeCompanyName("@IBM")
+      expect(sponsor).toBe("Red Hat & IBM")
     })
   })
 
