@@ -68,10 +68,9 @@ describe("an extension details page", () => {
     ).resolves.toBeTruthy()
   })
 
-  xit("should show a sponsor", async () => {
+  it("should show a sponsor", async () => {
     await expect(
       page.waitForSelector(`xpath///*[text()="Maintained by"]`)
     ).resolves.toBeTruthy()
   })
-
 })
