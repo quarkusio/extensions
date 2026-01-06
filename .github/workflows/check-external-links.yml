@@ -32,7 +32,7 @@ jobs:
           cache: "npm" # this only caches global dependencies
       - run: npm ci --prefer-offline
       - name: Download Built Artifact
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }} # token with actions:read permissions on target repo
           run-id: ${{ github.event.workflow_run.id }}
