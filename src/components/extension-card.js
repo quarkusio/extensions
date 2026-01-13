@@ -98,10 +98,33 @@ const MainInformation = styled.div`
   display: flex;
   flex-direction: column;
 `
+const ExtensionLogoAndStatus = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`
 const FinerDetails = styled.div`
   display: flex;
   flex-direction: column;
 `
+const ExtensionStatus = styled.div`
+  color: white;
+  display: inline;
+  background: ${props => props.$status === "deprecated" ? "#6a737d" : props.$status === "preview" ? "#F18F01" : props.$status === "experimental" ? "#FF004A" : "#4695EB"};
+  margin: 5px;
+  padding: 3px 7px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  height: 1.2rem;
+`
+const ConditionalExtensionStatus = ({ status }) => {
+  if(status && status !== "stable") {
+    return (<ExtensionStatus $status={status}>{status}</ExtensionStatus>);
+  } else {
+    return null;
+  }
+}
+
 
 const Logo = ({ extension }) => {
   return (
@@ -120,8 +143,12 @@ const ExtensionCard = ({ extension }) => {
   return (
     <Card to={"/" + extension.slug} $unlisted={unlisted} $superseded={superseded}>
       <MainInformation>
-        <Logo extension={extension} />
+        <ExtensionLogoAndStatus>
+          <Logo extension={extension} />
+          <ConditionalExtensionStatus status={extension.metadata?.status} />
+        </ExtensionLogoAndStatus>
         <ExtensionName $unlisted={unlisted} $superseded={superseded}>{extension.name}</ExtensionName>
+
         <ExtensionDescription>{extension.description}</ExtensionDescription>
       </MainInformation>
       <FinerDetails>

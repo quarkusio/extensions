@@ -156,6 +156,16 @@ const MavenCoordinate = styled.span`
   font-weight: var(--font-weight-bold);
 `
 
+const ExtensionStatus = styled.div`
+  color: white;
+  display: inline;
+  background: ${props => props.$status === "deprecated" ? "#6a737d" : props.$status === "preview" ? "#F18F01" : props.$status === "experimental" ? "#FF004A" : "#4695EB"};
+  padding: 3px 7px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  height: 1.2rem;
+`
+
 const VisibleLink = styled.a`
   &:link {
     color: var(--link-color);
@@ -485,6 +495,7 @@ const ExtensionDetailTemplate = ({
               data={{
                 name: "Status",
                 metadata,
+                transformer: element => (<ExtensionStatus $status={element}>{element}</ExtensionStatus>),
               }}
             />
             <ExtensionMetadata
