@@ -108,9 +108,11 @@ const FinerDetails = styled.div`
   flex-direction: column;
 `
 const ExtensionStatus = styled.div`
+  text-transform: uppercase;
+  font-weight: bold;
   color: white;
   display: inline;
-  background: ${props => props.$status === "deprecated" ? "#6a737d" : props.$status === "preview" ? "#F18F01" : props.$status === "experimental" ? "#FF004A" : "#4695EB"};
+  background: ${props => props.$status == "deprecated" ? "#6a737d" : props.$status == "preview" ? "#F18F01" : props.$status == "experimental" ? "#FF004A" : "#4695EB"};
   margin: 5px;
   padding: 3px 7px;
   border-radius: 20px;
@@ -118,7 +120,7 @@ const ExtensionStatus = styled.div`
   height: 1.2rem;
 `
 const ConditionalExtensionStatus = ({ status }) => {
-  if(status && status !== "stable") {
+  if(status && status != "stable") {
     return (<ExtensionStatus $status={status}>{status}</ExtensionStatus>);
   } else {
     return null;

@@ -157,9 +157,11 @@ const MavenCoordinate = styled.span`
 `
 
 const ExtensionStatus = styled.div`
+  text-transform: uppercase;
+  font-weight: bold;
   color: white;
   display: inline;
-  background: ${props => props.$status === "deprecated" ? "#6a737d" : props.$status === "preview" ? "#F18F01" : props.$status === "experimental" ? "#FF004A" : "#4695EB"};
+  background: ${props => props.$status == "deprecated" ? "#6a737d" : props.$status == "preview" ? "#F18F01" : props.$status == "experimental" ? "#FF004A" : "#4695EB"};
   padding: 3px 7px;
   border-radius: 20px;
   font-size: 0.9rem;
