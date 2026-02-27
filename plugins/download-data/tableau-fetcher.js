@@ -1,7 +1,7 @@
 const axios = require("axios")
 const csv = require("csvtojson")
 
-const serverUrl = "https://10ay.online.tableau.com/api/3.22"
+const serverUrl = "https://10ay.online.tableau.com/api/3.28"
 const site = process.env["TABLEAU_SITE"]
 
 // https://help.tableau.com/current/api/rest_api/en-us/REST/rest_api_get_started_tutorial_part_1.htm is the useful docs for this
