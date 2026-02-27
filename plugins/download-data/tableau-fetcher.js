@@ -11,16 +11,15 @@ async function getAccessToken() {
   if (personalAccessToken) {
     const tokenUrl = `${serverUrl}/auth/signin`
 
-    const xml = `<tsRequest>
-    <credentials 
-    personalAccessTokenName="extensions-site"
-    personalAccessTokenSecret="${personalAccessToken}" >
-      <site contentUrl="${site}" />
-    </credentials>
-  </tsRequest>`
+    const credentials = {
+      credentials: {
+        personalAccessTokenName: "extensions-site",
+        personalAccessTokenSecret: personalAccessToken,
+        site: { contentUrl: site }
+      }
+    }
 
-    const response = await axios.post(tokenUrl, xml)
-
+    const response = await axios.post(tokenUrl, credentials)
     return { token: response.data.credentials.token, siteId: response.data.credentials.site.id }
   } else {
     console.log("No TABLEAU_PERSONAL_ACCESS_TOKEN has been set. Not fetching download data.")
