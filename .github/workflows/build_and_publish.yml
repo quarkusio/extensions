@@ -129,7 +129,7 @@ jobs:
           path: site
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
 
   raise-defects:
     # Only try and raise defects on the main builds
