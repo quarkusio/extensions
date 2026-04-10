@@ -100,7 +100,7 @@ jobs:
         run: echo ${{ github.event.number }} > ./public/pr-id.txt
 
       - name: Publishing directory for site deployment
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: site
           path: ./public
@@ -119,12 +119,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Built site
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: site
           path: site
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
           path: site
       - name: Deploy to GitHub Pages
@@ -140,7 +140,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6 # not needed for the code, but needed for the git config
       - name: Download Built site
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           name: site
           path: site
