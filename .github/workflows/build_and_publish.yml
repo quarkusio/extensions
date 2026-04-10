@@ -74,11 +74,16 @@ jobs:
             .cache-github-api
           key: gatsby-build-github-queries-${{ steps.date.outputs.month }}-${{ steps.date.outputs.day }}-${{ github.run_id }}-${{ github.run_attempt }}
 
-      # run eslint on all files if eslintrc changes
       - name: Run eslint on changed files
-        uses: sibiraj-s/action-eslint@v4
-        with:
-          all-files: ${{ steps.filter.outputs.eslintrc == 'true' }}
+        if: github.event_name == 'pull_request'
+        run: |
+          git fetch --no-tags --depth=1 origin main
+          CHANGED_FILES=$(git diff --name-only --diff-filter=d origin/main -- '*.js' '*.jsx' '*.ts' '*.tsx')
+          if [ -n "$CHANGED_FILES" ]; then
+            echo "$CHANGED_FILES" | xargs npx eslint
+          else
+            echo "No JS/TS files changed, skipping lint"
+          fi
 
       # see https://github.com/puppeteer/puppeteer/issues/12818
       - name: Disable AppArmor
