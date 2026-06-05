@@ -15,9 +15,19 @@ describe("site external links", () => {
   const deadInternalLinks = []
 
   const resultsFile = "dead-link-check-results.json"
+  const summaryFile = "dead-link-check-summary.json"
+
+  let totalLinks = 0
+  let brokenLinks = 0
+  let passedAsRateLimited = 0
+  let passedAsPaywalled = 0
+  let retriedSuccessfully = 0
+  const statusBreakdown = {}
+  const domainBreakdown = {}
 
   beforeAll(async () => {
     await fs.rm(resultsFile, { force: true })
+    await fs.rm(summaryFile, { force: true })
 
     const path = `http://localhost:${port}/${pathPrefix}`
     const pendingRetries = []
@@ -27,7 +37,9 @@ describe("site external links", () => {
 
     // After a page is scanned, check out the results!
     checker.on("link", async result => {
+      totalLinks++
       if (result.state === "BROKEN") {
+        brokenLinks++
         // Don't stress about 403s from vimeo because humans can get past the paywall fairly easily and we want to have the link
         const isPaywalled =
           result.status === status.FORBIDDEN && result.url.includes("vimeo")
@@ -50,8 +62,10 @@ describe("site external links", () => {
 
         if (!retryWorked) {
           if (result.status === status.TOO_MANY_REQUESTS) {
+            passedAsRateLimited++
             console.log("Giving a pass because of too many tries to", result)
           } else if (isPaywalled) {
+            passedAsPaywalled++
             console.log("Giving a pass to paywalled link", result)
           } else {
             const errorText =
@@ -67,6 +81,13 @@ describe("site external links", () => {
               if (!deadExternalLinks.includes(description)) {
                 deadExternalLinks.push(description)
 
+                const statusCode = String(result.status || 0)
+                statusBreakdown[statusCode] = (statusBreakdown[statusCode] || 0) + 1
+                try {
+                  const domain = new URL(result.url).hostname
+                  domainBreakdown[domain] = (domainBreakdown[domain] || 0) + 1
+                } catch (e) { /* ignore unparseable URLs */ }
+
                 // Also write out to a file - the a+ flag will create it if it doesn't exist
                 const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
 
@@ -77,6 +98,10 @@ describe("site external links", () => {
               }
             }
           }
+        }
+
+        if (retryWorked) {
+          retriedSuccessfully++
         }
 
         return retryWorked
@@ -106,6 +131,21 @@ describe("site external links", () => {
       retryErrorsJitter: 8000, // Default is 3000
     })
       .then(() => Promise.all(pendingRetries))
+      .then(async () => {
+        const summary = {
+          totalLinks,
+          brokenLinks,
+          passedAsRateLimited,
+          passedAsPaywalled,
+          retriedSuccessfully,
+          deadExternalLinks: deadExternalLinks.length,
+          deadInternalLinks: deadInternalLinks.length,
+          statusBreakdown,
+          domainBreakdown,
+        }
+        console.log("Link check summary:", JSON.stringify(summary, null, 2))
+        await fs.writeFile(summaryFile, JSON.stringify(summary, null, 2))
+      })
   })
 
 

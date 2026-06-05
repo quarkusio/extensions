@@ -51,6 +51,7 @@ class Report implements Runnable {
     // raising an issue in
     private static final String EYECATCHER = "QuarkusExtensionsDeadLinkHelper";
     public static final String OUTPUT_PATH = "dead-link-check-results.json";
+    public static final String SUMMARY_PATH = "dead-link-check-summary.json";
     @Option(names = "token", description = "Github token to use when calling the Github API")
     private String token;
 
@@ -76,11 +77,17 @@ class Report implements Runnable {
 
             List<DeadLink> links = readTestOutputFile();
 
+            String summaryInfo = readSummaryFile();
+
             if (links.size() < 30) {
                 System.out.println("Processing " + links.size() + " dead links.");
+                if (!summaryInfo.isEmpty()) {
+                    System.out.println("Link check summary:\n" + summaryInfo);
+                }
                 links.forEach(link -> processDeadLink(github, link));
             } else {
-                throw new RuntimeException("There were " + links.size() + " dead links, which seems implausible.");
+                throw new RuntimeException("There were " + links.size() + " dead links, which seems implausible."
+                        + (summaryInfo.isEmpty() ? "" : "\nLink check summary:\n" + summaryInfo));
             }
 
             // Close any issues that don't relate to these
@@ -195,6 +202,18 @@ class Report implements Runnable {
 
     private String getOwningPage(DeadLink link) {
         return link.owningPage.replace("http://localhost:9000/extensions", siteUrl);
+    }
+
+    private String readSummaryFile() {
+        try {
+            Path filePath = FileSystems.getDefault().getPath(SUMMARY_PATH);
+            if (Files.exists(filePath)) {
+                return Files.readString(filePath);
+            }
+        } catch (IOException e) {
+            System.out.println("Could not read summary file: " + e.getMessage());
+        }
+        return "";
     }
 
     private List<DeadLink> readTestOutputFile() throws IOException {
