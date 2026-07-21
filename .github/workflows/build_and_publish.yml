@@ -149,7 +149,7 @@ jobs:
           name: site
           path: site
       - name: Raise defects if needed
-        uses: jbangdev/jbang-action@v0.137.0
+        uses: jbangdev/jbang-action@v0.141.0
         with:
           script: site-validation/bad-image-issue.java
           scriptargs: token=${{ secrets.GITHUB_TOKEN }} issueRepo=${{ github.repository }}  runId=${{ github.run_id }} siteUrl=https://quarkus.io/extensions
