@@ -117,9 +117,17 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
     // so check it. We don't check for every url because otherwise we start getting 429s and dropping good URLs
     // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
     // A simple property read won't work
-    const {
-      default: urlExist,
-    } = await import("url-exist")
+
+    let urlExist
+    try {
+      const urlExistModule = await import("url-exist")
+      urlExist = urlExistModule.default
+    } catch (error) {
+      // url-exist may fail to load in some environments (e.g., due to ky-universal ES module issues)
+      // In this case, skip URL validation and return the URL as-is
+      console.warn("Unable to load url-exist module, skipping URL validation:", error.message)
+      return issuesUrl
+    }
 
     console.log("Validating issue url for", issuesUrl, "because issues is", issues)
 

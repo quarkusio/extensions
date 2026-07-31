@@ -2,6 +2,12 @@
  * @jest-environment node
  */
 
+// Mock url-exist to avoid top-level await issues in ky-universal dependency
+// We need to mock it before any modules that use it are loaded
+jest.mock("url-exist", () => {
+  return jest.fn().mockResolvedValue(true)
+}, { virtual: true })
+
 const { onCreateNode, onPreBootstrap, onPluginInit, sourceNodes, createResolvers } = require("./gatsby-node")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { queryGraphQl, getRawFileContents, queryRest } = require("./github-helper")
@@ -1491,6 +1497,128 @@ describe("the github data handler", () => {
         expect.objectContaining({
           name: "9c2af8ee-c6e0-49bb-bd42-45d2ffe877e1",
         })
+      )
+    })
+  })
+
+  describe("when JWT tokens in GitHub image URLs expire", () => {
+    const url = "http://fake.github.com/someuser/aproject"
+    const avatarUrl = "http://something.com/someuser.png"
+
+    // Simulate a GitHub URL with JWT token and query parameters
+    const expiredJwtUrl =
+      "https://repository-images.githubusercontent.com/github-production-repository-image-32fea6/718048072/3f670f6b-0cad-431b-84bf-1bea70304daf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260803%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260803T103335Z&X-Amz-Expires=300&X-Amz-Signature=c58078aa5fc7bc36233b145f815a41faa44992a430e18f34e8f04c4acd757a6b&X-Amz-SignedHeaders=host&jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"
+
+    const freshJwtUrl =
+      "https://repository-images.githubusercontent.com/github-production-repository-image-32fea6/718048072/3f670f6b-0cad-431b-84bf-1bea70304daf?X-Amz-Algorithm=AWS4-HMAC-SHA256&jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.FRESH_TOKEN"
+
+    const initialResponse = {
+      data: {
+        repository: {
+          issues: {
+            totalCount: 5,
+          },
+          openGraphImageUrl: expiredJwtUrl,
+        },
+        repositoryOwner: { avatarUrl: avatarUrl },
+      },
+    }
+
+    const freshResponse = {
+      data: {
+        repository: {
+          openGraphImageUrl: freshJwtUrl,
+        },
+        repositoryOwner: { avatarUrl: avatarUrl },
+      },
+    }
+
+    const metadata = {
+      sourceControl: `${url},uniquenessstuff`,
+    }
+
+    const node = {
+      metadata,
+      internal,
+    }
+
+    beforeAll(async () => {
+      await onPreBootstrap({ cache, actions: {} })
+    })
+
+    beforeEach(() => {
+      // Clear the cache to avoid interference from previous tests
+      onPluginInit()
+
+      // Clear mock history before each test
+      createRemoteFileNode.mockClear()
+      queryGraphQl.mockClear()
+    })
+
+    it("retries with a fresh URL from GitHub API when JWT expires", async () => {
+      const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation()
+
+      // Set up mocks for this specific test
+      queryGraphQl
+        .mockResolvedValueOnce(initialResponse)
+        .mockResolvedValueOnce(freshResponse)
+
+      createRemoteFileNode
+        .mockRejectedValueOnce({
+          message: "Response code 618 (jwt:expired)",
+          statusCode: 618
+        })
+        .mockResolvedValueOnce({ absolutePath: "/cached/image.png" })
+
+      await onCreateNode({
+        node,
+        createContentDigest,
+        createNodeId,
+        actions,
+      })
+
+      // Verify that retry logic was triggered by checking console.warn was called
+      expect(consoleWarnSpy).toHaveBeenCalledWith(
+        expect.stringContaining('JWT expired')
+      )
+
+      // Verify createRemoteFileNode was called (at least once for the retry)
+      expect(createRemoteFileNode).toHaveBeenCalled()
+
+      // Verify at least one call was with the fresh URL (after retry)
+      expect(createRemoteFileNode).toHaveBeenCalledWith(
+        expect.objectContaining({ url: expect.stringContaining('.FRESH_TOKEN') })
+      )
+
+      consoleWarnSpy.mockRestore()
+    })
+
+    it("queries GitHub API twice to get the fresh URL", async () => {
+      // Set up mocks for this specific test
+      queryGraphQl
+        .mockResolvedValueOnce(initialResponse)
+        .mockResolvedValueOnce(freshResponse)
+
+      createRemoteFileNode
+        .mockRejectedValueOnce({
+          message: "Response code 618 (jwt:expired)",
+          statusCode: 618
+        })
+        .mockResolvedValueOnce({ absolutePath: "/cached/image.png" })
+
+      await onCreateNode({
+        node,
+        createContentDigest,
+        createNodeId,
+        actions,
+      })
+
+      // Verify GitHub API was queried at least twice (initial + retry)
+      expect(queryGraphQl.mock.calls.length).toBeGreaterThanOrEqual(2)
+
+      // Verify the fresh response was fetched during retry
+      expect(queryGraphQl).toHaveBeenCalledWith(
+        expect.stringContaining('openGraphImageUrl')
       )
     })
   })

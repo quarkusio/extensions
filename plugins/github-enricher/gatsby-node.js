@@ -126,6 +126,99 @@ exports.onPluginInit = () => {
   clearCaches()
 }
 
+/**
+ * Helper function to create remote file nodes with retry logic for JWT expiration.
+ * GitHub repository image URLs contain JWT tokens that expire after a short time (typically 5 minutes).
+ * If the build takes too long between retrieving the URL and fetching the image, the JWT may expire.
+ * This function catches JWT expiration errors (HTTP 618) and retries with a fresh URL from GitHub.
+ */
+const createRemoteFileNodeWithRetry = async (url, options, coords) => {
+  try {
+    // Strip query parameters from URL for filename to avoid ENAMETOOLONG errors
+    const urlWithoutQuery = url.split('?')[0]
+    const baseName = path.basename(urlWithoutQuery)
+
+    // Use URL without JWT query params as cache key so Gatsby can reuse cached files
+    // even when the JWT token in the URL changes (JWTs expire after 5 minutes)
+    const cacheKey = urlWithoutQuery
+
+    return await createRemoteFileNode({
+      url,
+      ...options,
+      name: baseName,
+      cacheKey,
+    })
+  } catch (error) {
+    // Log the error to help diagnose JWT detection issues
+    console.error(`createRemoteFileNode failed for ${url}:`, {
+      message: error.message,
+      statusCode: error.statusCode,
+      responseStatusCode: error.responseStatusCode,
+      responseStatusMessage: error.responseStatusMessage,
+      'response?.statusCode': error.response?.statusCode,
+      'originalError?.statusCode': error.originalError?.statusCode
+    })
+
+    // Check if this is a JWT expiration error
+    // Note: gatsby-source-filesystem wraps HTTP errors from 'got', check multiple locations
+    const statusCode = error.statusCode ||
+                       error.originalError?.statusCode ||
+                       error.response?.statusCode ||
+                       error.responseStatusCode  // got library uses this property
+
+    const errorMessage = error.message || ''
+    const errorString = JSON.stringify(error)
+
+    const isJwtExpired = errorMessage.includes('jwt:expired') ||
+                         errorMessage.includes('jwt expired') ||
+                         errorMessage.includes('618') ||
+                         errorString.includes('jwt:expired') ||
+                         errorString.includes('618') ||
+                         statusCode === 618
+
+    if (isJwtExpired && coords) {
+      console.warn(`JWT expired for ${url}, retrying with fresh URL from GitHub API`)
+
+      try {
+        // Re-fetch fresh URL from GitHub API
+        const freshImageInfo = await getImageInformationNoCache(coords)
+
+        if (freshImageInfo?.socialImage) {
+          const urlWithoutQuery = freshImageInfo.socialImage.split('?')[0]
+          const baseName = path.basename(urlWithoutQuery)
+          const cacheKey = urlWithoutQuery
+
+          // Retry with fresh URL
+          return await createRemoteFileNode({
+            url: freshImageInfo.socialImage,
+            ...options,
+            name: baseName,
+            cacheKey,
+          })
+        } else {
+          // No fresh URL available (possibly due to rate limiting)
+          console.warn(`Could not get fresh image URL for ${coords.owner}/${coords.name}, skipping image`)
+          return null
+        }
+      } catch (retryError) {
+        // Retry failed (likely due to GitHub API rate limiting)
+        // Instead of crashing the build, skip this image and continue
+        console.warn(`Retry failed for ${coords.owner}/${coords.name} (${retryError.message}), skipping image`)
+        return null
+      }
+    }
+
+    // Re-throw if not JWT expiration
+    // If it is JWT expiration but we don't have coords to retry, skip the image
+    if (isJwtExpired) {
+      console.warn(`JWT expired for ${url} but no repository coords available, skipping image`)
+      return null
+    }
+
+    throw error
+  }
+}
+
 exports.onCreateNode = async (
   { node, actions, createNodeId, createContentDigest },
   pluginOptions
@@ -182,23 +275,24 @@ exports.onCreateNode = async (
     }
 
     if (scmInfo.socialImage) {
-      // Extract just the base filename without query parameters to avoid ENAMETOOLONG errors
-      // GitHub's image URLs now include JWT tokens that can make filenames exceed the 255-char limit
-      const urlWithoutQuery = scmInfo.socialImage.split('?')[0]
-      const baseName = path.basename(urlWithoutQuery)
+      const fileNode = await createRemoteFileNodeWithRetry(
+        scmInfo.socialImage,
+        {
+          parentNodeId: scmInfo.id,
+          getCache,
+          createNode,
+          createNodeId,
+        },
+        coords
+      )
 
-      const fileNode = await createRemoteFileNode({
-        url: scmInfo.socialImage,
-        name: baseName,
-        parentNodeId: scmInfo.id,
-        getCache,
-        createNode,
-        createNodeId,
-      })
-
-      // This is the foreign key to the cropped file's name
-      // We have to guess what the name will be
-      scmInfo.projectImage = "smartcrop-" + path.basename(fileNode.absolutePath)
+      // fileNode might be null if JWT expired and retry failed (e.g., due to rate limiting)
+      // In that case, we skip the image rather than crashing the build
+      if (fileNode) {
+        // This is the foreign key to the cropped file's name
+        // We have to guess what the name will be
+        scmInfo.projectImage = "smartcrop-" + path.basename(fileNode.absolutePath)
+      }
     }
 
     createNode(scmInfo)
