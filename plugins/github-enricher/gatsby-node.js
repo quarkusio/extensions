@@ -35,17 +35,17 @@ exports.onPreBootstrap = async () => {
 // The location of extension files changes relatively often as extensions get moved or deprecated; to avoid publishing dead links, check often
   extensionYamlCache = new PersistableCache({
     key: "github-api-for-extension-metadata-paths",
-    stdTTL: 0.8 * DAY_IN_SECONDS
+    stdTTL: 2 * DAY_IN_SECONDS
   })
 
   samplesCache = new PersistableCache({
     key: "samples-url",
-    stdTTL: 5 * DAY_IN_SECONDS
+    stdTTL: 4 * DAY_IN_SECONDS
   })
 
   issueCountCache = new PersistableCache({
     key: "github-api-for-issue-counts",
-    stdTTL: DAY_IN_SECONDS
+    stdTTL: 2 * DAY_IN_SECONDS
   })
 
   await imageCache.ready()
@@ -135,7 +135,7 @@ exports.onPluginInit = () => {
 const createRemoteFileNodeWithRetry = async (url, options, coords) => {
   try {
     // Strip query parameters from URL for filename to avoid ENAMETOOLONG errors
-    const urlWithoutQuery = url.split('?')[0]
+    const urlWithoutQuery = url.split("?")[0]
     const baseName = path.basename(urlWithoutQuery)
 
     // Use URL without JWT query params as cache key so Gatsby can reuse cached files
@@ -155,26 +155,26 @@ const createRemoteFileNodeWithRetry = async (url, options, coords) => {
       statusCode: error.statusCode,
       responseStatusCode: error.responseStatusCode,
       responseStatusMessage: error.responseStatusMessage,
-      'response?.statusCode': error.response?.statusCode,
-      'originalError?.statusCode': error.originalError?.statusCode
+      "response?.statusCode": error.response?.statusCode,
+      "originalError?.statusCode": error.originalError?.statusCode
     })
 
     // Check if this is a JWT expiration error
     // Note: gatsby-source-filesystem wraps HTTP errors from 'got', check multiple locations
     const statusCode = error.statusCode ||
-                       error.originalError?.statusCode ||
-                       error.response?.statusCode ||
-                       error.responseStatusCode  // got library uses this property
+      error.originalError?.statusCode ||
+      error.response?.statusCode ||
+      error.responseStatusCode  // got library uses this property
 
-    const errorMessage = error.message || ''
+    const errorMessage = error.message || ""
     const errorString = JSON.stringify(error)
 
-    const isJwtExpired = errorMessage.includes('jwt:expired') ||
-                         errorMessage.includes('jwt expired') ||
-                         errorMessage.includes('618') ||
-                         errorString.includes('jwt:expired') ||
-                         errorString.includes('618') ||
-                         statusCode === 618
+    const isJwtExpired = errorMessage.includes("jwt:expired") ||
+      errorMessage.includes("jwt expired") ||
+      errorMessage.includes("618") ||
+      errorString.includes("jwt:expired") ||
+      errorString.includes("618") ||
+      statusCode === 618
 
     if (isJwtExpired && coords) {
       console.warn(`JWT expired for ${url}, retrying with fresh URL from GitHub API`)
@@ -184,7 +184,7 @@ const createRemoteFileNodeWithRetry = async (url, options, coords) => {
         const freshImageInfo = await getImageInformationNoCache(coords)
 
         if (freshImageInfo?.socialImage) {
-          const urlWithoutQuery = freshImageInfo.socialImage.split('?')[0]
+          const urlWithoutQuery = freshImageInfo.socialImage.split("?")[0]
           const baseName = path.basename(urlWithoutQuery)
           const cacheKey = urlWithoutQuery
 
