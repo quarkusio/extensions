@@ -19,6 +19,7 @@ class PersistableCache {
   constructor(options) {
     this.options = options
     this.cache = new NodeCache(options)
+    this.inflight = new Map()
 
     this.cachePath = this.options?.cachePath || DEFAULT_CACHE_PATH
 
@@ -108,11 +109,22 @@ class PersistableCache {
   async getOrSet(key, functionThatReturnsAPromise) {
     if (this.has(key)) {
       return this.get(key)
-    } else {
-      const answer = await functionThatReturnsAPromise()
-      this.set(key, answer)
-      return answer
     }
+
+    if (this.inflight.has(key)) {
+      return this.inflight.get(key)
+    }
+
+    const promise = functionThatReturnsAPromise().then(answer => {
+      this.set(key, answer)
+      this.inflight.delete(key)
+      return answer
+    }, err => {
+      this.inflight.delete(key)
+      throw err
+    })
+    this.inflight.set(key, promise)
+    return promise
   }
 
 }
