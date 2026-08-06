@@ -297,12 +297,18 @@ const saveSponsorCache = async () => {
   console.log("Persisted contributor information for", repoContributorCache.size(), "cached repositories and paths within those repositories.")
 }
 
+const getSponsorCacheStats = () => ({
+  repoContributorCache: repoContributorCache?.getStats(),
+  companyCache: companyCache?.getStats(),
+})
+
 module.exports = {
   findSponsor,
   getContributors,
   clearCaches,
   initSponsorCache,
   saveSponsorCache,
+  getSponsorCacheStats,
   setMinimumContributorCount,
   setMinimumContributionPercent,
   resolveAndNormalizeCompanyName,

@@ -16,6 +16,14 @@ const RATE_LIMIT_PREQUERY = `rateLimit {
 let resetTime
 const allowSlowBuild = !process.env.DONT_WAIT
 
+let graphqlCalls = 0
+let restCalls = 0
+let rawFetchCalls = 0
+let totalGraphqlCost = 0
+let lastRemaining = null
+let lowestRemaining = Infinity
+let paginationPages = 0
+
 // We can add more errors we know are non-recoverable here, which should help build times
 const isRecoverableError = (ghBody, params) => {
   const contents = JSON.stringify(ghBody)
@@ -116,6 +124,7 @@ function findPaginatedElements(data, name, inPath) {
 * If there's more than one edges element, I think it would paginate the first, but I haven't tested.
  */
 const queryGraphQl = async (query) => {
+  graphqlCalls++
 
   const amendedQuery = query.replace(/edges\s*{/, PAGE_INFO_SUBQUERY).replace("query {", "query {" + RATE_LIMIT_PREQUERY)
 
@@ -126,6 +135,15 @@ const queryGraphQl = async (query) => {
     (ghBody) => ghBody?.data
     , res => res && res.json()
   )
+
+  const rateLimit = answer?.data?.rateLimit
+  if (rateLimit) {
+    totalGraphqlCost += rateLimit.cost || 0
+    lastRemaining = rateLimit.remaining
+    if (rateLimit.remaining < lowestRemaining) {
+      lowestRemaining = rateLimit.remaining
+    }
+  }
 
   const paginatedElements = findPaginatedElements(answer?.data, "pageInfo")
 
@@ -151,6 +169,7 @@ const queryGraphQl = async (query) => {
 }
 
 const recurse = async (query, paginatedElements) => {
+  paginationPages++
 
   const pageInfo = paginatedElements.contents
   const pathElements = paginatedElements.keys
@@ -188,6 +207,7 @@ const recurse = async (query, paginatedElements) => {
 }
 
 const queryRest = async (path) => {
+  restCalls++
   return await tolerantFetch(`https://api.github.com/${path}`, {
       method: "GET",
     },
@@ -206,6 +226,7 @@ const waitUntil = async (timeString) => {
 }
 
 const getRawFileContents = async (org, repo, path) => {
+  rawFetchCalls++
   // Don't consolidate these two lines or we risk replacing the double slash in http://
   const fullPath = `raw.githubusercontent.com/${org}/${repo}/main/${path}`.replace("//", "/")
   const url = "https://" + fullPath
@@ -216,4 +237,14 @@ const getRawFileContents = async (org, repo, path) => {
 
 }
 
-module.exports = { queryGraphQl, queryRest, getRawFileContents }
+const getApiCallStats = () => ({
+  graphqlCalls,
+  restCalls,
+  rawFetchCalls,
+  totalGraphqlCost,
+  paginationPages,
+  lastRemaining,
+  lowestRemaining: lowestRemaining === Infinity ? "N/A" : lowestRemaining,
+})
+
+module.exports = { queryGraphQl, queryRest, getRawFileContents, getApiCallStats }

@@ -9,11 +9,12 @@ const {
   findSponsor,
   clearCaches,
   saveSponsorCache,
+  getSponsorCacheStats,
   initSponsorCache,
   getContributors,
   normalizeCompanyName
 } = require("./sponsorFinder")
-const { getRawFileContents, queryGraphQl } = require("./github-helper")
+const { getRawFileContents, queryGraphQl, getApiCallStats } = require("./github-helper")
 const yaml = require("js-yaml")
 const { getIssueInformationNoCache } = require("./issue-count-helper")
 const { normaliseUrl } = require("./url-helper")
@@ -115,6 +116,23 @@ exports.onPostBootstrap = async () => {
   console.log("Persisted", issueCountCache.size(), "issue counts.")
 
   await saveSponsorCache()
+
+  console.log("\n=== GitHub API Diagnostic Summary ===")
+  const apiStats = getApiCallStats()
+  console.log("API calls: GraphQL:", apiStats.graphqlCalls, "| REST:", apiStats.restCalls, "| Raw file:", apiStats.rawFetchCalls)
+  console.log("GraphQL total cost:", apiStats.totalGraphqlCost, "| Pagination pages:", apiStats.paginationPages)
+  console.log("Rate limit: last remaining:", apiStats.lastRemaining, "| lowest seen:", apiStats.lowestRemaining)
+
+  console.log("\nCache hit/miss rates:")
+  console.log("  Images:", JSON.stringify(imageCache.getStats()))
+  console.log("  Metadata paths:", JSON.stringify(extensionYamlCache.getStats()))
+  console.log("  Issue counts:", JSON.stringify(issueCountCache.getStats()))
+  console.log("  Samples:", JSON.stringify(samplesCache.getStats()))
+
+  const sponsorStats = getSponsorCacheStats()
+  console.log("  Repo contributors:", JSON.stringify(sponsorStats.repoContributorCache))
+  console.log("  Companies:", JSON.stringify(sponsorStats.companyCache))
+  console.log("=== End Diagnostic Summary ===\n")
 }
 
 exports.onPluginInit = () => {
