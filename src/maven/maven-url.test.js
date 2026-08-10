@@ -6,11 +6,16 @@ const {
   createMavenUrlFromCoordinates,
   createMavenUrlFromArtifactString,
   createMavenPomUrlFromCoordinates,
+  initMavenUrlCache,
 } = require("./maven-url")
 
 describe("maven url generator", () => {
   const gav =
     "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0"
+
+  beforeAll(async () => {
+    await initMavenUrlCache()
+  })
 
   beforeEach(() => {
     urlExist.mockReturnValue(true)

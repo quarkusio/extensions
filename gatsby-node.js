@@ -12,6 +12,7 @@ const {
   slugForExtensionsAddedMonth, slugForExtensionsAddedYear
 } = require("./src/components/util/extension-slugger")
 const { generateMavenInfo, initMavenCache, saveMavenCache } = require("./src/maven/maven-info")
+const { initMavenUrlCache, saveMavenUrlCache } = require("./src/maven/maven-url")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
@@ -227,6 +228,7 @@ exports.sourceNodes = async ({
 
 exports.onPreBootstrap = async () => {
   await initMavenCache()
+  await initMavenUrlCache()
   await initJavadocCache()
   badImages = []
 }
@@ -532,6 +534,7 @@ exports.onCreateWebpackConfig = ({ stage }) => {
 
 exports.onPostBootstrap = async () => {
   await saveMavenCache()
+  await saveMavenUrlCache()
 
   const badImageDetails = Object.values(badImages)
   // Write out to a file

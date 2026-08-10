@@ -1,4 +1,22 @@
 const parse = require("mvn-artifact-name-parser").default
+const PersistableCache = require("../persistable-cache")
+
+const DAY_IN_SECONDS = 60 * 60 * 24
+
+let mavenUrlCache
+
+const initMavenUrlCache = async () => {
+  mavenUrlCache = new PersistableCache({
+    key: "maven-url-existence",
+    stdTTL: 30 * DAY_IN_SECONDS
+  })
+  await mavenUrlCache.ready()
+  console.log("Ingested cached information for", mavenUrlCache.size(), "maven urls.")
+}
+
+const saveMavenUrlCache = async () => {
+  await mavenUrlCache.persist()
+}
 
 const createMavenUrlFromArtifactString = async artifact => {
   // Do some light pre-checking so we don't have to deal with catching
@@ -9,9 +27,11 @@ const createMavenUrlFromArtifactString = async artifact => {
 }
 
 const createMavenUrlFromCoordinates = async coordinates => {
+  const cacheKey = `${coordinates.groupId}:${coordinates.artifactId}:${coordinates.version}`
+  return mavenUrlCache.getOrSet(cacheKey, () => createMavenUrlFromCoordinatesNoCache(coordinates))
+}
 
-  // We have to access the url exist as a dynamic import (because CJS), await it because dynamic imports give a promise, and then destructure it to get the default
-  // A simple property read won't work
+const createMavenUrlFromCoordinatesNoCache = async coordinates => {
   const {
     default: urlExist,
   } = await import("url-exist")
@@ -51,5 +71,7 @@ module.exports = {
   createMavenUrlFromCoordinates,
   createMavenUrlFromArtifactString,
   createMavenPomUrlFromCoordinates,
-  createMavenMetadataUrlFromCoordinates
+  createMavenMetadataUrlFromCoordinates,
+  initMavenUrlCache,
+  saveMavenUrlCache,
 }
