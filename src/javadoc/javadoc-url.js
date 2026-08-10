@@ -48,7 +48,12 @@ const createJavadocUrlFromCoordinatesNoCache = async coordinates => {
   return NONE
 }
 
+const saveJavadocCache = async () => {
+  await urlCache.persist()
+}
+
 module.exports = {
   initJavadocCache,
+  saveJavadocCache,
   createJavadocUrlFromCoordinates,
 }

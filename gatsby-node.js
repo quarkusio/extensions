@@ -19,7 +19,7 @@ const ESLintPlugin = require("eslint-webpack-plugin")
 const { validate } = require("./src/data/image-validation")
 const fs = require("fs/promises")
 const {
-  createJavadocUrlFromCoordinates, initJavadocCache,
+  createJavadocUrlFromCoordinates, initJavadocCache, saveJavadocCache,
 } = require("./src/javadoc/javadoc-url")
 const { getCanonicalMonthTimestamp, getCanonicalYearTimestamp } = require("./src/components/util/date-utils")
 let badImages = {}
@@ -535,6 +535,7 @@ exports.onCreateWebpackConfig = ({ stage }) => {
 exports.onPostBootstrap = async () => {
   await saveMavenCache()
   await saveMavenUrlCache()
+  await saveJavadocCache()
 
   const badImageDetails = Object.values(badImages)
   // Write out to a file
