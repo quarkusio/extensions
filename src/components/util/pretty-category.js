@@ -7,4 +7,4 @@ const prettify = category => {
     .join(" ")
 }
 
-export default prettify
+module.exports = prettify
