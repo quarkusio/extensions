@@ -236,7 +236,8 @@ describe("the main gatsby entrypoint", () => {
       it("creates a category node", () => {
         expect(createNode).toHaveBeenCalledWith(
           expect.objectContaining({
-            name: "round",
+            categoryId: "round",
+            name: "Round",
             internal: expect.objectContaining({
               type: "Category",
             }),
@@ -245,7 +246,8 @@ describe("the main gatsby entrypoint", () => {
 
         expect(createNode).toHaveBeenCalledWith(
           expect.objectContaining({
-            name: "square",
+            categoryId: "square",
+            name: "Square",
             internal: expect.objectContaining({
               type: "Category",
             }),

@@ -57,7 +57,10 @@ describe("extension list", () => {
   }
 
   const extensions = [ruby, diamond, molluscs, obsolete, maybeObsolete]
-  const categories = [otherCategory, category]
+  const categories = [
+    { categoryId: otherCategory, name: "Snails" },
+    { categoryId: category, name: displayCategory }
+  ]
 
   const user = userEvent.setup()
 

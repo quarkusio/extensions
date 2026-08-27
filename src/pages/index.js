@@ -9,7 +9,7 @@ import { initialiseDisplayModeFromLocalStorage } from "../components/util/dark-m
 const Index = ({ data, location }) => {
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const extensions = data.allExtension.nodes
-  const categories = data.allCategory.nodes.map(c => c.name)
+  const categories = data.allCategory.nodes
   const downloadData = data.downloadDataDate
 
   if (extensions.length === 0) {
@@ -48,6 +48,7 @@ export const pageQuery = graphql`
     }
     allCategory(sort: { fields: [count, name], order: DESC }) {
       nodes {
+        categoryId
         name
       }
     }
@@ -66,6 +67,10 @@ export const pageQuery = graphql`
         slug
         metadata {
           categories
+          categoryObjects {
+            categoryId
+            name
+          }
           keywords
           guide
           status
