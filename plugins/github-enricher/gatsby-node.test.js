@@ -160,6 +160,11 @@ describe("the github data handler", () => {
     const avatarUrl = "http://something.com/someuser.png"
     const socialMediaPreviewUrl =
       "https://testopengraph.githubassets.com/3096043220541a8ea73deb5cb6baddf0f01d50244737d22402ba12d665e9aec2/quarkiverse/quarkus-some-extension"
+    const licenseInfo = {
+      spdxId: "Apache-2.0",
+      name: "Apache License 2.0",
+      url: "https://api.github.com/licenses/apache-2.0"
+    }
 
     const response = {
       data: {
@@ -180,6 +185,7 @@ describe("the github data handler", () => {
             ],
           },
           openGraphImageUrl: socialMediaPreviewUrl,
+          licenseInfo: licenseInfo,
         },
         repositoryOwner: { avatarUrl: avatarUrl },
       },
@@ -288,6 +294,17 @@ describe("the github data handler", () => {
       )
     })
 
+    it("fills in the license information", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          license: expect.objectContaining({
+            spdxId: "Apache-2.0",
+            name: "Apache License 2.0",
+            url: "https://api.github.com/licenses/apache-2.0"
+          })
+        })
+      )
+    })
 
     it("fills in an issue count", async () => {
       expect(createNode).toHaveBeenCalledWith(
@@ -1999,6 +2016,47 @@ named-contributing-orgs:
 
     // TODO test for re-sorting with other? Or do we care?
 
+  })
+
+  describe("when GitHub cannot classify the license (NOASSERTION)", () => {
+    const url = "http://fake.github.com/someuser/somerepo"
+
+    const response = {
+      data: {
+        repository: {
+          issues: { totalCount: 0 },
+          defaultBranchRef: { name: "main" },
+          metaInfs: null,
+          subfolderMetaInfs: null,
+          shortenedSubfolderMetaInfs: { entries: [] },
+          openGraphImageUrl: "https://opengraph.githubassets.com/default",
+          licenseInfo: {
+            spdxId: "NOASSERTION",
+            name: "Other",
+            url: null
+          },
+        },
+        repositoryOwner: { avatarUrl: "http://something.com/someuser.png" },
+      },
+    }
+
+    beforeEach(async () => {
+      queryGraphQl.mockResolvedValue(response)
+      const metadata = {
+        maven: { artifactId: "something", groupId: "grouper" },
+        sourceControl: `${url},mavenstuff`,
+      }
+      await onCreateNode(
+        { node: { metadata, internal }, createContentDigest, createNodeId, actions },
+        {}
+      )
+    })
+
+    it("sets license to null", async () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({ license: null })
+      )
+    })
   })
 })
 

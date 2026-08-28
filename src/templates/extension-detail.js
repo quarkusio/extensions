@@ -279,6 +279,7 @@ const ExtensionDetailTemplate = ({
   const alongWith = extensionCount > 1 ? `, along with ${extensionCount} other extensions,` : ""
 
   const repository = metadata?.sourceControl?.repository
+  const license = metadata?.sourceControl?.license
 
   const cta = (<CodeLink
     unlisted={metadata.unlisted}
@@ -546,6 +547,13 @@ const ExtensionDetailTemplate = ({
             />
             <ExtensionMetadata
               data={{
+                name: "License",
+                text: license?.spdxId || license?.name,
+                url: license?.url,
+              }}
+            />
+            <ExtensionMetadata
+              data={{
                 name: "Issues",
                 fieldName: "issues",
                 metadata: extension.metadata?.sourceControl,
@@ -689,6 +697,11 @@ export const pageQuery = graphql`
             childImageSharp {
               gatsbyImageData(width: 208)
             }
+          }
+          license {
+            spdxId
+            name
+            url
           }
         }
       }
