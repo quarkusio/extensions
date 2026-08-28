@@ -33,7 +33,7 @@ const skipEnrichment = process.env.SKIP_ENRICHMENT === "true"
 const DAY_IN_SECONDS = 24 * 60 * 60
 
 // Defer initialization of these so we're playing at the right points in the plugin lifecycle
-let imageCache, extensionYamlCache, issueCountCache, samplesCache
+let repoOverviewCache, extensionYamlCache, issueCountCache, samplesCache
 
 exports.onPreBootstrap = async () => {
   if (skipEnrichment) {
@@ -45,7 +45,7 @@ exports.onPreBootstrap = async () => {
 
   startGitHubBudget()
 
-  imageCache = new PersistableCache({ key: "github-api-for-images", stdTTL: 3 * DAY_IN_SECONDS })
+  repoOverviewCache = new PersistableCache({ key: "github-api-for-repo-overview", stdTTL: 3 * DAY_IN_SECONDS })
 
 // The location of extension files changes relatively often as extensions get moved or deprecated; to avoid publishing dead links, check often
   extensionYamlCache = new PersistableCache({
@@ -63,8 +63,8 @@ exports.onPreBootstrap = async () => {
     stdTTL: 2 * DAY_IN_SECONDS
   })
 
-  await imageCache.ready()
-  console.log("Ingested", imageCache.size(), "cached images.")
+  await repoOverviewCache.ready()
+  console.log("Ingested", repoOverviewCache.size(), "cached repo overviews.")
 
   await extensionYamlCache.ready()
   console.log("Ingested", extensionYamlCache.size(), "cached metadata file locations.")
@@ -121,8 +121,8 @@ exports.onPostBootstrap = async () => {
     return
   }
 
-  await imageCache.persist()
-  console.log("Persisted", imageCache.size(), "cached repository images.")
+  await repoOverviewCache.persist()
+  console.log("Persisted", repoOverviewCache.size(), "cached repo overviews.")
 
   await extensionYamlCache.persist()
   console.log("Persisted", extensionYamlCache.size(), "cached metadata file locations.")
@@ -139,7 +139,7 @@ exports.onPostBootstrap = async () => {
 exports.onPluginInit = () => {
   // Clear the in-memory cache; we read from the gatsby cache later on, so this shouldn't affect the persistence between builds
   // This is mostly needed for tests, since we can't add new methods beyond what the API defines to this file
-  imageCache?.flushAll()
+  repoOverviewCache?.flushAll()
   extensionYamlCache?.flushAll()
   issueCountCache?.flushAll()
   clearCaches()
@@ -200,10 +200,10 @@ const createRemoteFileNodeWithRetry = async (url, options, coords) => {
 
       try {
         // Re-fetch fresh URL from GitHub API
-        const freshImageInfo = await getImageInformationNoCache(coords)
+        const freshRepoOverview = await getRepoOverviewNoCache(coords)
 
-        if (freshImageInfo?.socialImage) {
-          const urlWithoutQuery = freshImageInfo.socialImage.split("?")[0]
+        if (freshRepoOverview?.socialImage) {
+          const urlWithoutQuery = freshRepoOverview.socialImage.split("?")[0]
           const baseName = path.basename(urlWithoutQuery)
           const cacheKey = urlWithoutQuery
 
@@ -398,13 +398,14 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId) => {
     scmInfo.issues = issues
   }
 
-  const imageInfo = await getImageInformation(coords, scmUrl)
+  const repoOverview = await getRepoOverview(coords, scmUrl)
 
-  if (imageInfo) {
-    const { ownerImageUrl, socialImage } = imageInfo
+  if (repoOverview) {
+    const { ownerImageUrl, socialImage, license } = repoOverview
 
     scmInfo.ownerImageUrl = ownerImageUrl
     scmInfo.socialImage = socialImage
+    scmInfo.license = license
   }
 
 
@@ -441,16 +442,21 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId) => {
   return scmInfo
 }
 
-const getImageInformation = async (coords, scmUrl) => {
-  return await imageCache.getOrSet(scmUrl, () => getImageInformationNoCache(coords))
+const getRepoOverview = async (coords, scmUrl) => {
+  return await repoOverviewCache.getOrSet(scmUrl, () => getRepoOverviewNoCache(coords))
 }
 
-const getImageInformationNoCache = async (coords) => {
+const getRepoOverviewNoCache = async (coords) => {
   const query = `query {
-    repository(owner:"${coords.owner}", name:"${coords.name}") {               
+    repository(owner:"${coords.owner}", name:"${coords.name}") {
       openGraphImageUrl
+      licenseInfo {
+        spdxId
+        name
+        url
+      }
     }
-    
+
     repositoryOwner(login: "${coords.owner}") {
         avatarUrl
     }
@@ -468,6 +474,7 @@ const getImageInformationNoCache = async (coords) => {
     const {
       repository: {
         openGraphImageUrl,
+        licenseInfo,
       },
       repositoryOwner: {
         avatarUrl
@@ -490,7 +497,17 @@ const getImageInformationNoCache = async (coords) => {
       socialImage = openGraphImageUrl
     }
 
-    return { socialImage, ownerImageUrl }
+    // Normalize the license: treat NOASSERTION (GitHub's "couldn't classify" marker) as absent
+    let license = null
+    if (licenseInfo && licenseInfo.spdxId !== "NOASSERTION") {
+      license = {
+        name: licenseInfo.name,
+        spdxId: licenseInfo.spdxId,
+        url: licenseInfo.url
+      }
+    }
+
+    return { socialImage, ownerImageUrl, license }
   }
 
 }
@@ -973,19 +990,27 @@ exports.createSchemaCustomization = ({ actions }) => {
     socialImage: File @link(by: "url")
     projectImage: File @link(by: "name")
     numMonthsForContributions: Int
+    license: LicenseInfo
   }
-  
+
+  type LicenseInfo {
+    name: String
+    spdxId: String
+    url: String
+  }
+
   type SampleInfo implements Node {
     url: String
-    description: String 
+    description: String
   }
-  
+
   type Repository implements Node {
     url: String
     owner: String
     project: String
+    license: LicenseInfo
   }
-  
+
   type ContributorInfo implements Node @noinfer {
     name: String
     login: String
@@ -993,7 +1018,7 @@ exports.createSchemaCustomization = ({ actions }) => {
     contributions: Int
     url: String
   }
-  
+
   type CompanyContributorInfo implements Node @noinfer {
     name: String
     contributions: Int

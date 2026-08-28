@@ -74,6 +74,11 @@ describe("extension detail page", () => {
               gatsbyImageData: "specific-logo.png",
             },
           },
+          license: {
+            spdxId: "Apache-2.0",
+            name: "Apache License 2.0",
+            url: "https://spdx.org/licenses/Apache-2.0",
+          },
         },
       },
       platforms: [platform1, platform2, nonPlatform],
@@ -228,6 +233,15 @@ describe("extension detail page", () => {
     it("renders a sponsor field", () => {
       expect(screen.getByText("Maintained by")).toBeTruthy()
       expect(screen.getByText("Automatically Calculated Sponsor")).toBeTruthy()
+    })
+
+    it("renders the license", () => {
+      expect(screen.getByText("License")).toBeTruthy()
+      expect(screen.getByText("Apache-2.0")).toBeInTheDocument()
+    })
+
+    it("renders the license as a link", () => {
+      expect(screen.getByText("Apache-2.0").href).toBe("https://spdx.org/licenses/Apache-2.0")
     })
 
     it("renders a message about duplicate extensions", () => {
@@ -606,6 +620,9 @@ describe("extension detail page", () => {
 
       link = await screen.queryByText("Maintained by")
       expect(link).toBeNull()
+
+      link = await screen.queryByText("License")
+      expect(link).toBeNull()
     })
 
     it("renders a placeholder image with appropriate source", async () => {
@@ -616,6 +633,46 @@ describe("extension detail page", () => {
       expect(image.src).toContain("generic-extension-logo.png")
     })
   })
+
+  describe("for an extension with a license name but no SPDX id", () => {
+    const previous = {}
+    const next = {}
+
+    const extension = {
+      name: "JRuby",
+      slug: "jruby-slug",
+      metadata: {
+        categories: ["jewellery"],
+        sourceControl: {
+          license: {
+            spdxId: null,
+            name: "Some Custom License",
+            url: "https://example.com/license",
+          },
+        },
+      },
+    }
+
+    beforeEach(() => {
+      render(
+        <ExtensionDetailTemplate
+          data={{ extension, previous, next }}
+          location="/somewhere"
+        />
+      )
+    })
+
+    it("renders the license name as fallback", () => {
+      expect(screen.getByText("License")).toBeTruthy()
+      expect(screen.getByText("Some Custom License")).toBeInTheDocument()
+    })
+
+    it("renders the license name as a link", () => {
+      expect(screen.getByText("Some Custom License").href).toBe("https://example.com/license")
+    })
+  })
+
+
 
   describe("for an unlisted extension", () => {
     const previous = {}

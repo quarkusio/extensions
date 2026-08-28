@@ -356,6 +356,11 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
                   owner
                   project
                   extensionCount
+                  license {
+                    spdxId
+                    name
+                    url
+                  }
                 }
                 issues
                 issuesUrl
