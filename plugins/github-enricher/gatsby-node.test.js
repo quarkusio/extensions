@@ -618,6 +618,86 @@ describe("the github data handler", () => {
     })
   })
 
+  // For some artifacts (such as quarkus-core, where shortArtifactId and oneWordArtifactId are both "core"),
+  // several query aliases resolve to the same tree expression, so the same yaml is returned more than once. This
+  // used to trigger a spurious "too many candidate extension yaml paths" warning.
+  describe("for an extension where several query aliases return the same yaml path", () => {
+    const projectName = "somerepo"
+    const url = "http://fake.github.com/someuser/" + projectName
+    const avatarUrl = "http://something.com/someuser.png"
+    const duplicatePath =
+      "some-folder-name/runtime/src/main/resources/META-INF/quarkus-extension.yaml"
+
+    const response = {
+      data: {
+        repository: {
+          issues: {
+            totalCount: 16,
+          },
+          defaultBranchRef: { name: "unusual" },
+          metaInfs: null,
+          shortenedSubfolderMetaInfs: {
+            entries: [{ path: duplicatePath }],
+          },
+          oneWordSubfolderMetaInfs: {
+            entries: [{ path: duplicatePath }],
+          },
+        },
+        repositoryOwner: { avatarUrl: avatarUrl },
+      },
+    }
+
+    const metadata = {
+      maven: { artifactId: "something", groupId: "grouper" },
+      sourceControl: `${url},mavenstuff`,
+    }
+
+    const node = {
+      metadata,
+      internal,
+    }
+
+    let warnSpy
+
+    beforeAll(async () => {
+      warnSpy = jest.spyOn(console, "warn").mockImplementation(() => {})
+      queryGraphQl.mockResolvedValue(response)
+      getContributors.mockResolvedValue({ contributors: [{ name: "someone" }], lastUpdated: Date.now() })
+      await onPreBootstrap({ cache, actions: {} })
+    })
+
+    beforeEach(async () => {
+      onPluginInit()
+      warnSpy.mockClear()
+      return onCreateNode({
+        node,
+        createContentDigest,
+        createNodeId,
+        actions,
+      })
+    })
+
+    afterAll(() => {
+      warnSpy.mockRestore()
+      jest.clearAllMocks()
+    })
+
+    it("resolves to a single extension yaml url", () => {
+      expect(createNode).toHaveBeenCalledWith(
+        expect.objectContaining({
+          extensionYamlUrl: `${url}/blob/unusual/${duplicatePath}`,
+        })
+      )
+    })
+
+    it("does not warn about too many candidate paths", () => {
+      expect(warnSpy).not.toHaveBeenCalledWith(
+        expect.stringContaining("Too many candidate extension yaml paths"),
+        expect.anything()
+      )
+    })
+  })
+
   describe("for an extension with a scm-url with a trailing slash", () => {
     const projectName = "somerepo"
     const ownerName = "someuser"

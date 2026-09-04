@@ -779,9 +779,12 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
 
     const allMetaInfs = Object.values(data.repository).map(e => e?.entries).flat()
 
-    const extensionYamls = allMetaInfs.filter(entry =>
-      entry?.path.endsWith("/quarkus-extension.yaml")
-    )
+    // Several of the query aliases can resolve to the same tree expression (for example, quarkus-core has an
+    // identical shortArtifactId and oneWordArtifactId), so the same yaml can appear more than once. Dedupe by path
+    // to avoid spurious "too many candidates" warnings.
+    const extensionYamls = allMetaInfs
+      .filter(entry => entry?.path.endsWith("/quarkus-extension.yaml"))
+      .filter((entry, index, self) => self.findIndex(e => e.path === entry.path) === index)
     const answer = { defaultBranchRef, extensionYamls }
     if (extensionYamls.length === 0) {
       console.warn(`Could not identify the extension yaml path for ${groupId}:${artifactId} (no results). `)

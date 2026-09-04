@@ -52,6 +52,12 @@ npm install
 npm run test:watch
 ```
 
+If `npm install` fails building a native module (for example, `node-libcurl`, which needs a native toolchain), install without running build scripts:
+```
+npm install --ignore-scripts
+```
+This is enough to run the unit tests, since they don't depend on the native modules.
+
 In another terminal, run the site
 ```
 npm run develop
