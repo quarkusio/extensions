@@ -11,6 +11,17 @@ import config from "../../../gatsby-config.js"
 import { DarkModeToggle } from "./dark-mode-toggle"
 import { device } from "../util/styles/breakpoints"
 
+const NavSubheading = styled.li`
+  padding: 8px 10px 2px;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  font-size: 0.85em;
+  color: var(--navbar-text-color);
+  opacity: 0.7;
+  border-bottom: 1px solid var(--submenu-separator-color);
+  width: 100%;
+`
+
 const NavToggle = styled.label`
   font-size: 27.2px;
 `
@@ -178,7 +189,25 @@ const Navigation = () => {
           Using Spring?
         </a>
       </NavEntry>
-
+      <NavSubheading>AI</NavSubheading>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/ai`}>AI Overview</a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/java-for-ai`}>
+          Java for AI
+        </a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/quarkus-for-ai`}>
+          Why Quarkus for AI
+        </a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/ai-blueprints`}>
+          AI Blueprints
+        </a>
+      </NavEntry>
     </Submenu>
   )
   const learn = (
@@ -244,6 +273,11 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/working-groups`}>
+          Working Groups
+        </a>
+      </NavEntry>
+      <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/insights`}>Podcast</a>
       </NavEntry>
       <NavEntry>
@@ -257,6 +291,11 @@ const Navigation = () => {
       <NavEntry>
         <a href="https://github.com/orgs/quarkusio/projects/13/views/1">
           Roadmap
+        </a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/benefactors`}>
+          Benefactors
         </a>
       </NavEntry>
     </Submenu>
