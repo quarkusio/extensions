@@ -76,7 +76,11 @@ describe("filters bar", () => {
   }
 
   const extensions = [alice, pascal, fluffy, stale, secret]
-  const categories = ["moose", "SKunks", "lynx"]
+  const categories = [
+    { categoryId: "moose", name: "Moose" },
+    { categoryId: "skunks", name: "Skunks" },
+    { categoryId: "lynx", name: "Lynx" }
+  ]
   const keywords = ["shiny", "cOOl", "sad"]
 
   describe("at a desktop screen size", () => {

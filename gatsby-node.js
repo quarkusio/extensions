@@ -6,6 +6,7 @@ const {
   getStream,
 } = require("./src/components/util/pretty-platform")
 const { sortableName } = require("./src/components/util/sortable-name")
+const prettyCategory = require("./src/components/util/pretty-category")
 const {
   extensionSlug,
   extensionSlugFromCoordinates,
@@ -32,7 +33,7 @@ exports.sourceNodes = async ({
                              }) => {
   const { createNode } = actions
   const {
-    data: { extensions },
+    data: { extensions, categories: apiCategories },
   } = await axios.get(`https://registry.quarkus.io/client/extensions/all`)
 
   const {
@@ -59,21 +60,55 @@ exports.sourceNodes = async ({
     .map(extension => extension.metadata.categories)
     .flat()
 
-  const categories = [...new Set(categoriesWithDuplicates)]
+  const categoryIds = [...new Set(categoriesWithDuplicates)]
 
-  const categoryPromises = categories.map(async category => {
-    if (category) {
-      const slug = extensionSlug(category)
+  // Create a map of category ID to category info from the API
+  const categoryMap = new Map()
+  const registryCategoryNames = new Set()
+  if (apiCategories) {
+    apiCategories.forEach(cat => {
+      categoryMap.set(cat.id, cat)
+      registryCategoryNames.add(cat.name.toLowerCase())
+    })
+  }
+
+  const categoryPromises = categoryIds.map(async categoryId => {
+    if (categoryId) {
+      const count = categoriesWithDuplicates.filter(c => c === categoryId).length
+      const categoryInfo = categoryMap.get(categoryId)
+
+      let name, description
+
+      if (categoryInfo) {
+        // Category is in the registry, use official name
+        name = categoryInfo.name
+        description = categoryInfo.description
+      } else {
+        // Category not in registry - prettify it
+        name = prettyCategory(categoryId)
+
+        // Check if the prettified name collides with a registry category name
+        if (registryCategoryNames.has(name.toLowerCase())) {
+          console.warn(`Dropping category '${categoryId}' (used by ${count} extension${count > 1 ? 's' : ''}) - prettified name '${name}' collides with official registry category. Extensions should use the official category ID from the registry.`)
+          return
+        }
+
+        description = undefined
+      }
+
+      const slug = extensionSlug(categoryId)
       const id = createNodeId(slug)
-      const count = categoriesWithDuplicates.filter(c => c === category).length // Not as proper as a reduce, but much easier to read :)
+
       const node = {
-        name: category,
+        categoryId: categoryId,
+        name: name,
+        description: description,
         count,
         id,
-        sortableName: sortableName(category),
+        sortableName: sortableName(name),
         internal: {
           type: "Category",
-          contentDigest: createContentDigest(category),
+          contentDigest: createContentDigest(categoryId),
         },
       }
 
@@ -554,7 +589,7 @@ exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
 
   createTypes(`
-  
+
     type Extension implements Node {
       name: String!
       description: String
@@ -562,9 +597,10 @@ exports.createSchemaCustomization = ({ actions }) => {
       metadata: ExtensionMetadata
       origins: [String]
       }
-      
+
     type ExtensionMetadata {
       categories: [String]
+      categoryObjects: [Category] @link(by: "categoryId", from: "categories")
       status: [String]
       builtWithQuarkusCore: String
       quarkus_core_compatibility: String
@@ -576,6 +612,14 @@ exports.createSchemaCustomization = ({ actions }) => {
       sponsors: [String]
       sponsor: String
       downloads: DownloadRanking @link(by: "uniqueId")
+    }
+
+    type Category implements Node {
+      categoryId: String!
+      name: String!
+      description: String
+      count: Int!
+      sortableName: String!
     }
     
     type MavenInfo {
