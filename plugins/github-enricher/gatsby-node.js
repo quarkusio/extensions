@@ -209,7 +209,7 @@ const createRemoteFileNodeWithRetry = async (url, options, coords) => {
 
           // Retry with fresh URL
           return await createRemoteFileNode({
-            url: freshImageInfo.socialImage,
+            url: freshRepoOverview?.socialImage,
             ...options,
             name: baseName,
             cacheKey,
