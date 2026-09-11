@@ -23,6 +23,11 @@ const defaultOptions = {
   nodeType: "Extension",
 }
 
+// Setting SKIP_ENRICHMENT stubs out every GitHub call, for much faster local builds.
+// The schema customization and resolvers stay in place, so the rest of the site still builds,
+// it just won't have any source control information.
+const skipEnrichment = process.env.SKIP_ENRICHMENT === "true"
+
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 24 * 60 * 60
 
@@ -30,6 +35,13 @@ const DAY_IN_SECONDS = 24 * 60 * 60
 let imageCache, extensionYamlCache, issueCountCache, samplesCache
 
 exports.onPreBootstrap = async () => {
+  if (skipEnrichment) {
+    console.warn(
+      "SKIP_ENRICHMENT is set, so no source control information will be read from GitHub."
+    )
+    return
+  }
+
   imageCache = new PersistableCache({ key: "github-api-for-images", stdTTL: 3 * DAY_IN_SECONDS })
 
 // The location of extension files changes relatively often as extensions get moved or deprecated; to avoid publishing dead links, check often
@@ -102,6 +114,10 @@ exports.onPreBootstrap = async () => {
 }
 
 exports.onPostBootstrap = async () => {
+  if (skipEnrichment) {
+    return
+  }
+
   await imageCache.persist()
   console.log("Persisted", imageCache.size(), "cached repository images.")
 
@@ -223,6 +239,10 @@ exports.onCreateNode = async (
   { node, actions, createNodeId, createContentDigest },
   pluginOptions
 ) => {
+  if (skipEnrichment) {
+    return
+  }
+
   const { createNode } = actions
 
   const options = {
@@ -303,6 +323,10 @@ exports.onCreateNode = async (
 }
 
 exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
+  if (skipEnrichment) {
+    return
+  }
+
   await createContributingCompanies({ actions, createNodeId, createContentDigest })
 }
 
