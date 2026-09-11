@@ -37,11 +37,20 @@ The site pulls data from a range of sources, some of which need credentials. For
 Information is more complete if a these tokens are provided, but the build should still succeed if they are missing. If it fails without them, please raise an issue.
 In PR builds, everything except the `GITHUB_TOKEN` will be missing.
 
+### Speeding up local builds
+
+A full build is slow, so there are some environment variables which trade completeness for speed. None of these should be set in CI.
+
+- `DONT_WAIT=true` – do not wait for the GitHub rate limiter to roll over; incomplete source control information is used instead.
+- `EXTENSION_LIMIT=50` – only process the first 50 extensions from the registry, instead of all of them. Most of the catalog will be missing, and so will anything which depends on it (such as duplicate detection for the extensions which were dropped).
+- `SKIP_ENRICHMENT=true` – stub out the GitHub plugin entirely, so no calls are made to the GitHub API. Extension pages will build, but with no source control information: no contributors, sponsors, issue counts, samples, or repository images.
+
 ## Caching 
 
 The site pulls down a lot of content through the GitHub API. 
 A full build of the site will trigger the rate limiter several times. Each time the rate limiter is hit, the build needs to wait an hour for it to roll over.
 Because of this, a fresh build could take two or three hours – be prepared! To build more quickly (but with incomplete information), use the `npm run develop:quickly` command.
+If that is still too slow, `npm run develop:very-quickly` skips the GitHub API completely and only builds a handful of extensions (it sets `DONT_WAIT`, `SKIP_ENRICHMENT` and `EXTENSION_LIMIT` together).
 
 The build caches GitHub content in a cache in the `.cache-github-api/` directory, so once a build has been done, subsequent builds should be quicker. 
 Most cache contents have a lifespan of a few days (with some jitter so everything doesn't expire at once).
@@ -63,7 +72,7 @@ In another terminal, run the site
 npm run develop
 ```
 
-(or `npm run develop:quickly` if you're in a hurry and don't need all the source control data)
+(or `npm run develop:quickly` if you're in a hurry and don't need all the source control data, or `npm run develop:very-quickly` if you're in a real hurry and are happy with just a slice of the catalog and no source control data at all)
 
 You can then see changes live on http://localhost:8000. 
 

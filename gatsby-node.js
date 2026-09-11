@@ -24,6 +24,11 @@ const {
 const { getCanonicalMonthTimestamp, getCanonicalYearTimestamp } = require("./src/components/util/date-utils")
 let badImages = {}
 
+// Setting EXTENSION_LIMIT to a number caps how many extensions get processed, for faster local builds
+const extensionLimit = process.env.EXTENSION_LIMIT
+  ? parseInt(process.env.EXTENSION_LIMIT, 10)
+  : undefined
+
 exports.sourceNodes = async ({
                                actions,
                                getCache,
@@ -32,8 +37,19 @@ exports.sourceNodes = async ({
                              }) => {
   const { createNode } = actions
   const {
-    data: { extensions },
+    data: { extensions: allExtensions },
   } = await axios.get(`https://registry.quarkus.io/client/extensions/all`)
+
+  // Local builds of the whole catalog are slow, so allow capping how many extensions we process
+  const extensions = extensionLimit
+    ? allExtensions.slice(0, extensionLimit)
+    : allExtensions
+
+  if (extensionLimit) {
+    console.warn(
+      `EXTENSION_LIMIT is set, so only processing ${extensions.length} of ${allExtensions.length} extensions. The site will be incomplete.`
+    )
+  }
 
   const {
     data: { platforms },
