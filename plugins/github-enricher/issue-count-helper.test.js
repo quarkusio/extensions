@@ -2,6 +2,7 @@ import { getIssueInformationNoCache, initialiseLabels } from "./issue-count-help
 import { setMinimumContributorCount } from "./sponsorFinder"
 import { queryGraphQl } from "./github-helper"
 import { labelExtractor } from "./labelExtractor"
+import { ABSENT, isAbsent } from "../../src/absent"
 
 jest.mock("./github-helper")
 jest.mock("./labelExtractor")
@@ -151,6 +152,51 @@ describe("the issue count helper", () => {
         expect(queryGraphQl).toHaveBeenLastCalledWith(expect.stringContaining(artifactId))
       })
 
+    })
+  })
+
+  /* If github did not answer, we know nothing about the issues url, and checking it anyway means an
+  unauthenticated request to github.com for every affected extension. Those get 429ed, and the
+  retries are what used to leave builds apparently hung for hours.
+   */
+  describe("when github does not answer", () => {
+    const scmUrl = "http://some.repo"
+
+    beforeEach(() => {
+      queryGraphQl.mockResolvedValue(undefined)
+    })
+
+    afterEach(() => {
+      queryGraphQl.mockResolvedValue(graphQLResponse)
+    })
+
+    // Nothing at all, rather than an empty answer, so that the failure does not get cached as
+    // though it were real, and so we do not validate a url we know nothing about
+    it("gives back nothing at all", async () => {
+      const answer = await getIssueInformationNoCache(coords, artifactId, scmUrl)
+      expect(answer).toBeUndefined()
+    })
+
+    it("does not report the repository as absent, since it may just be a blip", async () => {
+      const answer = await getIssueInformationNoCache(coords, artifactId, scmUrl)
+      expect(isAbsent(answer)).toBe(false)
+    })
+  })
+
+  describe("when the repository has gone away", () => {
+    const scmUrl = "http://some.repo"
+
+    beforeEach(() => {
+      queryGraphQl.mockResolvedValue(ABSENT)
+    })
+
+    afterEach(() => {
+      queryGraphQl.mockResolvedValue(graphQLResponse)
+    })
+
+    it("reports the absence, so that it can be remembered", async () => {
+      const answer = await getIssueInformationNoCache(coords, artifactId, scmUrl)
+      expect(isAbsent(answer)).toBe(true)
     })
   })
 })

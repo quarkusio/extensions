@@ -1,5 +1,6 @@
 const PersistableCache = require("../../src/persistable-cache")
 const { queryGraphQl, queryRest } = require("./github-helper")
+const { ABSENT, isAbsent } = require("../../src/absent")
 
 // We store the raw(ish) data in the cache, to avoid repeating the same request multiple times and upsetting the github rate limiter
 const DAY_IN_SECONDS = 60 * 60 * 24
@@ -115,6 +116,11 @@ const getContributorsNoCache = async (org, project, inPath) => {
   }`
 
   const body = await queryGraphQl(query)
+
+  // Remember that the repository has gone, so we stop asking about it on every build
+  if (isAbsent(body)) {
+    return ABSENT
+  }
 
   if (body?.data && body?.data?.repository) {
     const history = body?.data?.repository?.defaultBranchRef?.target?.history?.edges

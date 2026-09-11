@@ -1,4 +1,5 @@
 const PersistableCache = require("./persistable-cache")
+const { ABSENT } = require("./absent")
 const { dir } = require("tmp-promise")
 require("tmp-promise").setGracefulCleanup()
 
@@ -229,6 +230,61 @@ describe("the persistable cache", () => {
     const cache2 = new PersistableCache({ cachePath, key: "different" })
     expect(cache2.has("bowls")).toBeFalsy()
     expect(cache2.has("plates")).toBeFalsy()
+  })
+
+  // The distinction that matters here is between "we asked, and it is not there", which is worth
+  // remembering, and "we could not find out", which is not
+  describe("when a fetch does not find anything", () => {
+
+    it("hands back nothing, rather than the marker, when something is known to be absent", async () => {
+      const cache = new PersistableCache()
+      const answer = await cache.getOrSet("newt", () => Promise.resolve(ABSENT))
+
+      expect(answer).toBeUndefined()
+      expect(cache.get("newt")).toBeUndefined()
+    })
+
+    it("does not ask again for something known to be absent", async () => {
+      const cache = new PersistableCache()
+      const fetch = jest.fn().mockResolvedValue(ABSENT)
+
+      await cache.getOrSet("newt", fetch)
+      await cache.getOrSet("newt", fetch)
+
+      expect(fetch).toHaveBeenCalledTimes(1)
+    })
+
+    it("persists an absence, so later builds do not ask again", async () => {
+      const cache = new PersistableCache({ cachePath, key: "amphibians" })
+      await cache.getOrSet("newt", () => Promise.resolve(ABSENT))
+      await cache.persist()
+
+      const cache2 = new PersistableCache({ cachePath, key: "amphibians" })
+      await cache2.ready()
+
+      expect(cache2.has("newt")).toBeTruthy()
+      expect(cache2.get("newt")).toBeUndefined()
+
+      const fetch = jest.fn().mockResolvedValue(ABSENT)
+      await cache2.getOrSet("newt", fetch)
+      expect(fetch).not.toHaveBeenCalled()
+    })
+
+    it("does not persist a failure to find out, so later builds do ask again", async () => {
+      const cache = new PersistableCache({ cachePath, key: "amphibians" })
+      // A rate limited or timed out fetch has no answer for us, as opposed to an answer of "no"
+      await cache.getOrSet("axolotl", () => Promise.resolve(undefined))
+      await cache.persist()
+
+      const cache2 = new PersistableCache({ cachePath, key: "amphibians" })
+      await cache2.ready()
+
+      expect(cache2.has("axolotl")).toBeFalsy()
+
+      const fetch = jest.fn().mockResolvedValue(frog)
+      expect(await cache2.getOrSet("axolotl", fetch)).toStrictEqual(frog)
+      expect(fetch).toHaveBeenCalledTimes(1)
+    })
   })
 
 })

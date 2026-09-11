@@ -1,4 +1,5 @@
 const { queryGraphQl, getRawFileContents, queryRest } = require("./github-helper")
+const { isAbsent } = require("../../src/absent")
 const fetchMock = require("jest-fetch-mock")
 
 
@@ -236,7 +237,10 @@ describe("the github helper", () => {
 
       await getRawFileContents(org, repo, path)
       expect(fetch).toHaveBeenLastCalledWith(
-        expectedUrl, { "headers": { "Authorization": "Bearer test_value" }, "method": "GET" })
+        expectedUrl, expect.objectContaining({
+          "headers": { "Authorization": "Bearer test_value" },
+          "method": "GET"
+        }))
     })
 
     it("handles double slashes", async () => {
@@ -247,7 +251,10 @@ describe("the github helper", () => {
 
       await getRawFileContents(org, repo, path)
       expect(fetch).toHaveBeenLastCalledWith(
-        expectedUrl, { "headers": { "Authorization": "Bearer test_value" }, "method": "GET" })
+        expectedUrl, expect.objectContaining({
+          "headers": { "Authorization": "Bearer test_value" },
+          "method": "GET"
+        }))
     })
 
 
@@ -255,6 +262,71 @@ describe("the github helper", () => {
       const path = "some-path"
       const answer = await getRawFileContents(path)
       expect(answer).toBe(contents)
+    })
+  })
+
+  /* A repository which has been deleted, renamed, or made private is a permanent answer, not a
+  blip. Telling it apart from a rate limit matters: callers cache an absence so we stop asking on
+  every build, and retrying it would only burn rate limit.
+   */
+  describe("when github says something does not exist", () => {
+
+    beforeEach(async () => {
+      process.env.GITHUB_TOKEN = "test_value"
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    const mockResponse = response => fetch.mockResolvedValue({
+      json: jest.fn().mockResolvedValue(response),
+    })
+
+    it("reports a graphql not found as an absence", async () => {
+      mockResponse({
+        data: { rateLimit: { limit: 5000, cost: 1, remaining: 4991 }, repository: null },
+        errors: [{
+          type: "NOT_FOUND",
+          path: ["repository"],
+          message: "Could not resolve to a Repository with the name 'someone/long-gone'."
+        }]
+      })
+
+      expect(isAbsent(await queryGraphQl("query bla bla bla"))).toBe(true)
+    })
+
+    it("reports a not found with no data at all as an absence", async () => {
+      mockResponse({
+        errors: [{ type: "NOT_FOUND", message: "Could not resolve to a Repository." }]
+      })
+
+      expect(isAbsent(await queryGraphQl("query bla bla bla"))).toBe(true)
+    })
+
+    it("does not retry a not found, since the answer will not change", async () => {
+      mockResponse({
+        errors: [{ type: "NOT_FOUND", message: "Could not resolve to a Repository." }]
+      })
+
+      await queryGraphQl("query bla bla bla")
+      expect(fetch).toHaveBeenCalledTimes(1)
+    })
+
+    it("reports a rest not found as an absence", async () => {
+      mockResponse({ message: "Not Found", status: "404" })
+
+      expect(isAbsent(await queryRest("frogs/kermit"))).toBe(true)
+    })
+
+    it("does not treat other errors as an absence", async () => {
+      mockResponse({
+        errors: [{ type: "RATE_LIMITED", message: "API rate limit exceeded" }]
+      })
+
+      const answer = await queryRest("frogs/kermit")
+      expect(isAbsent(answer)).toBe(false)
+      expect(answer).toBeUndefined()
     })
   })
 })

@@ -13,7 +13,8 @@ const {
   getContributors,
   normalizeCompanyName
 } = require("./sponsorFinder")
-const { getRawFileContents, queryGraphQl } = require("./github-helper")
+const { getRawFileContents, queryGraphQl, startGitHubBudget } = require("./github-helper")
+const { ABSENT, isAbsent } = require("../../src/absent")
 const yaml = require("js-yaml")
 const { getIssueInformationNoCache } = require("./issue-count-helper")
 const { normaliseUrl } = require("./url-helper")
@@ -41,6 +42,8 @@ exports.onPreBootstrap = async () => {
     )
     return
   }
+
+  startGitHubBudget()
 
   imageCache = new PersistableCache({ key: "github-api-for-images", stdTTL: 3 * DAY_IN_SECONDS })
 
@@ -387,7 +390,8 @@ const fetchGitHubInfo = async (scmUrl, groupId, artifactId) => {
 
   const scmInfo = {}
 
-  const { issuesUrl, issues } = await getIssueInformation(coords, artifactId, scmUrl)
+  // There may be nothing at all, if the repository has gone away, so do not destructure blindly
+  const { issuesUrl, issues } = await getIssueInformation(coords, artifactId, scmUrl) ?? {}
 
   if (issuesUrl) {
     scmInfo.issuesUrl = issuesUrl
@@ -453,6 +457,11 @@ const getImageInformationNoCache = async (coords) => {
   }`
 
   const body = await queryGraphQl(query)
+
+  // Remember that the repository has gone, so we stop asking about it on every build
+  if (isAbsent(body)) {
+    return ABSENT
+  }
 
   // Don't try and destructure undefined things
   if (body?.data?.repository) {
@@ -531,6 +540,12 @@ const discoverCamelSamplesPath = async (artifactId) => {
     }`
 
   const body = await queryGraphQl(query)
+
+  // Remember that the repository has gone, so we stop asking about it on every build
+  if (isAbsent(body)) {
+    return ABSENT
+  }
+
   const data = body?.data
 
   // If we got rate limited, there may not be a repository field
@@ -574,6 +589,12 @@ const discoverQuarkusCoreQuickstartPath = async (artifactId) => {
     }`
 
   const body = await queryGraphQl(query)
+
+  // Remember that the repository has gone, so we stop asking about it on every build
+  if (isAbsent(body)) {
+    return ABSENT
+  }
+
   const data = body?.data
 
   // If we got rate limited, there may not be a repository field
@@ -629,6 +650,12 @@ const discoverSamplesPath = async (artifactId, coords, scmUrl) => {
     }`
 
   const body = await queryGraphQl(query)
+
+  // Remember that the repository has gone, so we stop asking about it on every build
+  if (isAbsent(body)) {
+    return ABSENT
+  }
+
   const data = body?.data
 
   // If we got rate limited, there may not be a repository field
@@ -795,6 +822,12 @@ const getMetadataPathNoCache = async (coords, groupId, artifactId) => {
 
   // TODO we should probably split this up and query one by one until we get a match, but that might not be faster, and we wouldn't detect the case where we have multiple matches
   const body = await queryGraphQl(query)
+
+  // Remember that the repository has gone, so we stop asking about it on every build
+  if (isAbsent(body)) {
+    return ABSENT
+  }
+
   const data = body?.data
 
   // If we got rate limited, there may not be a repository field
