@@ -7,10 +7,33 @@ const promiseRetry = require("promise-retry")
 const followRedirect = require("follow-redirect-url")
 
 const { queryGraphQl } = require("./github-helper")
+const { ABSENT, isAbsent } = require("../../src/absent")
 let getLabels
 
-const RETRY_OPTIONS = { retries: 5, minTimeout: 75 * 1000, factor: 5 }
+/* These checks hit github.com unauthenticated, so 429s are routine rather than exceptional. The
+previous settings (5 retries, a 75 second minimum and a factor of 5) backed off to 75s, 375s, 1875s,
+9375s and 46875s, so a single unlucky url could hold the build up for the best part of a day.
+Keep the retries, but keep them to well under a minute in total.
+ */
+const RETRY_OPTIONS = { retries: 2, minTimeout: 10 * 1000, maxTimeout: 30 * 1000, factor: 3 }
+
+// Neither url-exist nor follow-redirect-url takes a timeout, and a hung socket in either stalls the
+// whole build
+const URL_CHECK_TIMEOUT_MS = 15 * 1000
+
 const URL_QUERY = "?q=is%3Aopen+is%3Aissue+"
+
+const withTimeout = async (promise, fallback) => {
+  let timer
+  const timeout = new Promise(resolve => {
+    timer = setTimeout(() => resolve(fallback), URL_CHECK_TIMEOUT_MS)
+  })
+  try {
+    return await Promise.race([promise, timeout])
+  } finally {
+    clearTimeout(timer)
+  }
+}
 
 
 async function fetchScmLabel(artifactId) {
@@ -100,9 +123,26 @@ const getIssueInformationNoCache = async (coords, artifactId, scmUrl) => {
 
   const body = graphqlQuery ? await queryGraphQl(graphqlQuery) : undefined
 
+  // If the repository is gone, say so, so the answer gets cached and we stop asking every build
+  if (isAbsent(body)) {
+    return ABSENT
+  }
+
+  /* If GitHub did not answer at all, we know nothing: not the issue count, and not whether the
+  issues url is any good. Give back nothing rather than an empty answer, so the failure stays out of
+  the persisted cache and the next build tries again.
+
+  It also stops us validating a url we know nothing about, which would mean an unauthenticated
+  request to github.com for every affected extension. Those get 429ed, and the retries are what
+  leaves a build apparently hung for hours.
+   */
+  if (!body) {
+    return undefined
+  }
+
   // The parent objects may be undefined and destructuring nested undefineds is not good
   // If we had to use a search, there's no total count field and we just have to count nodes
-  const issues = totalCountAvailable ? body?.data?.repository?.issues?.totalCount : body.data.search.nodes.length
+  const issues = totalCountAvailable ? body?.data?.repository?.issues?.totalCount : body?.data?.search?.nodes?.length
 
   issuesUrl = await maybeIssuesUrl(issues, issuesUrl)
 
@@ -131,7 +171,8 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
 
     console.log("Validating issue url for", issuesUrl, "because issues is", issues)
 
-    const isValidUrl = await urlExist(issuesUrl)
+    // If the check times out, assume the url is fine rather than dropping a probably-good link
+    const isValidUrl = await withTimeout(urlExist(issuesUrl), true)
 
     let isOriginalUrl = isValidUrl && (!await isRedirectToPulls(issuesUrl))
 
@@ -140,7 +181,7 @@ const maybeIssuesUrl = async (issues, issuesUrl) => {
 }
 
 const isRedirectToPulls = async (issuesUrl) => {
-  return await promiseRetry(async (retry, number) => {
+  const check = promiseRetry(async (retry, number) => {
     // Being a valid url may not be enough, we also want to check for redirects to /pulls
     const urls = await followRedirect.startFollowing(issuesUrl)
     const finalUrl = urls[urls.length - 1]
@@ -149,7 +190,13 @@ const isRedirectToPulls = async (issuesUrl) => {
     }
 
     return (finalUrl.url.includes("/pulls"))
-  }, RETRY_OPTIONS)
+  }, RETRY_OPTIONS).catch(e => {
+    // An unhandled rejection here would take the whole build down, and not knowing is not fatal
+    console.warn("Could not check whether", issuesUrl, "redirects to pull requests -", e.message)
+    return false
+  })
+
+  return await withTimeout(check, false)
 }
 
 const initialiseLabels = (yaml, repoListing) => {

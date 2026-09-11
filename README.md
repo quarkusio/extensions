@@ -44,6 +44,7 @@ A full build is slow, so there are some environment variables which trade comple
 - `DONT_WAIT=true` – do not wait for the GitHub rate limiter to roll over; incomplete source control information is used instead.
 - `EXTENSION_LIMIT=50` – only process the first 50 extensions from the registry, instead of all of them. Most of the catalog will be missing, and so will anything which depends on it (such as duplicate detection for the extensions which were dropped).
 - `SKIP_ENRICHMENT=true` – stub out the GitHub plugin entirely, so no calls are made to the GitHub API. Extension pages will build, but with no source control information: no contributors, sponsors, issue counts, samples, or repository images.
+- `GITHUB_BUDGET_MINUTES` – change how long the build is allowed to spend talking to GitHub, or set it to `0` to remove the limit. See [Caching](#caching) below; unlike the others, this one has a default, so you only need it if twenty minutes is the wrong number for you.
 
 ## Caching 
 
@@ -54,6 +55,17 @@ If that is still too slow, `npm run develop:very-quickly` skips the GitHub API c
 
 The build caches GitHub content in a cache in the `.cache-github-api/` directory, so once a build has been done, subsequent builds should be quicker. 
 Most cache contents have a lifespan of a few days (with some jitter so everything doesn't expire at once).
+
+To stop a cold build running away, local builds spend at most 20 minutes talking to GitHub. When that
+budget runs out the build carries on without the rest of the GitHub data, and finishes. Nothing is
+wasted: whatever was fetched is still written to the cache, so each build gets further than the last
+and the cache warms up over a few runs rather than one very long one. CI builds have no budget, since
+they want complete data and have the rate limit to themselves.
+
+Set `GITHUB_BUDGET_MINUTES` to change the budget, or to `0` to remove it:
+```
+GITHUB_BUDGET_MINUTES=5 npm run develop
+```
 
 In one terminal, run tests
 ```

@@ -1,5 +1,15 @@
 const promiseRetry = require("promise-retry")
-const RETRY_OPTIONS = { retries: 3, minTimeout: 75 * 1000, factor: 3 }
+const { ABSENT, isAbsent } = require("../../src/absent")
+
+// The pause before a retry is long because GitHub's secondary rate limiter wants a long pause, but
+// it has to be bounded; with no maxTimeout, a factor of 3 runs away and one bad query can hold a
+// build up for a quarter of an hour.
+const RETRY_OPTIONS = { retries: 3, minTimeout: 75 * 1000, maxTimeout: 5 * 60 * 1000, factor: 3 }
+
+// No single request should be able to hang the build. Without this, a stalled socket waits for ever
+// and the gatsby spinner sits on "source and transform nodes" with nothing to say why.
+const REQUEST_TIMEOUT_MS = 30 * 1000
+
 const PAGE_INFO_SUBQUERY = "pageInfo {\n" +
   "      hasNextPage\n" +
   "      endCursor\n" +
@@ -16,12 +26,75 @@ const RATE_LIMIT_PREQUERY = `rateLimit {
 let resetTime
 const allowSlowBuild = !process.env.DONT_WAIT
 
+/* A whole-build budget for talking to GitHub.
+
+Once it is spent we stop making requests, and the build finishes with whatever we managed to gather.
+That is not a loss: everything we did fetch is still written to the cache, so each build picks up
+where the last one left off and the cache warms up over a few runs instead of one very long one.
+
+CI builds want complete data and have the rate limit to themselves, so they get no budget by
+default. Set GITHUB_BUDGET_MINUTES to override, or to 0 to remove the budget entirely.
+ */
+const DEFAULT_BUDGET_MINUTES = process.env.CI ? 0 : 20
+const budgetMinutes = process.env.GITHUB_BUDGET_MINUTES !== undefined
+  ? Number(process.env.GITHUB_BUDGET_MINUTES)
+  : DEFAULT_BUDGET_MINUTES
+const budgetMs = budgetMinutes > 0 ? budgetMinutes * 60 * 1000 : undefined
+let buildStart = Date.now()
+
+// The module is only loaded once, but a develop session bootstraps more than once, and each
+// bootstrap should get its own budget rather than inheriting an exhausted one
+const startGitHubBudget = () => {
+  buildStart = Date.now()
+  alreadyWarned.clear()
+}
+
+const remainingBudget = () => budgetMs ? budgetMs - (Date.now() - buildStart) : Infinity
+
+const isOutOfBudget = () => {
+  if (remainingBudget() > 0) {
+    return false
+  }
+  warnOnce(`Spent the ${budgetMinutes} minute GitHub budget for this build, so skipping the remaining GitHub queries. Everything fetched so far has been cached, so the next build will get further. Set GITHUB_BUDGET_MINUTES to change the budget, or to 0 to remove it.`)
+  return true
+}
+
+// A dead repository is referenced by every extension that lives in it, and each one produces the
+// same complaint. Saying it once is enough, and keeps the useful warnings visible.
+const alreadyWarned = new Set()
+const warnOnce = message => {
+  if (!alreadyWarned.has(message)) {
+    alreadyWarned.add(message)
+    console.warn(message)
+  }
+}
+
+/* GitHub reports a repository that is missing, private, or renamed as a NOT_FOUND error alongside a
+null in the data. That is a permanent answer rather than a blip, so it is worth remembering:
+retrying it burns rate limit, and re-asking on every build is how a handful of dead repositories
+come to dominate the build.
+ */
+const isNotFound = ghBody => {
+  const errors = ghBody?.errors
+  if (Array.isArray(errors) && errors.length > 0) {
+    return errors.every(error => error?.type === "NOT_FOUND")
+  }
+  // The REST api says it more briefly
+  return ghBody?.message === "Not Found"
+}
+
+// jsdom, which the tests run in, does not always have AbortSignal.timeout
+const timeoutSignal = () =>
+  typeof AbortSignal !== "undefined" ? AbortSignal.timeout?.(REQUEST_TIMEOUT_MS) : undefined
+
 // We can add more errors we know are non-recoverable here, which should help build times
 const isRecoverableError = (ghBody, params) => {
   const contents = JSON.stringify(ghBody)
   if (contents.includes("Parse error")) {
     console.warn("Parse error on ", params)
     console.warn("Error is", ghBody)
+    return false
+  } else if (isNotFound(ghBody)) {
     return false
   } else if (contents.includes("Something went wrong while executing your query")) {
     console.warn("Mystery error for ", params)
@@ -35,12 +108,16 @@ async function tolerantFetch(url, params, isSuccessful, getContents) {
   const accessToken = process.env.GITHUB_TOKEN
 
   if (accessToken) {
+    if (isOutOfBudget()) {
+      return undefined
+    }
+
     const headers = {
       Authorization: `Bearer ${accessToken}`,
     }
     const body = await promiseRetry(
       async retry => {
-        const res = await fetch(url, { ...params, headers }).catch(e => retry(e))
+        const res = await fetch(url, { ...params, headers, signal: timeoutSignal() }).catch(e => retry(e))
         const ghBody = await getContents(res)
         resetTime = ghBody?.data?.rateLimit?.resetAt || resetTime
 
@@ -65,6 +142,13 @@ async function tolerantFetch(url, params, isSuccessful, getContents) {
       console.warn(e)
       return undefined
     })
+
+    // A definitive "this does not exist" is an answer, and callers cache it so we stop asking
+    if (isNotFound(body)) {
+      const detail = body?.errors?.map(error => error?.message).join(" ") || `${url} was not found`
+      warnOnce(`GitHub does not have this, so no information will be shown for it: ${detail}`)
+      return ABSENT
+    }
 
     if (body?.errors || body?.message) {
       console.warn(
@@ -126,6 +210,11 @@ const queryGraphQl = async (query) => {
     (ghBody) => ghBody?.data
     , res => res && res.json()
   )
+
+  // Nothing to paginate through if the repository is not there
+  if (isAbsent(answer)) {
+    return answer
+  }
 
   const paginatedElements = findPaginatedElements(answer?.data, "pageInfo")
 
@@ -200,6 +289,19 @@ const queryRest = async (path) => {
 const waitUntil = async (timeString) => {
   const targetTime = new Date(timeString)
   const delta = targetTime - Date.now()
+
+  if (delta <= 0) {
+    return
+  }
+
+  // Waiting out the rate limiter can take the best part of an hour. If that would take us past the
+  // build's budget there is no point sleeping through it; give up on the remaining GitHub data now
+  // and let the build finish.
+  if (delta > remainingBudget()) {
+    warnOnce("Hit the rate limit, and waiting for it to reset would take longer than this build's remaining GitHub budget. Carrying on without the rest of the GitHub data.")
+    return
+  }
+
   return new Promise(resolve => {
     setTimeout(resolve, delta)
   })
@@ -216,4 +318,4 @@ const getRawFileContents = async (org, repo, path) => {
 
 }
 
-module.exports = { queryGraphQl, queryRest, getRawFileContents }
+module.exports = { queryGraphQl, queryRest, getRawFileContents, startGitHubBudget }

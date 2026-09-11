@@ -1,5 +1,6 @@
 const NodeCache = require("node-cache")
 const cacache = require("cacache")
+const { isAbsent } = require("./absent")
 
 // Vary the time to live to avoid mass extinctions
 const jitterRatio = 0.35
@@ -49,8 +50,12 @@ class PersistableCache {
 
   }
 
+  // Callers should not have to know about the absence marker; to them a known-absent entry just
+  // looks like nothing was found. dump() reads the underlying cache directly, so the marker still
+  // gets persisted.
   get(key) {
-    return this.cache.get(key)
+    const value = this.cache.get(key)
+    return isAbsent(value) ? undefined : value
   }
 
   has(key) {
@@ -75,7 +80,10 @@ class PersistableCache {
         ts: this.cache.getTtl(key)
       }
 
-      // If the entry  is evicted, it will have a key but no value, so don't dump it
+      // If the entry is evicted, it will have a key but no value, so don't dump it.
+      // This is also what keeps transient failures out of the persisted cache; a fetch that could
+      // not get an answer stores undefined, and so is retried on the next build. A fetch that got
+      // a definitive "this does not exist" stores the ABSENT marker, which is truthy and persists.
       if (entry.val) {
         result.push(entry)
       }
@@ -118,7 +126,10 @@ class PersistableCache {
     const promise = functionThatReturnsAPromise().then(answer => {
       this.set(key, answer)
       this.inflight.delete(key)
-      return answer
+      // Store the absence marker, but hand back the same undefined a later build would see, so the
+      // marker never escapes into node data. Doing it here rather than at the return covers the
+      // callers who get handed this same promise off the inflight map.
+      return isAbsent(answer) ? undefined : answer
     }, err => {
       this.inflight.delete(key)
       throw err
