@@ -16,19 +16,26 @@ const TickyBox = styled(props => <FontAwesomeIcon {...props} />)`
   color: var(--main-text-color);
 `
 
+const PlatformEntry = styled(Entry)`
+`
+
+const NonPlatformEntry = styled(Entry)`
+  opacity: 0.7;
+`
+
 const separator = ","
 const noop = a => a
 
 const toggleEntry = (
-  entry,
+  entryName,
   tickedEntries,
   setTickedEntries,
   filterer
 ) => {
-  if (tickedEntries.includes(entry)) {
-    tickedEntries = tickedEntries.filter(item => item !== entry)
+  if (tickedEntries.includes(entryName)) {
+    tickedEntries = tickedEntries.filter(item => item !== entryName)
   } else {
-    tickedEntries = [...tickedEntries, entry] // It's important to make a new array or nothing will be re-rendered
+    tickedEntries = [...tickedEntries, entryName] // It's important to make a new array or nothing will be re-rendered
   }
   if (tickedEntries.length > 0) {
     setTickedEntries(tickedEntries?.join(separator))
@@ -41,14 +48,27 @@ const toggleEntry = (
 
 const normalize = x => typeof x === "string" ? x.toLowerCase() : x
 
+// Get the name for display (used with prettify)
+const getName = x => {
+  if (typeof x === "string") return x
+  // Category objects have categoryId (for filtering) and name (for display)
+  return x.categoryId || x.name
+}
+
+// Get the display name (already prettified for category objects)
+const getDisplayName = x => {
+  if (typeof x === "string") return x
+  return x.name || x.categoryId
+}
+
 const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
   prettify = prettify || noop
 
   // Eliminate duplicates, in a case-insensitive way
   entries = entries.reduce((result, element) => {
 
-    const normalizedElement = normalize(element)
-    if (result.every(otherElement => normalize(otherElement) !== normalizedElement))
+    const normalizedElement = normalize(getName(element))
+    if (result.every(otherElement => normalize(getName(otherElement)) !== normalizedElement))
       result.push(element)
 
     return result
@@ -64,7 +84,7 @@ const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
 
   const onClick = entry => () =>
     toggleEntry(
-      entry,
+      getName(entry),
       tickedEntries,
       setTickedEntries,
       filterer
@@ -84,22 +104,28 @@ const TickyFilter = ({ entries, filterer, prettify, label, queryKey }) => {
     entries && <Element>
       <Entries>
         {entries &&
-          entries.map(entry => (
-            <Entry
-              key={entry}
-              onClick={onClick(entry)
-              }
-            >
-              <div>
-                {tickedEntries.includes(entry) ? (
-                  <TickyBox icon="square-check" title="ticked" />
-                ) : (
-                  <TickyBox icon={["far", "square"]} title="unticked" />
-                )}
-              </div>
-              <label>{prettify(entry)}</label>
-            </Entry>
-          ))}
+          entries.map(entry => {
+            const entryName = getName(entry)
+            const isPlatform = typeof entry === "object" && entry.isPlatform
+            const EntryComponent = isPlatform ? PlatformEntry : NonPlatformEntry
+            // For category objects, use the pre-prettified name; for strings, use prettify
+            const displayName = typeof entry === "object" && entry.name ? getDisplayName(entry) : prettify(entryName)
+            return (
+              <EntryComponent
+                key={entryName}
+                onClick={onClick(entry)}
+              >
+                <div>
+                  {tickedEntries.includes(entryName) ? (
+                    <TickyBox icon="square-check" title="ticked" />
+                  ) : (
+                    <TickyBox icon={["far", "square"]} title="unticked" />
+                  )}
+                </div>
+                <label>{displayName}</label>
+              </EntryComponent>
+            )
+          })}
       </Entries>
     </Element>
   )

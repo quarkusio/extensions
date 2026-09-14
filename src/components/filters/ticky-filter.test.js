@@ -263,4 +263,54 @@ describe("ticky filter", () => {
       })
     })
   })
+
+  describe("when entries are category objects with categoryId and name", () => {
+    const categoryEntries = [
+      { categoryId: "web", name: "Web", isPlatform: false },
+      { categoryId: "data", name: "Data", isPlatform: true },
+      { categoryId: "messaging", name: "Messaging", isPlatform: true },
+    ]
+
+    let user
+    const filterer = jest.fn(() => {
+      if (rerender) {
+        try {
+          rerender()
+        } catch (e) {
+          // This can happen if the component is already unmounted
+        }
+      }
+    })
+
+    beforeEach(() => {
+      user = userEvent.setup()
+      mockQueryParamSearchString = undefined
+      const products = render(<TickyFilter filterer={filterer} entries={categoryEntries} label="Category" />)
+      rerender = () => {
+        products.rerender(<TickyFilter filterer={filterer} entries={categoryEntries} label="Category" />)
+      }
+    })
+
+    it("renders category display names", () => {
+      expect(screen.getByText("Web")).toBeTruthy()
+      expect(screen.getByText("Data")).toBeTruthy()
+      expect(screen.getByText("Messaging")).toBeTruthy()
+    })
+
+    it("applies different styling based on isPlatform field", () => {
+      const webItem = screen.getByText("Web").closest("li")
+      const dataItem = screen.getByText("Data").closest("li")
+
+      // Non-platform should have reduced opacity
+      expect(webItem).toHaveStyle({ opacity: "0.7" })
+      // Platform should not have reduced opacity
+      expect(dataItem).not.toHaveStyle({ opacity: "0.7" })
+    })
+
+    it("uses categoryId for filtering", async () => {
+      await user.click(screen.getByText("Data"))
+      // Should pass categoryId to filterer, not the display name
+      expect(filterer).toHaveBeenCalledWith(["data"])
+    })
+  })
 })

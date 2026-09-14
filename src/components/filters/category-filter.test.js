@@ -192,5 +192,35 @@ describe("category filter", () => {
       expect(screen.getByText("Toad")).toBeTruthy()
     })
   })
+
+  describe("category sorting", () => {
+    const mixedCategories = [
+      { categoryId: "web", name: "Web", isPlatform: false },
+      { categoryId: "data", name: "Data", isPlatform: true },
+      { categoryId: "messaging", name: "Messaging", isPlatform: true },
+      { categoryId: "ai", name: "AI", isPlatform: false },
+      { categoryId: "cloud", name: "Cloud", isPlatform: true },
+      { categoryId: "agents", name: "Agents", isPlatform: false },
+    ]
+
+    beforeEach(() => {
+      mockQueryParamSearchString = undefined
+      render(<CategoryFilter filterer={filterer} categories={mixedCategories} />)
+    })
+
+    it("renders platform categories first, alphabetically sorted", () => {
+      const labels = screen.getAllByRole("listitem").map(item => item.textContent)
+
+      // Platform categories (isPlatform: true): Cloud, Data, Messaging (alphabetical)
+      expect(labels[0]).toBe("Cloud")
+      expect(labels[1]).toBe("Data")
+      expect(labels[2]).toBe("Messaging")
+
+      // Non-platform categories (isPlatform: false): Agents, AI, Web (alphabetical)
+      expect(labels[3]).toBe("Agents")
+      expect(labels[4]).toBe("AI")
+      expect(labels[5]).toBe("Web")
+    })
+  })
 })
 
