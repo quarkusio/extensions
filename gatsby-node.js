@@ -116,6 +116,9 @@ exports.sourceNodes = async ({
       const slug = extensionSlug(categoryId)
       const id = createNodeId(slug)
 
+      // Platform categories have descriptions (from the registry API); community categories don't
+      const isPlatform = description != null
+
       const node = {
         categoryId: normalisedCategoryId, // Use the lower case category in the graphql, to be case-insensitive on id matching
         name: name,
@@ -123,6 +126,7 @@ exports.sourceNodes = async ({
         count,
         id,
         sortableName: sortableName(name),
+        isPlatform,
         internal: {
           type: "Category",
           contentDigest: createContentDigest(categoryId),

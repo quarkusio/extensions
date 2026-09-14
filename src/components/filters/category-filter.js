@@ -2,20 +2,19 @@ import React from "react"
 import TickyFilter from "./ticky-filter"
 
 const CategoryFilter = ({ categories, filterer }) => {
-  // Extract category IDs for the filter entries (used in query params)
-  const categoryIds = categories?.map(c => c.categoryId) || []
+  // Sort categories: platform first (alphabetically), then non-platform (alphabetically)
+  const sortedCategories = categories ? [...categories].sort((a, b) => {
+    // Platform categories come first
+    if (a.isPlatform && !b.isPlatform) return -1
+    if (!a.isPlatform && b.isPlatform) return 1
 
-  // Create a map from category ID to display name.
-  // gatsby-node.js always sets name on every Category node (falling back to prettyCategory there),
-  // so every entry passed here is guaranteed to have a name.
-  const categoryMap = new Map()
-  categories?.forEach(c => {
-    categoryMap.set(c.categoryId, c.name)
-  })
+    // Within each group, sort alphabetically by name
+    return a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+  }) : []
 
+  // Pass full category objects to TickyFilter so it can apply styling based on isPlatform
   return (
-    categories && <TickyFilter label="Category" queryKey="categories" entries={categoryIds} filterer={filterer}
-                               prettify={categoryId => categoryMap.get(categoryId)} />
+    categories && <TickyFilter label="Category" queryKey="categories" entries={sortedCategories} filterer={filterer} />
   )
 }
 

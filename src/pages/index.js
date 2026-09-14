@@ -50,6 +50,7 @@ export const pageQuery = graphql`
       nodes {
         categoryId
         name
+        isPlatform
       }
     }
     
