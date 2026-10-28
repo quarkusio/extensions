@@ -40,6 +40,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.Collections;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Command(name = "report", mixinStandardHelpOptions = true,
         description = "Raises and closes issues depending on the results of dead link checking")
@@ -69,13 +71,20 @@ class Report implements Runnable {
     @Option(names = "runId", description = "The ID of the Github Action run")
     private String runId;
 
+    @Option(names = "previousResults", description = "The dead link results file from the previous run, if " +
+            "there is one. Network errors are only reported if they also happened in the previous run.")
+    private String previousResults;
+
     @Override
     public void run() {
         try {
             final GitHub github = new GitHubBuilder().withAppInstallationToken(token)
                     .build();
 
-            List<DeadLink> links = readTestOutputFile();
+            List<DeadLink> links = readResultsFile(OUTPUT_PATH);
+            Set<String> previouslyDeadUrls = readResultsFile(previousResults).stream()
+                    .map(DeadLink::url)
+                    .collect(Collectors.toSet());
 
             String summaryInfo = readSummaryFile();
 
@@ -84,13 +93,23 @@ class Report implements Runnable {
                 if (!summaryInfo.isEmpty()) {
                     System.out.println("Link check summary:\n" + summaryInfo);
                 }
-                links.forEach(link -> processDeadLink(github, link));
+                links.forEach(link -> {
+                    // Some hosts are unreachable from some runners but not others, so don't raise issues for a one-off network error
+                    if (link.isNetworkError() && !previouslyDeadUrls.contains(link.url())) {
+                        System.out.println(String.format(
+                                "Got a network error for %s, but it is not in the previous run's results; not raising an issue unless it fails again",
+                                link.url()));
+                    } else {
+                        processDeadLink(github, link);
+                    }
+                });
             } else {
                 throw new RuntimeException("There were " + links.size() + " dead links, which seems implausible."
                         + (summaryInfo.isEmpty() ? "" : "\nLink check summary:\n" + summaryInfo));
             }
 
             // Close any issues that don't relate to these
+            // This uses all the dead links, so issues are kept open if a link has gone from a 404 to a network error
             closeResolvedIssues(github, links);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
@@ -216,11 +235,15 @@ class Report implements Runnable {
         return "";
     }
 
-    private List<DeadLink> readTestOutputFile() throws IOException {
+    private List<DeadLink> readResultsFile(String path) throws IOException {
+        if (path == null) {
+            return Collections.emptyList();
+        }
         Path filePath = FileSystems.getDefault()
-                .getPath(OUTPUT_PATH);
+                .getPath(path);
         if (Files.exists(filePath)) {
             return Files.lines(filePath)
+                    .filter(line -> !line.isBlank())
                     .map(line -> {
                         try {
                             return new ObjectMapper().readValue(line, DeadLink.class);
@@ -239,8 +262,15 @@ class Report implements Runnable {
         System.exit(exitCode);
     }
 
+    // Status is null for results written before it was recorded
     record DeadLink(
             String url,
-            String owningPage) {
+            String owningPage,
+            Integer status) {
+
+        // A status of 0 means there was no HTTP response at all
+        boolean isNetworkError() {
+            return status != null && status == 0;
+        }
     }
 }
