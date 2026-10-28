@@ -26,7 +26,8 @@ describe("site external links", () => {
   const domainBreakdown = {}
 
   beforeAll(async () => {
-    await fs.rm(resultsFile, { force: true })
+    // Always write the results file, even if there are no dead links, so the next run can tell "nothing was dead" apart from "no results"
+    await fs.writeFile(resultsFile, "")
     await fs.rm(summaryFile, { force: true })
 
     const path = `http://localhost:${port}/${pathPrefix}`
@@ -88,8 +89,8 @@ describe("site external links", () => {
                   domainBreakdown[domain] = (domainBreakdown[domain] || 0) + 1
                 } catch (e) { /* ignore unparseable URLs */ }
 
-                // Also write out to a file - the a+ flag will create it if it doesn't exist
-                const content = JSON.stringify({ url: result.url, owningPage: result.parent }) + "\n"
+                // Also write out to a file; a status of 0 means there was no HTTP response at all (a network error, rather than a dead page)
+                const content = JSON.stringify({ url: result.url, owningPage: result.parent, status: result.status }) + "\n"
 
                 const write = await fs.writeFile(resultsFile, content, { flag: "a+" }, err => {
                   console.warn("Error writing results:", err)
@@ -126,8 +127,10 @@ describe("site external links", () => {
       concurrency: 5,
       timeout: 30 * 1000,
       retry: true, // Retry on 429
-      retryErrors: true, // Retry on 5xx
-      retryErrorsCount: 12,
+      retryErrors: true, // Retry on 5xx and network errors (status 0)
+      // Retries back off exponentially (2^n seconds), so 12 retries took over two hours for a host which never responded, and blew the jest timeout
+      // Hosts which are unreachable from one runner are handled by the issue helper, which waits for a second failing run before raising an issue
+      retryErrorsCount: 4,
       retryErrorsJitter: 8000, // Default is 3000
     })
       .then(() => Promise.all(pendingRetries))

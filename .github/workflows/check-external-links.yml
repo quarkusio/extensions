@@ -20,6 +20,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
+      actions: read # to find the previous run and download its results
       issues: write
       repository-projects: read
       statuses: read
@@ -51,6 +52,24 @@ jobs:
           CI: true
           PATH_PREFIX: "${{ github.ref_name == 'main' && 'extensions' || '' }}"
           PATH_PREFIX_FLAG: "${{ github.ref_name == 'main' && '--prefix-paths' || '' }}"
+      # Network errors are only reported if they also happened in the previous run, so fetch its results
+      - name: Find previous run
+        id: previous-run
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          id=$(gh run list -R ${{ github.repository }} --workflow check-external-links.yml --status success --limit 1 --json databaseId --jq '.[0].databaseId // empty')
+          echo "Previous successful run: ${id:-none}"
+          echo "id=$id" >> "$GITHUB_OUTPUT"
+      - name: Download previous results
+        if: steps.previous-run.outputs.id != ''
+        continue-on-error: true # the artifact may have expired, or pre-date this step; network errors then just wait one more run to be confirmed
+        uses: actions/download-artifact@v8
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ steps.previous-run.outputs.id }}
+          path: previous-results/
+          name: dead-link-results
       - name: Set up JBang
         uses: jbangdev/setup-jbang@main
       - name: Raise defects if needed
@@ -59,5 +78,14 @@ jobs:
             token=${{ secrets.GITHUB_TOKEN }} \
             issueRepo=${{ github.repository }} \
             runId=${{ github.run_id }} \
-            siteUrl=https://quarkus.io/extensions
+            siteUrl=https://quarkus.io/extensions \
+            previousResults=previous-results/dead-link-check-results.json
         shell: bash
+      - name: Save results for the next run
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: dead-link-results
+          path: dead-link-check-results.json
+          if-no-files-found: warn
+          retention-days: 7
