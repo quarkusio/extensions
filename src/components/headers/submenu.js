@@ -130,6 +130,65 @@ const NavEntry = styled(props => <li {...props} />)`
   }
 `
 
+// A nested menu inside a submenu. It expands inline, below its title, on both desktop and mobile.
+const InlineTertiaryMenu = styled.ul`
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  background: var(--tertiary-menu-background-color);
+`
+
+const TertiaryTitle = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: ${({ $centered }) => ($centered ? "center" : "flex-end")};
+  align-items: center;
+  box-sizing: border-box; // Otherwise the padding pushes the chevron off the right edge
+  width: 100%;
+  padding: 5px 14.4px; // Match the horizontal padding of the top-level menu titles, so the chevron has some breathing room
+  line-height: 1.8rem;
+  white-space: nowrap;
+  cursor: default;
+`
+
+const TertiaryEntry = styled.li`
+  border-bottom: 1px solid var(--submenu-separator-color);
+  width: 100%;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+`
+
+const TertiaryMenu = ({ title, children }) => {
+  const isMobile = useMediaQuery({ query: device.sm })
+  const [open, setOpen] = React.useState(false)
+
+  const iconTitle = open ? "tertiaryChevronUp" : "tertiaryChevronDown"
+
+  return (
+    <TertiaryEntry
+      onMouseEnter={isMobile ? undefined : () => setOpen(true)}
+      onMouseLeave={isMobile ? undefined : () => setOpen(false)}
+    >
+      <TertiaryTitle
+        $centered={isMobile}
+        onClick={isMobile ? () => setOpen(!open) : undefined}
+      >
+        <div>{title}</div>
+        <FlippyIcon icon={faChevronDown} isOpen={open} title={iconTitle} />
+      </TertiaryTitle>
+      {open && <InlineTertiaryMenu>{children}</InlineTertiaryMenu>}
+    </TertiaryEntry>
+  )
+}
+
 const Submenu = ({ title, children }) => {
   const isMobile = useMediaQuery({ query: device.sm })
 
@@ -171,4 +230,4 @@ const Submenu = ({ title, children }) => {
   )
 }
 
-export { Submenu, NavEntry }
+export { Submenu, TertiaryMenu, NavEntry }

@@ -2,7 +2,7 @@ import React from "react"
 import { render, screen } from "@testing-library/react"
 import { Context as ResponsiveContext } from "react-responsive"
 import userEvent from "@testing-library/user-event"
-import { Submenu } from "./submenu"
+import { Submenu, TertiaryMenu } from "./submenu"
 
 describe("hover flippy menu", () => {
   const linkTitle = "Open Me"
@@ -147,4 +147,46 @@ describe("hover flippy menu", () => {
     })
   })
 
+})
+
+describe("tertiary menu", () => {
+  const title = "Nested"
+  const item = "nested item"
+
+  describe("at normal screen size", () => {
+    it("shows the contents on hover and hides them on leaving", async () => {
+      const user = userEvent.setup()
+      render(
+        <>
+          <div>elsewhere</div>
+          <TertiaryMenu title={title}>
+            <li>{item}</li>
+          </TertiaryMenu>
+        </>
+      )
+      expect(screen.queryByText(item)).toBeNull()
+      await user.hover(screen.getByText(title))
+      expect(screen.getByText(item)).toBeInTheDocument()
+      await user.hover(screen.getByText("elsewhere"))
+      expect(screen.queryByText(item)).toBeNull()
+    })
+  })
+
+  describe("at a mobile screen size", () => {
+    it("toggles the contents on click", async () => {
+      const user = userEvent.setup({ skipHover: true })
+      render(
+        <ResponsiveContext.Provider value={{ width: 300, type: "screen" }}>
+          <TertiaryMenu title={title}>
+            <li>{item}</li>
+          </TertiaryMenu>
+        </ResponsiveContext.Provider>
+      )
+      expect(screen.queryByText(item)).toBeNull()
+      await user.click(screen.getByText(title))
+      expect(screen.getByText(item)).toBeInTheDocument()
+      await user.click(screen.getByText(title))
+      expect(screen.queryByText(item)).toBeNull()
+    })
+  })
 })

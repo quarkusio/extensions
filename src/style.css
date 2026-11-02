@@ -44,6 +44,7 @@ html {
     --navbar-text-color: #FFFFFF; /* not in the main site */
     --title-text-color: #FFFFFF; /* not in the main site */
     --submenu-background-color: #333333; /* not in the main site */
+    --tertiary-menu-background-color: #4d4d4d; /* not in the main site */
     --filter-separator-color: var(--code-background-color); /* not in the main site */
     --filter-outline-color: #A6A6A6; /* not in the main site */
 
