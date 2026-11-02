@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { useMediaQuery } from "react-responsive"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faBars, faGlobe } from "@fortawesome/free-solid-svg-icons"
-import { NavEntry, Submenu } from "./submenu"
+import { NavEntry, Submenu, TertiaryMenu } from "./submenu"
 
 import config from "../../../gatsby-config.js"
 import { DarkModeToggle } from "./dark-mode-toggle"
@@ -173,12 +173,38 @@ const Navigation = () => {
           Container First
         </a>
       </NavEntry>
-      <NavEntry>
-        <a href={`${config.siteMetadata.parentSiteUrl}/spring`}>
-          Using Spring?
-        </a>
-      </NavEntry>
-
+      <TertiaryMenu title="Using Spring?">
+        <NavEntry>
+          <a href={`${config.siteMetadata.parentSiteUrl}/spring`}>
+            Spring Overview
+          </a>
+        </NavEntry>
+        <NavEntry>
+          <a href={`${config.siteMetadata.parentSiteUrl}/spring/migrate/`}>
+            Migrate to Quarkus
+          </a>
+        </NavEntry>
+      </TertiaryMenu>
+      <TertiaryMenu title="AI">
+        <NavEntry>
+          <a href={`${config.siteMetadata.parentSiteUrl}/ai`}>AI Overview</a>
+        </NavEntry>
+        <NavEntry>
+          <a href={`${config.siteMetadata.parentSiteUrl}/java-for-ai`}>
+            Java for AI
+          </a>
+        </NavEntry>
+        <NavEntry>
+          <a href={`${config.siteMetadata.parentSiteUrl}/quarkus-for-ai`}>
+            Why Quarkus for AI
+          </a>
+        </NavEntry>
+        <NavEntry>
+          <a href={`${config.siteMetadata.parentSiteUrl}/ai-blueprints`}>
+            AI Blueprints
+          </a>
+        </NavEntry>
+      </TertiaryMenu>
     </Submenu>
   )
   const learn = (
@@ -192,6 +218,14 @@ const Navigation = () => {
         <a href={`${config.siteMetadata.parentSiteUrl}/guides`}>Documentation</a>
       </NavEntry>
       <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/releases/`}>Releases</a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/almanac/`}>
+          Release Almanac
+        </a>
+      </NavEntry>
+      <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/userstories`}>User Stories</a>
       </NavEntry>
       <NavEntry>
@@ -201,6 +235,9 @@ const Navigation = () => {
       </NavEntry>
       <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/books`}>Books</a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/workshops`}>Workshops</a>
       </NavEntry>
     </Submenu>
   )
@@ -244,6 +281,11 @@ const Navigation = () => {
         </a>
       </NavEntry>
       <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/working-groups`}>
+          Working Groups
+        </a>
+      </NavEntry>
+      <NavEntry>
         <a href={`${config.siteMetadata.parentSiteUrl}/insights`}>Podcast</a>
       </NavEntry>
       <NavEntry>
@@ -257,6 +299,11 @@ const Navigation = () => {
       <NavEntry>
         <a href="https://github.com/orgs/quarkusio/projects/13/views/1">
           Roadmap
+        </a>
+      </NavEntry>
+      <NavEntry>
+        <a href={`${config.siteMetadata.parentSiteUrl}/benefactors`}>
+          Benefactors
         </a>
       </NavEntry>
     </Submenu>
