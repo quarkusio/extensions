@@ -24,7 +24,7 @@ module.exports = {
     },
   },
   plugins: [
-    `github-enricher`,
+    `synced-data`,
     `smart-cropper`,
     {
       resolve: "gatsby-plugin-force-file-loader",
@@ -87,7 +87,6 @@ module.exports = {
         },
       },
     },
-    "download-data",
     {
       resolve: `gatsby-plugin-feed`,
       options: {

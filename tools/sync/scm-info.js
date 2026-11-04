@@ -1,9 +1,5 @@
 const gh = require("parse-github-url")
-const path = require("path")
-const { createRepository, getResolvers } = require("./repository-creator")
-
-const { getCache } = require("gatsby/dist/utils/get-cache")
-const { createRemoteFileNode } = require("gatsby-source-filesystem")
+const yaml = require("js-yaml")
 const PersistableCache = require("../../src/persistable-cache")
 const {
   findSponsor,
@@ -11,38 +7,19 @@ const {
   saveSponsorCache,
   initSponsorCache,
   getContributors,
-  normalizeCompanyName
 } = require("./sponsorFinder")
 const { getRawFileContents, queryGraphQl, startGitHubBudget } = require("./github-helper")
 const { ABSENT, isAbsent } = require("../../src/absent")
-const yaml = require("js-yaml")
-const { getIssueInformationNoCache } = require("./issue-count-helper")
+const { getIssueInformationNoCache, initialiseLabels } = require("./issue-count-helper")
 const { normaliseUrl } = require("./url-helper")
-const { initialiseLabels } = require("./issue-count-helper")
-
-const defaultOptions = {
-  nodeType: "Extension",
-}
-
-// Setting SKIP_ENRICHMENT stubs out every GitHub call, for much faster local builds.
-// The schema customization and resolvers stay in place, so the rest of the site still builds,
-// it just won't have any source control information.
-const skipEnrichment = process.env.SKIP_ENRICHMENT === "true"
 
 // To avoid hitting the git rate limiter retrieving information we already know, cache what we can
 const DAY_IN_SECONDS = 24 * 60 * 60
 
-// Defer initialization of these so we're playing at the right points in the plugin lifecycle
+// Defer initialization of these so they are set up at a predictable point
 let repoOverviewCache, extensionYamlCache, issueCountCache, samplesCache
 
-exports.onPreBootstrap = async () => {
-  if (skipEnrichment) {
-    console.warn(
-      "SKIP_ENRICHMENT is set, so no source control information will be read from GitHub."
-    )
-    return
-  }
-
+const initialise = async () => {
   startGitHubBudget()
 
   repoOverviewCache = new PersistableCache({ key: "github-api-for-repo-overview", stdTTL: 3 * DAY_IN_SECONDS })
@@ -78,7 +55,7 @@ exports.onPreBootstrap = async () => {
 
   const text = await getRawFileContents(repoCoords.owner, repoCoords.name, ".github/quarkus-github-bot.yml")
 
-  const yaml = text ? text : ""
+  const botConfig = text ? text : ""
 
   // This query is long, because I can't find a way to do "or" or
   // Batching this may not help that much because rate limits are done on query complexity and cost,
@@ -111,16 +88,12 @@ exports.onPreBootstrap = async () => {
   const pathsRes = await queryGraphQl(query)
   const repoListing = pathsRes?.repository?.object?.entries
 
-  initialiseLabels(yaml, repoListing)
+  initialiseLabels(botConfig, repoListing)
   // Return the promise so the execution waits for us
-  return yaml
+  return botConfig
 }
 
-exports.onPostBootstrap = async () => {
-  if (skipEnrichment) {
-    return
-  }
-
+const persist = async () => {
   await repoOverviewCache.persist()
   console.log("Persisted", repoOverviewCache.size(), "cached repo overviews.")
 
@@ -136,244 +109,13 @@ exports.onPostBootstrap = async () => {
   await saveSponsorCache()
 }
 
-exports.onPluginInit = () => {
-  // Clear the in-memory cache; we read from the gatsby cache later on, so this shouldn't affect the persistence between builds
-  // This is mostly needed for tests, since we can't add new methods beyond what the API defines to this file
+// Clear the in-memory caches; the persisted copies are read again by initialise()
+// This is mostly needed for tests
+const resetCaches = () => {
   repoOverviewCache?.flushAll()
   extensionYamlCache?.flushAll()
   issueCountCache?.flushAll()
   clearCaches()
-}
-
-/**
- * Helper function to create remote file nodes with retry logic for JWT expiration.
- * GitHub repository image URLs contain JWT tokens that expire after a short time (typically 5 minutes).
- * If the build takes too long between retrieving the URL and fetching the image, the JWT may expire.
- * This function catches JWT expiration errors (HTTP 618) and retries with a fresh URL from GitHub.
- */
-const createRemoteFileNodeWithRetry = async (url, options, coords) => {
-  try {
-    // Strip query parameters from URL for filename to avoid ENAMETOOLONG errors
-    const urlWithoutQuery = url.split("?")[0]
-    const baseName = path.basename(urlWithoutQuery)
-
-    // Use URL without JWT query params as cache key so Gatsby can reuse cached files
-    // even when the JWT token in the URL changes (JWTs expire after 5 minutes)
-    const cacheKey = urlWithoutQuery
-
-    return await createRemoteFileNode({
-      url,
-      ...options,
-      name: baseName,
-      cacheKey,
-    })
-  } catch (error) {
-    // Log the error to help diagnose JWT detection issues
-    console.error(`createRemoteFileNode failed for ${url}:`, {
-      message: error.message,
-      statusCode: error.statusCode,
-      responseStatusCode: error.responseStatusCode,
-      responseStatusMessage: error.responseStatusMessage,
-      "response?.statusCode": error.response?.statusCode,
-      "originalError?.statusCode": error.originalError?.statusCode
-    })
-
-    // Check if this is a JWT expiration error
-    // Note: gatsby-source-filesystem wraps HTTP errors from 'got', check multiple locations
-    const statusCode = error.statusCode ||
-      error.originalError?.statusCode ||
-      error.response?.statusCode ||
-      error.responseStatusCode  // got library uses this property
-
-    const errorMessage = error.message || ""
-    const errorString = JSON.stringify(error)
-
-    const isJwtExpired = errorMessage.includes("jwt:expired") ||
-      errorMessage.includes("jwt expired") ||
-      errorMessage.includes("618") ||
-      errorString.includes("jwt:expired") ||
-      errorString.includes("618") ||
-      statusCode === 618
-
-    if (isJwtExpired && coords) {
-      console.warn(`JWT expired for ${url}, retrying with fresh URL from GitHub API`)
-
-      try {
-        // Re-fetch fresh URL from GitHub API
-        const freshRepoOverview = await getRepoOverviewNoCache(coords)
-
-        if (freshRepoOverview?.socialImage) {
-          const urlWithoutQuery = freshRepoOverview.socialImage.split("?")[0]
-          const baseName = path.basename(urlWithoutQuery)
-          const cacheKey = urlWithoutQuery
-
-          // Retry with fresh URL
-          return await createRemoteFileNode({
-            url: freshRepoOverview?.socialImage,
-            ...options,
-            name: baseName,
-            cacheKey,
-          })
-        } else {
-          // No fresh URL available (possibly due to rate limiting)
-          console.warn(`Could not get fresh image URL for ${coords.owner}/${coords.name}, skipping image`)
-          return null
-        }
-      } catch (retryError) {
-        // Retry failed (likely due to GitHub API rate limiting)
-        // Instead of crashing the build, skip this image and continue
-        console.warn(`Retry failed for ${coords.owner}/${coords.name} (${retryError.message}), skipping image`)
-        return null
-      }
-    }
-
-    // Re-throw if not JWT expiration
-    // If it is JWT expiration but we don't have coords to retry, skip the image
-    if (isJwtExpired) {
-      console.warn(`JWT expired for ${url} but no repository coords available, skipping image`)
-      return null
-    }
-
-    throw error
-  }
-}
-
-exports.onCreateNode = async (
-  { node, actions, createNodeId, createContentDigest },
-  pluginOptions
-) => {
-  if (skipEnrichment) {
-    return
-  }
-
-  const { createNode } = actions
-
-  const options = {
-    ...defaultOptions,
-    ...pluginOptions,
-  }
-
-  if (node.internal.type !== options.nodeType) {
-    return
-  }
-
-  const { metadata } = node
-
-  createSponsor({ actions, createNodeId, createContentDigest }, metadata)
-
-  // A bit ugly, we need a unique identifier in string form, and we also need the url; use a comma-separated string
-  const id = metadata?.sourceControl
-  let scmUrl = id?.split(",")[0]
-
-  if (scmUrl?.includes("gitbox.apache.org")) {
-    const urlState = new URL(scmUrl).search
-    const matches = urlState?.match(/p=(.*).git;/)
-    const projectName = matches?.length > 0 && matches[1]
-    scmUrl = `https://github.com/apache/${projectName}`
-  }
-
-  if (scmUrl) {
-
-    const coords = gh(scmUrl)
-
-    const project = coords.name
-    const owner = coords.owner
-
-    const scmInfo = await fetchScmInfo(
-      scmUrl,
-      node.metadata?.maven?.groupId,
-      node.metadata?.maven?.artifactId,
-    )
-
-    createRepository({ actions, createNodeId, createContentDigest }, { url: scmUrl, project, owner })
-    scmInfo.repository = scmUrl
-
-    scmInfo.id = createNodeId(id)
-    // We need a non-obfuscated version of the id to act as a foreign key
-    scmInfo.key = id
-
-    scmInfo.internal = {
-      type: "SourceControlInfo",
-      contentDigest: createContentDigest(scmInfo),
-    }
-
-    if (scmInfo.socialImage) {
-      const fileNode = await createRemoteFileNodeWithRetry(
-        scmInfo.socialImage,
-        {
-          parentNodeId: scmInfo.id,
-          getCache,
-          createNode,
-          createNodeId,
-        },
-        coords
-      )
-
-      // fileNode might be null if JWT expired and retry failed (e.g., due to rate limiting)
-      // In that case, we skip the image rather than crashing the build
-      if (fileNode) {
-        // This is the foreign key to the cropped file's name
-        // We have to guess what the name will be
-        scmInfo.projectImage = "smartcrop-" + path.basename(fileNode.absolutePath)
-      }
-    }
-
-    createNode(scmInfo)
-
-    // Return a promise to make sure we wait
-    return scmInfo
-  }
-}
-
-exports.sourceNodes = async ({ actions, createNodeId, createContentDigest }) => {
-  if (skipEnrichment) {
-    return
-  }
-
-  await createContributingCompanies({ actions, createNodeId, createContentDigest })
-}
-
-
-const extensionCatalogContributingCompany = "extension-catalog-contributing-company"
-const createContributingCompanies = async ({ actions, createNodeId, createContentDigest }) => {
-
-  const org = "quarkusio"
-  const repo = "quarkus-extension-catalog"
-  const path = "named-contributing-orgs-opt-in.yml"
-
-  const yamlString = await getRawFileContents(org, repo, path)
-
-  if (yamlString) {
-    const json = await yaml.load(yamlString)
-
-    json["named-sponsors"]?.forEach(company => createSponsor({
-      actions,
-      createNodeId,
-      createContentDigest
-    }, { sponsor: company, source: "extension-catalog-sponsor" }))
-
-    json["named-contributing-orgs"]?.forEach(company => createSponsor({
-      actions,
-      createNodeId,
-      createContentDigest
-    }, { sponsor: company, source: extensionCatalogContributingCompany }))
-
-  } else {
-    console.warn("Could not fetch sponsor opt in information from", org, repo, path, ". Does the file exist?")
-  }
-}
-
-
-const createSponsor = ({ actions: { createNode }, createNodeId, createContentDigest }, { sponsor, source }) => {
-  if (sponsor) {
-    const derivedSource = source || "metadata-sponsor"
-    createNode({
-      id: sponsor,
-      name: sponsor,
-      source: derivedSource,
-      internal: { type: "ContributingCompany", contentDigest: createContentDigest(sponsor + "sponsor") }
-    })
-  }
 }
 
 const fetchScmInfo = async (scmUrl, groupId, artifactId, labels) => {
@@ -880,149 +622,62 @@ const getIssueInformation = async (coords, artifactId, scmUrl) => {
 
 }
 
-// This combines the sponsor opt-in information (which we only fully have after processing all nodes) with the companies and sponsor information for individual nodes,
-// to get a sanitised list
-exports.createResolvers = ({ createResolvers }) => {
-  const other = "Other"
 
-  const resolvers = {
-    ...getResolvers(),
-    SourceControlInfo: {
-      companies: {
-        type: "[CompanyContributorInfo]",
-        resolve: async (source, args, context) => {
+// The sourceControl id is the scm url and the maven coordinates, comma-separated; this is the key used in the synced data
+const parseSourceControlId = (sourceControl) => {
+  let scmUrl = sourceControl?.split(",")[0]
 
-          const answer = await context.nodeModel.findAll({
-              type: `ContributingCompany`
-            },
-          )
-
-          // No need to filter on opt-in source, any named company counts
-          const nameableCompanies = Array.from(answer?.entries.map(company => company.name?.toLowerCase()))
-
-          // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
-          const onlyOptIns = source.allCompanies?.map(company => {
-            const sanitisedName = nameableCompanies.includes(company.name?.toLowerCase()) ? company.name : other
-            return { ...company, name: sanitisedName }
-          })
-
-          // We're almost there, but we may have multiple 'other' entries, so aggregate
-          const aggregated = onlyOptIns?.reduce((acc, stats) => {
-            if (stats.name === other) {
-              const existingOther = acc.find(s => s.name === other)
-              if (existingOther) {
-                existingOther.contributors = existingOther.contributors + stats.contributors
-                existingOther.contributions = existingOther.contributions + stats.contributions
-              } else {
-                acc.push(stats)
-              }
-            } else {
-              acc.push(stats)
-            }
-            return acc
-          }, [])
-
-          return aggregated?.length > 0 ? aggregated : undefined
-        }
-      },
-
-      contributors: {
-        type: "[ContributorInfo]",
-        resolve: async (source, args, context) => {
-
-          const optedInCompanies = await context.nodeModel.findAll({
-              type: `ContributingCompany`
-            },
-          )
-
-          // No need to filter on opt-in source, any named company counts
-          // Normalise the company name, since the names in the user record will be normalized
-          const nameableCompanies = Array.from(optedInCompanies?.entries.map(company => normalizeCompanyName(company.name)).map(companyName => companyName.toLowerCase()))
-
-          // The case should be the same on the opt in list and GitHub info, but do a case-insensitive comparison to be safe
-          return source.contributorsWithFullCompanyInfo?.map(contributor => {
-            const sanitisedName = nameableCompanies.includes(contributor.company?.toLowerCase()) ? contributor.company : other
-            return { ...contributor, company: sanitisedName }
-          })
-
-
-        }
-      },
-
-      sponsors: {
-        type: "[String]",
-        resolve: async (source, args, context) => {
-
-          const answer = await context.nodeModel.findAll({
-              type: `ContributingCompany`
-            },
-          )
-          const namedSponsors = Array.from(answer?.entries.filter(company => company.source !== extensionCatalogContributingCompany).map(company => normalizeCompanyName(company.name)).map(companyName => companyName?.toLowerCase()))
-
-          // The case should be the same on the opt in list and GitHub info, but do a normalized case-insensitive comparison to be safe
-          // Since this is a filter, we need to use a sync function, but that's ok as we don't need to resolve user ids
-          const filtered = source.allSponsors?.filter(company => namedSponsors && namedSponsors.includes(normalizeCompanyName(company).toLowerCase()))
-          return filtered?.length > 0 ? filtered : undefined
-        }
-      }
-    }
+  if (scmUrl?.includes("gitbox.apache.org")) {
+    const urlState = new URL(scmUrl).search
+    const matches = urlState?.match(/p=(.*).git;/)
+    const projectName = matches?.length > 0 && matches[1]
+    scmUrl = `https://github.com/apache/${projectName}`
   }
-  createResolvers(resolvers)
+
+  return scmUrl
 }
 
-exports.createSchemaCustomization = ({ actions }) => {
-  const { createTypes } = actions
-  const typeDefs = `
-  type SourceControlInfo implements Node @noinfer {
-    repository: Repository @link(by: "url")
-    ownerImageUrl: String
-    extensionYamlUrl: String
-    extensionRootUrl: String
-    issues: String
-    issuesUrl: String
-    samplesUrl: [SampleInfo]
-    lastUpdated: String
-    contributors: [ContributorInfo]
-    companies: [CompanyContributorInfo]
-    allCompanies: [CompanyContributorInfo]
-    sponsors: [String]
-    allSponsors: [String]
-    socialImage: File @link(by: "url")
-    projectImage: File @link(by: "name")
-    numMonthsForContributions: Int
-    license: LicenseInfo
-  }
+// Returns everything we know about the source control for one extension, in a form that can be written straight to json
+const fetchScmInfoForExtension = async ({ sourceControl, groupId, artifactId }) => {
+  const scmUrl = parseSourceControlId(sourceControl)
 
-  type LicenseInfo {
-    name: String
-    spdxId: String
-    url: String
-  }
+  if (scmUrl) {
+    const coords = gh(scmUrl)
 
-  type SampleInfo implements Node {
-    url: String
-    description: String
-  }
+    const scmInfo = await fetchScmInfo(scmUrl, groupId, artifactId)
+    scmInfo.repository = scmUrl
+    scmInfo.project = coords.name
+    scmInfo.owner = coords.owner
 
-  type Repository implements Node {
-    url: String
-    owner: String
-    project: String
-    license: LicenseInfo
+    return scmInfo
   }
+}
 
-  type ContributorInfo implements Node @noinfer {
-    name: String
-    login: String
-    company: String
-    contributions: Int
-    url: String
-  }
+const fetchNamedCompanies = async () => {
+  const org = "quarkusio"
+  const repo = "quarkus-extension-catalog"
+  const path = "named-contributing-orgs-opt-in.yml"
 
-  type CompanyContributorInfo implements Node @noinfer {
-    name: String
-    contributions: Int
+  const yamlString = await getRawFileContents(org, repo, path)
+
+  if (yamlString) {
+    const json = await yaml.load(yamlString)
+
+    return {
+      namedSponsors: json["named-sponsors"] ?? [],
+      namedContributingOrgs: json["named-contributing-orgs"] ?? []
+    }
+  } else {
+    console.warn("Could not fetch sponsor opt in information from", org, repo, path, ". Does the file exist?")
   }
-  `
-  createTypes(typeDefs)
+}
+
+module.exports = {
+  initialise,
+  persist,
+  resetCaches,
+  fetchScmInfoForExtension,
+  fetchNamedCompanies,
+  getRepoOverviewNoCache,
+  parseSourceControlId
 }

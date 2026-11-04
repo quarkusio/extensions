@@ -106,6 +106,8 @@
     "build": "cp ./node_modules/gatsby-page-utils/dist/apply-trailing-slash-option.js ./node_modules/gatsby-page-utils && gatsby build",
     "develop": "gatsby develop",
     "develop:quickly": "DONT_WAIT=true gatsby develop",
+    "sync:github": "node tools/sync/sync-github.js",
+    "sync:downloads": "node tools/sync/sync-downloads.js",
     "develop:very-quickly": "DONT_WAIT=true SKIP_ENRICHMENT=true EXTENSION_LIMIT=50 gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "cp ./node_modules/gatsby-page-utils/dist/apply-trailing-slash-option.js ./node_modules/gatsby-page-utils && gatsby develop",

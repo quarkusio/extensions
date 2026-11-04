@@ -5,6 +5,7 @@ const {
   getPlatformId,
   getStream,
 } = require("./src/components/util/pretty-platform")
+const { sourceControlId } = require("./src/data/source-control-id")
 const { sortableName } = require("./src/components/util/sortable-name")
 const prettyCategory = require("./src/components/util/pretty-category")
 const {
@@ -214,11 +215,8 @@ exports.sourceNodes = async ({
     }
 
     // Use a better name and some structure for the source control information
-    // This is the id of the other node, and it needs to be unique per extension, even extensions which share a repo
-    // The scm node generator parses this string to extract the url, so format matters
-    node.metadata.sourceControl = node.metadata["scm-url"]
-      ? `${node.metadata["scm-url"]},${node.metadata?.maven?.groupId}.${node.metadata?.maven?.artifactId}`
-      : undefined
+    // This is the id of the other node, and it needs to match the keys of the synced source control data
+    node.metadata.sourceControl = sourceControlId(node.metadata["scm-url"], node.metadata?.maven)
     // Tidy up the old scm url
     delete node.metadata["scm-url"]
 
