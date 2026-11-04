@@ -1,1 +1,26 @@
-{}
+{
+  "metadataSponsors": [
+    "KSM Technology Partners",
+    "Apache Software Foundation",
+    "Rosoco BV"
+  ],
+  "namedContributingOrgs": [
+    "Made Up Example Company who does not ever want to be a sponsor"
+  ],
+  "namedSponsors": [
+    "Red Hat",
+    "IBM",
+    "Red Hat & IBM",
+    "Red Hat/IBM",
+    "Microsoft",
+    "KSM Technology Partners",
+    "Lunatech",
+    "Melloware Inc",
+    "Consol Software GmbH",
+    "Techspace Software GmbH",
+    "Amadeus",
+    "Amadeus IT",
+    "Amadeus IT Group",
+    "AmadeusITGroup"
+  ]
+}
