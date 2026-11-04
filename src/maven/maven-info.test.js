@@ -4,7 +4,7 @@ import {
   getLatestVersionFromMavenMetadata,
   initMavenCache
 } from "./maven-info"
-import { clearCaches } from "../../plugins/github-enricher/sponsorFinder"
+import { clearCaches } from "../../tools/sync/sponsorFinder"
 
 jest.setTimeout(70 * 1000)
 

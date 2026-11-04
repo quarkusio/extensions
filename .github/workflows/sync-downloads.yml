@@ -1,0 +1,76 @@
+name: Sync downloads
+
+on:
+  schedule:
+    - cron: '41 20 * * *'
+  pull_request: # a dry run, which reports what would change in the data
+    paths:
+      - 'tools/sync/**'
+      - '.github/workflows/sync-downloads.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: sync-downloads # this only talks to Tableau, so it does not need to queue behind the builds which use the github api
+
+jobs:
+  sync:
+    if: github.repository == 'quarkusio/extensions' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to commit the synced data
+    steps:
+      # Pushes made with the default GITHUB_TOKEN do not trigger other workflows, so committing the data does not start a site build;
+      # the scheduled site builds pick the data up
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event_name != 'pull_request' && 'main' || '' }}
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '18'
+          cache: "npm"
+
+      - run: npm ci --prefer-offline
+
+      - name: Run sync
+        run: |
+          if [ -z "$TABLEAU_PERSONAL_ACCESS_TOKEN" ] && [ "${{ github.event_name }}" == "pull_request" ]; then
+            echo "::warning::No Tableau credentials are available to this pull request (is it from a fork?), so the dry run was skipped."
+            exit 0
+          fi
+          npm run sync:downloads
+        env:
+          TABLEAU_PERSONAL_ACCESS_TOKEN: ${{ secrets.TABLEAU_PERSONAL_ACCESS_TOKEN }}
+          TABLEAU_SITE: ${{ secrets.TABLEAU_SITE }}
+
+      - name: Show dry-run diff
+        if: github.event_name == 'pull_request'
+        run: |
+          # New files are invisible to git diff until they are known to git
+          # (the directory may not exist, if the sync was skipped)
+          if [ -d data/synced ]; then git add --intent-to-add data/synced/; fi
+          {
+            echo "### Dry run: changes that would be committed"
+            echo '```diff'
+            git diff --stat -- data/synced/
+            # head closes the pipe early on a big diff, which makes git diff fail with SIGPIPE, so ignore the exit code
+            git diff -- data/synced/ | head -n 500 || true
+            git diff --quiet -- data/synced/ && echo "No changes to the data."
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit and push
+        if: github.event_name != 'pull_request'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/synced/download-ranking.json
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Sync downloads data"
+            git pull origin main --rebase
+            git push origin main
+          fi
