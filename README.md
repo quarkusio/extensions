@@ -25,17 +25,16 @@ nvm use 18
 
 # Local development
 
-## Environment variables 
+## Synced data
 
-The site pulls data from a range of sources, some of which need credentials. For the full build, set the following environment variables:
+Information from GitHub and Tableau is not fetched during the Gatsby build. Instead, scheduled workflows (`sync-github.yml` and `sync-downloads.yml`) run the scripts in `tools/sync` and commit the results as json files in `data/synced/`. The `synced-data` plugin reads those files and turns them into graphql nodes.
 
-- `GITHUB_TOKEN` (this will be automatically set in a GitHub CI, and should only be granted read access)
-- `TABLEAU_PERSONAL_ACCESS_TOKEN`
-- `TABLEAU_SITE`
-- `SEGMENT_KEY` (used for anonymised analytics)
+To refresh the data locally, set the environment variables below and run `npm run sync:github` or `npm run sync:downloads`:
 
-Information is more complete if a these tokens are provided, but the build should still succeed if they are missing. If it fails without them, please raise an issue.
-In PR builds, everything except the `GITHUB_TOKEN` will be missing.
+- `GITHUB_TOKEN` (should only be granted read access)
+- `TABLEAU_PERSONAL_ACCESS_TOKEN` and `TABLEAU_SITE`
+
+The build reads the synced files rather than calling GitHub for them. The only GitHub call left in the build is fetching a fresh repository image url when a stored one has expired (they are signed, and only valid for a few minutes), so `GITHUB_TOKEN` is still useful there. `SEGMENT_KEY` (used for anonymised analytics) is also optional, and the build succeeds if either is missing.
 
 ### Speeding up local builds
 
@@ -48,7 +47,7 @@ A full build is slow, so there are some environment variables which trade comple
 
 ## Caching 
 
-The site pulls down a lot of content through the GitHub API. 
+The sync tools pull down a lot of content through the GitHub API. 
 A full build of the site will trigger the rate limiter several times. Each time the rate limiter is hit, the build needs to wait an hour for it to roll over.
 Because of this, a fresh build could take two or three hours – be prepared! To build more quickly (but with incomplete information), use the `npm run develop:quickly` command.
 If that is still too slow, `npm run develop:very-quickly` skips the GitHub API completely and only builds a handful of extensions (it sets `DONT_WAIT`, `SKIP_ENRICHMENT` and `EXTENSION_LIMIT` together).
