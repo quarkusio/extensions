@@ -160,7 +160,7 @@ describe("the synced data reader", () => {
 
     it("creates a node for the date", () => {
       expect(createNode).toHaveBeenCalledWith(expect.objectContaining({
-        date, internal: expect.objectContaining({ type: "DownloadDataDate" })
+        date: String(new Date(date).getTime()), internal: expect.objectContaining({ type: "DownloadDataDate" })
       }))
     })
 
