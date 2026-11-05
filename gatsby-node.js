@@ -13,8 +13,7 @@ const {
   extensionSlugFromCoordinates,
   slugForExtensionsAddedMonth, slugForExtensionsAddedYear
 } = require("./src/components/util/extension-slugger")
-const { generateMavenInfo, initMavenCache, saveMavenCache } = require("./src/maven/maven-info")
-const { initMavenUrlCache, saveMavenUrlCache } = require("./src/maven/maven-url")
+const { readDataFile } = require("./tools/sync/data-file")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
 const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
@@ -57,12 +56,18 @@ exports.sourceNodes = async ({
     data: { platforms },
   } = await axios.get(`https://registry.quarkus.io/client/platforms`)
 
+  // The sync tool writes this, so the build does not need to hit maven central
+  const syncedMavenInfo = readDataFile("maven-info.json", {})
+
   // Do a first pass of processing, to try and fill in release dates
   const firstPromises = extensions.map(async extension => {
     extension.metadata = extension.metadata || {}
     if (extension.artifact) {
-      // This is very slow. Would doing it as a remote file help speed things up?
-      extension.metadata.maven = await generateMavenInfo(extension.artifact)
+      extension.metadata.maven = syncedMavenInfo[extension.artifact]
+      if (!extension.metadata.maven) {
+        console.warn(`No synced maven information for ${extension.artifact}. Has the sync been run?`)
+        return
+      }
 
       const javadocUrl = await createJavadocUrlFromCoordinates(extension.metadata.maven)
       if (javadocUrl) {
@@ -284,8 +289,6 @@ exports.sourceNodes = async ({
 }
 
 exports.onPreBootstrap = async () => {
-  await initMavenCache()
-  await initMavenUrlCache()
   await initJavadocCache()
   badImages = []
 }
@@ -595,8 +598,6 @@ exports.onCreateWebpackConfig = ({ stage }) => {
 }
 
 exports.onPostBootstrap = async () => {
-  await saveMavenCache()
-  await saveMavenUrlCache()
   await saveJavadocCache()
 
   const badImageDetails = Object.values(badImages)
