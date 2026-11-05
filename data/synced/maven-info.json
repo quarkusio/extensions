@@ -5503,7 +5503,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.reactivemessaging.http/quarkus-reactive-messaging-http/2.9.0/jar",
     "version": "2.9.0"
   },
-  "io.quarkiverse.reactivemessaging.nats-jetstream:quarkus-messaging-nats-jetstream::jar:3.40.12": {
+  "io.quarkiverse.reactivemessaging.nats-jetstream:quarkus-messaging-nats-jetstream::jar:3.40.14": {
     "artifactId": "quarkus-messaging-nats-jetstream",
     "classifier": "jar",
     "earliestVersion": "1.12.0",
@@ -5512,9 +5512,9 @@
     "since": 1725287094000,
     "sinceMonth": 1725170400000,
     "sinceYear": 1704088800000,
-    "timestamp": 1793263925000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.reactivemessaging.nats-jetstream/quarkus-messaging-nats-jetstream/3.40.12/jar",
-    "version": "3.40.12"
+    "timestamp": 1793879175000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.reactivemessaging.nats-jetstream/quarkus-messaging-nats-jetstream/3.40.14/jar",
+    "version": "3.40.14"
   },
   "io.quarkiverse.reactivemessaging.nats-jetstream:quarkus-reactive-messsaging-nats-jetstream::jar:1.11.0": {
     "artifactId": "quarkus-reactive-messsaging-nats-jetstream",
