@@ -24,15 +24,15 @@ createJavadocUrlFromCoordinates.mockImplementation(() => {
 
 const resolvedMavenUrl = "http://reallygoodurl.mvn"
 
-const { generateMavenInfo } = require("./src/maven/maven-info")
-jest.mock("./src/maven/maven-info")
+const { readDataFile } = require("./tools/sync/data-file")
+jest.mock("./tools/sync/data-file")
 
 const dataCatRelocation = {
   artifactId: "quarkus-micrometer-registry-datadog",
   groupId: "io.quarkiverse.micrometer.registry"
 }
 
-generateMavenInfo.mockImplementation(artifactId => {
+const mavenInfoFor = artifactId => {
   const coordinates = parse(artifactId)
   // This is totally unscientific and arbitrary, but it's reproducible
   coordinates.timestamp = artifactId.length
@@ -44,7 +44,10 @@ generateMavenInfo.mockImplementation(artifactId => {
   }
 
   return coordinates
-})
+}
+
+// Behave as if the synced data has an entry for every artifact
+readDataFile.mockImplementation(() => new Proxy({}, { get: (_, artifactId) => mavenInfoFor(artifactId) }))
 
 const actions = { createNode, createPage }
 // A cut down version of what the registry returns us, with just the relevant bits
