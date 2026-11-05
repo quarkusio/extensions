@@ -1,0 +1,90 @@
+name: Sync Maven
+
+on:
+  schedule:
+    - cron: '17 22 * * *'
+  pull_request: # a dry run, which reports what would change in the data
+    paths:
+      - 'tools/sync/**'
+      - 'src/maven/**'
+      - 'src/absent.js'
+      - 'src/persistable-cache.js'
+      - '.github/workflows/sync-maven.yml'
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: sync-maven # this only talks to Maven Central, so it does not need to queue behind the builds which use the github api
+
+jobs:
+  sync:
+    if: github.repository == 'quarkusio/extensions' || github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # to commit the synced data
+    steps:
+      # Pushes made with the default GITHUB_TOKEN do not trigger other workflows, so committing the data does not start a site build;
+      # the scheduled site builds pick the data up
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event_name != 'pull_request' && 'main' || '' }}
+
+      - name: Restoring cached Maven API results
+        uses: actions/cache/restore@v5
+        with:
+          path: |
+            .cache-github-api
+          key: sync-maven-queries-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: | # the second prefix lets the first run pick up the cache the site build used to save
+            sync-maven-queries-
+            gatsby-build-github-queries-
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '18'
+          cache: "npm"
+
+      - run: npm ci --prefer-offline
+
+      - name: Run sync
+        run: npm run sync:maven
+
+      # Dry runs on pull requests read the cache but never write one, as the cache is large
+      - name: Caching Maven API results
+        if: github.event_name != 'pull_request'
+        uses: actions/cache/save@v5
+        with:
+          path: |
+            .cache-github-api
+          key: sync-maven-queries-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Show dry-run diff
+        if: github.event_name == 'pull_request'
+        run: |
+          # New files are invisible to git diff until they are known to git
+          # (the directory may not exist, if the sync was skipped)
+          if [ -d data/synced ]; then git add --intent-to-add data/synced/; fi
+          {
+            echo "### Dry run: changes that would be committed"
+            echo '```diff'
+            git diff --stat -- data/synced/
+            # head closes the pipe early on a big diff, which makes git diff fail with SIGPIPE, so ignore the exit code
+            git diff -- data/synced/ | head -n 500 || true
+            git diff --quiet -- data/synced/ && echo "No changes to the data."
+            echo '```'
+          } | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Commit and push
+        if: github.event_name != 'pull_request'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/synced/maven-info.json
+          if [ -n "$(git status --porcelain)" ]; then
+            git commit -m "Sync Maven data"
+            git pull origin main --rebase
+            git push origin main
+          fi
