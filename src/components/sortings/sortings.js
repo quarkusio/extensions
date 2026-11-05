@@ -15,6 +15,14 @@ const format = new Intl.DateTimeFormat("default", {
   month: "long"
 })
 
+// Accepts epoch millis (as a number or numeric string) or a date string such as an ISO timestamp
+const formatDate = rawDate => {
+  if (!rawDate) return ""
+  const numeric = Number(rawDate)
+  const date = new Date(Number.isNaN(numeric) ? rawDate : numeric)
+  return Number.isNaN(date.getTime()) ? "" : format.format(date)
+}
+
 const Title = styled.label`
   font-size: var(--font-size-16);
   letter-spacing: 0;
@@ -102,7 +110,7 @@ const Sortings = ({ sorterAction, downloadData }) => {
     applySort(selected)
   }
 
-  const formattedDate = downloadData?.date ? format.format(new Date(Number(downloadData.date))) : ""
+  const formattedDate = formatDate(downloadData?.date)
 
   if (isMobile) {
     return (

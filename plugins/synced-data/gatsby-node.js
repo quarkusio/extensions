@@ -197,10 +197,13 @@ const createDownloadNodes = ({ actions: { createNode }, createNodeId, createCont
   const allData = readData("download-ranking.json")
 
   if (allData?.date) {
+    // The synced file has an ISO string, but the front end reads the date as epoch millis
+    const date = String(new Date(allData.date).getTime())
+
     createNode({
-      date: allData.date,
-      id: createNodeId(allData.date.toString()),
-      internal: { type: "DownloadDataDate", contentDigest: createContentDigest(allData.date) }
+      date,
+      id: createNodeId(date),
+      internal: { type: "DownloadDataDate", contentDigest: createContentDigest(date) }
     })
 
     allData.ranking?.forEach(artifact =>

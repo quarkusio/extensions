@@ -71,6 +71,18 @@ describe("sorting bar", () => {
 
   })
 
+  describe.each([
+    ["an ISO date string", "2024-01-01T00:00:00.000Z", /January 2024/],
+    ["a numeric string", "1704067200000", /January 2024/],
+    ["an unparseable value", "not-a-date", /Downloads/]
+  ])("when the download date is %s", (_, date, expected) => {
+    it("renders without throwing", async () => {
+      render(<Sortings sorterAction={sortListener} downloadData={{ date }} />)
+      await selectEvent.select(screen.getByLabelText(label), downloadsLabel)
+      expect(screen.queryAllByText(expected).length).toBeGreaterThan(0)
+    })
+  })
+
   describe("when download data is not available", () => {
 
     beforeEach(() => {
