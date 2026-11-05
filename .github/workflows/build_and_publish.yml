@@ -14,10 +14,6 @@ defaults:
   run:
     shell: bash
 
-
-concurrency:
-  group: uses-github-api # do not allow any concurrency or the different builds will fight for the github rate limit and all take far longer
-
 jobs:
   unit-test:
     runs-on: ubuntu-latest
