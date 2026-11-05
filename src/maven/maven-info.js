@@ -256,6 +256,12 @@ const generateMavenInfo = async artifact => {
   const maven = parse(artifact)
   const { groupId, artifactId } = maven
 
+  // The registry sometimes has unresolved templates (like ${project.groupId}) as coordinates; nothing can be looked up for those,
+  // and each lookup would spend its whole retry budget finding that out
+  if (artifact.includes("${")) {
+    return maven
+  }
+
   const mavenUrl = await createMavenUrlFromCoordinates(maven)
 
   if (mavenUrl) {

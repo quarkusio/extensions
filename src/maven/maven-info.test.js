@@ -154,6 +154,21 @@ describe("the maven information generator", () => {
     })
   })
 
+  describe("when the coordinates are an unresolved template", () => {
+    // eslint-disable-next-line no-template-curly-in-string
+    const templated = "${project.groupId}:${project.artifactId}::jar:${project.version}"
+
+    it("does not go to maven central", async () => {
+      // Reset, not just clear, so the responses queued by the beforeEach do not leak into later tests
+      axios.get.mockReset()
+      axios.head.mockReset()
+      const mavenInfo = await generateMavenInfo(templated)
+      expect(mavenInfo.timestamp).toBeUndefined()
+      expect(axios.get).not.toHaveBeenCalled()
+      expect(axios.head).not.toHaveBeenCalled()
+    })
+  })
+
   describe("when the repository listing has errors", () => {
     beforeEach(() => {
       axios.head.mockRejectedValue("deliberate error")
