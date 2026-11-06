@@ -2768,7 +2768,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy/3.40.0/jar",
     "version": "3.40.0"
   },
-  "io.quarkiverse.helm:quarkus-helm::jar:1.4.3": {
+  "io.quarkiverse.helm:quarkus-helm::jar:1.5.0": {
     "artifactId": "quarkus-helm",
     "classifier": "jar",
     "earliestVersion": "0.0.1",
@@ -2777,9 +2777,9 @@
     "since": 1649057360000,
     "sinceMonth": 1648792800000,
     "sinceYear": 1641016800000,
-    "timestamp": 1787822891000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.helm/quarkus-helm/1.4.3/jar",
-    "version": "1.4.3"
+    "timestamp": 1793980793000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.helm/quarkus-helm/1.5.0/jar",
+    "version": "1.5.0"
   },
   "io.quarkiverse.hibernatesearchextras:quarkus-hibernate-search-orm-elasticsearch-aws::jar:6.0.0": {
     "artifactId": "quarkus-hibernate-search-orm-elasticsearch-aws",
