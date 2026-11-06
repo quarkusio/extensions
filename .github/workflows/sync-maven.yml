@@ -1,4 +1,4 @@
-name: Sync Maven
+name: Sync Maven and links
 
 on:
   schedule:
@@ -7,6 +7,9 @@ on:
     paths:
       - 'tools/sync/**'
       - 'src/maven/**'
+      - 'src/javadoc/**'
+      - 'src/data/image-validation.js'
+      - 'src/components/util/guide-url-rewriter.js'
       - 'src/absent.js'
       - 'src/persistable-cache.js'
       - '.github/workflows/sync-maven.yml'
@@ -17,7 +20,7 @@ defaults:
     shell: bash
 
 concurrency:
-  group: sync-maven # this only talks to Maven Central, so it does not need to queue behind the builds which use the github api
+  group: sync-maven # this only talks to Maven Central, javadoc.io, the guides and the icon hosts, so it does not need to queue behind the builds which use the github api
 
 jobs:
   sync:
@@ -50,7 +53,10 @@ jobs:
       - run: npm ci --prefer-offline
 
       - name: Run sync
-        run: npm run sync:maven
+        run: |
+          npm run sync:maven
+          # Finding the links uses the maven information, so they have to follow it
+          npm run sync:links
 
       # Dry runs on pull requests read the cache but never write one, as the cache is large
       - name: Caching Maven API results
@@ -82,9 +88,9 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add data/synced/maven-info.json
+          git add data/synced/maven-info.json data/synced/enriched-links.json
           if [ -n "$(git status --porcelain)" ]; then
-            git commit -m "Sync Maven data"
+            git commit -m "Sync Maven and link data"
             git pull origin main --rebase
             git push origin main
           fi
