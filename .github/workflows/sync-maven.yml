@@ -36,7 +36,7 @@ jobs:
           ref: ${{ github.event_name != 'pull_request' && 'main' || '' }}
 
       - name: Restoring cached Maven API results
-        uses: actions/cache/restore@v5
+        uses: actions/cache/restore@v6
         with:
           path: |
             .cache-github-api
@@ -61,7 +61,7 @@ jobs:
       # Dry runs on pull requests read the cache but never write one, as the cache is large
       - name: Caching Maven API results
         if: github.event_name != 'pull_request'
-        uses: actions/cache/save@v5
+        uses: actions/cache/save@v6
         with:
           path: |
             .cache-github-api
