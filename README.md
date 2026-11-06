@@ -27,43 +27,51 @@ nvm use 18
 
 ## Synced data
 
-Information from GitHub, Tableau, Maven Central and the links to javadoc, guides and icons is not fetched during the Gatsby build. Instead, scheduled workflows (`sync-github.yml`, `sync-downloads.yml` and `sync-maven.yml`) run the scripts in `tools/sync` and commit the results as json files in `data/synced/`. The `synced-data` plugin reads the GitHub and download files and turns them into graphql nodes, and `gatsby-node.js` reads the Maven and link files (`maven-info.json` and `enriched-links.json`) when it creates the extension nodes.
+The Gatsby build does not fetch data from external services. Instead, scheduled workflows run the scripts in `tools/sync` and commit the results as json files in `data/synced/`:
 
-To refresh the data locally, set the environment variables below and run `npm run sync:github`, `npm run sync:downloads` or `npm run sync:maven` then `npm run sync:links` (which need no credentials; finding the links uses the Maven data, so run them in that order):
+| Workflow | Script | File |
+| --- | --- | --- |
+| `sync-github.yml` | `npm run sync:github` | `source-control-info.json`, `contributing-companies.json` |
+| `sync-downloads.yml` | `npm run sync:downloads` | `download-ranking.json` |
+| `sync-maven.yml` | `npm run sync:registry`, then `npm run sync:maven`, then `npm run sync:links` | `registry.json` (the extensions, categories and platforms from the registry), `maven-info.json`, `enriched-links.json` (the javadoc, guide and icon links, and whether each icon is a valid image) |
+
+The `synced-data` plugin reads the GitHub and download files and turns them into graphql nodes. `gatsby-node.js` reads the registry, Maven and link files when it creates the extension nodes. The Maven workflow runs its three scripts in order, because each uses the data from the one before. Only `sync:github` and `sync:downloads` need credentials, so to refresh the data locally, set the environment variables below for the scripts you run:
 
 - `GITHUB_TOKEN` (should only be granted read access)
 - `TABLEAU_PERSONAL_ACCESS_TOKEN` and `TABLEAU_SITE`
 
-The build reads the synced files rather than calling GitHub for them. The only GitHub call left in the build is fetching a fresh repository image url when a stored one has expired (they are signed, and only valid for a few minutes), so `GITHUB_TOKEN` is still useful there. `SEGMENT_KEY` (used for anonymised analytics) is also optional, and the build succeeds if either is missing.
+The build itself makes only two kinds of external call. It downloads the icons (they are validated by the sync, but Gatsby still needs the files), and it fetches a fresh repository image url from GitHub when a stored one has expired (they are signed, and only valid for a few minutes), so `GITHUB_TOKEN` is still useful there. `SEGMENT_KEY` (used for anonymised analytics) is also optional, and the build succeeds if any of these are missing.
+
+Because the build uses a snapshot, a new extension, or a new icon, appears on the site after the next sync, not on the next build. An icon which has not been validated by the sync yet is left out until then.
 
 ### Speeding up local builds
 
 A full build is slow, so there are some environment variables which trade completeness for speed. None of these should be set in CI.
 
-- `DONT_WAIT=true` – do not wait for the GitHub rate limiter to roll over; incomplete source control information is used instead.
+- `DONT_WAIT=true` – when running `sync:github`, do not wait for the GitHub rate limiter to roll over; incomplete source control information is used instead.
 - `EXTENSION_LIMIT=50` – only process the first 50 extensions from the registry, instead of all of them. Most of the catalog will be missing, and so will anything which depends on it (such as duplicate detection for the extensions which were dropped).
-- `SKIP_ENRICHMENT=true` – stub out the GitHub plugin entirely, so no calls are made to the GitHub API. Extension pages will build, but with no source control information: no contributors, sponsors, issue counts, samples, or repository images.
-- `GITHUB_BUDGET_MINUTES` – change how long the build is allowed to spend talking to GitHub, or set it to `0` to remove the limit. See [Caching](#caching) below; unlike the others, this one has a default, so you only need it if twenty minutes is the wrong number for you.
+- `SKIP_ENRICHMENT=true` – make the `synced-data` plugin ignore the synced data, so no calls are made to the GitHub API. Extension pages will build, but with no source control or download information: no contributors, sponsors, issue counts, samples, repository images, or download ranking.
+- `GITHUB_BUDGET_MINUTES` – change how long `sync:github` is allowed to spend talking to GitHub, or set it to `0` to remove the limit. See [Caching](#caching) below; unlike the others, this one has a default, so you only need it if twenty minutes is the wrong number for you.
 
 ## Caching 
 
 The sync tools pull down a lot of content through the GitHub API. 
-A full build of the site will trigger the rate limiter several times. Each time the rate limiter is hit, the build needs to wait an hour for it to roll over.
-Because of this, a fresh build could take two or three hours – be prepared! To build more quickly (but with incomplete information), use the `npm run develop:quickly` command.
-If that is still too slow, `npm run develop:very-quickly` skips the GitHub API completely and only builds a handful of extensions (it sets `DONT_WAIT`, `SKIP_ENRICHMENT` and `EXTENSION_LIMIT` together).
+A full `sync:github` will trigger the rate limiter several times. Each time the rate limiter is hit, the sync needs to wait an hour for it to roll over.
+Because of this, a fresh sync could take two or three hours – be prepared! The synced files are committed, so you only need to run it if you want newer data. To sync more quickly (but with incomplete information), set `DONT_WAIT=true`.
+If that is still too slow, `npm run develop:very-quickly` ignores the synced GitHub data and only builds a handful of extensions (it sets `DONT_WAIT`, `SKIP_ENRICHMENT` and `EXTENSION_LIMIT` together; `DONT_WAIT` only matters when running the sync).
 
-The build caches GitHub content in a cache in the `.cache-github-api/` directory, so once a build has been done, subsequent builds should be quicker. 
+The sync tools cache GitHub content in a cache in the `.cache-github-api/` directory, so once a sync has been done, subsequent syncs should be quicker. 
 Most cache contents have a lifespan of a few days (with some jitter so everything doesn't expire at once).
 
-To stop a cold build running away, local builds spend at most 20 minutes talking to GitHub. When that
-budget runs out the build carries on without the rest of the GitHub data, and finishes. Nothing is
-wasted: whatever was fetched is still written to the cache, so each build gets further than the last
-and the cache warms up over a few runs rather than one very long one. CI builds have no budget, since
+To stop a cold sync running away, local syncs spend at most 20 minutes talking to GitHub. When that
+budget runs out the sync carries on without the rest of the GitHub data, and finishes. Nothing is
+wasted: whatever was fetched is still written to the cache, so each sync gets further than the last
+and the cache warms up over a few runs rather than one very long one. CI syncs have no budget, since
 they want complete data and have the rate limit to themselves.
 
 Set `GITHUB_BUDGET_MINUTES` to change the budget, or to `0` to remove it:
 ```
-GITHUB_BUDGET_MINUTES=5 npm run develop
+GITHUB_BUDGET_MINUTES=5 npm run sync:github
 ```
 
 In one terminal, run tests
