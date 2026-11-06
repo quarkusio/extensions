@@ -13,6 +13,10 @@ const fetchExtensions = async () => {
     const scmUrl = extension.metadata?.["scm-url"]
     return {
       artifact: extension.artifact,
+      name: extension.name,
+      guide: extension.metadata?.guide,
+      status: extension.metadata?.status,
+      icon: extension.metadata?.["icon-url"],
       groupId: maven.groupId,
       artifactId: maven.artifactId,
       sourceControl: sourceControlId(scmUrl, maven),
