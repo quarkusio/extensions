@@ -426,7 +426,7 @@
     "extensionPathInRepo": "extensions/a2a/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/a2a/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/a2a/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914235561,
     "license": {
@@ -1202,9 +1202,9 @@
     "extensionPathInRepo": "extensions/atom/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/atom/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/atom/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793576783950,
+    "lastUpdated": 1793964635385,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -1263,7 +1263,7 @@
     "extensionPathInRepo": "extensions/attachments/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/attachments/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/attachments/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914201365,
     "license": {
@@ -1387,7 +1387,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws-bedrock/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793598415011,
+    "lastUpdated": 1793964643242,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -1496,7 +1496,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws-secrets-manager/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793576783851,
+    "lastUpdated": 1793964634984,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -1795,7 +1795,7 @@
     "extensionPathInRepo": "extensions/aws2-athena/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-athena/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-athena/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793684799879,
     "license": {
@@ -1980,7 +1980,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-ec2/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793540820348,
+    "lastUpdated": 1793964635169,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -2777,7 +2777,7 @@
     "extensionPathInRepo": "extensions/aws2-sqs/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-sqs/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-sqs/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793628233971,
     "license": {
@@ -3265,7 +3265,7 @@
     "extensionPathInRepo": "extensions/azure-storage-blob/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-storage-blob/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-storage-blob/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152562,
     "license": {
@@ -3387,7 +3387,7 @@
     "extensionPathInRepo": "extensions/azure-storage-queue/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-storage-queue/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-storage-queue/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 300,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914202127,
     "license": {
@@ -3632,7 +3632,7 @@
     "extensionPathInRepo": "extensions/bean-validator/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/bean-validator/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/bean-validator/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 300,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152351,
     "license": {
@@ -3998,9 +3998,9 @@
     "extensionPathInRepo": "extensions/browse/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/browse/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/browse/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793628233123,
+    "lastUpdated": 1793964635979,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -4368,7 +4368,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/cassandraql/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793540819858,
+    "lastUpdated": 1793964636126,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -4490,7 +4490,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/chatscript/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793576783854,
+    "lastUpdated": 1793964635796,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -4686,7 +4686,7 @@
     "extensionPathInRepo": "extensions-jvm/cli-debug/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/cli-debug/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/cli-debug/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152779,
     "license": {
@@ -5826,7 +5826,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/couchdb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793628233096,
+    "lastUpdated": 1793964636496,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -6308,7 +6308,7 @@
     "extensionPathInRepo": "extensions/csv/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/csv/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/csv/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793628233096,
     "license": {
@@ -6572,7 +6572,7 @@
     "extensionPathInRepo": "extensions/dataset/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/dataset/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/dataset/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800153347,
     "license": {
@@ -7606,7 +7606,7 @@
     "extensionPathInRepo": "extensions-jvm/dns/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/dns/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/dns/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793849557330,
     "license": {
@@ -8574,7 +8574,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 300,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -8961,7 +8961,7 @@
     "extensionPathInRepo": "extensions/flatpack/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/flatpack/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/flatpack/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152925,
     "license": {
@@ -9207,7 +9207,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/freemarker/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793628233386,
+    "lastUpdated": 1793964636867,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -9507,7 +9507,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -9984,7 +9984,7 @@
     "extensionPathInRepo": "extensions/google-bigquery/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/google-bigquery/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/google-bigquery/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914204677,
     "license": {
@@ -10529,7 +10529,7 @@
     "extensionPathInRepo": "extensions/google-secret-manager/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/google-secret-manager/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/google-secret-manager/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793702985240,
     "license": {
@@ -10653,7 +10653,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/google-storage/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793628233414,
+    "lastUpdated": 1793964637326,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -12407,7 +12407,7 @@
     "extensionPathInRepo": "extensions/http/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/http/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/http/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800153233,
     "license": {
@@ -12707,7 +12707,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ibm-watson-discovery/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793540820101,
+    "lastUpdated": 1793964647427,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -13327,7 +13327,7 @@
     "extensionPathInRepo": "extensions/influxdb/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/influxdb/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/influxdb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793849559020,
     "license": {
@@ -13708,7 +13708,7 @@
     "extensionPathInRepo": "extensions/jackson/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152970,
     "license": {
@@ -13830,7 +13830,7 @@
     "extensionPathInRepo": "extensions/jackson-protobuf/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson-protobuf/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson-protobuf/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793702985446,
     "license": {
@@ -14451,9 +14451,9 @@
     "extensionPathInRepo": "extensions-jvm/jcr/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jcr/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jcr/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793598415064,
+    "lastUpdated": 1793964638174,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -14760,7 +14760,7 @@
     "extensionPathInRepo": "extensions/jfr/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jfr/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jfr/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 300,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793665417199,
     "license": {
@@ -14821,7 +14821,7 @@
     "extensionPathInRepo": "extensions-jvm/jgroups/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jgroups/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jgroups/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793935922606,
     "license": {
@@ -15200,7 +15200,7 @@
     "extensionPathInRepo": "extensions-jvm/jooq/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jooq/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jooq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914205811,
     "license": {
@@ -16723,7 +16723,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jta/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793511941063,
+    "lastUpdated": 1793964637790,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -17054,7 +17054,7 @@
     "extensionPathInRepo": "extensions/knative-consumer/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/knative-consumer/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/knative-consumer/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793665417681,
     "license": {
@@ -17595,7 +17595,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -18215,7 +18215,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/langchain4j-chat/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793598415036,
+    "lastUpdated": 1793964643487,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -18456,7 +18456,7 @@
     "extensionPathInRepo": "extensions/langchain4j-tokenizer/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/langchain4j-tokenizer/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/langchain4j-tokenizer/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793935928693,
     "license": {
@@ -19066,7 +19066,7 @@
     "extensionPathInRepo": "extensions/ldap/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ldap/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ldap/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914207379,
     "license": {
@@ -19129,7 +19129,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/ldif/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793511941058,
+    "lastUpdated": 1793964638309,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -20156,7 +20156,7 @@
     "extensionPathInRepo": "extensions/master/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/master/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/master/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 300,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793665417383,
     "license": {
@@ -20217,7 +20217,7 @@
     "extensionPathInRepo": "extensions/mcp-server/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/mcp-server/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/mcp-server/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152809,
     "license": {
@@ -20286,7 +20286,7 @@
     "extensionPathInRepo": "extensions/mdc/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/mdc/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/mdc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793628233490,
     "license": {
@@ -20410,7 +20410,7 @@
     "extensionPathInRepo": "extensions/micrometer-observability/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/micrometer-observability/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/micrometer-observability/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914236737,
     "license": {
@@ -20540,7 +20540,7 @@
     "extensionPathInRepo": "extensions/microprofile-health/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/microprofile-health/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/microprofile-health/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152919,
     "license": {
@@ -21268,9 +21268,9 @@
     "extensionPathInRepo": "extensions/mustache/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/mustache/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/mustache/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793665417455,
+    "lastUpdated": 1793964638713,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -21513,7 +21513,7 @@
     "extensionPathInRepo": "extensions/netty/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/netty/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/netty/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 300,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793665417317,
     "license": {
@@ -21574,7 +21574,7 @@
     "extensionPathInRepo": "extensions/netty-http/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/netty-http/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/netty-http/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793849561292,
     "license": {
@@ -21814,7 +21814,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 300,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -22263,8 +22263,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 3,
-        "contributors": 3,
+        "contributions": 4,
+        "contributors": 4,
         "name": "Red Hat & IBM"
       }
     ],
@@ -22272,6 +22272,13 @@
       "Unknown"
     ],
     "contributorsWithFullCompanyInfo": [
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 1,
+        "login": "ppalaga",
+        "name": "Peter Palaga",
+        "url": "https://github.com/ppalaga"
+      },
       {
         "contributions": 3,
         "login": "JiriOndrusek",
@@ -22311,7 +22318,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/openai/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 297,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793628233493,
+    "lastUpdated": 1793964648998,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -22494,7 +22501,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/opensearch/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793576784186,
+    "lastUpdated": 1793964642651,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -22553,7 +22560,7 @@
     "extensionPathInRepo": "extensions/openstack/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/openstack/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/openstack/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793628233590,
     "license": {
@@ -22698,7 +22705,7 @@
     "extensionPathInRepo": "extensions/opentelemetry2/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/opentelemetry2/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/opentelemetry2/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914224648,
     "license": {
@@ -23316,7 +23323,7 @@
     "extensionPathInRepo": "extensions-jvm/printer/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/printer/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/printer/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793935923182,
     "license": {
@@ -23499,7 +23506,7 @@
     "extensionPathInRepo": "extensions-jvm/pulsar/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/pulsar/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/pulsar/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749573628,
     "license": {
@@ -24071,7 +24078,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -24504,7 +24511,7 @@
     "extensionPathInRepo": "extensions/rocketmq/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/rocketmq/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/rocketmq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793935933762,
     "license": {
@@ -24565,7 +24572,7 @@
     "extensionPathInRepo": "extensions/rss/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/rss/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/rss/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749573632,
     "license": {
@@ -24882,7 +24889,7 @@
     "extensionPathInRepo": "extensions/scheduler/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/scheduler/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/scheduler/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793914209246,
     "license": {
@@ -25698,7 +25705,7 @@
     "extensionPathInRepo": "extensions/snakeyaml/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/snakeyaml/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/snakeyaml/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800152945,
     "license": {
@@ -26182,7 +26189,7 @@
     "extensionPathInRepo": "extensions/splunk-hec/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/splunk-hec/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/splunk-hec/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749573719,
     "license": {
@@ -28658,7 +28665,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -30818,7 +30825,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -31778,7 +31785,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -32498,7 +32505,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -33938,7 +33945,7 @@
         "url": "https://github.com/phateffect"
       }
     ],
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793749575827,
     "license": {
@@ -34827,7 +34834,7 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
+        "contributions": 3,
         "contributors": 2,
         "name": "Red Hat & IBM"
       }
@@ -34836,6 +34843,13 @@
       "Unknown"
     ],
     "contributorsWithFullCompanyInfo": [
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 2,
+        "login": "gansheer",
+        "name": "Gaëlle Fournier",
+        "url": "https://github.com/gansheer"
+      },
       {
         "contributions": 2,
         "login": "JiriOndrusek",
@@ -34851,13 +34865,6 @@
       {
         "company": "Red Hat & IBM",
         "contributions": 1,
-        "login": "gansheer",
-        "name": "Gaëlle Fournier",
-        "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
         "login": "zbendhiba",
         "name": "Zineb BENDHIBA",
         "url": "https://github.com/zbendhiba"
@@ -34868,7 +34875,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/tika/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793628233037,
+    "lastUpdated": 1793964640074,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -35049,7 +35056,7 @@
     "extensionPathInRepo": "extensions/twilio/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/twilio/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/twilio/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 299,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800153031,
     "license": {
@@ -35429,7 +35436,7 @@
     "extensionPathInRepo": "extensions/vertx-http/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/vertx-http/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/vertx-http/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793811290901,
     "license": {
@@ -35558,7 +35565,7 @@
     "extensionPathInRepo": "extensions/wasm/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/wasm/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/wasm/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793800153006,
     "license": {
@@ -36168,7 +36175,7 @@
     "extensionPathInRepo": "extensions-core/xml-jaxp/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-core/xml-jaxp/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-core/xml-jaxp/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 297,
+    "issues": 301,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1793665418041,
     "license": {
@@ -36726,7 +36733,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/zip-deflater/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 299,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1793540820603,
+    "lastUpdated": 1793964640603,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -37355,14 +37362,14 @@
   "https://github.com/debezium/debezium,io.debezium.quarkus.quarkus-debezium-agroal": {
     "allCompanies": [
       {
-        "contributions": 636,
-        "contributors": 9,
-        "name": "Red Hat & IBM"
+        "contributions": 702,
+        "contributors": 85,
+        "name": "Unknown"
       },
       {
-        "contributions": 612,
-        "contributors": 83,
-        "name": "Unknown"
+        "contributions": 640,
+        "contributors": 9,
+        "name": "Red Hat & IBM"
       },
       {
         "contributions": 333,
@@ -37370,7 +37377,7 @@
         "name": "kakao"
       },
       {
-        "contributions": 56,
+        "contributions": 58,
         "contributors": 1,
         "name": "Cockroach Labs"
       },
@@ -37380,7 +37387,7 @@
         "name": "databricks"
       },
       {
-        "contributions": 24,
+        "contributions": 26,
         "contributors": 1,
         "name": "SRM University AP"
       },
@@ -37398,6 +37405,11 @@
         "contributions": 12,
         "contributors": 1,
         "name": "Private"
+      },
+      {
+        "contributions": 11,
+        "contributors": 1,
+        "name": "Microsoft"
       },
       {
         "contributions": 10,
@@ -37438,11 +37450,6 @@
         "contributions": 6,
         "contributors": 1,
         "name": "Slack"
-      },
-      {
-        "contributions": 6,
-        "contributors": 1,
-        "name": "Microsoft"
       },
       {
         "contributions": 6,
@@ -37493,6 +37500,11 @@
         "contributions": 4,
         "contributors": 1,
         "name": "Zopa"
+      },
+      {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "Affirm"
       },
       {
         "contributions": 3,
@@ -37557,11 +37569,6 @@
       {
         "contributions": 2,
         "contributors": 1,
-        "name": "Affirm"
-      },
-      {
-        "contributions": 2,
-        "contributors": 1,
         "name": "CP Axtra"
       },
       {
@@ -37573,6 +37580,11 @@
         "contributions": 2,
         "contributors": 1,
         "name": "Workday"
+      },
+      {
+        "contributions": 1,
+        "contributors": 1,
+        "name": "ACA Group"
       },
       {
         "contributions": 1,
@@ -37627,11 +37639,102 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 86,
+        "login": "siddhantcvdi",
+        "name": "Siddhant",
+        "url": "https://github.com/siddhantcvdi"
+      },
+      {
+        "company": "Affirm",
+        "contributions": 3,
+        "login": "kebab-mai-haddi",
+        "name": "Aviral Srivastava",
+        "url": "https://github.com/kebab-mai-haddi"
+      },
+      {
         "company": "Red Hat & IBM",
-        "contributions": 87,
+        "contributions": 90,
         "login": "jpechane",
         "name": "Jiri Pechanec",
         "url": "https://github.com/jpechane"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 344,
+        "login": "Naros",
+        "name": "Chris Cranford",
+        "url": "https://github.com/Naros"
+      },
+      {
+        "company": "ACA Group",
+        "contributions": 1,
+        "login": "ThomasVerhoeven1998",
+        "name": "Thomas Verhoeven",
+        "url": "https://github.com/ThomasVerhoeven1998"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 82,
+        "login": "vjuranek",
+        "name": "Vojtěch Juránek",
+        "url": "https://github.com/vjuranek"
+      },
+      {
+        "contributions": 4,
+        "login": "chiragkava",
+        "name": "Chirag Kava",
+        "url": "https://github.com/chiragkava"
+      },
+      {
+        "contributions": 162,
+        "login": "roldanbob",
+        "name": "roldanbob",
+        "url": "https://github.com/roldanbob"
+      },
+      {
+        "contributions": 31,
+        "login": "kinolaev",
+        "name": "Sergei Nikolaev",
+        "url": "https://github.com/kinolaev"
+      },
+      {
+        "company": "Microsoft",
+        "contributions": 11,
+        "login": "nkokitkar",
+        "name": "nkokitkar",
+        "url": "https://github.com/nkokitkar"
+      },
+      {
+        "company": "SRM University AP",
+        "contributions": 26,
+        "login": "NiteeshK21",
+        "name": "Niteesh Kumar Pandey",
+        "url": "https://github.com/NiteeshK21"
+      },
+      {
+        "contributions": 2,
+        "login": "dongmin132",
+        "name": "Dongmin Kim",
+        "url": "https://github.com/dongmin132"
+      },
+      {
+        "contributions": 54,
+        "login": "bhuvan-somisetty",
+        "name": "Bhuvan Somisetty ",
+        "url": "https://github.com/bhuvan-somisetty"
+      },
+      {
+        "company": "Cockroach Labs",
+        "contributions": 58,
+        "login": "viragtripathi",
+        "name": "Virag Tripathi",
+        "url": "https://github.com/viragtripathi"
+      },
+      {
+        "contributions": 47,
+        "login": "debezium-builder",
+        "name": "Debezium Builder",
+        "url": "https://github.com/debezium-builder"
       },
       {
         "company": "RUOPlin",
@@ -37639,13 +37742,6 @@
         "login": "Tlinian",
         "name": "Tlinian",
         "url": "https://github.com/Tlinian"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 324,
-        "login": "Naros",
-        "name": "Chris Cranford",
-        "url": "https://github.com/Naros"
       },
       {
         "contributions": 2,
@@ -37658,12 +37754,6 @@
         "login": "vetruvet",
         "name": "Val Trubachev",
         "url": "https://github.com/vetruvet"
-      },
-      {
-        "contributions": 50,
-        "login": "bhuvan-somisetty",
-        "name": "Bhuvan Somisetty ",
-        "url": "https://github.com/bhuvan-somisetty"
       },
       {
         "contributions": 1,
@@ -37684,12 +37774,6 @@
         "url": "https://github.com/vaibhav8a"
       },
       {
-        "contributions": 162,
-        "login": "roldanbob",
-        "name": "roldanbob",
-        "url": "https://github.com/roldanbob"
-      },
-      {
         "company": "Arkansas Blue Cross Blue Shield",
         "contributions": 6,
         "login": "wbaker23",
@@ -37707,13 +37791,6 @@
         "login": "Aangbaeck",
         "name": "Björn Ångbäck",
         "url": "https://github.com/Aangbaeck"
-      },
-      {
-        "company": "SRM University AP",
-        "contributions": 24,
-        "login": "NiteeshK21",
-        "name": "Niteesh Kumar Pandey",
-        "url": "https://github.com/NiteeshK21"
       },
       {
         "contributions": 23,
@@ -37832,7 +37909,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 12,
+        "contributions": 10,
         "login": "AlvarVG",
         "name": "Alvar Viana Gomez",
         "url": "https://github.com/AlvarVG"
@@ -37849,13 +37926,6 @@
         "login": "JosipVukoja",
         "name": "Josip Vukoja",
         "url": "https://github.com/JosipVukoja"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 99,
-        "login": "vjuranek",
-        "name": "Vojtěch Juránek",
-        "url": "https://github.com/vjuranek"
       },
       {
         "company": "Redis",
@@ -37914,12 +37984,6 @@
         "url": "https://github.com/daniilzabludovsky"
       },
       {
-        "contributions": 17,
-        "login": "siddhantcvdi",
-        "name": "Siddhant",
-        "url": "https://github.com/siddhantcvdi"
-      },
-      {
         "contributions": 2,
         "login": "Abhishek-Gawande",
         "name": "Abhishek-Gawande",
@@ -37970,12 +38034,6 @@
         "url": "https://github.com/vsantonastaso"
       },
       {
-        "contributions": 22,
-        "login": "kinolaev",
-        "name": "Sergei Nikolaev",
-        "url": "https://github.com/kinolaev"
-      },
-      {
         "company": "Amazon.com",
         "contributions": 3,
         "login": "akshat08",
@@ -38001,13 +38059,6 @@
         "login": "anlowee",
         "name": "Xiaochong(Eddy) Wei",
         "url": "https://github.com/anlowee"
-      },
-      {
-        "company": "Cockroach Labs",
-        "contributions": 56,
-        "login": "viragtripathi",
-        "name": "Virag Tripathi",
-        "url": "https://github.com/viragtripathi"
       },
       {
         "company": "confluentinc",
@@ -38037,13 +38088,6 @@
         "url": "https://github.com/anilabhabaral"
       },
       {
-        "company": "Microsoft",
-        "contributions": 6,
-        "login": "nkokitkar",
-        "name": "nkokitkar",
-        "url": "https://github.com/nkokitkar"
-      },
-      {
         "company": "Healingpaper 힐링페이퍼",
         "contributions": 2,
         "login": "anjeongkyun",
@@ -38055,12 +38099,6 @@
         "login": "g-zemlianyi",
         "name": "Georgii Zemlianyi",
         "url": "https://github.com/g-zemlianyi"
-      },
-      {
-        "contributions": 43,
-        "login": "debezium-builder",
-        "name": "Debezium Builder",
-        "url": "https://github.com/debezium-builder"
       },
       {
         "contributions": 1,
@@ -38400,13 +38438,6 @@
         "url": "https://github.com/dutta1kartik3"
       },
       {
-        "company": "Affirm",
-        "contributions": 2,
-        "login": "kebab-mai-haddi",
-        "name": "Aviral Srivastava",
-        "url": "https://github.com/kebab-mai-haddi"
-      },
-      {
         "contributions": 1,
         "login": "gaurav7261",
         "name": "gaurav7261",
@@ -38568,7 +38599,7 @@
         "url": "https://github.com/laughingman7743"
       },
       {
-        "contributions": 4,
+        "contributions": 2,
         "login": "aqhil07",
         "name": "aqhil07",
         "url": "https://github.com/aqhil07"
@@ -38582,7 +38613,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/debezium/debezium/issues",
-    "lastUpdated": 1793628247148,
+    "lastUpdated": 1793964666612,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -38597,14 +38628,14 @@
   "https://github.com/debezium/debezium,io.debezium.quarkus.quarkus-debezium-mariadb": {
     "allCompanies": [
       {
-        "contributions": 636,
-        "contributors": 9,
-        "name": "Red Hat & IBM"
+        "contributions": 702,
+        "contributors": 85,
+        "name": "Unknown"
       },
       {
-        "contributions": 612,
-        "contributors": 83,
-        "name": "Unknown"
+        "contributions": 640,
+        "contributors": 9,
+        "name": "Red Hat & IBM"
       },
       {
         "contributions": 333,
@@ -38612,7 +38643,7 @@
         "name": "kakao"
       },
       {
-        "contributions": 56,
+        "contributions": 58,
         "contributors": 1,
         "name": "Cockroach Labs"
       },
@@ -38622,7 +38653,7 @@
         "name": "databricks"
       },
       {
-        "contributions": 24,
+        "contributions": 26,
         "contributors": 1,
         "name": "SRM University AP"
       },
@@ -38640,6 +38671,11 @@
         "contributions": 12,
         "contributors": 1,
         "name": "Private"
+      },
+      {
+        "contributions": 11,
+        "contributors": 1,
+        "name": "Microsoft"
       },
       {
         "contributions": 10,
@@ -38680,11 +38716,6 @@
         "contributions": 6,
         "contributors": 1,
         "name": "Slack"
-      },
-      {
-        "contributions": 6,
-        "contributors": 1,
-        "name": "Microsoft"
       },
       {
         "contributions": 6,
@@ -38735,6 +38766,11 @@
         "contributions": 4,
         "contributors": 1,
         "name": "Zopa"
+      },
+      {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "Affirm"
       },
       {
         "contributions": 3,
@@ -38799,11 +38835,6 @@
       {
         "contributions": 2,
         "contributors": 1,
-        "name": "Affirm"
-      },
-      {
-        "contributions": 2,
-        "contributors": 1,
         "name": "CP Axtra"
       },
       {
@@ -38815,6 +38846,11 @@
         "contributions": 2,
         "contributors": 1,
         "name": "Workday"
+      },
+      {
+        "contributions": 1,
+        "contributors": 1,
+        "name": "ACA Group"
       },
       {
         "contributions": 1,
@@ -38869,11 +38905,102 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 86,
+        "login": "siddhantcvdi",
+        "name": "Siddhant",
+        "url": "https://github.com/siddhantcvdi"
+      },
+      {
+        "company": "Affirm",
+        "contributions": 3,
+        "login": "kebab-mai-haddi",
+        "name": "Aviral Srivastava",
+        "url": "https://github.com/kebab-mai-haddi"
+      },
+      {
         "company": "Red Hat & IBM",
-        "contributions": 87,
+        "contributions": 90,
         "login": "jpechane",
         "name": "Jiri Pechanec",
         "url": "https://github.com/jpechane"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 344,
+        "login": "Naros",
+        "name": "Chris Cranford",
+        "url": "https://github.com/Naros"
+      },
+      {
+        "company": "ACA Group",
+        "contributions": 1,
+        "login": "ThomasVerhoeven1998",
+        "name": "Thomas Verhoeven",
+        "url": "https://github.com/ThomasVerhoeven1998"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 82,
+        "login": "vjuranek",
+        "name": "Vojtěch Juránek",
+        "url": "https://github.com/vjuranek"
+      },
+      {
+        "contributions": 4,
+        "login": "chiragkava",
+        "name": "Chirag Kava",
+        "url": "https://github.com/chiragkava"
+      },
+      {
+        "contributions": 162,
+        "login": "roldanbob",
+        "name": "roldanbob",
+        "url": "https://github.com/roldanbob"
+      },
+      {
+        "contributions": 31,
+        "login": "kinolaev",
+        "name": "Sergei Nikolaev",
+        "url": "https://github.com/kinolaev"
+      },
+      {
+        "company": "Microsoft",
+        "contributions": 11,
+        "login": "nkokitkar",
+        "name": "nkokitkar",
+        "url": "https://github.com/nkokitkar"
+      },
+      {
+        "company": "SRM University AP",
+        "contributions": 26,
+        "login": "NiteeshK21",
+        "name": "Niteesh Kumar Pandey",
+        "url": "https://github.com/NiteeshK21"
+      },
+      {
+        "contributions": 2,
+        "login": "dongmin132",
+        "name": "Dongmin Kim",
+        "url": "https://github.com/dongmin132"
+      },
+      {
+        "contributions": 54,
+        "login": "bhuvan-somisetty",
+        "name": "Bhuvan Somisetty ",
+        "url": "https://github.com/bhuvan-somisetty"
+      },
+      {
+        "company": "Cockroach Labs",
+        "contributions": 58,
+        "login": "viragtripathi",
+        "name": "Virag Tripathi",
+        "url": "https://github.com/viragtripathi"
+      },
+      {
+        "contributions": 47,
+        "login": "debezium-builder",
+        "name": "Debezium Builder",
+        "url": "https://github.com/debezium-builder"
       },
       {
         "company": "RUOPlin",
@@ -38881,13 +39008,6 @@
         "login": "Tlinian",
         "name": "Tlinian",
         "url": "https://github.com/Tlinian"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 324,
-        "login": "Naros",
-        "name": "Chris Cranford",
-        "url": "https://github.com/Naros"
       },
       {
         "contributions": 2,
@@ -38900,12 +39020,6 @@
         "login": "vetruvet",
         "name": "Val Trubachev",
         "url": "https://github.com/vetruvet"
-      },
-      {
-        "contributions": 50,
-        "login": "bhuvan-somisetty",
-        "name": "Bhuvan Somisetty ",
-        "url": "https://github.com/bhuvan-somisetty"
       },
       {
         "contributions": 1,
@@ -38926,12 +39040,6 @@
         "url": "https://github.com/vaibhav8a"
       },
       {
-        "contributions": 162,
-        "login": "roldanbob",
-        "name": "roldanbob",
-        "url": "https://github.com/roldanbob"
-      },
-      {
         "company": "Arkansas Blue Cross Blue Shield",
         "contributions": 6,
         "login": "wbaker23",
@@ -38949,13 +39057,6 @@
         "login": "Aangbaeck",
         "name": "Björn Ångbäck",
         "url": "https://github.com/Aangbaeck"
-      },
-      {
-        "company": "SRM University AP",
-        "contributions": 24,
-        "login": "NiteeshK21",
-        "name": "Niteesh Kumar Pandey",
-        "url": "https://github.com/NiteeshK21"
       },
       {
         "contributions": 23,
@@ -39074,7 +39175,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 12,
+        "contributions": 10,
         "login": "AlvarVG",
         "name": "Alvar Viana Gomez",
         "url": "https://github.com/AlvarVG"
@@ -39091,13 +39192,6 @@
         "login": "JosipVukoja",
         "name": "Josip Vukoja",
         "url": "https://github.com/JosipVukoja"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 99,
-        "login": "vjuranek",
-        "name": "Vojtěch Juránek",
-        "url": "https://github.com/vjuranek"
       },
       {
         "company": "Redis",
@@ -39156,12 +39250,6 @@
         "url": "https://github.com/daniilzabludovsky"
       },
       {
-        "contributions": 17,
-        "login": "siddhantcvdi",
-        "name": "Siddhant",
-        "url": "https://github.com/siddhantcvdi"
-      },
-      {
         "contributions": 2,
         "login": "Abhishek-Gawande",
         "name": "Abhishek-Gawande",
@@ -39212,12 +39300,6 @@
         "url": "https://github.com/vsantonastaso"
       },
       {
-        "contributions": 22,
-        "login": "kinolaev",
-        "name": "Sergei Nikolaev",
-        "url": "https://github.com/kinolaev"
-      },
-      {
         "company": "Amazon.com",
         "contributions": 3,
         "login": "akshat08",
@@ -39243,13 +39325,6 @@
         "login": "anlowee",
         "name": "Xiaochong(Eddy) Wei",
         "url": "https://github.com/anlowee"
-      },
-      {
-        "company": "Cockroach Labs",
-        "contributions": 56,
-        "login": "viragtripathi",
-        "name": "Virag Tripathi",
-        "url": "https://github.com/viragtripathi"
       },
       {
         "company": "confluentinc",
@@ -39279,13 +39354,6 @@
         "url": "https://github.com/anilabhabaral"
       },
       {
-        "company": "Microsoft",
-        "contributions": 6,
-        "login": "nkokitkar",
-        "name": "nkokitkar",
-        "url": "https://github.com/nkokitkar"
-      },
-      {
         "company": "Healingpaper 힐링페이퍼",
         "contributions": 2,
         "login": "anjeongkyun",
@@ -39297,12 +39365,6 @@
         "login": "g-zemlianyi",
         "name": "Georgii Zemlianyi",
         "url": "https://github.com/g-zemlianyi"
-      },
-      {
-        "contributions": 43,
-        "login": "debezium-builder",
-        "name": "Debezium Builder",
-        "url": "https://github.com/debezium-builder"
       },
       {
         "contributions": 1,
@@ -39642,13 +39704,6 @@
         "url": "https://github.com/dutta1kartik3"
       },
       {
-        "company": "Affirm",
-        "contributions": 2,
-        "login": "kebab-mai-haddi",
-        "name": "Aviral Srivastava",
-        "url": "https://github.com/kebab-mai-haddi"
-      },
-      {
         "contributions": 1,
         "login": "gaurav7261",
         "name": "gaurav7261",
@@ -39810,7 +39865,7 @@
         "url": "https://github.com/laughingman7743"
       },
       {
-        "contributions": 4,
+        "contributions": 2,
         "login": "aqhil07",
         "name": "aqhil07",
         "url": "https://github.com/aqhil07"
@@ -39824,7 +39879,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/debezium/debezium/issues",
-    "lastUpdated": 1793628247148,
+    "lastUpdated": 1793964666612,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -39839,14 +39894,14 @@
   "https://github.com/debezium/debezium,io.debezium.quarkus.quarkus-debezium-mongodb": {
     "allCompanies": [
       {
-        "contributions": 636,
-        "contributors": 9,
-        "name": "Red Hat & IBM"
+        "contributions": 702,
+        "contributors": 85,
+        "name": "Unknown"
       },
       {
-        "contributions": 612,
-        "contributors": 83,
-        "name": "Unknown"
+        "contributions": 640,
+        "contributors": 9,
+        "name": "Red Hat & IBM"
       },
       {
         "contributions": 333,
@@ -39854,7 +39909,7 @@
         "name": "kakao"
       },
       {
-        "contributions": 56,
+        "contributions": 58,
         "contributors": 1,
         "name": "Cockroach Labs"
       },
@@ -39864,7 +39919,7 @@
         "name": "databricks"
       },
       {
-        "contributions": 24,
+        "contributions": 26,
         "contributors": 1,
         "name": "SRM University AP"
       },
@@ -39882,6 +39937,11 @@
         "contributions": 12,
         "contributors": 1,
         "name": "Private"
+      },
+      {
+        "contributions": 11,
+        "contributors": 1,
+        "name": "Microsoft"
       },
       {
         "contributions": 10,
@@ -39922,11 +39982,6 @@
         "contributions": 6,
         "contributors": 1,
         "name": "Slack"
-      },
-      {
-        "contributions": 6,
-        "contributors": 1,
-        "name": "Microsoft"
       },
       {
         "contributions": 6,
@@ -39977,6 +40032,11 @@
         "contributions": 4,
         "contributors": 1,
         "name": "Zopa"
+      },
+      {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "Affirm"
       },
       {
         "contributions": 3,
@@ -40041,11 +40101,6 @@
       {
         "contributions": 2,
         "contributors": 1,
-        "name": "Affirm"
-      },
-      {
-        "contributions": 2,
-        "contributors": 1,
         "name": "CP Axtra"
       },
       {
@@ -40057,6 +40112,11 @@
         "contributions": 2,
         "contributors": 1,
         "name": "Workday"
+      },
+      {
+        "contributions": 1,
+        "contributors": 1,
+        "name": "ACA Group"
       },
       {
         "contributions": 1,
@@ -40111,11 +40171,102 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 86,
+        "login": "siddhantcvdi",
+        "name": "Siddhant",
+        "url": "https://github.com/siddhantcvdi"
+      },
+      {
+        "company": "Affirm",
+        "contributions": 3,
+        "login": "kebab-mai-haddi",
+        "name": "Aviral Srivastava",
+        "url": "https://github.com/kebab-mai-haddi"
+      },
+      {
         "company": "Red Hat & IBM",
-        "contributions": 87,
+        "contributions": 90,
         "login": "jpechane",
         "name": "Jiri Pechanec",
         "url": "https://github.com/jpechane"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 344,
+        "login": "Naros",
+        "name": "Chris Cranford",
+        "url": "https://github.com/Naros"
+      },
+      {
+        "company": "ACA Group",
+        "contributions": 1,
+        "login": "ThomasVerhoeven1998",
+        "name": "Thomas Verhoeven",
+        "url": "https://github.com/ThomasVerhoeven1998"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 82,
+        "login": "vjuranek",
+        "name": "Vojtěch Juránek",
+        "url": "https://github.com/vjuranek"
+      },
+      {
+        "contributions": 4,
+        "login": "chiragkava",
+        "name": "Chirag Kava",
+        "url": "https://github.com/chiragkava"
+      },
+      {
+        "contributions": 162,
+        "login": "roldanbob",
+        "name": "roldanbob",
+        "url": "https://github.com/roldanbob"
+      },
+      {
+        "contributions": 31,
+        "login": "kinolaev",
+        "name": "Sergei Nikolaev",
+        "url": "https://github.com/kinolaev"
+      },
+      {
+        "company": "Microsoft",
+        "contributions": 11,
+        "login": "nkokitkar",
+        "name": "nkokitkar",
+        "url": "https://github.com/nkokitkar"
+      },
+      {
+        "company": "SRM University AP",
+        "contributions": 26,
+        "login": "NiteeshK21",
+        "name": "Niteesh Kumar Pandey",
+        "url": "https://github.com/NiteeshK21"
+      },
+      {
+        "contributions": 2,
+        "login": "dongmin132",
+        "name": "Dongmin Kim",
+        "url": "https://github.com/dongmin132"
+      },
+      {
+        "contributions": 54,
+        "login": "bhuvan-somisetty",
+        "name": "Bhuvan Somisetty ",
+        "url": "https://github.com/bhuvan-somisetty"
+      },
+      {
+        "company": "Cockroach Labs",
+        "contributions": 58,
+        "login": "viragtripathi",
+        "name": "Virag Tripathi",
+        "url": "https://github.com/viragtripathi"
+      },
+      {
+        "contributions": 47,
+        "login": "debezium-builder",
+        "name": "Debezium Builder",
+        "url": "https://github.com/debezium-builder"
       },
       {
         "company": "RUOPlin",
@@ -40123,13 +40274,6 @@
         "login": "Tlinian",
         "name": "Tlinian",
         "url": "https://github.com/Tlinian"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 324,
-        "login": "Naros",
-        "name": "Chris Cranford",
-        "url": "https://github.com/Naros"
       },
       {
         "contributions": 2,
@@ -40142,12 +40286,6 @@
         "login": "vetruvet",
         "name": "Val Trubachev",
         "url": "https://github.com/vetruvet"
-      },
-      {
-        "contributions": 50,
-        "login": "bhuvan-somisetty",
-        "name": "Bhuvan Somisetty ",
-        "url": "https://github.com/bhuvan-somisetty"
       },
       {
         "contributions": 1,
@@ -40168,12 +40306,6 @@
         "url": "https://github.com/vaibhav8a"
       },
       {
-        "contributions": 162,
-        "login": "roldanbob",
-        "name": "roldanbob",
-        "url": "https://github.com/roldanbob"
-      },
-      {
         "company": "Arkansas Blue Cross Blue Shield",
         "contributions": 6,
         "login": "wbaker23",
@@ -40191,13 +40323,6 @@
         "login": "Aangbaeck",
         "name": "Björn Ångbäck",
         "url": "https://github.com/Aangbaeck"
-      },
-      {
-        "company": "SRM University AP",
-        "contributions": 24,
-        "login": "NiteeshK21",
-        "name": "Niteesh Kumar Pandey",
-        "url": "https://github.com/NiteeshK21"
       },
       {
         "contributions": 23,
@@ -40316,7 +40441,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 12,
+        "contributions": 10,
         "login": "AlvarVG",
         "name": "Alvar Viana Gomez",
         "url": "https://github.com/AlvarVG"
@@ -40333,13 +40458,6 @@
         "login": "JosipVukoja",
         "name": "Josip Vukoja",
         "url": "https://github.com/JosipVukoja"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 99,
-        "login": "vjuranek",
-        "name": "Vojtěch Juránek",
-        "url": "https://github.com/vjuranek"
       },
       {
         "company": "Redis",
@@ -40398,12 +40516,6 @@
         "url": "https://github.com/daniilzabludovsky"
       },
       {
-        "contributions": 17,
-        "login": "siddhantcvdi",
-        "name": "Siddhant",
-        "url": "https://github.com/siddhantcvdi"
-      },
-      {
         "contributions": 2,
         "login": "Abhishek-Gawande",
         "name": "Abhishek-Gawande",
@@ -40454,12 +40566,6 @@
         "url": "https://github.com/vsantonastaso"
       },
       {
-        "contributions": 22,
-        "login": "kinolaev",
-        "name": "Sergei Nikolaev",
-        "url": "https://github.com/kinolaev"
-      },
-      {
         "company": "Amazon.com",
         "contributions": 3,
         "login": "akshat08",
@@ -40485,13 +40591,6 @@
         "login": "anlowee",
         "name": "Xiaochong(Eddy) Wei",
         "url": "https://github.com/anlowee"
-      },
-      {
-        "company": "Cockroach Labs",
-        "contributions": 56,
-        "login": "viragtripathi",
-        "name": "Virag Tripathi",
-        "url": "https://github.com/viragtripathi"
       },
       {
         "company": "confluentinc",
@@ -40521,13 +40620,6 @@
         "url": "https://github.com/anilabhabaral"
       },
       {
-        "company": "Microsoft",
-        "contributions": 6,
-        "login": "nkokitkar",
-        "name": "nkokitkar",
-        "url": "https://github.com/nkokitkar"
-      },
-      {
         "company": "Healingpaper 힐링페이퍼",
         "contributions": 2,
         "login": "anjeongkyun",
@@ -40539,12 +40631,6 @@
         "login": "g-zemlianyi",
         "name": "Georgii Zemlianyi",
         "url": "https://github.com/g-zemlianyi"
-      },
-      {
-        "contributions": 43,
-        "login": "debezium-builder",
-        "name": "Debezium Builder",
-        "url": "https://github.com/debezium-builder"
       },
       {
         "contributions": 1,
@@ -40884,13 +40970,6 @@
         "url": "https://github.com/dutta1kartik3"
       },
       {
-        "company": "Affirm",
-        "contributions": 2,
-        "login": "kebab-mai-haddi",
-        "name": "Aviral Srivastava",
-        "url": "https://github.com/kebab-mai-haddi"
-      },
-      {
         "contributions": 1,
         "login": "gaurav7261",
         "name": "gaurav7261",
@@ -41052,7 +41131,7 @@
         "url": "https://github.com/laughingman7743"
       },
       {
-        "contributions": 4,
+        "contributions": 2,
         "login": "aqhil07",
         "name": "aqhil07",
         "url": "https://github.com/aqhil07"
@@ -41066,7 +41145,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/debezium/debezium/issues",
-    "lastUpdated": 1793628247148,
+    "lastUpdated": 1793964666612,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -41081,14 +41160,14 @@
   "https://github.com/debezium/debezium,io.debezium.quarkus.quarkus-debezium-mysql": {
     "allCompanies": [
       {
-        "contributions": 636,
-        "contributors": 9,
-        "name": "Red Hat & IBM"
+        "contributions": 702,
+        "contributors": 85,
+        "name": "Unknown"
       },
       {
-        "contributions": 612,
-        "contributors": 83,
-        "name": "Unknown"
+        "contributions": 640,
+        "contributors": 9,
+        "name": "Red Hat & IBM"
       },
       {
         "contributions": 333,
@@ -41096,7 +41175,7 @@
         "name": "kakao"
       },
       {
-        "contributions": 56,
+        "contributions": 58,
         "contributors": 1,
         "name": "Cockroach Labs"
       },
@@ -41106,7 +41185,7 @@
         "name": "databricks"
       },
       {
-        "contributions": 24,
+        "contributions": 26,
         "contributors": 1,
         "name": "SRM University AP"
       },
@@ -41124,6 +41203,11 @@
         "contributions": 12,
         "contributors": 1,
         "name": "Private"
+      },
+      {
+        "contributions": 11,
+        "contributors": 1,
+        "name": "Microsoft"
       },
       {
         "contributions": 10,
@@ -41164,11 +41248,6 @@
         "contributions": 6,
         "contributors": 1,
         "name": "Slack"
-      },
-      {
-        "contributions": 6,
-        "contributors": 1,
-        "name": "Microsoft"
       },
       {
         "contributions": 6,
@@ -41219,6 +41298,11 @@
         "contributions": 4,
         "contributors": 1,
         "name": "Zopa"
+      },
+      {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "Affirm"
       },
       {
         "contributions": 3,
@@ -41283,11 +41367,6 @@
       {
         "contributions": 2,
         "contributors": 1,
-        "name": "Affirm"
-      },
-      {
-        "contributions": 2,
-        "contributors": 1,
         "name": "CP Axtra"
       },
       {
@@ -41299,6 +41378,11 @@
         "contributions": 2,
         "contributors": 1,
         "name": "Workday"
+      },
+      {
+        "contributions": 1,
+        "contributors": 1,
+        "name": "ACA Group"
       },
       {
         "contributions": 1,
@@ -41353,11 +41437,102 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 86,
+        "login": "siddhantcvdi",
+        "name": "Siddhant",
+        "url": "https://github.com/siddhantcvdi"
+      },
+      {
+        "company": "Affirm",
+        "contributions": 3,
+        "login": "kebab-mai-haddi",
+        "name": "Aviral Srivastava",
+        "url": "https://github.com/kebab-mai-haddi"
+      },
+      {
         "company": "Red Hat & IBM",
-        "contributions": 87,
+        "contributions": 90,
         "login": "jpechane",
         "name": "Jiri Pechanec",
         "url": "https://github.com/jpechane"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 344,
+        "login": "Naros",
+        "name": "Chris Cranford",
+        "url": "https://github.com/Naros"
+      },
+      {
+        "company": "ACA Group",
+        "contributions": 1,
+        "login": "ThomasVerhoeven1998",
+        "name": "Thomas Verhoeven",
+        "url": "https://github.com/ThomasVerhoeven1998"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 82,
+        "login": "vjuranek",
+        "name": "Vojtěch Juránek",
+        "url": "https://github.com/vjuranek"
+      },
+      {
+        "contributions": 4,
+        "login": "chiragkava",
+        "name": "Chirag Kava",
+        "url": "https://github.com/chiragkava"
+      },
+      {
+        "contributions": 162,
+        "login": "roldanbob",
+        "name": "roldanbob",
+        "url": "https://github.com/roldanbob"
+      },
+      {
+        "contributions": 31,
+        "login": "kinolaev",
+        "name": "Sergei Nikolaev",
+        "url": "https://github.com/kinolaev"
+      },
+      {
+        "company": "Microsoft",
+        "contributions": 11,
+        "login": "nkokitkar",
+        "name": "nkokitkar",
+        "url": "https://github.com/nkokitkar"
+      },
+      {
+        "company": "SRM University AP",
+        "contributions": 26,
+        "login": "NiteeshK21",
+        "name": "Niteesh Kumar Pandey",
+        "url": "https://github.com/NiteeshK21"
+      },
+      {
+        "contributions": 2,
+        "login": "dongmin132",
+        "name": "Dongmin Kim",
+        "url": "https://github.com/dongmin132"
+      },
+      {
+        "contributions": 54,
+        "login": "bhuvan-somisetty",
+        "name": "Bhuvan Somisetty ",
+        "url": "https://github.com/bhuvan-somisetty"
+      },
+      {
+        "company": "Cockroach Labs",
+        "contributions": 58,
+        "login": "viragtripathi",
+        "name": "Virag Tripathi",
+        "url": "https://github.com/viragtripathi"
+      },
+      {
+        "contributions": 47,
+        "login": "debezium-builder",
+        "name": "Debezium Builder",
+        "url": "https://github.com/debezium-builder"
       },
       {
         "company": "RUOPlin",
@@ -41365,13 +41540,6 @@
         "login": "Tlinian",
         "name": "Tlinian",
         "url": "https://github.com/Tlinian"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 324,
-        "login": "Naros",
-        "name": "Chris Cranford",
-        "url": "https://github.com/Naros"
       },
       {
         "contributions": 2,
@@ -41384,12 +41552,6 @@
         "login": "vetruvet",
         "name": "Val Trubachev",
         "url": "https://github.com/vetruvet"
-      },
-      {
-        "contributions": 50,
-        "login": "bhuvan-somisetty",
-        "name": "Bhuvan Somisetty ",
-        "url": "https://github.com/bhuvan-somisetty"
       },
       {
         "contributions": 1,
@@ -41410,12 +41572,6 @@
         "url": "https://github.com/vaibhav8a"
       },
       {
-        "contributions": 162,
-        "login": "roldanbob",
-        "name": "roldanbob",
-        "url": "https://github.com/roldanbob"
-      },
-      {
         "company": "Arkansas Blue Cross Blue Shield",
         "contributions": 6,
         "login": "wbaker23",
@@ -41433,13 +41589,6 @@
         "login": "Aangbaeck",
         "name": "Björn Ångbäck",
         "url": "https://github.com/Aangbaeck"
-      },
-      {
-        "company": "SRM University AP",
-        "contributions": 24,
-        "login": "NiteeshK21",
-        "name": "Niteesh Kumar Pandey",
-        "url": "https://github.com/NiteeshK21"
       },
       {
         "contributions": 23,
@@ -41558,7 +41707,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 12,
+        "contributions": 10,
         "login": "AlvarVG",
         "name": "Alvar Viana Gomez",
         "url": "https://github.com/AlvarVG"
@@ -41575,13 +41724,6 @@
         "login": "JosipVukoja",
         "name": "Josip Vukoja",
         "url": "https://github.com/JosipVukoja"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 99,
-        "login": "vjuranek",
-        "name": "Vojtěch Juránek",
-        "url": "https://github.com/vjuranek"
       },
       {
         "company": "Redis",
@@ -41640,12 +41782,6 @@
         "url": "https://github.com/daniilzabludovsky"
       },
       {
-        "contributions": 17,
-        "login": "siddhantcvdi",
-        "name": "Siddhant",
-        "url": "https://github.com/siddhantcvdi"
-      },
-      {
         "contributions": 2,
         "login": "Abhishek-Gawande",
         "name": "Abhishek-Gawande",
@@ -41696,12 +41832,6 @@
         "url": "https://github.com/vsantonastaso"
       },
       {
-        "contributions": 22,
-        "login": "kinolaev",
-        "name": "Sergei Nikolaev",
-        "url": "https://github.com/kinolaev"
-      },
-      {
         "company": "Amazon.com",
         "contributions": 3,
         "login": "akshat08",
@@ -41727,13 +41857,6 @@
         "login": "anlowee",
         "name": "Xiaochong(Eddy) Wei",
         "url": "https://github.com/anlowee"
-      },
-      {
-        "company": "Cockroach Labs",
-        "contributions": 56,
-        "login": "viragtripathi",
-        "name": "Virag Tripathi",
-        "url": "https://github.com/viragtripathi"
       },
       {
         "company": "confluentinc",
@@ -41763,13 +41886,6 @@
         "url": "https://github.com/anilabhabaral"
       },
       {
-        "company": "Microsoft",
-        "contributions": 6,
-        "login": "nkokitkar",
-        "name": "nkokitkar",
-        "url": "https://github.com/nkokitkar"
-      },
-      {
         "company": "Healingpaper 힐링페이퍼",
         "contributions": 2,
         "login": "anjeongkyun",
@@ -41781,12 +41897,6 @@
         "login": "g-zemlianyi",
         "name": "Georgii Zemlianyi",
         "url": "https://github.com/g-zemlianyi"
-      },
-      {
-        "contributions": 43,
-        "login": "debezium-builder",
-        "name": "Debezium Builder",
-        "url": "https://github.com/debezium-builder"
       },
       {
         "contributions": 1,
@@ -42126,13 +42236,6 @@
         "url": "https://github.com/dutta1kartik3"
       },
       {
-        "company": "Affirm",
-        "contributions": 2,
-        "login": "kebab-mai-haddi",
-        "name": "Aviral Srivastava",
-        "url": "https://github.com/kebab-mai-haddi"
-      },
-      {
         "contributions": 1,
         "login": "gaurav7261",
         "name": "gaurav7261",
@@ -42294,7 +42397,7 @@
         "url": "https://github.com/laughingman7743"
       },
       {
-        "contributions": 4,
+        "contributions": 2,
         "login": "aqhil07",
         "name": "aqhil07",
         "url": "https://github.com/aqhil07"
@@ -42308,7 +42411,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/debezium/debezium/issues",
-    "lastUpdated": 1793628247148,
+    "lastUpdated": 1793964666612,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -42323,14 +42426,14 @@
   "https://github.com/debezium/debezium,io.debezium.quarkus.quarkus-debezium-postgres": {
     "allCompanies": [
       {
-        "contributions": 636,
-        "contributors": 9,
-        "name": "Red Hat & IBM"
+        "contributions": 702,
+        "contributors": 85,
+        "name": "Unknown"
       },
       {
-        "contributions": 612,
-        "contributors": 83,
-        "name": "Unknown"
+        "contributions": 640,
+        "contributors": 9,
+        "name": "Red Hat & IBM"
       },
       {
         "contributions": 333,
@@ -42338,7 +42441,7 @@
         "name": "kakao"
       },
       {
-        "contributions": 56,
+        "contributions": 58,
         "contributors": 1,
         "name": "Cockroach Labs"
       },
@@ -42348,7 +42451,7 @@
         "name": "databricks"
       },
       {
-        "contributions": 24,
+        "contributions": 26,
         "contributors": 1,
         "name": "SRM University AP"
       },
@@ -42366,6 +42469,11 @@
         "contributions": 12,
         "contributors": 1,
         "name": "Private"
+      },
+      {
+        "contributions": 11,
+        "contributors": 1,
+        "name": "Microsoft"
       },
       {
         "contributions": 10,
@@ -42406,11 +42514,6 @@
         "contributions": 6,
         "contributors": 1,
         "name": "Slack"
-      },
-      {
-        "contributions": 6,
-        "contributors": 1,
-        "name": "Microsoft"
       },
       {
         "contributions": 6,
@@ -42461,6 +42564,11 @@
         "contributions": 4,
         "contributors": 1,
         "name": "Zopa"
+      },
+      {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "Affirm"
       },
       {
         "contributions": 3,
@@ -42525,11 +42633,6 @@
       {
         "contributions": 2,
         "contributors": 1,
-        "name": "Affirm"
-      },
-      {
-        "contributions": 2,
-        "contributors": 1,
         "name": "CP Axtra"
       },
       {
@@ -42541,6 +42644,11 @@
         "contributions": 2,
         "contributors": 1,
         "name": "Workday"
+      },
+      {
+        "contributions": 1,
+        "contributors": 1,
+        "name": "ACA Group"
       },
       {
         "contributions": 1,
@@ -42595,11 +42703,102 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 86,
+        "login": "siddhantcvdi",
+        "name": "Siddhant",
+        "url": "https://github.com/siddhantcvdi"
+      },
+      {
+        "company": "Affirm",
+        "contributions": 3,
+        "login": "kebab-mai-haddi",
+        "name": "Aviral Srivastava",
+        "url": "https://github.com/kebab-mai-haddi"
+      },
+      {
         "company": "Red Hat & IBM",
-        "contributions": 87,
+        "contributions": 90,
         "login": "jpechane",
         "name": "Jiri Pechanec",
         "url": "https://github.com/jpechane"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 344,
+        "login": "Naros",
+        "name": "Chris Cranford",
+        "url": "https://github.com/Naros"
+      },
+      {
+        "company": "ACA Group",
+        "contributions": 1,
+        "login": "ThomasVerhoeven1998",
+        "name": "Thomas Verhoeven",
+        "url": "https://github.com/ThomasVerhoeven1998"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 82,
+        "login": "vjuranek",
+        "name": "Vojtěch Juránek",
+        "url": "https://github.com/vjuranek"
+      },
+      {
+        "contributions": 4,
+        "login": "chiragkava",
+        "name": "Chirag Kava",
+        "url": "https://github.com/chiragkava"
+      },
+      {
+        "contributions": 162,
+        "login": "roldanbob",
+        "name": "roldanbob",
+        "url": "https://github.com/roldanbob"
+      },
+      {
+        "contributions": 31,
+        "login": "kinolaev",
+        "name": "Sergei Nikolaev",
+        "url": "https://github.com/kinolaev"
+      },
+      {
+        "company": "Microsoft",
+        "contributions": 11,
+        "login": "nkokitkar",
+        "name": "nkokitkar",
+        "url": "https://github.com/nkokitkar"
+      },
+      {
+        "company": "SRM University AP",
+        "contributions": 26,
+        "login": "NiteeshK21",
+        "name": "Niteesh Kumar Pandey",
+        "url": "https://github.com/NiteeshK21"
+      },
+      {
+        "contributions": 2,
+        "login": "dongmin132",
+        "name": "Dongmin Kim",
+        "url": "https://github.com/dongmin132"
+      },
+      {
+        "contributions": 54,
+        "login": "bhuvan-somisetty",
+        "name": "Bhuvan Somisetty ",
+        "url": "https://github.com/bhuvan-somisetty"
+      },
+      {
+        "company": "Cockroach Labs",
+        "contributions": 58,
+        "login": "viragtripathi",
+        "name": "Virag Tripathi",
+        "url": "https://github.com/viragtripathi"
+      },
+      {
+        "contributions": 47,
+        "login": "debezium-builder",
+        "name": "Debezium Builder",
+        "url": "https://github.com/debezium-builder"
       },
       {
         "company": "RUOPlin",
@@ -42607,13 +42806,6 @@
         "login": "Tlinian",
         "name": "Tlinian",
         "url": "https://github.com/Tlinian"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 324,
-        "login": "Naros",
-        "name": "Chris Cranford",
-        "url": "https://github.com/Naros"
       },
       {
         "contributions": 2,
@@ -42626,12 +42818,6 @@
         "login": "vetruvet",
         "name": "Val Trubachev",
         "url": "https://github.com/vetruvet"
-      },
-      {
-        "contributions": 50,
-        "login": "bhuvan-somisetty",
-        "name": "Bhuvan Somisetty ",
-        "url": "https://github.com/bhuvan-somisetty"
       },
       {
         "contributions": 1,
@@ -42652,12 +42838,6 @@
         "url": "https://github.com/vaibhav8a"
       },
       {
-        "contributions": 162,
-        "login": "roldanbob",
-        "name": "roldanbob",
-        "url": "https://github.com/roldanbob"
-      },
-      {
         "company": "Arkansas Blue Cross Blue Shield",
         "contributions": 6,
         "login": "wbaker23",
@@ -42675,13 +42855,6 @@
         "login": "Aangbaeck",
         "name": "Björn Ångbäck",
         "url": "https://github.com/Aangbaeck"
-      },
-      {
-        "company": "SRM University AP",
-        "contributions": 24,
-        "login": "NiteeshK21",
-        "name": "Niteesh Kumar Pandey",
-        "url": "https://github.com/NiteeshK21"
       },
       {
         "contributions": 23,
@@ -42800,7 +42973,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 12,
+        "contributions": 10,
         "login": "AlvarVG",
         "name": "Alvar Viana Gomez",
         "url": "https://github.com/AlvarVG"
@@ -42817,13 +42990,6 @@
         "login": "JosipVukoja",
         "name": "Josip Vukoja",
         "url": "https://github.com/JosipVukoja"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 99,
-        "login": "vjuranek",
-        "name": "Vojtěch Juránek",
-        "url": "https://github.com/vjuranek"
       },
       {
         "company": "Redis",
@@ -42882,12 +43048,6 @@
         "url": "https://github.com/daniilzabludovsky"
       },
       {
-        "contributions": 17,
-        "login": "siddhantcvdi",
-        "name": "Siddhant",
-        "url": "https://github.com/siddhantcvdi"
-      },
-      {
         "contributions": 2,
         "login": "Abhishek-Gawande",
         "name": "Abhishek-Gawande",
@@ -42938,12 +43098,6 @@
         "url": "https://github.com/vsantonastaso"
       },
       {
-        "contributions": 22,
-        "login": "kinolaev",
-        "name": "Sergei Nikolaev",
-        "url": "https://github.com/kinolaev"
-      },
-      {
         "company": "Amazon.com",
         "contributions": 3,
         "login": "akshat08",
@@ -42969,13 +43123,6 @@
         "login": "anlowee",
         "name": "Xiaochong(Eddy) Wei",
         "url": "https://github.com/anlowee"
-      },
-      {
-        "company": "Cockroach Labs",
-        "contributions": 56,
-        "login": "viragtripathi",
-        "name": "Virag Tripathi",
-        "url": "https://github.com/viragtripathi"
       },
       {
         "company": "confluentinc",
@@ -43005,13 +43152,6 @@
         "url": "https://github.com/anilabhabaral"
       },
       {
-        "company": "Microsoft",
-        "contributions": 6,
-        "login": "nkokitkar",
-        "name": "nkokitkar",
-        "url": "https://github.com/nkokitkar"
-      },
-      {
         "company": "Healingpaper 힐링페이퍼",
         "contributions": 2,
         "login": "anjeongkyun",
@@ -43023,12 +43163,6 @@
         "login": "g-zemlianyi",
         "name": "Georgii Zemlianyi",
         "url": "https://github.com/g-zemlianyi"
-      },
-      {
-        "contributions": 43,
-        "login": "debezium-builder",
-        "name": "Debezium Builder",
-        "url": "https://github.com/debezium-builder"
       },
       {
         "contributions": 1,
@@ -43368,13 +43502,6 @@
         "url": "https://github.com/dutta1kartik3"
       },
       {
-        "company": "Affirm",
-        "contributions": 2,
-        "login": "kebab-mai-haddi",
-        "name": "Aviral Srivastava",
-        "url": "https://github.com/kebab-mai-haddi"
-      },
-      {
         "contributions": 1,
         "login": "gaurav7261",
         "name": "gaurav7261",
@@ -43536,7 +43663,7 @@
         "url": "https://github.com/laughingman7743"
       },
       {
-        "contributions": 4,
+        "contributions": 2,
         "login": "aqhil07",
         "name": "aqhil07",
         "url": "https://github.com/aqhil07"
@@ -43550,7 +43677,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/debezium/debezium/issues",
-    "lastUpdated": 1793628247148,
+    "lastUpdated": 1793964666612,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -43565,14 +43692,14 @@
   "https://github.com/debezium/debezium,io.debezium.quarkus.quarkus-debezium-sqlserver": {
     "allCompanies": [
       {
-        "contributions": 636,
-        "contributors": 9,
-        "name": "Red Hat & IBM"
+        "contributions": 702,
+        "contributors": 85,
+        "name": "Unknown"
       },
       {
-        "contributions": 612,
-        "contributors": 83,
-        "name": "Unknown"
+        "contributions": 640,
+        "contributors": 9,
+        "name": "Red Hat & IBM"
       },
       {
         "contributions": 333,
@@ -43580,7 +43707,7 @@
         "name": "kakao"
       },
       {
-        "contributions": 56,
+        "contributions": 58,
         "contributors": 1,
         "name": "Cockroach Labs"
       },
@@ -43590,7 +43717,7 @@
         "name": "databricks"
       },
       {
-        "contributions": 24,
+        "contributions": 26,
         "contributors": 1,
         "name": "SRM University AP"
       },
@@ -43608,6 +43735,11 @@
         "contributions": 12,
         "contributors": 1,
         "name": "Private"
+      },
+      {
+        "contributions": 11,
+        "contributors": 1,
+        "name": "Microsoft"
       },
       {
         "contributions": 10,
@@ -43648,11 +43780,6 @@
         "contributions": 6,
         "contributors": 1,
         "name": "Slack"
-      },
-      {
-        "contributions": 6,
-        "contributors": 1,
-        "name": "Microsoft"
       },
       {
         "contributions": 6,
@@ -43703,6 +43830,11 @@
         "contributions": 4,
         "contributors": 1,
         "name": "Zopa"
+      },
+      {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "Affirm"
       },
       {
         "contributions": 3,
@@ -43767,11 +43899,6 @@
       {
         "contributions": 2,
         "contributors": 1,
-        "name": "Affirm"
-      },
-      {
-        "contributions": 2,
-        "contributors": 1,
         "name": "CP Axtra"
       },
       {
@@ -43783,6 +43910,11 @@
         "contributions": 2,
         "contributors": 1,
         "name": "Workday"
+      },
+      {
+        "contributions": 1,
+        "contributors": 1,
+        "name": "ACA Group"
       },
       {
         "contributions": 1,
@@ -43837,11 +43969,102 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 86,
+        "login": "siddhantcvdi",
+        "name": "Siddhant",
+        "url": "https://github.com/siddhantcvdi"
+      },
+      {
+        "company": "Affirm",
+        "contributions": 3,
+        "login": "kebab-mai-haddi",
+        "name": "Aviral Srivastava",
+        "url": "https://github.com/kebab-mai-haddi"
+      },
+      {
         "company": "Red Hat & IBM",
-        "contributions": 87,
+        "contributions": 90,
         "login": "jpechane",
         "name": "Jiri Pechanec",
         "url": "https://github.com/jpechane"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 344,
+        "login": "Naros",
+        "name": "Chris Cranford",
+        "url": "https://github.com/Naros"
+      },
+      {
+        "company": "ACA Group",
+        "contributions": 1,
+        "login": "ThomasVerhoeven1998",
+        "name": "Thomas Verhoeven",
+        "url": "https://github.com/ThomasVerhoeven1998"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 82,
+        "login": "vjuranek",
+        "name": "Vojtěch Juránek",
+        "url": "https://github.com/vjuranek"
+      },
+      {
+        "contributions": 4,
+        "login": "chiragkava",
+        "name": "Chirag Kava",
+        "url": "https://github.com/chiragkava"
+      },
+      {
+        "contributions": 162,
+        "login": "roldanbob",
+        "name": "roldanbob",
+        "url": "https://github.com/roldanbob"
+      },
+      {
+        "contributions": 31,
+        "login": "kinolaev",
+        "name": "Sergei Nikolaev",
+        "url": "https://github.com/kinolaev"
+      },
+      {
+        "company": "Microsoft",
+        "contributions": 11,
+        "login": "nkokitkar",
+        "name": "nkokitkar",
+        "url": "https://github.com/nkokitkar"
+      },
+      {
+        "company": "SRM University AP",
+        "contributions": 26,
+        "login": "NiteeshK21",
+        "name": "Niteesh Kumar Pandey",
+        "url": "https://github.com/NiteeshK21"
+      },
+      {
+        "contributions": 2,
+        "login": "dongmin132",
+        "name": "Dongmin Kim",
+        "url": "https://github.com/dongmin132"
+      },
+      {
+        "contributions": 54,
+        "login": "bhuvan-somisetty",
+        "name": "Bhuvan Somisetty ",
+        "url": "https://github.com/bhuvan-somisetty"
+      },
+      {
+        "company": "Cockroach Labs",
+        "contributions": 58,
+        "login": "viragtripathi",
+        "name": "Virag Tripathi",
+        "url": "https://github.com/viragtripathi"
+      },
+      {
+        "contributions": 47,
+        "login": "debezium-builder",
+        "name": "Debezium Builder",
+        "url": "https://github.com/debezium-builder"
       },
       {
         "company": "RUOPlin",
@@ -43849,13 +44072,6 @@
         "login": "Tlinian",
         "name": "Tlinian",
         "url": "https://github.com/Tlinian"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 324,
-        "login": "Naros",
-        "name": "Chris Cranford",
-        "url": "https://github.com/Naros"
       },
       {
         "contributions": 2,
@@ -43868,12 +44084,6 @@
         "login": "vetruvet",
         "name": "Val Trubachev",
         "url": "https://github.com/vetruvet"
-      },
-      {
-        "contributions": 50,
-        "login": "bhuvan-somisetty",
-        "name": "Bhuvan Somisetty ",
-        "url": "https://github.com/bhuvan-somisetty"
       },
       {
         "contributions": 1,
@@ -43894,12 +44104,6 @@
         "url": "https://github.com/vaibhav8a"
       },
       {
-        "contributions": 162,
-        "login": "roldanbob",
-        "name": "roldanbob",
-        "url": "https://github.com/roldanbob"
-      },
-      {
         "company": "Arkansas Blue Cross Blue Shield",
         "contributions": 6,
         "login": "wbaker23",
@@ -43917,13 +44121,6 @@
         "login": "Aangbaeck",
         "name": "Björn Ångbäck",
         "url": "https://github.com/Aangbaeck"
-      },
-      {
-        "company": "SRM University AP",
-        "contributions": 24,
-        "login": "NiteeshK21",
-        "name": "Niteesh Kumar Pandey",
-        "url": "https://github.com/NiteeshK21"
       },
       {
         "contributions": 23,
@@ -44042,7 +44239,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 12,
+        "contributions": 10,
         "login": "AlvarVG",
         "name": "Alvar Viana Gomez",
         "url": "https://github.com/AlvarVG"
@@ -44059,13 +44256,6 @@
         "login": "JosipVukoja",
         "name": "Josip Vukoja",
         "url": "https://github.com/JosipVukoja"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 99,
-        "login": "vjuranek",
-        "name": "Vojtěch Juránek",
-        "url": "https://github.com/vjuranek"
       },
       {
         "company": "Redis",
@@ -44124,12 +44314,6 @@
         "url": "https://github.com/daniilzabludovsky"
       },
       {
-        "contributions": 17,
-        "login": "siddhantcvdi",
-        "name": "Siddhant",
-        "url": "https://github.com/siddhantcvdi"
-      },
-      {
         "contributions": 2,
         "login": "Abhishek-Gawande",
         "name": "Abhishek-Gawande",
@@ -44180,12 +44364,6 @@
         "url": "https://github.com/vsantonastaso"
       },
       {
-        "contributions": 22,
-        "login": "kinolaev",
-        "name": "Sergei Nikolaev",
-        "url": "https://github.com/kinolaev"
-      },
-      {
         "company": "Amazon.com",
         "contributions": 3,
         "login": "akshat08",
@@ -44211,13 +44389,6 @@
         "login": "anlowee",
         "name": "Xiaochong(Eddy) Wei",
         "url": "https://github.com/anlowee"
-      },
-      {
-        "company": "Cockroach Labs",
-        "contributions": 56,
-        "login": "viragtripathi",
-        "name": "Virag Tripathi",
-        "url": "https://github.com/viragtripathi"
       },
       {
         "company": "confluentinc",
@@ -44247,13 +44418,6 @@
         "url": "https://github.com/anilabhabaral"
       },
       {
-        "company": "Microsoft",
-        "contributions": 6,
-        "login": "nkokitkar",
-        "name": "nkokitkar",
-        "url": "https://github.com/nkokitkar"
-      },
-      {
         "company": "Healingpaper 힐링페이퍼",
         "contributions": 2,
         "login": "anjeongkyun",
@@ -44265,12 +44429,6 @@
         "login": "g-zemlianyi",
         "name": "Georgii Zemlianyi",
         "url": "https://github.com/g-zemlianyi"
-      },
-      {
-        "contributions": 43,
-        "login": "debezium-builder",
-        "name": "Debezium Builder",
-        "url": "https://github.com/debezium-builder"
       },
       {
         "contributions": 1,
@@ -44610,13 +44768,6 @@
         "url": "https://github.com/dutta1kartik3"
       },
       {
-        "company": "Affirm",
-        "contributions": 2,
-        "login": "kebab-mai-haddi",
-        "name": "Aviral Srivastava",
-        "url": "https://github.com/kebab-mai-haddi"
-      },
-      {
         "contributions": 1,
         "login": "gaurav7261",
         "name": "gaurav7261",
@@ -44778,7 +44929,7 @@
         "url": "https://github.com/laughingman7743"
       },
       {
-        "contributions": 4,
+        "contributions": 2,
         "login": "aqhil07",
         "name": "aqhil07",
         "url": "https://github.com/aqhil07"
@@ -44792,7 +44943,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/debezium/debezium/issues",
-    "lastUpdated": 1793628247148,
+    "lastUpdated": 1793964666612,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56056,7 +56207,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-apistax/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-apistax/issues",
-    "lastUpdated": 1793576786066,
+    "lastUpdated": 1793964633099,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -57682,7 +57833,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-config-extensions/blob/main/consul/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-config-extensions/issues",
-    "lastUpdated": 1793628229812,
+    "lastUpdated": 1793964633035,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -58441,7 +58592,7 @@
         "url": "https://github.com/JinyuChen97"
       }
     ],
-    "issues": 49,
+    "issues": 46,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
     "lastUpdated": 1793914195342,
     "license": {
@@ -58674,7 +58825,7 @@
     "extensionPathInRepo": "extensions/saaj/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/saaj/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/saaj/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 49,
+    "issues": 46,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
     "lastUpdated": 1793628229780,
     "license": {
@@ -59242,7 +59393,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-elasticsearch-reactive/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-elasticsearch-reactive/issues",
-    "lastUpdated": 1793665413783,
+    "lastUpdated": 1793964631507,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -59510,7 +59661,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flags/blob/main/hibernate-reactive/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flags/issues",
-    "lastUpdated": 1793540816978,
+    "lastUpdated": 1793964657353,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -60666,7 +60817,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/oidc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 44,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
-    "lastUpdated": 1793628230302,
+    "lastUpdated": 1793964658811,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -62120,7 +62271,7 @@
     ],
     "issues": 14,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-github-app/issues",
-    "lastUpdated": 1793598411988,
+    "lastUpdated": 1793964633439,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -63040,17 +63191,18 @@
         "name": "Red Hat & IBM"
       },
       {
-        "contributions": 5,
+        "contributions": 7,
         "contributors": 1,
         "name": "Unknown"
       }
     ],
     "allSponsors": [
-      "Red Hat & IBM"
+      "Red Hat & IBM",
+      "Unknown"
     ],
     "contributorsWithFullCompanyInfo": [
       {
-        "contributions": 5,
+        "contributions": 7,
         "login": "matheusandre1",
         "name": "Matheus André",
         "url": "https://github.com/matheusandre1"
@@ -63082,7 +63234,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-helm/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 12,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-helm/issues",
-    "lastUpdated": 1793540819884,
+    "lastUpdated": 1793964633318,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -63884,7 +64036,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jdbc-singlestore/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jdbc-singlestore/issues",
-    "lastUpdated": 1793540818474,
+    "lastUpdated": 1793964644586,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -64770,7 +64922,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/solr/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jnosql/issues",
-    "lastUpdated": 1793511938325,
+    "lastUpdated": 1793964646232,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -69730,7 +69882,7 @@
         "url": "https://github.com/unsignedint"
       }
     ],
-    "issues": 186,
+    "issues": 185,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1793576787465,
     "license": {
@@ -71062,7 +71214,7 @@
         "url": "https://github.com/unsignedint"
       }
     ],
-    "issues": 186,
+    "issues": 185,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1793576787465,
     "license": {
@@ -73001,7 +73153,7 @@
         "url": "https://github.com/unsignedint"
       }
     ],
-    "issues": 186,
+    "issues": 185,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1793576787465,
     "license": {
@@ -76577,7 +76729,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-mcp": {
     "allCompanies": [
       {
-        "contributions": 19,
+        "contributions": 20,
         "contributors": 4,
         "name": "Red Hat & IBM"
       },
@@ -76598,17 +76750,17 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Red Hat & IBM",
+        "contributions": 17,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "manovotn",
         "name": "Matej Novotny",
         "url": "https://github.com/manovotn"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 16,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
       },
       {
         "company": "Act | BMW",
@@ -76649,7 +76801,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-langchain4j/blob/main/mcp/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 186,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1793540817676,
+    "lastUpdated": 1793964645299,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -78867,7 +79019,7 @@
         "url": "https://github.com/unsignedint"
       }
     ],
-    "issues": 186,
+    "issues": 185,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1793576787465,
     "license": {
@@ -79311,7 +79463,7 @@
         "url": "https://github.com/unsignedint"
       }
     ],
-    "issues": 186,
+    "issues": 185,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1793576787465,
     "license": {
@@ -87371,7 +87523,7 @@
         "url": "https://github.com/unsignedint"
       }
     ],
-    "issues": 187,
+    "issues": 185,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1793576787465,
     "license": {
@@ -87815,7 +87967,7 @@
         "url": "https://github.com/unsignedint"
       }
     ],
-    "issues": 186,
+    "issues": 185,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1793576787465,
     "license": {
@@ -89223,7 +89375,7 @@
     "extensionPathInRepo": "cli-adapter/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/cli-adapter/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/cli-adapter/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 11,
+    "issues": 14,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1793684796431,
     "license": {
@@ -89343,7 +89495,7 @@
     "extensionPathInRepo": "core/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/core/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/core/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 11,
+    "issues": 14,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1793914228835,
     "license": {
@@ -89393,7 +89545,7 @@
     "extensionPathInRepo": "hibernate-validator/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/hibernate-validator/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/hibernate-validator/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 11,
+    "issues": 14,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1793665413929,
     "license": {
@@ -89624,7 +89776,7 @@
     "extensionPathInRepo": "oidc/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/oidc/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/oidc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 11,
+    "issues": 14,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1793914232231,
     "license": {
@@ -89869,7 +90021,7 @@
         "url": "https://github.com/wjglerum"
       }
     ],
-    "issues": 11,
+    "issues": 14,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1793800153259,
     "license": {
@@ -92200,7 +92352,7 @@
   "https://github.com/quarkiverse/quarkus-network-faults,io.quarkiverse.networkfaults.quarkus-network-faults-reactive-datasource": {
     "allCompanies": [
       {
-        "contributions": 2,
+        "contributions": 3,
         "contributors": 1,
         "name": "Red Hat & IBM"
       }
@@ -92211,7 +92363,7 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Red Hat & IBM",
-        "contributions": 2,
+        "contributions": 3,
         "login": "geoand",
         "name": "Georgios Andrianakis",
         "url": "https://github.com/geoand"
@@ -92222,7 +92374,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-network-faults/blob/main/extensions/reactive-datasource/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-network-faults/issues",
-    "lastUpdated": 1793598411196,
+    "lastUpdated": 1793964664010,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -93779,7 +93931,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-proxy-wasm/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-proxy-wasm/issues",
-    "lastUpdated": 1793628229336,
+    "lastUpdated": 1793964646239,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -94031,7 +94183,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-quinoa/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 9,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-quinoa/issues",
-    "lastUpdated": 1793628234295,
+    "lastUpdated": 1793964634222,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -94064,7 +94216,7 @@
         "url": "https://github.com/rolfedh"
       }
     ],
-    "issues": 5,
+    "issues": 7,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-qute-web/issues",
     "lastUpdated": 1793665415421,
     "license": {
@@ -94536,7 +94688,7 @@
     "extensionPathInRepo": "roq/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-roq/blob/main/roq/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-roq/blob/main/roq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 102,
+    "issues": 105,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1793665418637,
     "license": {
@@ -95301,7 +95453,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 102,
+    "issues": 105,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1793771171798,
     "license": {
@@ -95454,7 +95606,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 102,
+    "issues": 105,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1793771171798,
     "license": {
@@ -96066,7 +96218,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 104,
+    "issues": 105,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1793771171798,
     "license": {
@@ -97902,7 +98054,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 102,
+    "issues": 105,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1793771171798,
     "license": {
@@ -98433,7 +98585,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-spdx/blob/main/v2/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-spdx/issues",
-    "lastUpdated": 1793540819740,
+    "lastUpdated": 1793964649949,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -104320,7 +104472,7 @@
     "extensionPathInRepo": "extensions/amazon-lambda-http/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/amazon-lambda-http/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/amazon-lambda-http/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 39,
+    "issues": 38,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Famazon-lambda",
     "lastUpdated": 1793914185828,
     "license": {
@@ -107743,7 +107895,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/arc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 23,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Farc",
-    "lastUpdated": 1793576782324,
+    "lastUpdated": 1793964627227,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -113020,7 +113172,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/container-image/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 50,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fcontainer-image",
-    "lastUpdated": 1793628228813,
+    "lastUpdated": 1793964626696,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -125787,7 +125939,7 @@
   "https://github.com/quarkusio/quarkus,io.quarkus.quarkus-cyclonedx": {
     "allCompanies": [
       {
-        "contributions": 19,
+        "contributions": 18,
         "contributors": 6,
         "name": "Red Hat & IBM"
       },
@@ -125808,7 +125960,7 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Red Hat & IBM",
-        "contributions": 2,
+        "contributions": 1,
         "login": "zakkak",
         "name": "Foivos Zakkak",
         "url": "https://github.com/zakkak"
@@ -125868,7 +126020,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/cyclonedx/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 2,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsbom",
-    "lastUpdated": 1793576781886,
+    "lastUpdated": 1793964644406,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -131349,7 +131501,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/elytron-security-common/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 99,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsecurity",
-    "lastUpdated": 1793540816977,
+    "lastUpdated": 1793964626807,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -204072,7 +204224,7 @@
     "extensionPathInRepo": "extensions/netty/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/netty/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/netty/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 8,
+    "issues": 7,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fnetty",
     "lastUpdated": 1793914189854,
     "license": {
@@ -206673,7 +206825,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/oidc-token-propagation-reactive/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 63,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Foidc",
-    "lastUpdated": 1793576781722,
+    "lastUpdated": 1793964632746,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -208663,7 +208815,7 @@
   "https://github.com/quarkusio/quarkus,io.quarkus.quarkus-qute": {
     "allCompanies": [
       {
-        "contributions": 18,
+        "contributions": 16,
         "contributors": 8,
         "name": "Red Hat & IBM"
       },
@@ -208696,7 +208848,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 8,
+        "contributions": 6,
         "login": "mkouba",
         "name": "Martin Kouba",
         "url": "https://github.com/mkouba"
@@ -208732,7 +208884,7 @@
       {
         "contributions": 1,
         "login": "MaxFreedomPollard",
-        "name": "Max Freedom Pollard",
+        "name": "Max Freedom",
         "url": "https://github.com/MaxFreedomPollard"
       },
       {
@@ -208769,7 +208921,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/qute/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 41,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fqute",
-    "lastUpdated": 1793576781825,
+    "lastUpdated": 1793964628930,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -223411,7 +223563,7 @@
         "url": "https://github.com/alerosmile"
       }
     ],
-    "issues": 110,
+    "issues": 109,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fmutiny,area%2Fsmallrye",
     "lastUpdated": 1793800197802,
     "license": {
@@ -282127,7 +282279,7 @@
         "url": "https://github.com/alerosmile"
       }
     ],
-    "issues": 110,
+    "issues": 109,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fmutiny,area%2Fsmallrye",
     "lastUpdated": 1793800197802,
     "license": {
@@ -307763,7 +307915,7 @@
     "extensionPathInRepo": "extensions/smallrye-graphql/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-graphql/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-graphql/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 112,
+    "issues": 111,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fgraphql,area%2Fsmallrye",
     "lastUpdated": 1793714102763,
     "license": {
@@ -307933,7 +308085,7 @@
     "extensionPathInRepo": "extensions/smallrye-health/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-health/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-health/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 113,
+    "issues": 110,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhealth,area%2Fsmallrye",
     "lastUpdated": 1793800149731,
     "license": {
@@ -307998,7 +308150,7 @@
     "extensionPathInRepo": "extensions/smallrye-jwt/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-jwt/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-jwt/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 109,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsmallrye",
     "lastUpdated": 1793749570015,
     "license": {
@@ -308049,7 +308201,7 @@
     "extensionPathInRepo": "extensions/smallrye-jwt-build/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-jwt-build/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-jwt-build/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 109,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsmallrye",
     "lastUpdated": 1793800149720,
     "license": {
@@ -311407,7 +311559,7 @@
     "extensionPathInRepo": "extensions/smallrye-reactive-messaging-amqp/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-reactive-messaging-amqp/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-reactive-messaging-amqp/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 116,
+    "issues": 115,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fmessaging,area%2Fsmallrye",
     "lastUpdated": 1793811287769,
     "license": {
@@ -315016,7 +315168,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-boot-properties/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 32,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
-    "lastUpdated": 1793628229425,
+    "lastUpdated": 1793964630534,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
