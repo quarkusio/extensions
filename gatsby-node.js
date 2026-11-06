@@ -15,13 +15,9 @@ const {
 } = require("./src/components/util/extension-slugger")
 const { readDataFile } = require("./tools/sync/data-file")
 const { createRemoteFileNode } = require("gatsby-source-filesystem")
-const { rewriteGuideUrl } = require("./src/components/util/guide-url-rewriter")
 const ESLintPlugin = require("eslint-webpack-plugin")
 const { validate } = require("./src/data/image-validation")
 const fs = require("fs/promises")
-const {
-  createJavadocUrlFromCoordinates, initJavadocCache, saveJavadocCache,
-} = require("./src/javadoc/javadoc-url")
 const { getCanonicalMonthTimestamp, getCanonicalYearTimestamp } = require("./src/components/util/date-utils")
 let badImages = {}
 
@@ -58,6 +54,7 @@ exports.sourceNodes = async ({
 
   // The sync tool writes this, so the build does not need to hit maven central
   const syncedMavenInfo = readDataFile("maven-info.json", {})
+  const { javadoc: javadocUrls = {}, guides = {}, icons = {} } = readDataFile("enriched-links.json", {})
 
   // Do a first pass of processing, to try and fill in release dates
   const firstPromises = extensions.map(async extension => {
@@ -69,7 +66,7 @@ exports.sourceNodes = async ({
         return
       }
 
-      const javadocUrl = await createJavadocUrlFromCoordinates(extension.metadata.maven)
+      const javadocUrl = javadocUrls[extension.artifact]
       if (javadocUrl) {
         extension.metadata.javadoc = { url: javadocUrl }
       }
@@ -182,7 +179,9 @@ exports.sourceNodes = async ({
       // Rule out git hub urls that are not raw
       const isGitHubBlobPage = iconUrl.includes("github.com") && iconUrl.includes("blob") && !iconUrl.includes("raw")
 
-      const isValid = await validate(iconUrl)
+      // The sync checks the icons we know about, but a new extension could have an icon the sync has not seen yet,
+      // and a malformed image kills the build, so check those ourselves
+      const isValid = icons[iconUrl] ?? await validate(iconUrl)
 
       if (!isValid || isGitHubBlobPage) {
         console.warn("Not a valid image in", node.artifact, ". Image link is:", iconUrl)
@@ -276,7 +275,10 @@ exports.sourceNodes = async ({
 
     }
 
-    node.metadata.guide = await rewriteGuideUrl(node)
+    // A guide the sync has not seen yet is left alone, rather than being followed during the build
+    if (node.artifact in guides) {
+      node.metadata.guide = guides[node.artifact] ?? undefined
+    }
 
     if (node.metadata) {
       // Do the link to the download data
@@ -289,7 +291,6 @@ exports.sourceNodes = async ({
 }
 
 exports.onPreBootstrap = async () => {
-  await initJavadocCache()
   badImages = []
 }
 
@@ -598,7 +599,6 @@ exports.onCreateWebpackConfig = ({ stage }) => {
 }
 
 exports.onPostBootstrap = async () => {
-  await saveJavadocCache()
 
   const badImageDetails = Object.values(badImages)
   // Write out to a file

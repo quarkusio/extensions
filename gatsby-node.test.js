@@ -16,11 +16,6 @@ const createPage = jest.fn()
 const createContentDigest = jest.fn()
 
 const resolvedJavadocUrl = "http://reallygoodurl.javadoc"
-const { createJavadocUrlFromCoordinates } = require("./src/javadoc/javadoc-url")
-jest.mock("./src/javadoc/javadoc-url")
-createJavadocUrlFromCoordinates.mockImplementation(() => {
-  return resolvedJavadocUrl
-})
 
 const resolvedMavenUrl = "http://reallygoodurl.mvn"
 
@@ -47,7 +42,12 @@ const mavenInfoFor = artifactId => {
 }
 
 // Behave as if the synced data has an entry for every artifact
-readDataFile.mockImplementation(() => new Proxy({}, { get: (_, artifactId) => mavenInfoFor(artifactId) }))
+const forEveryArtifact = fn => new Proxy({}, { get: (_, artifactId) => fn(artifactId) })
+const syncedFiles = {
+  "maven-info.json": forEveryArtifact(mavenInfoFor),
+  "enriched-links.json": { javadoc: forEveryArtifact(() => resolvedJavadocUrl) }
+}
+readDataFile.mockImplementation(name => syncedFiles[name])
 
 const actions = { createNode, createPage }
 // A cut down version of what the registry returns us, with just the relevant bits
@@ -386,6 +386,50 @@ describe("the main gatsby entrypoint", () => {
         })
       })
 
+
+      describe("where the sync has already checked the links", () => {
+        const artifact = "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:2.12.0"
+        const extension = {
+          artifact,
+          origins: [
+            "io.quarkus.platform:quarkus-bom-quarkus-platform-descriptor:3.0.0.Alpha3:json:3.0.0.Alpha3",
+          ],
+          metadata: {
+            "icon-url": "http://synced-bad.png",
+            guide: "https://quarkus.io/guides/dead",
+          },
+        }
+
+        beforeAll(async () => {
+          axios.get = jest.fn().mockReturnValue({
+            data: { extensions: [extension], platforms: [] },
+          })
+          imageValidation.validate.mockClear()
+          readDataFile.mockImplementation(name => name === "enriched-links.json"
+            ? { guides: { [artifact]: "https://quarkus.io/guides/live" }, icons: { "http://synced-bad.png": false } }
+            : syncedFiles[name])
+
+          await sourceNodes({ actions, getCache, createNodeId, createContentDigest })
+        })
+
+        afterAll(() => {
+          readDataFile.mockImplementation(name => syncedFiles[name])
+          jest.clearAllMocks()
+        })
+
+        it("uses the synced guide link", () => {
+          expect(createNode).toHaveBeenCalledWith(
+            expect.objectContaining({ metadata: expect.objectContaining({ guide: "https://quarkus.io/guides/live" }) })
+          )
+        })
+
+        it("drops an icon the sync found to be invalid, without downloading it again", () => {
+          expect(imageValidation.validate).not.toHaveBeenCalled()
+          expect(createNode).not.toHaveBeenCalledWith(
+            expect.objectContaining({ metadata: expect.objectContaining({ icon: expect.anything() }) })
+          )
+        })
+      })
 
       describe("where the icon is a github blob page", () => {
         const blobPath =
