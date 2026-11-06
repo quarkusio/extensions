@@ -27,9 +27,9 @@ nvm use 18
 
 ## Synced data
 
-Information from GitHub, Tableau and Maven Central is not fetched during the Gatsby build. Instead, scheduled workflows (`sync-github.yml`, `sync-downloads.yml` and `sync-maven.yml`) run the scripts in `tools/sync` and commit the results as json files in `data/synced/`. The `synced-data` plugin reads the GitHub and download files and turns them into graphql nodes, and `gatsby-node.js` reads the Maven file when it creates the extension nodes.
+Information from GitHub, Tableau, Maven Central and the links to javadoc, guides and icons is not fetched during the Gatsby build. Instead, scheduled workflows (`sync-github.yml`, `sync-downloads.yml` and `sync-maven.yml`) run the scripts in `tools/sync` and commit the results as json files in `data/synced/`. The `synced-data` plugin reads the GitHub and download files and turns them into graphql nodes, and `gatsby-node.js` reads the Maven and link files (`maven-info.json` and `enriched-links.json`) when it creates the extension nodes.
 
-To refresh the data locally, set the environment variables below and run `npm run sync:github`, `npm run sync:downloads` or `npm run sync:maven` (which needs no credentials):
+To refresh the data locally, set the environment variables below and run `npm run sync:github`, `npm run sync:downloads` or `npm run sync:maven` then `npm run sync:links` (which need no credentials; finding the links uses the Maven data, so run them in that order):
 
 - `GITHUB_TOKEN` (should only be granted read access)
 - `TABLEAU_PERSONAL_ACCESS_TOKEN` and `TABLEAU_SITE`
