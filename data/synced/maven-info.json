@@ -81,7 +81,7 @@
     "sinceMonth": 1588312800000,
     "sinceYear": 1577858400000,
     "timestamp": 1669034144000,
-    "url": "https://central.sonatype.com/artifact/com.blazebit/blaze-persistence-integration-quarkus/1.6.8/jar",
+    "url": "https://search.maven.org/artifact/com.blazebit/blaze-persistence-integration-quarkus/1.6.8/jar?eh=",
     "version": "1.6.8"
   },
   "com.datastax.oss.quarkus:cassandra-quarkus-client::jar:1.4.1": {
@@ -2089,7 +2089,7 @@
     "sinceMonth": 1601532000000,
     "sinceYear": 1577858400000,
     "timestamp": 1772286344000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.doma/quarkus-doma/1.0.9/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.doma/quarkus-doma/1.0.9/jar?eh=",
     "version": "1.0.9"
   },
   "io.quarkiverse.edb:quarkus-jdbc-edb::jar:1.3.0": {
@@ -2817,7 +2817,7 @@
     "sinceMonth": 1675231200000,
     "sinceYear": 1672552800000,
     "timestamp": 1789139443000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.hivemqclient/quarkus-hivemq-client/2.6.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.hivemqclient/quarkus-hivemq-client/2.6.0/jar?eh=",
     "version": "2.6.0"
   },
   "io.quarkiverse.httpproblem:quarkus-http-problem::jar:3.38.2": {
@@ -3639,7 +3639,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-gpu-llama3/1.13.3/jar",
     "version": "1.13.3"
   },
-  "io.quarkiverse.langchain4j:quarkus-langchain4j-hibernate::jar:1.14.2": {
+  "io.quarkiverse.langchain4j:quarkus-langchain4j-hibernate::jar:1.15.0": {
     "artifactId": "quarkus-langchain4j-hibernate",
     "classifier": "jar",
     "earliestVersion": "1.12.0",
@@ -3648,9 +3648,9 @@
     "since": 1783595884000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1792060190000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-hibernate/1.14.2/jar",
-    "version": "1.14.2"
+    "timestamp": 1794039013000,
+    "url": "https://search.maven.org/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-hibernate/1.15.0/jar?eh=",
+    "version": "1.15.0"
   },
   "io.quarkiverse.langchain4j:quarkus-langchain4j-hugging-face::jar:2.0.0.Beta2": {
     "artifactId": "quarkus-langchain4j-hugging-face",
@@ -3808,7 +3808,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-mistral-ai/2.0.0.Beta2/jar",
     "version": "2.0.0.Beta2"
   },
-  "io.quarkiverse.langchain4j:quarkus-langchain4j-neo4j::jar:1.14.2": {
+  "io.quarkiverse.langchain4j:quarkus-langchain4j-neo4j::jar:1.15.0": {
     "artifactId": "quarkus-langchain4j-neo4j",
     "classifier": "jar",
     "earliestVersion": "0.13.1",
@@ -3817,9 +3817,9 @@
     "since": 1715178758000,
     "sinceMonth": 1714543200000,
     "sinceYear": 1704088800000,
-    "timestamp": 1792060191000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-neo4j/1.14.2/jar",
-    "version": "1.14.2"
+    "timestamp": 1794039014000,
+    "url": "https://search.maven.org/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-neo4j/1.15.0/jar?eh=",
+    "version": "1.15.0"
   },
   "io.quarkiverse.langchain4j:quarkus-langchain4j-oidc-client-mcp-auth-provider::jar:2.0.0.Beta2": {
     "artifactId": "quarkus-langchain4j-oidc-client-mcp-auth-provider",
@@ -3964,7 +3964,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-pinecone/2.0.0.Beta2/jar",
     "version": "2.0.0.Beta2"
   },
-  "io.quarkiverse.langchain4j:quarkus-langchain4j-qdrant::jar:1.14.2": {
+  "io.quarkiverse.langchain4j:quarkus-langchain4j-qdrant::jar:1.15.0": {
     "artifactId": "quarkus-langchain4j-qdrant",
     "classifier": "jar",
     "earliestVersion": "0.10.0",
@@ -3973,9 +3973,9 @@
     "since": 1711459890000,
     "sinceMonth": 1709272800000,
     "sinceYear": 1704088800000,
-    "timestamp": 1792060192000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-qdrant/1.14.2/jar",
-    "version": "1.14.2"
+    "timestamp": 1794039015000,
+    "url": "https://search.maven.org/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-qdrant/1.15.0/jar?eh=",
+    "version": "1.15.0"
   },
   "io.quarkiverse.langchain4j:quarkus-langchain4j-redis::jar:2.0.0.Beta2": {
     "artifactId": "quarkus-langchain4j-redis",
@@ -4208,7 +4208,7 @@
     "sinceMonth": 1614578400000,
     "sinceYear": 1609480800000,
     "timestamp": 1694168196000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.lucene/quarkus-lucene/2.3.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.lucene/quarkus-lucene/2.3.0/jar?eh=",
     "version": "2.3.0"
   },
   "io.quarkiverse.mailpit:quarkus-mailpit::jar:2.1.3": {
@@ -4473,7 +4473,7 @@
     "sinceMonth": 1656655200000,
     "sinceYear": 1641016800000,
     "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-newrelic-telemetry/3.7.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-newrelic-telemetry/3.7.0/jar?eh=",
     "version": "3.7.0"
   },
   "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-newrelic::jar:3.7.0": {
@@ -5694,7 +5694,7 @@
     "sinceMonth": 1727762400000,
     "sinceYear": 1704088800000,
     "timestamp": 1791999733000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.roq/quarkus-roq-plugin-asciidoc/2.2.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.roq/quarkus-roq-plugin-asciidoc/2.2.0/jar?eh=",
     "version": "2.2.0"
   },
   "io.quarkiverse.roq:quarkus-roq-plugin-diagram::jar:2.2.0": {
@@ -5824,7 +5824,7 @@
     "sinceMonth": 1727762400000,
     "sinceYear": 1704088800000,
     "timestamp": 1791999733000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.roq/quarkus-roq-plugin-tagging/2.2.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.roq/quarkus-roq-plugin-tagging/2.2.0/jar?eh=",
     "version": "2.2.0"
   },
   "io.quarkiverse.roq:quarkus-roq-plugin-toc::jar:2.2.0": {
@@ -6110,7 +6110,7 @@
     "sinceMonth": 1669874400000,
     "sinceYear": 1641016800000,
     "timestamp": 1792204283000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.systemd.notify/quarkus-systemd-notify/1.1.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.systemd.notify/quarkus-systemd-notify/1.1.0/jar?eh=",
     "version": "1.1.0"
   },
   "io.quarkiverse.tektonclient:quarkus-tekton-client::jar:1.3.0": {
@@ -6201,7 +6201,7 @@
     "sinceMonth": 1764568800000,
     "sinceYear": 1735711200000,
     "timestamp": 1791400260000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler-tailwindcss/3.0.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler-tailwindcss/3.0.0/jar?eh=",
     "version": "3.0.0"
   },
   "io.quarkiverse.web-bundler:quarkus-web-bundler::jar:3.0.0": {
@@ -8646,7 +8646,7 @@
     "sinceMonth": 1561960800000,
     "sinceYear": 1546322400000,
     "timestamp": 1639766299000,
-    "url": "https://central.sonatype.com/artifact/io.quarkus/quarkus-neo4j/2.5.4.Final/jar",
+    "url": "https://search.maven.org/artifact/io.quarkus/quarkus-neo4j/2.5.4.Final/jar?eh=",
     "version": "2.5.4.Final"
   },
   "io.quarkus:quarkus-netty::jar:4.0.0.Beta3": {
@@ -9860,7 +9860,7 @@
     "sinceMonth": 1606802400000,
     "sinceYear": 1577858400000,
     "timestamp": 1740654974000,
-    "url": "https://central.sonatype.com/artifact/io.quarkus/quarkus-resteasy-reactive-jackson/3.8.6.1/jar",
+    "url": "https://search.maven.org/artifact/io.quarkus/quarkus-resteasy-reactive-jackson/3.8.6.1/jar?eh=",
     "version": "3.8.6.1"
   },
   "io.quarkus:quarkus-resteasy-reactive-jaxb-common::jar:2.10.4.Final": {
@@ -13799,7 +13799,7 @@
     "sinceMonth": 1619848800000,
     "sinceYear": 1609480800000,
     "timestamp": 1648722659000,
-    "url": "https://central.sonatype.com/artifact/org.apache.camel.quarkus/camel-quarkus-kamelet-reify/2.7.1/jar",
+    "url": "https://search.maven.org/artifact/org.apache.camel.quarkus/camel-quarkus-kamelet-reify/2.7.1/jar?eh=",
     "version": "2.7.1"
   },
   "org.apache.camel.quarkus:camel-quarkus-kamelet::jar:3.40.0": {
@@ -14761,7 +14761,7 @@
     "sinceMonth": 1569909600000,
     "sinceYear": 1546322400000,
     "timestamp": 1674135787000,
-    "url": "https://central.sonatype.com/artifact/org.apache.camel.quarkus/camel-quarkus-opentracing/2.16.0/jar",
+    "url": "https://search.maven.org/artifact/org.apache.camel.quarkus/camel-quarkus-opentracing/2.16.0/jar?eh=",
     "version": "2.16.0"
   },
   "org.apache.camel.quarkus:camel-quarkus-optaplanner::jar:3.40.0": {
@@ -17345,7 +17345,7 @@
     "extension": "",
     "groupId": "org.optaplanner",
     "timestamp": 1682072695000,
-    "url": "https://central.sonatype.com/artifact/org.optaplanner/optaplanner-quarkus-benchmark/9.37.0.Final/jar",
+    "url": "https://search.maven.org/artifact/org.optaplanner/optaplanner-quarkus-benchmark/9.37.0.Final/jar?eh=",
     "version": "9.37.0.Final"
   },
   "org.optaplanner:optaplanner-quarkus-jackson::jar:9.37.0.Final": {
@@ -17371,7 +17371,7 @@
     "sinceMonth": 1590991200000,
     "sinceYear": 1577858400000,
     "timestamp": 1682072696000,
-    "url": "https://central.sonatype.com/artifact/org.optaplanner/optaplanner-quarkus-jsonb/9.37.0.Final/jar",
+    "url": "https://search.maven.org/artifact/org.optaplanner/optaplanner-quarkus-jsonb/9.37.0.Final/jar?eh=",
     "version": "9.37.0.Final"
   },
   "org.optaplanner:optaplanner-quarkus::jar:9.37.0.Final": {
