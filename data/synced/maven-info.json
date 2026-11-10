@@ -1793,7 +1793,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.couchbase/quarkus-couchbase/1.4.1/jar",
     "version": "1.4.1"
   },
-  "io.quarkiverse.cucumber:quarkus-cucumber::jar:1.4.0": {
+  "io.quarkiverse.cucumber:quarkus-cucumber::jar:1.5.0": {
     "artifactId": "quarkus-cucumber",
     "classifier": "jar",
     "earliestVersion": "0.1.0",
@@ -1802,9 +1802,9 @@
     "since": 1628491818000,
     "sinceMonth": 1627797600000,
     "sinceYear": 1609480800000,
-    "timestamp": 1794227325000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.cucumber/quarkus-cucumber/1.4.0/jar",
-    "version": "1.4.0"
+    "timestamp": 1794303015000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.cucumber/quarkus-cucumber/1.5.0/jar",
+    "version": "1.5.0"
   },
   "io.quarkiverse.cxf:quarkus-cxf-integration-tracing-opentelemetry::jar:4.0.0.Beta2": {
     "artifactId": "quarkus-cxf-integration-tracing-opentelemetry",
@@ -2206,7 +2206,7 @@
     "sinceMonth": 1761976800000,
     "sinceYear": 1735711200000,
     "timestamp": 1787575704000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.flags/quarkus-flags-qute/1.0.1/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.flags/quarkus-flags-qute/1.0.1/jar?eh=",
     "version": "1.0.1"
   },
   "io.quarkiverse.flags:quarkus-flags-security::jar:1.0.1": {
@@ -3626,7 +3626,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-google-genai/2.0.0.Beta2/jar",
     "version": "2.0.0.Beta2"
   },
-  "io.quarkiverse.langchain4j:quarkus-langchain4j-gpu-llama3::jar:1.13.3": {
+  "io.quarkiverse.langchain4j:quarkus-langchain4j-gpu-llama3::jar:1.13.4": {
     "artifactId": "quarkus-langchain4j-gpu-llama3",
     "classifier": "jar",
     "earliestVersion": "1.4.0.CR1",
@@ -3635,9 +3635,9 @@
     "since": 1761819956000,
     "sinceMonth": 1759298400000,
     "sinceYear": 1735711200000,
-    "timestamp": 1789488654000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-gpu-llama3/1.13.3/jar",
-    "version": "1.13.3"
+    "timestamp": 1792054884000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.langchain4j/quarkus-langchain4j-gpu-llama3/1.13.4/jar",
+    "version": "1.13.4"
   },
   "io.quarkiverse.langchain4j:quarkus-langchain4j-hibernate::jar:1.15.0": {
     "artifactId": "quarkus-langchain4j-hibernate",
@@ -5331,7 +5331,7 @@
     "sinceMonth": 1614578400000,
     "sinceYear": 1609480800000,
     "timestamp": 1761316384000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.prettytime/quarkus-prettytime/2.0.12/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.prettytime/quarkus-prettytime/2.0.12/jar?eh=",
     "version": "2.0.12"
   },
   "io.quarkiverse.primefaces:quarkus-primefaces::jar:4.16.2": {
@@ -5837,7 +5837,7 @@
     "sinceMonth": 1785564000000,
     "sinceYear": 1767247200000,
     "timestamp": 1791999733000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.roq/quarkus-roq-plugin-toc/2.2.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.roq/quarkus-roq-plugin-toc/2.2.0/jar?eh=",
     "version": "2.2.0"
   },
   "io.quarkiverse.roq:quarkus-roq-theme-default::jar:2.2.0": {
@@ -16139,7 +16139,7 @@
     "sinceMonth": 1561960800000,
     "sinceYear": 1546322400000,
     "timestamp": 1790243844000,
-    "url": "https://central.sonatype.com/artifact/org.apache.camel.quarkus/camel-quarkus-timer/3.40.0/jar",
+    "url": "https://search.maven.org/artifact/org.apache.camel.quarkus/camel-quarkus-timer/3.40.0/jar?eh=",
     "version": "3.40.0"
   },
   "org.apache.camel.quarkus:camel-quarkus-tls-registry::jar:3.40.0": {
