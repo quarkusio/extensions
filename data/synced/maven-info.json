@@ -6061,6 +6061,19 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.solr/quarkus-solr/1.1.0/jar",
     "version": "1.1.0"
   },
+  "io.quarkiverse.sonify:quarkus-sonify::jar:0.1.0": {
+    "artifactId": "quarkus-sonify",
+    "classifier": "jar",
+    "earliestVersion": "0.1.0",
+    "extension": "",
+    "groupId": "io.quarkiverse.sonify",
+    "since": 1794310663000,
+    "sinceMonth": 1793512800000,
+    "sinceYear": 1767247200000,
+    "timestamp": 1794310663000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.sonify/quarkus-sonify/0.1.0/jar",
+    "version": "0.1.0"
+  },
   "io.quarkiverse.spdx:quarkus-spdx-v2::jar:0.0.1": {
     "artifactId": "quarkus-spdx-v2",
     "classifier": "jar",

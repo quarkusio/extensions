@@ -1590,6 +1590,7 @@
     "io.quarkiverse.shim:quarkus-shim::jar:0.4.0": null,
     "io.quarkiverse.snappy:quarkus-snappy::jar:0.1.0": "https://javadoc.io/doc/io.quarkiverse.snappy/quarkus-snappy/0.1.0/index.html",
     "io.quarkiverse.solr:quarkus-solr::jar:1.1.0": "https://javadoc.io/doc/io.quarkiverse.solr/quarkus-solr/1.1.0/index.html",
+    "io.quarkiverse.sonify:quarkus-sonify::jar:0.1.0": null,
     "io.quarkiverse.spdx:quarkus-spdx-v2::jar:0.0.1": null,
     "io.quarkiverse.spdx:quarkus-spdx-v3::jar:0.0.1": null,
     "io.quarkiverse.sshd:quarkus-sshd::jar:1.2.0": null,
