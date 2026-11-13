@@ -419,7 +419,7 @@
     "sinceMonth": 1638338400000,
     "sinceYear": 1609480800000,
     "timestamp": 1681306935000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.amazonalexa/quarkus-amazon-alexa/2.0.0/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.amazonalexa/quarkus-amazon-alexa/2.0.0/jar?eh=",
     "version": "2.0.0"
   },
   "io.quarkiverse.amazonservices:quarkus-amazon-accessanalyzer::jar:4.0.0.Beta4": {
@@ -1569,7 +1569,7 @@
     "sinceMonth": 1730440800000,
     "sinceYear": 1704088800000,
     "timestamp": 1791971199000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.backstage/quarkus-backstage/0.11.1/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.backstage/quarkus-backstage/0.11.1/jar?eh=",
     "version": "0.11.1"
   },
   "io.quarkiverse.banner:quarkus-banner::jar:1.6.0": {
@@ -4195,7 +4195,7 @@
     "sinceMonth": 1638338400000,
     "sinceYear": 1609480800000,
     "timestamp": 1792098381000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.loggingsentry/quarkus-logging-sentry/2.3.6/jar",
+    "url": "https://search.maven.org/artifact/io.quarkiverse.loggingsentry/quarkus-logging-sentry/2.3.6/jar?eh=",
     "version": "2.3.6"
   },
   "io.quarkiverse.lucene:quarkus-lucene::jar:2.3.0": {
@@ -4398,7 +4398,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.messaginghub/quarkus-pooled-jms/2.13.0/jar",
     "version": "2.13.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-azure-monitor::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-azure-monitor::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-azure-monitor",
     "classifier": "jar",
     "earliestVersion": "0.2.0",
@@ -4407,11 +4407,11 @@
     "since": 1611062809000,
     "sinceMonth": 1609480800000,
     "sinceYear": 1609480800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-azure-monitor/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584198000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-azure-monitor/3.8.0/jar",
+    "version": "3.8.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-datadog::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-datadog",
     "classifier": "jar",
     "earliestVersion": "0.2.0",
@@ -4420,11 +4420,11 @@
     "since": 1611062839000,
     "sinceMonth": 1609480800000,
     "sinceYear": 1609480800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-datadog/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584198000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-datadog/3.8.0/jar",
+    "version": "3.8.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-graphite::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-graphite::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-graphite",
     "classifier": "jar",
     "earliestVersion": "2.0.0.CR3",
@@ -4433,11 +4433,11 @@
     "since": 1623682237000,
     "sinceMonth": 1622527200000,
     "sinceYear": 1609480800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-graphite/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584198000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-graphite/3.8.0/jar",
+    "version": "3.8.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-influx::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-influx::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-influx",
     "classifier": "jar",
     "earliestVersion": "2.2.2",
@@ -4446,9 +4446,9 @@
     "since": 1631547841000,
     "sinceMonth": 1630476000000,
     "sinceYear": 1609480800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-influx/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584198000,
+    "url": "https://search.maven.org/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-influx/3.8.0/jar?eh=",
+    "version": "3.8.0"
   },
   "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-jmx::jar:3.7.0": {
     "artifactId": "quarkus-micrometer-registry-jmx",
@@ -4463,7 +4463,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-jmx/3.7.0/jar",
     "version": "3.7.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-newrelic-telemetry::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-newrelic-telemetry::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-newrelic-telemetry",
     "classifier": "jar",
     "earliestVersion": "2.11.0",
@@ -4472,11 +4472,11 @@
     "since": 1658775890000,
     "sinceMonth": 1656655200000,
     "sinceYear": 1641016800000,
-    "timestamp": 1787835572000,
-    "url": "https://search.maven.org/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-newrelic-telemetry/3.7.0/jar?eh=",
-    "version": "3.7.0"
+    "timestamp": 1794584198000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-newrelic-telemetry/3.8.0/jar",
+    "version": "3.8.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-newrelic::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-newrelic::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-newrelic",
     "classifier": "jar",
     "earliestVersion": "1.0.2",
@@ -4485,11 +4485,11 @@
     "since": 1622167631000,
     "sinceMonth": 1619848800000,
     "sinceYear": 1609480800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-newrelic/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584198000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-newrelic/3.8.0/jar",
+    "version": "3.8.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-otlp::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-otlp::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-otlp",
     "classifier": "jar",
     "earliestVersion": "2.10.0",
@@ -4498,11 +4498,11 @@
     "since": 1655917578000,
     "sinceMonth": 1654063200000,
     "sinceYear": 1641016800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-otlp/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584198000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-otlp/3.8.0/jar",
+    "version": "3.8.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-signalfx::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-signalfx::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-signalfx",
     "classifier": "jar",
     "earliestVersion": "0.2.0",
@@ -4511,11 +4511,11 @@
     "since": 1611062826000,
     "sinceMonth": 1609480800000,
     "sinceYear": 1609480800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-signalfx/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584199000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-signalfx/3.8.0/jar",
+    "version": "3.8.0"
   },
-  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-stackdriver::jar:3.7.0": {
+  "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-stackdriver::jar:3.8.0": {
     "artifactId": "quarkus-micrometer-registry-stackdriver",
     "classifier": "jar",
     "earliestVersion": "0.2.0",
@@ -4524,9 +4524,9 @@
     "since": 1611062832000,
     "sinceMonth": 1609480800000,
     "sinceYear": 1609480800000,
-    "timestamp": 1787835572000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-stackdriver/3.7.0/jar",
-    "version": "3.7.0"
+    "timestamp": 1794584199000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-stackdriver/3.8.0/jar",
+    "version": "3.8.0"
   },
   "io.quarkiverse.micrometer.registry:quarkus-micrometer-registry-statsd::jar:3.7.0": {
     "artifactId": "quarkus-micrometer-registry-statsd",
@@ -4606,7 +4606,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.morphia/quarkus-morphia/0.5.0/jar",
     "version": "0.5.0"
   },
-  "io.quarkiverse.multitenancy:quarkus-multitenancy-core::jar:0.2.0": {
+  "io.quarkiverse.multitenancy:quarkus-multitenancy-core::jar:0.3.0": {
     "artifactId": "quarkus-multitenancy-core",
     "classifier": "jar",
     "earliestVersion": "0.1.0",
@@ -4615,9 +4615,9 @@
     "since": 1781182837000,
     "sinceMonth": 1780293600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1786375359000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.multitenancy/quarkus-multitenancy-core/0.2.0/jar",
-    "version": "0.2.0"
+    "timestamp": 1794584197000,
+    "url": "https://search.maven.org/artifact/io.quarkiverse.multitenancy/quarkus-multitenancy-core/0.3.0/jar?eh=",
+    "version": "0.3.0"
   },
   "io.quarkiverse.multitenancy:quarkus-multitenancy-http::jar:0.2.0": {
     "artifactId": "quarkus-multitenancy-http",
@@ -4645,7 +4645,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.multitenancy/quarkus-multitenancy-messaging-kafka/0.2.0/jar",
     "version": "0.2.0"
   },
-  "io.quarkiverse.multitenancy:quarkus-multitenancy-orm::jar:0.2.0": {
+  "io.quarkiverse.multitenancy:quarkus-multitenancy-orm::jar:0.3.0": {
     "artifactId": "quarkus-multitenancy-orm",
     "classifier": "jar",
     "earliestVersion": "0.1.0",
@@ -4654,9 +4654,9 @@
     "since": 1781182837000,
     "sinceMonth": 1780293600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1786375359000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.multitenancy/quarkus-multitenancy-orm/0.2.0/jar",
-    "version": "0.2.0"
+    "timestamp": 1794584198000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.multitenancy/quarkus-multitenancy-orm/0.3.0/jar",
+    "version": "0.3.0"
   },
   "io.quarkiverse.mybatis:quarkus-mybatis-plus::jar:2.4.3": {
     "artifactId": "quarkus-mybatis-plus",
@@ -5360,7 +5360,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.proxy-wasm/quarkus-proxy-wasm/0.0.2/jar",
     "version": "0.0.2"
   },
-  "io.quarkiverse.qdrant:quarkus-qdrant::jar:0.3.0": {
+  "io.quarkiverse.qdrant:quarkus-qdrant::jar:0.4.0": {
     "artifactId": "quarkus-qdrant",
     "classifier": "jar",
     "earliestVersion": "0.1.0",
@@ -5369,9 +5369,9 @@
     "since": 1781083264000,
     "sinceMonth": 1780293600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1792686892000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.qdrant/quarkus-qdrant/0.3.0/jar",
-    "version": "0.3.0"
+    "timestamp": 1794563874000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.qdrant/quarkus-qdrant/0.4.0/jar",
+    "version": "0.4.0"
   },
   "io.quarkiverse.quarkus-datafaker:quarkus-datafaker::jar:0.0.0": {
     "artifactId": "quarkus-datafaker",
@@ -11264,7 +11264,7 @@
     "sinceMonth": 1619848800000,
     "sinceYear": 1609480800000,
     "timestamp": 1790241976000,
-    "url": "https://central.sonatype.com/artifact/org.apache.camel.quarkus/camel-quarkus-aws-secrets-manager/3.40.0/jar",
+    "url": "https://search.maven.org/artifact/org.apache.camel.quarkus/camel-quarkus-aws-secrets-manager/3.40.0/jar?eh=",
     "version": "3.40.0"
   },
   "org.apache.camel.quarkus:camel-quarkus-aws-xray::jar:3.36.0": {
@@ -12382,7 +12382,7 @@
     "sinceMonth": 1575180000000,
     "sinceYear": 1546322400000,
     "timestamp": 1674135099000,
-    "url": "https://central.sonatype.com/artifact/org.apache.camel.quarkus/camel-quarkus-dozer/2.16.0/jar",
+    "url": "https://search.maven.org/artifact/org.apache.camel.quarkus/camel-quarkus-dozer/2.16.0/jar?eh=",
     "version": "2.16.0"
   },
   "org.apache.camel.quarkus:camel-quarkus-drill::jar:3.40.0": {
@@ -14917,7 +14917,7 @@
     "sinceMonth": 1598940000000,
     "sinceYear": 1577858400000,
     "timestamp": 1790244318000,
-    "url": "https://central.sonatype.com/artifact/org.apache.camel.quarkus/camel-quarkus-printer/3.40.0/jar",
+    "url": "https://search.maven.org/artifact/org.apache.camel.quarkus/camel-quarkus-printer/3.40.0/jar?eh=",
     "version": "3.40.0"
   },
   "org.apache.camel.quarkus:camel-quarkus-protobuf::jar:3.40.0": {
@@ -15229,7 +15229,7 @@
     "sinceMonth": 1572588000000,
     "sinceYear": 1546322400000,
     "timestamp": 1790243642000,
-    "url": "https://central.sonatype.com/artifact/org.apache.camel.quarkus/camel-quarkus-scheduler/3.40.0/jar",
+    "url": "https://search.maven.org/artifact/org.apache.camel.quarkus/camel-quarkus-scheduler/3.40.0/jar?eh=",
     "version": "3.40.0"
   },
   "org.apache.camel.quarkus:camel-quarkus-schematron::jar:3.40.0": {
@@ -16971,7 +16971,7 @@
     "sinceMonth": 1677650400000,
     "sinceYear": 1672552800000,
     "timestamp": 1693910006000,
-    "url": "https://central.sonatype.com/artifact/org.kie.kogito/kogito-addons-quarkus-knative-serving/1.44.0.Final/jar",
+    "url": "https://search.maven.org/artifact/org.kie.kogito/kogito-addons-quarkus-knative-serving/1.44.0.Final/jar?eh=",
     "version": "1.44.0.Final"
   },
   "org.kie.kogito:kogito-addons-quarkus-kubernetes::jar:1.44.0.Final": {
