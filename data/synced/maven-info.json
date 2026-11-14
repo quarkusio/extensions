@@ -16662,7 +16662,7 @@
     "url": "https://central.sonatype.com/artifact/org.camunda.bpm.quarkus/camunda-bpm-quarkus-engine/7.24.0/jar",
     "version": "7.24.0"
   },
-  "org.citrusframework:citrus-quarkus::jar:5.1.0": {
+  "org.citrusframework:citrus-quarkus::jar:5.2.0": {
     "artifactId": "citrus-quarkus",
     "classifier": "jar",
     "earliestVersion": "4.0.0",
@@ -16671,9 +16671,9 @@
     "since": 1698245813000,
     "sinceMonth": 1696140000000,
     "sinceYear": 1672552800000,
-    "timestamp": 1792421189000,
-    "url": "https://central.sonatype.com/artifact/org.citrusframework/citrus-quarkus/5.1.0/jar",
-    "version": "5.1.0"
+    "timestamp": 1794607514000,
+    "url": "https://central.sonatype.com/artifact/org.citrusframework/citrus-quarkus/5.2.0/jar",
+    "version": "5.2.0"
   },
   "org.drools:drools-quarkus::jar:10.2.0": {
     "artifactId": "drools-quarkus",
