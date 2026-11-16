@@ -36,6 +36,17 @@ describe("maven url generator", () => {
       ).toBe("https://central.sonatype.com/artifact/fred/george/0.1/jar")
     })
 
+    it("falls back to the repository listing when the central page is not found", async () => {
+      urlExist.mockReturnValue(false)
+      expect(
+        await createMavenUrlFromCoordinates({
+          groupId: "io.quarkiverse.fred",
+          artifactId: "george",
+          version: "0.1",
+        })
+      ).toBe("https://repo1.maven.org/maven2/io/quarkiverse/fred/george/0.1/")
+    })
+
     it("turns artifacts into sensible urls", async () => {
       expect(await createMavenUrlFromArtifactString(gav)).toBe(
         "https://central.sonatype.com/artifact/io.quarkiverse.micrometer.registry/quarkus-micrometer-registry-datadog/2.12.0/jar"

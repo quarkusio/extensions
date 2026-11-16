@@ -42,9 +42,9 @@ const createMavenUrlFromCoordinatesNoCache = async coordinates => {
   if (exists) {
     return url
   } else {
-    // Validating these is so unreliable, don't do it at build-time, just let the links test complain
-    // ?eh= avoids the redirect to the page that doesn't exist
-    return `https://search.maven.org/artifact/${coordinates.groupId}/${coordinates.artifactId}/${coordinates.version}/jar?eh=`
+    // search.maven.org now returns 403 to everything, so fall back to the plain repository directory listing
+    const groupPath = coordinates.groupId.replace(/\./g, "/")
+    return `https://repo1.maven.org/maven2/${groupPath}/${coordinates.artifactId}/${coordinates.version}/`
   }
 }
 
