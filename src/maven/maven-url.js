@@ -7,7 +7,8 @@ let mavenUrlCache
 
 const initMavenUrlCache = async () => {
   mavenUrlCache = new PersistableCache({
-    key: "maven-url-existence",
+    // Bumped from "maven-url-existence" to discard cached search.maven.org urls, which now return 403
+    key: "maven-url-existence-v2",
     stdTTL: 30 * DAY_IN_SECONDS
   })
   await mavenUrlCache.ready()
