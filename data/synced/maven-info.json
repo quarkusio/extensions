@@ -1286,7 +1286,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.antivirus/quarkus-antivirus/4.0.0/jar",
     "version": "4.0.0"
   },
-  "io.quarkiverse.antora:quarkus-antora-quarkiverse::jar:3.40.0": {
+  "io.quarkiverse.antora:quarkus-antora-quarkiverse::jar:4.0.0": {
     "artifactId": "quarkus-antora-quarkiverse",
     "classifier": "jar",
     "earliestVersion": "2.1.0",
@@ -1295,11 +1295,11 @@
     "since": 1750321749000,
     "sinceMonth": 1748757600000,
     "sinceYear": 1735711200000,
-    "timestamp": 1790771861000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.antora/quarkus-antora-quarkiverse/3.40.0/jar",
-    "version": "3.40.0"
+    "timestamp": 1795201838000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.antora/quarkus-antora-quarkiverse/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.antora:quarkus-antora::jar:3.40.0": {
+  "io.quarkiverse.antora:quarkus-antora::jar:4.0.0": {
     "artifactId": "quarkus-antora",
     "classifier": "jar",
     "earliestVersion": "0.0.1",
@@ -1308,9 +1308,9 @@
     "since": 1712085965000,
     "sinceMonth": 1711951200000,
     "sinceYear": 1704088800000,
-    "timestamp": 1790771861000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.antora/quarkus-antora/3.40.0/jar",
-    "version": "3.40.0"
+    "timestamp": 1795201838000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.antora/quarkus-antora/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.apistax:quarkus-apistax::jar:7.0.0": {
     "artifactId": "quarkus-apistax",
@@ -1572,7 +1572,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.azureservices/quarkus-azure-storage-blob/1.2.5/jar",
     "version": "1.2.5"
   },
-  "io.quarkiverse.backstage:quarkus-backstage::jar:0.11.1": {
+  "io.quarkiverse.backstage:quarkus-backstage::jar:0.12.0": {
     "artifactId": "quarkus-backstage",
     "classifier": "jar",
     "earliestVersion": "0.1.0",
@@ -1581,9 +1581,9 @@
     "since": 1730736800000,
     "sinceMonth": 1730440800000,
     "sinceYear": 1704088800000,
-    "timestamp": 1791971199000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.backstage/quarkus-backstage/0.11.1/jar",
-    "version": "0.11.1"
+    "timestamp": 1795224976000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.backstage/quarkus-backstage/0.12.0/jar",
+    "version": "0.12.0"
   },
   "io.quarkiverse.banner:quarkus-banner::jar:1.6.0": {
     "artifactId": "quarkus-banner",
@@ -2924,7 +2924,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.jackson-jq/quarkus-jackson-jq/2.6.3/jar",
     "version": "2.6.3"
   },
-  "io.quarkiverse.jasperreports:quarkus-jasperreports::jar:1.4.4": {
+  "io.quarkiverse.jasperreports:quarkus-jasperreports::jar:4.0.0": {
     "artifactId": "quarkus-jasperreports",
     "classifier": "jar",
     "earliestVersion": "schmalnau",
@@ -2933,9 +2933,9 @@
     "since": 1687028575000,
     "sinceMonth": 1685599200000,
     "sinceYear": 1672552800000,
-    "timestamp": 1793806574000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jasperreports/quarkus-jasperreports/1.4.4/jar",
-    "version": "1.4.4"
+    "timestamp": 1795202411000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jasperreports/quarkus-jasperreports/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.jberet:quarkus-jberet-rest::jar:2.11.0": {
     "artifactId": "quarkus-jberet-rest",
@@ -4211,7 +4211,7 @@
     "url": "https://repo1.maven.org/maven2/io/quarkiverse/loggingmanager/quarkus-logging-manager/4.0.0/",
     "version": "4.0.0"
   },
-  "io.quarkiverse.loggingsentry:quarkus-logging-sentry::jar:2.3.6": {
+  "io.quarkiverse.loggingsentry:quarkus-logging-sentry::jar:4.0.0": {
     "artifactId": "quarkus-logging-sentry",
     "classifier": "jar",
     "earliestVersion": "1.0.0",
@@ -4220,9 +4220,9 @@
     "since": 1638871183000,
     "sinceMonth": 1638338400000,
     "sinceYear": 1609480800000,
-    "timestamp": 1792098381000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.loggingsentry/quarkus-logging-sentry/2.3.6/jar",
-    "version": "2.3.6"
+    "timestamp": 1795200377000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.loggingsentry/quarkus-logging-sentry/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.lucene:quarkus-lucene::jar:2.3.0": {
     "artifactId": "quarkus-lucene",
@@ -5477,7 +5477,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.pdfbox/quarkus-pdfbox/4.0.0/jar",
     "version": "4.0.0"
   },
-  "io.quarkiverse.playwright:quarkus-playwright::jar:2.5.0": {
+  "io.quarkiverse.playwright:quarkus-playwright::jar:4.0.0": {
     "artifactId": "quarkus-playwright",
     "classifier": "jar",
     "earliestVersion": "0.0.1",
@@ -5486,9 +5486,9 @@
     "since": 1694008748000,
     "sinceMonth": 1693548000000,
     "sinceYear": 1672552800000,
-    "timestamp": 1794600293000,
-    "url": "https://repo1.maven.org/maven2/io/quarkiverse/playwright/quarkus-playwright/2.5.0/",
-    "version": "2.5.0"
+    "timestamp": 1795203980000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.playwright/quarkus-playwright/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.poi:quarkus-poi::jar:4.0.0": {
     "artifactId": "quarkus-poi",
@@ -5633,7 +5633,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.quickjs4j/quarkus-quickjs4j/0.0.3/jar",
     "version": "0.0.3"
   },
-  "io.quarkiverse.quinoa:quarkus-quinoa::jar:2.9.3": {
+  "io.quarkiverse.quinoa:quarkus-quinoa::jar:4.0.0": {
     "artifactId": "quarkus-quinoa",
     "classifier": "jar",
     "earliestVersion": "1.0.0-alpha-2",
@@ -5642,9 +5642,9 @@
     "since": 1648462887000,
     "sinceMonth": 1646114400000,
     "sinceYear": 1641016800000,
-    "timestamp": 1792165091000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.quinoa/quarkus-quinoa/2.9.3/jar",
-    "version": "2.9.3"
+    "timestamp": 1795205989000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.quinoa/quarkus-quinoa/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.qute.web:quarkus-qute-web-markdown::jar:3.4.5": {
     "artifactId": "quarkus-qute-web-markdown",
