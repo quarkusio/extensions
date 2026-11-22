@@ -3106,7 +3106,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.jjwtjackson/quarkus-jjwt-jackson/1.0.0/jar",
     "version": "1.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-arangodb::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-arangodb::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-arangodb",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3115,11 +3115,11 @@
     "since": 1746804634000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547057000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-arangodb/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300050000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-arangodb/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-cassandra::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-cassandra::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-cassandra",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3128,11 +3128,11 @@
     "since": 1746804635000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547057000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-cassandra/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300050000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-cassandra/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-core::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-core::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-core",
     "classifier": "jar",
     "earliestVersion": "1.0.0",
@@ -3141,11 +3141,11 @@
     "since": 1679348062000,
     "sinceMonth": 1677650400000,
     "sinceYear": 1672552800000,
-    "timestamp": 1793547057000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300050000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-core/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-couchdb::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-couchdb::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-couchdb",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3154,9 +3154,9 @@
     "since": 1746804635000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547057000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-couchdb/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300050000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-couchdb/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.jnosql:quarkus-jnosql-document-mongodb::jar:3.3.4": {
     "artifactId": "quarkus-jnosql-document-mongodb",
@@ -3171,7 +3171,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-document-mongodb/3.3.4/jar",
     "version": "3.3.4"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-dynamodb::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-dynamodb::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-dynamodb",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3180,11 +3180,11 @@
     "since": 1746804635000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547057000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-dynamodb/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300050000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-dynamodb/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-elasticsearch::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-elasticsearch::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-elasticsearch",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3193,11 +3193,11 @@
     "since": 1746804634000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547057000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-elasticsearch/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300050000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-elasticsearch/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-hazelcast::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-hazelcast::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-hazelcast",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3206,11 +3206,11 @@
     "since": 1746804634000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547057000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-hazelcast/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300050000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-hazelcast/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-mongodb::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-mongodb::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-mongodb",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3219,11 +3219,11 @@
     "since": 1746804634000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547058000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-mongodb/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300051000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-mongodb/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-neo4j::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-neo4j::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-neo4j",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3232,11 +3232,11 @@
     "since": 1746804634000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547058000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-neo4j/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300051000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-neo4j/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-oracle-nosql::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-oracle-nosql::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-oracle-nosql",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3245,11 +3245,11 @@
     "since": 1746804634000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547058000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-oracle-nosql/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300051000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-oracle-nosql/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-redis::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-redis::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-redis",
     "classifier": "jar",
     "earliestVersion": "3.5.0",
@@ -3258,11 +3258,11 @@
     "since": 1786475335000,
     "sinceMonth": 1785564000000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793547058000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-redis/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300051000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-redis/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-solr::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-solr::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-solr",
     "classifier": "jar",
     "earliestVersion": "3.4.0",
@@ -3271,11 +3271,11 @@
     "since": 1746804634000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793547058000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-solr/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300051000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-solr/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.jnosql:quarkus-jnosql-valkey::jar:3.8.0": {
+  "io.quarkiverse.jnosql:quarkus-jnosql-valkey::jar:4.0.0": {
     "artifactId": "quarkus-jnosql-valkey",
     "classifier": "jar",
     "earliestVersion": "3.5.0",
@@ -3284,9 +3284,9 @@
     "since": 1786475335000,
     "sinceMonth": 1785564000000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793547058000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-valkey/3.8.0/jar",
-    "version": "3.8.0"
+    "timestamp": 1795300051000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jnosql/quarkus-jnosql-valkey/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.jooq:quarkus-jooq::jar:2.2.0": {
     "artifactId": "quarkus-jooq",
@@ -4263,7 +4263,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.mapstruct/quarkus-mapstruct/1.1.0/jar",
     "version": "1.1.0"
   },
-  "io.quarkiverse.mateu:quarkus-mateu::jar:1.0.0": {
+  "io.quarkiverse.mateu:quarkus-mateu::jar:1.1.0": {
     "artifactId": "quarkus-mateu",
     "classifier": "jar",
     "earliestVersion": "1.0.0",
@@ -4272,9 +4272,9 @@
     "since": 1794850788000,
     "sinceMonth": 1793512800000,
     "sinceYear": 1767247200000,
-    "timestamp": 1794850788000,
-    "url": "https://repo1.maven.org/maven2/io/quarkiverse/mateu/quarkus-mateu/1.0.0/",
-    "version": "1.0.0"
+    "timestamp": 1795295720000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.mateu/quarkus-mateu/1.1.0/jar",
+    "version": "1.1.0"
   },
   "io.quarkiverse.mavenresolver:quarkus-maven-resolver::jar:0.0.5": {
     "artifactId": "quarkus-maven-resolver",
