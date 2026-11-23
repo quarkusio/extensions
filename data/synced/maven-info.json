@@ -97,7 +97,7 @@
     "url": "https://central.sonatype.com/artifact/com.datastax.oss.quarkus/cassandra-quarkus-client/1.4.1/jar",
     "version": "1.4.1"
   },
-  "com.github.mcollovati:quarkus-hilla-react::jar:25.3.0": {
+  "com.github.mcollovati:quarkus-hilla-react::jar:25.3.1": {
     "artifactId": "quarkus-hilla-react",
     "classifier": "jar",
     "earliestVersion": "2.4.1",
@@ -106,11 +106,11 @@
     "since": 1701272629000,
     "sinceMonth": 1698818400000,
     "sinceYear": 1672552800000,
-    "timestamp": 1793634740000,
-    "url": "https://central.sonatype.com/artifact/com.github.mcollovati/quarkus-hilla-react/25.3.0/jar",
-    "version": "25.3.0"
+    "timestamp": 1795443067000,
+    "url": "https://central.sonatype.com/artifact/com.github.mcollovati/quarkus-hilla-react/25.3.1/jar",
+    "version": "25.3.1"
   },
-  "com.github.mcollovati:quarkus-hilla::jar:25.3.0": {
+  "com.github.mcollovati:quarkus-hilla::jar:25.3.1": {
     "artifactId": "quarkus-hilla",
     "classifier": "jar",
     "earliestVersion": "1.0.0-alpha1",
@@ -119,9 +119,9 @@
     "since": 1684697194000,
     "sinceMonth": 1682920800000,
     "sinceYear": 1672552800000,
-    "timestamp": 1793634740000,
-    "url": "https://central.sonatype.com/artifact/com.github.mcollovati/quarkus-hilla/25.3.0/jar",
-    "version": "25.3.0"
+    "timestamp": 1795443067000,
+    "url": "https://central.sonatype.com/artifact/com.github.mcollovati/quarkus-hilla/25.3.1/jar",
+    "version": "25.3.1"
   },
   "com.hazelcast:quarkus-hazelcast-client::jar:4.1.0": {
     "artifactId": "quarkus-hazelcast-client",
@@ -136,7 +136,7 @@
     "url": "https://central.sonatype.com/artifact/com.hazelcast/quarkus-hazelcast-client/4.1.0/jar",
     "version": "4.1.0"
   },
-  "com.vaadin:vaadin-quarkus-extension::jar:25.3.5": {
+  "com.vaadin:vaadin-quarkus-extension::jar:25.3.6": {
     "artifactId": "vaadin-quarkus-extension",
     "classifier": "jar",
     "earliestVersion": "23.0.0",
@@ -145,9 +145,9 @@
     "since": 1646152803000,
     "sinceMonth": 1646114400000,
     "sinceYear": 1641016800000,
-    "timestamp": 1793652047000,
-    "url": "https://central.sonatype.com/artifact/com.vaadin/vaadin-quarkus-extension/25.3.5/jar",
-    "version": "25.3.5"
+    "timestamp": 1795453566000,
+    "url": "https://central.sonatype.com/artifact/com.vaadin/vaadin-quarkus-extension/25.3.6/jar",
+    "version": "25.3.6"
   },
   "io.carbonintensity:quarkus-green-scheduler::jar:0.8.6": {
     "artifactId": "quarkus-green-scheduler",
@@ -4328,7 +4328,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.mcp/quarkus-mcp-server-hibernate-validator/2.0.4/jar",
     "version": "2.0.4"
   },
-  "io.quarkiverse.mcp:quarkus-mcp-server-http::jar:2.0.4": {
+  "io.quarkiverse.mcp:quarkus-mcp-server-http::jar:2.1.0": {
     "artifactId": "quarkus-mcp-server-http",
     "classifier": "jar",
     "earliestVersion": "1.8.0",
@@ -4337,9 +4337,9 @@
     "since": 1764159819000,
     "sinceMonth": 1761976800000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793029965000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.mcp/quarkus-mcp-server-http/2.0.4/jar",
-    "version": "2.0.4"
+    "timestamp": 1795443843000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.mcp/quarkus-mcp-server-http/2.1.0/jar",
+    "version": "2.1.0"
   },
   "io.quarkiverse.mcp:quarkus-mcp-server-oidc::jar:2.0.4": {
     "artifactId": "quarkus-mcp-server-oidc",
@@ -4385,7 +4385,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.mcp/quarkus-mcp-server-sse/1.7.3/jar",
     "version": "1.7.3"
   },
-  "io.quarkiverse.mcp:quarkus-mcp-server-stdio::jar:2.0.4": {
+  "io.quarkiverse.mcp:quarkus-mcp-server-stdio::jar:2.1.0": {
     "artifactId": "quarkus-mcp-server-stdio",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha2",
@@ -4394,9 +4394,9 @@
     "since": 1736434276000,
     "sinceMonth": 1735711200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1793029965000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.mcp/quarkus-mcp-server-stdio/2.0.4/jar",
-    "version": "2.0.4"
+    "timestamp": 1795443843000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.mcp/quarkus-mcp-server-stdio/2.1.0/jar",
+    "version": "2.1.0"
   },
   "io.quarkiverse.mcp:quarkus-mcp-server-websocket::jar:2.0.4": {
     "artifactId": "quarkus-mcp-server-websocket",
@@ -5230,7 +5230,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.opencv/quarkus-opencv/2.1.0/jar",
     "version": "2.1.0"
   },
-  "io.quarkiverse.openfeature:quarkus-openfeature-buildtime-config::jar:1.0.2": {
+  "io.quarkiverse.openfeature:quarkus-openfeature-buildtime-config::jar:2.0.0": {
     "artifactId": "quarkus-openfeature-buildtime-config",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha1",
@@ -5239,11 +5239,11 @@
     "since": 1782988467000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793956325000,
-    "url": "https://repo1.maven.org/maven2/io/quarkiverse/openfeature/quarkus-openfeature-buildtime-config/1.0.2/",
-    "version": "1.0.2"
+    "timestamp": 1795434926000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-buildtime-config/2.0.0/jar",
+    "version": "2.0.0"
   },
-  "io.quarkiverse.openfeature:quarkus-openfeature-flagd::jar:1.0.2": {
+  "io.quarkiverse.openfeature:quarkus-openfeature-flagd::jar:2.0.0": {
     "artifactId": "quarkus-openfeature-flagd",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha1",
@@ -5252,11 +5252,11 @@
     "since": 1782988467000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793956325000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-flagd/1.0.2/jar",
-    "version": "1.0.2"
+    "timestamp": 1795434926000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-flagd/2.0.0/jar",
+    "version": "2.0.0"
   },
-  "io.quarkiverse.openfeature:quarkus-openfeature-flipt::jar:1.0.2": {
+  "io.quarkiverse.openfeature:quarkus-openfeature-flipt::jar:2.0.0": {
     "artifactId": "quarkus-openfeature-flipt",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha1",
@@ -5265,11 +5265,11 @@
     "since": 1782988467000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793956325000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-flipt/1.0.2/jar",
-    "version": "1.0.2"
+    "timestamp": 1795434926000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-flipt/2.0.0/jar",
+    "version": "2.0.0"
   },
-  "io.quarkiverse.openfeature:quarkus-openfeature-gofeatureflag::jar:1.0.2": {
+  "io.quarkiverse.openfeature:quarkus-openfeature-gofeatureflag::jar:2.0.0": {
     "artifactId": "quarkus-openfeature-gofeatureflag",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha1",
@@ -5278,11 +5278,11 @@
     "since": 1782988467000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793956325000,
-    "url": "https://repo1.maven.org/maven2/io/quarkiverse/openfeature/quarkus-openfeature-gofeatureflag/1.0.2/",
-    "version": "1.0.2"
+    "timestamp": 1795434926000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-gofeatureflag/2.0.0/jar",
+    "version": "2.0.0"
   },
-  "io.quarkiverse.openfeature:quarkus-openfeature-runtime-config::jar:1.0.2": {
+  "io.quarkiverse.openfeature:quarkus-openfeature-runtime-config::jar:2.0.0": {
     "artifactId": "quarkus-openfeature-runtime-config",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha1",
@@ -5291,11 +5291,11 @@
     "since": 1782988467000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793956325000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-runtime-config/1.0.2/jar",
-    "version": "1.0.2"
+    "timestamp": 1795434926000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-runtime-config/2.0.0/jar",
+    "version": "2.0.0"
   },
-  "io.quarkiverse.openfeature:quarkus-openfeature-unleash::jar:1.0.2": {
+  "io.quarkiverse.openfeature:quarkus-openfeature-unleash::jar:2.0.0": {
     "artifactId": "quarkus-openfeature-unleash",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha1",
@@ -5304,11 +5304,11 @@
     "since": 1782988467000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793956325000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-unleash/1.0.2/jar",
-    "version": "1.0.2"
+    "timestamp": 1795434926000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature-unleash/2.0.0/jar",
+    "version": "2.0.0"
   },
-  "io.quarkiverse.openfeature:quarkus-openfeature::jar:1.0.2": {
+  "io.quarkiverse.openfeature:quarkus-openfeature::jar:2.0.0": {
     "artifactId": "quarkus-openfeature",
     "classifier": "jar",
     "earliestVersion": "1.0.0.Alpha1",
@@ -5317,9 +5317,9 @@
     "since": 1782988467000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793956325000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature/1.0.2/jar",
-    "version": "1.0.2"
+    "timestamp": 1795434926000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.openfeature/quarkus-openfeature/2.0.0/jar",
+    "version": "2.0.0"
   },
   "io.quarkiverse.openfga:quarkus-openfga-client::jar:3.17.0": {
     "artifactId": "quarkus-openfga-client",
