@@ -396,7 +396,7 @@
     "url": "https://central.sonatype.com/artifact/io.debezium/debezium-quarkus-outbox/3.7.1.Final/jar",
     "version": "3.7.1.Final"
   },
-  "io.github.matheuslealpa:quarkus-rsql::jar:1.1.0": {
+  "io.github.matheuslealpa:quarkus-rsql::jar:1.2.0": {
     "artifactId": "quarkus-rsql",
     "classifier": "jar",
     "earliestVersion": "1.0.0-RC1",
@@ -405,11 +405,11 @@
     "since": 1793109192000,
     "sinceMonth": 1790834400000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793551287000,
-    "url": "https://repo1.maven.org/maven2/io/github/matheuslealpa/quarkus-rsql/1.1.0/",
-    "version": "1.1.0"
+    "timestamp": 1795472762000,
+    "url": "https://central.sonatype.com/artifact/io.github.matheuslealpa/quarkus-rsql/1.2.0/jar",
+    "version": "1.2.0"
   },
-  "io.github.microcks.quarkus:quarkus-microcks::jar:0.5.0": {
+  "io.github.microcks.quarkus:quarkus-microcks::jar:0.5.1": {
     "artifactId": "quarkus-microcks",
     "classifier": "jar",
     "earliestVersion": "0.1.0",
@@ -418,9 +418,9 @@
     "since": 1691590772000,
     "sinceMonth": 1690869600000,
     "sinceYear": 1672552800000,
-    "timestamp": 1787569979000,
-    "url": "https://central.sonatype.com/artifact/io.github.microcks.quarkus/quarkus-microcks/0.5.0/jar",
-    "version": "0.5.0"
+    "timestamp": 1795539923000,
+    "url": "https://central.sonatype.com/artifact/io.github.microcks.quarkus/quarkus-microcks/0.5.1/jar",
+    "version": "0.5.1"
   },
   "io.quarkiverse.amazonalexa:quarkus-amazon-alexa::jar:2.1.0": {
     "artifactId": "quarkus-amazon-alexa",
@@ -1689,7 +1689,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.bucket4j/quarkus-bucket4j/1.0.7/jar",
     "version": "1.0.7"
   },
-  "io.quarkiverse.camunda:quarkus-camunda::jar:3.0.2": {
+  "io.quarkiverse.camunda:quarkus-camunda::jar:4.0.0": {
     "artifactId": "quarkus-camunda",
     "classifier": "jar",
     "earliestVersion": "2.0.0",
@@ -1698,11 +1698,11 @@
     "since": 1784122672000,
     "sinceMonth": 1782885600000,
     "sinceYear": 1767247200000,
-    "timestamp": 1793626484000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.camunda/quarkus-camunda/3.0.2/jar",
-    "version": "3.0.2"
+    "timestamp": 1795527080000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.camunda/quarkus-camunda/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.chappie:quarkus-chappie::jar:2.0.0": {
+  "io.quarkiverse.chappie:quarkus-chappie::jar:2.0.1": {
     "artifactId": "quarkus-chappie",
     "classifier": "jar",
     "earliestVersion": "0.0.2",
@@ -1711,9 +1711,9 @@
     "since": 1724759458000,
     "sinceMonth": 1722492000000,
     "sinceYear": 1704088800000,
-    "timestamp": 1791426668000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.chappie/quarkus-chappie/2.0.0/jar",
-    "version": "2.0.0"
+    "timestamp": 1795500667000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.chappie/quarkus-chappie/2.0.1/jar",
+    "version": "2.0.1"
   },
   "io.quarkiverse.chicory:quarkus-chicory::jar:0.0.1": {
     "artifactId": "quarkus-chicory",
@@ -1728,7 +1728,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.chicory/quarkus-chicory/0.0.1/jar",
     "version": "0.0.1"
   },
-  "io.quarkiverse.config:quarkus-config-consul::jar:3.0.0.Beta1": {
+  "io.quarkiverse.config:quarkus-config-consul::jar:3.0.0": {
     "artifactId": "quarkus-config-consul",
     "classifier": "jar",
     "earliestVersion": "1.0.0",
@@ -1737,11 +1737,11 @@
     "since": 1638899790000,
     "sinceMonth": 1638338400000,
     "sinceYear": 1609480800000,
-    "timestamp": 1791903667000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-consul/3.0.0.Beta1/jar",
-    "version": "3.0.0.Beta1"
+    "timestamp": 1795509915000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-consul/3.0.0/jar",
+    "version": "3.0.0"
   },
-  "io.quarkiverse.config:quarkus-config-hocon::jar:2.6.0": {
+  "io.quarkiverse.config:quarkus-config-hocon::jar:3.0.0": {
     "artifactId": "quarkus-config-hocon",
     "classifier": "jar",
     "earliestVersion": "1.2.0",
@@ -1750,9 +1750,9 @@
     "since": 1677184896000,
     "sinceMonth": 1675231200000,
     "sinceYear": 1672552800000,
-    "timestamp": 1790700822000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-hocon/2.6.0/jar",
-    "version": "2.6.0"
+    "timestamp": 1795509916000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-hocon/3.0.0/jar",
+    "version": "3.0.0"
   },
   "io.quarkiverse.config:quarkus-config-jasypt::jar:2.6.0": {
     "artifactId": "quarkus-config-jasypt",
@@ -1767,7 +1767,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-jasypt/2.6.0/jar",
     "version": "2.6.0"
   },
-  "io.quarkiverse.config:quarkus-config-jdbc::jar:2.6.0": {
+  "io.quarkiverse.config:quarkus-config-jdbc::jar:3.0.0": {
     "artifactId": "quarkus-config-jdbc",
     "classifier": "jar",
     "earliestVersion": "1.0.0",
@@ -1776,11 +1776,11 @@
     "since": 1638899796000,
     "sinceMonth": 1638338400000,
     "sinceYear": 1609480800000,
-    "timestamp": 1790700822000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-jdbc/2.6.0/jar",
-    "version": "2.6.0"
+    "timestamp": 1795509915000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-jdbc/3.0.0/jar",
+    "version": "3.0.0"
   },
-  "io.quarkiverse.config:quarkus-config-nacos::jar:2.6.0": {
+  "io.quarkiverse.config:quarkus-config-nacos::jar:3.0.0": {
     "artifactId": "quarkus-config-nacos",
     "classifier": "jar",
     "earliestVersion": "2.5.0",
@@ -1789,9 +1789,9 @@
     "since": 1769531860000,
     "sinceMonth": 1767247200000,
     "sinceYear": 1767247200000,
-    "timestamp": 1790700822000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-nacos/2.6.0/jar",
-    "version": "2.6.0"
+    "timestamp": 1795509916000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.config/quarkus-config-nacos/3.0.0/jar",
+    "version": "3.0.0"
   },
   "io.quarkiverse.couchbase:quarkus-couchbase::jar:1.5.0": {
     "artifactId": "quarkus-couchbase",
@@ -1806,7 +1806,7 @@
     "url": "https://repo1.maven.org/maven2/io/quarkiverse/couchbase/quarkus-couchbase/1.5.0/",
     "version": "1.5.0"
   },
-  "io.quarkiverse.cucumber:quarkus-cucumber::jar:1.5.0": {
+  "io.quarkiverse.cucumber:quarkus-cucumber::jar:2.0.0": {
     "artifactId": "quarkus-cucumber",
     "classifier": "jar",
     "earliestVersion": "0.1.0",
@@ -1815,9 +1815,9 @@
     "since": 1628491818000,
     "sinceMonth": 1627797600000,
     "sinceYear": 1609480800000,
-    "timestamp": 1794303015000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.cucumber/quarkus-cucumber/1.5.0/jar",
-    "version": "1.5.0"
+    "timestamp": 1795517223000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.cucumber/quarkus-cucumber/2.0.0/jar",
+    "version": "2.0.0"
   },
   "io.quarkiverse.cxf:quarkus-cxf-integration-tracing-opentelemetry::jar:4.0.0.Beta2": {
     "artifactId": "quarkus-cxf-integration-tracing-opentelemetry",
@@ -2729,7 +2729,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.googlecloudservices/quarkus-google-cloud-vertex-ai/2.24.0/jar",
     "version": "2.24.0"
   },
-  "io.quarkiverse.groovy:quarkus-groovy-hibernate-orm-panache::jar:3.40.0": {
+  "io.quarkiverse.groovy:quarkus-groovy-hibernate-orm-panache::jar:4.0.0": {
     "artifactId": "quarkus-groovy-hibernate-orm-panache",
     "classifier": "jar",
     "earliestVersion": "3.0.0",
@@ -2738,11 +2738,11 @@
     "since": 1683291841000,
     "sinceMonth": 1682920800000,
     "sinceYear": 1672552800000,
-    "timestamp": 1792853516000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-hibernate-orm-panache/3.40.0/jar",
-    "version": "3.40.0"
+    "timestamp": 1795509090000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-hibernate-orm-panache/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.groovy:quarkus-groovy-hibernate-reactive-panache::jar:3.40.0": {
+  "io.quarkiverse.groovy:quarkus-groovy-hibernate-reactive-panache::jar:4.0.0": {
     "artifactId": "quarkus-groovy-hibernate-reactive-panache",
     "classifier": "jar",
     "earliestVersion": "3.0.0",
@@ -2751,11 +2751,11 @@
     "since": 1683291844000,
     "sinceMonth": 1682920800000,
     "sinceYear": 1672552800000,
-    "timestamp": 1792853516000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-hibernate-reactive-panache/3.40.0/jar",
-    "version": "3.40.0"
+    "timestamp": 1795509090000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-hibernate-reactive-panache/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.groovy:quarkus-groovy-jaxb::jar:3.40.0": {
+  "io.quarkiverse.groovy:quarkus-groovy-jaxb::jar:4.0.0": {
     "artifactId": "quarkus-groovy-jaxb",
     "classifier": "jar",
     "earliestVersion": "3.0.0",
@@ -2764,11 +2764,11 @@
     "since": 1683291836000,
     "sinceMonth": 1682920800000,
     "sinceYear": 1672552800000,
-    "timestamp": 1792853516000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-jaxb/3.40.0/jar",
-    "version": "3.40.0"
+    "timestamp": 1795509090000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-jaxb/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.groovy:quarkus-groovy-junit5::jar:3.40.0": {
+  "io.quarkiverse.groovy:quarkus-groovy-junit5::jar:4.0.0": {
     "artifactId": "quarkus-groovy-junit5",
     "classifier": "jar",
     "earliestVersion": "3.0.0",
@@ -2777,11 +2777,11 @@
     "since": 1683291842000,
     "sinceMonth": 1682920800000,
     "sinceYear": 1672552800000,
-    "timestamp": 1792853516000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-junit5/3.40.0/jar",
-    "version": "3.40.0"
+    "timestamp": 1795509090000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy-junit5/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.groovy:quarkus-groovy::jar:3.40.0": {
+  "io.quarkiverse.groovy:quarkus-groovy::jar:4.0.0": {
     "artifactId": "quarkus-groovy",
     "classifier": "jar",
     "earliestVersion": "3.0.0",
@@ -2790,9 +2790,9 @@
     "since": 1683291834000,
     "sinceMonth": 1682920800000,
     "sinceYear": 1672552800000,
-    "timestamp": 1792853516000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy/3.40.0/jar",
-    "version": "3.40.0"
+    "timestamp": 1795509090000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.groovy/quarkus-groovy/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.helm:quarkus-helm::jar:1.5.0": {
     "artifactId": "quarkus-helm",
@@ -2937,7 +2937,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.jasperreports/quarkus-jasperreports/4.0.0/jar",
     "version": "4.0.0"
   },
-  "io.quarkiverse.jberet:quarkus-jberet-rest::jar:2.11.0": {
+  "io.quarkiverse.jberet:quarkus-jberet-rest::jar:3.0.0": {
     "artifactId": "quarkus-jberet-rest",
     "classifier": "jar",
     "earliestVersion": "0.0.2",
@@ -2946,11 +2946,11 @@
     "since": 1605702246000,
     "sinceMonth": 1604210400000,
     "sinceYear": 1577858400000,
-    "timestamp": 1781610416000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jberet/quarkus-jberet-rest/2.11.0/jar",
-    "version": "2.11.0"
+    "timestamp": 1795532720000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jberet/quarkus-jberet-rest/3.0.0/jar",
+    "version": "3.0.0"
   },
-  "io.quarkiverse.jberet:quarkus-jberet::jar:2.11.0": {
+  "io.quarkiverse.jberet:quarkus-jberet::jar:3.0.0": {
     "artifactId": "quarkus-jberet",
     "classifier": "jar",
     "earliestVersion": "0.0.1",
@@ -2959,9 +2959,9 @@
     "since": 1602782491000,
     "sinceMonth": 1601532000000,
     "sinceYear": 1577858400000,
-    "timestamp": 1781610416000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jberet/quarkus-jberet/2.11.0/jar",
-    "version": "2.11.0"
+    "timestamp": 1795532720000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.jberet/quarkus-jberet/3.0.0/jar",
+    "version": "3.0.0"
   },
   "io.quarkiverse.jdbc:quarkus-jdbc-clickhouse::jar:3.0.3": {
     "artifactId": "quarkus-jdbc-clickhouse",
@@ -3327,7 +3327,7 @@
     "url": "https://repo1.maven.org/maven2/io/quarkiverse/jsch/quarkus-jsch/4.0.0/",
     "version": "4.0.0"
   },
-  "io.quarkiverse.json-rpc:quarkus-json-rpc-domain-socket::jar:3.0.0": {
+  "io.quarkiverse.json-rpc:quarkus-json-rpc-domain-socket::jar:3.0.1": {
     "artifactId": "quarkus-json-rpc-domain-socket",
     "classifier": "jar",
     "earliestVersion": "2.0.0",
@@ -3336,11 +3336,11 @@
     "since": 1785737213000,
     "sinceMonth": 1785564000000,
     "sinceYear": 1767247200000,
-    "timestamp": 1791424851000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.json-rpc/quarkus-json-rpc-domain-socket/3.0.0/jar",
-    "version": "3.0.0"
+    "timestamp": 1795501289000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.json-rpc/quarkus-json-rpc-domain-socket/3.0.1/jar",
+    "version": "3.0.1"
   },
-  "io.quarkiverse.json-rpc:quarkus-json-rpc-websocket::jar:3.0.0": {
+  "io.quarkiverse.json-rpc:quarkus-json-rpc-websocket::jar:3.0.1": {
     "artifactId": "quarkus-json-rpc-websocket",
     "classifier": "jar",
     "earliestVersion": "2.0.0",
@@ -3349,11 +3349,11 @@
     "since": 1785737213000,
     "sinceMonth": 1785564000000,
     "sinceYear": 1767247200000,
-    "timestamp": 1791424852000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.json-rpc/quarkus-json-rpc-websocket/3.0.0/jar",
-    "version": "3.0.0"
+    "timestamp": 1795501290000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.json-rpc/quarkus-json-rpc-websocket/3.0.1/jar",
+    "version": "3.0.1"
   },
-  "io.quarkiverse.json-rpc:quarkus-json-rpc::jar:3.0.0": {
+  "io.quarkiverse.json-rpc:quarkus-json-rpc::jar:3.0.1": {
     "artifactId": "quarkus-json-rpc",
     "classifier": "jar",
     "earliestVersion": "0.0.1",
@@ -3362,9 +3362,9 @@
     "since": 1723532161000,
     "sinceMonth": 1722492000000,
     "sinceYear": 1704088800000,
-    "timestamp": 1791424852000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.json-rpc/quarkus-json-rpc/3.0.0/jar",
-    "version": "3.0.0"
+    "timestamp": 1795501290000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.json-rpc/quarkus-json-rpc/3.0.1/jar",
+    "version": "3.0.1"
   },
   "io.quarkiverse.kafkastreamsprocessor:quarkus-kafka-streams-processor::jar:6.1.0": {
     "artifactId": "quarkus-kafka-streams-processor",
@@ -5698,7 +5698,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.reactivemessaging.http/quarkus-reactive-messaging-http/2.10.0/jar",
     "version": "2.10.0"
   },
-  "io.quarkiverse.reactivemessaging.nats-jetstream:quarkus-messaging-nats-jetstream::jar:3.40.15": {
+  "io.quarkiverse.reactivemessaging.nats-jetstream:quarkus-messaging-nats-jetstream::jar:4.0.0": {
     "artifactId": "quarkus-messaging-nats-jetstream",
     "classifier": "jar",
     "earliestVersion": "1.12.0",
@@ -5707,9 +5707,9 @@
     "since": 1725287094000,
     "sinceMonth": 1725170400000,
     "sinceYear": 1704088800000,
-    "timestamp": 1794470878000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.reactivemessaging.nats-jetstream/quarkus-messaging-nats-jetstream/3.40.15/jar",
-    "version": "3.40.15"
+    "timestamp": 1795530596000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.reactivemessaging.nats-jetstream/quarkus-messaging-nats-jetstream/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.reactivemessaging.nats-jetstream:quarkus-reactive-messsaging-nats-jetstream::jar:1.11.0": {
     "artifactId": "quarkus-reactive-messsaging-nats-jetstream",
@@ -6386,7 +6386,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.vault/quarkus-vault/5.0.0.Beta2/jar",
     "version": "5.0.0.Beta2"
   },
-  "io.quarkiverse.web-bundler:quarkus-web-bundler-svelte::jar:3.0.0": {
+  "io.quarkiverse.web-bundler:quarkus-web-bundler-svelte::jar:4.0.0": {
     "artifactId": "quarkus-web-bundler-svelte",
     "classifier": "jar",
     "earliestVersion": "2.1.0",
@@ -6395,11 +6395,11 @@
     "since": 1767696779000,
     "sinceMonth": 1767247200000,
     "sinceYear": 1767247200000,
-    "timestamp": 1791400260000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler-svelte/3.0.0/jar",
-    "version": "3.0.0"
+    "timestamp": 1795527706000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler-svelte/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.web-bundler:quarkus-web-bundler-tailwindcss::jar:3.0.0": {
+  "io.quarkiverse.web-bundler:quarkus-web-bundler-tailwindcss::jar:4.0.0": {
     "artifactId": "quarkus-web-bundler-tailwindcss",
     "classifier": "jar",
     "earliestVersion": "2.0.0",
@@ -6408,11 +6408,11 @@
     "since": 1764935753000,
     "sinceMonth": 1764568800000,
     "sinceYear": 1735711200000,
-    "timestamp": 1791400260000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler-tailwindcss/3.0.0/jar",
-    "version": "3.0.0"
+    "timestamp": 1795527706000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler-tailwindcss/4.0.0/jar",
+    "version": "4.0.0"
   },
-  "io.quarkiverse.web-bundler:quarkus-web-bundler::jar:3.0.0": {
+  "io.quarkiverse.web-bundler:quarkus-web-bundler::jar:4.0.0": {
     "artifactId": "quarkus-web-bundler",
     "classifier": "jar",
     "earliestVersion": "0.0.1-alpha1",
@@ -6421,9 +6421,9 @@
     "since": 1684162993000,
     "sinceMonth": 1682920800000,
     "sinceYear": 1672552800000,
-    "timestamp": 1791400260000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler/3.0.0/jar",
-    "version": "3.0.0"
+    "timestamp": 1795527706000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler/4.0.0/jar",
+    "version": "4.0.0"
   },
   "io.quarkiverse.wiremock:quarkus-wiremock::jar:1.8.1": {
     "artifactId": "quarkus-wiremock",
