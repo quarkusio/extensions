@@ -3137,7 +3137,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-key-vault/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795087843007,
+    "lastUpdated": 1795491213944,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -3442,7 +3442,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/barcode/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795174260414,
+    "lastUpdated": 1795491213931,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -5718,7 +5718,7 @@
   "https://github.com/apache/camel-quarkus,org.apache.camel.quarkus.camel-quarkus-couchdb": {
     "allCompanies": [
       {
-        "contributions": 5,
+        "contributions": 6,
         "contributors": 2,
         "name": "Unknown"
       },
@@ -5733,7 +5733,7 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
-        "contributions": 4,
+        "contributions": 5,
         "login": "jamesnetherton",
         "name": "James Netherton",
         "url": "https://github.com/jamesnetherton"
@@ -5764,7 +5764,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/couchdb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795087843719,
+    "lastUpdated": 1795491214108,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -9441,7 +9441,7 @@
   "https://github.com/apache/camel-quarkus,org.apache.camel.quarkus.camel-quarkus-git": {
     "allCompanies": [
       {
-        "contributions": 4,
+        "contributions": 5,
         "contributors": 2,
         "name": "Unknown"
       },
@@ -9456,7 +9456,7 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
-        "contributions": 3,
+        "contributions": 4,
         "login": "jamesnetherton",
         "name": "James Netherton",
         "url": "https://github.com/jamesnetherton"
@@ -9487,7 +9487,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/git/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795059162929,
+    "lastUpdated": 1795491214797,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -13465,7 +13465,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson-avro/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795123821903,
+    "lastUpdated": 1795491215014,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -14860,7 +14860,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jooq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 314,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795123822570,
+    "lastUpdated": 1795491215152,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -15043,7 +15043,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795059164462,
+    "lastUpdated": 1795491215678,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -15609,7 +15609,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jslt/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 314,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795059163695,
+    "lastUpdated": 1795491215381,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -16266,7 +16266,7 @@
   "https://github.com/apache/camel-quarkus,org.apache.camel.quarkus.camel-quarkus-jta": {
     "allCompanies": [
       {
-        "contributions": 5,
+        "contributions": 6,
         "contributors": 2,
         "name": "Unknown"
       },
@@ -16282,7 +16282,7 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
-        "contributions": 4,
+        "contributions": 5,
         "login": "jamesnetherton",
         "name": "James Netherton",
         "url": "https://github.com/jamesnetherton"
@@ -16327,7 +16327,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jta/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 314,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795123823182,
+    "lastUpdated": 1795491215806,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -20217,7 +20217,7 @@
   "https://github.com/apache/camel-quarkus,org.apache.camel.quarkus.camel-quarkus-minio": {
     "allCompanies": [
       {
-        "contributions": 5,
+        "contributions": 8,
         "contributors": 2,
         "name": "Unknown"
       },
@@ -20232,16 +20232,16 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 6,
+        "login": "jamesnetherton",
+        "name": "James Netherton",
+        "url": "https://github.com/jamesnetherton"
+      },
+      {
         "contributions": 2,
         "login": "JiriOndrusek",
         "name": "Jiří Ondrušek",
         "url": "https://github.com/JiriOndrusek"
-      },
-      {
-        "contributions": 3,
-        "login": "jamesnetherton",
-        "name": "James Netherton",
-        "url": "https://github.com/jamesnetherton"
       },
       {
         "company": "Red Hat & IBM",
@@ -20263,7 +20263,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/minio/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795087847169,
+    "lastUpdated": 1795491215799,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -22003,7 +22003,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/openstack/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 314,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795087847945,
+    "lastUpdated": 1795491216386,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -23045,7 +23045,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/qdrant/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 314,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795087853760,
+    "lastUpdated": 1795491227115,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -35665,7 +35665,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/zookeeper/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 313,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795123826924,
+    "lastUpdated": 1795491217441,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56389,7 +56389,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/integration-tracing-opentelemetry/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 49,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
-    "lastUpdated": 1795123836864,
+    "lastUpdated": 1795491226333,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56424,7 +56424,7 @@
     "extensionPathInRepo": "extensions/jaxb-plugins/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/jaxb-plugins/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/jaxb-plugins/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 47,
+    "issues": 50,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
     "lastUpdated": 1795210220588,
     "license": {
@@ -57036,7 +57036,7 @@
     "extensionPathInRepo": "extensions/santuario-xmlsec/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/santuario-xmlsec/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/santuario-xmlsec/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 48,
+    "issues": 50,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
     "lastUpdated": 1795260622696,
     "license": {
@@ -57551,7 +57551,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-doma/blob/master/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-doma/issues",
-    "lastUpdated": 1795174254659,
+    "lastUpdated": 1795491211533,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -58261,7 +58261,7 @@
     "extensionPathInRepo": "durable-kubernetes/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/durable-kubernetes/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/durable-kubernetes/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 43,
+    "issues": 45,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
     "lastUpdated": 1795433421439,
     "license": {
@@ -58678,7 +58678,7 @@
     "extensionPathInRepo": "messaging/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/messaging/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/messaging/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 43,
+    "issues": 45,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
     "lastUpdated": 1795210224445,
     "license": {
@@ -58994,7 +58994,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/opentelemetry/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 43,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
-    "lastUpdated": 1795087870764,
+    "lastUpdated": 1795491231945,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -60169,7 +60169,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-github-api/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-github-api/issues",
-    "lastUpdated": 1795145598659,
+    "lastUpdated": 1795491211774,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -60751,7 +60751,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-google-cloud-services/blob/main/logging/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 17,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-google-cloud-services/issues",
-    "lastUpdated": 1795087850346,
+    "lastUpdated": 1795491217588,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -62311,7 +62311,7 @@
     "extensionPathInRepo": "cassandra/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/cassandra/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/cassandra/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 2,
+    "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jnosql/issues",
     "lastUpdated": 1795210221037,
     "license": {
@@ -62328,6 +62328,11 @@
   "https://github.com/quarkiverse/quarkus-jnosql,io.quarkiverse.jnosql.quarkus-jnosql-core": {
     "allCompanies": [
       {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "SouJava"
+      },
+      {
         "contributions": 1,
         "contributors": 1,
         "name": "Red Hat & IBM"
@@ -62336,14 +62341,19 @@
         "contributions": 1,
         "contributors": 1,
         "name": "Eclipse Foundation"
-      },
-      {
-        "contributions": 1,
-        "contributors": 1,
-        "name": "SouJava"
       }
     ],
+    "allSponsors": [
+      "SouJava"
+    ],
     "contributorsWithFullCompanyInfo": [
+      {
+        "company": "SouJava",
+        "contributions": 3,
+        "login": "dearrudam",
+        "name": "Maximillian Arruda",
+        "url": "https://github.com/dearrudam"
+      },
       {
         "company": "Red Hat & IBM",
         "contributions": 1,
@@ -62357,13 +62367,6 @@
         "login": "otaviojava",
         "name": "Otávio Santana",
         "url": "https://github.com/otaviojava"
-      },
-      {
-        "company": "SouJava",
-        "contributions": 1,
-        "login": "dearrudam",
-        "name": "Maximillian Arruda",
-        "url": "https://github.com/dearrudam"
       }
     ],
     "extensionPathInRepo": "core/",
@@ -62371,7 +62374,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/core/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jnosql/issues",
-    "lastUpdated": 1795145607666,
+    "lastUpdated": 1795491229066,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -62508,6 +62511,11 @@
   "https://github.com/quarkiverse/quarkus-jnosql,io.quarkiverse.jnosql.quarkus-jnosql-dynamodb": {
     "allCompanies": [
       {
+        "contributions": 3,
+        "contributors": 1,
+        "name": "SouJava"
+      },
+      {
         "contributions": 2,
         "contributors": 1,
         "name": "Eclipse Foundation"
@@ -62516,17 +62524,19 @@
         "contributions": 1,
         "contributors": 1,
         "name": "Red Hat & IBM"
-      },
-      {
-        "contributions": 1,
-        "contributors": 1,
-        "name": "SouJava"
       }
     ],
     "allSponsors": [
-      "Eclipse Foundation"
+      "SouJava"
     ],
     "contributorsWithFullCompanyInfo": [
+      {
+        "company": "SouJava",
+        "contributions": 3,
+        "login": "dearrudam",
+        "name": "Maximillian Arruda",
+        "url": "https://github.com/dearrudam"
+      },
       {
         "company": "Red Hat & IBM",
         "contributions": 1,
@@ -62540,13 +62550,6 @@
         "login": "otaviojava",
         "name": "Otávio Santana",
         "url": "https://github.com/otaviojava"
-      },
-      {
-        "company": "SouJava",
-        "contributions": 1,
-        "login": "dearrudam",
-        "name": "Maximillian Arruda",
-        "url": "https://github.com/dearrudam"
       }
     ],
     "extensionPathInRepo": "dynamodb/",
@@ -62554,7 +62557,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/dynamodb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jnosql/issues",
-    "lastUpdated": 1795174274563,
+    "lastUpdated": 1795491229163,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -63440,7 +63443,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-chat-scopes-passivation-file": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -63520,6 +63523,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -63532,20 +63563,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -63562,17 +63579,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -63774,13 +63784,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -63917,7 +63920,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -63939,7 +63942,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-chat-scopes-passivation-json-base": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -64019,6 +64022,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -64031,20 +64062,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -64061,17 +64078,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -64273,13 +64283,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -64416,7 +64419,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -64438,7 +64441,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-chat-scopes-passivation-mongo": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -64518,6 +64521,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -64530,20 +64561,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -64560,17 +64577,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -64769,13 +64779,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -64915,7 +64918,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -64937,7 +64940,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-chat-scopes-passivation-redis": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -65017,6 +65020,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -65029,20 +65060,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -65059,17 +65076,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -65268,13 +65278,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -65414,7 +65417,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -65436,7 +65439,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-a2a-apicurio-registry": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -65516,6 +65519,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -65528,20 +65559,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -65558,17 +65575,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -65770,13 +65780,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -65913,7 +65916,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -66022,7 +66025,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-ai-gemini": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -66102,6 +66105,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -66114,20 +66145,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -66144,17 +66161,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -66356,13 +66366,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -66499,7 +66502,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -66521,7 +66524,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-anthropic": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -66601,6 +66604,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -66613,20 +66644,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -66643,17 +66660,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -66855,13 +66865,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -66998,7 +67001,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -67020,7 +67023,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-azure-openai": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -67100,6 +67103,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -67112,20 +67143,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -67142,17 +67159,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -67354,13 +67364,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -67497,7 +67500,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -67519,7 +67522,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-bedrock": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -67599,6 +67602,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -67611,20 +67642,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -67641,17 +67658,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -67853,13 +67863,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -67996,7 +67999,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -68018,7 +68021,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-chat-scopes": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -68098,6 +68101,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -68110,20 +68141,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -68140,17 +68157,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -68352,13 +68362,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -68495,7 +68498,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -68517,7 +68520,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-chat-scopes-websocket": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -68597,6 +68600,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -68609,20 +68640,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -68639,17 +68656,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -68851,13 +68861,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -68994,7 +68997,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -69016,7 +69019,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-chatbot": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -69096,6 +69099,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -69108,20 +69139,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -69138,17 +69155,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -69347,13 +69357,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -69493,7 +69496,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -69515,7 +69518,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-chroma": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -69595,6 +69598,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -69607,20 +69638,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -69637,17 +69654,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -69849,13 +69859,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -69992,7 +69995,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -70014,7 +70017,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-cohere": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -70094,6 +70097,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -70106,20 +70137,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -70136,17 +70153,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -70348,13 +70358,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -70491,7 +70494,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -70689,7 +70692,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-easy-rag": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -70769,6 +70772,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -70781,20 +70812,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -70811,17 +70828,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -71023,13 +71033,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -71166,7 +71169,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -71188,7 +71191,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-gemini-common": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -71268,6 +71271,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -71280,20 +71311,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -71310,17 +71327,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -71522,13 +71532,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -71665,7 +71668,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -71687,7 +71690,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-google-genai": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -71767,6 +71770,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -71779,20 +71810,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -71809,17 +71826,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -72021,13 +72031,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -72162,9 +72165,9 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 179,
+    "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -72186,7 +72189,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-gpu-llama3": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -72266,6 +72269,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -72278,20 +72309,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -72308,17 +72325,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -72520,13 +72530,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -72663,7 +72666,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -72685,7 +72688,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-hibernate": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -72765,6 +72768,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -72777,20 +72808,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -72807,17 +72824,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -73019,13 +73029,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -73162,7 +73165,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -73184,7 +73187,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-hugging-face": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -73264,6 +73267,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -73276,20 +73307,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -73306,17 +73323,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -73518,13 +73528,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -73659,9 +73662,9 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 179,
+    "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -73683,7 +73686,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-infinispan": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -73763,6 +73766,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -73775,20 +73806,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -73805,17 +73822,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -74017,13 +74027,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -74160,7 +74163,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -74182,7 +74185,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-jinfer": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -74262,6 +74265,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -74274,20 +74305,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -74304,17 +74321,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -74516,13 +74526,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -74659,7 +74662,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -74681,7 +74684,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-jitllm": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -74761,6 +74764,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -74773,20 +74804,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -74803,17 +74820,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -75015,13 +75025,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -75158,7 +75161,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -75180,7 +75183,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-jlama": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -75260,6 +75263,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -75272,20 +75303,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -75302,17 +75319,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -75511,13 +75521,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -75657,7 +75660,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -75679,7 +75682,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-llama3-java": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -75759,6 +75762,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -75771,20 +75802,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -75801,17 +75818,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -76010,13 +76020,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -76156,7 +76159,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -76272,7 +76275,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-mcp-apicurio-registry": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -76352,6 +76355,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -76364,20 +76395,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -76394,17 +76411,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -76606,13 +76616,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -76749,7 +76752,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -76771,7 +76774,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-memory-store-mongodb": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -76851,6 +76854,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -76863,20 +76894,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -76893,17 +76910,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -77105,13 +77115,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -77248,7 +77251,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -77270,7 +77273,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-memory-store-redis": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -77350,6 +77353,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -77362,20 +77393,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -77392,17 +77409,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -77604,13 +77614,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -77747,7 +77750,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -77769,7 +77772,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-milvus": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -77849,6 +77852,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -77861,20 +77892,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -77891,17 +77908,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -78103,13 +78113,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -78246,7 +78249,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -78268,7 +78271,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-mistral-ai": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -78348,6 +78351,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -78360,20 +78391,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -78390,17 +78407,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -78602,13 +78612,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -78745,7 +78748,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -78767,7 +78770,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-neo4j": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -78847,6 +78850,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -78859,20 +78890,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -78889,17 +78906,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -79101,13 +79111,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -79244,7 +79247,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -79266,7 +79269,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-oidc-client-mcp-auth-provider": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -79346,6 +79349,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -79358,20 +79389,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -79388,17 +79405,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -79600,13 +79610,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -79743,7 +79746,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -79765,7 +79768,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-oidc-mcp-auth-provider": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -79845,6 +79848,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -79857,20 +79888,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -79887,17 +79904,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -80099,13 +80109,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -80242,7 +80245,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -80264,7 +80267,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-oidc-model-auth-provider": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -80344,6 +80347,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -80356,20 +80387,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -80386,17 +80403,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -80598,13 +80608,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -80741,7 +80744,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -80763,7 +80766,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-ollama": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -80843,6 +80846,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -80855,20 +80886,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -80885,17 +80902,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -81094,13 +81104,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -81240,7 +81243,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -81262,7 +81265,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-openai": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -81342,6 +81345,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -81354,20 +81385,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -81384,17 +81401,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -81593,13 +81603,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -81739,7 +81742,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -81761,7 +81764,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-openai-common": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -81841,6 +81844,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -81853,20 +81884,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -81883,17 +81900,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -82095,13 +82105,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -82238,7 +82241,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -82260,7 +82263,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-openshift-ai": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -82340,6 +82343,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -82352,20 +82383,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -82382,17 +82399,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -82594,13 +82604,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -82735,9 +82738,9 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 179,
+    "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -82759,7 +82762,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-oracle": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -82839,6 +82842,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -82851,20 +82882,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -82881,17 +82898,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -83093,13 +83103,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -83236,7 +83239,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -83258,7 +83261,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-parsers-base": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -83338,6 +83341,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -83350,20 +83381,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -83380,17 +83397,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -83592,13 +83602,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -83735,7 +83738,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -83757,7 +83760,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-pgvector": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -83837,6 +83840,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -83849,20 +83880,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -83879,17 +83896,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -84091,13 +84101,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -84234,7 +84237,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -84256,7 +84259,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-pinecone": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -84336,6 +84339,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -84348,20 +84379,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -84378,17 +84395,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -84590,13 +84600,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -84733,7 +84736,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -84755,7 +84758,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-qdrant": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -84835,6 +84838,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -84847,20 +84878,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -84877,17 +84894,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -85089,13 +85099,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -85232,7 +85235,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -85254,7 +85257,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-redis": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -85334,6 +85337,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -85346,20 +85377,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -85376,17 +85393,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -85588,13 +85598,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -85731,7 +85734,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -85828,7 +85831,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-tavily": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -85908,6 +85911,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -85920,20 +85951,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -85950,17 +85967,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -86162,13 +86172,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -86305,7 +86308,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -86327,7 +86330,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-typesafe": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -86407,6 +86410,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -86419,20 +86450,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -86449,17 +86466,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -86661,13 +86671,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -86804,7 +86807,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -86826,7 +86829,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-vertex-ai": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -86906,6 +86909,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -86918,20 +86949,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -86948,17 +86965,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -87160,13 +87170,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -87301,9 +87304,9 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 179,
+    "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -87325,7 +87328,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-vertex-ai-gemini": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -87405,6 +87408,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -87417,20 +87448,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -87447,17 +87464,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -87659,13 +87669,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -87802,7 +87805,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -87824,7 +87827,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-watsonx": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -87904,6 +87907,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -87916,20 +87947,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -87946,17 +87963,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -88155,13 +88165,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -88301,7 +88304,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -88323,7 +88326,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-weaviate": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -88403,6 +88406,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -88415,20 +88446,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -88445,17 +88462,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -88654,13 +88664,6 @@
         "login": "weih-kahoot",
         "name": "Wei Huang",
         "url": "https://github.com/weih-kahoot"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -88800,7 +88803,7 @@
     ],
     "issues": 177,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -88822,7 +88825,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-websockets-next": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -88902,6 +88905,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -88914,20 +88945,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -88944,17 +88961,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -89156,13 +89166,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -89299,7 +89302,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -89321,7 +89324,7 @@
   "https://github.com/quarkiverse/quarkus-langchain4j,io.quarkiverse.langchain4j.quarkus-langchain4j-workload-model-auth-provider": {
     "allCompanies": [
       {
-        "contributions": 282,
+        "contributions": 293,
         "contributors": 22,
         "name": "Red Hat & IBM"
       },
@@ -89401,6 +89404,34 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "Red Hat & IBM",
+        "contributions": 30,
+        "login": "mariofusco",
+        "name": "Mario Fusco",
+        "url": "https://github.com/mariofusco"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 63,
+        "login": "jmartisk",
+        "name": "Jan Martiska",
+        "url": "https://github.com/jmartisk"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 112,
+        "login": "geoand",
+        "name": "Georgios Andrianakis",
+        "url": "https://github.com/geoand"
+      },
+      {
+        "company": "Act | BMW",
+        "contributions": 44,
+        "login": "omatheusmesmo",
+        "name": "Matheus Oliveira",
+        "url": "https://github.com/omatheusmesmo"
+      },
+      {
         "company": "The University of Manchester",
         "contributions": 5,
         "login": "orionpapadakis",
@@ -89413,20 +89444,6 @@
         "login": "oscerd",
         "name": "Andrea Cosentino",
         "url": "https://github.com/oscerd"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 28,
-        "login": "mariofusco",
-        "name": "Mario Fusco",
-        "url": "https://github.com/mariofusco"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 106,
-        "login": "geoand",
-        "name": "Georgios Andrianakis",
-        "url": "https://github.com/geoand"
       },
       {
         "contributions": 2,
@@ -89443,17 +89460,10 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 61,
-        "login": "jmartisk",
-        "name": "Jan Martiska",
-        "url": "https://github.com/jmartisk"
-      },
-      {
-        "company": "Act | BMW",
-        "contributions": 44,
-        "login": "omatheusmesmo",
-        "name": "Matheus Oliveira",
-        "url": "https://github.com/omatheusmesmo"
+        "contributions": 5,
+        "login": "sberyozkin",
+        "name": "Sergey Beryozkin",
+        "url": "https://github.com/sberyozkin"
       },
       {
         "company": "Red Hat & IBM",
@@ -89655,13 +89665,6 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 4,
-        "login": "sberyozkin",
-        "name": "Sergey Beryozkin",
-        "url": "https://github.com/sberyozkin"
-      },
-      {
-        "company": "Red Hat & IBM",
         "contributions": 1,
         "login": "baldimir",
         "name": "Tibor Zimányi",
@@ -89798,7 +89801,7 @@
     ],
     "issues": 179,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795123835999,
+    "lastUpdated": 1795491225772,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92517,7 +92520,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92551,7 +92554,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92585,7 +92588,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92619,7 +92622,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92653,7 +92656,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92687,7 +92690,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92721,7 +92724,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92755,7 +92758,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92789,7 +92792,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92823,7 +92826,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92857,7 +92860,7 @@
     ],
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-modulith/issues",
-    "lastUpdated": 1795123852189,
+    "lastUpdated": 1795491232518,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92877,7 +92880,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-moneta/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-moneta/issues",
-    "lastUpdated": 1795174270051,
+    "lastUpdated": 1795491217984,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -93557,7 +93560,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-network-faults/blob/main/extensions/data-hibernate/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-network-faults/issues",
-    "lastUpdated": 1795059174737,
+    "lastUpdated": 1795491232208,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -93686,7 +93689,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-network-faults/blob/main/extensions/grpc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-network-faults/issues",
-    "lastUpdated": 1795087873813,
+    "lastUpdated": 1795491232127,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -94553,7 +94556,7 @@
   "https://github.com/quarkiverse/quarkus-openapi-generator,io.quarkiverse.openapi.generator.quarkus-openapi-generator-server": {
     "allCompanies": [
       {
-        "contributions": 8,
+        "contributions": 7,
         "contributors": 1,
         "name": "Unknown"
       },
@@ -94573,7 +94576,7 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
-        "contributions": 8,
+        "contributions": 7,
         "login": "matheusandre1",
         "name": "Matheus André",
         "url": "https://github.com/matheusandre1"
@@ -94598,7 +94601,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-openapi-generator/blob/main/server/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 42,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-openapi-generator/issues",
-    "lastUpdated": 1795123842159,
+    "lastUpdated": 1795491228288,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -95104,7 +95107,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-operator-sdk/blob/main/bundle-generator/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 27,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-operator-sdk/issues",
-    "lastUpdated": 1795059160491,
+    "lastUpdated": 1795491212456,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -95352,7 +95355,7 @@
   "https://github.com/quarkiverse/quarkus-poi,io.quarkiverse.poi.quarkus-poi": {
     "allCompanies": [
       {
-        "contributions": 4,
+        "contributions": 7,
         "contributors": 1,
         "name": "Melloware Inc"
       }
@@ -95363,7 +95366,7 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Melloware Inc",
-        "contributions": 4,
+        "contributions": 7,
         "login": "melloware",
         "name": "Melloware",
         "url": "https://github.com/melloware"
@@ -95374,7 +95377,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-poi/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-poi/issues",
-    "lastUpdated": 1795059162294,
+    "lastUpdated": 1795491213567,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -95702,24 +95705,24 @@
   "https://github.com/quarkiverse/quarkus-quinoa,io.quarkiverse.quinoa.quarkus-quinoa": {
     "allCompanies": [
       {
-        "contributions": 14,
+        "contributions": 16,
         "contributors": 1,
         "name": "Melloware Inc"
       },
       {
-        "contributions": 7,
+        "contributions": 6,
+        "contributors": 1,
+        "name": "Lunatech"
+      },
+      {
+        "contributions": 6,
         "contributors": 2,
         "name": "Unknown"
       },
       {
-        "contributions": 6,
+        "contributions": 5,
         "contributors": 3,
         "name": "Red Hat & IBM"
-      },
-      {
-        "contributions": 5,
-        "contributors": 1,
-        "name": "Lunatech"
       },
       {
         "contributions": 1,
@@ -95733,14 +95736,14 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Melloware Inc",
-        "contributions": 14,
+        "contributions": 16,
         "login": "melloware",
         "name": "Melloware",
         "url": "https://github.com/melloware"
       },
       {
         "company": "Lunatech",
-        "contributions": 5,
+        "contributions": 6,
         "login": "LSRaGeUx",
         "name": "Yan Adam",
         "url": "https://github.com/LSRaGeUx"
@@ -95760,7 +95763,7 @@
         "url": "https://github.com/ia3andy"
       },
       {
-        "contributions": 6,
+        "contributions": 5,
         "login": "matheusandre1",
         "name": "Matheus André",
         "url": "https://github.com/matheusandre1"
@@ -95780,7 +95783,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 2,
+        "contributions": 1,
         "login": "gastaldi",
         "name": "George Gastaldi",
         "url": "https://github.com/gastaldi"
@@ -95791,7 +95794,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-quinoa/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 8,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-quinoa/issues",
-    "lastUpdated": 1795174259066,
+    "lastUpdated": 1795491213967,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -95911,7 +95914,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-rabbitmq-client/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 4,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-rabbitmq-client/issues",
-    "lastUpdated": 1795174256003,
+    "lastUpdated": 1795491212127,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -120146,7 +120149,7 @@
         "url": "https://github.com/dcheng1248"
       }
     ],
-    "issues": 55,
+    "issues": 56,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fcontainer-image",
     "lastUpdated": 1795318341907,
     "license": {
@@ -132225,7 +132228,7 @@
     "extensionPathInRepo": "extensions/devui/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/devui/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/devui/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 24,
+    "issues": 23,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+devui",
     "lastUpdated": 1795296654337,
     "license": {
@@ -134349,7 +134352,7 @@
     "extensionPathInRepo": "extensions/elytron-security-properties-file/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/elytron-security-properties-file/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/elytron-security-properties-file/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 98,
+    "issues": 99,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsecurity",
     "lastUpdated": 1795433396048,
     "license": {
@@ -144505,7 +144508,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hal/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+hal",
-    "lastUpdated": 1795123816945,
+    "lastUpdated": 1795491212790,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -144608,7 +144611,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-envers/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 89,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-orm",
-    "lastUpdated": 1795123806912,
+    "lastUpdated": 1795491209452,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -164169,7 +164172,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-search-orm-outbox-polling/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 12,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-search",
-    "lastUpdated": 1795123836654,
+    "lastUpdated": 1795491226127,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -164236,7 +164239,7 @@
     "extensionPathInRepo": "extensions/hibernate-search-standalone-elasticsearch/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-search-standalone-elasticsearch/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-search-standalone-elasticsearch/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 12,
+    "issues": 13,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-search",
     "lastUpdated": 1795347021762,
     "license": {
@@ -166290,7 +166293,7 @@
         "url": "https://github.com/dcheng1248"
       }
     ],
-    "issues": 13,
+    "issues": 12,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+jacoco",
     "lastUpdated": 1795318341907,
     "license": {
@@ -182213,7 +182216,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/jfr/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 13,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+jfr",
-    "lastUpdated": 1795123841196,
+    "lastUpdated": 1795491227151,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -183996,7 +183999,7 @@
     "extensionPathInRepo": "extensions/kafka-client/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/kafka-client/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/kafka-client/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 22,
+    "issues": 25,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fkafka",
     "lastUpdated": 1795469371048,
     "license": {
@@ -206448,7 +206451,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/mutiny/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 105,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fmutiny,area%2Fsmallrye",
-    "lastUpdated": 1795123809438,
+    "lastUpdated": 1795491210203,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -245511,7 +245514,7 @@
         "url": "https://github.com/dcheng1248"
       }
     ],
-    "issues": 26,
+    "issues": 27,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+rest-data-panache",
     "lastUpdated": 1795318341907,
     "license": {
@@ -273903,7 +273906,7 @@
         "url": "https://github.com/dcheng1248"
       }
     ],
-    "issues": 18,
+    "issues": 19,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795318341907,
     "license": {
@@ -294404,7 +294407,7 @@
         "url": "https://github.com/dcheng1248"
       }
     ],
-    "issues": 18,
+    "issues": 19,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795318341907,
     "license": {
@@ -303866,7 +303869,7 @@
         "url": "https://github.com/dcheng1248"
       }
     ],
-    "issues": 18,
+    "issues": 19,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795318341907,
     "license": {
@@ -314532,7 +314535,7 @@
     "extensionPathInRepo": "extensions/smallrye-jwt-build/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-jwt-build/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-jwt-build/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 106,
+    "issues": 104,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsmallrye",
     "lastUpdated": 1795347007528,
     "license": {
@@ -321730,7 +321733,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-cloud-config-client/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 35,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
-    "lastUpdated": 1795059159095,
+    "lastUpdated": 1795491210861,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
