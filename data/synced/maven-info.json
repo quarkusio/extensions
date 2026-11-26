@@ -4341,7 +4341,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.mapstruct/quarkus-mapstruct/1.1.0/jar",
     "version": "1.1.0"
   },
-  "io.quarkiverse.mateu:quarkus-mateu::jar:1.1.0": {
+  "io.quarkiverse.mateu:quarkus-mateu::jar:1.2.0": {
     "artifactId": "quarkus-mateu",
     "classifier": "jar",
     "earliestVersion": "1.0.0",
@@ -4350,9 +4350,9 @@
     "since": 1794850788000,
     "sinceMonth": 1793512800000,
     "sinceYear": 1767247200000,
-    "timestamp": 1795295720000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.mateu/quarkus-mateu/1.1.0/jar",
-    "version": "1.1.0"
+    "timestamp": 1795678851000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.mateu/quarkus-mateu/1.2.0/jar",
+    "version": "1.2.0"
   },
   "io.quarkiverse.mavenresolver:quarkus-maven-resolver::jar:0.0.5": {
     "artifactId": "quarkus-maven-resolver",
@@ -4684,7 +4684,7 @@
     "url": "https://repo1.maven.org/maven2/io/quarkiverse/microprofile/quarkus-microprofile/3.5.1/",
     "version": "3.5.1"
   },
-  "io.quarkiverse.minio:quarkus-minio-admin::jar:3.9.2": {
+  "io.quarkiverse.minio:quarkus-minio-admin::jar:3.9.3": {
     "artifactId": "quarkus-minio-admin",
     "classifier": "jar",
     "earliestVersion": "3.8.2",
@@ -4693,11 +4693,11 @@
     "since": 1746455560000,
     "sinceMonth": 1746079200000,
     "sinceYear": 1735711200000,
-    "timestamp": 1791871255000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.minio/quarkus-minio-admin/3.9.2/jar",
-    "version": "3.9.2"
+    "timestamp": 1795704816000,
+    "url": "https://central.sonatype.com/artifact/io.quarkiverse.minio/quarkus-minio-admin/3.9.3/jar",
+    "version": "3.9.3"
   },
-  "io.quarkiverse.minio:quarkus-minio::jar:3.9.2": {
+  "io.quarkiverse.minio:quarkus-minio::jar:3.9.3": {
     "artifactId": "quarkus-minio",
     "classifier": "jar",
     "earliestVersion": "0.2.1",
@@ -4706,9 +4706,9 @@
     "since": 1611310276000,
     "sinceMonth": 1609480800000,
     "sinceYear": 1609480800000,
-    "timestamp": 1791871255000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.minio/quarkus-minio/3.9.2/jar",
-    "version": "3.9.2"
+    "timestamp": 1795704816000,
+    "url": "https://repo1.maven.org/maven2/io/quarkiverse/minio/quarkus-minio/3.9.3/",
+    "version": "3.9.3"
   },
   "io.quarkiverse.modulith:quarkus-modulith-events-jdbc::jar:1.0.0": {
     "artifactId": "quarkus-modulith-events-jdbc",
@@ -5620,7 +5620,7 @@
     "url": "https://repo1.maven.org/maven2/io/quarkiverse/prettytime/quarkus-prettytime/3.0.0/",
     "version": "3.0.0"
   },
-  "io.quarkiverse.primefaces:quarkus-primefaces::jar:4.16.2": {
+  "io.quarkiverse.primefaces:quarkus-primefaces::jar:4.16.3": {
     "artifactId": "quarkus-primefaces",
     "classifier": "jar",
     "earliestVersion": "2.12.0",
@@ -5629,9 +5629,9 @@
     "since": 1676765281000,
     "sinceMonth": 1675231200000,
     "sinceYear": 1672552800000,
-    "timestamp": 1794244203000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.primefaces/quarkus-primefaces/4.16.2/jar",
-    "version": "4.16.2"
+    "timestamp": 1795645841000,
+    "url": "https://repo1.maven.org/maven2/io/quarkiverse/primefaces/quarkus-primefaces/4.16.3/",
+    "version": "4.16.3"
   },
   "io.quarkiverse.proxy-wasm:quarkus-proxy-wasm::jar:0.0.2": {
     "artifactId": "quarkus-proxy-wasm",
@@ -6516,7 +6516,7 @@
     "url": "https://central.sonatype.com/artifact/io.quarkiverse.web-bundler/quarkus-web-bundler/4.0.0/jar",
     "version": "4.0.0"
   },
-  "io.quarkiverse.wiremock:quarkus-wiremock::jar:1.8.1": {
+  "io.quarkiverse.wiremock:quarkus-wiremock::jar:2.0.0": {
     "artifactId": "quarkus-wiremock",
     "classifier": "jar",
     "earliestVersion": "0.0.2",
@@ -6525,9 +6525,9 @@
     "since": 1676198728000,
     "sinceMonth": 1675231200000,
     "sinceYear": 1672552800000,
-    "timestamp": 1791012116000,
-    "url": "https://central.sonatype.com/artifact/io.quarkiverse.wiremock/quarkus-wiremock/1.8.1/jar",
-    "version": "1.8.1"
+    "timestamp": 1795704816000,
+    "url": "https://repo1.maven.org/maven2/io/quarkiverse/wiremock/quarkus-wiremock/2.0.0/",
+    "version": "2.0.0"
   },
   "io.quarkiverse.zanzibar:quarkus-zanzibar-authzed::jar:2.16.0": {
     "artifactId": "quarkus-zanzibar-authzed",
