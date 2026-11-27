@@ -455,7 +455,7 @@
     "extensionPathInRepo": "extensions/a2a/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/a2a/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/a2a/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795469413334,
     "license": {
@@ -726,7 +726,7 @@
     "extensionPathInRepo": "extensions/arangodb/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/arangodb/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/arangodb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555838309,
     "license": {
@@ -1449,7 +1449,7 @@
     "extensionPathInRepo": "extensions/aws-secrets-manager/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws-secrets-manager/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws-secrets-manager/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795404890137,
     "license": {
@@ -1862,8 +1862,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -1889,13 +1889,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/aws2-ec2/",
@@ -1903,7 +1896,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-ec2/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 310,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433404423,
+    "lastUpdated": 1795815019180,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -1962,7 +1955,7 @@
     "extensionPathInRepo": "extensions/aws2-ecs/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-ecs/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-ecs/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555839296,
     "license": {
@@ -2023,7 +2016,7 @@
     "extensionPathInRepo": "extensions/aws2-eks/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-eks/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-eks/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795469379123,
     "license": {
@@ -2045,8 +2038,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -2072,21 +2065,14 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/aws2-eventbridge/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-eventbridge/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-eventbridge/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795383051141,
+    "lastUpdated": 1795815019069,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -2368,7 +2354,7 @@
     "extensionPathInRepo": "extensions/aws2-mq/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-mq/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/aws2-mq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795433404390,
     "license": {
@@ -2970,7 +2956,7 @@
     "extensionPathInRepo": "extensions-jvm/azure-files/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/azure-files/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/azure-files/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606265352,
     "license": {
@@ -3031,7 +3017,7 @@
     "extensionPathInRepo": "extensions/azure-key-vault/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-key-vault/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-key-vault/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795491213944,
     "license": {
@@ -3146,7 +3132,7 @@
     "extensionPathInRepo": "extensions/azure-storage-blob/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-storage-blob/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/azure-storage-blob/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795664039345,
     "license": {
@@ -3315,7 +3301,7 @@
     "extensionPathInRepo": "extensions-jvm/barcode/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/barcode/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/barcode/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795491213931,
     "license": {
@@ -3438,7 +3424,7 @@
     "extensionPathInRepo": "extensions/bean/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/bean/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/bean/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606251738,
     "license": {
@@ -3622,8 +3608,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -3649,13 +3635,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions-jvm/bonita/",
@@ -3663,7 +3642,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/bonita/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 310,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795519880020,
+    "lastUpdated": 1795815019551,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -3837,7 +3816,7 @@
     "extensionPathInRepo": "extensions/browse/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/browse/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/browse/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795692605858,
     "license": {
@@ -3898,7 +3877,7 @@
     "extensionPathInRepo": "extensions/caffeine/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/caffeine/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/caffeine/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795433404930,
     "license": {
@@ -4547,7 +4526,7 @@
     "extensionPathInRepo": "extensions/cloudevents/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/cloudevents/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/cloudevents/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795469380506,
     "license": {
@@ -4806,8 +4785,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -4833,13 +4812,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/consul/",
@@ -4847,7 +4819,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/consul/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795404891085,
+    "lastUpdated": 1795815019724,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -5222,7 +5194,7 @@
     "extensionPathInRepo": "extensions-core/core/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-core/core/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-core/core/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555840440,
     "license": {
@@ -5498,7 +5470,7 @@
     "extensionPathInRepo": "extensions-jvm/couchbase/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/couchbase/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/couchbase/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728595060,
     "license": {
@@ -5520,8 +5492,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -5547,13 +5519,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/couchdb/",
@@ -5561,7 +5526,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/couchdb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795491214108,
+    "lastUpdated": 1795815019986,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -6093,8 +6058,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -6120,13 +6085,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/cyberark-vault/",
@@ -6134,7 +6092,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/cyberark-vault/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469398000,
+    "lastUpdated": 1795815037534,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -6160,8 +6118,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -6187,21 +6145,14 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/dataformat/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/dataformat/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/dataformat/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433405815,
+    "lastUpdated": 1795815020174,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -6530,7 +6481,7 @@
     "extensionPathInRepo": "extensions/debezium-postgres/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/debezium-postgres/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/debezium-postgres/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642327447,
     "license": {
@@ -6714,7 +6665,7 @@
     "extensionPathInRepo": "extensions-jvm/dfdl/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/dfdl/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/dfdl/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555857167,
     "license": {
@@ -6768,7 +6719,7 @@
     "extensionPathInRepo": "extensions-jvm/diagram/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/diagram/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/diagram/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795750457576,
     "license": {
@@ -7051,7 +7002,7 @@
     "extensionPathInRepo": "extensions/direct/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/direct/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/direct/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795519880837,
     "license": {
@@ -7073,8 +7024,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -7100,13 +7051,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/disruptor/",
@@ -7114,7 +7058,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/disruptor/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469380867,
+    "lastUpdated": 1795815020262,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -7227,7 +7171,7 @@
     "extensionPathInRepo": "extensions-jvm/dns/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/dns/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/dns/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728595743,
     "license": {
@@ -7518,7 +7462,7 @@
     "extensionPathInRepo": "extensions-jvm/ehcache/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/ehcache/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/ehcache/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555841520,
     "license": {
@@ -8260,7 +8204,7 @@
     "extensionPathInRepo": "extensions/fhir/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/fhir/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/fhir/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779037876,
     "license": {
@@ -8327,7 +8271,7 @@
     "extensionPathInRepo": "extensions/file/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/file/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/file/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795577732421,
     "license": {
@@ -8388,7 +8332,7 @@
     "extensionPathInRepo": "extensions/file-cluster-service/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/file-cluster-service/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/file-cluster-service/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642339392,
     "license": {
@@ -8686,7 +8630,7 @@
     "extensionPathInRepo": "extensions/fory/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/fory/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/fory/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555858742,
     "license": {
@@ -8802,7 +8746,7 @@
     "extensionPathInRepo": "extensions/ftp/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ftp/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ftp/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254585,
     "license": {
@@ -9139,7 +9083,7 @@
     "extensionPathInRepo": "extensions/git/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/git/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/git/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795491214797,
     "license": {
@@ -9469,7 +9413,7 @@
     "extensionPathInRepo": "extensions/google-bigquery/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/google-bigquery/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/google-bigquery/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642328221,
     "license": {
@@ -10180,8 +10124,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -10207,13 +10151,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/grok/",
@@ -10221,7 +10158,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/grok/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469381945,
+    "lastUpdated": 1795815021116,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -11144,8 +11081,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -11171,13 +11108,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/hazelcast/",
@@ -11185,7 +11115,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/hazelcast/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 310,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433406813,
+    "lastUpdated": 1795815021283,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -11825,8 +11755,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -11852,13 +11782,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions-jvm/huaweicloud-smn/",
@@ -11866,7 +11789,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/huaweicloud-smn/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433406670,
+    "lastUpdated": 1795815021475,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -11918,7 +11841,7 @@
     "extensionPathInRepo": "extensions/ibm-cos/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ibm-cos/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ibm-cos/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795750455056,
     "license": {
@@ -12608,7 +12531,7 @@
     "extensionPathInRepo": "extensions/influxdb/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/influxdb/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/influxdb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779038803,
     "license": {
@@ -12964,7 +12887,7 @@
     "extensionPathInRepo": "extensions/jackson/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555842604,
     "license": {
@@ -12986,8 +12909,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -13013,13 +12936,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/jackson-avro/",
@@ -13027,7 +12943,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jackson-avro/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795491215014,
+    "lastUpdated": 1795815021565,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -13599,7 +13515,7 @@
     "extensionPathInRepo": "extensions/jcache/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jcache/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jcache/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555842640,
     "license": {
@@ -13621,8 +13537,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -13648,13 +13564,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions-jvm/jcr/",
@@ -13662,7 +13571,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jcr/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433407486,
+    "lastUpdated": 1795815021822,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -14059,7 +13968,7 @@
     "extensionPathInRepo": "extensions-jvm/jgroups-raft/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jgroups-raft/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jgroups-raft/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795692607656,
     "license": {
@@ -14113,7 +14022,7 @@
     "extensionPathInRepo": "extensions/jira/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jira/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jira/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795692607433,
     "license": {
@@ -14331,8 +14240,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -14358,13 +14267,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions-jvm/jooq/",
@@ -14372,7 +14274,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/jooq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795491215152,
+    "lastUpdated": 1795815021741,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -14424,7 +14326,7 @@
     "extensionPathInRepo": "extensions/joor/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/joor/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/joor/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779039217,
     "license": {
@@ -15496,7 +15398,7 @@
     "extensionPathInRepo": "extensions/jsonata/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jsonata/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jsonata/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606255910,
     "license": {
@@ -15557,7 +15459,7 @@
     "extensionPathInRepo": "extensions/jsonb/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jsonb/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jsonb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606257041,
     "license": {
@@ -15672,7 +15574,7 @@
     "extensionPathInRepo": "extensions/jsoup/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jsoup/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/jsoup/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728614375,
     "license": {
@@ -15923,7 +15825,7 @@
     "extensionPathInRepo": "extensions/kamelet/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/kamelet/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/kamelet/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642329975,
     "license": {
@@ -15984,7 +15886,7 @@
     "extensionPathInRepo": "extensions/keycloak/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/keycloak/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/keycloak/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795692620973,
     "license": {
@@ -16112,7 +16014,7 @@
     "extensionPathInRepo": "extensions/knative-consumer/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/knative-consumer/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/knative-consumer/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795519882313,
     "license": {
@@ -16617,7 +16519,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -16639,8 +16541,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -16672,13 +16574,6 @@
         "login": "rhaetor",
         "name": "Andreas Jonsson",
         "url": "https://github.com/rhaetor"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/kubernetes/",
@@ -16686,7 +16581,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/kubernetes/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469383389,
+    "lastUpdated": 1795815022543,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -16751,7 +16646,7 @@
     "extensionPathInRepo": "extensions/kubernetes-cluster-service/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/kubernetes-cluster-service/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/kubernetes-cluster-service/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728604965,
     "license": {
@@ -17373,7 +17268,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/langchain4j-ingest/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 310,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469415367,
+    "lastUpdated": 1795815042945,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -17425,7 +17320,7 @@
     "extensionPathInRepo": "extensions/langchain4j-tokenizer/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/langchain4j-tokenizer/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/langchain4j-tokenizer/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779046421,
     "license": {
@@ -17647,7 +17542,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -17923,7 +17818,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -17945,8 +17840,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 3,
-        "contributors": 3,
+        "contributions": 2,
+        "contributors": 2,
         "name": "Red Hat & IBM"
       }
     ],
@@ -17979,13 +17874,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/ldap/",
@@ -17993,7 +17881,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ldap/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795383055264,
+    "lastUpdated": 1795815022633,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -18052,7 +17940,7 @@
     "extensionPathInRepo": "extensions-jvm/ldif/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/ldif/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/ldif/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795555843399,
     "license": {
@@ -18274,7 +18162,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -18296,8 +18184,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -18323,13 +18211,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/log/",
@@ -18337,7 +18218,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/log/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433408259,
+    "lastUpdated": 1795815023025,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -19017,7 +18898,7 @@
     "extensionPathInRepo": "extensions/master/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/master/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/master/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606256621,
     "license": {
@@ -19081,7 +18962,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/mcp-server/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433424451,
+    "lastUpdated": 1795815042794,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -19216,7 +19097,7 @@
     "extensionPathInRepo": "extensions/micrometer/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/micrometer/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/micrometer/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642330397,
     "license": {
@@ -19325,7 +19206,7 @@
     "extensionPathInRepo": "extensions/microprofile-fault-tolerance/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/microprofile-fault-tolerance/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/microprofile-fault-tolerance/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795404892221,
     "license": {
@@ -20274,7 +20155,7 @@
     "extensionPathInRepo": "extensions/nats/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/nats/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/nats/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795577733805,
     "license": {
@@ -20680,8 +20561,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -20707,21 +20588,14 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/oauth/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/oauth/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/oauth/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469398608,
+    "lastUpdated": 1795815037832,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -20956,7 +20830,7 @@
     "extensionPathInRepo": "extensions/olingo4/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/olingo4/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/olingo4/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606257112,
     "license": {
@@ -21160,7 +21034,7 @@
     "extensionPathInRepo": "extensions/openapi-java/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/openapi-java/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/openapi-java/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606257198,
     "license": {
@@ -21236,8 +21110,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -21263,21 +21137,14 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions-jvm/opensearch/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/opensearch/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/opensearch/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795383061776,
+    "lastUpdated": 1795815030230,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -21397,7 +21264,7 @@
     "extensionPathInRepo": "extensions/opentelemetry/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/opentelemetry/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/opentelemetry/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779040370,
     "license": {
@@ -21563,7 +21430,7 @@
     "extensionPathInRepo": "extensions/paho/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/paho/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/paho/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728598125,
     "license": {
@@ -21786,7 +21653,7 @@
     "extensionPathInRepo": "extensions/pgevent/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/pgevent/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/pgevent/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779040435,
     "license": {
@@ -22307,7 +22174,7 @@
     "extensionPathInRepo": "extensions/qdrant/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/qdrant/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/qdrant/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795491227115,
     "license": {
@@ -22448,7 +22315,7 @@
     "extensionPathInRepo": "extensions-jvm/quickfix/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/quickfix/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/quickfix/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795577733836,
     "license": {
@@ -22914,7 +22781,7 @@
     "extensionPathInRepo": "extensions/ref/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ref/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/ref/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779040635,
     "license": {
@@ -22990,8 +22857,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 3,
-        "contributors": 3,
+        "contributions": 2,
+        "contributors": 2,
         "name": "Red Hat & IBM"
       }
     ],
@@ -23024,21 +22891,14 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/rest-openapi/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/rest-openapi/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/rest-openapi/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469384989,
+    "lastUpdated": 1795815024536,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -23090,7 +22950,7 @@
     "extensionPathInRepo": "extensions-jvm/robotframework/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/robotframework/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/robotframework/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728598622,
     "license": {
@@ -23379,7 +23239,7 @@
     "extensionPathInRepo": "extensions/sap-netweaver/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/sap-netweaver/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/sap-netweaver/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795750448669,
     "license": {
@@ -23433,7 +23293,7 @@
     "extensionPathInRepo": "extensions/saxon/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/saxon/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/saxon/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642331763,
     "license": {
@@ -23847,7 +23707,7 @@
     "extensionPathInRepo": "extensions/sjms/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/sjms/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/sjms/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728598756,
     "license": {
@@ -24016,7 +23876,7 @@
     "extensionPathInRepo": "extensions/smallrye-reactive-messaging/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/smallrye-reactive-messaging/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/smallrye-reactive-messaging/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795692609977,
     "license": {
@@ -24070,7 +23930,7 @@
     "extensionPathInRepo": "extensions/smb/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/smb/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/smb/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642337509,
     "license": {
@@ -24124,7 +23984,7 @@
     "extensionPathInRepo": "extensions-jvm/smooks/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/smooks/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/smooks/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795750453413,
     "license": {
@@ -24185,7 +24045,7 @@
     "extensionPathInRepo": "extensions-jvm/smpp/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/smpp/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/smpp/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795519883622,
     "license": {
@@ -24361,7 +24221,7 @@
     "extensionPathInRepo": "extensions/soap/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/soap/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/soap/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795519883719,
     "license": {
@@ -24422,7 +24282,7 @@
     "extensionPathInRepo": "extensions/solr/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/solr/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/solr/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795519884016,
     "license": {
@@ -24720,8 +24580,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -24747,13 +24607,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/spring-rabbitmq/",
@@ -24761,7 +24614,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/spring-rabbitmq/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795519884078,
+    "lastUpdated": 1795815024445,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -24813,7 +24666,7 @@
     "extensionPathInRepo": "extensions-jvm/spring-redis/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/spring-redis/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/spring-redis/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795728603128,
     "license": {
@@ -26100,7 +25953,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -26544,7 +26397,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -26766,7 +26619,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -26988,7 +26841,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -27432,7 +27285,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -27654,7 +27507,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -27876,7 +27729,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -28764,7 +28617,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -30762,7 +30615,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -30984,7 +30837,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -31650,7 +31503,7 @@
         "url": "https://github.com/arpitjain099"
       }
     ],
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795606254199,
     "license": {
@@ -32177,8 +32030,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -32204,21 +32057,14 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/syslog/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/syslog/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/syslog/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795383058157,
+    "lastUpdated": 1795815027167,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -32277,7 +32123,7 @@
     "extensionPathInRepo": "extensions/tarfile/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/tarfile/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/tarfile/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795469386069,
     "license": {
@@ -32804,7 +32650,7 @@
     "extensionPathInRepo": "extensions/timer/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/timer/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/timer/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642333564,
     "license": {
@@ -33026,7 +32872,7 @@
     "extensionPathInRepo": "extensions/univocity-parsers/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/univocity-parsers/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/univocity-parsers/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795692610759,
     "license": {
@@ -33156,7 +33002,7 @@
     "extensionPathInRepo": "extensions/velocity/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/velocity/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/velocity/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795469386118,
     "license": {
@@ -33408,8 +33254,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -33435,13 +33281,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/weather/",
@@ -33449,7 +33288,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/weather/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 310,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795383058204,
+    "lastUpdated": 1795815025664,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -33523,8 +33362,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -33550,21 +33389,14 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions-jvm/web3j/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/web3j/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/web3j/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795433410428,
+    "lastUpdated": 1795815026233,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -33778,7 +33610,7 @@
     "extensionPathInRepo": "extensions/xj/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/xj/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/xj/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795779042333,
     "license": {
@@ -34001,7 +33833,7 @@
     "extensionPathInRepo": "extensions/xmlsecurity/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/xmlsecurity/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/xmlsecurity/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795692611353,
     "license": {
@@ -34382,8 +34214,8 @@
         "name": "Unknown"
       },
       {
-        "contributions": 2,
-        "contributors": 2,
+        "contributions": 1,
+        "contributors": 1,
         "name": "Red Hat & IBM"
       }
     ],
@@ -34409,13 +34241,6 @@
         "login": "gansheer",
         "name": "Gaëlle Fournier",
         "url": "https://github.com/gansheer"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "zbendhiba",
-        "name": "Zineb BENDHIBA",
-        "url": "https://github.com/zbendhiba"
       }
     ],
     "extensionPathInRepo": "extensions/zendesk/",
@@ -34423,7 +34248,7 @@
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/zendesk/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 309,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
-    "lastUpdated": 1795469386355,
+    "lastUpdated": 1795815026104,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -34475,7 +34300,7 @@
     "extensionPathInRepo": "extensions/zip-deflater/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/zip-deflater/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/zip-deflater/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795642334281,
     "license": {
@@ -34543,7 +34368,7 @@
     "extensionPathInRepo": "extensions/zipfile/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/zipfile/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions/zipfile/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 309,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795577735684,
     "license": {
@@ -34604,7 +34429,7 @@
     "extensionPathInRepo": "extensions-jvm/zookeeper/",
     "extensionRootUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/zookeeper/",
     "extensionYamlUrl": "https://github.com/apache/camel-quarkus/blob/main/extensions-jvm/zookeeper/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 310,
+    "issues": 311,
     "issuesUrl": "https://github.com/apache/camel-quarkus/issues",
     "lastUpdated": 1795491217441,
     "license": {
@@ -44665,7 +44490,7 @@
   "https://github.com/matheuslealpa/quarkus-rsql,io.github.matheuslealpa.quarkus-rsql": {
     "allCompanies": [
       {
-        "contributions": 25,
+        "contributions": 29,
         "contributors": 1,
         "name": "Unknown"
       }
@@ -44675,7 +44500,7 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
-        "contributions": 25,
+        "contributions": 29,
         "login": "matheuslealpa",
         "name": "Matheus Leal",
         "url": "https://github.com/matheuslealpa"
@@ -44686,7 +44511,7 @@
     "extensionYamlUrl": "https://github.com/matheuslealpa/quarkus-rsql/blob/master/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 3,
     "issuesUrl": "https://github.com/matheuslealpa/quarkus-rsql/issues",
-    "lastUpdated": 1795383074440,
+    "lastUpdated": 1795815044836,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -44769,7 +44594,7 @@
     "extensionYamlUrl": "https://github.com/mcollovati/quarkus-hilla/blob/main/react/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 27,
     "issuesUrl": "https://github.com/mcollovati/quarkus-hilla/issues",
-    "lastUpdated": 1795404895350,
+    "lastUpdated": 1795815028536,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -53463,7 +53288,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-argocd/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 12,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-argocd/issues",
-    "lastUpdated": 1795469394904,
+    "lastUpdated": 1795815034861,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -53500,7 +53325,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-artemis/blob/main/core/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 8,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-artemis/issues",
-    "lastUpdated": 1795469376555,
+    "lastUpdated": 1795815015777,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -53645,7 +53470,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-asyncapi/blob/main/quarkus-asyncapi-scanner/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 7,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-asyncapi/issues",
-    "lastUpdated": 1795383060010,
+    "lastUpdated": 1795815027731,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -55252,7 +55077,7 @@
     "extensionPathInRepo": "extensions/integration-tracing-opentelemetry/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/integration-tracing-opentelemetry/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/integration-tracing-opentelemetry/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 56,
+    "issues": 55,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
     "lastUpdated": 1795491226333,
     "license": {
@@ -55289,7 +55114,7 @@
     "extensionPathInRepo": "extensions/jaxb-plugins/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/jaxb-plugins/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/jaxb-plugins/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 56,
+    "issues": 55,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
     "lastUpdated": 1795606265691,
     "license": {
@@ -55514,7 +55339,7 @@
   "https://github.com/quarkiverse/quarkus-cxf,io.quarkiverse.cxf.quarkus-cxf-rt-management": {
     "allCompanies": [
       {
-        "contributions": 2,
+        "contributions": 1,
         "contributors": 1,
         "name": "Red Hat & IBM"
       }
@@ -55525,7 +55350,7 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Red Hat & IBM",
-        "contributions": 2,
+        "contributions": 1,
         "login": "ppalaga",
         "name": "Peter Palaga",
         "url": "https://github.com/ppalaga"
@@ -55536,7 +55361,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-cxf/blob/main/extensions/rt-management/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 56,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-cxf/issues",
-    "lastUpdated": 1795433417824,
+    "lastUpdated": 1795815033461,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56555,7 +56380,7 @@
   "https://github.com/quarkiverse/quarkus-flags,io.quarkiverse.flags.quarkus-flags": {
     "allCompanies": [
       {
-        "contributions": 75,
+        "contributions": 67,
         "contributors": 4,
         "name": "Red Hat & IBM"
       }
@@ -56573,7 +56398,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 66,
+        "contributions": 58,
         "login": "mkouba",
         "name": "Martin Kouba",
         "url": "https://github.com/mkouba"
@@ -56595,7 +56420,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flags/issues",
-    "lastUpdated": 1795404902711,
+    "lastUpdated": 1795815042068,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56610,7 +56435,7 @@
   "https://github.com/quarkiverse/quarkus-flags,io.quarkiverse.flags.quarkus-flags-cache": {
     "allCompanies": [
       {
-        "contributions": 75,
+        "contributions": 67,
         "contributors": 4,
         "name": "Red Hat & IBM"
       }
@@ -56628,7 +56453,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 66,
+        "contributions": 58,
         "login": "mkouba",
         "name": "Martin Kouba",
         "url": "https://github.com/mkouba"
@@ -56650,7 +56475,7 @@
     ],
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flags/issues",
-    "lastUpdated": 1795404902711,
+    "lastUpdated": 1795815042068,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56694,7 +56519,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flags/blob/main/cron/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flags/issues",
-    "lastUpdated": 1795383071563,
+    "lastUpdated": 1795815041016,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56709,7 +56534,7 @@
   "https://github.com/quarkiverse/quarkus-flags,io.quarkiverse.flags.quarkus-flags-hibernate-orm": {
     "allCompanies": [
       {
-        "contributions": 9,
+        "contributions": 8,
         "contributors": 2,
         "name": "Red Hat & IBM"
       }
@@ -56727,7 +56552,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 6,
+        "contributions": 5,
         "login": "mkouba",
         "name": "Martin Kouba",
         "url": "https://github.com/mkouba"
@@ -56738,7 +56563,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flags/blob/main/hibernate-orm/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flags/issues",
-    "lastUpdated": 1795433423443,
+    "lastUpdated": 1795815041629,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -56797,7 +56622,7 @@
   "https://github.com/quarkiverse/quarkus-flags,io.quarkiverse.flags.quarkus-flags-openfeature": {
     "allCompanies": [
       {
-        "contributions": 11,
+        "contributions": 6,
         "contributors": 2,
         "name": "Red Hat & IBM"
       }
@@ -56815,7 +56640,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 10,
+        "contributions": 5,
         "login": "mkouba",
         "name": "Martin Kouba",
         "url": "https://github.com/mkouba"
@@ -56826,7 +56651,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flags/blob/main/openfeature/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flags/issues",
-    "lastUpdated": 1795469410654,
+    "lastUpdated": 1795815041406,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -57163,9 +56988,9 @@
     "extensionPathInRepo": "durable-kubernetes/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/durable-kubernetes/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/durable-kubernetes/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 47,
+    "issues": 46,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
-    "lastUpdated": 1795433421439,
+    "lastUpdated": 1795815038537,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -57218,7 +57043,7 @@
     "extensionPathInRepo": "grpc/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/grpc/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/grpc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 47,
+    "issues": 46,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
     "lastUpdated": 1795555864415,
     "license": {
@@ -57580,7 +57405,7 @@
     "extensionPathInRepo": "messaging/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/messaging/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/messaging/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 47,
+    "issues": 46,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
     "lastUpdated": 1795577742629,
     "license": {
@@ -57896,7 +57721,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-flow/blob/main/opentelemetry/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 47,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-flow/issues",
-    "lastUpdated": 1795491231945,
+    "lastUpdated": 1795815043395,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -59042,7 +58867,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-github-api/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-github-api/issues",
-    "lastUpdated": 1795491211774,
+    "lastUpdated": 1795815014005,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -59267,7 +59092,7 @@
         "name": "group9 / alfa1"
       },
       {
-        "contributions": 3,
+        "contributions": 2,
         "contributors": 1,
         "name": "Kestra"
       },
@@ -59278,13 +59103,12 @@
       }
     ],
     "allSponsors": [
-      "group9 / alfa1",
-      "Kestra"
+      "group9 / alfa1"
     ],
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Kestra",
-        "contributions": 3,
+        "contributions": 2,
         "login": "loicmathieu",
         "name": "Loïc Mathieu",
         "url": "https://github.com/loicmathieu"
@@ -59309,7 +59133,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-google-cloud-services/blob/main/common/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 17,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-google-cloud-services/issues",
-    "lastUpdated": 1795469387360,
+    "lastUpdated": 1795815027062,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -59554,22 +59378,22 @@
       {
         "contributions": 4,
         "contributors": 1,
-        "name": "Kestra"
+        "name": "group9 / alfa1"
       },
       {
-        "contributions": 4,
+        "contributions": 3,
         "contributors": 1,
-        "name": "group9 / alfa1"
+        "name": "Kestra"
       }
     ],
     "allSponsors": [
-      "Kestra",
-      "group9 / alfa1"
+      "group9 / alfa1",
+      "Kestra"
     ],
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Kestra",
-        "contributions": 4,
+        "contributions": 3,
         "login": "loicmathieu",
         "name": "Loïc Mathieu",
         "url": "https://github.com/loicmathieu"
@@ -59587,7 +59411,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-google-cloud-services/blob/main/firestore/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 17,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-google-cloud-services/issues",
-    "lastUpdated": 1795433410774,
+    "lastUpdated": 1795815027298,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -60557,7 +60381,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jackson-jq/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jackson-jq/issues",
-    "lastUpdated": 1795404888457,
+    "lastUpdated": 1795815014874,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -60677,7 +60501,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jberet/blob/main/rest/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 3,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jberet/issues",
-    "lastUpdated": 1795383046208,
+    "lastUpdated": 1795815014645,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -60794,7 +60618,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jdbc-generic/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jdbc-generic/issues",
-    "lastUpdated": 1795383073235,
+    "lastUpdated": 1795815042688,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -61636,7 +61460,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/elasticsearch/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jnosql/issues",
-    "lastUpdated": 1795383066958,
+    "lastUpdated": 1795815034980,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -61881,7 +61705,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/oracle-nosql/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jnosql/issues",
-    "lastUpdated": 1795433418873,
+    "lastUpdated": 1795815035354,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -62015,7 +61839,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-jnosql/blob/master/solr/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-jnosql/issues",
-    "lastUpdated": 1795383066271,
+    "lastUpdated": 1795815035144,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -63447,7 +63271,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -64445,7 +64269,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -69023,7 +68847,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -69522,7 +69346,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -69749,7 +69573,7 @@
     "extensionPathInRepo": "core/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-langchain4j/blob/main/core/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-langchain4j/blob/main/core/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795606261995,
     "license": {
@@ -70747,7 +70571,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -75334,7 +75158,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-langchain4j/blob/main/mcp/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 182,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
-    "lastUpdated": 1795383065342,
+    "lastUpdated": 1795815033388,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -75831,7 +75655,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -77328,7 +77152,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -85387,7 +85211,7 @@
     "extensionPathInRepo": "skills/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-langchain4j/blob/main/skills/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-langchain4j/blob/main/skills/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795692622062,
     "license": {
@@ -86385,7 +86209,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -86884,7 +86708,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -87383,7 +87207,7 @@
         "url": "https://github.com/JeffersonSantos29"
       }
     ],
-    "issues": 182,
+    "issues": 183,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-langchain4j/issues",
     "lastUpdated": 1795491225772,
     "license": {
@@ -90396,7 +90220,7 @@
     "extensionPathInRepo": "oidc/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/oidc/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/oidc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 10,
+    "issues": 9,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1795642349323,
     "license": {
@@ -90483,7 +90307,7 @@
     "extensionPathInRepo": "schema-validator/",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/schema-validator/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-mcp-server/blob/main/schema-validator/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 10,
+    "issues": 9,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1795728612956,
     "license": {
@@ -90719,7 +90543,7 @@
         "url": "https://github.com/wjglerum"
       }
     ],
-    "issues": 10,
+    "issues": 9,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-mcp-server/issues",
     "lastUpdated": 1795642345962,
     "license": {
@@ -92741,7 +92565,7 @@
     ],
     "issues": 3,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-multitenancy/issues",
-    "lastUpdated": 1795404902756,
+    "lastUpdated": 1795815042204,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92804,7 +92628,7 @@
     ],
     "issues": 3,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-multitenancy/issues",
-    "lastUpdated": 1795404902756,
+    "lastUpdated": 1795815042204,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92867,7 +92691,7 @@
     ],
     "issues": 3,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-multitenancy/issues",
-    "lastUpdated": 1795404902756,
+    "lastUpdated": 1795815042204,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -92930,7 +92754,7 @@
     ],
     "issues": 3,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-multitenancy/issues",
-    "lastUpdated": 1795404902756,
+    "lastUpdated": 1795815042204,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -93437,7 +93261,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-network-faults/blob/main/extensions/grpc/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-network-faults/issues",
-    "lastUpdated": 1795491232127,
+    "lastUpdated": 1795815043591,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -93951,7 +93775,7 @@
   "https://github.com/quarkiverse/quarkus-observability-minecraft,io.quarkiverse.observability.minecraft.quarkus-observability-minecraft": {
     "allCompanies": [
       {
-        "contributions": 16,
+        "contributions": 12,
         "contributors": 1,
         "name": "Red Hat & IBM"
       }
@@ -93962,7 +93786,7 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Red Hat & IBM",
-        "contributions": 16,
+        "contributions": 12,
         "login": "holly-cummins",
         "name": "Holly Cummins",
         "url": "https://github.com/holly-cummins"
@@ -93973,7 +93797,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-observability-minecraft/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 6,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-observability-minecraft/issues",
-    "lastUpdated": 1795433420620,
+    "lastUpdated": 1795815036462,
     "license": null,
     "numMonthsForContributions": 6,
     "owner": "quarkiverse",
@@ -94778,7 +94602,7 @@
     ],
     "issues": 27,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-operator-sdk/issues",
-    "lastUpdated": 1795383045644,
+    "lastUpdated": 1795815013857,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -95075,7 +94899,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-poi/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 0,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-poi/issues",
-    "lastUpdated": 1795491213567,
+    "lastUpdated": 1795815018154,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -95091,9 +94915,14 @@
   "https://github.com/quarkiverse/quarkus-pooled-jms,io.quarkiverse.messaginghub.quarkus-pooled-jms": {
     "allCompanies": [
       {
-        "contributions": 3,
+        "contributions": 4,
         "contributors": 2,
         "name": "Unknown"
+      },
+      {
+        "contributions": 1,
+        "contributors": 1,
+        "name": "Red Hat & IBM"
       }
     ],
     "allSponsors": [
@@ -95101,16 +94930,23 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "contributions": 3,
+        "login": "zhfeng",
+        "name": "Zheng Feng",
+        "url": "https://github.com/zhfeng"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 1,
+        "login": "gsmet",
+        "name": "Guillaume Smet",
+        "url": "https://github.com/gsmet"
+      },
+      {
         "contributions": 1,
         "login": "jamesnetherton",
         "name": "James Netherton",
         "url": "https://github.com/jamesnetherton"
-      },
-      {
-        "contributions": 2,
-        "login": "zhfeng",
-        "name": "Zheng Feng",
-        "url": "https://github.com/zhfeng"
       }
     ],
     "extensionPathInRepo": "",
@@ -95118,7 +94954,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-pooled-jms/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-pooled-jms/issues",
-    "lastUpdated": 1795519877751,
+    "lastUpdated": 1795815017060,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -95403,7 +95239,7 @@
   "https://github.com/quarkiverse/quarkus-quinoa,io.quarkiverse.quinoa.quarkus-quinoa": {
     "allCompanies": [
       {
-        "contributions": 16,
+        "contributions": 19,
         "contributors": 1,
         "name": "Melloware Inc"
       },
@@ -95434,7 +95270,7 @@
     "contributorsWithFullCompanyInfo": [
       {
         "company": "Melloware Inc",
-        "contributions": 16,
+        "contributions": 19,
         "login": "melloware",
         "name": "Melloware",
         "url": "https://github.com/melloware"
@@ -95490,9 +95326,9 @@
     "extensionPathInRepo": "",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-quinoa/blob/main/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-quinoa/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 8,
+    "issues": 7,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-quinoa/issues",
-    "lastUpdated": 1795491213967,
+    "lastUpdated": 1795815018536,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -96681,7 +96517,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 105,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1795664045852,
     "license": {
@@ -97194,7 +97030,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 105,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1795664045852,
     "license": {
@@ -97878,7 +97714,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 105,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1795664045852,
     "license": {
@@ -98049,7 +97885,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 105,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1795664045852,
     "license": {
@@ -98220,7 +98056,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 105,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1795664045852,
     "license": {
@@ -99075,7 +98911,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 105,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1795664045852,
     "license": {
@@ -99588,7 +99424,7 @@
         "url": "https://github.com/mathecruz"
       }
     ],
-    "issues": 105,
+    "issues": 108,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-roq/issues",
     "lastUpdated": 1795664045852,
     "license": {
@@ -100333,7 +100169,7 @@
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-spdx/blob/main/v2/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-spdx/issues",
-    "lastUpdated": 1795433421314,
+    "lastUpdated": 1795815038219,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -101094,7 +100930,7 @@
     "extensionPathInRepo": "",
     "extensionRootUrl": "https://github.com/quarkiverse/quarkus-zanzibar/blob/main/",
     "extensionYamlUrl": "https://github.com/quarkiverse/quarkus-zanzibar/blob/main/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 1,
+    "issues": 2,
     "issuesUrl": "https://github.com/quarkiverse/quarkus-zanzibar/issues",
     "lastUpdated": 1795750450044,
     "license": {
@@ -104510,12 +104346,12 @@
   "https://github.com/quarkusio/quarkus,io.quarkus.quarkus-agroal": {
     "allCompanies": [
       {
-        "contributions": 18,
-        "contributors": 9,
+        "contributions": 17,
+        "contributors": 8,
         "name": "Red Hat & IBM"
       },
       {
-        "contributions": 3,
+        "contributions": 4,
         "contributors": 1,
         "name": "PID 1"
       },
@@ -104525,8 +104361,8 @@
         "name": "The Nerds"
       },
       {
-        "contributions": 1,
-        "contributors": 1,
+        "contributions": 2,
+        "contributors": 2,
         "name": "Unknown"
       }
     ],
@@ -104535,6 +104371,13 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
+        "company": "PID 1",
+        "contributions": 4,
+        "login": "jnbdz",
+        "name": "Jean-Nicolas Boulay Desjardins",
+        "url": "https://github.com/jnbdz"
+      },
+      {
         "company": "The Nerds",
         "contributions": 2,
         "login": "meetRaval09",
@@ -104542,18 +104385,17 @@
         "url": "https://github.com/meetRaval09"
       },
       {
+        "contributions": 1,
+        "login": "Joseluiscruz-hub",
+        "name": "Cruz Prieto Jose Luis",
+        "url": "https://github.com/Joseluiscruz-hub"
+      },
+      {
         "company": "Red Hat & IBM",
         "contributions": 2,
         "login": "gsmet",
         "name": "Guillaume Smet",
         "url": "https://github.com/gsmet"
-      },
-      {
-        "company": "PID 1",
-        "contributions": 3,
-        "login": "jnbdz",
-        "name": "Jean-Nicolas Boulay Desjardins",
-        "url": "https://github.com/jnbdz"
       },
       {
         "company": "Red Hat & IBM",
@@ -104609,13 +104451,6 @@
         "login": "cescoffier",
         "name": "Clement Escoffier",
         "url": "https://github.com/cescoffier"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 1,
-        "login": "gastaldi",
-        "name": "George Gastaldi",
-        "url": "https://github.com/gastaldi"
       }
     ],
     "extensionPathInRepo": "extensions/agroal/",
@@ -104623,7 +104458,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/agroal/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 24,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fagroal",
-    "lastUpdated": 1795469368374,
+    "lastUpdated": 1795815007089,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -104638,7 +104473,7 @@
   "https://github.com/quarkusio/quarkus,io.quarkus.quarkus-amazon-lambda": {
     "allCompanies": [
       {
-        "contributions": 15,
+        "contributions": 14,
         "contributors": 6,
         "name": "Red Hat & IBM"
       },
@@ -104699,7 +104534,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 5,
+        "contributions": 4,
         "login": "geoand",
         "name": "Georgios Andrianakis",
         "url": "https://github.com/geoand"
@@ -104731,7 +104566,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/amazon-lambda/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 39,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Famazon-lambda",
-    "lastUpdated": 1795519870755,
+    "lastUpdated": 1795815007059,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -106561,7 +106396,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/amazon-lambda-rest/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 39,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Famazon-lambda",
-    "lastUpdated": 1795433395837,
+    "lastUpdated": 1795815007059,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -109935,7 +109770,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 2,
+    "issues": 3,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+apicurio-registry-json-schema",
     "lastUpdated": 1795642313103,
     "license": {
@@ -115531,8 +115366,8 @@
   "https://github.com/quarkusio/quarkus,io.quarkus.quarkus-container-image": {
     "allCompanies": [
       {
-        "contributions": 10,
-        "contributors": 6,
+        "contributions": 11,
+        "contributors": 7,
         "name": "Red Hat & IBM"
       },
       {
@@ -115560,6 +115395,13 @@
       "Red Hat & IBM"
     ],
     "contributorsWithFullCompanyInfo": [
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 1,
+        "login": "jponge",
+        "name": "Julien Ponge",
+        "url": "https://github.com/jponge"
+      },
       {
         "company": "Red Hat & IBM",
         "contributions": 4,
@@ -115653,7 +115495,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/container-image/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 56,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fcontainer-image",
-    "lastUpdated": 1795469369222,
+    "lastUpdated": 1795815007059,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -120583,7 +120425,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 55,
+    "issues": 59,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fcontainer-image",
     "lastUpdated": 1795642313103,
     "license": {
@@ -133131,7 +132973,7 @@
     "extensionPathInRepo": "extensions/devui/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/devui/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/devui/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 23,
+    "issues": 24,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+devui",
     "lastUpdated": 1795606266717,
     "license": {
@@ -135105,7 +134947,7 @@
     "extensionPathInRepo": "extensions/elytron-security-common/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/elytron-security-common/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/elytron-security-common/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 98,
+    "issues": 100,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsecurity",
     "lastUpdated": 1795664034485,
     "license": {
@@ -135329,7 +135171,7 @@
     "extensionPathInRepo": "extensions/elytron-security-properties-file/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/elytron-security-properties-file/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/elytron-security-properties-file/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 98,
+    "issues": 100,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fsecurity",
     "lastUpdated": 1795750440742,
     "license": {
@@ -137188,7 +137030,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/flyway-mysql/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 1,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+flyway-mysql",
-    "lastUpdated": 1795383063838,
+    "lastUpdated": 1795815031989,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -145550,7 +145392,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/google-cloud-functions/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 6,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fgoogle-cloud-functions",
-    "lastUpdated": 1795404885596,
+    "lastUpdated": 1795815008294,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -145606,7 +145448,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/google-cloud-functions-http/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 6,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fgoogle-cloud-functions",
-    "lastUpdated": 1795404885212,
+    "lastUpdated": 1795815007576,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -145878,7 +145720,7 @@
     "extensionPathInRepo": "extensions/hal/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hal/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hal/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 0,
+    "issues": 1,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+hal",
     "lastUpdated": 1795491212790,
     "license": {
@@ -145983,7 +145825,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-envers/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 90,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-orm",
-    "lastUpdated": 1795491209452,
+    "lastUpdated": 1795815008335,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -145998,8 +145840,8 @@
   "https://github.com/quarkusio/quarkus,io.quarkus.quarkus-hibernate-orm": {
     "allCompanies": [
       {
-        "contributions": 85,
-        "contributors": 17,
+        "contributions": 84,
+        "contributors": 18,
         "name": "Red Hat & IBM"
       },
       {
@@ -146035,13 +145877,27 @@
       {
         "company": "Red Hat & IBM",
         "contributions": 1,
+        "login": "zakkak",
+        "name": "Foivos Zakkak",
+        "url": "https://github.com/zakkak"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 15,
+        "login": "lucamolteni",
+        "name": "Luca Molteni",
+        "url": "https://github.com/lucamolteni"
+      },
+      {
+        "company": "Red Hat & IBM",
+        "contributions": 1,
         "login": "holly-cummins",
         "name": "Holly Cummins",
         "url": "https://github.com/holly-cummins"
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 6,
+        "contributions": 4,
         "login": "mathecruz",
         "name": "Matheus Cruz",
         "url": "https://github.com/mathecruz"
@@ -146054,14 +145910,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 14,
-        "login": "lucamolteni",
-        "name": "Luca Molteni",
-        "url": "https://github.com/lucamolteni"
-      },
-      {
-        "company": "Red Hat & IBM",
-        "contributions": 7,
+        "contributions": 6,
         "login": "gsmet",
         "name": "Guillaume Smet",
         "url": "https://github.com/gsmet"
@@ -146215,7 +146064,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-orm/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 88,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-orm",
-    "lastUpdated": 1795383041661,
+    "lastUpdated": 1795815009067,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -147863,7 +147712,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 90,
+    "issues": 89,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-orm",
     "lastUpdated": 1795642313103,
     "license": {
@@ -152801,7 +152650,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 90,
+    "issues": 89,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-orm",
     "lastUpdated": 1795642313103,
     "license": {
@@ -159561,7 +159410,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 36,
+    "issues": 38,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-reactive",
     "lastUpdated": 1795642313103,
     "license": {
@@ -162855,7 +162704,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 37,
+    "issues": 38,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-reactive",
     "lastUpdated": 1795642313103,
     "license": {
@@ -164499,7 +164348,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 37,
+    "issues": 38,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-reactive",
     "lastUpdated": 1795642313103,
     "license": {
@@ -166206,7 +166055,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 13,
+    "issues": 14,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-search",
     "lastUpdated": 1795642313103,
     "license": {
@@ -166228,7 +166077,7 @@
         "name": "Red Hat & IBM"
       },
       {
-        "contributions": 3,
+        "contributions": 5,
         "contributors": 1,
         "name": "Unknown"
       }
@@ -166238,7 +166087,7 @@
     ],
     "contributorsWithFullCompanyInfo": [
       {
-        "contributions": 3,
+        "contributions": 5,
         "login": "marko-bekhta",
         "name": "Marko Bekhta",
         "url": "https://github.com/marko-bekhta"
@@ -166291,7 +166140,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-search-orm-elasticsearch/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 13,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-search",
-    "lastUpdated": 1795383041162,
+    "lastUpdated": 1795815008634,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -166510,7 +166359,7 @@
     "extensionPathInRepo": "extensions/hibernate-validator/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-validator/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/hibernate-validator/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 13,
+    "issues": 14,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fhibernate-validator",
     "lastUpdated": 1795692596851,
     "license": {
@@ -170295,7 +170144,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/jaxp/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 3,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+jaxp",
-    "lastUpdated": 1795404885902,
+    "lastUpdated": 1795815008805,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -171937,7 +171786,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 6,
+    "issues": 8,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+jaxrs-client-reactive",
     "lastUpdated": 1795642313103,
     "license": {
@@ -185089,7 +184938,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 37,
+    "issues": 38,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+jdbc-postgresql",
     "lastUpdated": 1795642313103,
     "license": {
@@ -188724,7 +188573,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 14,
+    "issues": 15,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fkeycloak",
     "lastUpdated": 1795642313103,
     "license": {
@@ -190507,7 +190356,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/keycloak-admin-rest-client/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 15,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fkeycloak",
-    "lastUpdated": 1795433414086,
+    "lastUpdated": 1795815029396,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -199249,7 +199098,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/logging-gelf/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 33,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Flogging",
-    "lastUpdated": 1795404886295,
+    "lastUpdated": 1795815009415,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -199482,7 +199331,7 @@
         "name": "Red Hat & IBM"
       },
       {
-        "contributions": 1,
+        "contributions": 2,
         "contributors": 1,
         "name": "PID 1"
       }
@@ -199491,6 +199340,13 @@
       "Red Hat & IBM"
     ],
     "contributorsWithFullCompanyInfo": [
+      {
+        "company": "PID 1",
+        "contributions": 2,
+        "login": "jnbdz",
+        "name": "Jean-Nicolas Boulay Desjardins",
+        "url": "https://github.com/jnbdz"
+      },
       {
         "company": "Red Hat & IBM",
         "contributions": 3,
@@ -199527,13 +199383,6 @@
         "url": "https://github.com/Ladicek"
       },
       {
-        "company": "PID 1",
-        "contributions": 1,
-        "login": "jnbdz",
-        "name": "Jean-Nicolas Boulay Desjardins",
-        "url": "https://github.com/jnbdz"
-      },
-      {
         "company": "Red Hat & IBM",
         "contributions": 2,
         "login": "ozangunalp",
@@ -199558,9 +199407,9 @@
     "extensionPathInRepo": "extensions/smallrye-reactive-messaging/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-reactive-messaging/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-reactive-messaging/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 66,
+    "issues": 69,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+messaging",
-    "lastUpdated": 1795383044098,
+    "lastUpdated": 1795815013220,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -199724,7 +199573,7 @@
     "extensionPathInRepo": "extensions/smallrye-reactive-messaging-kafka/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-reactive-messaging-kafka/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-reactive-messaging-kafka/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 27,
+    "issues": 30,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+messaging-kafka",
     "lastUpdated": 1795606246577,
     "license": {
@@ -200281,7 +200130,7 @@
     "extensionPathInRepo": "extensions/micrometer-registry-prometheus/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/micrometer-registry-prometheus/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/micrometer-registry-prometheus/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 35,
+    "issues": 38,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fmetrics",
     "lastUpdated": 1795519873132,
     "license": {
@@ -212959,7 +212808,7 @@
   "https://github.com/quarkusio/quarkus,io.quarkus.quarkus-oidc-common": {
     "allCompanies": [
       {
-        "contributions": 15,
+        "contributions": 14,
         "contributors": 6,
         "name": "Red Hat & IBM"
       },
@@ -213035,7 +212884,7 @@
       },
       {
         "company": "Red Hat & IBM",
-        "contributions": 2,
+        "contributions": 1,
         "login": "jponge",
         "name": "Julien Ponge",
         "url": "https://github.com/jponge"
@@ -213044,9 +212893,9 @@
     "extensionPathInRepo": "extensions/oidc-common/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/oidc-common/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/oidc-common/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 58,
+    "issues": 59,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Foidc",
-    "lastUpdated": 1795433398089,
+    "lastUpdated": 1795815011333,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -213239,7 +213088,7 @@
     "extensionPathInRepo": "extensions/oidc-token-propagation/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/oidc-token-propagation/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/oidc-token-propagation/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 58,
+    "issues": 59,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Foidc",
     "lastUpdated": 1795750441901,
     "license": {
@@ -214954,7 +214803,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/oidc-token-propagation-reactive/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 59,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Foidc",
-    "lastUpdated": 1795469376844,
+    "lastUpdated": 1795815016280,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -216913,7 +216762,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/picocli/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 3,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fpicocli",
-    "lastUpdated": 1795469371754,
+    "lastUpdated": 1795815010510,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -216955,9 +216804,9 @@
     "extensionPathInRepo": "extensions/proxy-registry/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/proxy-registry/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/proxy-registry/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 5,
+    "issues": 6,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+proxy-registry",
-    "lastUpdated": 1795469397014,
+    "lastUpdated": 1795815037994,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -217498,7 +217347,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/reactive-mysql-client/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 15,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Freactive-sql-clients",
-    "lastUpdated": 1795383042971,
+    "lastUpdated": 1795815010943,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -217570,7 +217419,7 @@
     "extensionPathInRepo": "extensions/reactive-oracle-client/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/reactive-oracle-client/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/reactive-oracle-client/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 4,
+    "issues": 3,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+reactive-oracle-client",
     "lastUpdated": 1795555835375,
     "license": {
@@ -217749,7 +217598,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/reactive-routes/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 10,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+reactive-routes",
-    "lastUpdated": 1795469376136,
+    "lastUpdated": 1795815014666,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -217881,7 +217730,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/redis-cache/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+redis-cache",
-    "lastUpdated": 1795383059454,
+    "lastUpdated": 1795815027585,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -224610,7 +224459,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 20,
+    "issues": 19,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+rest-client-jackson",
     "lastUpdated": 1795642313103,
     "license": {
@@ -227898,7 +227747,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 5,
+    "issues": 6,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+rest-client-jaxrs",
     "lastUpdated": 1795642313103,
     "license": {
@@ -239406,7 +239255,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 14,
+    "issues": 13,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+rest-client-reactive-jackson",
     "lastUpdated": 1795642313103,
     "license": {
@@ -250914,7 +250763,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 27,
+    "issues": 26,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+rest-data-panache",
     "lastUpdated": 1795642313103,
     "license": {
@@ -280512,7 +280361,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -283800,7 +283649,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -288732,7 +288581,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -300240,7 +300089,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -301884,7 +301733,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -305172,7 +305021,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -306816,7 +306665,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -311748,7 +311597,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -319968,7 +319817,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 19,
+    "issues": 20,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fresteasy-classic",
     "lastUpdated": 1795642313103,
     "license": {
@@ -326213,7 +326062,7 @@
         "name": "Red Hat & IBM"
       },
       {
-        "contributions": 1,
+        "contributions": 2,
         "contributors": 1,
         "name": "PID 1"
       }
@@ -326222,6 +326071,13 @@
       "Red Hat & IBM"
     ],
     "contributorsWithFullCompanyInfo": [
+      {
+        "company": "PID 1",
+        "contributions": 2,
+        "login": "jnbdz",
+        "name": "Jean-Nicolas Boulay Desjardins",
+        "url": "https://github.com/jnbdz"
+      },
       {
         "company": "Red Hat & IBM",
         "contributions": 3,
@@ -326258,13 +326114,6 @@
         "url": "https://github.com/Ladicek"
       },
       {
-        "company": "PID 1",
-        "contributions": 1,
-        "login": "jnbdz",
-        "name": "Jean-Nicolas Boulay Desjardins",
-        "url": "https://github.com/jnbdz"
-      },
-      {
         "company": "Red Hat & IBM",
         "contributions": 2,
         "login": "ozangunalp",
@@ -326291,7 +326140,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/smallrye-reactive-messaging/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 112,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fmessaging,area%2Fsmallrye",
-    "lastUpdated": 1795383044098,
+    "lastUpdated": 1795815013220,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -330242,9 +330091,9 @@
     "extensionPathInRepo": "extensions/spring-cache/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-cache/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-cache/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 34,
+    "issues": 35,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
-    "lastUpdated": 1795383044206,
+    "lastUpdated": 1795815013254,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -330389,7 +330238,7 @@
     "extensionPathInRepo": "extensions/spring-data-jpa/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-data-jpa/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-data-jpa/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 34,
+    "issues": 35,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
     "lastUpdated": 1795469374272,
     "license": {
@@ -330510,7 +330359,7 @@
     "extensionPathInRepo": "extensions/spring-di/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-di/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-di/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 34,
+    "issues": 35,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
     "lastUpdated": 1795779031547,
     "license": {
@@ -330553,7 +330402,7 @@
     "extensionPathInRepo": "extensions/spring-scheduled/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-scheduled/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/spring-scheduled/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 34,
+    "issues": 35,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
     "lastUpdated": 1795642319301,
     "license": {
@@ -333972,7 +333821,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 34,
+    "issues": 35,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
     "lastUpdated": 1795642313103,
     "license": {
@@ -337260,7 +337109,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 34,
+    "issues": 35,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fspring",
     "lastUpdated": 1795642313103,
     "license": {
@@ -339069,7 +338918,7 @@
     "extensionPathInRepo": "extensions/tls-registry/",
     "extensionRootUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/tls-registry/",
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/tls-registry/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
-    "issues": 19,
+    "issues": 18,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue++in%3Abody+in%3Atitle+tls-registry",
     "lastUpdated": 1795519889607,
     "license": {
@@ -339392,7 +339241,7 @@
     "extensionYamlUrl": "https://github.com/quarkusio/quarkus/blob/main/extensions/vertx-graphql/runtime/src/main/resources/META-INF/quarkus-extension.yaml",
     "issues": 107,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fgraphql,area%2Fsmallrye",
-    "lastUpdated": 1795383045296,
+    "lastUpdated": 1795815013274,
     "license": {
       "name": "Apache License 2.0",
       "spdxId": "Apache-2.0",
@@ -341297,7 +341146,7 @@
         "url": "https://github.com/alex-martel"
       }
     ],
-    "issues": 58,
+    "issues": 66,
     "issuesUrl": "https://github.com/quarkusio/quarkus/issues?q=is%3Aopen+is%3Aissue+label%3Aarea%2Fvertx",
     "lastUpdated": 1795642313103,
     "license": {
